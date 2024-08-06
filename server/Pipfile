@@ -15,6 +15,9 @@ pillow = "*"
 django-phonenumber-field = {extras = ["phonenumbers"], version = "*"}
 
 [dev-packages]
+coverage = "*"
+pylint = "*"
+pylint-django = "*"
 
 [requires]
 python_version = "3.9"
