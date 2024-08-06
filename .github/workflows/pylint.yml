@@ -12,19 +12,25 @@ jobs:
         python-version: ["3.9"]
     steps:
     - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
+        cache: 'pipenv'
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        sudo apt-get update
+        sudo apt-get install -y lcov
         pip install pipenv
         cd server
         pipenv install --dev
-        pipenv shell
+
     - name: Analysing the code with pylint
       run: |
         cd server
-        source test/bin/activate
-        DJANGO_SETTINGS_MODULE=server.settings.local pylint **/*.py --load-plugins pylint_django
+        pipenv run pylint **/*.py --load-plugins pylint_django --django-settings-module=server.settings.local

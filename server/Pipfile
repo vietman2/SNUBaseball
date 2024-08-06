@@ -4,9 +4,21 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+django = "*"
+djangorestframework = "*"
+django-extensions = "*"
+drf-spectacular = "*"
+python-decouple = "*"
+dj-rest-auth = "*"
+djangorestframework-simplejwt = "*"
+pillow = "*"
+django-phonenumber-field = {extras = ["phonenumbers"], version = "*"}
+django-allauth = "*"
 
 [dev-packages]
+coverage = "*"
+pylint = "*"
+pylint-django = "*"
 
 [requires]
 python_version = "3.9"
-python_full_version = "3.9.5"
