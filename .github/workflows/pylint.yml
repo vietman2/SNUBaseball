@@ -31,4 +31,4 @@ jobs:
     - name: Analysing the code with pylint
       run: |
         cd server
-        pipenv run pylint --load-plugins pylint_django --django-settings-module=server.settings .
+        pipenv run DJANGO_SETTINGS_MODULE=server.settings pylint **/*.py --load-plugins pylint_django
