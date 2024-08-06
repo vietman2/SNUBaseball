@@ -11,7 +11,7 @@ name: ESLint
 
 on:
   push:
-    branches: [ "dev", "main" ]
+    branches: [ "dev" ]
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [ "dev" ]
@@ -49,5 +49,5 @@ jobs:
       - name: Upload analysis results to GitHub
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: ./eslint-results.sarif
+          sarif_file: ./snubaseball/eslint-results.sarif
           wait-for-processing: true
