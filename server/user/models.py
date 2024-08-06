@@ -3,6 +3,8 @@ from django.contrib.auth.models import AbstractBaseUser
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 
+from .managers import UserManager
+
 class User(AbstractBaseUser):
     uuid        = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     username    = models.CharField(max_length=150, unique=True)
@@ -19,6 +21,8 @@ class User(AbstractBaseUser):
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email', 'phone']
+
+    objects = UserManager()
 
     @property
     def full_name(self):
