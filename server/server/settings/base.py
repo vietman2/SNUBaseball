@@ -24,7 +24,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config("SECRET_KEY")
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -33,6 +32,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'user.apps.UserConfig',
 
     "allauth",
     "allauth.account",
@@ -108,7 +109,7 @@ SIMPLE_JWT = {
     'BLACKLIST_AFTER_ROTATION': True,
 
     'ALGORITHM': 'HS256',
-    'SIGNING_KEY': config("USER_MANAGEMENT_SECRET_KEY"),
+    'SIGNING_KEY': config("SECRET_KEY"),
     'VERIFYING_KEY': None,
     'AUDIENCE': None,
     'ISSUER': None,
