@@ -12,7 +12,7 @@ class RegisterAPITestCase(APITestCase):
             "first_name": "test",
             "last_name": "test",
             "email": "test@test.com",
-            "phone_number": "010-1234-5678",
+            "phone": "010-1234-5678",
             "password": "passpass1234!",
             "password2": "passpass1234!",
         }
@@ -21,7 +21,7 @@ class RegisterAPITestCase(APITestCase):
             "first_name": "test2",
             "last_name": "test2",
             "email": "test2@test.com",
-            "phone_number": "010-1234-5679",
+            "phone": "010-1234-5679",
             "password": "passpass12345!",
             "password2": "passpass12345!",
         }
@@ -58,7 +58,7 @@ class RegisterAPITestCase(APITestCase):
             "createsuperuser",
             username="admin",
             email="admin@test.com",
-            phone_number="010-1234-1234",
+            phone="010-1234-1234",
             interactive=False,
         )
         self.assertEqual(User.objects.count(), 1)
@@ -128,14 +128,14 @@ class RegisterAPITestCase(APITestCase):
 
     def test_register_fail_phonenumber(self):
         # 1. phone number is not valid
-        self.data["phone_number"] = "test"
+        self.data["phone"] = "test"
         response = self.client.post(self.url, data=self.data)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
         # 2. phone number is already in use
-        self.data["phone_number"] = "010-1234-5678"
+        self.data["phone"] = "010-1234-5678"
         self.client.post(self.url, data=self.data)
-        self.data2["phone_number"] = "010-1234-5678"
+        self.data2["phone"] = "010-1234-5678"
         response = self.client.post(self.url, data=self.data2)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
