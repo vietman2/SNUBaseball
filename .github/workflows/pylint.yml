@@ -31,4 +31,4 @@ jobs:
     - name: Analysing the code with pylint
       run: |
         cd server
-        PYTHONPATH=${PWD} DJANGO_SETTINGS_MODULE=noti_manager.settings pylint **/*.py --load-plugins pylint_django
+        pipenv run pylint **/*.py --load-plugins pylint_django --django-settings-module=server.settings.local
