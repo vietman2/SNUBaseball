@@ -5,8 +5,6 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      SECRET_KEY: ${{ secrets.SECRET_KEY }}
     strategy:
       matrix:
         python-version: ["3.9"]
@@ -19,7 +17,15 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
-        cache: 'pipenv'
+        cache: 'pip'
+
+    - name: Cache pipenv
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/Pipfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
 
     - name: Install dependencies
       run: |
@@ -33,4 +39,4 @@ jobs:
     - name: Analysing the code with pylint
       run: |
         cd server
-        pipenv run DJANGO_SETTINGS_MODULE=server.settings.local pylint **/*.py --load-plugins pylint_django
+        pipenv run DJANGO_SETTINGS_MODULE=server.settings pylint **/*.py --load-plugins pylint_django
