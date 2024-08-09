@@ -20,7 +20,8 @@
       "@components/*": ["components/*"],
       "@data/*": ["constants/data/*"],
       "@type/*": ["constants/types/*"],
-      "@store/*": ["store/*"]
+      "@store/*": ["store/*"],
+      "@utils/*": ["utils/*"],
     }
   },
   "include": ["src"]

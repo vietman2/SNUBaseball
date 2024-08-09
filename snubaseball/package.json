@@ -83,7 +83,8 @@
       "^@components/(.*)$": "<rootDir>/src/components/$1",
       "^@data/(.*)$": "<rootDir>/src/constants/data/$1",
       "^@type/(.*)$": "<rootDir>/src/constants/types/$1",
-      "^@store/(.*)$": "<rootDir>/src/store/$1"
+      "^@store/(.*)$": "<rootDir>/src/store/$1",
+      "^@utils/(.*)$": "<rootDir>/src/utils/$1"
     }
   }
 }
