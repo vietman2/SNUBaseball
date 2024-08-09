@@ -15,6 +15,20 @@ Object.defineProperty(window, "matchMedia", {
     dispatchEvent: jest.fn(),
   }),
 });
+const mockNavigate = jest.fn();
+jest.mock("react-router", () => ({
+  ...jest.requireActual("react-router"),
+  Navigate: (props: any) => {
+    mockNavigate(props.to);
+    return null;
+  },
+  useNavigate: () => mockNavigate,
+}));
+const mockDispatch = jest.fn();
+jest.mock("react-redux", () => ({
+  ...jest.requireActual("react-redux"),
+  useDispatch: () => mockDispatch,
+}));
 
 jest.mock("@components/Icons", () => ({
   AppIcon: () => <div data-testid="app-icon" />,
