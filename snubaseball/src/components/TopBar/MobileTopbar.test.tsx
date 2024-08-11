@@ -10,7 +10,6 @@ describe("<MobileTopbar />", () => {
     render(
       <MemoryRouter>
         <MobileTopbar
-          isPortrait={true}
           navigate={jest.fn()}
           openSidebar={jest.fn()}
         />
