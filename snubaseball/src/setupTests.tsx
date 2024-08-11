@@ -31,15 +31,15 @@ jest.mock("react-redux", () => ({
 }));
 
 jest.mock("@components/Icons", () => ({
-  AppIcon: () => <div data-testid="app-icon">appicon</div>,
+  AppIcon: () => <div data-testid="app-icon" />,
 }));
 jest.mock("@components/Sidebar", () => ({
   Sidebar: ({ toggleSidebar }: { toggleSidebar: () => void }) => (
-    <div data-testid="sidebar" onClick={toggleSidebar}>sidebar</div>
+    <div data-testid="sidebar" onClick={toggleSidebar} onKeyDown={jest.fn()} />
   ),
 }));
 jest.mock("@components/TopBar", () => ({
-  FullTopBar: () => <div data-testid="full-top-bar">topbar</div>,
+  FullTopBar: () => <div data-testid="full-top-bar" onKeyDown={jest.fn()} />,
   MobileTopbar: ({
     openSidebar,
     navigate,
