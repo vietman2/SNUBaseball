@@ -39,7 +39,7 @@ jest.mock("@components/Sidebar", () => ({
   ),
 }));
 jest.mock("@components/TopBar", () => ({
-  FullTopBar: () => <div data-testid="full-top-bar" onKeyDown={jest.fn()} />,
+  FullTopBar: () => <div data-testid="full-top-bar" />,
   MobileTopbar: ({
     openSidebar,
     navigate,
@@ -48,8 +48,16 @@ jest.mock("@components/TopBar", () => ({
     openSidebar: () => void;
   }) => (
     <>
-      <div data-testid="open-sidebar" onClick={openSidebar} />
-      <div data-testid="sidebar-navigate" onClick={() => navigate("asdf")} />
+      <div
+        data-testid="open-sidebar"
+        onClick={openSidebar}
+        onKeyDown={jest.fn()}
+      />
+      <div
+        data-testid="sidebar-navigate"
+        onClick={() => navigate("asdf")}
+        onKeyDown={jest.fn()}
+      />
     </>
   ),
 }));
