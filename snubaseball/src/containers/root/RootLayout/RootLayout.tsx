@@ -5,13 +5,6 @@ import styled from "styled-components";
 import { Sidebar } from "@components/Sidebar";
 import { FullTopBar, MobileTopbar } from "@components/TopBar";
 
-const MainContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-`;
-
 export default function RootLayout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isPortrait, setIsPortrait] = useState(
@@ -53,19 +46,23 @@ export default function RootLayout() {
         {isPortrait ? (
           <>
             <MobileTopbar
-              isPortrait={isPortrait}
               navigate={handleNavigate}
               openSidebar={openSidebar}
             />
             <Sidebar open={isSidebarOpen} toggleSidebar={toggleSidebar} />
           </>
         ) : (
-          <FullTopBar
-            navigate={navigate}
-          />
+          <FullTopBar navigate={navigate} />
         )}
       </MainContainer>
       <Outlet />
     </>
   );
 }
+
+const MainContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+`;
