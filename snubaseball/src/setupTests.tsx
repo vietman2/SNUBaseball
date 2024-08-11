@@ -18,8 +18,8 @@ Object.defineProperty(window, "matchMedia", {
 const mockNavigate = jest.fn();
 jest.mock("react-router", () => ({
   ...jest.requireActual("react-router"),
-  Navigate: (props: any) => {
-    mockNavigate(props.to);
+  Navigate: ({to}: {to: string}) => {
+    mockNavigate(to);
     return null;
   },
   useNavigate: () => mockNavigate,

@@ -1,4 +1,3 @@
-import { screen } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router";
 
 import { AuthProvider } from "./AuthProvider";
