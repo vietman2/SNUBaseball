@@ -14,10 +14,6 @@ module.exports = [
           jsx: true,
         },
       },
-      globals: {
-        ...globals.browser,
-        ...globals.serviceworker,
-      },
     },
     rules: {
       semi: "error",
