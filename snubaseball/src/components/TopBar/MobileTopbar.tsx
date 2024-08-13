@@ -8,10 +8,7 @@ interface TopbarProps {
   openSidebar: () => void;
 }
 
-export default function MobileTopbar({
-  navigate,
-  openSidebar,
-}: TopbarProps) {
+export default function MobileTopbar({ navigate, openSidebar }: TopbarProps) {
   const location = useLocation();
 
   const routeNameMap: { [key: string]: string } = {
@@ -33,14 +30,12 @@ export default function MobileTopbar({
     <Container>
       <Bar>
         <Logo onClick={() => handleNavigate("/")}>로고</Logo>
-        <Tabs>
-          <Title>{pageName}</Title>
-        </Tabs>
+        <Title>{pageName}</Title>
         <Icon onClick={openSidebar}>
           <AppIcon icon="menu" size={28} color="black" />
         </Icon>
       </Bar>
-      <BottomBar />
+      <BottomBorder />
     </Container>
   );
 }
@@ -48,25 +43,24 @@ export default function MobileTopbar({
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 100vw;
 `;
 
 const Bar = styled.div`
   display: flex;
+  flex: 1,
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width: 98vw;
   height: 60px;
   color: #fff;
-  border-bottom: 1px solid #ddd;
+
   padding: 0 15px;
 `;
 
 const Logo = styled.div`
   display: flex;
   flex: 1;
-  align-items: center;
-  justify-content: flex-start;
   color: black;
 
   &:hover {
@@ -77,7 +71,6 @@ const Logo = styled.div`
 const Title = styled.h1`
   display: flex;
   flex: 1;
-  align-items: center;
   justify-content: center;
   font-size: 20px;
   font-weight: bold;
@@ -86,13 +79,6 @@ const Title = styled.h1`
   &:hover {
     cursor: default;
   }
-`;
-
-const Tabs = styled.div`
-  display: flex;
-  flex: 8;
-  justify-content: center;
-  gap: 100px;
 `;
 
 const Icon = styled.div`
@@ -105,7 +91,7 @@ const Icon = styled.div`
   }
 `;
 
-const BottomBar = styled.div`
+const BottomBorder = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
