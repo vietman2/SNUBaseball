@@ -1,41 +1,69 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { Divider } from "@components/Dividers";
+import { getImages } from "services/archive/images";
+import { Interview, Memories } from "fragments/Archive";
+
+type ImageType = {
+  id: number;
+  title: string;
+  file: string;
+};
 
 export default function Archive() {
+  const [images, setImages] = useState<ImageType[]>([]);
+
+  const fetchImages = async () => {
+    try {
+      const response = await getImages();
+
+      if (response.status === 200) {
+        setImages(response.data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const navigateMore = () => {};
+
+  useEffect(() => {
+    fetchImages();
+  }, []);
+
   return (
     <Container>
       <Title>
-        MEMORIES<Subtitle>_순간의 기록</Subtitle>
+        MEMORIES <Subtitle>_ 순간의 기록</Subtitle>
       </Title>
       <Line>
         <YearText>2024</YearText>
       </Line>
-      <Grid>
-        <ImageContainerLarge></ImageContainerLarge>
-        <ImageContainerSmallTop></ImageContainerSmallTop>
-        <ImageContainerSmallBottom></ImageContainerSmallBottom>
-        <ImageContainerMedium></ImageContainerMedium>
-      </Grid>
+      <ImageContainer>{images ? <Memories /> : null}</ImageContainer>
       <Line>
         <YearText>2023</YearText>
       </Line>
-      <Grid>
-        <ImageContainerLarge></ImageContainerLarge>
-        <ImageContainerSmallTop></ImageContainerSmallTop>
-        <ImageContainerSmallBottom></ImageContainerSmallBottom>
-        <ImageContainerMedium></ImageContainerMedium>
-      </Grid>
+      <ImageContainer>{images ? <Memories /> : null}</ImageContainer>
       <Divider />
+      <Button onClick={navigateMore}>{"MORE >>"}</Button>
+      <Title>
+        INTERVIEW <Subtitle>_ 우리들의 이야기</Subtitle>
+      </Title>
+      <Line />
+      <Interview />
+      <Divider />
+      <Button onClick={navigateMore}>{"MORE >>"}</Button>
     </Container>
   );
 }
 
 const Container = styled.div`
   display: flex;
+  flex: 1;
   flex-direction: column;
-  width: 100vw;
   margin-top: 10px;
+  padding: 0 10px;
 `;
 
 const Title = styled.div`
@@ -44,18 +72,17 @@ const Title = styled.div`
   font-size: 20px;
   font-weight: bold;
   color: black;
-  padding: 0 20px;
+  margin-top: 10px;
+  padding: 5px 20px;
 `;
 
 const Subtitle = styled.div`
-  font-size: 15px;
-  font-weight: bold;
+  font-size: 14px;
   color: black;
 `;
 
 const Line = styled.div`
   position: relative;
-  width: 100vw;
   height: 1px;
   margin: 15px 0 5px 0;
   background: repeating-linear-gradient(
@@ -80,44 +107,26 @@ const YearText = styled.span`
   right: 0;
   top: -15px;
   background-color: white;
-  padding-left: 25px;
+  padding-left: 15px;
+  padding-right: 20px;
   font-size: 20px;
   color: #0f0f70;
   z-index: 1;
 `;
 
-const Grid = styled.div`
-  display: grid;
-  width: 95vw;
-  height: 15vh;
-  grid-template-columns: 4fr 3fr 3fr;
-  grid-column-rows: 1fr 1fr;
-  column-gap: 10px;
-  row-gap: 10px;
-  margin: 15px 0;
-  padding: 0 20px;
+const ImageContainer = styled.div`
+  display: flex;
+  width: 90vw;
+  height: 280px;
+  margin: 20px 0;
+  padding: 0 0px;
 `;
 
-const ImageContainerLarge = styled.div`
-  grid-column: 1 / 2;
-  grid-row: 1 / 3;
-  background-color: #f0f0f0;
-`;
-
-const ImageContainerSmallTop = styled.div`
-  grid-column: 2 / 3;
-  grid-row: 1 / 2;
-  background-color: red;
-`;
-
-const ImageContainerSmallBottom = styled.div`
-  grid-column: 2 / 3;
-  grid-row: 2 / 3;
-  background-color: green;
-`;
-
-const ImageContainerMedium = styled.div`
-  grid-column: 3 / 4;
-  grid-row: 1 / 3;
-  background-color: blue;
+const Button = styled.div`
+  display: flex;
+  align-items: center;
+  color: #0f0f70;
+  font-size: 16px;
+  margin: 10px 20px;
+  cursor: pointer;
 `;
