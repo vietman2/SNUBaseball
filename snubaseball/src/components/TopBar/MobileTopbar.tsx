@@ -27,24 +27,15 @@ export default function MobileTopbar({ navigate, openSidebar }: TopbarProps) {
   };
 
   return (
-    <Container>
-      <Bar>
-        <Logo onClick={() => handleNavigate("/")}>로고</Logo>
-        <Title>{pageName}</Title>
-        <Icon onClick={openSidebar}>
-          <AppIcon icon="menu" size={28} color="black" />
-        </Icon>
-      </Bar>
-      <BottomBorder />
-    </Container>
+    <Bar>
+      <Logo onClick={() => handleNavigate("/")}>로고</Logo>
+      <Title>{pageName}</Title>
+      <Icon onClick={openSidebar}>
+        <AppIcon icon="menu" size={28} color="black" />
+      </Icon>
+    </Bar>
   );
 }
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100vw;
-`;
 
 const Bar = styled.div`
   display: flex;
@@ -52,10 +43,11 @@ const Bar = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  width: 100vw;
   height: 60px;
   color: #fff;
 
-  padding: 0 15px;
+  padding: 20px 15px;
 `;
 
 const Logo = styled.div`
@@ -89,14 +81,4 @@ const Icon = styled.div`
   &:hover {
     cursor: pointer;
   }
-`;
-
-const BottomBorder = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  height: 30px;
-  padding: 0 15px;
-  background-color: #0f0f70;
 `;

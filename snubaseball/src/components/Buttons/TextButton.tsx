@@ -6,7 +6,7 @@ interface Props {
 }
 
 export function TextButton({ text, onClick }: Readonly<Props>) {
-  return <Button onClick={onClick}>{text}</Button>;
+  return <Button onClick={onClick} data-testid="button">{text}</Button>;
 }
 
 const Button = styled.div`
