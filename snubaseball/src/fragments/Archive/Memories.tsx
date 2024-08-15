@@ -1,28 +1,61 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
+import { getImages } from "services/archive/images";
+
+type ImageType = {
+  id: number;
+  title: string;
+  file: string;
+};
+
 export function Memories() {
+  const [images, setImages] = useState<ImageType[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchImages = async () => {
+    try {
+      const response = await getImages();
+
+      if (response.status === 200) {
+        setImages(response.data);
+        setLoading(false);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchImages();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <Container>
       <Row>
         <ImageBox>
-          <Image1 src="https://via.placeholder.com/150" />
-          <ImageTitle>Image Title</ImageTitle>
+          <Image1 src={images[0].file} />
+          <ImageTitle>{images[0].title}</ImageTitle>
         </ImageBox>
       </Row>
       <Row>
         <ImageBox>
-          <Image2 src="https://via.placeholder.com/150" />
-          <ImageTitle>Image Title</ImageTitle>
+          <Image2 src={images[1].file} />
+          <ImageTitle>{images[1].title}</ImageTitle>
         </ImageBox>
         <ImageBox>
-          <Image2 src="https://via.placeholder.com/150" />
-          <ImageTitle>Image Title</ImageTitle>
+          <Image2 src={images[2].file} />
+          <ImageTitle>{images[2].title}</ImageTitle>
         </ImageBox>
       </Row>
       <Row>
         <ImageBox>
-          <Image3 src="https://via.placeholder.com/150" />
-          <ImageTitle>Image Title</ImageTitle>
+          <Image3 src={images[3].file} />
+          <ImageTitle>{images[3].title}</ImageTitle>
         </ImageBox>
       </Row>
     </Container>
@@ -53,17 +86,17 @@ const ImageBox = styled.div`
 `;
 
 const Image1 = styled.img`
-  width: 37.5vw;
+  width: 35vw;
   height: 250px;
 `;
 
 const Image2 = styled.img`
-  width: 27.5vw;
+  width: 25vw;
   height: 110px;
 `;
 
 const Image3 = styled.img`
-  width: 27.5vw;
+  width: 25vw;
   height: 250px;
 `;
 
