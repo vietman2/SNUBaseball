@@ -12,15 +12,16 @@ export default function MobileTopbar({ navigate, openSidebar }: TopbarProps) {
   const location = useLocation();
 
   const routeNameMap: { [key: string]: string } = {
-    "/": "서울대 야구부",
-    "/about": "소개",
-    "/schedule": "일정",
-    "/archive": "아카이브",
-    "/sitemap": "사이트맵",
-    "/ask": "문의",
+    "": "서울대 야구부",
+    "about": "소개",
+    "schedule": "일정",
+    "archive": "아카이브",
+    "sitemap": "사이트맵",
+    "ask": "문의",
   };
 
-  const pageName = routeNameMap[location.pathname] || "서울대 야구부";
+  const pageName =
+    routeNameMap[location.pathname.split("/")[1]] || "서울대 야구부";
 
   const handleNavigate = (path: string) => {
     navigate(path);
