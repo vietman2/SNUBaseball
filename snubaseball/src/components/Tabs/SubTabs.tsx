@@ -6,7 +6,7 @@ interface Props {
   setSelectedTab: (index: string) => void;
 }
 
-export function Tabs({ tabs, selectedTab, setSelectedTab }: Props) {
+export function SubTabs({ tabs, selectedTab, setSelectedTab }: Props) {
   const handleTabClick = (tab: string) => {
     setSelectedTab(tab);
   };
@@ -27,17 +27,12 @@ export function Tabs({ tabs, selectedTab, setSelectedTab }: Props) {
   );
 }
 
-export function EmptyTabs() {
-  return <Container />;
-}
-
 const Container = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  height: 60px;
-  background-color: #0f0f70;
+  height: 40px;
 `;
 
 const Tab = styled.div<{ selected: boolean }>`
@@ -46,8 +41,8 @@ const Tab = styled.div<{ selected: boolean }>`
   align-items: center;
   justify-content: center;
   height: 100%;
-  font-size: 18px;
-  color: ${(props) => (props.selected ? "#0f0f70" : "#fff")};
-  background-color: ${(props) => (props.selected ? "#aaa" : "#0f0f70")};
+  font-size: 15px;
+  color: ${(props) => (props.selected ? "#0f0f70" : "#000")};
+  background-color: ${(props) => (props.selected ? "#aaa" : "#b6d3ed")};
   cursor: pointer;
 `;

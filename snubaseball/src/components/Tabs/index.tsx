@@ -1,3 +1,4 @@
+import { SubTabs } from "./SubTabs";
 import { EmptyTabs, Tabs } from "./Tabs";
 
-export { EmptyTabs, Tabs };
+export { EmptyTabs, SubTabs, Tabs };

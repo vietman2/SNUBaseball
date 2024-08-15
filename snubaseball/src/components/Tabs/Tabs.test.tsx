@@ -9,8 +9,8 @@ describe("<Tabs />", () => {
     render(
       <Tabs
         tabs={["tab1", "tab2"]}
-        selectedTabIndex={0}
-        setSelectedTabIndex={jest.fn()}
+        selectedTab="tab1"
+        setSelectedTab={jest.fn()}
       />
     );
     
