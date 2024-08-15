@@ -6,7 +6,7 @@ interface Props {
 
 export function Caption({ text }: Props) {
   const formattedText = text.split("\n").map((line, index) => (
-    <div>
+    <div key={index}>
       {line}
       <NewLine />
     </div>
