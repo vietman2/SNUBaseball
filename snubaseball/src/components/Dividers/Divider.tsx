@@ -6,6 +6,6 @@ interface Props {
 
 export const Divider = styled.div<Props>`
   width: 100%;
-  height: "1px";
+  height: 1px;
   background-color: ${(props) => (props.color ? props.color : "#9e9e9e")};
 `;

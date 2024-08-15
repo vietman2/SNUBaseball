@@ -15,6 +15,7 @@ export function TextDivider({ text }: Props) {
 const Line = styled.div`
   position: relative;
   height: 1px;
+  width: 95%;
   margin: 15px 0 5px 0;
   background: repeating-linear-gradient(
     to right,
