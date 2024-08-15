@@ -16,7 +16,7 @@ export function Title({ title, subtitle }: Props) {
 const MainTitle = styled.div`
   display: flex;
   align-items: flex-end;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: bold;
   color: black;
   margin-top: 10px;
