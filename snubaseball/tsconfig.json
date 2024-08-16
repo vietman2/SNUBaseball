@@ -19,9 +19,11 @@
     "paths": {
       "@components/*": ["components/*"],
       "@data/*": ["constants/data/*"],
-      "@type/*": ["constants/types/*"],
+      "@fragments/*": ["fragments/*"],
+      "@services/*": ["services/*"],
       "@store/*": ["store/*"],
-      "@utils/*": ["utils/*"],
+      "@type/*": ["constants/types/*"],
+      "@utils/*": ["utils/*"]
     }
   },
   "include": ["src"]
