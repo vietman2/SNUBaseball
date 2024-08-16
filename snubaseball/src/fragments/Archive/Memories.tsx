@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
-import { getImages } from "services/archive/images";
+import { getImages } from "@services/archive/images";
 
 type ImageType = {
   id: number;
@@ -14,15 +14,11 @@ export function Memories() {
   const [loading, setLoading] = useState(true);
 
   const fetchImages = async () => {
-    try {
-      const response = await getImages();
+    const response = await getImages();
 
-      if (response.status === 200) {
-        setImages(response.data);
-        setLoading(false);
-      }
-    } catch (error) {
-      console.error(error);
+    if (response.status === 200) {
+      setImages(response.data);
+      setLoading(false);
     }
   };
 
