@@ -8,7 +8,6 @@ module.exports = [
     ignores: ["**/*.d.ts", "**/*.config.js", "node_modules/**"],
     plugins: { react },
     languageOptions: {
-      ...react.configs.flat.recommended.languageOptions,
       parserOptions: {
         ecmaFeatures: {
           jsx: true,
