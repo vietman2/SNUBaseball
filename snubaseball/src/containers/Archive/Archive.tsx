@@ -24,6 +24,7 @@ export default function Archive() {
         <Divider />
         <Button onClick={navigateMore}>{"MORE >>"}</Button>
         <Title title="INTERVIEW" subtitle="우리들의 이야기" />
+        <TextDivider text="임준원" />
         <Interview />
         <Divider />
         <Button onClick={navigateMore}>{"MORE >>"}</Button>
