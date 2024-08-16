@@ -24,7 +24,7 @@ const router = createBrowserRouter(
         <Route path="sitemap" element={<Sitemap />} />
         <Route path="ask" element={<Ask />} />
         <Route path="about" element={<About />} />
-        <Route path="schedule" element={<Schedule />} />
+        <Route path="schedule/*" element={<Schedule />} />
         <Route path="portal" element={<Home />} />
       </Route>
       <Route path="login" element={<Login />} />
