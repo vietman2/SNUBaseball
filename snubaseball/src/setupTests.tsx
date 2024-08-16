@@ -15,27 +15,52 @@ Object.defineProperty(window, "matchMedia", {
     dispatchEvent: jest.fn(),
   }),
 });
-const mockNavigate = jest.fn();
-jest.mock("react-router", () => ({
-  ...jest.requireActual("react-router"),
-  Navigate: ({to}: {to: string}) => {
-    mockNavigate(to);
-    return null;
-  },
-  useNavigate: () => mockNavigate,
-}));
-const mockDispatch = jest.fn();
-jest.mock("react-redux", () => ({
-  ...jest.requireActual("react-redux"),
-  useDispatch: () => mockDispatch,
-}));
 
+jest.mock("@components/Dividers", () => ({
+  Divider: () => <div data-testid="divider" />,
+  TextDivider: ({ text }: { text: string }) => (
+    <div data-testid="text-divider">{text}</div>
+  ),
+}));
 jest.mock("@components/Icons", () => ({
   AppIcon: () => <div data-testid="app-icon" />,
 }));
 jest.mock("@components/Sidebar", () => ({
   Sidebar: ({ toggleSidebar }: { toggleSidebar: () => void }) => (
     <div data-testid="sidebar" onClick={toggleSidebar} onKeyDown={jest.fn()} />
+  ),
+}));
+jest.mock("@components/Tabs", () => ({
+  Tabs: ({
+    tabs,
+    selectedTab,
+    setSelectedTab,
+  }: {
+    tabs: string[];
+    selectedTab: string;
+    setSelectedTab: (tab: string) => void;
+  }) => (
+    <div data-testid="tabs">
+      {tabs.map((tab) => (
+        <div
+          key={tab}
+          data-testid={tab}
+          onClick={() => setSelectedTab(tab)}
+          onKeyDown={jest.fn()}
+        >
+          {tab}
+        </div>
+      ))}
+    </div>
+  ),
+  EmptyTabs: () => <div data-testid="empty-tabs" />,
+}));
+jest.mock("@components/Texts", () => ({
+  Title: ({ title, subtitle }: { title: string; subtitle: string }) => (
+    <div data-testid="title">
+      {title}
+      {subtitle}
+    </div>
   ),
 }));
 jest.mock("@components/TopBar", () => ({
@@ -60,4 +85,8 @@ jest.mock("@components/TopBar", () => ({
       />
     </>
   ),
+}));
+jest.mock("@fragments/Archive", () => ({
+  Interview: () => <div data-testid="interview" />,
+  Memories: () => <div data-testid="memories" />,
 }));
