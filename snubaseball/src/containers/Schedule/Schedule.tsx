@@ -28,7 +28,7 @@ export default function Schedule() {
     } else {
       navigate("/schedule");
     }
-  }
+  };
 
   return (
     <>
