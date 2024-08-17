@@ -33,11 +33,9 @@ jest.mock("@components/Sidebar", () => ({
 jest.mock("@components/Tabs", () => ({
   Tabs: ({
     tabs,
-    selectedTab,
     setSelectedTab,
   }: {
     tabs: string[];
-    selectedTab: string;
     setSelectedTab: (tab: string) => void;
   }) => (
     <div data-testid="tabs">
