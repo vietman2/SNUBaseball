@@ -45,10 +45,7 @@ export default function RootLayout() {
       <MainContainer>
         {isPortrait ? (
           <>
-            <MobileTopbar
-              navigate={handleNavigate}
-              openSidebar={openSidebar}
-            />
+            <MobileTopbar navigate={handleNavigate} openSidebar={openSidebar} />
             <Sidebar open={isSidebarOpen} toggleSidebar={toggleSidebar} />
           </>
         ) : (
