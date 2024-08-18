@@ -7,7 +7,7 @@
 # More details at https://github.com/eslint/eslint
 # and https://eslint.org
 
-name: ESLint
+name: ESLint (baseballhub)
 
 on:
   push:
@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: "snubaseball"
+        working-directory: "baseballhub"
     permissions:
       contents: read
       security-events: write
