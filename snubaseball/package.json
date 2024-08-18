@@ -50,6 +50,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@babel/preset-env": "^7.25.3",
     "@babel/preset-react": "^7.24.7",
     "@babel/preset-typescript": "^7.24.7",
@@ -70,6 +71,7 @@
     "transform": {
       "^.+\\.(js|jsx|ts|tsx)$": "babel-jest"
     },
+    "transformIgnorePatterns": ["node_modules\/(?!axios)"],
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
       "!src/index.tsx",
@@ -82,9 +84,12 @@
     "moduleNameMapper": {
       "^@components/(.*)$": "<rootDir>/src/components/$1",
       "^@data/(.*)$": "<rootDir>/src/constants/data/$1",
-      "^@type/(.*)$": "<rootDir>/src/constants/types/$1",
+      "^@fragments/(.*)$": "<rootDir>/src/fragments/$1",
+      "^@services/(.*)$": "<rootDir>/src/services/$1",
       "^@store/(.*)$": "<rootDir>/src/store/$1",
+      "^@type/(.*)$": "<rootDir>/src/constants/types/$1",
       "^@utils/(.*)$": "<rootDir>/src/utils/$1"
     }
-  }
+  },
+  "proxy": "http://localhost:8000"
 }

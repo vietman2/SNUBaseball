@@ -9,8 +9,6 @@ jest.mock("containers/Sitemap/Sitemap", () => "Sitemap");
 jest.mock("containers/Ask/Ask", () => "Ask");
 jest.mock("containers/About/About", () => "About");
 jest.mock("containers/Schedule/Schedule", () => "Schedule");
-jest.mock("containers/Login/Login", () => "Login");
-jest.mock("containers/Signup/Signup", () => "Signup");
 
 describe("<App />", () => {
   it("should render without crashing", () => {

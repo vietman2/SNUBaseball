@@ -15,28 +15,98 @@ Object.defineProperty(window, "matchMedia", {
     dispatchEvent: jest.fn(),
   }),
 });
-const mockNavigate = jest.fn();
-jest.mock("react-router", () => ({
-  ...jest.requireActual("react-router"),
-  Navigate: ({to}: {to: string}) => {
-    mockNavigate(to);
-    return null;
-  },
-  useNavigate: () => mockNavigate,
-}));
-const mockDispatch = jest.fn();
-jest.mock("react-redux", () => ({
-  ...jest.requireActual("react-redux"),
-  useDispatch: () => mockDispatch,
-}));
 
+jest.mock("@components/Buttons", () => ({
+  TextButton: ({ onClick }: { onClick: () => void }) => (
+    <button data-testid="button" onClick={onClick} />
+  ),
+}));
+jest.mock("@components/Checkbox", () => ({
+  Checkbox: "Checkbox",
+}));
+jest.mock("@components/Dividers", () => ({
+  Divider: () => <div data-testid="divider" />,
+  TextDivider: ({ text }: { text: string }) => (
+    <div data-testid="text-divider">{text}</div>
+  ),
+}));
 jest.mock("@components/Icons", () => ({
   AppIcon: () => <div data-testid="app-icon" />,
+}));
+jest.mock("@components/Loading", () => ({
+  LoadingPage: "LoadingPage",
 }));
 jest.mock("@components/Sidebar", () => ({
   Sidebar: ({ toggleSidebar }: { toggleSidebar: () => void }) => (
     <div data-testid="sidebar" onClick={toggleSidebar} onKeyDown={jest.fn()} />
   ),
+}));
+jest.mock("@components/Tables", () => ({
+  SimpleTable: "div",
+  TableRow: "div",
+}));
+jest.mock("@components/Tabs", () => ({
+  Tabs: ({
+    tabs,
+    setSelectedTab,
+  }: {
+    tabs: string[];
+    setSelectedTab: (tab: string) => void;
+  }) => (
+    <div data-testid="tabs">
+      {tabs.map((tab) => (
+        <div
+          key={tab}
+          data-testid={tab}
+          onClick={() => setSelectedTab(tab)}
+          onKeyDown={jest.fn()}
+        >
+          {tab}
+        </div>
+      ))}
+    </div>
+  ),
+  EmptyTabs: () => <div data-testid="empty-tabs" />,
+  SubTabs: ({
+    tabs,
+    setSelectedTab,
+  }: {
+    tabs: string[];
+    setSelectedTab: (tab: string) => void;
+  }) => (
+    <div data-testid="subtabs">
+      {tabs.map((tab) => (
+        <div
+          key={tab}
+          data-testid={tab}
+          onClick={() => setSelectedTab(tab)}
+          onKeyDown={jest.fn()}
+        >
+          {tab}
+        </div>
+      ))}
+    </div>
+  ),
+}));
+jest.mock("@components/TextInputs", () => ({
+  TextInput: ({ value, onChange }: { value: string; onChange: () => void }) => (
+    <input
+      data-testid="text-input"
+      value={value}
+      onChange={onChange}
+      onKeyDown={jest.fn()}
+    />
+  ),
+}));
+jest.mock("@components/Texts", () => ({
+  Title: ({ title, subtitle }: { title: string; subtitle: string }) => (
+    <div data-testid="title">
+      {title}
+      {subtitle}
+    </div>
+  ),
+  Subtitle: "div",
+  Caption: "div",
 }));
 jest.mock("@components/TopBar", () => ({
   FullTopBar: () => <div data-testid="full-top-bar" />,

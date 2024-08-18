@@ -1,13 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import ReactDOM from "react-dom/client";
 import axios from "axios";
-import { Provider } from "react-redux";
 
 import "./index.css";
 import App from "./containers/root/App";
-import { AuthProvider } from "./containers/root/AuthProvider/AuthProvider";
 import reportWebVitals from "./reportWebVitals";
-import { store } from "@store/index";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -15,16 +13,17 @@ const root = ReactDOM.createRoot(
 
 if (process.env.NODE_ENV === "production") {
   axios.defaults.baseURL = "https://api.snubaseball.com";
+} else {
+  axios.defaults.baseURL = "http://localhost:8000";
 }
 axios.defaults.headers.common["Content-Type"] = "application/json";
+axios.interceptors.request.use(function (config: any) {
+  return config;
+});
 
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <AuthProvider>
-        <App />
-      </AuthProvider>
-    </Provider>
+    <App />
   </React.StrictMode>
 );
 

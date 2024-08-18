@@ -1,6 +1,45 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
+interface Props {
+  open: boolean;
+  toggleSidebar: () => void;
+}
+
+export default function Sidebar({ open, toggleSidebar }: Readonly<Props>) {
+  const navigate = useNavigate();
+
+  const handleNavigate = (path: string) => {
+    navigate(path);
+
+    toggleSidebar();
+  };
+
+  return (
+    <>
+      <Container open={open}>
+        <Logo onClick={() => handleNavigate("/")}>로고</Logo>
+        <AuthTabs>
+          <AuthTab onClick={() => handleNavigate("/login")}>로그인</AuthTab>
+          <AuthTab onClick={() => handleNavigate("/signup")}>회원가입</AuthTab>
+        </AuthTabs>
+        <SidebarTab onClick={() => handleNavigate("/about")}>소개</SidebarTab>
+        <SidebarTab onClick={() => handleNavigate("/schedule")}>
+          일정
+        </SidebarTab>
+        <SidebarTab onClick={() => handleNavigate("/archive")}>
+          아카이브
+        </SidebarTab>
+        <SidebarTab onClick={() => handleNavigate("/sitemap")}>
+          사이트맵
+        </SidebarTab>
+        <SidebarTab onClick={() => handleNavigate("/ask")}>문의</SidebarTab>
+      </Container>
+      <Overlay open={open} onClick={toggleSidebar} />
+    </>
+  );
+}
+
 interface SimpleProps {
   open: boolean;
 }
@@ -82,42 +121,3 @@ const Overlay = styled.div<SimpleProps>`
   background: rgba(0, 0, 0, 0.5);
   z-index: 999;
 `;
-
-interface Props {
-  open: boolean;
-  toggleSidebar: () => void;
-}
-
-export default function Sidebar({ open, toggleSidebar }: Readonly<Props>) {
-  const navigate = useNavigate();
-
-  const handleNavigate = (path: string) => {
-    navigate(path);
-
-    toggleSidebar();
-  };
-
-  return (
-    <>
-      <Container open={open}>
-        <Logo onClick={() => handleNavigate("/")}>로고</Logo>
-        <AuthTabs>
-          <AuthTab onClick={() => handleNavigate("/login")}>로그인</AuthTab>
-          <AuthTab onClick={() => handleNavigate("/signup")}>회원가입</AuthTab>
-        </AuthTabs>
-        <SidebarTab onClick={() => handleNavigate("/about")}>소개</SidebarTab>
-        <SidebarTab onClick={() => handleNavigate("/schedule")}>
-          일정
-        </SidebarTab>
-        <SidebarTab onClick={() => handleNavigate("/archive")}>
-          아카이브
-        </SidebarTab>
-        <SidebarTab onClick={() => handleNavigate("/sitemap")}>
-          사이트맵
-        </SidebarTab>
-        <SidebarTab onClick={() => handleNavigate("/ask")}>문의</SidebarTab>
-      </Container>
-      <Overlay open={open} onClick={toggleSidebar} />
-    </>
-  );
-}
