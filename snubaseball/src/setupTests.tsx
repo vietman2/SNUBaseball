@@ -2,6 +2,7 @@
 // allows you to do things like:
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
+import { SimpleTable } from "@components/Tables";
 import "@testing-library/jest-dom";
 
 Object.defineProperty(window, "matchMedia", {
@@ -16,6 +17,14 @@ Object.defineProperty(window, "matchMedia", {
   }),
 });
 
+jest.mock("@components/Buttons", () => ({
+  TextButton: ({ onClick }: { onClick: () => void }) => (
+    <button data-testid="button" onClick={onClick} />
+  ),
+}));
+jest.mock("@components/Checkbox", () => ({
+  Checkbox: "Checkbox",
+}));
 jest.mock("@components/Dividers", () => ({
   Divider: () => <div data-testid="divider" />,
   TextDivider: ({ text }: { text: string }) => (
@@ -25,10 +34,17 @@ jest.mock("@components/Dividers", () => ({
 jest.mock("@components/Icons", () => ({
   AppIcon: () => <div data-testid="app-icon" />,
 }));
+jest.mock("@components/Loading", () => ({
+  LoadingPage: "LoadingPage",
+}));
 jest.mock("@components/Sidebar", () => ({
   Sidebar: ({ toggleSidebar }: { toggleSidebar: () => void }) => (
     <div data-testid="sidebar" onClick={toggleSidebar} onKeyDown={jest.fn()} />
   ),
+}));
+jest.mock("@components/Tables", () => ({
+  SimpleTable: "div",
+  TableRow: "div",
 }));
 jest.mock("@components/Tabs", () => ({
   Tabs: ({
@@ -52,6 +68,38 @@ jest.mock("@components/Tabs", () => ({
     </div>
   ),
   EmptyTabs: () => <div data-testid="empty-tabs" />,
+  SubTabs: ({
+    tabs,
+    selectedTab,
+    setSelectedTab,
+  }: {
+    tabs: string[];
+    selectedTab: string;
+    setSelectedTab: (tab: string) => void;
+  }) => (
+    <div data-testid="subtabs">
+      {tabs.map((tab) => (
+        <div
+          key={tab}
+          data-testid={tab}
+          onClick={() => setSelectedTab(tab)}
+          onKeyDown={jest.fn()}
+        >
+          {tab}
+        </div>
+      ))}
+    </div>
+  ),
+}));
+jest.mock("@components/TextInputs", () => ({
+  TextInput: ({ value, onChange }: { value: string; onChange: () => void }) => (
+    <input
+      data-testid="text-input"
+      value={value}
+      onChange={onChange}
+      onKeyDown={jest.fn()}
+    />
+  ),
 }));
 jest.mock("@components/Texts", () => ({
   Title: ({ title, subtitle }: { title: string; subtitle: string }) => (
@@ -60,6 +108,8 @@ jest.mock("@components/Texts", () => ({
       {subtitle}
     </div>
   ),
+  Subtitle: "div",
+  Caption: "div",
 }));
 jest.mock("@components/TopBar", () => ({
   FullTopBar: () => <div data-testid="full-top-bar" />,
@@ -83,8 +133,4 @@ jest.mock("@components/TopBar", () => ({
       />
     </>
   ),
-}));
-jest.mock("@fragments/Archive", () => ({
-  Interview: () => <div data-testid="interview" />,
-  Memories: () => <div data-testid="memories" />,
 }));
