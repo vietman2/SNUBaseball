@@ -28,41 +28,17 @@ export function Graduation() {
         <Graduate>
           <Image>IMAGE</Image>
           <Name>
-            <Role>[선수]</Role> 홍길동_경영학과 20
+            <Role>[선수]</Role> 김철수_경제학부 21
           </Name>
-          <Period>활동기간 2019.03 ~ 2024.02</Period>
+          <Period>활동기간 2021.09 ~ 2024.08</Period>
           <Words>소감을 적어주세요</Words>
         </Graduate>
         <Graduate>
           <Image>IMAGE</Image>
           <Name>
-            <Role>[매니저]</Role> 홍길동_경영학과 20
+            <Role>[매니저]</Role> 박영희_사회학과 20
           </Name>
-          <Period>활동기간 2019.03 ~ 2024.02</Period>
-          <Words>소감을 적어주세요</Words>
-        </Graduate>
-        <Graduate>
-          <Image>IMAGE</Image>
-          <Name>
-            <Role>[선수]</Role> 홍길동_경영학과 20
-          </Name>
-          <Period>활동기간 2019.03 ~ 2024.02</Period>
-          <Words>소감을 적어주세요</Words>
-        </Graduate>
-        <Graduate>
-          <Image>IMAGE</Image>
-          <Name>
-            <Role>[선수]</Role> 홍길동_경영학과 20
-          </Name>
-          <Period>활동기간 2019.03 ~ 2024.02</Period>
-          <Words>소감을 적어주세요</Words>
-        </Graduate>
-        <Graduate>
-          <Image>IMAGE</Image>
-          <Name>
-            <Role>[매니저]</Role> 홍길동_경영학과 20
-          </Name>
-          <Period>활동기간 2019.03 ~ 2024.02</Period>
+          <Period>활동기간 2022.03 ~ 2024.02</Period>
           <Words>소감을 적어주세요</Words>
         </Graduate>
       </Graduates>
