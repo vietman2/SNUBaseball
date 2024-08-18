@@ -6,7 +6,7 @@ import { Summer } from "./Summer/Summer";
 import { Winter } from "./Winter/Winter";
 import { SubTabs } from "@components/Tabs";
 
-const subtabs = ["월별 훈련 일정", "제주도 전지훈련", "여름 합숙훈련"]
+const subtabs = ["월별 훈련 일정", "제주도 전지훈련", "여름 합숙훈련"];
 
 export function Training() {
   const [selectedTab, setSelectedTab] = useState<string>("월별 훈련 일정");

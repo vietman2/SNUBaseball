@@ -13,9 +13,9 @@ export function Winter() {
         <Card>
           <Subtitle subtitle="DAY 1" icon="baseball" />
           <Checklist>
-            <Checkbox text="펑고 집중 훈련" />
-            <Checkbox text="태그 훈련" />
-            <Checkbox text="기본 체력 훈련" />
+            <Checkbox text="체력 훈련" />
+            <Checkbox text="내야 핸들링 훈련" />
+            <Checkbox text="외야 스타트 훈련" />
           </Checklist>
         </Card>
         <Image>TODAY'S PHOTO</Image>
@@ -24,9 +24,9 @@ export function Winter() {
         <Card>
           <Subtitle subtitle="DAY 2" icon="baseball" />
           <Checklist>
-            <Checkbox text="펑고 집중 훈련" />
-            <Checkbox text="태그 훈련" />
-            <Checkbox text="기본 체력 훈련" />
+            <Checkbox text="라이브 피칭/배팅 훈련" />
+            <Checkbox text="주루플레이 훈련" />
+            <Checkbox text="펑고 훈련" />
           </Checklist>
         </Card>
         <Image>TODAY'S PHOTO</Image>
@@ -35,9 +35,9 @@ export function Winter() {
         <Card>
           <Subtitle subtitle="DAY 3" icon="baseball" />
           <Checklist>
-            <Checkbox text="펑고 집중 훈련" />
-            <Checkbox text="태그 훈련" />
-            <Checkbox text="기본 체력 훈련" />
+            <Checkbox text="번트 훈련" />
+            <Checkbox text="중계플레이 훈련" />
+            <Checkbox text="청백전" />
           </Checklist>
         </Card>
         <Image>TODAY'S PHOTO</Image>

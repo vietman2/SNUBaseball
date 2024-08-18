@@ -22,10 +22,26 @@ jest.mock("./Winter/Winter", () => ({
 jest.mock("@components/Tabs", () => ({
   SubTabs: ({ setSelectedTab }: { setSelectedTab: (tab: string) => void }) => (
     <>
-      <div data-testid="월별 훈련 일정" onClick={() => setSelectedTab("월별 훈련 일정")} />
-      <div data-testid="제주도 전지훈련" onClick={() => setSelectedTab("제주도 전지훈련")} />
-      <div data-testid="여름 합숙훈련" onClick={() => setSelectedTab("여름 합숙훈련")} />
-      <div data-testid="null" onClick={() => setSelectedTab("null")} />
+      <div
+        data-testid="월별 훈련 일정"
+        onClick={() => setSelectedTab("월별 훈련 일정")}
+        onKeyDown={jest.fn()}
+      />
+      <div
+        data-testid="제주도 전지훈련"
+        onClick={() => setSelectedTab("제주도 전지훈련")}
+        onKeyDown={jest.fn()}
+      />
+      <div
+        data-testid="여름 합숙훈련"
+        onClick={() => setSelectedTab("여름 합숙훈련")}
+        onKeyDown={jest.fn()}
+      />
+      <div
+        data-testid="null"
+        onClick={() => setSelectedTab("null")}
+        onKeyDown={jest.fn()}
+      />
     </>
   ),
 }));

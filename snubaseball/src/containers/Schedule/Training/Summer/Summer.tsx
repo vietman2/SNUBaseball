@@ -24,9 +24,9 @@ export function Summer() {
         <Card>
           <Subtitle subtitle="DAY 2" icon="baseball" />
           <Checklist>
-            <Checkbox text="펑고 집중 훈련" />
-            <Checkbox text="태그 훈련" />
-            <Checkbox text="기본 체력 훈련" />
+            <Checkbox text="배팅 훈련" />
+            <Checkbox text="주루플레이 훈련" />
+            <Checkbox text="청백전" />
           </Checklist>
         </Card>
         <Image>TODAY'S PHOTO</Image>
@@ -35,9 +35,9 @@ export function Summer() {
         <Card>
           <Subtitle subtitle="DAY 3" icon="baseball" />
           <Checklist>
-            <Checkbox text="펑고 집중 훈련" />
-            <Checkbox text="태그 훈련" />
-            <Checkbox text="기본 체력 훈련" />
+            <Checkbox text="투수 불펜 훈련" />
+            <Checkbox text="라이브 배팅 훈련" />
+            <Checkbox text="시뮬레이션 훈련" />
           </Checklist>
         </Card>
         <Image>TODAY'S PHOTO</Image>
