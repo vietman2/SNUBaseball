@@ -40,7 +40,7 @@ export default function Schedule() {
       <Routes>
         <Route index element={<ScheduleMain />} />
         <Route path="/games" element={<Games />} />
-        <Route path="/training" element={<Training />} />
+        <Route path="/training/*" element={<Training />} />
         <Route path="/events/*" element={<Events />} />
       </Routes>
       <Outlet />

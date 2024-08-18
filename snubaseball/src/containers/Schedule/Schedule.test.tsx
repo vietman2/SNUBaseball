@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 
 import Schedule from "./Schedule";
 
@@ -6,7 +6,7 @@ jest.mock("react-router-dom", () => ({
   Outlet: () => <div data-testid="outlet" />,
   Route: ({ element }: { element: JSX.Element }) => element,
   Routes: ({ children }: { children: JSX.Element }) => children,
-  useNavigate: jest.fn(),
+  useNavigate: () => jest.fn(),
   useRoutes: jest.fn(),
 }));
 jest.mock("./Events/Events", () => ({
@@ -21,9 +21,26 @@ jest.mock("./Main/Main", () => ({
 jest.mock("./Training/Training", () => ({
   Training: () => <div data-testid="training" />,
 }));
+jest.mock("@components/Tabs", () => ({
+  Tabs: ({ setSelectedTab }: { setSelectedTab: (tab: string) => void }) => (
+    <>
+      <div data-testid="전체" onClick={() => setSelectedTab("전체")} />
+      <div data-testid="경기" onClick={() => setSelectedTab("경기")} />
+      <div data-testid="훈련" onClick={() => setSelectedTab("훈련")} />
+      <div data-testid="행사" onClick={() => setSelectedTab("행사")} />
+      <div data-testid="null" onClick={() => setSelectedTab("null")} />
+    </>
+  ),
+}));
 
 describe("<Schedule />", () => {
   it("should render", () => {
     render(<Schedule />);
+
+    fireEvent.click(screen.getByTestId("경기"));
+    fireEvent.click(screen.getByTestId("훈련"));
+    fireEvent.click(screen.getByTestId("행사"));
+    fireEvent.click(screen.getByTestId("전체"));
+    fireEvent.click(screen.getByTestId("null"));
   });
 });
