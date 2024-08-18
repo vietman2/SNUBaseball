@@ -25,6 +25,10 @@ describe("<AppIcon />", () => {
     render(<AppIcon icon="checkbox" size={1} color="black" />);
   });
   
+  it("should render graduate icon", () => {
+    render(<AppIcon icon="graduate" size={1} color="black" />);
+  });
+  
   it("should render null", () => {
     render(<AppIcon icon="null" size={1} color="black" />);
   });
