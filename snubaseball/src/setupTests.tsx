@@ -69,11 +69,9 @@ jest.mock("@components/Tabs", () => ({
   EmptyTabs: () => <div data-testid="empty-tabs" />,
   SubTabs: ({
     tabs,
-    selectedTab,
     setSelectedTab,
   }: {
     tabs: string[];
-    selectedTab: string;
     setSelectedTab: (tab: string) => void;
   }) => (
     <div data-testid="subtabs">
