@@ -1,0 +1,402 @@
+[
+  {
+    "model": "user.person",
+    "pk": 203,
+    "fields": {
+      "first_name": "준원",
+      "last_name": "임",
+      "birth_date": "2000-03-22",
+      "admission_year": "2020",
+      "student_id": "2020-17137",
+      "major": null,
+      "role": "1",
+      "status": 1,
+      "profile_image": "/profiles/2020-17137.jpg",
+      "phone": "+821026713120",
+      "email": "jun322813@naver.com",
+      "address": "",
+      "notes": "",
+      "date_joined": null
+    }
+  },
+  {
+    "model": "user.person",
+    "pk": 204,
+    "fields": {
+      "first_name": "정규",
+      "last_name": "김",
+      "birth_date": "2003-01-21",
+      "admission_year": "2022",
+      "student_id": "2022-18634",
+      "major": null,
+      "role": "1",
+      "status": 1,
+      "profile_image": "/profiles/2022-18634.jpg",
+      "phone": "+821029761332",
+      "email": "jeremykim21@snu.ac.kr",
+      "address": "",
+      "notes": "",
+      "date_joined": null
+    }
+  },
+  {
+    "model": "user.person",
+    "pk": 205,
+    "fields": {
+      "first_name": "상현",
+      "last_name": "이",
+      "birth_date": "1999-07-27",
+      "admission_year": "2019",
+      "student_id": "2019-12370",
+      "major": null,
+      "role": "1",
+      "status": 1,
+      "profile_image": "/profiles/2019-12370.jpg",
+      "phone": "+821026851770",
+      "email": null,
+      "address": "",
+      "notes": "",
+      "date_joined": null
+    }
+  },
+  {
+    "model": "user.person",
+    "pk": 206,
+    "fields": {
+      "first_name": "기헌",
+      "last_name": "남",
+      "birth_date": "2001-06-01",
+      "admission_year": "2020",
+      "student_id": "2020-16668",
+      "major": null,
+      "role": "1",
+      "status": 1,
+      "profile_image": "/profiles/2020-16668.jpg",
+      "phone": "+821091523375",
+      "email": "nam010601@naver.com",
+      "address": "",
+      "notes": "",
+      "date_joined": null
+    }
+  },
+  {
+    "model": "user.person",
+    "pk": 207,
+    "fields": {
+      "first_name": "유용",
+      "last_name": "이",
+      "birth_date": "2000-08-08",
+      "admission_year": "2020",
+      "student_id": "2020-18627",
+      "major": null,
+      "role": "1",
+      "status": 1,
+      "profile_image": "/profiles/2020-18627.jpg",
+      "phone": "+821027544606",
+      "email": null,
+      "address": "",
+      "notes": "",
+      "date_joined": null
+    }
+  },
+  {
+    "model": "user.person",
+    "pk": 208,
+    "fields": {
+      "first_name": "동현",
+      "last_name": "윤",
+      "birth_date": "2001-01-17",
+      "admission_year": "2020",
+      "student_id": "2020-10555",
+      "major": null,
+      "role": "1",
+      "status": 1,
+      "profile_image": "/profiles/2020-10555.jpg",
+      "phone": "+821050118462",
+      "email": "keroro1967@snu.ac.kr",
+      "address": "",
+      "notes": "",
+      "date_joined": null
+    }
+  },
+  {
+    "model": "user.person",
+    "pk": 209,
+    "fields": {
+      "first_name": "진산",
+      "last_name": "이",
+      "birth_date": "2002-05-22",
+      "admission_year": "2021",
+      "student_id": "2021-17607",
+      "major": null,
+      "role": "1",
+      "status": 1,
+      "profile_image": "/profiles/2021-17607.jpg",
+      "phone": "+821075746854",
+      "email": "dusgusch18@snu.ac.kr",
+      "address": "",
+      "notes": "",
+      "date_joined": null
+    }
+  },
+  {
+    "model": "user.person",
+    "pk": 210,
+    "fields": {
+      "first_name": "유안",
+      "last_name": "김",
+      "birth_date": "2001-12-06",
+      "admission_year": "2021",
+      "student_id": "2021-12452",
+      "major": null,
+      "role": "1",
+      "status": 1,
+      "profile_image": "/profiles/2021-12452.jpg",
+      "phone": "+821055359226",
+      "email": "youan1206@naver.com",
+      "address": "",
+      "notes": "",
+      "date_joined": null
+    }
+  },
+  {
+    "model": "user.person",
+    "pk": 211,
+    "fields": {
+      "first_name": "서진",
+      "last_name": "양",
+      "birth_date": "2002-01-11",
+      "admission_year": "2021",
+      "student_id": "2021-18947",
+      "major": null,
+      "role": "1",
+      "status": 1,
+      "profile_image": "/profiles/2021-18947.jpg",
+      "phone": "+821098223646",
+      "email": null,
+      "address": "",
+      "notes": "",
+      "date_joined": null
+    }
+  },
+  {
+    "model": "user.person",
+    "pk": 212,
+    "fields": {
+      "first_name": "서준",
+      "last_name": "이",
+      "birth_date": "2003-03-28",
+      "admission_year": "2022",
+      "student_id": "2022-10794",
+      "major": null,
+      "role": "1",
+      "status": 1,
+      "profile_image": "/profiles/2022-10794.jpg",
+      "phone": "+821085273252",
+      "email": "seojoon328@snu.ac.kr",
+      "address": "",
+      "notes": "",
+      "date_joined": null
+    }
+  },
+  {
+    "model": "user.person",
+    "pk": 213,
+    "fields": {
+      "first_name": "건우",
+      "last_name": "박",
+      "birth_date": "2002-07-22",
+      "admission_year": "2022",
+      "student_id": "2022-19662",
+      "major": null,
+      "role": "1",
+      "status": 1,
+      "profile_image": "/profiles/2022-19662.jpg",
+      "phone": "+821098979076",
+      "email": "gunoo0207@gmail.com",
+      "address": "",
+      "notes": "",
+      "date_joined": null
+    }
+  },
+  {
+    "model": "user.person",
+    "pk": 214,
+    "fields": {
+      "first_name": "영",
+      "last_name": "김",
+      "birth_date": "2001-06-11",
+      "admission_year": "2022",
+      "student_id": "2022-15623",
+      "major": null,
+      "role": "1",
+      "status": 1,
+      "profile_image": "/profiles/2022-15623.jpg",
+      "phone": "+821033093289",
+      "email": "kim-young@naver.com",
+      "address": "",
+      "notes": "",
+      "date_joined": null
+    }
+  },
+  {
+    "model": "user.person",
+    "pk": 215,
+    "fields": {
+      "first_name": "호성",
+      "last_name": "유",
+      "birth_date": "2004-02-11",
+      "admission_year": "2023",
+      "student_id": "2023-15781",
+      "major": null,
+      "role": "1",
+      "status": 1,
+      "profile_image": "/profiles/2023-15781.jpg",
+      "phone": "+821027721397",
+      "email": null,
+      "address": "",
+      "notes": "",
+      "date_joined": null
+    }
+  },
+  {
+    "model": "user.person",
+    "pk": 216,
+    "fields": {
+      "first_name": "택원",
+      "last_name": "김",
+      "birth_date": "2005-03-07",
+      "admission_year": "2024",
+      "student_id": "2024-18123",
+      "major": null,
+      "role": "1",
+      "status": 1,
+      "profile_image": "/profiles/2024-18123.jpg",
+      "phone": "+821040788647",
+      "email": null,
+      "address": "",
+      "notes": "",
+      "date_joined": null
+    }
+  },
+  {
+    "model": "user.person",
+    "pk": 217,
+    "fields": {
+      "first_name": "준서",
+      "last_name": "허",
+      "birth_date": "2005-10-10",
+      "admission_year": "2024",
+      "student_id": "2024-12212",
+      "major": null,
+      "role": "1",
+      "status": 1,
+      "profile_image": "/profiles/2024-12212.jpg",
+      "phone": "+821047257067",
+      "email": null,
+      "address": "",
+      "notes": "",
+      "date_joined": null
+    }
+  },
+  {
+    "model": "user.person",
+    "pk": 218,
+    "fields": {
+      "first_name": "두희",
+      "last_name": "이",
+      "birth_date": "2005-05-12",
+      "admission_year": "2024",
+      "student_id": "2024-16694",
+      "major": null,
+      "role": "1",
+      "status": 1,
+      "profile_image": null,
+      "phone": "+821042395416",
+      "email": null,
+      "address": "",
+      "notes": "",
+      "date_joined": null
+    }
+  },
+  {
+    "model": "user.person",
+    "pk": 219,
+    "fields": {
+      "first_name": "민수",
+      "last_name": "심",
+      "birth_date": "2004-01-06",
+      "admission_year": "2024",
+      "student_id": "2024-18477",
+      "major": null,
+      "role": "1",
+      "status": 1,
+      "profile_image": null,
+      "phone": "+821065328547",
+      "email": null,
+      "address": "",
+      "notes": "",
+      "date_joined": null
+    }
+  },
+  {
+    "model": "user.person",
+    "pk": 220,
+    "fields": {
+      "first_name": "연우",
+      "last_name": "최",
+      "birth_date": null,
+      "admission_year": "2022",
+      "student_id": null,
+      "major": null,
+      "role": "2",
+      "status": 1,
+      "profile_image": null,
+      "phone": "+821092694522",
+      "email": null,
+      "address": "",
+      "notes": "",
+      "date_joined": null
+    }
+  },
+  {
+    "model": "user.person",
+    "pk": 221,
+    "fields": {
+      "first_name": "영서",
+      "last_name": "박",
+      "birth_date": null,
+      "admission_year": "2022",
+      "student_id": null,
+      "major": null,
+      "role": "2",
+      "status": 1,
+      "profile_image": null,
+      "phone": "+821071100106",
+      "email": null,
+      "address": "",
+      "notes": "",
+      "date_joined": null
+    }
+  },
+  {
+    "model": "user.person",
+    "pk": 222,
+    "fields": {
+      "first_name": "지민",
+      "last_name": "강",
+      "birth_date": null,
+      "admission_year": "2024",
+      "student_id": null,
+      "major": null,
+      "role": "2",
+      "status": 1,
+      "profile_image": null,
+      "phone": "+821085526861",
+      "email": null,
+      "address": "",
+      "notes": "",
+      "date_joined": null
+    }
+  }
+]
