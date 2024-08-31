@@ -1,8 +1,10 @@
 from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError as DjangoValidationError
 from django.core.files.storage import default_storage
 from drf_spectacular.utils import extend_schema_field
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer, ValidationError
+from phonenumber_field.validators import validate_international_phonenumber
 
 from core.validators import UsernameValidator
 from .enums import RoleType
@@ -53,7 +55,7 @@ class PersonSerializer(ModelSerializer):
     first_name      = serializers.CharField(write_only=True)
     last_name       = serializers.CharField(write_only=True)
     phone           = serializers.SerializerMethodField()
-    role            = serializers.CharField()
+    role            = serializers.SerializerMethodField()
     status          = serializers.CharField(source='get_status_display', read_only=True)
     major           = serializers.CharField(source='major.name', read_only=True)
     profile_image   = serializers.ImageField(use_url=True)
@@ -87,6 +89,17 @@ class PersonSerializer(ModelSerializer):
 
         return None
 
+    def validate_phone(self, value):
+        if value == None:
+            return None
+
+        try:
+            validate_international_phonenumber(value)
+        except DjangoValidationError:
+            raise ValidationError("전화번호 형식이 올바르지 않습니다.")
+
+        return value
+
     def validate_student_id(self, value):
         if not value:
             raise ValidationError("학번을 입력해주세요.")
@@ -102,6 +115,8 @@ class PersonSerializer(ModelSerializer):
         for choice in RoleType.choices:
             if value in choice:
                 return choice[0]
+
+        raise ValidationError("역할이 올바르지 않습니다.")
 
     def save(self, **kwargs):
         ## upload profile image

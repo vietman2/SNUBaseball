@@ -10,7 +10,6 @@ from rest_framework.viewsets import ModelViewSet
 from core.validators import UsernameValidator
 from .person import College, Person
 from .serializers import RegisterSerializer, CollegeSerializer, PersonSerializer
-from .utils import get_error_message
 
 class RegisterView(GenericAPIView):
     serializer_class = RegisterSerializer
@@ -29,9 +28,8 @@ class RegisterView(GenericAPIView):
 
             username_validator(serializer.validated_data['username'])
         except ValidationError as e:
-            error_message = get_error_message(e)
             return Response(data={
-                "error": error_message,
+                "error": e.detail,
             }, status=status.HTTP_400_BAD_REQUEST)
 
         serializer.save()
@@ -90,13 +88,16 @@ class PersonViewSet(ModelViewSet):
     @extend_schema(summary="사용자 정보 추가", tags=["회원 관리"])
     def create(self, request):
         serializer = self.get_serializer(data=request.data)
+        phone_number = request.data.get('phone', None)
+        role = request.data.get('role', None)
 
         try:
+            serializer.validate_phone(phone_number)
+            serializer.validate_role(role)
             serializer.is_valid(raise_exception=True)
         except ValidationError as e:
-            error_message = get_error_message(e)
             return Response(data={
-                "error": error_message,
+                "error": e.detail,
             }, status=status.HTTP_400_BAD_REQUEST)
 
         serializer.save()
