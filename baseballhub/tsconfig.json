@@ -17,10 +17,16 @@
     "jsx": "react-jsx",
     "baseUrl": "src",
     "paths": {
+      "@assets/*": ["assets/*"],
       "@components/*": ["components/*"],
+      "@constants/*": ["constants/*"],
+      "@data/*": ["constants/data/*"],
       "@fragments/*": ["fragments/*"],
+      "@pages/*": ["pages/*"],
       "@models/*": ["constants/models/*"],
+      "@navigation/*": ["constants/navigation/*"],
       "@services/*": ["services/*"],
+      "@utils/*": ["utils/*"]
     }
   },
   "include": [
