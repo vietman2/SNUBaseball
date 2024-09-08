@@ -7,8 +7,11 @@ import {
   Outlet,
 } from "react-router-dom";
 
-import { Home } from "../Home/Home";
-import Members from "../Members/Members";
+import { Home } from "../Home";
+import { Members } from "../Admin";
+import { Daily, Weekly } from "@pages/Schedule";
+import { Guidelines } from "@pages/Training";
+
 import { RootLayout } from "@components/RootLayout";
 import { AuthProvider, Login, SignUp, useAuth } from "@pages/Auth";
 
@@ -31,6 +34,9 @@ const router = createBrowserRouter(
       <Route element={<ProtectedRoutes />}>
         <Route element={<RootLayout />}>
           <Route path="/home" element={<Home />} />
+          <Route path="/schedule/daily" element={<Daily />} />
+          <Route path="/schedule/weekly" element={<Weekly />} />
+          <Route path="/training/guidelines" element={<Guidelines />} />
           <Route path="/admin/members" element={<Members />} />
         </Route>
       </Route>
