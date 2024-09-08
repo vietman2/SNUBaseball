@@ -5,6 +5,7 @@ import { ReactComponent as CalendarIcon } from "./calendar.svg";
 import { ReactComponent as ChevronLeftIcon } from "./chevron-left.svg";
 import { ReactComponent as ChevronRightIcon } from "./chevron-right.svg";
 import { ReactComponent as DiaryIcon } from "./diary.svg";
+import { ReactComponent as FieldIcon } from "./field.svg";
 import { ReactComponent as HomeIcon } from "./home.svg";
 import { ReactComponent as RecordIcon } from "./record.svg";
 import { ReactComponent as StorageIcon } from "./storage.svg";
@@ -31,6 +32,8 @@ export const AppIcon = ({ icon, size, color }: Props) => {
       return <ChevronRightIcon width={size} height={size} color={color} />;
     case "diary":
       return <DiaryIcon width={size} height={size} color={color} />;
+    case "field":
+      return <FieldIcon width={size} height={size} color={color} />;
     case "home":
       return <HomeIcon width={size} height={size} color={color} />;
     case "record":
