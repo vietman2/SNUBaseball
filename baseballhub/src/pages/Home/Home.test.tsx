@@ -1,6 +1,6 @@
 import { screen } from "@testing-library/react";
 
-import { Home } from "./Home";
+import Home from "./Home";
 import { renderWithProviders } from "@utils/test-utils";
 
 describe("<Home />", () => {

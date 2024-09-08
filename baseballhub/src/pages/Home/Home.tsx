@@ -1,6 +1,6 @@
 import { useAuth } from "@pages/Auth/AuthProvider";
 
-export function Home() {
+export default function Home() {
   const { logout } = useAuth();
   return (
     <div>
