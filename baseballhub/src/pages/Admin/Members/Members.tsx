@@ -3,7 +3,8 @@ import styled from "styled-components";
 
 import { Chip } from "@components/Chips";
 import { Tabs } from "@components/Tabs";
-import { NewMemberModal, MembersTable } from "@fragments/Members";
+import { NewMemberModal } from "@components/Modals";
+import { MembersTable } from "@components/Tables";
 import { PersonType, CollegeType } from "@models/person";
 import { addMember, getMajors, getMembers } from "@services/person";
 

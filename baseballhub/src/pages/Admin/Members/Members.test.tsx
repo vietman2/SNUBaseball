@@ -6,26 +6,6 @@ import * as MemberAPI from "@services/person/members";
 import { sampleColleges } from "@constants/data/colleges";
 import { samplePeople } from "@constants/data/people";
 
-jest.mock("@fragments/Members", () => ({
-  NewMemberModal: ({
-    onClose,
-    onSubmit,
-  }: {
-    onClose: () => void;
-    onSubmit: () => void;
-  }) => (
-    <div data-testid="new-member-modal">
-      <button onClick={onClose} data-testid="close">
-        Close
-      </button>
-      <button onClick={onSubmit} data-testid="submit">
-        Submit
-      </button>
-    </div>
-  ),
-  MembersTable: () => <div data-testid="members-table" />,
-}));
-
 describe("<Members />", () => {
   it("renders without crashing", async () => {
     jest.spyOn(MajorAPI, "getMajors").mockResolvedValue(false);
