@@ -92,7 +92,7 @@ const SidebarContainer = styled.div<{ $isOpen: boolean }>`
   flex-direction: column;
   background-color: ${palette.background};
   height: 100%;
-  width: ${(props) => (props.$isOpen ? "240px" : "85px")};
+  width: ${(props) => (props.$isOpen ? "250px" : "85px")};
   position: fixed;
   top: 0;
   left: 0;
@@ -164,7 +164,7 @@ const SubMenuItem = styled.div`
 const SidebarToggleIcon = styled.div`
   position: fixed;
   top: 50%;
-  left: 210px;
+  left: 220px;
   cursor: pointer;
   transition: left 0.3s ease-in-out;
   z-index: 101;
