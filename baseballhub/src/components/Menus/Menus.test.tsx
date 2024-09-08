@@ -2,6 +2,8 @@ import { fireEvent, render, screen } from "@testing-library/react";
 
 import { MenuList } from "./MenuList";
 
+jest.unmock("@components/Menus");
+
 describe("<MenuList />", () => {
   it("should render unselected menu", () => {
     render(
