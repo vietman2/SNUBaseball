@@ -64,15 +64,15 @@ class PersonViewSet(ModelViewSet):
     @extend_schema(summary="사용자 정보 조회", tags=["회원 관리"])
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
-        filter = request.query_params.get('filter', None)
+        member_type = request.query_params.get('filter', None)
 
         q = Q()
 
-        if filter == "YB":
+        if member_type == "YB":
             q &= Q(status=1)
-        elif filter == "OB":
+        elif member_type == "OB":
             q &= Q(status=3)
-        elif filter == "지도자":
+        elif member_type == "지도자":
             q &= Q(role=3)
         else:
             q &= ~Q(status__in=[1, 3])

@@ -95,8 +95,8 @@ class PersonSerializer(ModelSerializer):
 
         try:
             validate_international_phonenumber(value)
-        except DjangoValidationError:
-            raise ValidationError("전화번호 형식이 올바르지 않습니다.")
+        except DjangoValidationError as exc:
+            raise ValidationError("전화번호 형식이 올바르지 않습니다.") from exc
 
         return value
 
