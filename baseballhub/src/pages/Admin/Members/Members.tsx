@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { Chip } from "@components/Chips";
-import { Tabs } from "@components/Tabs";
 import { NewMemberModal } from "@components/Modals";
 import { MembersTable } from "@components/Tables";
+import { Tabs } from "@components/Tabs";
 import { PersonType, CollegeType } from "@models/person";
 import { addMember, getMajors, getMembers } from "@services/person";
 
