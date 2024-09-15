@@ -18,6 +18,7 @@ jest.mock("react-router-dom", () => {
 });
 
 jest.mock("@assets/images/logo.png", () => "logo.png");
+
 jest.mock("@components/Buttons", () => ({
   TextButton: ({ text, onClick }: { text: string; onClick: () => void }) => (
     <button onClick={onClick} data-testid={`button-${text}`}>
@@ -58,7 +59,11 @@ jest.mock("@components/Menus", () => ({
   MenuList: () => <div>MenuList</div>,
 }));
 jest.mock("@components/Modals", () => ({
-  NewMemberModal: () => <div>NewMemberModal</div>,
+  NewMemberModal: ({ onClose }: { onClose: () => void }) => (
+    <div onClick={onClose} data-testid="close">
+      NewMemberModal
+    </div>
+  ),
 }));
 jest.mock("@components/RootLayout", () => ({
   RootLayout: ({ children }: { children: React.ReactNode }) => (
