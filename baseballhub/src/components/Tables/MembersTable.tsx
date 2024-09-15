@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { PersonType } from "@models/person";
+import { PersonType } from "@models/user/person";
 
 interface Props {
   members: PersonType[];

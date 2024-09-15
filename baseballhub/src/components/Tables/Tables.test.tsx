@@ -4,7 +4,7 @@ import { DailyTable } from "./DailyTable";
 import { MembersTable } from "./MembersTable";
 import { WeeklyTable } from "./WeeklyTable";
 import { sampleWeeklyData } from "@data/weekly";
-import { samplePeople } from "@constants/data/people";
+import { samplePeople } from "@data/user/people";
 
 jest.unmock("@components/Tables");
 
