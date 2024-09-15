@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Chip } from "@components/Chips";
 import { ChipSelector, CollegeSelector } from "@components/Selectors";
 import { DateInput, TextInput } from "@components/Inputs";
-import { CollegeType } from "@models/person";
+import { CollegeType } from "@models/user/person";
 
 interface Props {
   colleges: CollegeType[];

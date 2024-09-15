@@ -6,20 +6,20 @@ import {
   useState,
 } from "react";
 
-import { UserType } from "@models/person";
+import { UserProfileType } from "@models/user/person";
 
 interface AuthContextType {
-  user: UserType | null;
-  login: (user: UserType) => void;
+  user: UserProfileType | null;
+  login: (user: UserProfileType) => void;
   logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<UserType | null>(null);
+  const [user, setUser] = useState<UserProfileType | null>(null);
 
-  const login = (user: UserType) => {
+  const login = (user: UserProfileType) => {
     setUser(user);
     localStorage.setItem("user", JSON.stringify(user));
   };

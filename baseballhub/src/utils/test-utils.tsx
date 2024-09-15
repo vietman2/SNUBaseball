@@ -2,10 +2,10 @@ import { ReactElement, PropsWithChildren } from "react";
 import { render, RenderOptions } from "@testing-library/react";
 
 import { AuthProvider } from "@pages/Auth";
-import { UserType } from "@models/person";
+import { UserProfileType } from "@models/user/person";
 
 interface RenderWithProvidersOptions extends Omit<RenderOptions, "queries"> {
-  initialUser?: UserType;
+  initialUser?: UserProfileType;
 }
 
 export const renderWithProviders = (

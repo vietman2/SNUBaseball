@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import { getMembers, addMember } from "./members";
-import { samplePeople } from "@constants/data/people";
+import { samplePeople } from "@data/user/people";
 
 describe("getMembers", () => {
   it("should return an array of members", async () => {

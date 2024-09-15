@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Logo from "@assets/images/logo.png";
 import { TextButton } from "@components/Buttons";
 import { TextInput } from "@components/Inputs";
-import { palette } from "@constants/colors";
+import { palette } from "@colors/palette";
 
 export function SignUp() {
   const [student_id, setStudentId] = useState<string>("");

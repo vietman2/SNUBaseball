@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { palette } from "@constants/colors";
+import { palette } from "@colors/palette";
 import { PostType } from "@models/forum";
 
 interface Props {

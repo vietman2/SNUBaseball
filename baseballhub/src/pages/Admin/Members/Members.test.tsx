@@ -3,8 +3,8 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import Members from "./Members";
 import * as MajorAPI from "@services/person/majors";
 import * as MemberAPI from "@services/person/members";
-import { sampleColleges } from "@constants/data/colleges";
-import { samplePeople } from "@constants/data/people";
+import { sampleColleges } from "@data/user/colleges";
+import { samplePeople } from "@data/user/people";
 
 describe("<Members />", () => {
   it("renders without crashing", async () => {

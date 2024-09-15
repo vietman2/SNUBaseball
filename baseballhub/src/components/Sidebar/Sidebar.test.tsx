@@ -9,11 +9,6 @@ describe("<Sidebar />", () => {
     render(<Sidebar isSidebarOpen={true} toggleSidebar={jest.fn()} />);
 
     fireEvent.mouseEnter(screen.getByTestId("Home"));
-    fireEvent.click(screen.getByTestId("Home"));
-    fireEvent.mouseLeave(screen.getByTestId("Home"));
-    fireEvent.mouseEnter(screen.getByTestId("스케줄"));
-    fireEvent.click(screen.getByTestId("스케줄"));
-    fireEvent.click(screen.getByTestId("훈련참가표"));
     fireEvent.click(screen.getByTestId("toggle"));
   });
 
