@@ -17,10 +17,6 @@ module.exports = [
     rules: {
       semi: "error",
     },
-    extends: [
-      "@babel/plugin-transform-private-property-in-object",
-      "next/core-web-vitals",
-    ],
   },
   ...tseslint.configs.recommended,
 ];
