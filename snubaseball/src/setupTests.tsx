@@ -16,13 +16,18 @@ Object.defineProperty(window, "matchMedia", {
   }),
 });
 
+jest.mock("@assets/images/logo.png", () => "Logo");
+jest.mock("@assets/images/main1.jpg", () => "MainImage1");
+jest.mock("@assets/images/main2.jpg", () => "MainImage2");
+jest.mock("@assets/images/main3.jpg", () => "MainImage3");
+
 jest.mock("@components/Buttons", () => ({
   TextButton: ({ onClick }: { onClick: () => void }) => (
     <button data-testid="button" onClick={onClick} />
   ),
 }));
 jest.mock("@components/Checkbox", () => ({
-  Checkbox: "Checkbox",
+  Checkbox: "div",
 }));
 jest.mock("@components/Dividers", () => ({
   Divider: () => <div data-testid="divider" />,
@@ -34,7 +39,7 @@ jest.mock("@components/Icons", () => ({
   AppIcon: () => <div data-testid="app-icon" />,
 }));
 jest.mock("@components/Loading", () => ({
-  LoadingPage: "LoadingPage",
+  LoadingPage: "div",
 }));
 jest.mock("@components/Sidebar", () => ({
   Sidebar: ({ toggleSidebar }: { toggleSidebar: () => void }) => (
@@ -46,47 +51,9 @@ jest.mock("@components/Tables", () => ({
   TableRow: "div",
 }));
 jest.mock("@components/Tabs", () => ({
-  Tabs: ({
-    tabs,
-    setSelectedTab,
-  }: {
-    tabs: string[];
-    setSelectedTab: (tab: string) => void;
-  }) => (
-    <div data-testid="tabs">
-      {tabs.map((tab) => (
-        <div
-          key={tab}
-          data-testid={tab}
-          onClick={() => setSelectedTab(tab)}
-          onKeyDown={jest.fn()}
-        >
-          {tab}
-        </div>
-      ))}
-    </div>
-  ),
+  Tabs: () => <div data-testid="tabs" />,
   EmptyTabs: () => <div data-testid="empty-tabs" />,
-  SubTabs: ({
-    tabs,
-    setSelectedTab,
-  }: {
-    tabs: string[];
-    setSelectedTab: (tab: string) => void;
-  }) => (
-    <div data-testid="subtabs">
-      {tabs.map((tab) => (
-        <div
-          key={tab}
-          data-testid={tab}
-          onClick={() => setSelectedTab(tab)}
-          onKeyDown={jest.fn()}
-        >
-          {tab}
-        </div>
-      ))}
-    </div>
-  ),
+  SubTabs: () => <div data-testid="subtabs" />,
 }));
 jest.mock("@components/TextInputs", () => ({
   TextInput: ({ value, onChange }: { value: string; onChange: () => void }) => (
@@ -107,27 +74,4 @@ jest.mock("@components/Texts", () => ({
   ),
   Subtitle: "div",
   Caption: "div",
-}));
-jest.mock("@components/TopBar", () => ({
-  FullTopBar: () => <div data-testid="full-top-bar" />,
-  MobileTopbar: ({
-    openSidebar,
-    navigate,
-  }: {
-    navigate: (path: string) => void;
-    openSidebar: () => void;
-  }) => (
-    <>
-      <div
-        data-testid="open-sidebar"
-        onClick={openSidebar}
-        onKeyDown={jest.fn()}
-      />
-      <div
-        data-testid="sidebar-navigate"
-        onClick={() => navigate("asdf")}
-        onKeyDown={jest.fn()}
-      />
-    </>
-  ),
 }));
