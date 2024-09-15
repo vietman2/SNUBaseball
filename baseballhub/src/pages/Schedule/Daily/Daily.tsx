@@ -32,7 +32,7 @@ export default function Daily() {
         </Callout>
         <div>TODO 1: 훈련 목표</div>
         <div>TODO 2: 일일코치</div>
-        <div>TODO 3: 훈련 관련 영상 링크</div>
+        <div>**강수확률..?**</div>
         <DailyTable />
       </Content>
     </Container>
