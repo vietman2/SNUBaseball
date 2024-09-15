@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode, PropsWithChildren } from "react";
+import { ReactElement, PropsWithChildren } from "react";
 import { render, RenderOptions } from "@testing-library/react";
 
 import { AuthProvider } from "@pages/Auth";
