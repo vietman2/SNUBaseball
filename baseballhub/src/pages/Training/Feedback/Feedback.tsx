@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 //const tabs = ["내야 수비", "외야 수비", "타격", "스로잉", "주루"];
@@ -8,6 +8,10 @@ export default function Feedback() {
   //const [players, setPlayers] = useState<string[]>([]);
   //const [selectedPlayer, setSelectedPlayer] = useState<string>("");
   //const [activeTab, setActiveTab] = useState<string>("내야 수비");
+
+  useEffect(() => {
+    setSemester("2024-2학기");
+  }, []);
 
   return (
     <Container>
