@@ -1,5 +1,8 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+
+import { Tab, tabs } from "@navigation/tabs";
 
 interface Props {
   open: boolean;
@@ -7,33 +10,50 @@ interface Props {
 }
 
 export default function Sidebar({ open, toggleSidebar }: Readonly<Props>) {
+  const [activeTab, setActiveTab] = useState<Tab | null>(null);
   const navigate = useNavigate();
 
-  const handleNavigate = (path: string) => {
-    navigate(path);
+  const handleTabClick = (tab: Tab) => {
+    if (!tab.submenu) {
+      navigate(tab.path);
+      toggleSidebar();
+      return;
+    }
+    
+    if (activeTab === tab) {
+      setActiveTab(null);
+      return;
+    }
 
-    toggleSidebar();
+    setActiveTab(tab);
   };
 
   return (
     <>
       <Container open={open}>
-        <Logo onClick={() => handleNavigate("/")}>로고</Logo>
-        <AuthTabs>
-          <AuthTab onClick={() => handleNavigate("/login")}>로그인</AuthTab>
-          <AuthTab onClick={() => handleNavigate("/signup")}>회원가입</AuthTab>
-        </AuthTabs>
-        <SidebarTab onClick={() => handleNavigate("/about")}>소개</SidebarTab>
-        <SidebarTab onClick={() => handleNavigate("/schedule")}>
-          일정
-        </SidebarTab>
-        <SidebarTab onClick={() => handleNavigate("/archive")}>
-          아카이브
-        </SidebarTab>
-        <SidebarTab onClick={() => handleNavigate("/sitemap")}>
-          사이트맵
-        </SidebarTab>
-        <SidebarTab onClick={() => handleNavigate("/ask")}>문의</SidebarTab>
+        <Logo>로고</Logo>
+        {tabs.map((tab) => (
+          <div key={tab.title}>
+            <SidebarTab onClick={() => handleTabClick(tab)}>
+              {tab.title}
+            </SidebarTab>
+            {tab.submenu && (
+              <SubMenu $active={activeTab === tab}>
+                {tab.submenu.map((subtab) => (
+                  <SubTab
+                    key={subtab.title}
+                    onClick={() => {
+                      navigate(subtab.path);
+                      toggleSidebar();
+                    }}
+                  >
+                    {subtab.title}
+                  </SubTab>
+                ))}
+              </SubMenu>
+            )}
+          </div>
+        ))}
       </Container>
       <Overlay open={open} onClick={toggleSidebar} />
     </>
@@ -71,42 +91,42 @@ const Logo = styled.div`
   }
 `;
 
-const AuthTabs = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  padding: 10px 5px;
-
-  background-color: #0f0f70;
-`;
-
-const AuthTab = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: white;
-
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
 const SidebarTab = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 20px 0;
+  margin: 20px 0 0 0;
   padding: 20px 0px;
   font-weight: bold;
 
   &:hover {
     cursor: pointer;
     background-color: #0f0f70;
+    color: white;
+  }
+`;
+
+const SubMenu = styled.div<{ $active: boolean }>`
+  overflow: hidden;
+  max-height: ${(props) => (props.$active ? "400px" : "0")};
+  transition: max-height 0.3s ease-in-out;
+  cursor: pointer;
+  background-color: #0f0f70;
+  color: white;
+`;
+
+const SubTab = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 0;
+  font-weight: bold;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #080835;
     color: white;
   }
 `;

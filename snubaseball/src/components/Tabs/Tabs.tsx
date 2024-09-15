@@ -1,13 +1,15 @@
 import styled from "styled-components";
 
+import { SubTab } from "@navigation/tabs";
+
 interface Props {
-  tabs: string[];
-  selectedTab: string;
-  setSelectedTab: (index: string) => void;
+  tabs: SubTab[];
+  selectedTab: SubTab;
+  setSelectedTab: (index: SubTab) => void;
 }
 
 export function Tabs({ tabs, selectedTab, setSelectedTab }: Props) {
-  const handleTabClick = (tab: string) => {
+  const handleTabClick = (tab: SubTab) => {
     setSelectedTab(tab);
   };
 
@@ -15,12 +17,12 @@ export function Tabs({ tabs, selectedTab, setSelectedTab }: Props) {
     <Container>
       {tabs?.map((tab) => (
         <Tab
-          key={tab}
-          selected={tab === selectedTab}
+          key={tab.title}
+          selected={tab.title === selectedTab.title}
           onClick={() => handleTabClick(tab)}
-          data-testid={`tab-${tab}`}
+          data-testid={`tab-${tab.title}`}
         >
-          {tab}
+          {tab.title}
         </Tab>
       ))}
     </Container>
