@@ -6,7 +6,8 @@ import { useAuth } from "../AuthProvider";
 import Logo from "@assets/images/logo.png";
 import { TextButton } from "@components/Buttons";
 import { TextInput } from "@components/Inputs";
-import { palette } from "@constants/colors";
+import { palette } from "@colors/palette";
+import { tempProfile } from "@data/user/people";
 
 export function Login() {
   const [username, setUsername] = useState<string>("");
@@ -21,7 +22,7 @@ export function Login() {
 
   const handleLogin = () => {
     // TODO: Implement login logic
-    login({ uuid: "1234", token: "abcd" });
+    login(tempProfile);
     navigate("/home");
   };
 

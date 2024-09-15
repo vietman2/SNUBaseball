@@ -1,6 +1,7 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 
 import App from "./App";
+import { sampleProfile } from "@data/user/people";
 import { renderWithProviders } from "@utils/test-utils";
 
 jest.unmock("react-router-dom");
@@ -70,10 +71,7 @@ describe("<App />", () => {
     }));
 
     renderWithProviders(<App />, {
-      initialUser: {
-        uuid: "1",
-        token: "token",
-      },
+      initialUser: sampleProfile,
     });
 
     waitFor(() => fireEvent.click(screen.getByTestId("button-로그인")));

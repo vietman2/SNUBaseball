@@ -5,7 +5,7 @@ import { Chip } from "@components/Chips";
 import { NewMemberModal } from "@components/Modals";
 import { MembersTable } from "@components/Tables";
 import { Tabs } from "@components/Tabs";
-import { PersonType, CollegeType } from "@models/person";
+import { PersonType, CollegeType } from "@models/user/person";
 import { addMember, getMajors, getMembers } from "@services/person";
 
 const tabs = ["YB", "OB", "지도자", "기타"];
