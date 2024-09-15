@@ -47,6 +47,7 @@ const ContentWrapper = styled.div`
   height: 100vh;
   padding: 0 40px;
   overflow-x: hidden;
+  overflow-y: hidden;
   box-sizing: border-box;
   transition: width 0.3s ease-in-out;
 `;
