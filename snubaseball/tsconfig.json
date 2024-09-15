@@ -17,9 +17,12 @@
     "jsx": "react-jsx",
     "baseUrl": "src",
     "paths": {
+      "@assets/*": ["assets/*"],
       "@components/*": ["components/*"],
+      "@constants/*": ["constants/*"],
       "@data/*": ["constants/data/*"],
       "@fragments/*": ["fragments/*"],
+      "@navigation/*": ["constants/navigation/*"],
       "@services/*": ["services/*"],
       "@store/*": ["store/*"],
       "@type/*": ["constants/types/*"],
