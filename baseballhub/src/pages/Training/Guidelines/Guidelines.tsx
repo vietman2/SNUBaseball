@@ -103,6 +103,7 @@ export default function Guidelines() {
                     <div
                       key={guideline.id}
                       onClick={() => handleGuidelineClick(guideline)}
+                      onKeyDown={() => {}}
                     >
                       <GuidelinePreview guideline={guideline} />
                     </div>

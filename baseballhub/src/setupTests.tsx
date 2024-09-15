@@ -60,7 +60,7 @@ jest.mock("@components/Menus", () => ({
 }));
 jest.mock("@components/Modals", () => ({
   NewMemberModal: ({ onClose }: { onClose: () => void }) => (
-    <div onClick={onClose} data-testid="close">
+    <div onClick={onClose} data-testid="close" onKeyDown={() => {}}>
       NewMemberModal
     </div>
   ),
@@ -76,7 +76,7 @@ jest.mock("@components/Selectors", () => ({
 }));
 jest.mock("@components/Sidebar", () => ({
   Sidebar: ({ toggleSidebar }: { toggleSidebar: () => void }) => (
-    <div onClick={toggleSidebar} data-testid="sidebar">
+    <div onClick={toggleSidebar} data-testid="sidebar" onKeyDown={() => {}}>
       Sidebar
     </div>
   ),
