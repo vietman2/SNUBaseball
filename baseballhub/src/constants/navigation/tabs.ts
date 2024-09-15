@@ -1,7 +1,7 @@
 type SubTab = {
   title: string;
   path: string;
-}
+};
 
 export type Tab = {
   title: string;
@@ -36,14 +36,28 @@ export const sidebarItems: Tab[] = [
     icon: "field",
     submenu: [
       { title: "훈련 가이드라인", path: "/training/guidelines" },
-      { title: "훈련일지", path: "/" },
-      { title: "팀 피드백", path: "/" },
-      { title: "개인 피드백", path: "/" },
+      { title: "훈련일지", path: "/training/journals" },
+      { title: "피드백", path: "/training/feedback" },
     ],
   },
-  { title: "Archive", icon: "archive" },
-  { title: "기록", icon: "record" },
-  { title: "장비/물품관리", icon: "storage" },
+  {
+    title: "자료실",
+    icon: "archive",
+    submenu: [{ title: "Gallery", path: "/gallery" }],
+  },
+  {
+    title: "기록실",
+    icon: "record",
+    submenu: [{ title: "경기결과", path: "/records/results" }],
+  },
+  {
+    title: "게시판",
+    icon: "forum",
+    submenu: [
+      { title: "자유게시판", path: "/forum/board" },
+      { title: "팀 관리", path: "/forum/management" },
+    ],
+  },
   {
     title: "관리자 메뉴",
     icon: "admin",
