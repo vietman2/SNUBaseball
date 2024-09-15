@@ -90,7 +90,7 @@ class PersonSerializer(ModelSerializer):
         return None
 
     def validate_phone(self, value):
-        if value == None:
+        if value is None:
             return None
 
         try:

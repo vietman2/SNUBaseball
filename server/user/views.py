@@ -44,13 +44,13 @@ class MajorViewSet(ModelViewSet):
     lookup_field = 'id'
 
     @extend_schema(summary="전공 목록 조회", tags=["회원 관리"])
-    def list(self, request):
+    def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     @extend_schema(exclude=True)
-    def retrieve(self, request, id):
+    def retrieve(self, request, *args, **kwargs):
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 class PersonViewSet(ModelViewSet):
@@ -62,7 +62,7 @@ class PersonViewSet(ModelViewSet):
     lookup_field = 'id'
 
     @extend_schema(summary="사용자 정보 조회", tags=["회원 관리"])
-    def list(self, request):
+    def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
         filter = request.query_params.get('filter', None)
 
@@ -82,11 +82,11 @@ class PersonViewSet(ModelViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     @extend_schema(exclude=True)
-    def retrieve(self, request, id):
+    def retrieve(self, request, *args, **kwargs):
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
     @extend_schema(summary="사용자 정보 추가", tags=["회원 관리"])
-    def create(self, request):
+    def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         phone_number = request.data.get('phone', None)
         role = request.data.get('role', None)
