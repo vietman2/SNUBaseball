@@ -10,7 +10,7 @@ interface RenderWithProvidersOptions extends Omit<RenderOptions, "queries"> {
 
 export const renderWithProviders = (
   ui: ReactElement,
-  { initialUser, ...renderOptions }: RenderWithProvidersOptions = {}
+  { ...renderOptions }: RenderWithProvidersOptions = {}
 ) => {
   function Wrapper({ children }: PropsWithChildren): JSX.Element {
     return <AuthProvider>{children}</AuthProvider>;
