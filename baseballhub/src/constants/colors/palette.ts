@@ -5,4 +5,6 @@ export const palette = {
   highEmphasis: "#1a1a8f",
   lowEmphasis: "#333333",
   grayBorder: "#cccccc",
+  coldSteel: "#e3edf8",
+  charcoal: "#252525"
 };

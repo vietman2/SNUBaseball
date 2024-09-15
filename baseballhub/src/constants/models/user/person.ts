@@ -27,7 +27,10 @@ export type CollegeType = {
   departments: DepartmentType[];
 };
 
-export type UserType = {
+export type UserProfileType = {
   uuid: string;
+  name: string;
+  profile_image: string;
+  role: string;
   token: string;
 };

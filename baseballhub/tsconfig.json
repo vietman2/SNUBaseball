@@ -19,7 +19,7 @@
     "paths": {
       "@assets/*": ["assets/*"],
       "@components/*": ["components/*"],
-      "@constants/*": ["constants/*"],
+      "@colors/*": ["constants/colors/*"],
       "@data/*": ["constants/data/*"],
       "@fragments/*": ["fragments/*"],
       "@pages/*": ["pages/*"],

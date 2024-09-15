@@ -1,4 +1,4 @@
-import { DepartmentType, CollegeType } from "@constants/models/person";
+import { DepartmentType, CollegeType } from "@models/user/person";
 
 export const sampleDepartments: DepartmentType[] = [
   { id: 1, name: "컴퓨터공학과", short_name: "컴공" },
