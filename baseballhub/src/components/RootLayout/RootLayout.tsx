@@ -27,7 +27,7 @@ export default function RootLayout() {
 const MainContainer = styled.div`
   display: flex;
   flex: 1;
-  background-color: ${palette.background};
+  background-color: ${palette.fullWhite};
   overflow-x: hidden;
 `;
 
@@ -45,7 +45,7 @@ const ContentWrapper = styled.div`
   flex: 1;
   flex-direction: column;
   height: 100vh;
-  padding-left: 40px;
+  padding: 0 40px;
   overflow-x: hidden;
   box-sizing: border-box;
   transition: width 0.3s ease-in-out;

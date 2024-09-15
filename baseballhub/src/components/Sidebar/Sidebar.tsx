@@ -87,7 +87,7 @@ export function Sidebar({ isSidebarOpen, toggleSidebar }: Props) {
 const SidebarContainer = styled.div<{ $isOpen: boolean }>`
   display: flex;
   flex-direction: column;
-  background-color: ${palette.coldSteel};
+  background-color: ${palette.sidebarBackground};
   height: 100%;
   width: ${(props) => (props.$isOpen ? "240px" : "90px")};
   position: fixed;
@@ -134,10 +134,10 @@ const TabItem = styled.div<{ $isActive: boolean; $isOpen: boolean }>`
   font-size: 16px;
   color: ${(props) => (props.$isActive ? palette.primary : palette.charcoal)};
   background-color: ${(props) =>
-    props.$isActive ? palette.mystic : "transparent"};
+    props.$isActive ? palette.activeTab : "transparent"};
 
   &:hover {
-    background-color: ${palette.mystic};
+    background-color: ${palette.activeTab};
   }
 `;
 
@@ -147,7 +147,7 @@ const SidebarToggleIcon = styled.div<{ $isOpen?: boolean }>`
   left: ${(props) => (props.$isOpen ? "225px" : "80px")};
   cursor: pointer;
   transition: left 0.3s ease-in-out;
-  background-color: ${palette.coldSteel};
+  background-color: ${palette.sidebarBackground};
   padding: 10px 5px 5px 0;
   border-radius: 10px;
   z-index: 101;
