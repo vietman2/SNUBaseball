@@ -1,9 +1,12 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-import { Tabs } from "@components/Tabs";
 import { MenuList } from "@components/Menus";
-import { IFrame } from "@components/Frames";
+import { Tabs } from "@components/Tabs";
+import { Callout } from "@components/Texts";
+import { sampleGuidelines } from "@data/guidelines";
+import { GuidelineDetail, GuidelinePreview } from "@fragments/Guideline";
+import { GuidelineType } from "@models/guideline";
 
 type TabType = {
   name: string;
@@ -45,51 +48,105 @@ export default function Guidelines() {
   const [selectedTab, setSelectedTab] = useState<string>("내야수비");
   const [selectedMenu, setSelectedMenu] = useState<string>("");
   const [selectedSubmenu, setSelectedSubmenu] = useState<string>("");
+  const [selectedGuideline, setSelectedGuideline] =
+    useState<GuidelineType | null>(null);
+
+  const setActiveTab = (tab: string) => {
+    setSelectedTab(tab);
+    setSelectedMenu("");
+    setSelectedSubmenu("");
+    setSelectedGuideline(null);
+  };
+
+  const handleMenuClick = (menu: string) => {
+    setSelectedMenu(menu);
+    setSelectedSubmenu("");
+    setSelectedGuideline(null);
+  };
+
+  const handleGuidelineClick = (guideline: GuidelineType) => {
+    setSelectedGuideline(guideline);
+  };
 
   return (
     <>
+      <Title>훈련 가이드라인</Title>
       <Container>
-        <Title>훈련 가이드라인</Title>
-        <Tabs
-          tabs={tabs.map((tab) => tab.name)}
-          activeTab={selectedTab}
-          setActiveTab={setSelectedTab}
-        />
-        <Content>
-          <Wrapper>
-            <MenuList
-              menuitems={
-                tabs.find((tab) => tab.name === selectedTab)?.menus || []
-              }
-              selectedMenu={selectedMenu}
-              setSelectedMenu={setSelectedMenu}
-              submenuitems={["정면", "포핸드", "백핸드", "대쉬"]}
-              selectedSubmenu={selectedSubmenu}
-              setSelectedSubmenu={setSelectedSubmenu}
-            />
-            {selectedSubmenu !== "" && (
-              <Details>
-                <Subtitle>{selectedSubmenu}</Subtitle>
-                <IFrame videoId="Ak0IsTIKpF4" width="1000" height="600" />
-              </Details>
-            )}
-          </Wrapper>
-        </Content>
+        <Left>
+          <Callout text="함부로 좋아요 찍지마라!" />
+          <Tabs
+            tabs={tabs.map((tab) => tab.name)}
+            activeTab={selectedTab}
+            setActiveTab={setActiveTab}
+          />
+          <Content>
+            <Wrapper>
+              <MenuList
+                menuitems={
+                  tabs.find((tab) => tab.name === selectedTab)?.menus || []
+                }
+                selectedMenu={selectedMenu}
+                setSelectedMenu={handleMenuClick}
+                submenuitems={["정면", "포핸드", "백핸드", "대쉬"]}
+                selectedSubmenu={selectedSubmenu}
+                setSelectedSubmenu={setSelectedSubmenu}
+              />
+              {selectedSubmenu !== "" && (
+                <Details>
+                  <TopRow>
+                    <div style={{ width: "10px" }}>No</div>
+                    <div style={{ flex: 3 }}>제목</div>
+                    <div style={{ flex: 2 }}>작성자</div>
+                    <div style={{ flex: 2 }}>공유날짜</div>
+                  </TopRow>
+                  {sampleGuidelines.map((guideline) => (
+                    <div
+                      key={guideline.id}
+                      onClick={() => handleGuidelineClick(guideline)}
+                    >
+                      <GuidelinePreview guideline={guideline} />
+                    </div>
+                  ))}
+                </Details>
+              )}
+            </Wrapper>
+          </Content>
+        </Left>
+        <Right>
+          <GuidelineDetail guideline={selectedGuideline} />
+        </Right>
       </Container>
-      
     </>
   );
 }
 
+const Title = styled.h2`
+  margin: 1rem 0;
+`;
+
 const Container = styled.div`
   display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  gap: 20px;
+`;
+
+const Left = styled.div`
+  display: flex;
   flex-direction: column;
+  width: 55%;
   height: 100%;
   margin-bottom: 1rem;
 `;
 
-const Title = styled.h2`
-  margin: 1rem 0;
+const Right = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+  height: 100%;
+  margin-bottom: 1rem;
+  background-color: white;
 `;
 
 const Content = styled.div`
@@ -105,18 +162,28 @@ const Wrapper = styled.div`
   display: flex;
   flex: 1;
   flex-direction: row;
+  width: 100%;
   height: 100%;
   border: 1px solid #e0e0e0;
-  border-radius: 5px;
 `;
 
 const Details = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
   height: 100%;
   margin-left: 1rem;
 `;
 
-const Subtitle = styled.h3`
-  margin: 1rem 0;
+const TopRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  div {
+    text-align: center;
+    font-size: 1rem;
+    color: #333;
+  }
 `;
