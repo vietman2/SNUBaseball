@@ -6,6 +6,40 @@ import { renderWithProviders } from "@utils/test-utils";
 jest.unmock("react-router-dom");
 jest.unmock("@pages/Auth/AuthProvider");
 
+jest.mock("@pages/Home", () => ({
+  Home: () => <div />,
+}));
+jest.mock("@pages/Admin", () => ({
+  Members: () => <div />,
+}));
+jest.mock("@pages/Auth", () => ({
+  AuthProvider: ({ children }: { children: React.ReactNode }) => (
+    <>{children}</>
+  ),
+  Login: () => <div />,
+  SignUp: () => <div />,
+  useAuth: () => ({
+    user: null,
+    logout: jest.fn(),
+    login: jest.fn(),
+  }),
+}));
+jest.mock("@pages/Forum", () => ({
+  Board: () => <div />,
+}));
+jest.mock("@pages/Records", () => ({
+  Results: () => <div />,
+}));
+jest.mock("@pages/Schedule", () => ({
+  Daily: () => <div />,
+  Weekly: () => <div />,
+}));
+jest.mock("@pages/Training", () => ({
+  Feedback: () => <div />,
+  Guidelines: () => <div />,
+  Journals: () => <div />,
+}));
+
 describe("<App />", () => {
   it("renders no user", () => {
     jest.mock("@pages/Auth/AuthProvider", () => ({
