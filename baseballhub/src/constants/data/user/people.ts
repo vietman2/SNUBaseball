@@ -24,12 +24,13 @@ export const sampleProfile: UserProfileType = {
   profile_image: "https://via.placeholder.com/150",
   role: "Member",
   token: "token",
-}
+};
 
 export const tempProfile: UserProfileType = {
   uuid: "1234",
   name: "김유안",
-  profile_image: "https://kr.object.ncloudstorage.com/snubaseball.test/profiles/2021-12452.jpg",
+  profile_image:
+    "https://kr.object.ncloudstorage.com/snubaseball.test/profiles/2021-12452.jpg",
   role: "주장",
   token: "abcd",
 };
