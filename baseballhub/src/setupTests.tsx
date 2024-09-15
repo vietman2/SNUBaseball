@@ -84,6 +84,9 @@ jest.mock("@components/Tables", () => ({
 jest.mock("@components/Tabs", () => ({
   Tabs: () => <div>Tabs</div>,
 }));
+jest.mock("@components/Texts", () => ({
+  Callout: () => <div>Callout</div>,
+}));
 jest.mock("@pages/Auth/AuthProvider", () => ({
   AuthProvider: ({ children }: { children: React.ReactNode }) => (
     <>{children}</>
