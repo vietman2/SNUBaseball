@@ -1,12 +1,25 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React from "react";
+import ReactDOM from "react-dom/client";
+import axios from "axios";
+
+import "./index.css";
+import App from "./pages/root/App";
+import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
+
+if (process.env.NODE_ENV === "production") {
+  axios.defaults.baseURL = "https://api.snubaseball.com";
+} else {
+  axios.defaults.baseURL = "http://localhost:8000";
+}
+axios.interceptors.request.use(function (config: any) {
+  return config;
+});
+
 root.render(
   <React.StrictMode>
     <App />

@@ -1,6 +1,4 @@
 import re
-from django.core import validators
-from django.core.exceptions import ValidationError as CoreError
 from rest_framework.exceptions import ValidationError
 
 from user.models import User
@@ -24,23 +22,6 @@ class UsernameValidator:
 
         if not 4 <= len(value) <= 150:
             raise ValidationError("아이디는 4자 이상 150자 이하여야 합니다.")
-
-class EmailValidator:
-    ## condition 1: emails are case-insensitive
-    ## condition 2: emails are unique
-    ## condition 3: emails must be in the correct format
-
-    def __call__(self, value):
-        if not value:
-            raise ValidationError("이메일을 입력해주세요.")
-
-        if User.objects.filter(email__iexact=value).exists():
-            raise ValidationError("이미 사용중인 이메일입니다.")
-
-        try:
-            validators.validate_email(value)
-        except CoreError as e:
-            raise ValidationError("올바른 이메일 형식이 아닙니다.") from e
 
 class MyPasswordValidator:
     def validate(self, password, user=None):        ## pylint: disable=unused-argument

@@ -3,12 +3,12 @@ import { render } from "@testing-library/react";
 import App from "./App";
 
 jest.mock("./RootLayout/RootLayout", () => () => <div>Mock RootLayout</div>);
-jest.mock("containers/Home/Home", () => "Home");
-jest.mock("containers/Archive/Archive", () => "Archive");
-jest.mock("containers/Sitemap/Sitemap", () => "Sitemap");
-jest.mock("containers/Ask/Ask", () => "Ask");
-jest.mock("containers/About/About", () => "About");
-jest.mock("containers/Schedule/Schedule", () => "Schedule");
+jest.mock("../Home/Home", () => () => <div>Mock Home</div>);
+jest.mock("../Archive/Archive", () => () => <div>Mock Archive</div>);
+jest.mock("../Sitemap/Sitemap", () => () => <div>Mock Sitemap</div>);
+jest.mock("../Ask/Ask", () => () => <div>Mock Ask</div>);
+jest.mock("../About/About", () => () => <div>Mock About</div>);
+jest.mock("../Schedule/Schedule", () => () => <div>Mock Schedule</div>);
 
 describe("<App />", () => {
   it("should render without crashing", () => {
