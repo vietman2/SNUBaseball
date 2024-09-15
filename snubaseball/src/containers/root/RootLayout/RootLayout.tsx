@@ -1,36 +1,16 @@
 import { useEffect, useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 
-import { Sidebar } from "@components/Sidebar";
-import { FullTopBar, MobileTopbar } from "@components/TopBar";
+import { Header } from "@fragments/Header";
 
 export default function RootLayout() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isPortrait, setIsPortrait] = useState(
     window.matchMedia("(orientation: portrait)").matches
   );
 
-  const navigate = useNavigate();
-
   const handleOrientationChange = () => {
     setIsPortrait(window.matchMedia("(orientation: portrait)").matches);
-  };
-
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
-
-  const openSidebar = () => {
-    setIsSidebarOpen(true);
-  };
-
-  const handleNavigate = (path: string) => {
-    navigate(path);
-
-    if (isPortrait) {
-      setIsSidebarOpen(false);
-    }
   };
 
   useEffect(() => {
@@ -42,24 +22,18 @@ export default function RootLayout() {
 
   return (
     <>
-      <MainContainer>
-        {isPortrait ? (
-          <>
-            <MobileTopbar navigate={handleNavigate} openSidebar={openSidebar} />
-            <Sidebar open={isSidebarOpen} toggleSidebar={toggleSidebar} />
-          </>
-        ) : (
-          <FullTopBar navigate={navigate} />
-        )}
-      </MainContainer>
-      <Outlet />
+      <Header isPortrait={isPortrait} />
+      <ContentWrapper $isPortrait={isPortrait}>
+        <Outlet />
+      </ContentWrapper>
     </>
   );
 }
 
-const MainContainer = styled.div`
+const ContentWrapper = styled.div<{ $isPortrait: boolean }>`
   display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100vw;
+  flex: 1;
+  padding: ${({ $isPortrait }) => ($isPortrait ? "0 20px" : "0 400px")};
+  overflow-x: hidden;
+  box-sizing: border-box;
 `;
