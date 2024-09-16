@@ -22,6 +22,7 @@
       "@colors/*": ["constants/colors/*"],
       "@data/*": ["constants/data/*"],
       "@fragments/*": ["fragments/*"],
+      "@hooks/*": ["hooks/*"],
       "@pages/*": ["pages/*"],
       "@models/*": ["constants/models/*"],
       "@navigation/*": ["constants/navigation/*"],
