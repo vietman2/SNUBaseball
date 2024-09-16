@@ -18,6 +18,18 @@ export const sampleGameResult: GameResultsType = {
   away_runs: [0, 1, 0, 0, 0, 0, 1, -1, -1],
   home_records: [9, 5, 1, 11],
   away_records: [2, 6, 1, 5],
+  lineup: [
+    { order: 1, name: "김유안", position: "2B", number: 7 },
+    { order: 2, name: "이서준", position: "SS", number: 1 },
+    { order: 3, name: "이진산", position: "3B", number: 6 },
+    { order: 4, name: "박건우", position: "RF", number: 25 },
+    { order: 5, name: "이상엽", position: "P", number: 10 },
+    { order: 6, name: "김정규", position: "CF", number: 21 },
+    { order: 7, name: "정승원", position: "1B", number: 16 },
+    { order: 8, name: "남기헌", position: "C", number: 30 },
+    { order: 9, name: "윤동현", position: "LF", number: 24 },
+    { order: 0, name: "이상엽", position: "P", number: 10 },
+  ],
 };
 
 export const Games1: GameSummaryType[] = [

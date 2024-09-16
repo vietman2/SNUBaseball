@@ -12,6 +12,13 @@ export type GameSummaryType = {
   notes: string;
 };
 
+export type OrderType = {
+  order: number;
+  name: string;
+  number: number;
+  position: string;
+};
+
 export type GameResultsType = {
   id: number;
   date: string;
@@ -46,6 +53,18 @@ export type GameResultsType = {
   ];
   home_records: [number, number, number, number];
   away_records: [number, number, number, number];
+  lineup: [
+    OrderType,
+    OrderType,
+    OrderType,
+    OrderType,
+    OrderType,
+    OrderType,
+    OrderType,
+    OrderType,
+    OrderType,
+    OrderType
+  ];
 };
 
 export type TournamentType = {
