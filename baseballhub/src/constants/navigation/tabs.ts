@@ -25,7 +25,7 @@ const Main: TabGroup = {
 const Training: TabGroup = {
   title: "Training",
   tabs: [
-    { title: "훈련 일정", icon: "calendar", path: "/guidelines" },
+    { title: "훈련 일정", icon: "calendar", path: "/schedule" },
     { title: "훈련 가이드라인", icon: "guide", path: "/guidelines" },
     { title: "훈련 일지", icon: "diary", path: "/journals" },
     { title: "피드백", icon: "feedback", path: "/feedback" },
