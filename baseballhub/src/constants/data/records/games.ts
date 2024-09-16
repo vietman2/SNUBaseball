@@ -298,7 +298,7 @@ const Games5: GameSummaryType[] = [
   },
 ];
 
-const Tournament1: TournamentType = {
+export const Tournament1: TournamentType = {
   id: 1,
   name: "대학야구 U리그 B조",
   year: 2024,
