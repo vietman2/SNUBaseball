@@ -127,6 +127,35 @@ export const Games1: GameSummaryType[] = [
   },
 ];
 
+export const sampleGames: GameSummaryType[] = [
+  {
+    id: 3,
+    date: "2024-04-18",
+    time: "09:00",
+    opponent: "한국골프대",
+    location: "횡성",
+    tournament: "대학야구 U리그 B조",
+    away_runs: 3,
+    home_runs: 3,
+    result: "무",
+    home: true,
+    notes: "9회 종료",
+  },
+  {
+    id: 4,
+    date: "2024-04-19",
+    time: "11:30",
+    opponent: "경민대",
+    location: "횡성",
+    tournament: "대학야구 U리그 B조",
+    home_runs: 2,
+    away_runs: 9,
+    result: "승",
+    home: false,
+    notes: "7회 콜드게임",
+  },
+];
+
 const Games2: GameSummaryType[] = [
   {
     id: 9,
