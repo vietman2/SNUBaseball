@@ -67,14 +67,6 @@ const LineupTable = styled.table`
   text-align: center;
 `;
 
-const BenchTable = styled.table`
-  width: 95%;
-  margin: 16px 0;
-  border-collapse: collapse;
-  border: 1px solid ${palette.grayBorder};
-  text-align: center;
-`;
-
 const TBody = styled.tbody`
   background-color: #ffffff;
 `;
