@@ -1,46 +1,46 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
-import { sampleGameResult, sampleGames } from "@data/records/games";
-import { GameSummary, Scoreboard } from "@fragments/Records";
-import { GameSummaryType } from "@models/records/game";
+import { ChipSelector } from "@components/Selectors";
+import { sampleTournaments } from "@data/records/games";
+import { Tournament } from "@fragments/Records";
+import { useOrientation } from "@hooks/useOrientation";
+import { TournamentType } from "@models/records/game";
 
-export default function Results() {
+const years = ["2024", "2023", "2022", "2021", "2020"];
+
+interface Props {
+  onSelectGame: (gameId: number) => void;
+}
+
+export function Results({ onSelectGame }: Readonly<Props>) {
   const [selectedYear, setSelectedYear] = useState<string>("2024");
-  const [games, setGames] = useState<GameSummaryType[]>([]);
+  const [tournaments, setTournaments] = useState<TournamentType[]>([]);
+
+  const orientation = useOrientation();
 
   useEffect(() => {
     // TODO: Fetch game results from API
-    setGames(sampleGames);
-  }, [selectedYear]);
+    setTournaments(sampleTournaments);
+  }, []);
 
   return (
     <Container>
-      <Left>
-        <Title>경기 결과</Title>
-        <YearPicker
-          value={selectedYear}
-          onChange={(e) => setSelectedYear(e.target.value)}
-        >
-          <option value="2019">2024</option>
-          <option value="2018">2023</option>
-          <option value="2017">2022</option>
-          <option value="2021">2021</option>
-          <option value="2020">2020</option>
-        </YearPicker>
-        <Games>
-          {games.map((game) => (
-            <div key={game.id}>
-              <GameSummary game={game} />
-            </div>
-          ))}
-        </Games>
-      </Left>
-      <Right>
-        <ScoreboardContainer>
-          <Scoreboard game={sampleGameResult} />
-        </ScoreboardContainer>
-      </Right>
+      <ChipSelector
+        options={years}
+        selected={selectedYear}
+        onSelect={setSelectedYear}
+      />
+      <Wrapper>
+        {tournaments.map((tournament, index) => (
+          <Tournament
+            key={index}
+            orientation={orientation}
+            tournament={tournament}
+            onSelectGame={onSelectGame}
+          />
+        ))}
+      </Wrapper>
     </Container>
   );
 }
@@ -48,49 +48,17 @@ export default function Results() {
 const Container = styled.div`
   display: flex;
   flex: 1;
-  flex-direction: row;
-  width: 100%;
-  gap: 1rem;
-  margin-bottom: 1rem;
-`;
-
-const Title = styled.h2`
-  margin: 1rem 0;
-`;
-
-const YearPicker = styled.select`
-  width: 100px;
-  height: 30px;
-  margin-right: 10px;
-`;
-
-const Left = styled.div`
-  display: flex;
   flex-direction: column;
-  width: 30%;
+  height: calc(100vh - 200px);
 `;
 
-const Games = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-top: 1rem;
-  border-radius: 10px;
-  background-color: white;
-`;
-
-const Right = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 70%;
-`;
-
-const ScoreboardContainer = styled.div`
-  display: flex;
+const Wrapper = styled.div`
+  display: block;
   flex: 1;
   flex-direction: column;
-  gap: 1rem;
-  margin-top: 1rem;
-  border-radius: 10px;
-  background-color: white;
+  height: 100%;
+  margin: 16px 0;
+  padding: 0 16px;
+  white-space: nowrap;
+  overflow-y: auto;
 `;

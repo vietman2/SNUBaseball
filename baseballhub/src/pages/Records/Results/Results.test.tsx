@@ -1,14 +1,16 @@
 import { render } from "@testing-library/react";
 
-import Results from "./Results";
+import { Results } from "./Results";
 
 jest.mock("@fragments/Records", () => ({
-  GameSummary: () => <div>GameSummary</div>,
-  Scoreboard: () => <div>Scoreboard</div>,
+  Tournament: () => <div>Tournament</div>,
+}));
+jest.mock("@hooks/useOrientation", () => ({
+  useOrientation: () => "landscape",
 }));
 
 describe("<Results />", () => {
   it("renders", () => {
-    render(<Results />);
+    render(<Results onSelectGame={jest.fn()} />);
   });
 });
