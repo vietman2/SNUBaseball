@@ -31,7 +31,7 @@ const Container = styled.div`
   padding: 0.5rem 1rem;
   margin-bottom: 1rem;
   border-radius: 15px;
-  background-color: ${palette.background};
+  background-color: ${palette.fullWhite};
 
   div {
     display: flex;
