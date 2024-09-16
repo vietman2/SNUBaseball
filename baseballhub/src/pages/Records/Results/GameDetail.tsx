@@ -1,8 +1,9 @@
+import { useEffect } from "react";
 import styled from "styled-components";
 
 import { AppIcon } from "@components/Icons";
 import { palette } from "@colors/palette";
-import { useEffect } from "react";
+import { GameStory, GameReport } from "@fragments/Records";
 
 interface Props {
   selectedGame: number;
@@ -18,15 +19,17 @@ export function GameDetail({ selectedGame, goBack }: Readonly<Props>) {
   return (
     <Container>
       <Header onClick={goBack}>
-        <AppIcon icon="chevron-left" size={24} color={palette.charcoal} />
-        목록
+        <div>
+          <AppIcon icon="chevron-left" size={24} color={palette.charcoal} />
+          목록
+        </div>
       </Header>
       <Contents>
         <Left>
-          <div>Left</div>
+          <GameReport />
         </Left>
         <Right>
-          <div>Right</div>
+          <GameStory />
         </Right>
       </Contents>
     </Container>
@@ -43,14 +46,24 @@ const Container = styled.div`
 const Header = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 16px;
+
+  div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 `;
 
 const Contents = styled.div`
   display: flex;
   flex: 1;
   flex-direction: row;
+  height: calc(100vh - 200px);
   padding: 8px 16px;
   gap: 16px;
 `;
@@ -59,6 +72,8 @@ const Left = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
+
+  border-right: 1px solid ${palette.grayBorder};
 `;
 
 const Right = styled.div`
