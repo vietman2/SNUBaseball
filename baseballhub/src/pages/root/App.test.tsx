@@ -7,9 +7,6 @@ import { renderWithProviders } from "@utils/test-utils";
 jest.unmock("react-router-dom");
 jest.unmock("@pages/Auth/AuthProvider");
 
-jest.mock("@pages/Home", () => ({
-  Home: () => <div />,
-}));
 jest.mock("@pages/Admin", () => ({
   Members: () => <div />,
 }));
@@ -28,8 +25,11 @@ jest.mock("@pages/Auth", () => ({
 jest.mock("@pages/Forum", () => ({
   Board: () => <div />,
 }));
+jest.mock("@pages/Home", () => ({
+  Home: () => <div />,
+}));
 jest.mock("@pages/Records", () => ({
-  Results: () => <div />,
+  RecordsContainer: () => <div />,
 }));
 jest.mock("@pages/Schedule", () => ({
   Daily: () => <div />,
