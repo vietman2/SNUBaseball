@@ -66,6 +66,9 @@ jest.mock("@components/Modals", () => ({
     </div>
   ),
 }));
+jest.mock("@components/Progressbars", () => ({
+  Statsbar: () => <div>Statsbar</div>,
+}));
 jest.mock("@components/RootLayout", () => ({
   RootLayout: ({ children }: { children: React.ReactNode }) => (
     <div>{children}</div>
