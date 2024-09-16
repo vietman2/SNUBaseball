@@ -121,7 +121,7 @@ const Container = styled.div`
   padding: 16px;
   gap: 24px;
   border-radius: 16px;
-  background-color: ${(props) => palette.fullWhite};
+  background-color: ${palette.fullWhite};
   white-space: nowrap;
 `;
 

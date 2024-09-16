@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
 import { render, screen, waitFor } from "@testing-library/react";
-import "@testing-library/jest-dom"; // for extended assertions
-import { useOrientation } from "./useOrientation"; // Adjust path accordingly
+import "@testing-library/jest-dom";
+
+import { useOrientation } from "./useOrientation";
 
 const TestComponent = () => {
   const orientation = useOrientation();
