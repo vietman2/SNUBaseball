@@ -5,10 +5,11 @@ export type GameSummaryType = {
   opponent: string;
   location: string;
   tournament: string;
-  score: string;
+  home_runs: number;
+  away_runs: number;
   result: string;
   home: boolean;
-  image?: string;
+  notes: string;
 };
 
 export type GameResultsType = {
@@ -45,4 +46,11 @@ export type GameResultsType = {
   ];
   home_records: [number, number, number, number];
   away_records: [number, number, number, number];
+};
+
+export type TournamentType = {
+  id: number;
+  name: string;
+  year: number;
+  games: GameSummaryType[];
 };
