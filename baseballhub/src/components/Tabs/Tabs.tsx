@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { palette } from "@colors/palette";
+
 interface Props {
   tabs: string[];
   activeTab: string;
@@ -32,6 +34,7 @@ const Tab = styled.div<{ $active: boolean }>`
   padding: 5px 15px;
   border-radius: 5px 5px 0 0;
   cursor: pointer;
-  background-color: ${(props) => (props.$active ? "white" : "#f0f0f0")};
-  color: ${(props) => (props.$active ? "black" : "gray")};
+  background-color: ${(props) =>
+    props.$active ? palette.contentBackground : palette.fullWhite};
+  color: ${(props) => (props.$active ? palette.primary : palette.charcoal)};
 `;
