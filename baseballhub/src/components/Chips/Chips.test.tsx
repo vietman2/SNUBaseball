@@ -5,8 +5,8 @@ import { Chip } from "./Chip";
 jest.unmock("@components/Chips");
 
 describe("<Chip />", () => {
-  it("should render", () => {
-    render(<Chip label="Test" onClick={jest.fn()} />);
+  it("should render small", () => {
+    render(<Chip label="Test" onClick={jest.fn()} small />);
 
     fireEvent.click(screen.getByTestId("chip"));
   });
