@@ -7,9 +7,11 @@ export const palette = {
   activeTab: "#b1bdcd",
   sidebarBackground: "#f0f8ff",
   contentBackground: "#eef4f4",
-  //activeTab: "#e7f6ff",
 
-  winBackground: "rgba(0, 255, 0, 0.1)",
+  winBackground: "rgba(64, 255, 128, 0.3)",
+  drawBackground: "rgba(128, 128, 128, 0.2)",
+  loseBackground: "rgba(255, 64, 64, 0.15)",
+  //activeTab: "#e7f6ff",
 
   highEmphasis: "#1a1a8f",
   lowEmphasis: "#333333",
