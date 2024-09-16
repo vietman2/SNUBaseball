@@ -1,4 +1,4 @@
 import { Scoreboard } from "./Scoreboard/Scoreboard";
-import { GameSummary } from "./Summary/Summary";
+import { Tournament } from "./Tournament/Tournament";
 
-export { Scoreboard, GameSummary };
+export { Scoreboard, Tournament };
