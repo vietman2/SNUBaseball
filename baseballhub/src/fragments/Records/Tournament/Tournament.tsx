@@ -27,7 +27,6 @@ export function Tournament({ tournament, onSelectGame }: Readonly<Props>) {
             <GamePortrait
               key={index}
               game={game}
-              isLast={index === tournament.games.length - 1}
               onSelectGame={onSelectGame}
             />
           ))}

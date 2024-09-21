@@ -6,13 +6,11 @@ import { GameSummaryType } from "@models/records/game";
 
 interface Props {
   game: GameSummaryType;
-  isLast?: boolean;
   onSelectGame: (gameId: number) => void;
 }
 
 export function GamePortrait({
   game,
-  isLast = false,
   onSelectGame,
 }: Readonly<Props>) {
   const getDate = () => {
