@@ -1,45 +1,46 @@
 import styled from "styled-components";
 
 import { palette } from "@colors/palette";
-import { OrderType } from "@models/records/game";
+import { BattingOrderType, GamePitcherType } from "@models/records/game";
 
 interface Props {
   lineup: [
-    OrderType,
-    OrderType,
-    OrderType,
-    OrderType,
-    OrderType,
-    OrderType,
-    OrderType,
-    OrderType,
-    OrderType,
-    OrderType
+    BattingOrderType,
+    BattingOrderType,
+    BattingOrderType,
+    BattingOrderType,
+    BattingOrderType,
+    BattingOrderType,
+    BattingOrderType,
+    BattingOrderType,
+    BattingOrderType
   ];
+  pitcher: GamePitcherType;
 }
 
-export function Lineup({ lineup }: Readonly<Props>) {
+export function Lineup({ lineup, pitcher }: Readonly<Props>) {
   return (
     <Container>
       <Title>선발 라인업</Title>
       <LineupTable>
         <TBody>
-          {lineup.map((player) => (
-            <tr key={player.order}>
-              {player.order === 0 ? (
-                <TD colSpan={2}>선발투수</TD>
-              ) : (
-                <>
-                  <TD>{player.order}</TD>
-                  <TD>{player.position}</TD>
-                </>
-              )}
-              <TD>
-                <span>{player.number}</span>
-                <span style={{ marginLeft: 8 }}>{player.name}</span>
-              </TD>
+          {lineup.map((order) => (
+            <tr key={order.order}>
+              <Data>{order.order}</Data>
+              <Data>{order.batters[0].positions[0]}</Data>
+              <Data>
+                <span>{order.batters[0].number}</span>
+                <span style={{ marginLeft: 4 }}>{order.batters[0].name}</span>
+              </Data>
             </tr>
           ))}
+          <tr>
+            <Data colSpan={2}>선발투수</Data>
+            <Data>
+              <span>{pitcher.number}</span>
+              <span style={{ marginLeft: 4 }}>{pitcher.name}</span>
+            </Data>
+          </tr>
         </TBody>
       </LineupTable>
     </Container>
@@ -71,7 +72,7 @@ const TBody = styled.tbody`
   background-color: #ffffff;
 `;
 
-const TD = styled.td`
+const Data = styled.td`
   padding: 8px;
   border: 1px solid ${palette.grayBorder};
 `;
