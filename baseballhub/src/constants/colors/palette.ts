@@ -8,9 +8,9 @@ export const palette = {
   sidebarBackground: "#f0f8ff",
   contentBackground: "#eef4f4",
 
-  winBackground: "rgba(64, 255, 128, 0.3)",
+  winBackground: "rgba(0, 255, 64, 0.75)",
   drawBackground: "rgba(128, 128, 128, 0.2)",
-  loseBackground: "rgba(255, 64, 64, 0.15)",
+  loseBackground: "rgba(255, 64, 64, 0.5)",
   //activeTab: "#e7f6ff",
 
   highEmphasis: "#1a1a8f",
