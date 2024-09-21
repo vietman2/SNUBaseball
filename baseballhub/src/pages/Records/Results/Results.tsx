@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { ChipSelector } from "@components/Selectors";
 import { sampleTournaments } from "@data/records/games";
 import { Tournament } from "@fragments/Records";
-import { useOrientation } from "@hooks/useOrientation";
 import { TournamentType } from "@models/records/game";
 
 const years = ["2024", "2023", "2022", "2021", "2020"];
@@ -16,8 +15,6 @@ interface Props {
 export function Results({ onSelectGame }: Readonly<Props>) {
   const [selectedYear, setSelectedYear] = useState<string>("2024");
   const [tournaments, setTournaments] = useState<TournamentType[]>([]);
-
-  const orientation = useOrientation();
 
   useEffect(() => {
     // TODO: Fetch game results from API
@@ -35,7 +32,6 @@ export function Results({ onSelectGame }: Readonly<Props>) {
         {tournaments.map((tournament, index) => (
           <Tournament
             key={index}
-            orientation={orientation}
             tournament={tournament}
             onSelectGame={onSelectGame}
           />
