@@ -11,7 +11,7 @@ export function Scoreboard({ game }: Readonly<Props>) {
   return (
     <Table>
       <thead>
-        <TableRow>
+        <TableRow style={{ backgroundColor: palette.drawBackground }}>
           <TableCell></TableCell>
           <TableCell>1</TableCell>
           <TableCell>2</TableCell>
@@ -30,7 +30,13 @@ export function Scoreboard({ game }: Readonly<Props>) {
       </thead>
       <tbody>
         <TableRow>
-          <TableCell>{game.home_team}</TableCell>
+          <TableCell
+            style={{
+              fontWeight: game.home_team === "서울대" ? "bold" : "normal",
+            }}
+          >
+            {game.home_team}
+          </TableCell>
           {game.home_runs.map((run, index) => (
             <TableCell key={index}>{run === -1 ? "-" : run}</TableCell>
           ))}
@@ -39,7 +45,13 @@ export function Scoreboard({ game }: Readonly<Props>) {
           ))}
         </TableRow>
         <TableRow>
-          <TableCell>{game.away_team}</TableCell>
+          <TableCell
+            style={{
+              fontWeight: game.away_team === "서울대" ? "bold" : "normal",
+            }}
+          >
+            {game.away_team}
+          </TableCell>
           {game.away_runs.map((run, index) => (
             <TableCell key={index}>{run === -1 ? "-" : run}</TableCell>
           ))}
