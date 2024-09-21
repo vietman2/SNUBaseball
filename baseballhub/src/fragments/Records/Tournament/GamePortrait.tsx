@@ -10,7 +10,11 @@ interface Props {
   onSelectGame: (gameId: number) => void;
 }
 
-export function GamePortrait({ game, isLast = false, onSelectGame }: Readonly<Props>) {
+export function GamePortrait({
+  game,
+  isLast = false,
+  onSelectGame,
+}: Readonly<Props>) {
   const getDate = () => {
     // cut year, only return month and day
     // and remove leading 0
@@ -21,9 +25,7 @@ export function GamePortrait({ game, isLast = false, onSelectGame }: Readonly<Pr
   };
 
   return (
-    <Container
-      borderbottom={isLast ? "none" : `1px solid ${palette.grayBorder}`}
-    >
+    <Container>
       <TopRow>
         <DateTime>
           {getDate()} {game.time}
@@ -65,12 +67,7 @@ interface ScoreProps {
   result: string;
 }
 
-function Score({
-  team,
-  runs_scored,
-  our_team,
-  result,
-}: Readonly<ScoreProps>) {
+function Score({ team, runs_scored, our_team, result }: Readonly<ScoreProps>) {
   return (
     <ScoreWrapper>
       <TeamName>
@@ -97,11 +94,10 @@ function Score({
   );
 }
 
-const Container = styled.div<{ borderbottom: string }>`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding-bottom: 16px;
-  border-bottom: ${(props) => props.borderbottom};
   background-color: ${palette.fullWhite};
   user-select: none;
 `;

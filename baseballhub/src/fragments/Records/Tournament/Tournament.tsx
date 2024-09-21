@@ -1,57 +1,41 @@
-import { useState } from "react";
 import styled from "styled-components";
 
-import { GameLandscape } from "./GameLandscape";
 import { GamePortrait } from "./GamePortrait";
-import { AppIcon } from "@components/Icons";
+import { ExpandableTab } from "@components/Tabs";
 import { palette } from "@colors/palette";
+import { useWindowSize } from "@hooks/useWindowSize";
 import { TournamentType } from "@models/records/game";
 
 interface Props {
-  orientation: 1 | 2; // 1 = landscape, 2 = portrait
   tournament: TournamentType;
   onSelectGame: (gameId: number) => void;
 }
 
-export function Tournament({
-  orientation,
-  tournament,
-  onSelectGame,
-}: Readonly<Props>) {
-  const [expanded, setExpanded] = useState<boolean>(true);
+export function Tournament({ tournament, onSelectGame }: Readonly<Props>) {
+  const { width } = useWindowSize();
+  const columns = width > 1600 ? 4 : width > 1200 ? 3 : width > 880 ? 2 : 1;
+
+  const numberOfGames = tournament.games.length;
+  const totalSlots = Math.ceil(numberOfGames / columns) * columns;
+  const dummyCount = totalSlots - numberOfGames;
 
   return (
     <Container>
-      <Header
-        onClick={() => setExpanded(!expanded)}
-        radius={expanded ? "0" : "16px"}
-        data-testid="header"
-      >
-        <span>{tournament.name}</span>
-        <AppIcon
-          icon={expanded ? "chevron-up" : "chevron-down"}
-          size={24}
-          color={palette.charcoal}
-        />
-      </Header>
-      <Content height={expanded ? "1600px" : "0"}>
-        {tournament.games.map((game, index) =>
-          orientation === 1 ? (
-            <GameLandscape
-              key={index}
-              game={game}
-              onSelectGame={onSelectGame}
-            />
-          ) : (
+      <ExpandableTab title={tournament.name} height="1600px">
+        <Content columns={columns}>
+          {tournament.games.map((game, index) => (
             <GamePortrait
               key={index}
               game={game}
               isLast={index === tournament.games.length - 1}
               onSelectGame={onSelectGame}
             />
-          )
-        )}
-      </Content>
+          ))}
+          {Array.from({ length: dummyCount }).map((_, index) => (
+            <DummyComponent key={index} />
+          ))}
+        </Content>
+      </ExpandableTab>
     </Container>
   );
 }
@@ -60,35 +44,26 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 16px;
-  border-radius: 16px;
-  background-color: ${palette.fullWhite};
-  user-select: none;
 `;
 
-const Header = styled.div<{ radius: string }>`
-  display: flex;
-  flex: 1;
-  justify-content: space-between;
-  background-color: ${palette.drawBackground};
-  padding: 8px 16px;
-  border-radius: 16px;
-  border-bottom-left-radius: ${(props) => props.radius};
-  border-bottom-right-radius: ${(props) => props.radius};
+const Content = styled.div<{ columns: number }>`
+  display: grid;
+  grid-template-columns: repeat(${(props) => props.columns}, 1fr);
 
-  transition: border-radius 0.3s ease;
-
-  span {
-    font-size: 16px;
-    font-weight: 500;
-    color: ${palette.charcoal};
+  & > div {
+    border-bottom: 1px solid ${palette.drawBackground};
+    border-right: 1px solid ${palette.drawBackground};
+  }
+  & > div:nth-child(${(props) => props.columns}n) {
+    border-right: none;
+  }
+  & > div:nth-last-child(-n + ${(props) => props.columns}) {
+    border-bottom: none;
   }
 `;
 
-const Content = styled.div<{ height: string }>`
-  overflow: hidden;
-  max-height: ${(props) => (props.height)};
-  transition: max-height 0.3s ease-in-out;
-  background-color: ${palette.fullWhite};
-  border-bottom-left-radius: 16px;
-  border-bottom-right-radius: 16px;
+const DummyComponent = styled.div`
+  display: flex;
+  flex: 1;
+  background-color: transparent;
 `;
