@@ -12,11 +12,38 @@ export type GameSummaryType = {
   notes: string;
 };
 
-export type OrderType = {
-  order: number;
+type GameBatterType = {
   name: string;
   number: number;
-  position: string;
+  positions: string[];
+  plate_appearances: number;
+  at_bats: number;
+  runs_scored: number;
+  hits: number;
+  rbis: number;
+  walks_hbps: number;
+  strikeouts: number;
+};
+
+export type GamePitcherType = {
+  name: string;
+  number: number;
+  result: string;
+  innings_pitched: number;
+  batter_faced: number;
+  pitches: number;
+  hits: number;
+  homeruns: number;
+  walks: number;
+  hbps: number;
+  strikeouts: number;
+  runs_allowed: number;
+  earned_runs: number;
+};
+
+export type BattingOrderType = {
+  order: number;
+  batters: GameBatterType[];
 };
 
 export type GameResultsType = {
@@ -54,17 +81,17 @@ export type GameResultsType = {
   home_records: [number, number, number, number];
   away_records: [number, number, number, number];
   lineup: [
-    OrderType,
-    OrderType,
-    OrderType,
-    OrderType,
-    OrderType,
-    OrderType,
-    OrderType,
-    OrderType,
-    OrderType,
-    OrderType
+    BattingOrderType,
+    BattingOrderType,
+    BattingOrderType,
+    BattingOrderType,
+    BattingOrderType,
+    BattingOrderType,
+    BattingOrderType,
+    BattingOrderType,
+    BattingOrderType
   ];
+  pitchers: GamePitcherType[];
 };
 
 export type TournamentType = {
