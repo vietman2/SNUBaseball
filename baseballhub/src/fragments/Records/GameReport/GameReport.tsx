@@ -13,7 +13,10 @@ export function GameReport() {
       <Scoreboard game={sampleGameResult} />
       <Middle>
         <Left>
-          <Lineup lineup={sampleGameResult.lineup} />
+          <Lineup
+            lineup={sampleGameResult.lineup}
+            pitcher={sampleGameResult.pitchers[0]}
+          />
         </Left>
         <Right>
           <Notes />
