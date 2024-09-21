@@ -17,7 +17,7 @@ describe("<GamePortrait />", () => {
         <GamePortrait game={Games1[3]} onSelectGame={jest.fn()} />
         <GamePortrait game={Games1[4]} onSelectGame={jest.fn()} />
         <GamePortrait game={sampleGames[0]} onSelectGame={jest.fn()} />
-        <GamePortrait game={sampleGames[1]} onSelectGame={jest.fn()} isLast />
+        <GamePortrait game={sampleGames[1]} onSelectGame={jest.fn()}  />
       </>
     );
   });
