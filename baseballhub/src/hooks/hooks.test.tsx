@@ -2,6 +2,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import { useOrientation } from "./useOrientation";
+import { useWindowSize } from "./useWindowSize";
 
 const TestComponent = () => {
   const orientation = useOrientation();
@@ -45,10 +46,41 @@ describe("useOrientation", () => {
     expect(screen.getByTestId("orientation")).toHaveTextContent("2");
 
     await waitFor(() => {
-    window.matchMedia = mockMatchMedia(false);
-    addEventListenerMock.mock.calls[0][1](); // Trigger event listener
+      window.matchMedia = mockMatchMedia(false);
+      addEventListenerMock.mock.calls[0][1](); // Trigger event listener
     });
 
     expect(screen.getByTestId("orientation")).toHaveTextContent("1");
+  });
+});
+
+const TestComponent2 = () => {
+  const { width, height } = useWindowSize();
+  return (
+    <div data-testid="window-size">
+      {width} x {height}
+    </div>
+  );
+};
+
+describe("useWindowSize", () => {
+  const resizeWindow = (x: number, y: number) => {
+    window.innerWidth = x;
+    window.innerHeight = y;
+    window.dispatchEvent(new Event("resize"));
+  };
+
+  it("should return initial window size", () => {
+    render(<TestComponent2 />);
+    expect(screen.getByTestId("window-size")).toHaveTextContent("1024 x 768");
+  });
+
+  it("should update window size when window resizes", async () => {
+    render(<TestComponent2 />);
+
+    await waitFor(() => {
+      resizeWindow(800, 600);
+    });
+    expect(screen.getByTestId("window-size")).toHaveTextContent("800 x 600");
   });
 });
