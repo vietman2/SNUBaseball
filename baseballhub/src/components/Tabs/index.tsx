@@ -1,3 +1,4 @@
+import { ExpandableTab } from "./ExpandableTab";
 import { Tabs } from "./Tabs";
 
-export { Tabs };
+export { ExpandableTab, Tabs };
