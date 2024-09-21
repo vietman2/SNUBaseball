@@ -98,6 +98,7 @@ jest.mock("@components/Tabs", () => ({
 }));
 jest.mock("@components/Texts", () => ({
   Callout: () => <div>Callout</div>,
+  Subtitle: () => <div>Subtitle</div>,
   Title: () => <div>Title</div>,
 }));
 jest.mock("@pages/Auth/AuthProvider", () => ({
