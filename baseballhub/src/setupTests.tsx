@@ -91,6 +91,9 @@ jest.mock("@components/Tables", () => ({
   WeeklyTable: () => <div>WeeklyTable</div>,
 }));
 jest.mock("@components/Tabs", () => ({
+  ExpandableTab: ({ children }: { children: React.ReactNode }) => (
+    <div>{children}</div>
+  ),
   Tabs: () => <div>Tabs</div>,
 }));
 jest.mock("@components/Texts", () => ({
