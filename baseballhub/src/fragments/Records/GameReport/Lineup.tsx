@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+import { Subtitle } from "@components/Texts";
 import { palette } from "@colors/palette";
 import { BattingOrderType, GamePitcherType } from "@models/records/game";
 
@@ -21,7 +22,7 @@ interface Props {
 export function Lineup({ lineup, pitcher }: Readonly<Props>) {
   return (
     <Container>
-      <Title>선발 라인업</Title>
+      <Subtitle>선발 라인업</Subtitle>
       <LineupTable>
         <TBody>
           {lineup.map((order) => (
@@ -52,12 +53,6 @@ const Container = styled.div`
   flex: 1;
   flex-direction: column;
   height: 100%;
-`;
-
-const Title = styled.div`
-  padding: 0 16px;
-  font-size: 16px;
-  font-weight: 600;
 `;
 
 const LineupTable = styled.table`

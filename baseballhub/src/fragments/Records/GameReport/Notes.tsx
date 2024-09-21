@@ -1,13 +1,14 @@
 import styled from "styled-components";
 
 import { Statsbar } from "@components/Progressbars";
+import { Subtitle } from "@components/Texts";
 import { palette } from "@colors/palette";
 
 export function Notes() {
   return (
     <Container>
       <Stats>
-        <Title>기록</Title>
+        <Subtitle>기록</Subtitle>
         <Statsbar text="안타" number={5} />
         <Statsbar text="도루" number={10} />
         <Statsbar text="삼진" number={6} />
@@ -35,12 +36,6 @@ const Container = styled.div`
   flex-direction: column;
   height: 100%;
   overflow-y: auto;
-`;
-
-const Title = styled.div`
-  padding: 0 16px 8px 16px;
-  font-size: 16px;
-  font-weight: 600;
 `;
 
 const Stats = styled.div`

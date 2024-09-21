@@ -1,4 +1,4 @@
 import { Callout } from "./Callout";
-import { Title } from "./Title";
+import { Subtitle, Title } from "./Title";
 
-export { Callout, Title };
+export { Callout, Subtitle, Title };
