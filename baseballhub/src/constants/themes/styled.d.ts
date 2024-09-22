@@ -12,6 +12,10 @@ declare module "styled-components" {
       sapphire: string;
       border: string;
       background: string;
+      primaryText: string;
+      secondaryText: string;
+      accentText: string;
+      linkText: string;
     };
   }
 }

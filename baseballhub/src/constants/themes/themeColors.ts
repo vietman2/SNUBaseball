@@ -12,9 +12,15 @@ export const light = {
   sapphire: "#0B1623",
 
   // 테두리
-  border: "#cccccc",
+  border: "#C4C4C4",
 
   // 배경
   background: "#B1BDCD",
   // B5B6B6, E8E6F2, E0DFF4, B1BDCD
+
+  // 폰트
+  primaryText: "#212529",
+  secondaryText: "#F8F9FA",
+  accentText: "#FAF9F6",
+  linkText: "#0F0F70",
 };
