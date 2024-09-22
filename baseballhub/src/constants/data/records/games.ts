@@ -14,7 +14,7 @@ export const sampleGameResult: GameResultsType = {
   tournament: "대학야구 U리그 B조",
   score: "2:9",
   result: "승",
-  home_runs: [0, 4, 4, 0, 0, 1, -1, -1, -1],
+  home_runs: [0, 4, 4, 0, 0, 1, 0, -1, -1],
   away_runs: [0, 1, 0, 0, 0, 0, 1, -1, -1],
   home_records: [9, 5, 1, 11],
   away_records: [2, 6, 1, 5],
