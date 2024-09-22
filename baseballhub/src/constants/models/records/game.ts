@@ -18,9 +18,9 @@ type GameBatterType = {
   positions: string[];
   plate_appearances: number;
   at_bats: number;
-  runs_scored: number;
   hits: number;
   rbis: number;
+  runs_scored: number;
   walks_hbps: number;
   strikeouts: number;
 };
@@ -45,6 +45,18 @@ export type BattingOrderType = {
   order: number;
   batters: GameBatterType[];
 };
+
+export type LineupType = [
+  BattingOrderType,
+  BattingOrderType,
+  BattingOrderType,
+  BattingOrderType,
+  BattingOrderType,
+  BattingOrderType,
+  BattingOrderType,
+  BattingOrderType,
+  BattingOrderType
+];
 
 export type GameResultsType = {
   id: number;
@@ -80,17 +92,7 @@ export type GameResultsType = {
   ];
   home_records: [number, number, number, number];
   away_records: [number, number, number, number];
-  lineup: [
-    BattingOrderType,
-    BattingOrderType,
-    BattingOrderType,
-    BattingOrderType,
-    BattingOrderType,
-    BattingOrderType,
-    BattingOrderType,
-    BattingOrderType,
-    BattingOrderType
-  ];
+  lineup: LineupType;
   pitchers: GamePitcherType[];
 };
 
