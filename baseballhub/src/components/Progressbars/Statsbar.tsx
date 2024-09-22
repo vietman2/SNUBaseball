@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-import { palette } from "@colors/palette";
-
 interface Props {
   text: string;
   number: number;
@@ -33,20 +31,20 @@ const Text = styled.div`
   flex: 1;
   margin: 0 4px;
   font-size: 14px;
-  color: ${palette.charcoal};
+  color: ${({ theme }) => theme.colors.sapphire};
 `;
 
 const Bar = styled.div`
   display: flex;
   flex: 8;
   height: 16px;
-  background-color: ${palette.grayBorder};
+  background-color: ${({ theme }) => theme.colors.background};
   border-radius: 8px;
   margin: 0 8px;
 `;
 
 const Filler = styled.div<{ percentage: number }>`
   width: ${(props) => props.percentage}%;
-  background-color: ${palette.primary};
+  background-color: ${({ theme }) => theme.colors.primary};
   border-radius: 8px;
 `;
