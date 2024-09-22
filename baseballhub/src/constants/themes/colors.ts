@@ -1,6 +1,5 @@
 export const colors = {
-    active: "#0F0F70",
-  inactive: "#252525",
-  //dark: "252525",
-
+  win: "#2ECC71",
+  draw: "#D3D3D3",
+  lose: "#C0392B",
 };
