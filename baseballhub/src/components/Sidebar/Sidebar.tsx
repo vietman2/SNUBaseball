@@ -2,8 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import MainLogo from "@assets/images/logo.png";
-import { AppIcon } from "@components/Icons";
+import { AppIcon, MainLogo } from "@components/Icons";
 import { palette } from "@colors/palette";
 import { TabGroup, tabgroups } from "@navigation/tabs";
 import { useAuth } from "@pages/Auth";
@@ -34,7 +33,7 @@ export function Sidebar({ isSidebarOpen, toggleSidebar }: Props) {
     <>
       <SidebarContainer $isOpen={isSidebarOpen}>
         <SidebarHeader>
-          <Logo src={MainLogo} alt="Main Logo" />
+          <MainLogo />
         </SidebarHeader>
         <SidebarContent>
           {tabgroups.map(
@@ -101,11 +100,6 @@ const SidebarContainer = styled.div<{ $isOpen: boolean }>`
 const SidebarHeader = styled.div`
   padding-top: 40px;
   text-align: center;
-`;
-
-const Logo = styled.img`
-  width: 80px;
-  height: 80px;
 `;
 
 const SidebarContent = styled.div`
