@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-import { palette } from "@colors/palette";
-
 interface Props {
   tabs: string[];
   activeTab: string;
@@ -28,13 +26,22 @@ export function Tabs(props: Readonly<Props>) {
 const Container = styled.div`
   display: flex;
   gap: 5px;
+  margin: 0 8px;
+  padding: 0 8px 8px 8px;
+
+  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
 `;
 
 const Tab = styled.div<{ $active: boolean }>`
   padding: 5px 15px;
-  border-radius: 5px 5px 0 0;
+  border-radius: 16px;
   cursor: pointer;
-  background-color: ${(props) =>
-    props.$active ? palette.contentBackground : palette.fullWhite};
-  color: ${(props) => (props.$active ? palette.primary : palette.charcoal)};
+  background-color: ${({ $active, theme }) =>
+    $active ? theme.colors.offWhite : theme.colors.lavender};
+  color: ${({ $active, theme }) =>
+    $active ? theme.colors.primary : theme.colors.sapphire};
+  border: ${({ $active, theme }) =>
+    $active ? `1px solid ${theme.colors.border}` : `1px solid transparent`};
+
+  transition: background-color 0.3s ease-in-out;
 `;
