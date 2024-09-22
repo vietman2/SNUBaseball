@@ -11,9 +11,8 @@ interface Props {
   toggleSidebar: () => void;
 }
 
-const sidebarColor = "#F0F8FF";
 const activeTabColor = "#0F0F70";
-const activeTabBackgroundColor = "#B1BDCD";
+const activeTabBackgroundColor = "#E8E6F2";
 const inactiveTabColor = "#0B1623";
 
 export function Sidebar({ isSidebarOpen, toggleSidebar }: Props) {
@@ -90,7 +89,7 @@ export function Sidebar({ isSidebarOpen, toggleSidebar }: Props) {
 const SidebarContainer = styled.div<{ $isOpen: boolean }>`
   display: flex;
   flex-direction: column;
-  background-color: ${sidebarColor};
+  background-color: ${({ theme }) => theme.colors.background};
   height: 100%;
   width: ${(props) => (props.$isOpen ? "240px" : "90px")};
   position: fixed;
@@ -143,11 +142,11 @@ const TabItem = styled.div<{ $isActive: boolean; $isOpen: boolean }>`
 
 const SidebarToggleIcon = styled.div<{ $isOpen?: boolean }>`
   position: fixed;
-  top: 60px;
+  top: 50%;
   left: ${(props) => (props.$isOpen ? "225px" : "80px")};
   cursor: pointer;
   transition: left 0.3s ease-in-out;
-  background-color: ${sidebarColor};
+  background-color: ${({ theme }) => theme.colors.offWhite};
   padding: 10px 5px 5px 0;
   border-radius: 10px;
   z-index: 101;
