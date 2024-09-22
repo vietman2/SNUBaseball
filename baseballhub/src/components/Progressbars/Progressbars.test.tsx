@@ -1,11 +1,10 @@
-import { render } from "@testing-library/react";
-
 import { Statsbar } from "./Statsbar";
+import { renderWithProviders } from "@utils/test-utils";
 
 jest.unmock("@components/Progressbars");
 
 describe("<Statsbar />", () => {
   it("renders without errors", () => {
-    render(<Statsbar text="안타" number={5} />);
+    renderWithProviders(<Statsbar text="안타" number={5} />);
   });
 });
