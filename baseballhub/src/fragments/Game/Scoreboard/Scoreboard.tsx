@@ -121,6 +121,7 @@ export function Scoreboard({ game }: Readonly<Props>) {
 
 const Container = styled.div`
   display: flex;
+  flex: 1;
   flex-direction: column;
   background-color: #28a745;
   border-radius: 16px;
