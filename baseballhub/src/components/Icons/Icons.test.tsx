@@ -12,6 +12,7 @@ describe("<AppIcon />", () => {
         <AppIcon icon="add" size={16} color="black" />
         <AppIcon icon="admin" size={16} color="black" />
         <AppIcon icon="archive" size={16} color="black" />
+        <AppIcon icon="baseball" size={16} color="black" />
         <AppIcon icon="calendar" size={16} color="black" />
         <AppIcon icon="chevron-down" size={16} color="black" />
         <AppIcon icon="chevron-left" size={16} color="black" />

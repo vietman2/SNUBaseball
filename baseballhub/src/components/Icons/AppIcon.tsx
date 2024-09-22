@@ -1,6 +1,7 @@
 import { ReactComponent as AddIcon } from "./add.svg";
 import { ReactComponent as AdminIcon } from "./admin.svg";
 import { ReactComponent as ArchiveIcon } from "./archive.svg";
+import { ReactComponent as BaseballIcon } from "./baseball.svg";
 import { ReactComponent as CalendarIcon } from "./calendar.svg";
 import { ReactComponent as ChevronDownIcon } from "./chevron-down.svg";
 import { ReactComponent as ChevronLeftIcon } from "./chevron-left.svg";
@@ -32,6 +33,8 @@ export const AppIcon = ({ icon, size, color }: Props) => {
       return <AdminIcon width={size} height={size} color={color} />;
     case "archive":
       return <ArchiveIcon width={size} height={size} color={color} />;
+    case "baseball":
+      return <BaseballIcon width={size} height={size} color={color} />;
     case "calendar":
       return <CalendarIcon width={size} height={size} color={color} />;
     case "chevron-down":
