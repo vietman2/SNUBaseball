@@ -1,6 +1,7 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 
 import RecordsContainer from "./RecordsContainer";
+import { renderWithProviders } from "@utils/test-utils";
 
 jest.mock("./Results/Results", () => ({
   Results: ({ onSelectGame }: { onSelectGame: (gameId: number) => void }) => (
@@ -26,7 +27,7 @@ jest.mock("@components/Tabs", () => ({
 
 describe("<RecordsContainer />", () => {
   it("renders all tabs", () => {
-    render(<RecordsContainer />);
+    renderWithProviders(<RecordsContainer />);
 
     fireEvent.click(screen.getByText("기록실"));
     fireEvent.click(screen.getByText("연습경기"));
@@ -35,7 +36,7 @@ describe("<RecordsContainer />", () => {
   });
 
   it("renders game detail", () => {
-    render(<RecordsContainer />);
+    renderWithProviders(<RecordsContainer />);
 
     fireEvent.click(screen.getByText("Select Game"));
   });
