@@ -2,7 +2,6 @@ import { useState } from "react";
 import styled from "styled-components";
 
 import { AppIcon } from "@components/Icons";
-import { palette } from "@colors/palette";
 
 interface Props {
   title: string;
@@ -24,7 +23,7 @@ export function ExpandableTab({ title, children, height }: Readonly<Props>) {
         <AppIcon
           icon={expanded ? "chevron-up" : "chevron-down"}
           size={24}
-          color={palette.charcoal}
+          color="#FAF9F6"
         />
       </Header>
       <Content height={expanded ? height : "0"}>{children}</Content>
@@ -36,7 +35,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 16px;
-  background-color: ${palette.fullWhite};
+  background-color: ${({ theme }) => theme.colors.offWhite};
   user-select: none;
 `;
 
@@ -49,7 +48,7 @@ const Header = styled.div<{ radius: string }>`
   border-radius: 16px;
   border-bottom-left-radius: ${(props) => props.radius};
   border-bottom-right-radius: ${(props) => props.radius};
-  background-color: ${palette.drawBackground};
+  background-color: ${({ theme }) => theme.colors.primary};
   cursor: pointer;
   user-select: none;
 
@@ -58,7 +57,7 @@ const Header = styled.div<{ radius: string }>`
   span {
     font-size: 16px;
     font-weight: 500;
-    color: ${palette.charcoal};
+    color: ${({ theme }) => theme.colors.primary};
   }
 `;
 
@@ -66,7 +65,7 @@ const Content = styled.div<{ height: string }>`
   overflow: hidden;
   max-height: ${(props) => props.height};
   transition: max-height 0.3s ease-in-out;
-  background-color: ${palette.fullWhite};
+  background-color: ${({ theme }) => theme.colors.offWhite};
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
 `;
