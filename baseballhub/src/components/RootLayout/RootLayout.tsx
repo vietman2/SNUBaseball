@@ -3,7 +3,6 @@ import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 
 import { Sidebar } from "@components/Sidebar";
-import { palette } from "@colors/palette";
 
 export default function RootLayout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);
@@ -27,7 +26,7 @@ export default function RootLayout() {
 const MainContainer = styled.div`
   display: flex;
   flex: 1;
-  background-color: ${palette.fullWhite};
+  background-color: ${({ theme }) => theme.colors.offWhite};
   overflow-x: hidden;
 `;
 
