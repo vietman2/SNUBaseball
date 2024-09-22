@@ -1,10 +1,9 @@
-import { render } from "@testing-library/react";
-
 import { PostSimple } from "./PostSimple";
 import { samplePosts } from "@data/forum";
+import { renderWithProviders } from "@utils/test-utils";
 
 describe("<PostSimple />", () => {
   it("renders without errors", () => {
-    render(<PostSimple post={samplePosts[0]} />);
+    renderWithProviders(<PostSimple post={samplePosts[0]} />);
   });
 });
