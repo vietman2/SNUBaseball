@@ -1,5 +1,5 @@
 export const light = {
-  primary: "#0f0f70", // 파랑
+  primary: "#0F0F70", // 파랑
   primaryContainer: "#B5B6B6", // 실버
 
   secondary: "#C5A86F", // 골드

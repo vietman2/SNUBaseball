@@ -23,7 +23,7 @@ export function ExpandableTab({ title, children, height }: Readonly<Props>) {
         <AppIcon
           icon={expanded ? "chevron-up" : "chevron-down"}
           size={24}
-          color="#FAF9F6"
+          color="#0B1623"
         />
       </Header>
       <Content height={expanded ? height : "0"}>{children}</Content>
@@ -48,7 +48,7 @@ const Header = styled.div<{ radius: string }>`
   border-radius: 16px;
   border-bottom-left-radius: ${(props) => props.radius};
   border-bottom-right-radius: ${(props) => props.radius};
-  background-color: ${({ theme }) => theme.colors.primary};
+  background-color: ${({ theme }) => theme.colors.background};
   cursor: pointer;
   user-select: none;
 
