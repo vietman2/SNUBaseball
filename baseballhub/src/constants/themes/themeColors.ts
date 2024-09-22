@@ -1,8 +1,12 @@
-export const palette = {
+export const light = {
   primary: "#0f0f70",
-  fullWhite: "#ffffff",
-  fullBlack: "#000000",
-  charcoal: "#252525",
+  primaryContainer: "#B5B6B6",
+
+  secondary: "#C5A86F",
+
+  offWhite: "#FAF9F6",
+
+  sapphire: "#0B1623",
 
   activeTab: "#b1bdcd",
   sidebarBackground: "#f0f8ff",
@@ -16,7 +20,5 @@ export const palette = {
   highEmphasis: "#1a1a8f",
   lowEmphasis: "#333333",
 
-  secondary: "#ff8c00",
-
-  grayBorder: "#cccccc",
+  border: "#cccccc",
 };

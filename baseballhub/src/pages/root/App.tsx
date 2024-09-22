@@ -6,6 +6,7 @@ import {
   Navigate,
   Outlet,
 } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
 
 import { Members } from "@pages/Admin";
 import { AuthProvider, Login, SignUp, useAuth } from "@pages/Auth";
@@ -16,6 +17,7 @@ import { Daily, Weekly } from "@pages/Schedule";
 import { Feedback, Guidelines, Journals } from "@pages/Training";
 
 import { RootLayout } from "@components/RootLayout";
+import { light } from "@themes/themeColors";
 
 const ProtectedRoutes = () => {
   const { user } = useAuth();
@@ -52,8 +54,10 @@ const router = createBrowserRouter(
 
 export default function App() {
   return (
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
+    <ThemeProvider theme={{ colors: light }}>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </ThemeProvider>
   );
 }

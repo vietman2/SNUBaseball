@@ -19,7 +19,6 @@
     "paths": {
       "@assets/*": ["assets/*"],
       "@components/*": ["components/*"],
-      "@colors/*": ["constants/colors/*"],
       "@data/*": ["constants/data/*"],
       "@fragments/*": ["fragments/*"],
       "@hooks/*": ["hooks/*"],
@@ -27,6 +26,7 @@
       "@models/*": ["constants/models/*"],
       "@navigation/*": ["constants/navigation/*"],
       "@services/*": ["services/*"],
+      "@themes/*": ["constants/themes/*"],
       "@utils/*": ["utils/*"]
     }
   },
