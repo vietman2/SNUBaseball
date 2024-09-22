@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 
 import { Results } from "./Results/Results";
-import { GameDetail } from "./Results/GameDetail";
+import { GameDetail } from "./GameDetail/GameDetail";
 import { Tabs } from "@components/Tabs";
 import { Title } from "@components/Texts";
 

@@ -10,7 +10,7 @@ jest.mock("./Results/Results", () => ({
     </div>
   ),
 }));
-jest.mock("./Results/GameDetail", () => ({
+jest.mock("./GameDetail/GameDetail", () => ({
   GameDetail: () => <div>GameDetail</div>,
 }));
 jest.mock("@components/Tabs", () => ({
