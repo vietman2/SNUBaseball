@@ -2,11 +2,11 @@ import { useEffect } from "react";
 import styled from "styled-components";
 
 import { AppIcon } from "@components/Icons";
+import { ExpandableTab } from "@components/Tabs";
 import { sampleGameResult } from "@data/records/games";
+import { Scoreboard } from "@fragments/Game";
 import { GameStory, GameReport } from "@fragments/Records";
 import { useWindowSize } from "@hooks/useWindowSize";
-import { ExpandableTab } from "@components/Tabs";
-import { Scoreboard } from "@fragments/Records/GameReport/Scoreboard";
 
 interface Props {
   selectedGame: number;
