@@ -1,18 +1,15 @@
 import styled from "styled-components";
 
 import { Chip } from "@components/Chips";
-import { palette } from "@colors/palette";
 import { GameSummaryType } from "@models/records/game";
+import { colors } from "@themes/colors";
 
 interface Props {
   game: GameSummaryType;
   onSelectGame: (gameId: number) => void;
 }
 
-export function GamePortrait({
-  game,
-  onSelectGame,
-}: Readonly<Props>) {
+export function GameSummary({ game, onSelectGame }: Readonly<Props>) {
   const getDate = () => {
     // cut year, only return month and day
     // and remove leading 0
@@ -48,8 +45,8 @@ export function GamePortrait({
         <div>
           <Chip
             label="기록"
-            bgColor={palette.contentBackground}
-            color={palette.charcoal}
+            bgColor="#B5B6B6"
+            color="#0B1623"
             onClick={() => onSelectGame(game.id)}
           />
         </div>
@@ -76,12 +73,12 @@ function Score({ team, runs_scored, our_team, result }: Readonly<ScoreProps>) {
               label={result}
               bgColor={
                 result === "승"
-                  ? palette.winBackground
+                  ? colors.win
                   : result === "무"
-                  ? palette.drawBackground
-                  : palette.loseBackground
+                  ? colors.draw
+                  : colors.lose
               }
-              color={palette.charcoal}
+              color="#0B1623"
               small
             />
           ) : null}
@@ -96,7 +93,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding-bottom: 16px;
-  background-color: ${palette.fullWhite};
+  background-color: ${({ theme }) => theme.colors.offWhite};
   user-select: none;
 `;
 
@@ -111,7 +108,7 @@ const DateTime = styled.div`
   display: flex;
   flex: 1;
   font-size: 14px;
-  color: ${palette.charcoal};
+  color: ${({ theme }) => theme.colors.sapphire};
 `;
 
 const Location = styled.div`
@@ -119,7 +116,7 @@ const Location = styled.div`
   flex: 2;
   margin-left: 16px;
   font-size: 12px;
-  color: ${palette.charcoal};
+  color: ${({ theme }) => theme.colors.sapphire};
 `;
 
 const Contents = styled.div`
@@ -127,7 +124,7 @@ const Contents = styled.div`
   flex: 1;
   flex-direction: row;
   align-items: flex-end;
-  padding: 0 16px;
+  padding: 0 8px 0 16px;
 `;
 
 const Scores = styled.div`
@@ -144,7 +141,7 @@ const ScoreWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin: 0 16px 0 0;
+  margin: 0 24px 0 0;
 `;
 
 const TeamName = styled.div`
@@ -154,12 +151,12 @@ const TeamName = styled.div`
   gap: 8px;
   font-size: 14px;
   font-weight: 500;
-  color: ${palette.charcoal};
+  color: ${({ theme }) => theme.colors.sapphire};
 `;
 
 const Runs = styled.div`
   display: flex;
   font-size: 14px;
   font-weight: 500;
-  color: ${palette.charcoal};
+  color: ${({ theme }) => theme.colors.sapphire};
 `;
