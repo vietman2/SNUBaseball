@@ -19,9 +19,17 @@ describe("<ExpandableTab />", () => {
 });
 
 describe("<Tabs />", () => {
-  it("should render", () => {
+  it("should render type 1", () => {
     renderWithProviders(
       <Tabs tabs={["Tab1", "Tab2"]} activeTab="Tab1" setActiveTab={jest.fn()} />
+    );
+
+    fireEvent.click(screen.getByTestId("Tab2"));
+  });
+
+  it("should render type 2", () => {
+    renderWithProviders(
+      <Tabs type={2} tabs={["Tab1", "Tab2"]} activeTab="Tab1" setActiveTab={jest.fn()} />
     );
 
     fireEvent.click(screen.getByTestId("Tab2"));
