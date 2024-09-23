@@ -33,6 +33,28 @@ export function GameDetail({ selectedGame, goBack }: Readonly<Props>) {
     return ((width - 240) * 0.75 * 0.5).toString();
   };
 
+  const renderTabContent = () => {
+    switch (selectedTab) {
+      case "엔트리":
+        return <GameEntry game={sampleGameResult} />;
+      case "피드백":
+        return <GameFeedback game={sampleGameResult} />;
+      case "중계":
+        return <div>중계</div>;
+      case "상세기록":
+        return (
+          <GameRecords
+            lineup={sampleGameResult.lineup}
+            pitchers={sampleGameResult.pitchers}
+          />
+        );
+      case "영상":
+        return <div>영상</div>;
+      default:
+        return null;
+    }
+  };
+
   useEffect(() => {
     // fetch game detail from server
     console.log(selectedGame);
@@ -93,22 +115,7 @@ export function GameDetail({ selectedGame, goBack }: Readonly<Props>) {
             activeTab={selectedTab}
             setActiveTab={setSelectedTab}
           />
-          <NarrowTabPage>
-            {selectedTab === "엔트리" ? (
-              <GameEntry game={sampleGameResult} />
-            ) : selectedTab === "피드백" ? (
-              <GameFeedback game={sampleGameResult} />
-            ) : selectedTab === "상세기록" ? (
-              <GameRecords
-                lineup={sampleGameResult.lineup}
-                pitchers={sampleGameResult.pitchers}
-              />
-            ) : selectedTab === "중계" ? (
-              <div>중계</div>
-            ) : selectedTab === "영상" ? (
-              <div>영상</div>
-            ) : null}
-          </NarrowTabPage>
+          <NarrowTabPage>{renderTabContent()}</NarrowTabPage>
         </NarrowContents>
       )}
     </Container>
