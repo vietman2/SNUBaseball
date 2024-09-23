@@ -1,10 +1,12 @@
 import styled from "styled-components";
 
+import { Chip } from "@components/Chips";
+
 interface Props {
   tabs: string[];
   activeTab: string;
   setActiveTab: (tab: string) => void;
-  type?: 1 | 2;
+  type?: 1 | 2 | 3;
 }
 
 export function Tabs({
@@ -28,7 +30,7 @@ export function Tabs({
         ))}
       </Container1>
     );
-  } else {
+  } else if (type === 2) {
     return (
       <Container2>
         {tabs.map((tab) => (
@@ -42,6 +44,20 @@ export function Tabs({
           </Tab2>
         ))}
       </Container2>
+    );
+  } else {
+    return (
+      <Container3>
+        {tabs.map((tab) => (
+          <Chip
+            key={tab}
+            label={tab}
+            bgColor={tab === activeTab ? "#0F0F70" : "#B5B6B6"}
+            color={tab === activeTab ? "#E8E6F2" : "#0B1623"}
+            onClick={() => setActiveTab(tab)}
+          />
+        ))}
+      </Container3>
     );
   }
 }
@@ -90,4 +106,12 @@ const Tab2 = styled.div<{ $active: boolean }>`
     $active ? `2px solid ${theme.colors.primary}` : `2px solid transparent`};
 
   transition: border-bottom 0.3s linear;
+`;
+
+const Container3 = styled.div`
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
 `;
