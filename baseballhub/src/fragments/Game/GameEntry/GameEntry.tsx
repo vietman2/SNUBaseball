@@ -13,25 +13,34 @@ export function GameEntry({ game }: Readonly<Props>) {
       <Left>
         <Subtitle>라인업</Subtitle>
         <Lineup>
-          <Player>
+          <StartingPlayer>
             <div>투수</div>
             <div>
               <div>P</div>
               <div>{game.pitchers[0].name}</div>
             </div>
-          </Player>
+          </StartingPlayer>
           {game.lineup.map((order, index) => (
-            <Player key={index}>
+            <StartingPlayer key={index}>
               <div>{order.order}번</div>
               <div>
                 <div>{order.batters[0].positions[0]}</div>
                 <div>{order.batters[0].name}</div>
               </div>
-            </Player>
+            </StartingPlayer>
           ))}
         </Lineup>
       </Left>
       <Right>
+        <Subtitle>교체명단</Subtitle>
+        <Bench>
+          {game.bench.map((player, index) => (
+            <BenchPlayer key={index}>
+              <div>{`${player.number} ${player.name}`}</div>
+              <div>{player.hand}</div>
+            </BenchPlayer>
+          ))}
+        </Bench>
       </Right>
     </Container>
   );
@@ -61,7 +70,7 @@ const Lineup = styled.div`
   overflow-y: auto;
 `;
 
-const Player = styled.div`
+const StartingPlayer = styled.div`
   display: flex;
   flex: 1;
   flex-direction: row;
@@ -95,8 +104,39 @@ const Player = styled.div`
 
 const Right = styled.div`
   display: flex;
-  flex: 3;
+  flex: 1;
   flex-direction: column;
   align-items: center;
   padding: 0 4px;
+`;
+
+const Bench = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 8px;
+  gap: 8px;
+  overflow-y: auto;
+`;
+
+const BenchPlayer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 84px;
+  padding: 4px;
+  border-radius: 8px;
+
+  background-color: ${({ theme }) => theme.colors.lavender};
+  color: ${({ theme }) => theme.colors.sapphire};
+
+  div:nth-child(1) {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  div:nth-child(2) {
+    font-size: 12px;
+    color: ${({ theme }) => theme.colors.linkText};
+  }
 `;
