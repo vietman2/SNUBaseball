@@ -20,8 +20,8 @@ export function GameEntry({ game }: Readonly<Props>) {
               <div>{game.pitchers[0].name}</div>
             </div>
           </StartingPlayer>
-          {game.lineup.map((order, index) => (
-            <StartingPlayer key={index}>
+          {game.lineup.map((order) => (
+            <StartingPlayer key={order.order}>
               <div>{order.order}번</div>
               <div>
                 <div>{order.batters[0].positions[0]}</div>
@@ -34,8 +34,8 @@ export function GameEntry({ game }: Readonly<Props>) {
       <Right>
         <Subtitle>교체명단</Subtitle>
         <Bench>
-          {game.bench.map((player, index) => (
-            <BenchPlayer key={index}>
+          {game.bench.map((player) => (
+            <BenchPlayer key={player.number}>
               <div>{`${player.number} ${player.name}`}</div>
               <div>{player.hand}</div>
             </BenchPlayer>

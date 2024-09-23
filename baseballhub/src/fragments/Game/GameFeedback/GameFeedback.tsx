@@ -30,7 +30,7 @@ export function GameFeedback({ game }: Readonly<Props>) {
         <Feedback>
           <Subtitle>경기 피드백</Subtitle>
           {game.feedback.map((feedback, index) => (
-            <div key={index}>
+            <div key={feedback}>
               <div>{"\u2022"}</div>
               <div>{feedback}</div>
             </div>

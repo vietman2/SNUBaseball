@@ -63,6 +63,16 @@ interface ScoreProps {
 }
 
 function Score({ team, runs_scored, our_team, result }: Readonly<ScoreProps>) {
+
+  const getBackgroundColor = () => {
+    if (result === "승") {
+      return colors.win;
+    } else if (result === "무") {
+      return colors.draw;
+    } else {
+      return colors.lose;
+    }
+  };
   return (
     <ScoreWrapper>
       <TeamName>
@@ -71,13 +81,7 @@ function Score({ team, runs_scored, our_team, result }: Readonly<ScoreProps>) {
           {our_team ? (
             <Chip
               label={result}
-              bgColor={
-                result === "승"
-                  ? colors.win
-                  : result === "무"
-                  ? colors.draw
-                  : colors.lose
-              }
+              bgColor={getBackgroundColor()}
               color="#0B1623"
               small
             />
