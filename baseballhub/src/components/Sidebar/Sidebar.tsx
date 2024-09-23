@@ -146,7 +146,7 @@ const SidebarToggleIcon = styled.div<{ $isOpen?: boolean }>`
   left: ${(props) => (props.$isOpen ? "225px" : "80px")};
   cursor: pointer;
   transition: left 0.3s ease-in-out;
-  background-color: ${({ theme }) => theme.colors.offWhite};
+  background-color: ${({ theme }) => theme.colors.lavender};
   padding: 10px 5px 5px 0;
   border-radius: 10px;
   z-index: 101;
