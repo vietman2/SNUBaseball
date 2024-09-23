@@ -229,6 +229,63 @@ export const sampleGameResult: GameResultsType = {
       earned_runs: 1,
     },
   ],
+  bench: [
+    {
+      name: "임준원",
+      number: 2,
+      hand: "우투우타",
+    },
+    {
+      name: "문중협",
+      number: 5,
+      hand: "우투우타",
+    },
+    {
+      name: "양서진",
+      number: 8,
+      hand: "우투우타",
+    },
+    {
+      name: "이승민",
+      number: 9,
+      hand: "우투우타",
+    },
+    {
+      name: "이상현",
+      number: 11,
+      hand: "우투우타",
+    },
+    {
+      name: "김영",
+      number: 13,
+      hand: "우투우타",
+    },
+    {
+      name: "유찬휘",
+      number: 14,
+      hand: "우투우타",
+    },
+    {
+      name: "김택원",
+      number: 17,
+      hand: "우투우타",
+    },
+    {
+      name: "유호성",
+      number: 18,
+      hand: "우투좌타",
+    },
+    {
+      name: "허준서",
+      number: 20,
+      hand: "좌투좌타",
+    },
+    {
+      name: "이유용",
+      number: 23,
+      hand: "우투우타",
+    },
+  ],
 };
 
 export const Games1: GameSummaryType[] = [

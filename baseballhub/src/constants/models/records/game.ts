@@ -12,6 +12,12 @@ export type GameSummaryType = {
   notes: string;
 };
 
+type PlayerType = {
+  name: string;
+  number: number;
+  hand: string;
+};
+
 type GameBatterType = {
   name: string;
   number: number;
@@ -95,6 +101,7 @@ export type GameResultsType = {
   away_records: [number, number, number, number];
   lineup: LineupType;
   pitchers: GamePitcherType[];
+  bench: PlayerType[];
 };
 
 export type TournamentType = {
