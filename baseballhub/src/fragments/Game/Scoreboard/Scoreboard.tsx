@@ -26,12 +26,12 @@ export function Scoreboard({ game }: Readonly<Props>) {
       <Header>
         {isHome ? (
           <Team>
-            <AppIcon icon="baseball" size={60} color="white" />
+            <AppIcon icon="baseball" size={40} color="white" />
             {opponent}
           </Team>
         ) : (
           <Team>
-            <MainLogo size={60} />
+            <MainLogo size={40} />
             서울대
           </Team>
         )}
@@ -49,12 +49,12 @@ export function Scoreboard({ game }: Readonly<Props>) {
         </Middle>
         {isHome ? (
           <Team>
-            <MainLogo size={60} />
+            <MainLogo size={40} />
             서울대
           </Team>
         ) : (
           <Team>
-            <AppIcon icon="baseball" size={60} color="white" />
+            <AppIcon icon="baseball" size={40} color="white" />
             {opponent}
           </Team>
         )}
@@ -140,7 +140,7 @@ const Team = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: bold;
   padding: 8px;
   color: ${({ theme }) => theme.colors.linkText};
@@ -162,7 +162,7 @@ const Info = styled.div`
 
   div {
     text-align: center;
-    font-size: 14px;
+    font-size: 12px;
   }
 `;
 
@@ -170,7 +170,7 @@ const Score = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 48px;
+  font-size: 32px;
   font-weight: 600;
   color: ${({ theme }) => theme.colors.accentText};
 `;
@@ -180,6 +180,8 @@ const Table = styled.table`
   align-self: center;
   margin: 8px 0;
   border-collapse: collapse;
+
+  font-size: 14px;
 `;
 
 const TableHead = styled.thead`
@@ -200,8 +202,6 @@ const Row = styled.tr`
   }
 
   td:first-child {
-    text-align: left;
-    padding-left: 16px;
     border-right: 1px solid ${({ theme }) => theme.colors.border};
   }
 
