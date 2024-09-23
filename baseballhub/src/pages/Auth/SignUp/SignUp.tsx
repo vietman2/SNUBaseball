@@ -11,12 +11,12 @@ export function SignUp() {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [passwordConfirm, setPasswordConfirm] = useState<string>("");
-  
+
   const navigate = useNavigate();
 
   const handleGoBack = () => {
     navigate("/login");
-  }
+  };
 
   return (
     <Container>

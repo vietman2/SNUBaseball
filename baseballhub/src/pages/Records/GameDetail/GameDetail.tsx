@@ -18,7 +18,7 @@ interface Props {
   goBack: () => void;
 }
 
-const tabs = ["엔트리", "피드백", "상세기록"];
+const tabs = ["엔트리", "피드백", "중계", "상세기록", "영상"];
 
 export function GameDetail({ selectedGame, goBack }: Readonly<Props>) {
   const [selectedTab, setSelectedTab] = useState<string>("엔트리");
@@ -103,6 +103,10 @@ export function GameDetail({ selectedGame, goBack }: Readonly<Props>) {
                 lineup={sampleGameResult.lineup}
                 pitchers={sampleGameResult.pitchers}
               />
+            ) : selectedTab === "중계" ? (
+              <div>중계</div>
+            ) : selectedTab === "영상" ? (
+              <div>영상</div>
             ) : null}
           </NarrowTabPage>
         </NarrowContents>
