@@ -1,11 +1,16 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
+import { IFrame } from "@components/Frames";
 import { AppIcon } from "@components/Icons";
-import { ExpandableTab } from "@components/Tabs";
+import { ExpandableTab, Tabs } from "@components/Tabs";
 import { sampleGameResult } from "@data/records/games";
-import { Scoreboard } from "@fragments/Game";
-import { GameStory, GameReport } from "@fragments/Records";
+import {
+  GameRecords,
+  GameEntry,
+  GameFeedback,
+  Scoreboard,
+} from "@fragments/Game";
 import { useWindowSize } from "@hooks/useWindowSize";
 
 interface Props {
@@ -13,8 +18,20 @@ interface Props {
   goBack: () => void;
 }
 
+const tabs = ["엔트리", "피드백", "상세기록"];
+
 export function GameDetail({ selectedGame, goBack }: Readonly<Props>) {
+  const [selectedTab, setSelectedTab] = useState<string>("엔트리");
+
   const { width } = useWindowSize();
+
+  const getVideoWidth = () => {
+    return ((width - 240) * 0.75).toString();
+  };
+
+  const getVideoHeight = () => {
+    return ((width - 240) * 0.75 * 0.5).toString();
+  };
 
   useEffect(() => {
     // fetch game detail from server
@@ -35,24 +52,60 @@ export function GameDetail({ selectedGame, goBack }: Readonly<Props>) {
           <WideBoard>
             <Scoreboard game={sampleGameResult} />
           </WideBoard>
-          <Contents>
-            <Left>
-              <ExpandableTab title="경기 레포트" height="1000px">
-                <GameReport game={sampleGameResult} />
+          <WideContents>
+            <Half>
+              <ExpandableTab title="엔트리" height="1000px">
+                <GameEntry game={sampleGameResult} />
               </ExpandableTab>
-            </Left>
-            <Right>
-              <GameStory game={sampleGameResult} />
-            </Right>
-          </Contents>
+              <ExpandableTab title="상세기록" height="1000px">
+                <GameRecords
+                  lineup={sampleGameResult.lineup}
+                  pitchers={sampleGameResult.pitchers}
+                />
+              </ExpandableTab>
+            </Half>
+            <Half>
+              <ExpandableTab title="풀영상" height="500px">
+                <Video>
+                  <IFrame videoId="U28Gz6Dev0w" width="720" height="360" />
+                </Video>
+              </ExpandableTab>
+            </Half>
+          </WideContents>
         </>
       ) : (
-        <Contents style={{ flexDirection: "column" }}>
-          <Scoreboard game={sampleGameResult} />
-          <ExpandableTab title="경기 레포트" height="600px">
-            <GameReport game={sampleGameResult} />
+        <NarrowContents>
+          <div>
+            <Scoreboard game={sampleGameResult} />
+          </div>
+          <ExpandableTab title="풀영상" height="500px">
+            <Video>
+              <IFrame
+                videoId="U28Gz6Dev0w"
+                width={getVideoWidth()}
+                height={getVideoHeight()}
+              />
+            </Video>
           </ExpandableTab>
-        </Contents>
+          <Tabs
+            type={2}
+            tabs={tabs}
+            activeTab={selectedTab}
+            setActiveTab={setSelectedTab}
+          />
+          <NarrowTabPage>
+            {selectedTab === "엔트리" ? (
+              <GameEntry game={sampleGameResult} />
+            ) : selectedTab === "피드백" ? (
+              <GameFeedback game={sampleGameResult} />
+            ) : selectedTab === "상세기록" ? (
+              <GameRecords
+                lineup={sampleGameResult.lineup}
+                pitchers={sampleGameResult.pitchers}
+              />
+            ) : null}
+          </NarrowTabPage>
+        </NarrowContents>
       )}
     </Container>
   );
@@ -81,34 +134,57 @@ const Header = styled.div`
   }
 `;
 
-const WideBoard = styled.div`
+const Half = styled.div`
   display: flex;
   flex: 1;
+  flex-direction: column;
+  height: calc(100vh - 480px);
+  padding: 0 8px 0 0;
+  gap: 16px;
+
+  overflow-y: auto;
+`;
+
+const Video = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+`;
+
+const WideBoard = styled.div`
+  display: flex;
   width: 100%;
-  padding: 0 240px;
+  padding: 0 360px;
+  margin: 16px 0;
   justify-content: center;
   align-items: center;
 `;
 
-const Contents = styled.div`
+const WideContents = styled.div`
   display: flex;
   flex: 1;
   flex-direction: row;
-  height: calc(100vh - 200px);
   padding: 8px 16px;
   gap: 16px;
 `;
 
-const Left = styled.div`
+const NarrowContents = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
+  height: calc(100vh - 200px);
+  padding: 8px 16px;
+  gap: 16px;
 
-  border-right: 1px solid ${({ theme }) => theme.colors.border};
+  overflow-y: auto;
 `;
 
-const Right = styled.div`
+const NarrowTabPage = styled.div`
   display: flex;
   flex: 1;
-  flex-direction: column;
+  margin-top: -16px;
+  border-radius: 0 0 16px 16px;
+  background-color: ${({ theme }) => theme.colors.offWhite};
 `;
