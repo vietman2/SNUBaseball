@@ -3,7 +3,6 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { MainLogo } from "@components/Icons";
 import "@testing-library/jest-dom";
 
 jest.mock("react-router-dom", () => {

@@ -1,5 +1,4 @@
 import "styled-components";
-import { MyTheme } from "./themeColors";
 
 declare module "styled-components" {
   export interface DefaultTheme {
