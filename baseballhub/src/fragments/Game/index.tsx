@@ -1,6 +1,7 @@
-import { BattersGameRecords } from "./GameRecords/BattersGameRecords";
-import { PitchersGameRecords } from "./GameRecords/PitchersGameRecords";
+import { GameRecords } from "./GameRecords/GameRecords";
+import { GameEntry } from "./GameEntry/GameEntry";
+import { GameFeedback } from "./GameFeedback/GameFeedback";
 import { GameSummary } from "./GameSummary/GameSummary";
 import { Scoreboard } from "./Scoreboard/Scoreboard";
 
-export { BattersGameRecords, GameSummary, PitchersGameRecords, Scoreboard };
+export { GameRecords, GameEntry, GameFeedback, GameSummary, Scoreboard };

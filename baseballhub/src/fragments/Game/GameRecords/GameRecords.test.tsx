@@ -1,20 +1,14 @@
-import { BattersGameRecords } from "./BattersGameRecords";
-import { PitchersGameRecords } from "./PitchersGameRecords";
+import { GameRecords } from "./GameRecords";
 import { sampleGameResult } from "@data/records/games";
 import { renderWithProviders } from "@utils/test-utils";
 
-describe("<BattersGameRecords />", () => {
+describe("<GameRecords />", () => {
   it("renders", () => {
     renderWithProviders(
-      <BattersGameRecords lineup={sampleGameResult.lineup} />
-    );
-  });
-});
-
-describe("<PitchersGameRecords />", () => {
-  it("renders", () => {
-    renderWithProviders(
-      <PitchersGameRecords pitchers={sampleGameResult.pitchers} />
+      <GameRecords
+        lineup={sampleGameResult.lineup}
+        pitchers={sampleGameResult.pitchers}
+      />
     );
   });
 });
