@@ -31,9 +31,9 @@ export function Results({ onSelectGame }: Readonly<Props>) {
         onSelect={setSelectedYear}
       />
       <Wrapper>
-        {tournaments.map((tournament, index) => (
+        {tournaments.map((tournament) => (
           <Tournament
-            key={index}
+            key={tournament.id}
             tournament={tournament}
             onSelectGame={onSelectGame}
           />
@@ -50,7 +50,18 @@ interface TournamentProps {
 
 function Tournament({ tournament, onSelectGame }: Readonly<TournamentProps>) {
   const { width } = useWindowSize();
-  const columns = width > 1600 ? 4 : width > 1200 ? 3 : width > 880 ? 2 : 1;
+  const getNumColumns = () => {
+    if (width > 1600) {
+      return 4;
+    } else if (width > 1200) {
+      return 3;
+    } else if (width > 880) {
+      return 2;
+    } else {
+      return 1;
+    }
+  }
+  const columns = getNumColumns();
 
   const numberOfGames = tournament.games.length;
   const totalSlots = Math.ceil(numberOfGames / columns) * columns;
@@ -60,8 +71,8 @@ function Tournament({ tournament, onSelectGame }: Readonly<TournamentProps>) {
     <TournamentContainer>
       <ExpandableTab title={tournament.name} height="1600px">
         <Content columns={columns}>
-          {tournament.games.map((game, index) => (
-            <GameSummary key={index} game={game} onSelectGame={onSelectGame} />
+          {tournament.games.map((game) => (
+            <GameSummary key={game.id} game={game} onSelectGame={onSelectGame} />
           ))}
           {Array.from({ length: dummyCount }).map((_, index) => (
             <DummyComponent key={index} />
