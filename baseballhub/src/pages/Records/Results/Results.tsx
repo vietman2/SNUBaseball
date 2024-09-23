@@ -60,7 +60,7 @@ function Tournament({ tournament, onSelectGame }: Readonly<TournamentProps>) {
     } else {
       return 1;
     }
-  }
+  };
   const columns = getNumColumns();
 
   const numberOfGames = tournament.games.length;
@@ -72,7 +72,11 @@ function Tournament({ tournament, onSelectGame }: Readonly<TournamentProps>) {
       <ExpandableTab title={tournament.name} height="1600px">
         <Content columns={columns}>
           {tournament.games.map((game) => (
-            <GameSummary key={game.id} game={game} onSelectGame={onSelectGame} />
+            <GameSummary
+              key={game.id}
+              game={game}
+              onSelectGame={onSelectGame}
+            />
           ))}
           {Array.from({ length: dummyCount }).map((_, index) => (
             <DummyComponent key={index} />
