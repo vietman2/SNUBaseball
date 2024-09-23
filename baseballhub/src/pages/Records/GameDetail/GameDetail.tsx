@@ -6,9 +6,10 @@ import { AppIcon } from "@components/Icons";
 import { ExpandableTab, Tabs } from "@components/Tabs";
 import { sampleGameResult } from "@data/records/games";
 import {
-  GameRecords,
   GameEntry,
   GameFeedback,
+  GameStory,
+  GameRecords,
   Scoreboard,
 } from "@fragments/Game";
 import { useWindowSize } from "@hooks/useWindowSize";
@@ -40,7 +41,7 @@ export function GameDetail({ selectedGame, goBack }: Readonly<Props>) {
       case "피드백":
         return <GameFeedback game={sampleGameResult} />;
       case "중계":
-        return <div>중계</div>;
+        return <GameStory />;
       case "상세기록":
         return (
           <GameRecords
@@ -66,7 +67,6 @@ export function GameDetail({ selectedGame, goBack }: Readonly<Props>) {
         <div>
           <AppIcon icon="chevron-left" size={24} color="#0B1623" />
           목록
-          {width}
         </div>
       </Header>
       {width >= 1920 ? (
