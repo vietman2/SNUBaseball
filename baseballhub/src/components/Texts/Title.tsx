@@ -7,7 +7,7 @@ export const Title = styled.h1`
 `;
 
 export const Subtitle = styled.div`
-  padding: 0 16px 8px 16px;
+  padding: 0 16px;
   font-size: 16px;
   font-weight: 600;
 `;

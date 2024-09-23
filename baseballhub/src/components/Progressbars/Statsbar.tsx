@@ -10,11 +10,11 @@ export function Statsbar({ text, number }: Readonly<Props>) {
 
   return (
     <Container>
-      <Text>{text}</Text>
+      <Text width={48}>{text}</Text>
       <Bar>
         <Filler percentage={percentage} />
       </Bar>
-      <Text>{number}</Text>
+      <Text width={16}>{number}</Text>
     </Container>
   );
 }
@@ -23,24 +23,23 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 95%;
 `;
 
-const Text = styled.div`
+const Text = styled.div<{ width: number }>`
   display: flex;
-  flex: 1;
-  margin: 0 4px;
+  justify-content: center;
+  width: ${({ width }) => width}px;
   font-size: 14px;
   color: ${({ theme }) => theme.colors.sapphire};
 `;
 
 const Bar = styled.div`
   display: flex;
-  flex: 8;
+  flex: 1;
   height: 16px;
   background-color: ${({ theme }) => theme.colors.background};
   border-radius: 8px;
-  margin: 0 8px;
+  margin: 0 2px;
 `;
 
 const Filler = styled.div<{ percentage: number }>`
