@@ -102,6 +102,7 @@ export type GameResultsType = {
   lineup: LineupType;
   pitchers: GamePitcherType[];
   bench: PlayerType[];
+  feedback: string[];
 };
 
 export type TournamentType = {

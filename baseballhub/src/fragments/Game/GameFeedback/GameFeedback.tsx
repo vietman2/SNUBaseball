@@ -29,9 +29,12 @@ export function GameFeedback({ game }: Readonly<Props>) {
       <Half>
         <Feedback>
           <Subtitle>경기 피드백</Subtitle>
-          <div>{" \u2022 피이이이이이이이이이이이이이이이이이이이이이이이드백1"}</div>
-          <div>{" \u2022 피드백2"}</div>
-          <div>{" \u2022 피드백3"}</div>
+          {game.feedback.map((feedback, index) => (
+            <div key={index}>
+              <div>{"\u2022"}</div>
+              <div>{feedback}</div>
+            </div>
+          ))}
         </Feedback>
       </Half>
     </Container>
@@ -69,4 +72,10 @@ const Feedback = styled.div`
   padding: 0 16px;
   gap: 16px;
   color: ${({ theme }) => theme.colors.sapphire};
+
+  div {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+  }
 `;

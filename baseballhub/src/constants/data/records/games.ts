@@ -286,6 +286,11 @@ export const sampleGameResult: GameResultsType = {
       hand: "우투우타",
     },
   ],
+  feedback: [
+    "좋은 경기였습니다.",
+    "이번 경기에서는 팀원들이 잘 해냈습니다.",
+    "팀원들의 노력이 빛났습니다.",
+  ],
 };
 
 export const Games1: GameSummaryType[] = [
