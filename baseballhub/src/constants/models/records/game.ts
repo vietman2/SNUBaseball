@@ -23,6 +23,7 @@ type GameBatterType = {
   runs_scored: number;
   walks_hbps: number;
   strikeouts: number;
+  steals: number;
 };
 
 export type GamePitcherType = {
