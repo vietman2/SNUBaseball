@@ -15,8 +15,8 @@ export function ChipSelector({ options, selected, onSelect }: Props) {
         <Chip
           key={option}
           label={option}
-          bgColor={option === selected ? "#0f0f70" : "#f0f0f0"}
-          color={option === selected ? "white" : "#7f7f9c"}
+          bgColor={option === selected ? "#0F0F70" : "#B5B6B6"}
+          color={option === selected ? "#E8E6F2" : "#0B1623"}
           onClick={() => onSelect(option)}
         />
       ))}

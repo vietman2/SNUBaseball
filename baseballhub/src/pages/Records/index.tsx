@@ -1,3 +1,3 @@
-import Results from "./Results/Results";
+import RecordsContainer from "./RecordsContainer";
 
-export { Results };
+export { RecordsContainer };

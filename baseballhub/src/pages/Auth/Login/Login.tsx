@@ -6,7 +6,6 @@ import { useAuth } from "../AuthProvider";
 import Logo from "@assets/images/logo.png";
 import { TextButton } from "@components/Buttons";
 import { TextInput } from "@components/Inputs";
-import { palette } from "@colors/palette";
 import { tempProfile } from "@data/user/people";
 
 export function Login() {
@@ -54,6 +53,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background-color: ${({ theme }) => theme.colors.background};
 `;
 
 const Box = styled.div`
@@ -62,9 +62,10 @@ const Box = styled.div`
   justify-content: center;
   align-items: center;
   padding: 20px;
-  border: 1px solid ${palette.grayBorder};
+  border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: 10px;
   gap: 15px;
+  background-color: ${({ theme }) => theme.colors.lavender};
 `;
 
 const LogoImage = styled.img`

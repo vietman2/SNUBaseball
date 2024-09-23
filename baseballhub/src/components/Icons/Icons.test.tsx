@@ -1,6 +1,7 @@
 import { render } from "@testing-library/react";
 
 import { AppIcon } from "./AppIcon";
+import { MainLogo } from "./MainLogo";
 
 jest.unmock("@components/Icons");
 
@@ -11,9 +12,12 @@ describe("<AppIcon />", () => {
         <AppIcon icon="add" size={16} color="black" />
         <AppIcon icon="admin" size={16} color="black" />
         <AppIcon icon="archive" size={16} color="black" />
+        <AppIcon icon="baseball" size={16} color="black" />
         <AppIcon icon="calendar" size={16} color="black" />
+        <AppIcon icon="chevron-down" size={16} color="black" />
         <AppIcon icon="chevron-left" size={16} color="black" />
         <AppIcon icon="chevron-right" size={16} color="black" />
+        <AppIcon icon="chevron-up" size={16} color="black" />
         <AppIcon icon="diary" size={16} color="black" />
         <AppIcon icon="feedback" size={16} color="black" />
         <AppIcon icon="field" size={16} color="black" />
@@ -31,5 +35,11 @@ describe("<AppIcon />", () => {
 
   it("should render null", () => {
     render(<AppIcon icon="invalid" size={16} color="black" />);
+  });
+});
+
+describe("<MainLogo />", () => {
+  it("should render", () => {
+    render(<MainLogo />);
   });
 });

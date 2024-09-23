@@ -39,6 +39,7 @@ jest.mock("@components/Frames", () => ({
 }));
 jest.mock("@components/Icons", () => ({
   AppIcon: ({ icon }: { icon: string }) => <span>{icon}</span>,
+  MainLogo: () => <div>MainLogo</div>,
 }));
 jest.mock("@components/Inputs", () => ({
   DateInput: ({
@@ -66,6 +67,9 @@ jest.mock("@components/Modals", () => ({
     </div>
   ),
 }));
+jest.mock("@components/Progressbars", () => ({
+  Statsbar: () => <div>Statsbar</div>,
+}));
 jest.mock("@components/RootLayout", () => ({
   RootLayout: ({ children }: { children: React.ReactNode }) => (
     <div>{children}</div>
@@ -88,10 +92,15 @@ jest.mock("@components/Tables", () => ({
   WeeklyTable: () => <div>WeeklyTable</div>,
 }));
 jest.mock("@components/Tabs", () => ({
+  ExpandableTab: ({ children }: { children: React.ReactNode }) => (
+    <div>{children}</div>
+  ),
   Tabs: () => <div>Tabs</div>,
 }));
 jest.mock("@components/Texts", () => ({
   Callout: () => <div>Callout</div>,
+  Subtitle: () => <div>Subtitle</div>,
+  Title: () => <div>Title</div>,
 }));
 jest.mock("@pages/Auth/AuthProvider", () => ({
   AuthProvider: ({ children }: { children: React.ReactNode }) => (

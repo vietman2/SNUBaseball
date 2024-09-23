@@ -2,9 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import MainLogo from "@assets/images/logo.png";
-import { AppIcon } from "@components/Icons";
-import { palette } from "@colors/palette";
+import { AppIcon, MainLogo } from "@components/Icons";
 import { TabGroup, tabgroups } from "@navigation/tabs";
 import { useAuth } from "@pages/Auth";
 
@@ -12,6 +10,10 @@ interface Props {
   isSidebarOpen: boolean;
   toggleSidebar: () => void;
 }
+
+const activeTabColor = "#0F0F70";
+const activeTabBackgroundColor = "#E8E6F2";
+const inactiveTabColor = "#0B1623";
 
 export function Sidebar({ isSidebarOpen, toggleSidebar }: Props) {
   const [activeTab, setActiveTab] = useState<string>("/home");
@@ -34,7 +36,7 @@ export function Sidebar({ isSidebarOpen, toggleSidebar }: Props) {
     <>
       <SidebarContainer $isOpen={isSidebarOpen}>
         <SidebarHeader>
-          <Logo src={MainLogo} alt="Main Logo" />
+          <MainLogo />
         </SidebarHeader>
         <SidebarContent>
           {tabgroups.map(
@@ -57,8 +59,8 @@ export function Sidebar({ isSidebarOpen, toggleSidebar }: Props) {
                         size={24}
                         color={
                           activeTab === tab.path
-                            ? palette.primary
-                            : palette.charcoal
+                            ? activeTabColor
+                            : inactiveTabColor
                         }
                       />
                       {isSidebarOpen && tab.title}
@@ -77,7 +79,7 @@ export function Sidebar({ isSidebarOpen, toggleSidebar }: Props) {
         <AppIcon
           icon={isSidebarOpen ? "chevron-left" : "chevron-right"}
           size={24}
-          color={palette.charcoal}
+          color={inactiveTabColor}
         />
       </SidebarToggleIcon>
     </>
@@ -87,7 +89,7 @@ export function Sidebar({ isSidebarOpen, toggleSidebar }: Props) {
 const SidebarContainer = styled.div<{ $isOpen: boolean }>`
   display: flex;
   flex-direction: column;
-  background-color: ${palette.sidebarBackground};
+  background-color: ${({ theme }) => theme.colors.background};
   height: 100%;
   width: ${(props) => (props.$isOpen ? "240px" : "90px")};
   position: fixed;
@@ -103,11 +105,6 @@ const SidebarHeader = styled.div`
   text-align: center;
 `;
 
-const Logo = styled.img`
-  width: 80px;
-  height: 80px;
-`;
-
 const SidebarContent = styled.div`
   display: flex;
   flex-direction: column;
@@ -116,7 +113,8 @@ const SidebarContent = styled.div`
 `;
 
 const TabGroupTitle = styled.div<{ $isOpen: boolean }>`
-  color: ${(props) => (props.$isOpen ? palette.charcoal : "transparent")};
+  color: ${({ theme, $isOpen }) =>
+    $isOpen ? theme.colors.sapphire : "transparent"};
   font-size: 16px;
   font-weight: 500;
   padding: 5px 20px;
@@ -132,22 +130,23 @@ const TabItem = styled.div<{ $isActive: boolean; $isOpen: boolean }>`
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
   font-size: 16px;
-  color: ${(props) => (props.$isActive ? palette.primary : palette.charcoal)};
-  background-color: ${(props) =>
-    props.$isActive ? palette.activeTab : "transparent"};
+  color: ${({ $isActive, theme }) =>
+    $isActive ? theme.colors.primary : theme.colors.sapphire};
+  background-color: ${({ $isActive }) =>
+    $isActive ? activeTabBackgroundColor : "transparent"};
 
   &:hover {
-    background-color: ${palette.activeTab};
+    background-color: ${activeTabBackgroundColor};
   }
 `;
 
 const SidebarToggleIcon = styled.div<{ $isOpen?: boolean }>`
   position: fixed;
-  top: 60px;
+  top: 50%;
   left: ${(props) => (props.$isOpen ? "225px" : "80px")};
   cursor: pointer;
   transition: left 0.3s ease-in-out;
-  background-color: ${palette.sidebarBackground};
+  background-color: ${({ theme }) => theme.colors.lavender};
   padding: 10px 5px 5px 0;
   border-radius: 10px;
   z-index: 101;

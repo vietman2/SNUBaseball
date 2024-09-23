@@ -1,0 +1,44 @@
+import { fireEvent, screen } from "@testing-library/react";
+
+import { GameDetail } from "./GameDetail";
+import * as Hook from "@hooks/useWindowSize";
+import { renderWithProviders } from "@utils/test-utils";
+
+jest.mock("@components/Tabs", () => ({
+  ExpandableTab: () => <div>ExpandableTabs</div>,
+  Tabs: ({ setActiveTab }: { setActiveTab: (tab: string) => void }) => (
+    <div>
+      <button onClick={() => setActiveTab("엔트리")}>엔트리</button>
+      <button onClick={() => setActiveTab("피드백")}>피드백</button>
+      <button onClick={() => setActiveTab("상세기록")}>상세기록</button>
+      <button onClick={() => setActiveTab("asdf")}>asdf</button>
+    </div>
+  ),
+}));
+jest.mock("@fragments/Game", () => ({
+  GameRecords: () => <div>GameRecords</div>,
+  GameEntry: () => <div>GameEntry</div>,
+  GameFeedback: () => <div>GameFeedback</div>,
+  Scoreboard: () => <div>Scoreboard</div>,
+}));
+
+describe("<GameDetail />", () => {
+  it("renders wide", () => {
+    jest
+      .spyOn(Hook, "useWindowSize")
+      .mockReturnValue({ width: 1920, height: 1000 });
+    renderWithProviders(<GameDetail selectedGame={1} goBack={jest.fn()} />);
+  });
+
+  it("renders narrow", () => {
+    jest
+      .spyOn(Hook, "useWindowSize")
+      .mockReturnValue({ width: 768, height: 1000 });
+    renderWithProviders(<GameDetail selectedGame={1} goBack={jest.fn()} />);
+
+    fireEvent.click(screen.getByText("엔트리"));
+    fireEvent.click(screen.getByText("피드백"));
+    fireEvent.click(screen.getByText("상세기록"));
+    fireEvent.click(screen.getByText("asdf"));
+  });
+});

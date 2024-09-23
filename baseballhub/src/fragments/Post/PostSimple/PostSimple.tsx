@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-import { palette } from "@colors/palette";
 import { PostType } from "@models/forum";
 
 interface Props {
@@ -31,7 +30,7 @@ const Container = styled.div`
   padding: 0.5rem 1rem;
   margin-bottom: 1rem;
   border-radius: 15px;
-  background-color: ${palette.background};
+  background-color: ${({ theme }) => theme.colors.offWhite};
 
   div {
     display: flex;
@@ -48,7 +47,7 @@ const Title = styled.div`
 const Tag = styled.div`
   margin: 0 1.5rem 0 0;
   padding: 0.25rem 0.5rem;
-  background-color: ${palette.primary};
+  background-color: ${({ theme }) => theme.colors.primary};
   color: white;
   border-radius: 10px;
 `;

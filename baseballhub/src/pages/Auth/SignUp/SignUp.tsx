@@ -1,16 +1,22 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import Logo from "@assets/images/logo.png";
 import { TextButton } from "@components/Buttons";
 import { TextInput } from "@components/Inputs";
-import { palette } from "@colors/palette";
 
 export function SignUp() {
   const [student_id, setStudentId] = useState<string>("");
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [passwordConfirm, setPasswordConfirm] = useState<string>("");
+
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate("/login");
+  };
 
   return (
     <Container>
@@ -37,6 +43,7 @@ export function SignUp() {
           onChange={setPasswordConfirm}
         />
         <Buttons>
+          <TextButton text="뒤로" onClick={handleGoBack} />
           <TextButton text="회원가입" onClick={() => {}} />
         </Buttons>
       </Box>
@@ -49,6 +56,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background-color: ${({ theme }) => theme.colors.background};
 `;
 
 const Box = styled.div`
@@ -57,8 +65,9 @@ const Box = styled.div`
   justify-content: center;
   align-items: center;
   padding: 20px;
-  border: 1px solid ${palette.grayBorder};
+  border: 1px solid ${({ theme }) => theme.colors.border};
   gap: 15px;
+  background-color: ${({ theme }) => theme.colors.lavender};
 `;
 
 const LogoImage = styled.img`

@@ -1,10 +1,9 @@
-import { render } from "@testing-library/react";
-
 import { Scoreboard } from "./Scoreboard";
 import { sampleGameResult } from "@data/records/games";
+import { renderWithProviders } from "@utils/test-utils";
 
 describe("<Scoreboard />", () => {
   it("renders without errors", () => {
-    render(<Scoreboard game={sampleGameResult} />);
+    renderWithProviders(<Scoreboard game={sampleGameResult} />);
   });
 });

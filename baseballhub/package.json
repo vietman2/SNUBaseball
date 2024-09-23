@@ -17,7 +17,7 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.1",
     "react-scripts": "5.0.1",
-    "styled-components": "^6.1.13",
+    "styled-components": "^6.1.12",
     "typescript": "^5.5.4",
     "web-vitals": "^2.1.0"
   },
@@ -86,13 +86,14 @@
     "moduleNameMapper": {
       "^@assets/(.*)$": "<rootDir>/src/assets/$1",
       "^@components/(.*)$": "<rootDir>/src/components/$1",
-      "^@colors/(.*)$": "<rootDir>/src/constants/colors/$1",
       "^@data/(.*)$": "<rootDir>/src/constants/data/$1",
       "^@fragments/(.*)$": "<rootDir>/src/fragments/$1",
+      "^@hooks/(.*)$": "<rootDir>/src/hooks/$1",
       "^@pages/(.*)$": "<rootDir>/src/pages/$1",
       "^@models/(.*)$": "<rootDir>/src/constants/models/$1",
       "^@navigation/(.*)$": "<rootDir>/src/constants/navigation/$1",
       "^@services/(.*)$": "<rootDir>/src/services/$1",
+      "^@themes/(.*)$": "<rootDir>/src/constants/themes/$1",
       "^@utils/(.*)$": "<rootDir>/src/utils/$1"
     }
   },
