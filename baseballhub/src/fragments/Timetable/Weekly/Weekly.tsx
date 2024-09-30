@@ -303,7 +303,6 @@ const Container = styled.div`
 const WeeklyRules = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 16px;
   padding: 8px 16px;
 
   font-size: 14px;
@@ -365,6 +364,7 @@ const Indeces = styled.div`
 
 const TableWrapper = styled.div`
   position: relative;
+  min-width: 800px;
 `;
 
 const Table = styled.table<{ hoveredcolumn: number | null }>`

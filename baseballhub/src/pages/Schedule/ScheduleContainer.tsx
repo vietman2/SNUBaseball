@@ -87,6 +87,7 @@ const Selectors = styled.div`
   flex-direction: row;
   justify-content: center;
   gap: 8px;
+  margin-bottom: 16px;
 `;
 
 const TableContainer = styled.div`
