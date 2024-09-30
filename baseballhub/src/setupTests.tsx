@@ -81,6 +81,7 @@ jest.mock("@components/RootLayout", () => ({
 jest.mock("@components/Selectors", () => ({
   ChipSelector: () => <div>ChipSelector</div>,
   CollegeSelector: () => <div>CollegeSelector</div>,
+  SimpleSelector: () => <div>SimpleSelector</div>,
 }));
 jest.mock("@components/Sidebar", () => ({
   Sidebar: ({ toggleSidebar }: { toggleSidebar: () => void }) => (
