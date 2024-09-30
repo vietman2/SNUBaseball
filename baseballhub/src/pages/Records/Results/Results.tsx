@@ -91,18 +91,15 @@ const Container = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
-  height: calc(100vh - 200px);
 `;
 
 const Wrapper = styled.div`
   display: block;
   flex: 1;
   flex-direction: column;
-  height: 100%;
   margin: 8px 0;
   padding: 0 16px;
   white-space: nowrap;
-  overflow-y: auto;
 `;
 
 const TournamentContainer = styled.div`
