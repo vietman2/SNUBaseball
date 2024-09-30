@@ -14,7 +14,7 @@ export function Daily({ handleDayChange }: Readonly<Props>) {
 
   const handleBack = () => {
     handleDayChange("전체");
-  }
+  };
 
   useEffect(() => {
     setSchedule(sampleDailySchedule);
