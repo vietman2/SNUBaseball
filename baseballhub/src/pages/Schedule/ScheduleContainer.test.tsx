@@ -5,7 +5,7 @@ import { renderWithProviders } from "@utils/test-utils";
 jest.mock("@fragments/Timetable", () => ({
   Daily: () => <div>Daily</div>,
   Weekly: ({ handleDayChange }: { handleDayChange: (day: string) => void }) => (
-    <div onClick={() => handleDayChange("월요일")} onKeyDown={jest.fn()} role="button">
+    <div onClick={() => handleDayChange("월요일")} onKeyDown={jest.fn()}>
       Weekly
     </div>
   ),
