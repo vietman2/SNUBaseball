@@ -142,7 +142,7 @@ const Team = styled.div`
   font-size: 16px;
   font-weight: bold;
   padding: 8px;
-  color: ${({ theme }) => theme.colors.linkText};
+  color: ${({ theme }) => theme.colors.primaryText};
 `;
 
 const Middle = styled.div`
@@ -171,7 +171,7 @@ const Score = styled.div`
   align-items: center;
   font-size: 32px;
   font-weight: 600;
-  color: ${({ theme }) => theme.colors.accentText};
+  color: ${({ theme }) => theme.colors.secondaryText};
 `;
 
 const Table = styled.table`

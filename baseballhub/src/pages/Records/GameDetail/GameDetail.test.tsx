@@ -10,15 +10,18 @@ jest.mock("@components/Tabs", () => ({
     <div>
       <button onClick={() => setActiveTab("엔트리")}>엔트리</button>
       <button onClick={() => setActiveTab("피드백")}>피드백</button>
+      <button onClick={() => setActiveTab("중계")}>중계</button>
       <button onClick={() => setActiveTab("상세기록")}>상세기록</button>
+      <button onClick={() => setActiveTab("영상")}>영상</button>
       <button onClick={() => setActiveTab("asdf")}>asdf</button>
     </div>
   ),
 }));
 jest.mock("@fragments/Game", () => ({
-  GameRecords: () => <div>GameRecords</div>,
   GameEntry: () => <div>GameEntry</div>,
   GameFeedback: () => <div>GameFeedback</div>,
+  GameStory: () => <div>GameStory</div>,
+  GameRecords: () => <div>GameRecords</div>,
   Scoreboard: () => <div>Scoreboard</div>,
 }));
 
@@ -38,7 +41,9 @@ describe("<GameDetail />", () => {
 
     fireEvent.click(screen.getByText("엔트리"));
     fireEvent.click(screen.getByText("피드백"));
+    fireEvent.click(screen.getByText("중계"));
     fireEvent.click(screen.getByText("상세기록"));
+    fireEvent.click(screen.getByText("영상"));
     fireEvent.click(screen.getByText("asdf"));
   });
 });
