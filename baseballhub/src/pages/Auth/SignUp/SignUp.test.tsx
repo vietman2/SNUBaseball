@@ -8,5 +8,6 @@ describe('<SignUp />', () => {
     renderWithProviders(<SignUp />);
 
     fireEvent.click(screen.getByTestId('button-회원가입'));
+    fireEvent.click(screen.getByText("뒤로"));
   });
 });
