@@ -2,10 +2,11 @@ import { render } from "@testing-library/react";
 
 import { Callout } from "./Callout";
 import { Subtitle, Title } from "./Title";
+import { renderWithProviders } from "@utils/test-utils";
 
 describe("<Callout />", () => {
   it("renders correctly", () => {
-    render(<Callout text="Hello, world!" />);
+    renderWithProviders(<Callout text="Hello, world!" />);
   });
 });
 

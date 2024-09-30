@@ -19,7 +19,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.colors.offWhite};
   padding: 0.25rem 0.75rem;
   margin: 0 0 1rem 0;
   border-radius: 5px;
