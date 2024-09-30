@@ -101,15 +101,15 @@ const SidebarContainer = styled.div<{ $isOpen: boolean }>`
 `;
 
 const SidebarHeader = styled.div`
-  padding-top: 40px;
+  padding-top: 20px;
   text-align: center;
 `;
 
 const SidebarContent = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 30px 0;
-  gap: 20px;
+  padding: 10px 0;
+  gap: 10px;
 `;
 
 const TabGroupTitle = styled.div<{ $isOpen: boolean }>`
@@ -147,7 +147,7 @@ const SidebarToggleIcon = styled.div<{ $isOpen?: boolean }>`
   cursor: pointer;
   transition: left 0.3s ease-in-out;
   background-color: ${({ theme }) => theme.colors.lavender};
-  padding: 10px 5px 5px 0;
+  padding: 7px 5px 4px 0;
   border-radius: 10px;
   z-index: 101;
 `;
