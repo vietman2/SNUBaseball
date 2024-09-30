@@ -10,6 +10,11 @@ const lesson = {
   reason: "수업",
 };
 
+const notraining = {
+  attendance: "X",
+  reason: "훈련없음",
+};
+
 const present = {
   attendance: "O",
 };
@@ -36,7 +41,7 @@ export const sampleWeeklyData: WeeklyTimetableType[] = [
     major: "건설환경공학부",
     phone: "010-9822-3646",
     year: "3",
-    dailySchedules: [lesson, late, lesson, present, lesson, present],
+    dailySchedules: [lesson, late, notraining, present, lesson, present],
     total: 3,
   },
   {
@@ -45,7 +50,7 @@ export const sampleWeeklyData: WeeklyTimetableType[] = [
     major: "수학교육과",
     phone: "010-6279-9987",
     year: "4",
-    dailySchedules: [lesson, present, lesson, present, lesson, present],
+    dailySchedules: [notraining, present, lesson, late, notraining, present],
     total: 3,
   },
   {
@@ -54,7 +59,7 @@ export const sampleWeeklyData: WeeklyTimetableType[] = [
     major: "체육교육과",
     phone: "010-2685-1770",
     year: "4",
-    dailySchedules: [lesson, present, lesson, present, lesson, present],
+    dailySchedules: [lesson, present, lesson, present, notraining, present],
     total: 3,
   },
   {
@@ -63,7 +68,7 @@ export const sampleWeeklyData: WeeklyTimetableType[] = [
     major: "경영학과",
     phone: "010-2754-4606",
     year: "3",
-    dailySchedules: [lesson, present, lesson, present, lesson, present],
+    dailySchedules: [notraining, present, lesson, present, lesson, present],
     total: 3,
   },
   {
@@ -81,7 +86,7 @@ export const sampleWeeklyData: WeeklyTimetableType[] = [
     major: "동물생명공학과",
     phone: "010-8924-1429",
     year: "3",
-    dailySchedules: [lesson, present, lesson, present, lesson, present],
+    dailySchedules: [lesson, present, notraining, present, notraining, present],
     total: 3,
   },
   {
@@ -90,7 +95,7 @@ export const sampleWeeklyData: WeeklyTimetableType[] = [
     major: "경제학부",
     phone: "010-2772-1397",
     year: "2",
-    dailySchedules: [present, present, lesson, present, lesson, present],
+    dailySchedules: [present, present, notraining, present, lesson, present],
     total: 4,
   },
   {
@@ -99,7 +104,7 @@ export const sampleWeeklyData: WeeklyTimetableType[] = [
     major: "경영학과",
     phone: "010-4078-8647",
     year: "1",
-    dailySchedules: [lesson, present, present, present, lesson, present],
+    dailySchedules: [notraining, present, present, present, lesson, present],
     total: 4,
   },
   {
@@ -108,7 +113,7 @@ export const sampleWeeklyData: WeeklyTimetableType[] = [
     major: "경영학과",
     phone: "010-4725-7067",
     year: "1",
-    dailySchedules: [present, present, lesson, present, lesson, present],
+    dailySchedules: [present, present, notraining, present, lesson, present],
     total: 4,
   },
   {
@@ -117,7 +122,7 @@ export const sampleWeeklyData: WeeklyTimetableType[] = [
     major: "농경제사회학부",
     phone: "010-4239-5416",
     year: "1",
-    dailySchedules: [lesson, present, lesson, present, present, present],
+    dailySchedules: [lesson, present, notraining, present, present, present],
     total: 4,
   },
   {
@@ -126,7 +131,7 @@ export const sampleWeeklyData: WeeklyTimetableType[] = [
     major: "사회교육과",
     phone: "010-6532-8547",
     year: "1",
-    dailySchedules: [present, present, present, present, lesson, present],
+    dailySchedules: [present, present, present, present, notraining, present],
     total: 5,
   },
   {
