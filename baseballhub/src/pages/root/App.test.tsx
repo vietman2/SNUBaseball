@@ -10,18 +10,6 @@ jest.unmock("@pages/Auth/AuthProvider");
 jest.mock("@pages/Admin", () => ({
   Members: () => <div />,
 }));
-jest.mock("@pages/Auth", () => ({
-  AuthProvider: ({ children }: { children: React.ReactNode }) => (
-    <>{children}</>
-  ),
-  Login: () => <div />,
-  SignUp: () => <div />,
-  useAuth: () => ({
-    user: null,
-    logout: jest.fn(),
-    login: jest.fn(),
-  }),
-}));
 jest.mock("@pages/Forum", () => ({
   Board: () => <div />,
 }));
@@ -32,8 +20,7 @@ jest.mock("@pages/Records", () => ({
   RecordsContainer: () => <div />,
 }));
 jest.mock("@pages/Schedule", () => ({
-  Daily: () => <div />,
-  Weekly: () => <div />,
+  ScheduleContainer: () => <div />,
 }));
 jest.mock("@pages/Training", () => ({
   Feedback: () => <div />,
