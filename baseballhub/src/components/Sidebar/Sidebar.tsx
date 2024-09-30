@@ -108,7 +108,6 @@ const SidebarContainer = styled.div<{ width: string }>`
   display: flex;
   flex-direction: column;
   background-color: ${({ theme }) => theme.colors.background};
-  height: 100%;
   width: ${(props) => props.width};
   position: fixed;
   top: 0;

@@ -76,9 +76,8 @@ const Container = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
-  height: 100%;
   padding: 16px 16px 8px 28px;
-
+  border-radius: 16px;
   background-color: ${({ theme }) => theme.colors.lavender};
 `;
 
@@ -93,7 +92,5 @@ const Selectors = styled.div`
 const TableContainer = styled.div`
   display: flex;
   flex: 1;
-  height: 100%;
   padding: 0 8px 24px 0;
-  overflow-y: auto;
 `;
