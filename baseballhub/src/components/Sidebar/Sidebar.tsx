@@ -38,7 +38,7 @@ export function Sidebar({ isSidebarOpen, toggleSidebar }: Props) {
     if (width < 768) {
       if (isSidebarOpen) return "240px";
       return "0px";
-    };
+    }
     return isSidebarOpen ? "240px" : "90px";
   };
 
@@ -46,9 +46,9 @@ export function Sidebar({ isSidebarOpen, toggleSidebar }: Props) {
     if (width < 768) {
       if (isSidebarOpen) return "225px";
       return "10px";
-    };
+    }
     return isSidebarOpen ? "225px" : "80px";
-  }
+  };
 
   return (
     <>
@@ -109,7 +109,7 @@ const SidebarContainer = styled.div<{ width: string }>`
   flex-direction: column;
   background-color: ${({ theme }) => theme.colors.background};
   height: 100%;
-  width: ${(props) => (props.width)};
+  width: ${(props) => props.width};
   position: fixed;
   top: 0;
   left: 0;
