@@ -6,14 +6,14 @@ import {
   Navigate,
   Outlet,
 } from "react-router-dom";
-import { ThemeProvider } from "styled-components";
+import { ThemeProvider, createGlobalStyle } from "styled-components";
 
 import { Members } from "@pages/Admin";
 import { AuthProvider, Login, SignUp, useAuth } from "@pages/Auth";
 import { Board } from "@pages/Forum";
 import { Home } from "@pages/Home";
 import { RecordsContainer } from "@pages/Records";
-import { Daily, Weekly } from "@pages/Schedule";
+import { ScheduleContainer } from "@pages/Schedule";
 import { Feedback, Guidelines, Journals } from "@pages/Training";
 
 import { RootLayout } from "@components/RootLayout";
@@ -39,8 +39,7 @@ const router = createBrowserRouter(
         <Route element={<RootLayout />}>
           <Route path="/home" element={<Home />} />
           <Route path="/records" element={<RecordsContainer />} />
-          <Route path="/schedule/daily" element={<Daily />} />
-          <Route path="/schedule/weekly" element={<Weekly />} />
+          <Route path="/schedule" element={<ScheduleContainer />} />
           <Route path="/guidelines" element={<Guidelines />} />
           <Route path="/training/journals" element={<Journals />} />
           <Route path="/training/feedback" element={<Feedback />} />
@@ -52,12 +51,45 @@ const router = createBrowserRouter(
   )
 );
 
+const GlobalStyles = createGlobalStyle`
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: #B1BDCD;
+      border-radius: 3px;
+      border: 1.5px solid #B1BDCD;
+    }
+  }
+
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  }
+`;
+
 export default function App() {
   return (
-    <ThemeProvider theme={{ colors: light }}>
-      <AuthProvider>
-        <RouterProvider router={router} />
-      </AuthProvider>
-    </ThemeProvider>
+    <>
+      <GlobalStyles />
+      <ThemeProvider theme={{ colors: light }}>
+        <AuthProvider>
+          <RouterProvider router={router} />
+        </AuthProvider>
+      </ThemeProvider>
+    </>
   );
 }

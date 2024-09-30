@@ -3,17 +3,28 @@ import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 
 import { Sidebar } from "@components/Sidebar";
+import { useWindowSize } from "@hooks/useWindowSize";
 
 export default function RootLayout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);
+
+  const { width } = useWindowSize();
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  const getWidth = () => {
+    if (width < 768) {
+      if (isSidebarOpen) return "240px";
+      return "20px";
+    }
+    return isSidebarOpen ? "240px" : "90px";
+  };
+
   return (
     <MainContainer>
-      <SidebarWrapper $isOpen={isSidebarOpen}>
+      <SidebarWrapper width={getWidth()}>
         <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
       </SidebarWrapper>
       <ContentWrapper>
@@ -30,11 +41,11 @@ const MainContainer = styled.div`
   overflow-x: hidden;
 `;
 
-const SidebarWrapper = styled.div<{ $isOpen: boolean }>`
+const SidebarWrapper = styled.div<{ width: string }>`
   display: flex;
   flex-shrink: 0;
   flex-direction: column;
-  width: ${({ $isOpen }) => ($isOpen ? "240px" : "90px")};
+  width: ${({ width }) => width};
   transition: width 0.3s ease-in-out;
   overflow-x: hidden;
 `;

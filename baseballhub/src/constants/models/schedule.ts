@@ -1,5 +1,5 @@
-export type DailyScheduleType = {
-  attendance: "O" | "X" | "△";
+export type DailyPersonalScheduleType = {
+  attendance: string; // "O" | "X" | "△";
   time?: string;
   reason?: string;
 };
@@ -10,12 +10,23 @@ export type WeeklyTimetableType = {
   major: string;
   phone: string;
   year: string;
-  monday: DailyScheduleType;
-  tuesday: DailyScheduleType;
-  wednesday: DailyScheduleType;
-  thursday: DailyScheduleType;
-  friday: DailyScheduleType;
-  saturday: DailyScheduleType;
-  sunday: DailyScheduleType;
+  dailySchedules: DailyPersonalScheduleType[];
   total: number;
+};
+
+type TimetableType = {
+  time: string;
+  program: string;
+  location: string;
+  note: string;
+};
+
+export type DailyScheduleType = {
+  date: string;
+  time: string;
+  location: string;
+  goal: string;
+  coach: string;
+  weather: string;
+  timetables: TimetableType[];
 };

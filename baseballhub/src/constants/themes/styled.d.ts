@@ -13,8 +13,10 @@ declare module "styled-components" {
       background: string;
       primaryText: string;
       secondaryText: string;
+      tertiaryText: string;
       accentText: string;
       linkText: string;
+      grayText: string;
     };
   }
 }

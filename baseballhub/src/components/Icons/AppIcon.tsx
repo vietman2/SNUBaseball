@@ -3,11 +3,13 @@ import { ReactComponent as AdminIcon } from "./admin.svg";
 import { ReactComponent as ArchiveIcon } from "./archive.svg";
 import { ReactComponent as BaseballIcon } from "./baseball.svg";
 import { ReactComponent as CalendarIcon } from "./calendar.svg";
+import { ReactComponent as CheckIcon } from "./check.svg";
 import { ReactComponent as ChevronDownIcon } from "./chevron-down.svg";
 import { ReactComponent as ChevronLeftIcon } from "./chevron-left.svg";
 import { ReactComponent as ChevronRightIcon } from "./chevron-right.svg";
 import { ReactComponent as ChevronUpIcon } from "./chevron-up.svg";
 import { ReactComponent as DiaryIcon } from "./diary.svg";
+import { ReactComponent as DownIcon } from "./down.svg";
 import { ReactComponent as FeedbackIcon } from "./feedback.svg";
 import { ReactComponent as FieldIcon } from "./field.svg";
 import { ReactComponent as ForumIcon } from "./forum.svg";
@@ -37,6 +39,8 @@ export const AppIcon = ({ icon, size, color }: Props) => {
       return <BaseballIcon width={size} height={size} color={color} />;
     case "calendar":
       return <CalendarIcon width={size} height={size} color={color} />;
+    case "check":
+      return <CheckIcon width={size} height={size} color={color} />;
     case "chevron-down":
       return <ChevronDownIcon width={size} height={size} color={color} />;
     case "chevron-left":
@@ -47,6 +51,8 @@ export const AppIcon = ({ icon, size, color }: Props) => {
       return <ChevronUpIcon width={size} height={size} color={color} />;
     case "diary":
       return <DiaryIcon width={size} height={size} color={color} />;
+    case "down":
+      return <DownIcon width={size} height={size} color={color} />;
     case "feedback":
       return <FeedbackIcon width={size} height={size} color={color} />;
     case "field":

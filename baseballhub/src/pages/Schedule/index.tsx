@@ -1,4 +1,3 @@
-import Daily from "./Daily/Daily";
-import Weekly from "./Weekly/Weekly";
+import ScheduleContainer from "./ScheduleContainer";
 
-export { Daily, Weekly };
+export { ScheduleContainer };

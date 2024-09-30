@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import { Chip } from "@components/Chips";
+import { useWindowSize } from "@hooks/useWindowSize";
 
 interface Props {
   tabs: string[];
@@ -15,13 +16,16 @@ export function Tabs({
   setActiveTab,
   type = 1,
 }: Readonly<Props>) {
+  const { width } = useWindowSize();
+
   if (type === 1) {
     return (
-      <Container1>
+      <Container1 $wide={width > 768}>
         {tabs.map((tab) => (
           <Tab1
             key={tab}
             $active={activeTab === tab}
+            $wide={width > 768}
             onClick={() => setActiveTab(tab)}
             data-testid={tab}
           >
@@ -62,18 +66,21 @@ export function Tabs({
   }
 }
 
-const Container1 = styled.div`
+const Container1 = styled.div<{ $wide: boolean }>`
   display: flex;
-  gap: 5px;
-  margin: 0 8px;
-  padding: 0 8px 8px 8px;
+  gap: 4px;
+  margin: ${({ $wide }) => ($wide ? "0 8px" : "0 4px")};
+  padding: ${({ $wide }) => ($wide ? "0 8px 8px 8px" : "0 4px 8px 4px")};
 
   border-bottom: 1px solid ${({ theme }) => theme.colors.border};
 `;
 
-const Tab1 = styled.div<{ $active: boolean }>`
-  padding: 5px 15px;
-  border-radius: 16px;
+const Tab1 = styled.div<{ $active: boolean, $wide: boolean }>`
+  padding: ${({ $wide }) => ($wide ? "8px 16px" : "4px 8px")};
+  border-radius: ${({ $wide }) => ($wide ? "16px" : "8px")};
+
+  font-size: 16px;
+
   cursor: pointer;
   background-color: ${({ $active, theme }) =>
     $active ? theme.colors.offWhite : theme.colors.lavender};

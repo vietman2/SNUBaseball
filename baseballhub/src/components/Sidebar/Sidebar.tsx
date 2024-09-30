@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import { AppIcon, MainLogo } from "@components/Icons";
+import { useWindowSize } from "@hooks/useWindowSize";
 import { TabGroup, tabgroups } from "@navigation/tabs";
 import { useAuth } from "@pages/Auth";
 
@@ -19,6 +20,7 @@ export function Sidebar({ isSidebarOpen, toggleSidebar }: Props) {
   const [activeTab, setActiveTab] = useState<string>("/home");
 
   const { user } = useAuth();
+  const { width } = useWindowSize();
 
   const navigate = useNavigate();
 
@@ -32,9 +34,25 @@ export function Sidebar({ isSidebarOpen, toggleSidebar }: Props) {
     return user?.role === "주장";
   };
 
+  const getWidth = () => {
+    if (width < 768) {
+      if (isSidebarOpen) return "240px";
+      return "0px";
+    }
+    return isSidebarOpen ? "240px" : "90px";
+  };
+
+  const getTogglePosition = () => {
+    if (width < 768) {
+      if (isSidebarOpen) return "225px";
+      return "10px";
+    }
+    return isSidebarOpen ? "225px" : "80px";
+  };
+
   return (
     <>
-      <SidebarContainer $isOpen={isSidebarOpen}>
+      <SidebarContainer width={getWidth()}>
         <SidebarHeader>
           <MainLogo />
         </SidebarHeader>
@@ -73,7 +91,7 @@ export function Sidebar({ isSidebarOpen, toggleSidebar }: Props) {
       </SidebarContainer>
       <SidebarToggleIcon
         onClick={toggleSidebar}
-        $isOpen={isSidebarOpen}
+        left={getTogglePosition()}
         data-testid="toggle"
       >
         <AppIcon
@@ -86,12 +104,12 @@ export function Sidebar({ isSidebarOpen, toggleSidebar }: Props) {
   );
 }
 
-const SidebarContainer = styled.div<{ $isOpen: boolean }>`
+const SidebarContainer = styled.div<{ width: string }>`
   display: flex;
   flex-direction: column;
   background-color: ${({ theme }) => theme.colors.background};
   height: 100%;
-  width: ${(props) => (props.$isOpen ? "240px" : "90px")};
+  width: ${(props) => props.width};
   position: fixed;
   top: 0;
   left: 0;
@@ -101,15 +119,15 @@ const SidebarContainer = styled.div<{ $isOpen: boolean }>`
 `;
 
 const SidebarHeader = styled.div`
-  padding-top: 40px;
+  padding-top: 20px;
   text-align: center;
 `;
 
 const SidebarContent = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 30px 0;
-  gap: 20px;
+  padding: 10px 0;
+  gap: 10px;
 `;
 
 const TabGroupTitle = styled.div<{ $isOpen: boolean }>`
@@ -140,14 +158,14 @@ const TabItem = styled.div<{ $isActive: boolean; $isOpen: boolean }>`
   }
 `;
 
-const SidebarToggleIcon = styled.div<{ $isOpen?: boolean }>`
+const SidebarToggleIcon = styled.div<{ left: string }>`
   position: fixed;
   top: 50%;
-  left: ${(props) => (props.$isOpen ? "225px" : "80px")};
+  left: ${(props) => props.left};
   cursor: pointer;
   transition: left 0.3s ease-in-out;
   background-color: ${({ theme }) => theme.colors.lavender};
-  padding: 10px 5px 5px 0;
+  padding: 7px 5px 4px 0;
   border-radius: 10px;
   z-index: 101;
 `;
