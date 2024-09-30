@@ -14,6 +14,12 @@ const present = {
   attendance: "O",
 };
 
+const late = {
+  attendance: "△",
+  time: "17:30~",
+  reason: "수업",
+};
+
 export const sampleWeeklyData: WeeklyTimetableType[] = [
   {
     index: 1,
@@ -30,7 +36,7 @@ export const sampleWeeklyData: WeeklyTimetableType[] = [
     major: "건설환경공학부",
     phone: "010-9822-3646",
     year: "3",
-    dailySchedules: [lesson, present, lesson, present, lesson, present],
+    dailySchedules: [lesson, late, lesson, present, lesson, present],
     total: 3,
   },
   {
@@ -150,7 +156,7 @@ export const sampleManagerWeeklyData: WeeklyTimetableType[] = [
     major: "기계공학부",
     phone: "010-7110-0106",
     year: "2",
-    dailySchedules: [lesson, present, lesson, present, lesson, present],
+    dailySchedules: [present, lesson, present, lesson, present, lesson],
     total: 3,
   },
 ];
