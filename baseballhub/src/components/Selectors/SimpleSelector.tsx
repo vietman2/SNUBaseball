@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 import { AppIcon } from "@components/Icons";
+import { useWindowSize } from "@hooks/useWindowSize";
 
 interface Props {
   options: string[];
@@ -16,6 +17,8 @@ export function SimpleSelector({
 }: Readonly<Props>) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const { width } = useWindowSize();
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
@@ -42,6 +45,7 @@ export function SimpleSelector({
 
   return (
     <Container
+      $wide={width > 768}
       onClick={toggleDropdown}
       ref={containerRef}
       data-testid="selector"
@@ -66,10 +70,12 @@ export function SimpleSelector({
   );
 }
 
-const Container = styled.div`
+const Container = styled.div<{ $wide: boolean }>`
   display: flex;
   flex-direction: column;
   position: relative;
+
+  font-size: ${({ $wide }) => ($wide ? 16 : 12)}px;
 `;
 
 const Selector = styled.div`

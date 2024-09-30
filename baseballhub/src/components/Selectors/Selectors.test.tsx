@@ -1,20 +1,24 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 import { ChipSelector } from "./ChipSelector";
 import { CollegeSelector } from "./CollegeSelector";
 import { SimpleSelector } from "./SimpleSelector";
 import { sampleColleges } from "@data/user/colleges";
-import { renderWithProviders } from "@utils/test-utils";
+import { renderWithProviders, resizeWindow } from "@utils/test-utils";
 
 jest.unmock("@components/Selectors");
 
 describe("<ChipSelector />", () => {
-  it("should render: selected", () => {
+  it("should render: selected", async () => {
     render(
       <ChipSelector options={["Test"]} selected="Test" onSelect={jest.fn()} />
     );
 
     fireEvent.click(screen.getByText("Test"));
+
+    await waitFor(() => {
+      resizeWindow(600, 600);
+    });
   });
 
   it("should render: unselected", () => {
