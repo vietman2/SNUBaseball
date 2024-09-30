@@ -245,7 +245,7 @@ const Table = styled.table<{ maincolumn: number }>`
   th {
     padding: 4px 0;
     background-color: ${({ theme }) => theme.colors.primaryContainer};
-    color: ${({ theme }) => theme.colors.linkText};
+    color: ${({ theme }) => theme.colors.sapphire};
   }
 
   td {
