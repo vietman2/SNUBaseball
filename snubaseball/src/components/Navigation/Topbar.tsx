@@ -20,9 +20,8 @@ export function Topbar() {
   const navigate = useNavigate();
 
   const handleTabClick = (tab: TabType) => {
-    //setActiveTab(tab.title);
-
     if (!tab.submenu) {
+      setActiveTab(tab.title);
       setSubmenuOpen(false);
       setOpenSubmenuItems(null);
       navigate(tab.path);
@@ -31,6 +30,12 @@ export function Topbar() {
       setSubmenuOpen(!submenuOpen);
       setOpenSubmenuItems(tab);
     }
+  };
+
+  const handleSubmenuItemClick = (path: string) => {
+    navigate(path);
+    setActiveTab(openSubmenuItems?.title || "Home");
+    setSubmenuOpen(false);
   };
 
   useEffect(() => {
@@ -47,11 +52,6 @@ export function Topbar() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
-  const handleSubmenuItemClick = (path: string) => {
-    navigate(path);
-    setSubmenuOpen(false);
-  };
 
   return (
     <>
