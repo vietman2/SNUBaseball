@@ -41,10 +41,14 @@ jest.mock("@components/Icons", () => ({
 jest.mock("@components/Loading", () => ({
   LoadingPage: "div",
 }));
-jest.mock("@components/Sidebar", () => ({
+jest.mock("@components/Navigation", () => ({
   Sidebar: ({ toggleSidebar }: { toggleSidebar: () => void }) => (
     <div data-testid="sidebar" onClick={toggleSidebar} onKeyDown={jest.fn()} />
   ),
+  Topbar: () => <div data-testid="topbar" />,
+}));
+jest.mock("@components/RootLayout", () => ({
+  RootLayout: () => <div data-testid="root-layout" />,
 }));
 jest.mock("@components/Tables", () => ({
   SimpleTable: "div",
