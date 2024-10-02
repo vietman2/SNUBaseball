@@ -87,6 +87,8 @@
       "^@data/(.*)$": "<rootDir>/src/constants/data/$1",
       "^@fragments/(.*)$": "<rootDir>/src/fragments/$1",
       "^@navigation/(.*)$": "<rootDir>/src/constants/navigation/$1",
+      "^@hooks/(.*)$": "<rootDir>/src/hooks/$1",
+      "^@pages/(.*)$": "<rootDir>/src/pages/$1",
       "^@services/(.*)$": "<rootDir>/src/services/$1",
       "^@store/(.*)$": "<rootDir>/src/store/$1",
       "^@themes/(.*)$": "<rootDir>/src/constants/themes/$1",
