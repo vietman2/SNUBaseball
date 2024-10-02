@@ -3,16 +3,16 @@ import { Outlet, Route, Routes, useNavigate } from "react-router-dom";
 
 import { Players } from "./Players/Players";
 import { Tabs } from "@components/Tabs";
-import { SubTab, tabs } from "@navigation/tabs";
+import { SubTabType, tabs } from "@navigation/tabs";
 
 const subtabs = tabs.find((tab) => tab.title === "소개")?.submenu || [];
 
 export default function About() {
-  const [selectedTab, setSelectedTab] = useState<SubTab>(subtabs[0]);
+  const [selectedTab, setSelectedTab] = useState<SubTabType>(subtabs[0]);
 
   const navigate = useNavigate();
 
-  const handleTabClick = (tab: SubTab) => {
+  const handleTabClick = (tab: SubTabType) => {
     setSelectedTab(tab);
 
     navigate(tab.path);

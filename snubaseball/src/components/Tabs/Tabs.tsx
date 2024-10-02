@@ -1,15 +1,15 @@
 import styled from "styled-components";
 
-import { SubTab } from "@navigation/tabs";
+import { SubTabType } from "@navigation/tabs";
 
 interface Props {
-  tabs: SubTab[];
-  selectedTab: SubTab;
-  setSelectedTab: (index: SubTab) => void;
+  tabs: SubTabType[];
+  selectedTab: SubTabType;
+  setSelectedTab: (index: SubTabType) => void;
 }
 
 export function Tabs({ tabs, selectedTab, setSelectedTab }: Props) {
-  const handleTabClick = (tab: SubTab) => {
+  const handleTabClick = (tab: SubTabType) => {
     setSelectedTab(tab);
   };
 
@@ -35,6 +35,7 @@ export function EmptyTabs() {
 
 const Container = styled.div`
   display: flex;
+  flex: 1;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -47,7 +48,6 @@ const Tab = styled.div<{ selected: boolean }>`
   flex: 1;
   align-items: center;
   justify-content: center;
-  height: 100%;
   font-size: 18px;
   color: ${(props) => (props.selected ? "#0f0f70" : "#fff")};
   background-color: ${(props) => (props.selected ? "#aaa" : "#0f0f70")};

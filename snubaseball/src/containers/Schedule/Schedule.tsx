@@ -6,16 +6,16 @@ import { Games } from "./Games/Games";
 import { ScheduleMain } from "./Main/Main";
 import { Training } from "./Training/Training";
 import { Tabs } from "@components/Tabs";
-import { SubTab, tabs } from "@navigation/tabs";
+import { SubTabType, tabs } from "@navigation/tabs";
 
 const subtabs = tabs.find((tab) => tab.title === "일정")?.submenu || [];
 
 export default function Schedule() {
-  const [selectedTab, setSelectedTab] = useState<SubTab>(subtabs[0]);
+  const [selectedTab, setSelectedTab] = useState<SubTabType>(subtabs[0]);
 
   const navigate = useNavigate();
 
-  const handleTabClick = (tab: SubTab) => {
+  const handleTabClick = (tab: SubTabType) => {
     setSelectedTab(tab);
 
     navigate(tab.path);
