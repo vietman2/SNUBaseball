@@ -7,7 +7,7 @@ import MainImage1 from "@assets/images/main1.jpg";
 import MainImage2 from "@assets/images/main2.jpg";
 import MainImage3 from "@assets/images/main3.jpg";
 import { AppIcon } from "@components/Icons";
-import { Sidebar } from "@components/Sidebar";
+import { Sidebar, Topbar } from "@components/Navigation";
 
 const images = [MainImage1, MainImage2, MainImage3];
 
@@ -19,6 +19,7 @@ export function Header({ isPortrait }: Readonly<Props>) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -34,24 +35,12 @@ export function Header({ isPortrait }: Readonly<Props>) {
     }
   };
 
-  const routeNameMap: { [key: string]: string } = {
-    "": "서울대학교 야구부",
-    about: "소개",
-    schedule: "일정",
-    archive: "아카이브",
-    sitemap: "사이트맵",
-    ask: "문의",
-  };
-
-  const pageName =
-    routeNameMap[location.pathname.split("/")[1]] || "서울대 야구부";
-
   const startSlider = () => {
     intervalRef.current = setInterval(() => {
       setCurrentIndex((prevIndex) =>
         prevIndex === images.length - 1 ? 0 : prevIndex + 1
       );
-    }, 3000);
+    }, 5000);
   };
 
   useEffect(() => {
@@ -100,7 +89,6 @@ export function Header({ isPortrait }: Readonly<Props>) {
             >
               <img src={Logo} alt="logo" />
             </LogoContainer>
-            <Title>{pageName}</Title>
             <Icon onClick={openSidebar} data-testid="open">
               <AppIcon icon="menu" size={32} color="black" />
             </Icon>
@@ -109,8 +97,8 @@ export function Header({ isPortrait }: Readonly<Props>) {
           <Bar>
             <LogoContainer onClick={() => handleNavigate("/")} data-testid="logo">
               <img src={Logo} alt="logo" />
-              서울대학교 야구부
             </LogoContainer>
+            <Topbar />
           </Bar>
         )}
         {location.pathname === "/" ? (
@@ -151,8 +139,8 @@ const Bar = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 80px;
-  padding: 0 400px;
+  height: 60px;
+  padding: 0 20%;
   color: #000;
 `;
 
@@ -166,18 +154,6 @@ const MobileBar = styled.div`
   color: #fff;
 
   padding: 20px 15px;
-`;
-
-const Title = styled.h1`
-  display: flex;
-  justify-content: center;
-  font-size: 20px;
-  font-weight: bold;
-  color: black;
-
-  &:hover {
-    cursor: default;
-  }
 `;
 
 const Icon = styled.div`

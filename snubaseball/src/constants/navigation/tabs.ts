@@ -1,21 +1,24 @@
-export type SubTab = {
+export type SubTabType = {
   title: string;
   path: string;
 }
 
-export type Tab = {
+export type TabType = {
   title: string;
+  icon: string;
   path: string;
-  submenu?: SubTab[];
-}
+  submenu?: SubTabType[];
+};
 
-export const tabs: Tab[] = [
+export const tabs: TabType[] = [
   {
     title: "Home",
+    icon: "home",
     path: "/",
   },
   {
     title: "소개",
+    icon: "about",
     path: "/about",
     submenu: [
       {
@@ -38,6 +41,7 @@ export const tabs: Tab[] = [
   },
   {
     title: "일정",
+    icon: "calendar",
     path: "/schedule",
     submenu: [
       {
@@ -60,6 +64,7 @@ export const tabs: Tab[] = [
   },
   {
     title: "아카이브",
+    icon: "archive",
     path: "/archive",
     submenu: [
       {
@@ -74,10 +79,12 @@ export const tabs: Tab[] = [
   },
   {
     title: "사이트맵",
+    icon: "menu",
     path: "/sitemap",
   },
   {
     title: "문의",
+    icon: "question",
     path: "/ask",
     submenu: [
       {

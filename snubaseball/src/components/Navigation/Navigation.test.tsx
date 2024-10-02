@@ -2,8 +2,9 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 
 import Sidebar from "./Sidebar";
+import { Topbar } from "./Topbar";
 
-jest.unmock("@components/Sidebar");
+jest.unmock("@components/Navigation");
 
 describe("<Sidebar />", () => {
   it("should render", () => {
@@ -13,7 +14,6 @@ describe("<Sidebar />", () => {
       </MemoryRouter>
     );
 
-    fireEvent.click(screen.getByText("로고"));
     fireEvent.click(screen.getByText("소개"));
     fireEvent.click(screen.getByText("일정"));
     fireEvent.click(screen.getByText("아카이브"));
@@ -39,5 +39,22 @@ describe("<Sidebar />", () => {
         <Sidebar open={false} toggleSidebar={() => {}} />
       </MemoryRouter>
     );
+  });
+});
+
+describe("<Topbar />", () => {
+  it("should render", () => {
+    render(
+      <MemoryRouter>
+        <Topbar />
+      </MemoryRouter>
+    );
+
+    fireEvent.click(screen.getByText("소개"));
+    fireEvent.click(screen.getByText("일정"));
+    fireEvent.click(screen.getByText("아카이브"));
+    fireEvent.click(screen.getByText("사이트맵"));
+    fireEvent.click(screen.getByText("문의"));
+    fireEvent.click(screen.getByText("문의"));
   });
 });

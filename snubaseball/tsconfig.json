@@ -25,6 +25,7 @@
       "@navigation/*": ["constants/navigation/*"],
       "@services/*": ["services/*"],
       "@store/*": ["store/*"],
+      "@themes/*": ["constants/themes/*"],
       "@type/*": ["constants/types/*"],
       "@utils/*": ["utils/*"]
     }

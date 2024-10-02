@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import { Header } from "@fragments/Header";
 
-export default function RootLayout() {
+export function RootLayout() {
   const [isPortrait, setIsPortrait] = useState(
     window.matchMedia("(orientation: portrait)").matches
   );
@@ -33,7 +33,7 @@ export default function RootLayout() {
 const ContentWrapper = styled.div<{ $isPortrait: boolean }>`
   display: flex;
   flex: 1;
-  padding: ${({ $isPortrait }) => ($isPortrait ? "0 20px" : "0 400px")};
+  padding: ${({ $isPortrait }) => ($isPortrait ? "0 20px" : "0 20%")};
   overflow-x: hidden;
   box-sizing: border-box;
 `;
