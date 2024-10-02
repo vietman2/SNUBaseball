@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import { Tab, tabs } from "@navigation/tabs";
+import { TabType, tabs } from "@navigation/tabs";
 
 interface Props {
   open: boolean;
@@ -10,16 +10,16 @@ interface Props {
 }
 
 export default function Sidebar({ open, toggleSidebar }: Readonly<Props>) {
-  const [activeTab, setActiveTab] = useState<Tab | null>(null);
+  const [activeTab, setActiveTab] = useState<TabType | null>(null);
   const navigate = useNavigate();
 
-  const handleTabClick = (tab: Tab) => {
+  const handleTabClick = (tab: TabType) => {
     if (!tab.submenu) {
       navigate(tab.path);
       toggleSidebar();
       return;
     }
-    
+
     if (activeTab === tab) {
       setActiveTab(null);
       return;
@@ -31,7 +31,6 @@ export default function Sidebar({ open, toggleSidebar }: Readonly<Props>) {
   return (
     <>
       <Container open={open}>
-        <Logo>로고</Logo>
         {tabs.map((tab) => (
           <div key={tab.title}>
             <SidebarTab onClick={() => handleTabClick(tab)}>
@@ -74,21 +73,8 @@ const Container = styled.div<SimpleProps>`
   color: black;
   padding-top: 1rem;
   transform: ${({ open }) => (open ? "translateX(0)" : "translateX(100%)")};
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.2s ease-in-out;
   z-index: 1000;
-`;
-
-const Logo = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 80px;
-  font-size: 24px;
-  font-weight: bold;
-
-  &:hover {
-    cursor: pointer;
-  }
 `;
 
 const SidebarTab = styled.div`
