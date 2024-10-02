@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import { AppIcon } from "@components/Icons";
-import { TabType, tabs } from "@navigation/tabs";
+import { TabType } from "@models/navigation";
+import { tabs } from "@navigation/tabs";
 
 const inactiveColor = "#333333";
 

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { SubTabType } from "@navigation/tabs";
+import { SubTabType } from "@models/navigation";
 
 interface Props {
   tabs: SubTabType[];

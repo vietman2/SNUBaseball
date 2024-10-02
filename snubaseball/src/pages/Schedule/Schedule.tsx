@@ -6,7 +6,8 @@ import { Games } from "./Games/Games";
 import { ScheduleMain } from "./Main/Main";
 import { Training } from "./Training/Training";
 import { Tabs } from "@components/Tabs";
-import { SubTabType, tabs } from "@navigation/tabs";
+import { SubTabType } from "@models/navigation";
+import { tabs } from "@navigation/tabs";
 
 const subtabs = tabs.find((tab) => tab.title === "일정")?.submenu || [];
 
