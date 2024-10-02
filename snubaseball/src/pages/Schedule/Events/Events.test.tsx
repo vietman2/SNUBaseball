@@ -26,21 +26,25 @@ jest.mock("@components/Tabs", () => ({
         data-testid="OB전"
         onClick={() => setSelectedTab("OB전")}
         onKeyDown={jest.fn()}
+        role="button"
       />
       <div
         data-testid="종무식"
         onClick={() => setSelectedTab("종무식")}
         onKeyDown={jest.fn()}
+        role="button"
       />
       <div
         data-testid="졸업식"
         onClick={() => setSelectedTab("졸업식")}
         onKeyDown={jest.fn()}
+        role="button"
       />
       <div
         data-testid="null"
         onClick={() => setSelectedTab("null")}
         onKeyDown={jest.fn()}
+        role="button"
       />
     </>
   ),

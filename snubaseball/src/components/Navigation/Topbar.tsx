@@ -25,7 +25,6 @@ export function Topbar() {
       setSubmenuOpen(false);
       setOpenSubmenuItems(null);
       navigate(tab.path);
-      return;
     } else {
       setSubmenuOpen(!submenuOpen);
       setOpenSubmenuItems(tab);
