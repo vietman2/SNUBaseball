@@ -14,23 +14,13 @@ describe("<Sidebar />", () => {
       </MemoryRouter>
     );
 
-    fireEvent.click(screen.getByText("소개"));
-    fireEvent.click(screen.getByText("일정"));
-    fireEvent.click(screen.getByText("아카이브"));
-    fireEvent.click(screen.getByText("사이트맵"));
-    fireEvent.click(screen.getByText("문의"));
-    fireEvent.click(screen.getByText("문의"));
-  });
-  
-  it("should handle navigate", () => {
-    render(
-      <MemoryRouter>
-        <Sidebar open={true} toggleSidebar={() => {}} />
-      </MemoryRouter>
-    );
-
+    fireEvent.click(screen.getByText("Home"));
     fireEvent.click(screen.getByText("소개"));
     fireEvent.click(screen.getByText("팀"));
+    fireEvent.click(screen.getByText("일정"));
+    fireEvent.click(screen.getByText("아카이브"));
+    fireEvent.click(screen.getByText("문의"));
+    fireEvent.click(screen.getByText("문의"));
   });
 
   it("should render closed", () => {
@@ -50,11 +40,14 @@ describe("<Topbar />", () => {
       </MemoryRouter>
     );
 
+    fireEvent.click(screen.getByText("Home"));
     fireEvent.click(screen.getByText("소개"));
+    fireEvent.click(screen.getByText("팀"));
     fireEvent.click(screen.getByText("일정"));
     fireEvent.click(screen.getByText("아카이브"));
-    fireEvent.click(screen.getByText("사이트맵"));
     fireEvent.click(screen.getByText("문의"));
+    fireEvent.mouseDown(document);
     fireEvent.click(screen.getByText("문의"));
+    fireEvent.click(screen.getByText("FAQ"));
   });
 });
