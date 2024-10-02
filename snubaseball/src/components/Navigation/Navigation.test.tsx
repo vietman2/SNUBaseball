@@ -55,5 +55,6 @@ describe("<Topbar />", () => {
     fireEvent.click(screen.getByText("아카이브"));
     fireEvent.click(screen.getByText("사이트맵"));
     fireEvent.click(screen.getByText("문의"));
+    fireEvent.click(screen.getByText("문의"));
   });
 });
