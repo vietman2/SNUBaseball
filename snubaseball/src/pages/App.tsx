@@ -7,12 +7,12 @@ import {
 import { ThemeProvider } from "styled-components";
 
 import { RootLayout } from "@components/RootLayout";
-import Home from "../Home/Home";
-import Archive from "../Archive/Archive";
-import Sitemap from "../Sitemap/Sitemap";
-import Ask from "../Ask/Ask";
-import About from "../About/About";
-import Schedule from "../Schedule/Schedule";
+import Home from "./Home/Home";
+import Archive from "./Archive/Archive";
+import Sitemap from "./Sitemap/Sitemap";
+import Ask from "./Ask/Ask";
+import About from "./About/About";
+import Schedule from "./Schedule/Schedule";
 import { light } from "@themes/themeColors";
 
 const router = createBrowserRouter(
