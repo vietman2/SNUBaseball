@@ -89,6 +89,7 @@
       "^@navigation/(.*)$": "<rootDir>/src/constants/navigation/$1",
       "^@services/(.*)$": "<rootDir>/src/services/$1",
       "^@store/(.*)$": "<rootDir>/src/store/$1",
+      "^@themes/(.*)$": "<rootDir>/src/constants/themes/$1",
       "^@type/(.*)$": "<rootDir>/src/constants/types/$1",
       "^@utils/(.*)$": "<rootDir>/src/utils/$1"
     }
