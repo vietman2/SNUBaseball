@@ -24,9 +24,7 @@ export function Header() {
   const handleNavigate = (path: string) => {
     navigate(path);
 
-    if (isWide) {
-      setIsSidebarOpen(false);
-    }
+    setIsSidebarOpen(false);
   };
 
   const toggleSidebar = () => {
@@ -42,12 +40,6 @@ export function Header() {
       <Container $isMain={location.pathname === "/"}>
         {isWide ? (
           <Bar>
-            <LogoContainer
-              onClick={() => handleNavigate("/")}
-              data-testid="logo"
-            >
-              <img src={Logo} alt="logo" />
-            </LogoContainer>
             <Topbar />
           </Bar>
         ) : (
@@ -70,6 +62,7 @@ export function Header() {
 }
 
 const Container = styled.div<{ $isMain: boolean }>`
+  position: relative;
   width: 100vw;
   background-color: #f0f0f0;
 `;

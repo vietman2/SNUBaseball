@@ -13,8 +13,6 @@ describe("<Header />", () => {
     );
 
     await waitFor(() => resizeWindow(1200, 800));
-
-    fireEvent.click(screen.getByTestId("logo"));
   });
 
   it("renders portrait correctly and handles sidebar toggle", async () => {
