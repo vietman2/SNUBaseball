@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 
-import About from "./About";
+import About from "./AboutContainer";
 
 jest.mock("./Players/Players", () => ({
   __esModule: true,
