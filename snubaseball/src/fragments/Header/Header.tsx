@@ -12,10 +12,10 @@ import { Sidebar, Topbar } from "@components/Navigation";
 const images = [MainImage1, MainImage2, MainImage3];
 
 interface Props {
-  isPortrait: boolean;
+  isWide: boolean;
 }
 
-export function Header({ isPortrait }: Readonly<Props>) {
+export function Header({ isWide }: Readonly<Props>) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -30,7 +30,7 @@ export function Header({ isPortrait }: Readonly<Props>) {
   const handleNavigate = (path: string) => {
     navigate(path);
 
-    if (isPortrait) {
+    if (isWide) {
       setIsSidebarOpen(false);
     }
   };
@@ -81,7 +81,17 @@ export function Header({ isPortrait }: Readonly<Props>) {
   return (
     <>
       <Container $isMain={location.pathname === "/"}>
-        {isPortrait ? (
+        {isWide ? (
+          <Bar>
+            <LogoContainer
+              onClick={() => handleNavigate("/")}
+              data-testid="logo"
+            >
+              <img src={Logo} alt="logo" />
+            </LogoContainer>
+            <Topbar />
+          </Bar>
+        ) : (
           <MobileBar>
             <LogoContainer
               onClick={() => handleNavigate("/")}
@@ -93,13 +103,6 @@ export function Header({ isPortrait }: Readonly<Props>) {
               <AppIcon icon="menu" size={32} color="black" />
             </Icon>
           </MobileBar>
-        ) : (
-          <Bar>
-            <LogoContainer onClick={() => handleNavigate("/")} data-testid="logo">
-              <img src={Logo} alt="logo" />
-            </LogoContainer>
-            <Topbar />
-          </Bar>
         )}
         {location.pathname === "/" ? (
           <ImageContainer>

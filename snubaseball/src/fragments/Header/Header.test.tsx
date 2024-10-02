@@ -7,7 +7,7 @@ describe("<Header />", () => {
   it("renders landscape correctly and handles image toggle", () => {
     render(
       <MemoryRouter>
-        <Header isPortrait={false} />
+        <Header isWide={false} />
       </MemoryRouter>
     );
     
@@ -17,7 +17,7 @@ describe("<Header />", () => {
   it("renders landscape correctly and handles logo click", () => {
     render(
       <MemoryRouter>
-        <Header isPortrait={false} />
+        <Header isWide={false} />
       </MemoryRouter>
     );
 
@@ -27,7 +27,7 @@ describe("<Header />", () => {
   it("renders portrait correctly and handles sidebar toggle", () => {
     render(
       <MemoryRouter>
-        <Header isPortrait />
+        <Header isWide />
       </MemoryRouter>
     );
 
@@ -38,7 +38,7 @@ describe("<Header />", () => {
   it("renders portrait correctly and handles logo click", () => {
     render(
       <MemoryRouter>
-        <Header isPortrait />
+        <Header isWide />
       </MemoryRouter>
     );
 

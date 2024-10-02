@@ -3,37 +3,32 @@ import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 
 import { Header } from "@fragments/Header";
+import { useWindowSize } from "@hooks/useWindowSize";
 
 export function RootLayout() {
-  const [isPortrait, setIsPortrait] = useState(
-    window.matchMedia("(orientation: portrait)").matches
-  );
+  const [isWide, setIsWide] = useState<boolean>(true);
 
-  const handleOrientationChange = () => {
-    setIsPortrait(window.matchMedia("(orientation: portrait)").matches);
-  };
+  const { width } = useWindowSize();
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(orientation: portrait)");
-    mediaQuery.addEventListener("change", handleOrientationChange);
-    return () =>
-      mediaQuery.removeEventListener("change", handleOrientationChange);
-  }, []);
+    setIsWide(width > 1024);
+  }, [width]);
 
   return (
     <>
-      <Header isPortrait={isPortrait} />
-      <ContentWrapper $isPortrait={isPortrait}>
+      <Header isWide={isWide} />
+      <ContentWrapper $iswide={isWide}>
         <Outlet />
       </ContentWrapper>
     </>
   );
 }
 
-const ContentWrapper = styled.div<{ $isPortrait: boolean }>`
+const ContentWrapper = styled.div<{ $iswide: boolean }>`
   display: flex;
   flex: 1;
-  padding: ${({ $isPortrait }) => ($isPortrait ? "0 20px" : "0 20%")};
+  padding: ${({ $iswide }) => ($iswide ? "0 20%" : "0 20px")};
+
   overflow-x: hidden;
   box-sizing: border-box;
 `;
