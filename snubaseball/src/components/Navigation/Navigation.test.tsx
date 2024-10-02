@@ -3,6 +3,7 @@ import { MemoryRouter } from "react-router-dom";
 
 import Sidebar from "./Sidebar";
 import { Topbar } from "./Topbar";
+import { renderWithProviders } from "@utils/test-utils";
 
 jest.unmock("@components/Navigation");
 
@@ -34,7 +35,7 @@ describe("<Sidebar />", () => {
 
 describe("<Topbar />", () => {
   it("should render", () => {
-    render(
+    renderWithProviders(
       <MemoryRouter>
         <Topbar />
       </MemoryRouter>

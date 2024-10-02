@@ -20,7 +20,7 @@ export function Topbar() {
   const navigate = useNavigate();
 
   const handleTabClick = (tab: TabType) => {
-    setActiveTab(tab.title);
+    //setActiveTab(tab.title);
 
     if (!tab.submenu) {
       setSubmenuOpen(false);
@@ -83,6 +83,7 @@ export function Topbar() {
               key={item.title}
               onClick={() => handleSubmenuItemClick(item.path)}
             >
+              <AppIcon icon={item.icon} size={24} color="#000" />
               {item.title}
             </SubmenuItem>
           ))}
@@ -118,8 +119,8 @@ const LogoContainer = styled.div`
   font-weight: 700;
 
   img {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
   }
 
   &:hover {
@@ -132,6 +133,7 @@ const Tab = styled.div<{ $active?: boolean }>`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  margin: 8px 0;
   padding: 8px 12px;
   gap: 4px;
 
@@ -148,21 +150,35 @@ const Tab = styled.div<{ $active?: boolean }>`
 const Submenu = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: space-around;
   position: absolute;
   top: 100%;
   left: 0;
   right: 0;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 8px;
+  height: 150px;
+
+  padding: 0 20%;
+  gap: 24px;
+
+  background-color: ${({ theme }) => theme.colors.background};
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 20;
+  z-index: 1000;
 `;
 
 const SubmenuItem = styled.div`
-  padding: 8px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  gap: 16px;
+
   cursor: pointer;
+  border: 1px solid #f0f0f0;
+  border-radius: 16px;
+
   &:hover {
     background-color: #f0f0f0;
   }
