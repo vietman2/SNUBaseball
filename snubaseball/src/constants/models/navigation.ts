@@ -1,5 +1,6 @@
 export type SubTabType = {
   title: string;
+  icon: string;
   path: string;
 };
 
