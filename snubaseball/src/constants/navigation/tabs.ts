@@ -1,4 +1,4 @@
-import { SubTabType, TabType } from "@models/navigation";
+import { TabType } from "@models/navigation";
 
 export const aboutTab: TabType = {
   title: "소개",
@@ -89,10 +89,5 @@ export const tabs: TabType[] = [
   aboutTab,
   scheduleTab,
   archiveTab,
-  {
-    title: "사이트맵",
-    icon: "menu",
-    path: "/sitemap",
-  },
   askTab,
 ];
