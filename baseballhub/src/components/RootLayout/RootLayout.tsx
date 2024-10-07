@@ -38,8 +38,11 @@ const MainContainer = styled.div`
   display: flex;
   flex: 1;
   background-color: ${({ theme }) => theme.colors.background};
+  width: 100%;
+  height: 100dvh;
   overflow-x: auto;
   overflow-y: auto;
+  user-select: none;
 `;
 
 const SidebarWrapper = styled.div<{ width: string }>`
@@ -55,7 +58,7 @@ const ContentWrapper = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
-  min-height: calc(100vh - 32px);
+  min-height: calc(100dvh - 32px);
   margin: 24px 24px 8px 0;
   box-sizing: border-box;
   transition: width 0.3s ease-in-out;

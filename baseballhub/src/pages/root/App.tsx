@@ -65,8 +65,7 @@ const GlobalStyles = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
 
     ::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
+      width: 0;
     }
 
     ::-webkit-scrollbar-thumb {

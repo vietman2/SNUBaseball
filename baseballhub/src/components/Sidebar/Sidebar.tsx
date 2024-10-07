@@ -109,12 +109,27 @@ const SidebarContainer = styled.div<{ width: string }>`
   flex-direction: column;
   background-color: ${({ theme }) => theme.colors.background};
   width: ${(props) => props.width};
+  height: 100dvh;
   position: fixed;
   top: 0;
   left: 0;
+
   z-index: 100;
   overflow-x: hidden;
+  overflow-y: auto;
+
   transition: width 0.3s ease-in-out;
+
+  ::-webkit-scrollbar {
+    display: none;
+    width: 0;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: blue;
+    border-radius: 3px;
+    border: 1.5px solid #b1bdcd;
+  }
 `;
 
 const SidebarHeader = styled.div`

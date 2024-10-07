@@ -61,7 +61,8 @@ const Content = styled.div<{ $first: boolean }>`
   display: flex;
   flex: 1;
   background-color: ${({ theme }) => theme.colors.lavender};
-  padding: 1rem 20px;
+  margin-bottom: 24px;
+  padding: 24px 24px;
   border-radius: 10px;
   border-top-left-radius: ${(props) => (props.$first ? "0" : "10px")};
 `;
