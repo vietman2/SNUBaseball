@@ -6,18 +6,24 @@ import {
   Navigate,
   Outlet,
 } from "react-router-dom";
-import { ThemeProvider, createGlobalStyle } from "styled-components";
+import {
+  ThemeProvider as StyledThemeProvider,
+  createGlobalStyle,
+} from "styled-components";
 
 import { Members } from "@pages/Admin";
-import { AuthProvider, Login, SignUp, useAuth } from "@pages/Auth";
+import { Login, SignUp } from "@pages/Auth";
 import { Board } from "@pages/Forum";
+import { GuidelinesContainer } from "@pages/Guidelines";
 import { Home } from "@pages/Home";
 import { RecordsContainer } from "@pages/Records";
 import { ScheduleContainer } from "@pages/Schedule";
 import { Feedback, Guidelines, Journals } from "@pages/Training";
 
+import { AuthProvider, useAuth } from "@contexts/auth";
+import { ThemeProvider, useTheme } from "@contexts/theme";
 import { RootLayout } from "@components/RootLayout";
-import { light } from "@themes/themeColors";
+import { dark, light } from "@themes/themeColors";
 
 const ProtectedRoutes = () => {
   const { user } = useAuth();
@@ -40,11 +46,11 @@ const router = createBrowserRouter(
           <Route path="/home" element={<Home />} />
           <Route path="/records" element={<RecordsContainer />} />
           <Route path="/schedule" element={<ScheduleContainer />} />
-          <Route path="/guidelines" element={<Guidelines />} />
-          <Route path="/training/journals" element={<Journals />} />
-          <Route path="/training/feedback" element={<Feedback />} />
-          <Route path="/forum/board" element={<Board />} />
-          <Route path="/admin/members" element={<Members />} />
+          <Route path="/guidelines" element={<GuidelinesContainer />} />
+          <Route path="/journals" element={<Journals />} />
+          <Route path="/feedback" element={<Feedback />} />
+          <Route path="/forum" element={<Board />} />
+          <Route path="/members" element={<Members />} />
         </Route>
       </Route>
     </>
@@ -84,11 +90,21 @@ export default function App() {
   return (
     <>
       <GlobalStyles />
-      <ThemeProvider theme={{ colors: light }}>
-        <AuthProvider>
-          <RouterProvider router={router} />
-        </AuthProvider>
+      <ThemeProvider>
+        <ThemedApp />
       </ThemeProvider>
     </>
+  );
+}
+
+function ThemedApp() {
+  const { isDarkMode } = useTheme();
+
+  return (
+    <StyledThemeProvider theme={{ colors: isDarkMode ? dark : light }}>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </StyledThemeProvider>
   );
 }
