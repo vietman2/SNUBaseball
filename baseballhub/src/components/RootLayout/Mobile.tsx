@@ -92,7 +92,7 @@ const Header = styled.div<{ $isMenuOpen: boolean }>`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 60px;
+  height: 50px;
   padding: 0 16px;
 
   color: ${({ theme }) => theme.colors.primary};
@@ -109,12 +109,12 @@ const Menu = styled.div<{ $isMenuOpen: boolean }>`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: calc(100dvh - 60px);
+  height: calc(100dvh - 50px);
   padding: 16px;
   gap: 16px;
 
   position: fixed;
-  top: 60px;
+  top: 50px;
   left: ${({ $isMenuOpen }) => ($isMenuOpen ? "0" : "-100%")};
 
   background-color: ${({ theme }) => theme.colors.background300};

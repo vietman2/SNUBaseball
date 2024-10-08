@@ -29,6 +29,12 @@ describe("<Tabs />", () => {
 
     fireEvent.click(screen.getByTestId("Tab2"));
   });
+  
+  it("should render type 1: small text", async () => {
+    renderWithProviders(
+      <Tabs tabs={["Tab1", "Tab2"]} activeTab="Tab1" setActiveTab={jest.fn()} textSize="small" />
+    );
+  });
 
   it("should render type 2", () => {
     renderWithProviders(

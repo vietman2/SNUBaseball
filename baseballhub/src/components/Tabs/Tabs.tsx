@@ -7,6 +7,7 @@ interface Props {
   activeTab: string;
   setActiveTab: (tab: string) => void;
   type?: 1 | 2 | 3;
+  textSize?: "small" | "large";
 }
 
 export function Tabs({
@@ -14,6 +15,7 @@ export function Tabs({
   activeTab,
   setActiveTab,
   type = 1,
+  textSize = "large",
 }: Readonly<Props>) {
   if (type === 1) {
     return (
@@ -23,6 +25,7 @@ export function Tabs({
             key={tab}
             $active={activeTab === tab}
             onClick={() => setActiveTab(tab)}
+            textsize={textSize}
             data-testid={tab}
           >
             {tab}
@@ -68,11 +71,12 @@ const Container1 = styled.div`
   padding: 8px;
 `;
 
-const Tab1 = styled.div<{ $active: boolean; }>`
+const Tab1 = styled.div<{ $active: boolean; textsize: "small" | "large" }>`
   padding: 8px 12px;
 
-  font-size: 18px;
-  font-weight: ${({ $active }) => ($active ? "900" : "400")};
+  font-size: ${({ textsize }) => (textsize === "small" ? "16px" : "18px")};
+  font-weight: ${({ $active, textsize }) =>
+    $active ? (textsize === "small" ? "700" : "900") : "400"};
 
   cursor: pointer;
   color: ${({ $active, theme }) =>

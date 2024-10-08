@@ -1,3 +1,3 @@
-import { PageHeader } from "./PageHeader";
+import { MobileHeader, PageHeader } from "./PageHeader";
 
-export { PageHeader };
+export { MobileHeader, PageHeader };
