@@ -19,10 +19,12 @@ import { ReactComponent as GuideIcon } from "./guide.svg";
 import { ReactComponent as HomeIcon } from "./home.svg";
 import { ReactComponent as LightBulbIcon } from "./lightbulb.svg";
 import { ReactComponent as MenuIcon } from "./menu.svg";
+import { ReactComponent as MoonIcon } from "./moon.svg";
 import { ReactComponent as PeopleIcon } from "./people.svg";
 import { ReactComponent as PersonIcon } from "./person.svg";
 import { ReactComponent as RecordIcon } from "./record.svg";
 import { ReactComponent as StorageIcon } from "./storage.svg";
+import { ReactComponent as SunIcon } from "./sun.svg";
 
 interface Props {
   icon: string;
@@ -74,6 +76,8 @@ export const AppIcon = ({ icon, size, color }: Props) => {
       return <LightBulbIcon width={size} height={size} color={color} />;
     case "menu":
       return <MenuIcon width={size} height={size} color={color} />;
+    case "moon":
+      return <MoonIcon width={size} height={size} color={color} />;
     case "people":
       return <PeopleIcon width={size} height={size} color={color} />;
     case "person":
@@ -82,6 +86,8 @@ export const AppIcon = ({ icon, size, color }: Props) => {
       return <RecordIcon width={size} height={size} color={color} />;
     case "storage":
       return <StorageIcon width={size} height={size} color={color} />;
+    case "sun":
+      return <SunIcon width={size} height={size} color={color} />;
     default:
       return null;
   }
