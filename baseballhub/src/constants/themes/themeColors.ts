@@ -28,11 +28,11 @@ export const dark = {
   tertiary: "#A01F1F", // 빨강
 
   // background: 검정 계열
-  background100: "#0B1623",
-  background300: "#212529",
-  background500: "#495057",
-  background700: "#6C757D",
-  background900: "#AE7910",
+  background100: "#03070B",
+  background300: "#0B1623",
+  background500: "#212529",
+  background700: "#495057",
+  background900: "#6C757D",
 
   // foreground: 흰색 계열
   foreground100: "#FAF9F6",
