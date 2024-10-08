@@ -24,9 +24,8 @@ describe("<Tabs />", () => {
       <Tabs tabs={["Tab1", "Tab2"]} activeTab="Tab1" setActiveTab={jest.fn()} />
     );
 
-    await waitFor(() => {
-      resizeWindow(600, 600);
-    });
+    await waitFor(() => resizeWindow(600, 600));
+    await waitFor(() => resizeWindow(1500, 1500));
 
     fireEvent.click(screen.getByTestId("Tab2"));
   });

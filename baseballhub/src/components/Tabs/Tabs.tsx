@@ -20,12 +20,12 @@ export function Tabs({
 
   if (type === 1) {
     return (
-      <Container1 $wide={width > 768}>
+      <Container1 $wide={width > 1440}>
         {tabs.map((tab) => (
           <Tab1
             key={tab}
             $active={activeTab === tab}
-            $wide={width > 768}
+            $wide={width > 1440}
             onClick={() => setActiveTab(tab)}
             data-testid={tab}
           >
@@ -69,14 +69,13 @@ export function Tabs({
 const Container1 = styled.div<{ $wide: boolean }>`
   display: flex;
   gap: 4px;
-  margin: ${({ $wide }) => ($wide ? "0 8px" : "0 4px")};
-  padding: ${({ $wide }) => ($wide ? "0 8px 8px 8px" : "0 4px 8px 4px")};
+  padding: ${({ $wide }) => ($wide ? "8px 8px 8px 0" : "8px 4px 8px 0")};
 
   border-bottom: 1px solid ${({ theme }) => theme.colors.border};
 `;
 
 const Tab1 = styled.div<{ $active: boolean, $wide: boolean }>`
-  padding: ${({ $wide }) => ($wide ? "8px 16px" : "4px 8px")};
+  padding: ${({ $wide }) => ($wide ? "8px 16px" : "6px 12px")};
   border-radius: ${({ $wide }) => ($wide ? "16px" : "8px")};
 
   font-size: 16px;
