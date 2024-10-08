@@ -32,8 +32,8 @@ const InputWrapper = styled.div`
     position: absolute;
     background-color: transparent;
     color: ${({ theme }) => theme.colors.borderDark};
-    font-size: 12px;
-    top: 11px;
+    font-size: 14px;
+    top: 12px;
     left: 10px;
     transition: all 0.2s ease-in;
   }
@@ -53,7 +53,7 @@ const Input = styled.input`
 
   &:focus + .placeholder,
   &:not(:placeholder-shown) + .placeholder {
-    padding: 0 5px;
+    padding: 2px 6px;
     font-size: 14px;
     border-radius: 6px;
     color: ${({ theme }) => theme.colors.primary};
