@@ -50,6 +50,7 @@ interface TournamentProps {
 
 function Tournament({ tournament, onSelectGame }: Readonly<TournamentProps>) {
   const { width } = useWindowSize();
+
   const getNumColumns = () => {
     if (width > 1600) {
       return 4;
@@ -61,6 +62,12 @@ function Tournament({ tournament, onSelectGame }: Readonly<TournamentProps>) {
       return 1;
     }
   };
+
+  const getHeight = () => {
+    const height = 120 * Math.ceil(tournament.games.length / getNumColumns());
+    return `${height}px`;
+  }
+
   const columns = getNumColumns();
 
   const numberOfGames = tournament.games.length;
@@ -69,7 +76,7 @@ function Tournament({ tournament, onSelectGame }: Readonly<TournamentProps>) {
 
   return (
     <TournamentContainer>
-      <ExpandableTab title={tournament.name} height="1600px">
+      <ExpandableTab title={tournament.name} height={getHeight()}>
         <Content columns={columns}>
           {tournament.games.map((game) => (
             <GameSummary
@@ -91,6 +98,7 @@ const Container = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
+  padding: 4px 16px;
 `;
 
 const Wrapper = styled.div`
@@ -98,7 +106,6 @@ const Wrapper = styled.div`
   flex: 1;
   flex-direction: column;
   margin: 8px 0;
-  padding: 0 16px;
   white-space: nowrap;
 `;
 
