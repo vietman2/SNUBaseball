@@ -141,6 +141,7 @@ const GlobalStyles = createGlobalStyle`
 
     ::-webkit-scrollbar {
       width: 0;
+      height: 0;
     }
 
     ::-webkit-scrollbar-thumb {
