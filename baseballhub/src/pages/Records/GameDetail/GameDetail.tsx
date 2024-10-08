@@ -126,7 +126,6 @@ const Container = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
-  height: calc(100vh - 200px);
 `;
 
 const Header = styled.div`

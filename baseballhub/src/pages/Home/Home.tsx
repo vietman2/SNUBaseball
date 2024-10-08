@@ -1,12 +1,24 @@
-import { useAuth } from "@contexts/auth/AuthContext";
+import styled from "styled-components";
+
+import { PageHeader } from "@components/Headers";
+import { Title } from "@components/Texts";
+import { useWindowSize } from "@hooks/useWindowSize";
 
 export default function Home() {
-  const { logout } = useAuth();
+  const { width } = useWindowSize();
+
   return (
-    <div>
-      <h1 onClick={logout} onKeyDown={() => {}}>
-        Home
-      </h1>
-    </div>
+    <Container>
+      {width > 768 ? (
+        <PageHeader>
+          <Title>Home</Title>
+        </PageHeader>
+      ) : null}
+    </Container>
   );
 }
+
+const Container = styled.div`
+  flex: 1;
+  flex-direction: column;
+`;

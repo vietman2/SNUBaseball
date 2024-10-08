@@ -100,9 +100,8 @@ const Header = styled.div<{ $isMenuOpen: boolean }>`
   font-weight: 600;
 
   background-color: ${({ theme, $isMenuOpen }) =>
-    $isMenuOpen ? theme.colors.background300 : theme.colors.background500};
-  border-bottom: ${({ theme, $isMenuOpen }) =>
-    $isMenuOpen ? `1px solid ${theme.colors.borderLight}` : "none"};
+    $isMenuOpen ? theme.colors.background300 : theme.colors.background700};
+  border-bottom: ${({ theme }) => `1px solid ${theme.colors.borderLight}`};
 `;
 
 const Menu = styled.div<{ $isMenuOpen: boolean }>`
