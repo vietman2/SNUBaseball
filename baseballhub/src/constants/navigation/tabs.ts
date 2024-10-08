@@ -1,4 +1,4 @@
-type Tab = {
+export type TabType = {
   title: string;
   icon: string;
   path: string;
@@ -6,7 +6,7 @@ type Tab = {
 
 export type TabGroup = {
   title: string;
-  tabs: Tab[];
+  tabs: TabType[];
   limited: boolean;
 };
 
