@@ -76,22 +76,18 @@ export function GameDetail({ selectedGame, goBack }: Readonly<Props>) {
           </WideBoard>
           <WideContents>
             <Half>
-              <ExpandableTab title="엔트리" height="1000px">
-                <GameEntry game={sampleGameResult} />
-              </ExpandableTab>
-              <ExpandableTab title="상세기록" height="1000px">
-                <GameRecords
-                  lineup={sampleGameResult.lineup}
-                  pitchers={sampleGameResult.pitchers}
-                />
-              </ExpandableTab>
+              <Video>
+                <IFrame videoId="U28Gz6Dev0w" width="720" height="360" />
+              </Video>
             </Half>
             <Half>
-              <ExpandableTab title="풀영상" height="500px">
-                <Video>
-                  <IFrame videoId="U28Gz6Dev0w" width="720" height="360" />
-                </Video>
-              </ExpandableTab>
+              <Tabs
+                type={2}
+                tabs={tabs}
+                activeTab={selectedTab}
+                setActiveTab={setSelectedTab}
+              />
+              <NarrowTabPage>{renderTabContent()}</NarrowTabPage>
             </Half>
           </WideContents>
         </>
