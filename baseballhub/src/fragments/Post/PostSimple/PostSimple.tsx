@@ -30,7 +30,7 @@ const Container = styled.div`
   padding: 0.5rem 1rem;
   margin-bottom: 1rem;
   border-radius: 15px;
-  background-color: ${({ theme }) => theme.colors.offWhite};
+  background-color: ${({ theme }) => theme.colors.background100};
 
   div {
     display: flex;

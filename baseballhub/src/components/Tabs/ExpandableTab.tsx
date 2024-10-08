@@ -35,7 +35,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 16px;
-  background-color: ${({ theme }) => theme.colors.offWhite};
+  background-color: ${({ theme }) => theme.colors.background100};
   user-select: none;
 `;
 
@@ -48,7 +48,7 @@ const Header = styled.div<{ radius: string }>`
   border-radius: 16px;
   border-bottom-left-radius: ${(props) => props.radius};
   border-bottom-right-radius: ${(props) => props.radius};
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: ${({ theme }) => theme.colors.background700};
   cursor: pointer;
   user-select: none;
 
@@ -65,7 +65,7 @@ const Content = styled.div<{ height: string }>`
   overflow: hidden;
   max-height: ${(props) => props.height};
   transition: max-height 0.3s ease-in-out;
-  background-color: ${({ theme }) => theme.colors.offWhite};
+  background-color: ${({ theme }) => theme.colors.background100};
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
 `;

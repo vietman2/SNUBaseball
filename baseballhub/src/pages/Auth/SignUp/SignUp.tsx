@@ -56,7 +56,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   height: 100dvh;
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: ${({ theme }) => theme.colors.background700};
 `;
 
 const Box = styled.div`
@@ -65,10 +65,10 @@ const Box = styled.div`
   justify-content: center;
   align-items: center;
   padding: 24px;
-  border: 1px solid ${({ theme }) => theme.colors.border};
+  border: 1px solid ${({ theme }) => theme.colors.borderLight};
   border-radius: 12px;
   gap: 16px;
-  background-color: ${({ theme }) => theme.colors.lavender};
+  background-color: ${({ theme }) => theme.colors.background300};
 `;
 
 const LogoImage = styled.img`

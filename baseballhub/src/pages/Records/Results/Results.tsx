@@ -113,8 +113,8 @@ const Content = styled.div<{ columns: number }>`
   grid-template-columns: repeat(${(props) => props.columns}, 1fr);
 
   & > div {
-    border-bottom: 1px solid ${({ theme }) => theme.colors.border};
-    border-right: 1px solid ${({ theme }) => theme.colors.border};
+    border-bottom: 1px solid ${({ theme }) => theme.colors.borderLight};
+    border-right: 1px solid ${({ theme }) => theme.colors.borderLight};
   }
   & > div:nth-child(${(props) => props.columns}n) {
     border-right: none;

@@ -95,14 +95,14 @@ const Horizontal = styled.div`
 
   &:hover {
     cursor: pointer;
-    background-color: ${({ theme }) => theme.colors.offWhite};
+    background-color: ${({ theme }) => theme.colors.background100};
   }
 `;
 
 const Subtitle = styled.div`
   font-size: 16px;
   font-weight: bold;
-  color: ${({ theme }) => theme.colors.grayText};
+  color: ${({ theme }) => theme.colors.foreground500};
 `;
 
 const Outline = styled.div`
@@ -120,7 +120,7 @@ const Outline = styled.div`
 
     div {
       padding: 8px 16px;
-      border-right: 1px solid ${({ theme }) => theme.colors.border};
+      border-right: 1px solid ${({ theme }) => theme.colors.borderLight};
     }
 
     div:last-child {
@@ -139,13 +139,13 @@ const Outline = styled.div`
   > div:first-child {
     font-weight: bold;
     color: ${({ theme }) => theme.colors.primary};
-    background-color: ${({ theme }) => theme.colors.primaryContainer};
+    background-color: ${({ theme }) => theme.colors.background300};
     border-radius: 8px 8px 0 0;
   }
 
   > div:last-child {
-    color: ${({ theme }) => theme.colors.sapphire};
-    background-color: ${({ theme }) => theme.colors.offWhite};
+    color: ${({ theme }) => theme.colors.foreground900};
+    background-color: ${({ theme }) => theme.colors.background100};
     border-radius: 0 0 8px 8px;
   }
 `;
@@ -154,9 +154,9 @@ const Timetable = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 16px;
-  border: 1px solid ${({ theme }) => theme.colors.border};
+  border: 1px solid ${({ theme }) => theme.colors.borderLight};
   border-radius: 8px;
-  background-color: ${({ theme }) => theme.colors.offWhite};
+  background-color: ${({ theme }) => theme.colors.background100};
 
   > div {
     display: flex;
@@ -164,12 +164,12 @@ const Timetable = styled.div`
 
     font-size: 12px;
     text-align: flex-start;
-    color: ${({ theme }) => theme.colors.sapphire};
-    border-top: 1px solid ${({ theme }) => theme.colors.border};
+    color: ${({ theme }) => theme.colors.foreground900};
+    border-top: 1px solid ${({ theme }) => theme.colors.borderLight};
 
     div {
       padding: 8px 16px;
-      border-right: 1px solid ${({ theme }) => theme.colors.border};
+      border-right: 1px solid ${({ theme }) => theme.colors.borderLight};
     }
 
     div:last-child {
@@ -187,8 +187,8 @@ const Timetable = styled.div`
 
   > div:first-child {
     font-weight: bold;
-    color: ${({ theme }) => theme.colors.sapphire};
-    background-color: ${({ theme }) => theme.colors.primaryContainer};
+    color: ${({ theme }) => theme.colors.foreground900};
+    background-color: ${({ theme }) => theme.colors.background300};
     border-radius: 8px 8px 0 0;
     border-top: none;
   }
@@ -203,7 +203,7 @@ const Notes = styled.div`
 
   font-size: 12px;
 
-  border: 1px solid ${({ theme }) => theme.colors.border};
+  border: 1px solid ${({ theme }) => theme.colors.borderLight};
   border-radius: 8px;
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: ${({ theme }) => theme.colors.background700};
 `;

@@ -142,7 +142,7 @@ const Team = styled.div`
   font-size: 16px;
   font-weight: bold;
   padding: 8px;
-  color: ${({ theme }) => theme.colors.primaryText};
+  color: ${({ theme }) => theme.colors.foreground700};
 `;
 
 const Middle = styled.div`
@@ -171,7 +171,7 @@ const Score = styled.div`
   align-items: center;
   font-size: 32px;
   font-weight: 600;
-  color: ${({ theme }) => theme.colors.secondaryText};
+  color: ${({ theme }) => theme.colors.background100};
 `;
 
 const Table = styled.table`
@@ -184,14 +184,14 @@ const Table = styled.table`
 `;
 
 const TableHead = styled.thead`
-  border-top: 1px solid ${({ theme }) => theme.colors.border};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
-  color: ${({ theme }) => theme.colors.secondaryText};
+  border-top: 1px solid ${({ theme }) => theme.colors.borderLight};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.borderLight};
+  color: ${({ theme }) => theme.colors.background100};
 `;
 
 const TableBody = styled.tbody`
   font-weight: bold;
-  color: ${({ theme }) => theme.colors.primaryText};
+  color: ${({ theme }) => theme.colors.foreground700};
 `;
 
 const Row = styled.tr`
@@ -201,12 +201,12 @@ const Row = styled.tr`
   }
 
   td:first-child {
-    border-right: 1px solid ${({ theme }) => theme.colors.border};
+    border-right: 1px solid ${({ theme }) => theme.colors.borderLight};
   }
 
   td:nth-child(11) {
-    border-left: 1px solid ${({ theme }) => theme.colors.border};
-    border-right: 1px solid ${({ theme }) => theme.colors.border};
+    border-left: 1px solid ${({ theme }) => theme.colors.borderLight};
+    border-right: 1px solid ${({ theme }) => theme.colors.borderLight};
   }
 
   td:nth-child(12),

@@ -4,19 +4,20 @@ declare module "styled-components" {
   export interface DefaultTheme {
     colors: {
       primary: string;
-      primaryContainer: string;
       secondary: string;
-      offWhite: string;
-      lavender: string;
-      sapphire: string;
-      border: string;
-      background: string;
-      primaryText: string;
-      secondaryText: string;
-      tertiaryText: string;
-      accentText: string;
-      linkText: string;
-      grayText: string;
+      tertiary: string;
+      background100: string;
+      background300: string;
+      background500: string;
+      background700: string;
+      background900: string;
+      foreground900: string;
+      foreground700: string;
+      foreground500: string;
+      foreground300: string;
+      foreground100: string;
+      borderLight: string;
+      borderDark: string;
     };
   }
 }

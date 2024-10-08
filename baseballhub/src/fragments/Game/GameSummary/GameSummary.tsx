@@ -97,7 +97,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding-bottom: 16px;
-  background-color: ${({ theme }) => theme.colors.offWhite};
+  background-color: ${({ theme }) => theme.colors.background100};
   user-select: none;
 `;
 
@@ -112,7 +112,7 @@ const DateTime = styled.div`
   display: flex;
   flex: 1;
   font-size: 14px;
-  color: ${({ theme }) => theme.colors.sapphire};
+  color: ${({ theme }) => theme.colors.foreground900};
 `;
 
 const Location = styled.div`
@@ -120,7 +120,7 @@ const Location = styled.div`
   flex: 2;
   margin-left: 16px;
   font-size: 12px;
-  color: ${({ theme }) => theme.colors.sapphire};
+  color: ${({ theme }) => theme.colors.foreground900};
 `;
 
 const Contents = styled.div`
@@ -155,12 +155,12 @@ const TeamName = styled.div`
   gap: 8px;
   font-size: 14px;
   font-weight: 500;
-  color: ${({ theme }) => theme.colors.sapphire};
+  color: ${({ theme }) => theme.colors.foreground900};
 `;
 
 const Runs = styled.div`
   display: flex;
   font-size: 14px;
   font-weight: 500;
-  color: ${({ theme }) => theme.colors.sapphire};
+  color: ${({ theme }) => theme.colors.foreground900};
 `;

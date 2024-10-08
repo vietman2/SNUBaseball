@@ -41,7 +41,7 @@ const TabWrapper = styled.div`
   margin: 0 8px;
   padding: 8px;
 
-  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.borderLight};
 `;
 
 const Relay = styled.div`
@@ -81,7 +81,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 16px;
-  background-color: ${({ theme }) => theme.colors.offWhite};
+  background-color: ${({ theme }) => theme.colors.background100};
   user-select: none;
 `;
 
@@ -94,7 +94,7 @@ const Header = styled.div<{ radius: string }>`
   border-radius: 16px;
   border-bottom-left-radius: ${(props) => props.radius};
   border-bottom-right-radius: ${(props) => props.radius};
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: ${({ theme }) => theme.colors.background700};
   cursor: pointer;
   user-select: none;
 

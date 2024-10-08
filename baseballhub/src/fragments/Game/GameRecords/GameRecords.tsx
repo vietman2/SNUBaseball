@@ -244,8 +244,8 @@ const Table = styled.table<{ maincolumn: number }>`
 
   th {
     padding: 4px 0;
-    background-color: ${({ theme }) => theme.colors.primaryContainer};
-    color: ${({ theme }) => theme.colors.sapphire};
+    background-color: ${({ theme }) => theme.colors.background300};
+    color: ${({ theme }) => theme.colors.foreground900};
   }
 
   td {
@@ -256,13 +256,13 @@ const Table = styled.table<{ maincolumn: number }>`
   td:nth-child(${({ maincolumn }) => maincolumn}) {
     font-weight: bold;
     border-left: ${({ maincolumn, theme }) =>
-      maincolumn === 1 ? "none" : "1px solid " + theme.colors.border};
-    border-right: 1px solid ${({ theme }) => theme.colors.border};
+      maincolumn === 1 ? "none" : "1px solid " + theme.colors.borderLight};
+    border-right: 1px solid ${({ theme }) => theme.colors.borderLight};
   }
 
   tr:last-child {
     font-weight: bold;
-    background-color: ${({ theme }) => theme.colors.primaryContainer};
+    background-color: ${({ theme }) => theme.colors.background300};
 
     td:nth-child(2) {
       border: none;

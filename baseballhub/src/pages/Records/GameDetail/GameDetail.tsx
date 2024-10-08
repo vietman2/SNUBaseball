@@ -197,5 +197,5 @@ const NarrowTabPage = styled.div`
   flex: 1;
   margin-top: -16px;
   border-radius: 0 0 16px 16px;
-  background-color: ${({ theme }) => theme.colors.offWhite};
+  background-color: ${({ theme }) => theme.colors.background100};
 `;

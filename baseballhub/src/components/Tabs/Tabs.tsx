@@ -71,10 +71,10 @@ const Container1 = styled.div<{ $wide: boolean }>`
   gap: 4px;
   padding: ${({ $wide }) => ($wide ? "8px 8px 8px 0" : "8px 4px 8px 0")};
 
-  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.borderLight};
 `;
 
-const Tab1 = styled.div<{ $active: boolean, $wide: boolean }>`
+const Tab1 = styled.div<{ $active: boolean; $wide: boolean }>`
   padding: ${({ $wide }) => ($wide ? "8px 16px" : "6px 12px")};
   border-radius: ${({ $wide }) => ($wide ? "16px" : "8px")};
 
@@ -82,11 +82,13 @@ const Tab1 = styled.div<{ $active: boolean, $wide: boolean }>`
 
   cursor: pointer;
   background-color: ${({ $active, theme }) =>
-    $active ? theme.colors.offWhite : theme.colors.lavender};
+    $active ? theme.colors.background100 : theme.colors.background300};
   color: ${({ $active, theme }) =>
-    $active ? theme.colors.primary : theme.colors.sapphire};
+    $active ? theme.colors.primary : theme.colors.foreground900};
   border: ${({ $active, theme }) =>
-    $active ? `1px solid ${theme.colors.border}` : `1px solid transparent`};
+    $active
+      ? `1px solid ${theme.colors.borderLight}`
+      : `1px solid transparent`};
 
   transition: background-color 0.3s ease-in-out;
 `;
@@ -97,8 +99,8 @@ const Container2 = styled.div`
   gap: 5px;
   border-radius: 16px 16px 0 0;
 
-  background-color: ${({ theme }) => theme.colors.offWhite};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+  background-color: ${({ theme }) => theme.colors.background100};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.borderLight};
 `;
 
 const Tab2 = styled.div<{ $active: boolean }>`
@@ -107,7 +109,7 @@ const Tab2 = styled.div<{ $active: boolean }>`
 
   font-weight: ${({ $active }) => ($active ? "600" : "400")};
   color: ${({ $active, theme }) =>
-    $active ? theme.colors.primary : theme.colors.sapphire};
+    $active ? theme.colors.primary : theme.colors.foreground900};
   border-bottom: ${({ $active, theme }) =>
     $active ? `2px solid ${theme.colors.primary}` : `2px solid transparent`};
 

@@ -14,8 +14,8 @@ export const TextButton = ({ text, onClick }: Props) => {
 };
 
 const Button = styled.div`
-  background-color: #0f0f70;
-  color: #ffffff;
+  background-color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.background100};
   border: none;
   padding: 10px 20px;
   border-radius: 5px;

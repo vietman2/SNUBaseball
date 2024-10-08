@@ -100,9 +100,9 @@ const Header = styled.div<{ $isMenuOpen: boolean }>`
   font-weight: 600;
 
   background-color: ${({ theme, $isMenuOpen }) =>
-    $isMenuOpen ? theme.colors.lavender : "#D1D6DA"};
+    $isMenuOpen ? theme.colors.background300 : theme.colors.background500};
   border-bottom: ${({ theme, $isMenuOpen }) =>
-    $isMenuOpen ? `1px solid ${theme.colors.border}` : "none"};
+    $isMenuOpen ? `1px solid ${theme.colors.borderLight}` : "none"};
 `;
 
 const Menu = styled.div<{ $isMenuOpen: boolean }>`
@@ -117,7 +117,7 @@ const Menu = styled.div<{ $isMenuOpen: boolean }>`
   top: 60px;
   left: ${({ $isMenuOpen }) => ($isMenuOpen ? "0" : "-100%")};
 
-  background-color: ${({ theme }) => theme.colors.lavender};
+  background-color: ${({ theme }) => theme.colors.background300};
   transition: left 0.3s ease-in-out;
   z-index: 1000;
 

@@ -308,7 +308,7 @@ const WeeklyRules = styled.div`
   font-size: 14px;
   font-weight: 600;
 
-  background-color: ${({ theme }) => theme.colors.offWhite};
+  background-color: ${({ theme }) => theme.colors.background100};
   border-radius: 8px;
 
   > div {
@@ -316,8 +316,8 @@ const WeeklyRules = styled.div`
   }
 
   > div:nth-child(2) {
-    border-top: 1px solid ${({ theme }) => theme.colors.border};
-    border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+    border-top: 1px solid ${({ theme }) => theme.colors.borderLight};
+    border-bottom: 1px solid ${({ theme }) => theme.colors.borderLight};
   }
 `;
 
@@ -336,11 +336,11 @@ const Duties = styled.div`
     align-items: center;
     justify-content: center;
 
-    color: ${({ theme }) => theme.colors.linkText};
+    color: ${({ theme }) => theme.colors.primary};
   }
 
   > div:nth-child(3) {
-    color: ${({ theme }) => theme.colors.tertiaryText};
+    color: ${({ theme }) => theme.colors.foreground100};
   }
 `;
 
@@ -354,11 +354,11 @@ const Indeces = styled.div`
   gap: 8px;
 
   div:nth-child(1) {
-    color: ${({ theme }) => theme.colors.grayText};
+    color: ${({ theme }) => theme.colors.foreground500};
   }
 
   div:nth-child(2) {
-    color: ${({ theme }) => theme.colors.accentText};
+    color: ${({ theme }) => theme.colors.secondary};
   }
 `;
 
@@ -373,10 +373,10 @@ const Table = styled.table<{ hoveredcolumn: number | null }>`
   border-collapse: collapse;
   border: 1px solid #ddd;
   table-layout: fixed;
-  background-color: ${({ theme }) => theme.colors.offWhite};
+  background-color: ${({ theme }) => theme.colors.background100};
 
   thead {
-    background-color: ${({ theme }) => theme.colors.border};
+    background-color: ${({ theme }) => theme.colors.borderLight};
   }
 
   th {
@@ -389,7 +389,7 @@ const Table = styled.table<{ hoveredcolumn: number | null }>`
       hoveredcolumn !== null &&
       `&:hover {
         cursor: pointer;
-      background-color: ${theme.colors.lavender};
+      background-color: ${theme.colors.background300};
       }`}
   }
 
@@ -406,7 +406,7 @@ const SumRow = styled.tr`
 
 const TableData = styled.td<{ hoveredcolumn: number | null }>`
   &:hover {
-    background-color: ${({ theme }) => theme.colors.lavender};
+    background-color: ${({ theme }) => theme.colors.background300};
   }
 
   transition: background-color 0.3s;
@@ -414,7 +414,7 @@ const TableData = styled.td<{ hoveredcolumn: number | null }>`
   ${({ hoveredcolumn, theme }) =>
     hoveredcolumn !== null &&
     `&:nth-child(${hoveredcolumn + 1}) {
-        background-color: ${theme.colors.lavender};
+        background-color: ${theme.colors.background300};
       }`}
 `;
 
@@ -424,8 +424,8 @@ const HoverMenu = styled.div<{
   position: absolute;
   top: ${({ position }) => position.top}px;
   left: ${({ position }) => position.left}px;
-  background-color: ${({ theme }) => theme.colors.offWhite};
-  border: 1px solid ${({ theme }) => theme.colors.border};
+  background-color: ${({ theme }) => theme.colors.background100};
+  border: 1px solid ${({ theme }) => theme.colors.borderLight};
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   padding: 8px 12px;
   border-radius: 5px;
