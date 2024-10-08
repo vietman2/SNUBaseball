@@ -161,7 +161,6 @@ const MainContainer = styled.div`
 
 const SidebarWrapper = styled.div<{ width: string }>`
   display: flex;
-  flex-shrink: 0;
   flex-direction: column;
   width: ${({ width }) => width};
   transition: width 0.3s ease-in-out;
@@ -169,7 +168,6 @@ const SidebarWrapper = styled.div<{ width: string }>`
 `;
 
 const SidebarContainer = styled.div<{ width: string }>`
-  display: flex;
   flex-direction: column;
   background-color: ${({ theme }) => theme.colors.background300};
   width: ${(props) => props.width};
@@ -189,15 +187,15 @@ const SidebarContainer = styled.div<{ width: string }>`
 
 const SidebarHeader = styled.div`
   display: flex;
-  margin-top: 8px;
-  padding: 16px;
   align-items: center;
-  gap: 4px;
+  height: 80px;
+  padding: 0 16px;
 
   text-align: center;
   color: ${({ theme }) => theme.colors.primary};
-  font-weight: 600;
-  font-size: 16px;
+  font-family: "SCDream";
+  font-size: 18px;
+  font-weight: 900;
 
   border-bottom: 1px solid ${({ theme }) => theme.colors.borderLight};
 `;
@@ -235,7 +233,8 @@ const TabItem = styled.div<{ $isActive: boolean; $isOpen: boolean }>`
   padding: 8px 24px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: 700;
   color: ${({ $isActive, theme }) =>
     $isActive ? theme.colors.primary : theme.colors.foreground900};
   background-color: ${({ $isActive, theme }) =>
@@ -275,7 +274,7 @@ const IconWrapper = styled.div<{ $isSelected: boolean }>`
 
 const SidebarToggleIcon = styled.div<{ left: string }>`
   position: fixed;
-  top: 36px;
+  top: 20px;
   left: ${(props) => props.left};
   cursor: pointer;
   transition: left 0.3s ease-in-out;

@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 import { Chip } from "@components/Chips";
-import { useWindowSize } from "@hooks/useWindowSize";
 
 interface Props {
   tabs: string[];
@@ -16,16 +15,13 @@ export function Tabs({
   setActiveTab,
   type = 1,
 }: Readonly<Props>) {
-  const { width } = useWindowSize();
-
   if (type === 1) {
     return (
-      <Container1 $wide={width > 1440}>
+      <Container1>
         {tabs.map((tab) => (
           <Tab1
             key={tab}
             $active={activeTab === tab}
-            $wide={width > 1440}
             onClick={() => setActiveTab(tab)}
             data-testid={tab}
           >
@@ -66,29 +62,21 @@ export function Tabs({
   }
 }
 
-const Container1 = styled.div<{ $wide: boolean }>`
+const Container1 = styled.div`
   display: flex;
-  gap: 4px;
-  padding: ${({ $wide }) => ($wide ? "8px 8px 8px 0" : "8px 4px 8px 0")};
-
-  border-bottom: 1px solid ${({ theme }) => theme.colors.borderLight};
+  gap: 16px;
+  padding: 8px;
 `;
 
-const Tab1 = styled.div<{ $active: boolean; $wide: boolean }>`
-  padding: ${({ $wide }) => ($wide ? "8px 16px" : "6px 12px")};
-  border-radius: ${({ $wide }) => ($wide ? "16px" : "8px")};
+const Tab1 = styled.div<{ $active: boolean; }>`
+  padding: 8px 12px;
 
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: ${({ $active }) => ($active ? "900" : "400")};
 
   cursor: pointer;
-  background-color: ${({ $active, theme }) =>
-    $active ? theme.colors.background100 : theme.colors.background300};
   color: ${({ $active, theme }) =>
     $active ? theme.colors.primary : theme.colors.foreground900};
-  border: ${({ $active, theme }) =>
-    $active
-      ? `1px solid ${theme.colors.borderLight}`
-      : `1px solid transparent`};
 
   transition: background-color 0.3s ease-in-out;
 `;
