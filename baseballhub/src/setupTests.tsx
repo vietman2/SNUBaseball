@@ -114,5 +114,6 @@ jest.mock("@contexts/theme/ThemeContext", () => ({
   ),
   useTheme: () => ({
     toggleTheme: jest.fn(),
+    isDarkMode: false,
   }),
 }));

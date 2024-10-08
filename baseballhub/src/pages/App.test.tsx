@@ -5,7 +5,7 @@ import { sampleProfile } from "@data/user/people";
 import { renderWithProviders } from "@utils/test-utils";
 
 jest.unmock("react-router-dom");
-jest.unmock("@pages/Auth/AuthProvider");
+jest.unmock("@contexts/auth");
 
 jest.mock("@pages/Admin", () => ({
   Members: () => <div />,

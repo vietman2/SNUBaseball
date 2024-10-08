@@ -108,19 +108,16 @@ function Sidebar({ isSidebarOpen, toggleSidebar }: Props) {
                 <IconWrapper
                   $isSelected={!isDarkMode}
                   onClick={selectLightMode}
+                  data-testid="light-mode"
                 >
-                  <AppIcon
-                    icon="sun"
-                    size={24}
-                    color="#0F0F70"
-                  />
+                  <AppIcon icon="sun" size={24} color="#0F0F70" />
                 </IconWrapper>
-                <IconWrapper $isSelected={isDarkMode} onClick={selectDarkMode}>
-                  <AppIcon
-                    icon="moon"
-                    size={24}
-                    color="#C5A86F"
-                  />
+                <IconWrapper
+                  $isSelected={isDarkMode}
+                  onClick={selectDarkMode}
+                  data-testid="dark-mode"
+                >
+                  <AppIcon icon="moon" size={24} color="#C5A86F" />
                 </IconWrapper>
               </>
             ) : (
