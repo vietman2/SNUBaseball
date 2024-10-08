@@ -58,13 +58,82 @@ const router = createBrowserRouter(
 );
 
 const GlobalStyles = createGlobalStyle`
+  @font-face {
+    font-family: 'SCDream';
+    src: url('/assets/fonts/SCDream1.otf') format('opentype');
+    font-weight: 100;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'SCDream';
+    src: url('/assets/fonts/SCDream2.otf') format('opentype');
+    font-weight: 200;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'SCDream';
+    src: url('/assets/fonts/SCDream3.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'SCDream';
+    src: url('/assets/fonts/SCDream4.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'SCDream';
+    src: url('/assets/fonts/SCDream5.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'SCDream';
+    src: url('/assets/fonts/SCDream6.otf') format('opentype');
+    font-weight: 600;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'SCDream';
+    src: url('/assets/fonts/SCDream7.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'SCDream';
+    src: url('/assets/fonts/SCDream8.otf') format('opentype');
+    font-weight: 800;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'SCDream';
+    src: url('/assets/fonts/SCDream9.otf') format('opentype');
+    font-weight: 900;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Freesentation';
+    src: url('/assets/fonts/FreesentationVF.ttf') format('truetype');
+    font-style: normal;
+  }
+    
   * {
     box-sizing: border-box;
   }
 
   body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    font-family: 'Freesentation', 'SCDream', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
       'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
       sans-serif;
     -webkit-font-smoothing: antialiased;
