@@ -19,7 +19,9 @@ export function Desktop() {
       <SidebarWrapper width={isSidebarOpen ? "240px" : "90px"}>
         <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
       </SidebarWrapper>
+      <ContentWrapper>
       <Outlet />
+      </ContentWrapper>
     </MainContainer>
   );
 }
@@ -167,6 +169,12 @@ const SidebarWrapper = styled.div<{ width: string }>`
   width: ${({ width }) => width};
   transition: width 0.3s ease-in-out;
   overflow-x: hidden;
+`;
+
+const ContentWrapper = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 `;
 
 const SidebarContainer = styled.div<{ width: string }>`
