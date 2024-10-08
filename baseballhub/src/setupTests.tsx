@@ -83,13 +83,6 @@ jest.mock("@components/Selectors", () => ({
   CollegeSelector: () => <div>CollegeSelector</div>,
   SimpleSelector: () => <div>SimpleSelector</div>,
 }));
-jest.mock("@components/Sidebar", () => ({
-  Sidebar: ({ toggleSidebar }: { toggleSidebar: () => void }) => (
-    <div onClick={toggleSidebar} data-testid="sidebar" onKeyDown={() => {}}>
-      Sidebar
-    </div>
-  ),
-}));
 jest.mock("@components/Tables", () => ({
   DailyTable: () => <div>DailyTable</div>,
   MembersTable: () => <div>MembersTable</div>,
@@ -105,13 +98,4 @@ jest.mock("@components/Texts", () => ({
   Callout: () => <div>Callout</div>,
   Subtitle: () => <div>Subtitle</div>,
   Title: () => <div>Title</div>,
-}));
-jest.mock("@pages/Auth/AuthProvider", () => ({
-  AuthProvider: ({ children }: { children: React.ReactNode }) => (
-    <>{children}</>
-  ),
-  useAuth: () => ({
-    logout: jest.fn(),
-    login: jest.fn(),
-  }),
 }));
