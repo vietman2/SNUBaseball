@@ -76,14 +76,29 @@ export function Mobile() {
             )
         )}
       </Menu>
-      {!isMenuOpen && <Outlet />}
+      {!isMenuOpen && (
+        <ContentWrapper>
+          <Outlet />
+        </ContentWrapper>
+      )}
     </Container>
   );
 }
 
 const Container = styled.div`
   display: flex;
+  flex: 1;
   flex-direction: column;
+  width: 100%;
+  height: 100dvh;
+  background-color: ${({ theme }) => theme.colors.background700};
+`;
+
+const ContentWrapper = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  background-color: ${({ theme }) => theme.colors.background300};
 `;
 
 const Header = styled.div<{ $isMenuOpen: boolean }>`

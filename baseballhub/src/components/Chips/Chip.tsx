@@ -36,4 +36,6 @@ const ChipWrapper = styled.div<{ $hasOnClick: boolean; $small: boolean }>`
   font-size: 14px;
   border-radius: 5px;
   cursor: ${({ $hasOnClick }) => ($hasOnClick ? "pointer" : "default")};
+
+  white-space: nowrap;
 `;

@@ -96,7 +96,7 @@ const Container2 = styled.div`
 `;
 
 const Tab2 = styled.div<{ $active: boolean }>`
-  padding: 8px 16px;
+  padding: 8px 8px;
   cursor: pointer;
 
   font-weight: ${({ $active }) => ($active ? "600" : "400")};
@@ -113,5 +113,9 @@ const Container3 = styled.div`
   flex: 1;
   align-items: center;
   justify-content: center;
+  width: 300px;
   gap: 16px;
+
+  white-space: nowrap;
+  overflow-x: auto;
 `;

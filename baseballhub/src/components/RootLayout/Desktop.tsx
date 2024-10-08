@@ -20,7 +20,7 @@ export function Desktop() {
         <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
       </SidebarWrapper>
       <ContentWrapper>
-      <Outlet />
+        <Outlet />
       </ContentWrapper>
     </MainContainer>
   );
