@@ -115,6 +115,7 @@ const Info = styled.div`
 
   font-size: 14px;
   font-weight: 600;
+  color: ${({ theme }) => theme.colors.primary};
 `;
 
 const Result = styled.div`

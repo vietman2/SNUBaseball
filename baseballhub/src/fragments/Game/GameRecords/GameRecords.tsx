@@ -234,6 +234,7 @@ const Table = styled.table<{ maincolumn: number }>`
 
   font-size: 12px;
   text-align: center;
+  color: ${({ theme }) => theme.colors.primary};
 
   thead {
     background-color: ${({ theme }) => theme.colors.primary};
