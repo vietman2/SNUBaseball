@@ -12,7 +12,7 @@ describe("<Callout />", () => {
 
 describe("<Subtitle />", () => {
   it("renders correctly", () => {
-    render(<Subtitle>Hello, world!</Subtitle>);
+    renderWithProviders(<Subtitle>Hello, world!</Subtitle>);
   });
 });
 

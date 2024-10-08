@@ -10,4 +10,5 @@ export const Subtitle = styled.div`
   padding: 0 16px;
   font-size: 16px;
   font-weight: 600;
+  color: ${({ theme }) => theme.colors.foreground900};
 `;
