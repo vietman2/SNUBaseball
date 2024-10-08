@@ -24,11 +24,11 @@ jest.mock("./Training/Training", () => ({
 jest.mock("@components/Tabs", () => ({
   Tabs: ({ setSelectedTab }: { setSelectedTab: (tab: string) => void }) => (
     <>
-      <div data-testid="전체" onClick={() => setSelectedTab("전체")} />
-      <div data-testid="경기" onClick={() => setSelectedTab("경기")} />
-      <div data-testid="훈련" onClick={() => setSelectedTab("훈련")} />
-      <div data-testid="행사" onClick={() => setSelectedTab("행사")} />
-      <div data-testid="null" onClick={() => setSelectedTab("null")} />
+      <button data-testid="전체" onClick={() => setSelectedTab("전체")} />
+      <button data-testid="경기" onClick={() => setSelectedTab("경기")} />
+      <button data-testid="훈련" onClick={() => setSelectedTab("훈련")} />
+      <button data-testid="행사" onClick={() => setSelectedTab("행사")} />
+      <button data-testid="null" onClick={() => setSelectedTab("null")} />
     </>
   ),
 }));

@@ -22,19 +22,19 @@ jest.mock("./Winter/Winter", () => ({
 jest.mock("@components/Tabs", () => ({
   SubTabs: ({ setSelectedTab }: { setSelectedTab: (tab: string) => void }) => (
     <>
-      <div
+      <button
         data-testid="월별 훈련 일정"
         onClick={() => setSelectedTab("월별 훈련 일정")}
       />
-      <div
+      <button
         data-testid="제주도 전지훈련"
         onClick={() => setSelectedTab("제주도 전지훈련")}
       />
-      <div
+      <button
         data-testid="여름 합숙훈련"
         onClick={() => setSelectedTab("여름 합숙훈련")}
       />
-      <div data-testid="null" onClick={() => setSelectedTab("null")} />
+      <button data-testid="null" onClick={() => setSelectedTab("null")} />
     </>
   ),
 }));
