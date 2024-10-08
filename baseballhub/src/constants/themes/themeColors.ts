@@ -6,9 +6,9 @@ export const light = {
   // background: 흰색 계열
   background100: "#FAF9F6",
   background300: "#E8E6F2",
-  background500: "#D1D6DA",
-  background700: "#B1BDCD",
-  background900: "#667BE8",
+  background500: "#D9D9D9",
+  background700: "#D1D6DA",
+  background900: "#B1BDCD",
 
   // foreground: 검정 계열
   foreground900: "#0B1623",
@@ -18,8 +18,8 @@ export const light = {
   foreground100: "#AE7910",
 
   // 테두리
-  borderLight: "#C4C4C4",
-  borderDark: "#B5B6B6",
+  borderLight: "#B5B6B6",
+  borderDark: "#A1A1A1",
 };
 
 export const dark = {
