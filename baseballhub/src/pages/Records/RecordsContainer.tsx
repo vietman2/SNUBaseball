@@ -45,7 +45,6 @@ export default function RecordsContainer() {
           <Title>기록실</Title>
           <VerticalDivider height="45%" bold />
           <Tabs
-            type={1}
             tabs={tabs}
             activeTab={selectedTab}
             setActiveTab={setSelectedTab}
@@ -55,7 +54,6 @@ export default function RecordsContainer() {
       ) : (
         <MobileHeader>
           <Tabs
-            type={1}
             tabs={tabs}
             activeTab={selectedTab}
             setActiveTab={setSelectedTab}

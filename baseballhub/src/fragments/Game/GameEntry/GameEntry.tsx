@@ -67,7 +67,6 @@ const Lineup = styled.div`
   flex-direction: column;
   padding: 8px;
   gap: 8px;
-  overflow-y: auto;
 `;
 
 const StartingPlayer = styled.div`
@@ -113,6 +112,7 @@ const Right = styled.div`
 const Bench = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: center;
   flex-wrap: wrap;
   padding: 8px;
   gap: 8px;

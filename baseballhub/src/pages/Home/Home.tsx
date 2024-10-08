@@ -13,7 +13,9 @@ export default function Home() {
         <PageHeader>
           <Title>Home</Title>
         </PageHeader>
-      ) : null}
+      ) : (
+        <div />
+      )}
     </Container>
   );
 }

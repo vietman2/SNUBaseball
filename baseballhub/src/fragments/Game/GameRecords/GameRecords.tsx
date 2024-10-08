@@ -151,12 +151,10 @@ export function GameRecords({ lineup, pitchers }: Readonly<Props>) {
           <col style={{ width: "8%" }} />
           <col style={{ width: "8%" }} />
           <col style={{ width: "8%" }} />
-          <col style={{ width: "8%" }} />
         </colgroup>
         <thead>
           <tr>
             <th>이름</th>
-            <th>결과</th>
             <th>이닝</th>
             <th>타자</th>
             <th>투구수</th>
@@ -173,7 +171,6 @@ export function GameRecords({ lineup, pitchers }: Readonly<Props>) {
           {pitchers.map((pitcher) => (
             <tr key={pitcher.name}>
               <td>{pitcher.name}</td>
-              <td>{pitcher.result}</td>
               <td>{pitcher.innings_pitched}</td>
               <td>{pitcher.batter_faced}</td>
               <td>{pitcher.pitches}</td>
@@ -187,7 +184,7 @@ export function GameRecords({ lineup, pitchers }: Readonly<Props>) {
             </tr>
           ))}
           <tr>
-            <td colSpan={2}>합</td>
+            <td>합</td>
             <td>
               {pitchers.reduce(
                 (acc, pitcher) => acc + pitcher.innings_pitched,
@@ -235,7 +232,7 @@ const Table = styled.table<{ maincolumn: number }>`
   width: 100%;
   border-collapse: collapse;
 
-  font-size: 14px;
+  font-size: 12px;
   text-align: center;
 
   thead {

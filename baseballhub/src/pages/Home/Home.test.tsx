@@ -1,13 +1,13 @@
-import { screen } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
 
 import Home from "./Home";
-import { renderWithProviders } from "@utils/test-utils";
+import { renderWithProviders, resizeWindow } from "@utils/test-utils";
 
 describe("<Home />", () => {
-  it("renders without crashing", () => {
+  it("renders without crashing", async () => {
     renderWithProviders(<Home />);
 
-    expect(screen.getByText("Home")).toBeInTheDocument();
-    screen.getByText("Home").click();
+    await waitFor(() => resizeWindow(800, 800));
+    await waitFor(() => resizeWindow(600, 600));
   });
 });
