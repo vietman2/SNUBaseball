@@ -37,8 +37,19 @@ jest.mock("@components/Chips", () => ({
     </button>
   ),
 }));
+jest.mock("@components/Dividers", () => ({
+  VerticalDivider: () => <div>VerticalDivider</div>,
+}));
 jest.mock("@components/Frames", () => ({
   IFrame: () => <div>IFrame</div>,
+}));
+jest.mock("@components/Headers", () => ({
+  MobileHeader: ({ children }: { children: React.ReactNode }) => (
+    <div>{children}</div>
+  ),
+  PageHeader: ({ children }: { children: React.ReactNode }) => (
+    <div>{children}</div>
+  ),
 }));
 jest.mock("@components/Icons", () => ({
   AppIcon: ({ icon }: { icon: string }) => <span>{icon}</span>,
