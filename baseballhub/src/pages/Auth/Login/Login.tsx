@@ -2,10 +2,10 @@ import { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-import { useAuth } from "../AuthProvider";
 import Logo from "@assets/images/logo.png";
 import { TextButton } from "@components/Buttons";
 import { TextInput } from "@components/Inputs";
+import { useAuth } from "@contexts/auth";
 import { tempProfile } from "@data/user/people";
 
 export function Login() {
