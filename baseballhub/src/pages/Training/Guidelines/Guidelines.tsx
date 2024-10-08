@@ -69,9 +69,9 @@ export default function Guidelines() {
   };
 
   return (
-    <>
+    <Container>
       <Title>훈련 가이드라인</Title>
-      <Container>
+      <Contents>
         <Left>
           <Callout text="함부로 좋아요 찍지마라!" />
           <Tabs
@@ -116,16 +116,22 @@ export default function Guidelines() {
         <Right>
           <GuidelineDetail guideline={selectedGuideline} />
         </Right>
-      </Container>
-    </>
+      </Contents>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+`;
 
 const Title = styled.h2`
   margin: 1rem 0;
 `;
 
-const Container = styled.div`
+const Contents = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;

@@ -20,9 +20,9 @@ import { RecordsContainer } from "@pages/Records";
 import { ScheduleContainer } from "@pages/Schedule";
 import { Feedback, Guidelines, Journals } from "@pages/Training";
 
+import { RootLayout } from "@components/RootLayout";
 import { AuthProvider, useAuth } from "@contexts/auth";
 import { ThemeProvider, useTheme } from "@contexts/theme";
-import { RootLayout } from "@components/RootLayout";
 import { dark, light } from "@themes/themeColors";
 
 const ProtectedRoutes = () => {

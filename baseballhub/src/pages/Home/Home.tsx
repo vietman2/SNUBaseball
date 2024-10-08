@@ -1,4 +1,4 @@
-import { useAuth } from "@pages/Auth/AuthProvider";
+import { useAuth } from "@contexts/auth/AuthContext";
 
 export default function Home() {
   const { logout } = useAuth();

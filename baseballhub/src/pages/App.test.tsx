@@ -30,7 +30,7 @@ jest.mock("@pages/Training", () => ({
 
 describe("<App />", () => {
   it("renders no user", () => {
-    jest.mock("@pages/Auth/AuthProvider", () => ({
+    jest.mock("@contexts/auth", () => ({
       AuthProvider: ({ children }: { children: React.ReactNode }) => (
         <>{children}</>
       ),
@@ -43,7 +43,7 @@ describe("<App />", () => {
   });
 
   it("renders user", () => {
-    jest.mock("@pages/Auth/AuthProvider", () => ({
+    jest.mock("@contexts/auth", () => ({
       AuthProvider: ({ children }: { children: React.ReactNode }) => (
         <>{children}</>
       ),

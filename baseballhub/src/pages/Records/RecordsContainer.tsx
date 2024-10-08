@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { Results } from "./Results/Results";
 import { GameDetail } from "./GameDetail/GameDetail";
 import { Tabs } from "@components/Tabs";
-import { Title } from "@components/Texts";
 
 const tabs = ["경기결과", "개인기록", "연습경기", "체력측정"];
 
@@ -34,17 +33,14 @@ export default function RecordsContainer() {
   };
 
   return (
-    <Container>
-      <Header>
-        <Title>기록실</Title>
-      </Header>
+    <Wrapper>
       <Tabs tabs={tabs} activeTab={selectedTab} setActiveTab={setSelectedTab} />
       <Content $first={selectedTab === "경기결과"}>{renderContent()}</Content>
-    </Container>
+    </Wrapper>
   );
 }
 
-const Container = styled.div`
+const Wrapper = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -54,15 +50,11 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px;
 `;
 
 const Content = styled.div<{ $first: boolean }>`
   display: flex;
   flex: 1;
-  background-color: ${({ theme }) => theme.colors.lavender};
-  margin-bottom: 24px;
-  padding: 24px 24px;
-  border-radius: 10px;
+  margin: 8px;
   border-top-left-radius: ${(props) => (props.$first ? "0" : "10px")};
 `;
