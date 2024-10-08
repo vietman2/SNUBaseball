@@ -99,3 +99,20 @@ jest.mock("@components/Texts", () => ({
   Subtitle: () => <div>Subtitle</div>,
   Title: () => <div>Title</div>,
 }));
+jest.mock("@contexts/auth/AuthContext", () => ({
+  AuthProvider: ({ children }: { children: React.ReactNode }) => (
+    <div>{children}</div>
+  ),
+  useAuth: () => ({
+    login: jest.fn(),
+    logout: jest.fn(),
+  })
+}));
+jest.mock("@contexts/theme/ThemeContext", () => ({
+  ThemeProvider: ({ children }: { children: React.ReactNode }) => (
+    <div>{children}</div>
+  ),
+  useTheme: () => ({
+    toggleTheme: jest.fn(),
+  }),
+}));
