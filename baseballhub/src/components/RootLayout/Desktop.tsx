@@ -121,11 +121,13 @@ function Sidebar({ isSidebarOpen, toggleSidebar }: Props) {
                 </IconWrapper>
               </>
             ) : (
-              <AppIcon
-                icon={isDarkMode ? "moon" : "sun"}
-                size={24}
-                color={isDarkMode ? "#C5A86F" : "#0F0F70"}
-              />
+              <div onClick={toggleTheme}>
+                <AppIcon
+                  icon={isDarkMode ? "moon" : "sun"}
+                  size={24}
+                  color={isDarkMode ? "#C5A86F" : "#0F0F70"}
+                />
+              </div>
             )}
           </Switch>
           <TabItem $isOpen={isSidebarOpen} $isActive={false}>
@@ -136,7 +138,7 @@ function Sidebar({ isSidebarOpen, toggleSidebar }: Props) {
       </SidebarContainer>
       <SidebarToggleIcon
         onClick={toggleSidebar}
-        left={isSidebarOpen ? "225px" : "80px"}
+        left={isSidebarOpen ? "225px" : "75px"}
         data-testid="toggle"
       >
         <AppIcon
@@ -191,12 +193,17 @@ const SidebarHeader = styled.div`
   height: 80px;
   padding: 0 16px;
 
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
   text-align: center;
   color: ${({ theme }) => theme.colors.primary};
   font-family: "SCDream";
   font-size: 18px;
   font-weight: 900;
 
+  background-color: ${({ theme }) => theme.colors.background300};
   border-bottom: 1px solid ${({ theme }) => theme.colors.borderLight};
 `;
 

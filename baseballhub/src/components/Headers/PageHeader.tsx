@@ -14,5 +14,10 @@ const Header = styled.div`
   height: 80px;
   gap: 16px;
 
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  background-color: ${({ theme }) => theme.colors.background700};  
   border-bottom: 1px solid ${({ theme }) => theme.colors.borderLight};
 `;
