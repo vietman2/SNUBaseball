@@ -19,6 +19,7 @@ describe("<AppIcon />", () => {
         <AppIcon icon="chevron-left" size={16} color="black" />
         <AppIcon icon="chevron-right" size={16} color="black" />
         <AppIcon icon="chevron-up" size={16} color="black" />
+        <AppIcon icon="close" size={16} color="black" />
         <AppIcon icon="diary" size={16} color="black" />
         <AppIcon icon="down" size={16} color="black" />
         <AppIcon icon="feedback" size={16} color="black" />
@@ -28,6 +29,8 @@ describe("<AppIcon />", () => {
         <AppIcon icon="guide" size={16} color="black" />
         <AppIcon icon="home" size={16} color="black" />
         <AppIcon icon="lightbulb" size={16} color="black" />
+        <AppIcon icon="menu" size={16} color="black" />
+        <AppIcon icon="people" size={16} color="black" />
         <AppIcon icon="person" size={16} color="black" />
         <AppIcon icon="record" size={16} color="black" />
         <AppIcon icon="storage" size={16} color="black" />
