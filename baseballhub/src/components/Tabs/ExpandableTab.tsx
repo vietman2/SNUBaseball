@@ -48,7 +48,7 @@ const Header = styled.div<{ radius: string }>`
   border-radius: 16px;
   border-bottom-left-radius: ${(props) => props.radius};
   border-bottom-right-radius: ${(props) => props.radius};
-  background-color: ${({ theme }) => theme.colors.background700};
+  background-color: ${({ theme }) => theme.colors.background900};
   cursor: pointer;
   user-select: none;
 
