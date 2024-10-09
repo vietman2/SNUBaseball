@@ -15,7 +15,7 @@ import { Members } from "@pages/Admin";
 import { Login, SignUp } from "@pages/Auth";
 import { Board } from "@pages/Forum";
 import { GuidelinesContainer } from "@pages/Guidelines";
-import { Home } from "@pages/Home";
+import { HomeContainer } from "@pages/Home";
 import { RecordsContainer } from "@pages/Records";
 import { ScheduleContainer } from "@pages/Schedule";
 import { Feedback, Journals } from "@pages/Training";
@@ -43,7 +43,7 @@ const router = createBrowserRouter(
       <Route path="/signup" element={<SignUp />} />
       <Route element={<ProtectedRoutes />}>
         <Route element={<RootLayout />}>
-          <Route path="/home" element={<Home />} />
+          <Route path="/home" element={<HomeContainer />} />
           <Route path="/records" element={<RecordsContainer />} />
           <Route path="/schedule" element={<ScheduleContainer />} />
           <Route path="/guidelines" element={<GuidelinesContainer />} />

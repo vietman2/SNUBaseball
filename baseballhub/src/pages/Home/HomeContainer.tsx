@@ -4,7 +4,7 @@ import { PageHeader } from "@components/Headers";
 import { Title } from "@components/Texts";
 import { useWindowSize } from "@hooks/useWindowSize";
 
-export default function Home() {
+export default function HomeContainer() {
   const { width } = useWindowSize();
 
   return (

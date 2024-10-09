@@ -27,7 +27,7 @@ jest.mock("@pages/Forum", () => ({
   Board: () => <div />,
 }));
 jest.mock("@pages/Home", () => ({
-  Home: () => <div />,
+  HomeContainer: () => <div />,
 }));
 jest.mock("@pages/Records", () => ({
   RecordsContainer: () => <div />,

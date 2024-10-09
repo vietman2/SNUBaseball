@@ -1,11 +1,11 @@
-import { screen, waitFor } from "@testing-library/react";
+import { waitFor } from "@testing-library/react";
 
-import Home from "./Home";
+import HomeContainer from "./HomeContainer";
 import { renderWithProviders, resizeWindow } from "@utils/test-utils";
 
-describe("<Home />", () => {
+describe("<HomeContainer />", () => {
   it("renders without crashing", async () => {
-    renderWithProviders(<Home />);
+    renderWithProviders(<HomeContainer />);
 
     await waitFor(() => resizeWindow(800, 800));
     await waitFor(() => resizeWindow(600, 600));
