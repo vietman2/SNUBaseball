@@ -8,7 +8,7 @@ interface Props {
   onSelect: (option: string) => void;
 }
 
-export function ChipSelector({ options, selected, onSelect }: Props) {
+export function ChipTabs({ options, selected, onSelect }: Props) {
   return (
     <ChipSelectorWrapper>
       {options.map((option) => (

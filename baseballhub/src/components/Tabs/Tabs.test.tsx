@@ -1,10 +1,25 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 
+import { ChipTabs } from "./ChipTabs";
 import { ExpandableTab } from "./ExpandableTab";
 import { Tabs } from "./Tabs";
 import { renderWithProviders, resizeWindow } from "@utils/test-utils";
 
 jest.unmock("@components/Tabs");
+
+describe("<ChipTabs />", () => {
+  it("should render", () => {
+    renderWithProviders(
+      <ChipTabs
+        options={["Option1", "Option2"]}
+        selected="Option1"
+        onSelect={jest.fn()}
+      />
+    );
+
+    fireEvent.click(screen.getByText("Option2"));
+  });
+});
 
 describe("<ExpandableTab />", () => {
   it("should render", () => {
@@ -40,19 +55,6 @@ describe("<Tabs />", () => {
     renderWithProviders(
       <Tabs
         type={2}
-        tabs={["Tab1", "Tab2"]}
-        activeTab="Tab1"
-        setActiveTab={jest.fn()}
-      />
-    );
-
-    fireEvent.click(screen.getByTestId("Tab2"));
-  });
-
-  it("should render type 3", () => {
-    renderWithProviders(
-      <Tabs
-        type={3}
         tabs={["Tab1", "Tab2"]}
         activeTab="Tab1"
         setActiveTab={jest.fn()}
