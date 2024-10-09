@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-import { Chip } from "@components/Chips";
 import { AppIcon, MainLogo } from "@components/Icons";
 import { GameResultsType } from "@models/records/game";
 
@@ -12,12 +11,12 @@ export function Scoreboard({ game }: Readonly<Props>) {
   const isHome = game.home_team === "서울대";
   const opponent = isHome ? game.away_team : game.home_team;
 
-  const getDateTimeText = () => {
+  const getDateText = () => {
     const dateText = game.date
       .slice(5, 10)
       .replace(/^0+/, "")
       .replace("-", "/");
-    return `${dateText} ${game.time}`;
+    return `${dateText}`;
   };
 
   return (
@@ -37,9 +36,10 @@ export function Scoreboard({ game }: Readonly<Props>) {
         <Middle>
           <Score>{game.away_records[0]}</Score>
           <Info>
-            <Chip label={game.result} bgColor="#FAF9F6" color="#0B1623" />
             <div>
-              {getDateTimeText()}
+              {getDateText()}
+              <br />
+              {game.time}
               <br />
               {game.location}
             </div>
