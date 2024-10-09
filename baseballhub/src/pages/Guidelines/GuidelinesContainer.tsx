@@ -1,6 +1,14 @@
+import { useState } from "react";
 import styled from "styled-components";
 
+import { VerticalDivider } from "@components/Dividers";
+import { MobileHeader, PageHeader } from "@components/Headers";
+import { ChipTabs, Tabs } from "@components/Tabs";
 import { Title } from "@components/Texts";
+import { sampleGuidelines } from "@data/guidelines";
+import { GuidelineDetail, GuidelinePreview } from "@fragments/Guideline";
+import { useWindowSize } from "@hooks/useWindowSize";
+import { GuidelineType } from "@models/guideline";
 
 type TabType = {
   name: string;
@@ -9,15 +17,15 @@ type TabType = {
 
 const tabs: TabType[] = [
   {
-    name: "내야수비",
+    name: "내야",
     menus: ["캐칭/핸들링", "스텝", "송구", "팝플라이"],
   },
   {
-    name: "외야수비",
+    name: "외야",
     menus: ["플라이", "땅볼", "송구"],
   },
   {
-    name: "포수수비",
+    name: "포수",
     menus: ["송구", "블로킹", "캐치"],
   },
   {
@@ -39,30 +47,117 @@ const tabs: TabType[] = [
 ];
 
 export default function GuidelinesContainer() {
+  const [selectedTab, setSelectedTab] = useState<TabType>(tabs[0]);
+  const [selectedMenu, setSelectedMenu] = useState<string>(tabs[0].menus[0]);
+  const [selectedGuideline, setSelectedGuideline] =
+    useState<GuidelineType | null>(null);
+
+  const setActiveTab = (tab: TabType) => {
+    setSelectedTab(tab);
+    setSelectedMenu(tab.menus[0]);
+    setSelectedGuideline(null);
+  };
+
+  const handleGuidelineClick = (guideline: GuidelineType) => {
+    setSelectedGuideline(guideline);
+  };
+
+  const { width } = useWindowSize();
+
   return (
-    <Wrapper>
-      <Header>
-        <Title>훈련 가이드라인</Title>
-      </Header>
-    </Wrapper>
+    <Container>
+      {width > 768 ? (
+        <PageHeader>
+          <Title>훈련 가이드라인</Title>
+          <VerticalDivider height="45%" bold />
+          <Tabs
+            tabs={tabs.map((tab) => tab.name)}
+            activeTab={selectedTab.name}
+            setActiveTab={(tab) =>
+              setActiveTab(tabs.find((t) => t.name === tab)!)
+            }
+          />
+        </PageHeader>
+      ) : (
+        <MobileHeader>
+          <Tabs
+            tabs={tabs.map((tab) => tab.name)}
+            activeTab={selectedTab.name}
+            setActiveTab={(tab) =>
+              setActiveTab(tabs.find((t) => t.name === tab)!)
+            }
+            textSize="small"
+          />
+        </MobileHeader>
+      )}
+      {selectedGuideline ? (
+        <Content>
+          <GuidelineDetail
+            guideline={selectedGuideline}
+            goBack={() => setSelectedGuideline(null)}
+          />
+        </Content>
+      ) : (
+        <Content>
+          <TabsWrapper>
+            <ChipTabs
+              options={selectedTab.menus}
+              selected={selectedMenu}
+              onSelect={setSelectedMenu}
+            />
+          </TabsWrapper>
+          <Wrapper align={width > 768 ? "flex-start" : "center"}>
+            {sampleGuidelines.map((guideline) => (
+              <div
+                key={guideline.id}
+                onClick={() => handleGuidelineClick(guideline)}
+                data-testid={`guideline-${guideline.id}`}
+              >
+                <GuidelinePreview guideline={guideline} />
+              </div>
+            ))}
+          </Wrapper>
+        </Content>
+      )}
+    </Container>
   );
 }
 
-const Wrapper = styled.div`
+const Container = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
+  margin-bottom: 16px;
 `;
 
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const Content = styled.div<{ $first: boolean }>`
+const Content = styled.div`
   display: flex;
   flex: 1;
-  margin: 8px;
-  border-top-left-radius: ${(props) => (props.$first ? "0" : "10px")};
+  flex-direction: column;
+  margin: 12px;
+  padding: 12px 16px;
+  gap: 16px;
+
+  border-radius: 16px;
+  background-color: ${({ theme }) => theme.colors.background300};
+`;
+
+const TabsWrapper = styled.div`
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+`;
+
+const Wrapper = styled.div<{ align: string }>`
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: ${({ align }) => align};
+  gap: 16px;
+
+  > div {
+    cursor: pointer;
+  }
 `;

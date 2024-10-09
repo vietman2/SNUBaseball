@@ -11,7 +11,11 @@ jest.mock("./Results/Results", () => ({
   ),
 }));
 jest.mock("./GameDetail/GameDetail", () => ({
-  GameDetail: () => <div>GameDetail</div>,
+  GameDetail: ({ goBack }: { goBack: () => void }) => (
+    <div>
+      <button onClick={goBack}>GameDetail</button>
+    </div>
+  ),
 }));
 jest.mock("@components/Tabs", () => ({
   Tabs: ({ setActiveTab }: { setActiveTab: (tab: string) => void }) => (
@@ -42,5 +46,6 @@ describe("<RecordsContainer />", () => {
     renderWithProviders(<RecordsContainer />);
 
     fireEvent.click(screen.getByText("Select Game"));
+    fireEvent.click(screen.getByText("GameDetail"));
   });
 });
