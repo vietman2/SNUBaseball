@@ -248,7 +248,6 @@ const TabItem = styled.div<{ $isActive: boolean; $isOpen: boolean }>`
   margin: 5px 0;
   padding: 8px 24px;
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
   font-size: 18px;
   font-weight: 700;
   color: ${({ $isActive, theme }) =>
@@ -285,7 +284,6 @@ const IconWrapper = styled.div<{ $isSelected: boolean }>`
   border-radius: 8px;
   background-color: ${({ $isSelected, theme }) =>
     $isSelected ? theme.colors.background300 : "transparent"};
-  transition: background-color 0.3s ease-in-out;
 `;
 
 const SidebarToggleIcon = styled.div<{ left: string }>`
