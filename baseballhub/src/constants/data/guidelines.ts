@@ -18,7 +18,7 @@ export const sampleGuidelines: GuidelineType[] = [
   },
   {
     id: 2,
-    title: "맨손으로 공 잡기 Drill",
+    title: "맨손으로 공 잡기 Drill (내야수)",
     shared_by: "김유안",
     shared_at: "09/08",
     video_id: "xbZDmXPgRWE",
