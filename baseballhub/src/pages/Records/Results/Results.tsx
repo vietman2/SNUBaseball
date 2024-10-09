@@ -97,7 +97,10 @@ const Container = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
-  padding: 4px 16px;
+  padding: 12px 16px;
+
+  border-radius: 16px;
+  background-color: ${({ theme }) => theme.colors.background300};
 `;
 
 const Wrapper = styled.div`
