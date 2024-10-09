@@ -108,13 +108,13 @@ export default function GuidelinesContainer() {
           </TabsWrapper>
           <Wrapper align={width > 768 ? "flex-start" : "center"}>
             {sampleGuidelines.map((guideline) => (
-              <div
+              <button
                 key={guideline.id}
                 onClick={() => handleGuidelineClick(guideline)}
                 data-testid={`guideline-${guideline.id}`}
               >
                 <GuidelinePreview guideline={guideline} />
-              </div>
+              </button>
             ))}
           </Wrapper>
         </Content>
@@ -154,10 +154,7 @@ const Wrapper = styled.div<{ align: string }>`
   flex: 1;
   flex-direction: row;
   flex-wrap: wrap;
+  align-items: flex-start;
   justify-content: ${({ align }) => align};
   gap: 16px;
-
-  > div {
-    cursor: pointer;
-  }
 `;
