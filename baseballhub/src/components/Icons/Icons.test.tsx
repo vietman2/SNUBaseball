@@ -49,7 +49,11 @@ describe("<AppIcon />", () => {
 });
 
 describe("<MainLogo />", () => {
-  it("should render", () => {
+  it("should render blue logo", () => {
     render(<MainLogo />);
+  });
+  
+  it("should render white logo", () => {
+    render(<MainLogo color="white" />);
   });
 });
