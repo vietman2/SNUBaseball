@@ -2,8 +2,8 @@ import { useState } from "react";
 import styled from "styled-components";
 
 import { Bases } from "@components/Bases";
+import { Chip } from "@components/Chips";
 import { AppIcon } from "@components/Icons";
-import { Tabs } from "@components/Tabs";
 
 const tabs = ["1회", "2회", "3회", "4회", "5회", "6회", "7회", "8회", "9회"];
 
@@ -13,12 +13,17 @@ export function GameStory() {
   return (
     <Container>
       <TabWrapper>
-        <Tabs
-          type={3}
-          tabs={tabs}
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-        />
+        <div>
+          {tabs.map((tab) => (
+            <Chip
+              key={tab}
+              label={tab}
+              bgColor={tab === activeTab ? "#0F0F70" : "#B5B6B6"}
+              color={tab === activeTab ? "#E8E6F2" : "#0B1623"}
+              onClick={() => setActiveTab(tab)}
+            />
+          ))}
+        </div>
       </TabWrapper>
       <Relay>
         <PlateAppearance />
@@ -42,6 +47,18 @@ const TabWrapper = styled.div`
   padding: 8px;
 
   border-bottom: 1px solid ${({ theme }) => theme.colors.borderLight};
+
+  > div {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    gap: 12px;
+
+    white-space: nowrap;
+    overflow-x: auto;
+  }
 `;
 
 const Relay = styled.div`
