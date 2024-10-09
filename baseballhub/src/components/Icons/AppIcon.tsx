@@ -3,6 +3,7 @@ import { ReactComponent as AdminIcon } from "./admin.svg";
 import { ReactComponent as ArchiveIcon } from "./archive.svg";
 import { ReactComponent as BaseballIcon } from "./baseball.svg";
 import { ReactComponent as CalendarIcon } from "./calendar.svg";
+import { ReactComponent as ChatIcon } from "./chat.svg";
 import { ReactComponent as CheckIcon } from "./check.svg";
 import { ReactComponent as ChevronDownIcon } from "./chevron-down.svg";
 import { ReactComponent as ChevronLeftIcon } from "./chevron-left.svg";
@@ -16,8 +17,10 @@ import { ReactComponent as FieldIcon } from "./field.svg";
 import { ReactComponent as ForumIcon } from "./forum.svg";
 import { ReactComponent as GalleryIcon } from "./gallery.svg";
 import { ReactComponent as GuideIcon } from "./guide.svg";
+import { ReactComponent as HeartIcon } from "./heart.svg";
 import { ReactComponent as HomeIcon } from "./home.svg";
 import { ReactComponent as LightBulbIcon } from "./lightbulb.svg";
+import { ReactComponent as LikeIcon } from "./like.svg";
 import { ReactComponent as MenuIcon } from "./menu.svg";
 import { ReactComponent as MoonIcon } from "./moon.svg";
 import { ReactComponent as PeopleIcon } from "./people.svg";
@@ -44,6 +47,8 @@ export const AppIcon = ({ icon, size, color }: Props) => {
       return <BaseballIcon width={size} height={size} color={color} />;
     case "calendar":
       return <CalendarIcon width={size} height={size} color={color} />;
+    case "chat":
+      return <ChatIcon width={size} height={size} color={color} />;
     case "check":
       return <CheckIcon width={size} height={size} color={color} />;
     case "chevron-down":
@@ -70,10 +75,14 @@ export const AppIcon = ({ icon, size, color }: Props) => {
       return <GalleryIcon width={size} height={size} color={color} />;
     case "guide":
       return <GuideIcon width={size} height={size} color={color} />;
+    case "heart":
+      return <HeartIcon width={size} height={size} color={color} />;
     case "home":
       return <HomeIcon width={size} height={size} color={color} />;
     case "lightbulb":
       return <LightBulbIcon width={size} height={size} color={color} />;
+    case "like":
+      return <LikeIcon width={size} height={size} color={color} />;
     case "menu":
       return <MenuIcon width={size} height={size} color={color} />;
     case "moon":

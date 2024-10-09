@@ -33,7 +33,7 @@ export function Mobile() {
   };
 
   return (
-    <Container>
+    <>
       <Header $isMenuOpen={isMenuOpen}>
         <div onClick={toggleMenu} role="button" data-testid="toggle">
           <AppIcon
@@ -47,47 +47,51 @@ export function Mobile() {
           <AppIcon icon="person" size={24} color="#000" />
         </div>
       </Header>
-      <Menu $isMenuOpen={isMenuOpen}>
-        {tabgroups.map(
-          (tabgroup) =>
-            doRender(tabgroup) && (
-              <div key={tabgroup.title}>
-                <div>{tabgroup.title}</div>
-                {tabgroup.tabs.map((tab) => (
-                  <MenuItem
-                    key={tab.title}
-                    onClick={() => handleTabClick(tab)}
-                    $isActive={activeTab === tab.title}
-                    data-testid={tab.title}
-                  >
-                    <AppIcon
-                      icon={tab.icon}
-                      size={24}
-                      color={
-                        activeTab === tab.title
-                          ? activeTabColor
-                          : inactiveTabColor
-                      }
-                    />
-                    {tab.title}
-                  </MenuItem>
-                ))}
-              </div>
-            )
+      <Container>
+        <Menu $isMenuOpen={isMenuOpen}>
+          {tabgroups.map(
+            (tabgroup) =>
+              doRender(tabgroup) && (
+                <div key={tabgroup.title}>
+                  <div>{tabgroup.title}</div>
+                  {tabgroup.tabs.map((tab) => (
+                    <MenuItem
+                      key={tab.title}
+                      onClick={() => handleTabClick(tab)}
+                      $isActive={activeTab === tab.title}
+                      data-testid={tab.title}
+                    >
+                      <AppIcon
+                        icon={tab.icon}
+                        size={24}
+                        color={
+                          activeTab === tab.title
+                            ? activeTabColor
+                            : inactiveTabColor
+                        }
+                      />
+                      {tab.title}
+                    </MenuItem>
+                  ))}
+                </div>
+              )
+          )}
+        </Menu>
+        {!isMenuOpen && (
+          <ContentWrapper>
+            <Outlet />
+          </ContentWrapper>
         )}
-      </Menu>
-      {!isMenuOpen && (
-        <ContentWrapper>
-          <Outlet />
-        </ContentWrapper>
-      )}
-    </Container>
+      </Container>
+    </>
   );
 }
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  height: 100dvh;
+  height: calc(100dvh - 50px);
   background-color: ${({ theme }) => theme.colors.background700};
 `;
 
@@ -106,6 +110,10 @@ const Header = styled.div<{ $isMenuOpen: boolean }>`
   width: 100%;
   height: 50px;
   padding: 0 16px;
+
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 
   color: ${({ theme }) => theme.colors.primary};
   font-size: 20px;

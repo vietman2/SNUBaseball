@@ -56,11 +56,10 @@ const Container1 = styled.div`
 `;
 
 const Tab1 = styled.div<{ $active: boolean; textsize: "small" | "large" }>`
-  padding: 8px 12px;
+  padding: ${({ textsize }) => (textsize === "small" ? "4px 8px" : "8px 16px")};
 
-  font-size: ${({ textsize }) => (textsize === "small" ? "16px" : "18px")};
-  font-weight: ${({ $active, textsize }) =>
-    $active ? "700" : "400"};
+  font-size: ${({ textsize }) => (textsize === "small" ? "14px" : "18px")};
+  font-weight: ${({ $active }) => ($active ? "700" : "400")};
 
   cursor: pointer;
   color: ${({ $active, theme }) =>

@@ -6,7 +6,7 @@ jest.unmock("@components/Chips");
 
 describe("<Chip />", () => {
   it("should render small", () => {
-    render(<Chip label="Test" onClick={jest.fn()} small />);
+    render(<Chip label="Test" onClick={jest.fn()} size="small" icon="icon" />);
 
     fireEvent.click(screen.getByTestId("chip"));
   });
