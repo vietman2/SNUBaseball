@@ -68,7 +68,7 @@ function Sidebar({ isSidebarOpen, toggleSidebar }: Props) {
     <>
       <SidebarContainer width={isSidebarOpen ? "240px" : "90px"}>
         <SidebarHeader>
-          <MainLogo size={60} />
+          <MainLogo size={60} color={isDarkMode ? "white" : "blue"} />
           {isSidebarOpen ? "서울대학교 야구부" : ""}
         </SidebarHeader>
         <SidebarContent>
@@ -200,6 +200,7 @@ const SidebarHeader = styled.div`
   align-items: center;
   height: 80px;
   padding: 0 16px;
+  gap: 4px;
 
   position: sticky;
   top: 0;
@@ -247,7 +248,6 @@ const TabItem = styled.div<{ $isActive: boolean; $isOpen: boolean }>`
   margin: 5px 0;
   padding: 8px 24px;
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
   font-size: 18px;
   font-weight: 700;
   color: ${({ $isActive, theme }) =>
@@ -284,7 +284,6 @@ const IconWrapper = styled.div<{ $isSelected: boolean }>`
   border-radius: 8px;
   background-color: ${({ $isSelected, theme }) =>
     $isSelected ? theme.colors.background300 : "transparent"};
-  transition: background-color 0.3s ease-in-out;
 `;
 
 const SidebarToggleIcon = styled.div<{ left: string }>`

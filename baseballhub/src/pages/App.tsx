@@ -141,6 +141,10 @@ const GlobalStyles = createGlobalStyle`
     cursor: pointer;
   }
 
+  div {
+    transition: background-color 0.3s ease-in-out;
+  }
+
   body {
     margin: 0;
     font-family: 'Freesentation', 'SCDream', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
