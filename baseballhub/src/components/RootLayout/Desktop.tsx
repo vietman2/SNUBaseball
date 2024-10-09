@@ -123,13 +123,13 @@ function Sidebar({ isSidebarOpen, toggleSidebar }: Props) {
                 </IconWrapper>
               </>
             ) : (
-              <div onClick={toggleTheme} role="button">
+              <button onClick={toggleTheme}>
                 <AppIcon
                   icon={isDarkMode ? "moon" : "sun"}
                   size={24}
                   color={isDarkMode ? "#C5A86F" : "#0F0F70"}
                 />
-              </div>
+              </button>
             )}
           </Switch>
           <TabItem $isOpen={isSidebarOpen} $isActive={false}>

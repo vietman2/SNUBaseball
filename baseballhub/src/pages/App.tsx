@@ -130,6 +130,16 @@ const GlobalStyles = createGlobalStyle`
   * {
     box-sizing: border-box;
   }
+    
+  button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+  }
 
   body {
     margin: 0;
