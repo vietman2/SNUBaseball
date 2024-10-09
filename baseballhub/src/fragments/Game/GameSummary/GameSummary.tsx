@@ -83,7 +83,7 @@ function Score({ team, runs_scored, our_team, result }: Readonly<ScoreProps>) {
               label={result}
               bgColor={getBackgroundColor()}
               color="#0B1623"
-              small
+              size="small"
             />
           ) : null}
         </div>
