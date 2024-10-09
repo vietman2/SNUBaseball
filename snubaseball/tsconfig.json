@@ -19,14 +19,15 @@
     "paths": {
       "@assets/*": ["assets/*"],
       "@components/*": ["components/*"],
-      "@constants/*": ["constants/*"],
       "@data/*": ["constants/data/*"],
       "@fragments/*": ["fragments/*"],
+      "@models/*": ["constants/models/*"],
       "@navigation/*": ["constants/navigation/*"],
+      "@hooks/*": ["hooks/*"],
+      "@pages/*": ["pages/*"],
       "@services/*": ["services/*"],
       "@store/*": ["store/*"],
       "@themes/*": ["constants/themes/*"],
-      "@type/*": ["constants/types/*"],
       "@utils/*": ["utils/*"]
     }
   },

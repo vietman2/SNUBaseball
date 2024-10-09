@@ -4,7 +4,7 @@ interface Props {
   height?: string;
 }
 
-export function IFrame({ videoId, width = "100%", height = "100%" }: Props) {
+export function IFrame({ videoId, width = "100%", height = "100%" }: Readonly<Props>) {
   const embedUrl = `https://www.youtube.com/embed/${videoId}`;
 
   return (

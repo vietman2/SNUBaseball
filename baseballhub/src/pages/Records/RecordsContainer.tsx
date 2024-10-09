@@ -3,14 +3,19 @@ import styled from "styled-components";
 
 import { Results } from "./Results/Results";
 import { GameDetail } from "./GameDetail/GameDetail";
+import { VerticalDivider } from "@components/Dividers";
+import { MobileHeader, PageHeader } from "@components/Headers";
 import { Tabs } from "@components/Tabs";
 import { Title } from "@components/Texts";
+import { useWindowSize } from "@hooks/useWindowSize";
 
 const tabs = ["경기결과", "개인기록", "연습경기", "체력측정"];
 
 export default function RecordsContainer() {
   const [selectedTab, setSelectedTab] = useState<string>("경기결과");
   const [selectedGame, setSelectedGame] = useState<number | null>(null);
+
+  const { width } = useWindowSize();
 
   const renderContent = () => {
     switch (selectedTab) {
@@ -22,8 +27,8 @@ export default function RecordsContainer() {
         } else {
           return <Results onSelectGame={setSelectedGame} />;
         }
-      case "기록실":
-        return <div>기록실</div>;
+      case "개인기록":
+        return <div>개인기록</div>;
       case "연습경기":
         return <div>연습경기</div>;
       case "체력측정":
@@ -35,33 +40,38 @@ export default function RecordsContainer() {
 
   return (
     <Container>
-      <Header>
-        <Title>기록실</Title>
-      </Header>
-      <Tabs tabs={tabs} activeTab={selectedTab} setActiveTab={setSelectedTab} />
-      <Content $first={selectedTab === "경기결과"}>{renderContent()}</Content>
+      {width > 768 ? (
+        <PageHeader>
+          <Title>기록실</Title>
+          <VerticalDivider height="45%" bold />
+          <Tabs
+            tabs={tabs}
+            activeTab={selectedTab}
+            setActiveTab={setSelectedTab}
+          />
+        </PageHeader>
+      ) : (
+        <MobileHeader>
+          <Tabs
+            tabs={tabs}
+            activeTab={selectedTab}
+            setActiveTab={setSelectedTab}
+            textSize="small"
+          />
+        </MobileHeader>
+      )}
+      <Content>{renderContent()}</Content>
     </Container>
   );
 }
 
 const Container = styled.div`
-  display: flex;
   flex: 1;
   flex-direction: column;
 `;
 
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px;
-`;
-
-const Content = styled.div<{ $first: boolean }>`
+const Content = styled.div`
   display: flex;
   flex: 1;
-  background-color: ${({ theme }) => theme.colors.lavender};
-  padding: 1rem 20px;
-  border-radius: 10px;
-  border-top-left-radius: ${(props) => (props.$first ? "0" : "10px")};
+  margin: 8px;
 `;

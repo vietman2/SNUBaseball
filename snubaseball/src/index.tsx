@@ -4,7 +4,7 @@ import ReactDOM from "react-dom/client";
 import axios from "axios";
 
 import "./index.css";
-import App from "./containers/root/App";
+import App from "./pages/App";
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(

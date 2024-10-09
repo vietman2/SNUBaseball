@@ -2,6 +2,7 @@ import { fireEvent, screen } from "@testing-library/react";
 
 import { GameDetail } from "./GameDetail";
 import * as Hook from "@hooks/useWindowSize";
+import * as ThemeContext from "@contexts/theme";
 import { renderWithProviders } from "@utils/test-utils";
 
 jest.mock("@components/Tabs", () => ({
@@ -17,6 +18,12 @@ jest.mock("@components/Tabs", () => ({
     </div>
   ),
 }));
+jest.mock("@contexts/theme", () => ({
+  ThemeProvider: ({ children }: { children: React.ReactNode }) => (
+    <div>{children}</div>
+  ),
+  useTheme: jest.fn(),
+}));
 jest.mock("@fragments/Game", () => ({
   GameEntry: () => <div>GameEntry</div>,
   GameFeedback: () => <div>GameFeedback</div>,
@@ -26,14 +33,26 @@ jest.mock("@fragments/Game", () => ({
 }));
 
 describe("<GameDetail />", () => {
-  it("renders wide", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it("renders wide in light mode", () => {
+    jest.spyOn(ThemeContext, "useTheme").mockReturnValue({
+      isDarkMode: false,
+      toggleTheme: jest.fn(),
+    });
     jest
       .spyOn(Hook, "useWindowSize")
       .mockReturnValue({ width: 1920, height: 1000 });
     renderWithProviders(<GameDetail selectedGame={1} goBack={jest.fn()} />);
   });
 
-  it("renders narrow", () => {
+  it("renders narrow in dark mode", () => {
+    jest.spyOn(ThemeContext, "useTheme").mockReturnValue({
+      isDarkMode: true,
+      toggleTheme: jest.fn(),
+    });
     jest
       .spyOn(Hook, "useWindowSize")
       .mockReturnValue({ width: 768, height: 1000 });

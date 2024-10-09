@@ -22,8 +22,6 @@ export function TextInput({ placeholder, value, onChange }: Readonly<Props>) {
 }
 
 const InputWrapper = styled.div`
-  --padding: 2px;
-  --focus-color: #0f0f70;
   display: flex;
   position: relative;
   align-items: center;
@@ -33,16 +31,16 @@ const InputWrapper = styled.div`
   label {
     position: absolute;
     background-color: transparent;
-    color: gray;
-    font-size: 12px;
-    top: 11px;
+    color: ${({ theme }) => theme.colors.borderDark};
+    font-size: 14px;
+    top: 12px;
     left: 10px;
     transition: all 0.2s ease-in;
   }
 `;
 
 const Input = styled.input`
-  border: 2px solid gray;
+  border: ${({ theme }) => `2px solid ${theme.colors.borderDark}`};
   outline: none;
   border-radius: 6px;
   padding: 10px 5px;
@@ -51,15 +49,15 @@ const Input = styled.input`
 
   &:focus,
   &:not(:placeholder-shown) {
-    border: 2px solid var(--focus-color);
-  }
+    border: ${({ theme }) => `2px solid ${theme.colors.primary};`}
 
   &:focus + .placeholder,
   &:not(:placeholder-shown) + .placeholder {
-    transform: translateY(calc(-1 * var(--padding) - 20px));
+    padding: 2px 6px;
     font-size: 14px;
-    color: var(--focus-color);
-    background-color: white;
-    padding: 0 5px;
+    border-radius: 6px;
+    color: ${({ theme }) => theme.colors.primary};
+    background-color: ${({ theme }) => theme.colors.background100};
+    transform: translateY(calc(-1 * 2px - 20px));
   }
 `;

@@ -3,6 +3,7 @@ import { MemoryRouter } from "react-router-dom";
 
 import Sidebar from "./Sidebar";
 import { Topbar } from "./Topbar";
+import { renderWithProviders } from "@utils/test-utils";
 
 jest.unmock("@components/Navigation");
 
@@ -14,23 +15,13 @@ describe("<Sidebar />", () => {
       </MemoryRouter>
     );
 
-    fireEvent.click(screen.getByText("소개"));
-    fireEvent.click(screen.getByText("일정"));
-    fireEvent.click(screen.getByText("아카이브"));
-    fireEvent.click(screen.getByText("사이트맵"));
-    fireEvent.click(screen.getByText("문의"));
-    fireEvent.click(screen.getByText("문의"));
-  });
-  
-  it("should handle navigate", () => {
-    render(
-      <MemoryRouter>
-        <Sidebar open={true} toggleSidebar={() => {}} />
-      </MemoryRouter>
-    );
-
+    fireEvent.click(screen.getByText("Home"));
     fireEvent.click(screen.getByText("소개"));
     fireEvent.click(screen.getByText("팀"));
+    fireEvent.click(screen.getByText("일정"));
+    fireEvent.click(screen.getByText("아카이브"));
+    fireEvent.click(screen.getByText("문의"));
+    fireEvent.click(screen.getByText("문의"));
   });
 
   it("should render closed", () => {
@@ -44,17 +35,20 @@ describe("<Sidebar />", () => {
 
 describe("<Topbar />", () => {
   it("should render", () => {
-    render(
+    renderWithProviders(
       <MemoryRouter>
         <Topbar />
       </MemoryRouter>
     );
 
+    fireEvent.click(screen.getByText("Home"));
     fireEvent.click(screen.getByText("소개"));
+    fireEvent.click(screen.getByText("팀"));
     fireEvent.click(screen.getByText("일정"));
     fireEvent.click(screen.getByText("아카이브"));
-    fireEvent.click(screen.getByText("사이트맵"));
     fireEvent.click(screen.getByText("문의"));
+    fireEvent.mouseDown(document);
     fireEvent.click(screen.getByText("문의"));
+    fireEvent.click(screen.getByText("FAQ"));
   });
 });

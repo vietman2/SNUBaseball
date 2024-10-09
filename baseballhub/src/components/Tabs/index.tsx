@@ -1,4 +1,5 @@
+import { ChipTabs } from "./ChipTabs";
 import { ExpandableTab } from "./ExpandableTab";
 import { Tabs } from "./Tabs";
 
-export { ExpandableTab, Tabs };
+export { ChipTabs, ExpandableTab, Tabs };

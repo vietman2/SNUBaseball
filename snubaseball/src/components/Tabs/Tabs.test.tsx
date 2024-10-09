@@ -2,37 +2,17 @@ import { fireEvent, render, screen } from "@testing-library/react";
 
 import { SubTabs } from "./SubTabs";
 import { EmptyTabs, Tabs } from "./Tabs";
+import { tabs } from "@navigation/tabs";
 
 jest.unmock("@components/Tabs");
-
-const sampleTabs = [
-  {
-    title: "tab1",
-    path: "/tab1",
-  },
-  {
-    title: "tab2",
-    path: "/tab2",
-    submenu: [
-      {
-        title: "subtab1",
-        path: "/subtab1",
-      },
-    ],
-  },
-];
 
 describe("<Tabs />", () => {
   it("should render", () => {
     render(
-      <Tabs
-        tabs={sampleTabs}
-        selectedTab={sampleTabs[0]}
-        setSelectedTab={jest.fn()}
-      />
+      <Tabs tabs={tabs} selectedTab={tabs[0]} setSelectedTab={jest.fn()} />
     );
 
-    fireEvent.click(screen.getByTestId("tab-tab1"));
+    fireEvent.click(screen.getByTestId("tab-Home"));
   });
 });
 

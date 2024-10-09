@@ -55,8 +55,8 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-color: ${({ theme }) => theme.colors.background};
+  height: 100dvh;
+  background-color: ${({ theme }) => theme.colors.background700};
 `;
 
 const Box = styled.div`
@@ -64,16 +64,17 @@ const Box = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 20px;
-  border: 1px solid ${({ theme }) => theme.colors.border};
-  gap: 15px;
-  background-color: ${({ theme }) => theme.colors.lavender};
+  padding: 24px;
+  border: 1px solid ${({ theme }) => theme.colors.borderLight};
+  border-radius: 12px;
+  gap: 16px;
+  background-color: ${({ theme }) => theme.colors.background300};
 `;
 
 const LogoImage = styled.img`
   width: 100px;
   height: 100px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 `;
 
 const Buttons = styled.div`

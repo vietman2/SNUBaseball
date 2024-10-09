@@ -30,14 +30,14 @@ const Text = styled.div<{ width: number }>`
   justify-content: center;
   width: ${({ width }) => width}px;
   font-size: 14px;
-  color: ${({ theme }) => theme.colors.sapphire};
+  color: ${({ theme }) => theme.colors.foreground900};
 `;
 
 const Bar = styled.div`
   display: flex;
   flex: 1;
   height: 16px;
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: ${({ theme }) => theme.colors.background700};
   border-radius: 8px;
   margin: 0 2px;
 `;

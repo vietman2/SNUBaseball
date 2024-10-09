@@ -3,7 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import axios from "axios";
 
-import App from "./pages/root/App";
+import App from "@pages/App";
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(

@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { Chip } from "@components/Chips";
-import { ChipSelector, CollegeSelector } from "@components/Selectors";
 import { DateInput, TextInput } from "@components/Inputs";
+import { CollegeSelector } from "@components/Selectors";
+import { ChipTabs } from "@components/Tabs";
 import { CollegeType } from "@models/user/person";
 
 interface Props {
@@ -26,7 +27,12 @@ interface Props {
 
 const RoleChoices = ["선수", "매니저"];
 
-export function NewMemberModal({ colleges, isOpen, onClose, onSubmit }: Props) {
+export function NewMemberModal({
+  colleges,
+  isOpen,
+  onClose,
+  onSubmit,
+}: Readonly<Props>) {
   const [lastname, setLastname] = useState<string>("");
   const [firstname, setFirstname] = useState<string>("");
   const [studentId, setStudentId] = useState<string>("");
@@ -132,7 +138,7 @@ export function NewMemberModal({ colleges, isOpen, onClose, onSubmit }: Props) {
                 onChange={setFirstname}
               />
             </div>
-            <ChipSelector
+            <ChipTabs
               options={RoleChoices}
               selected={selectedRole}
               onSelect={setSelectedRole}

@@ -1,7 +1,7 @@
-import { fireEvent, screen } from "@testing-library/react";
+import { fireEvent, screen, waitFor } from "@testing-library/react";
 
 import RecordsContainer from "./RecordsContainer";
-import { renderWithProviders } from "@utils/test-utils";
+import { renderWithProviders, resizeWindow } from "@utils/test-utils";
 
 jest.mock("./Results/Results", () => ({
   Results: ({ onSelectGame }: { onSelectGame: (gameId: number) => void }) => (
@@ -11,13 +11,17 @@ jest.mock("./Results/Results", () => ({
   ),
 }));
 jest.mock("./GameDetail/GameDetail", () => ({
-  GameDetail: () => <div>GameDetail</div>,
+  GameDetail: ({ goBack }: { goBack: () => void }) => (
+    <div>
+      <button onClick={goBack}>GameDetail</button>
+    </div>
+  ),
 }));
 jest.mock("@components/Tabs", () => ({
   Tabs: ({ setActiveTab }: { setActiveTab: (tab: string) => void }) => (
     <div>
       <button onClick={() => setActiveTab("경기결과")}>경기결과</button>
-      <button onClick={() => setActiveTab("기록실")}>기록실</button>
+      <button onClick={() => setActiveTab("개인기록")}>개인기록</button>
       <button onClick={() => setActiveTab("연습경기")}>연습경기</button>
       <button onClick={() => setActiveTab("체력측정")}>체력측정</button>
       <button onClick={() => setActiveTab("asdf")}>asdf</button>
@@ -26,10 +30,13 @@ jest.mock("@components/Tabs", () => ({
 }));
 
 describe("<RecordsContainer />", () => {
-  it("renders all tabs", () => {
+  it("renders all tabs", async () => {
     renderWithProviders(<RecordsContainer />);
 
-    fireEvent.click(screen.getByText("기록실"));
+    await waitFor(() => resizeWindow(800, 800));
+    await waitFor(() => resizeWindow(600, 600));
+
+    fireEvent.click(screen.getByText("개인기록"));
     fireEvent.click(screen.getByText("연습경기"));
     fireEvent.click(screen.getByText("체력측정"));
     fireEvent.click(screen.getByText("asdf"));
@@ -39,5 +46,6 @@ describe("<RecordsContainer />", () => {
     renderWithProviders(<RecordsContainer />);
 
     fireEvent.click(screen.getByText("Select Game"));
+    fireEvent.click(screen.getByText("GameDetail"));
   });
 });

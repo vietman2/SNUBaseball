@@ -2,7 +2,8 @@ import { ReactElement, PropsWithChildren } from "react";
 import { render, RenderOptions } from "@testing-library/react";
 import { ThemeProvider } from "styled-components";
 
-import { AuthProvider } from "@pages/Auth";
+import { AuthProvider } from "@contexts/auth";
+import { ThemeProvider as MyThemeProvider } from "@contexts/theme";
 import { UserProfileType } from "@models/user/person";
 import { light } from "@themes/themeColors";
 
@@ -17,7 +18,9 @@ export const renderWithProviders = (
   function Wrapper({ children }: PropsWithChildren): JSX.Element {
     return (
       <ThemeProvider theme={{ colors: light }}>
-        <AuthProvider>{children}</AuthProvider>
+        <MyThemeProvider>
+          <AuthProvider>{children}</AuthProvider>
+        </MyThemeProvider>
       </ThemeProvider>
     );
   }

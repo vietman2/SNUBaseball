@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { IFrame } from "@components/Frames";
 import { AppIcon } from "@components/Icons";
 import { ExpandableTab, Tabs } from "@components/Tabs";
+import { useTheme } from "@contexts/theme";
 import { sampleGameResult } from "@data/records/games";
 import {
   GameEntry,
@@ -25,6 +26,7 @@ export function GameDetail({ selectedGame, goBack }: Readonly<Props>) {
   const [selectedTab, setSelectedTab] = useState<string>("엔트리");
 
   const { width } = useWindowSize();
+  const { isDarkMode } = useTheme();
 
   const getVideoWidth = () => {
     return ((width - 240) * 0.75).toString();
@@ -65,7 +67,11 @@ export function GameDetail({ selectedGame, goBack }: Readonly<Props>) {
     <Container>
       <Header onClick={goBack}>
         <div>
-          <AppIcon icon="chevron-left" size={24} color="#0B1623" />
+          <AppIcon
+            icon="chevron-left"
+            size={24}
+            color={isDarkMode ? "#C5A86F" : "#0B1623"}
+          />
           목록
         </div>
       </Header>
@@ -76,22 +82,18 @@ export function GameDetail({ selectedGame, goBack }: Readonly<Props>) {
           </WideBoard>
           <WideContents>
             <Half>
-              <ExpandableTab title="엔트리" height="1000px">
-                <GameEntry game={sampleGameResult} />
-              </ExpandableTab>
-              <ExpandableTab title="상세기록" height="1000px">
-                <GameRecords
-                  lineup={sampleGameResult.lineup}
-                  pitchers={sampleGameResult.pitchers}
-                />
-              </ExpandableTab>
+              <Video>
+                <IFrame videoId="U28Gz6Dev0w" width="720" height="360" />
+              </Video>
             </Half>
             <Half>
-              <ExpandableTab title="풀영상" height="500px">
-                <Video>
-                  <IFrame videoId="U28Gz6Dev0w" width="720" height="360" />
-                </Video>
-              </ExpandableTab>
+              <Tabs
+                type={2}
+                tabs={tabs}
+                activeTab={selectedTab}
+                setActiveTab={setSelectedTab}
+              />
+              <NarrowTabPage>{renderTabContent()}</NarrowTabPage>
             </Half>
           </WideContents>
         </>
@@ -126,18 +128,23 @@ const Container = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
-  height: calc(100vh - 200px);
+
+  border-radius: 16px;
+  background-color: ${({ theme }) => theme.colors.background300};
 `;
 
 const Header = styled.div`
   display: flex;
   align-items: center;
+  padding: 12px 16px;
 
   div {
     display: flex;
     align-items: center;
     gap: 8px;
     font-size: 16px;
+    font-weight: 600;
+    color: ${({ theme }) => theme.colors.foreground900};
 
     &:hover {
       cursor: pointer;
@@ -186,7 +193,7 @@ const NarrowContents = styled.div`
   flex: 1;
   flex-direction: column;
   height: calc(100vh - 200px);
-  padding: 8px 16px;
+  padding: 16px 9px;
   gap: 16px;
 
   overflow-y: auto;
@@ -197,5 +204,5 @@ const NarrowTabPage = styled.div`
   flex: 1;
   margin-top: -16px;
   border-radius: 0 0 16px 16px;
-  background-color: ${({ theme }) => theme.colors.offWhite};
+  background-color: ${({ theme }) => theme.colors.background100};
 `;

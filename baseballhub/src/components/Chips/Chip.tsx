@@ -1,11 +1,14 @@
 import styled from "styled-components";
 
+import { AppIcon } from "@components/Icons";
+
 interface Props {
   label: string;
   color?: string;
   bgColor?: string;
   onClick?: () => void;
-  small?: boolean;
+  size?: "small" | "medium"; // | "large";
+  icon?: string;
 }
 
 export function Chip({
@@ -13,27 +16,45 @@ export function Chip({
   color = "white",
   bgColor = "#0f0f70",
   onClick,
-  small = false,
+  size = "medium",
+  icon,
 }: Readonly<Props>) {
+  const getPadding = () => {
+    if (size === "small") {
+      return "2px 6px";
+    } else {
+      return "5px 10px";
+    } /*else {
+      return "5px 12px";
+    }*/
+  };
+
   return (
     <ChipWrapper
       style={{ color: color, backgroundColor: bgColor }}
       onClick={onClick}
       $hasOnClick={!!onClick}
-      $small={small}
+      padding={getPadding()}
       data-testid="chip"
     >
+      {icon && <AppIcon icon={icon} size={18} color={color} />}
       {label}
     </ChipWrapper>
   );
 }
 
-const ChipWrapper = styled.div<{ $hasOnClick: boolean; $small: boolean }>`
-  display: inline-block;
+const ChipWrapper = styled.div<{ $hasOnClick: boolean; padding: string; }>`
+  display: flex;
   position: relative;
   align-items: center;
-  padding: ${({ $small }) => ($small ? "2px 6px" : "5px 10px")};
+  padding: ${({ padding }) => padding};
+  gap: 4px;
+
   font-size: 14px;
+  font-weight: 500;
+
   border-radius: 5px;
   cursor: ${({ $hasOnClick }) => ($hasOnClick ? "pointer" : "default")};
+
+  white-space: nowrap;
 `;

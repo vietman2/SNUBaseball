@@ -1,13 +1,11 @@
 import styled from "styled-components";
 
-import { Chip } from "@components/Chips";
-import { useWindowSize } from "@hooks/useWindowSize";
-
 interface Props {
   tabs: string[];
   activeTab: string;
   setActiveTab: (tab: string) => void;
-  type?: 1 | 2 | 3;
+  type?: 1 | 2;
+  textSize?: "small" | "large";
 }
 
 export function Tabs({
@@ -15,18 +13,17 @@ export function Tabs({
   activeTab,
   setActiveTab,
   type = 1,
+  textSize = "large",
 }: Readonly<Props>) {
-  const { width } = useWindowSize();
-
   if (type === 1) {
     return (
-      <Container1 $wide={width > 768}>
+      <Container1>
         {tabs.map((tab) => (
           <Tab1
             key={tab}
             $active={activeTab === tab}
-            $wide={width > 768}
             onClick={() => setActiveTab(tab)}
+            textsize={textSize}
             data-testid={tab}
           >
             {tab}
@@ -34,7 +31,7 @@ export function Tabs({
         ))}
       </Container1>
     );
-  } else if (type === 2) {
+  } else {
     return (
       <Container2>
         {tabs.map((tab) => (
@@ -49,45 +46,24 @@ export function Tabs({
         ))}
       </Container2>
     );
-  } else {
-    return (
-      <Container3>
-        {tabs.map((tab) => (
-          <Chip
-            key={tab}
-            label={tab}
-            bgColor={tab === activeTab ? "#0F0F70" : "#B5B6B6"}
-            color={tab === activeTab ? "#E8E6F2" : "#0B1623"}
-            onClick={() => setActiveTab(tab)}
-          />
-        ))}
-      </Container3>
-    );
   }
 }
 
-const Container1 = styled.div<{ $wide: boolean }>`
+const Container1 = styled.div`
   display: flex;
-  gap: 4px;
-  margin: ${({ $wide }) => ($wide ? "0 8px" : "0 4px")};
-  padding: ${({ $wide }) => ($wide ? "0 8px 8px 8px" : "0 4px 8px 4px")};
-
-  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+  gap: 16px;
+  padding: 8px;
 `;
 
-const Tab1 = styled.div<{ $active: boolean, $wide: boolean }>`
-  padding: ${({ $wide }) => ($wide ? "8px 16px" : "4px 8px")};
-  border-radius: ${({ $wide }) => ($wide ? "16px" : "8px")};
+const Tab1 = styled.div<{ $active: boolean; textsize: "small" | "large" }>`
+  padding: ${({ textsize }) => (textsize === "small" ? "4px 8px" : "8px 16px")};
 
-  font-size: 16px;
+  font-size: ${({ textsize }) => (textsize === "small" ? "14px" : "18px")};
+  font-weight: ${({ $active }) => ($active ? "700" : "400")};
 
   cursor: pointer;
-  background-color: ${({ $active, theme }) =>
-    $active ? theme.colors.offWhite : theme.colors.lavender};
   color: ${({ $active, theme }) =>
-    $active ? theme.colors.primary : theme.colors.sapphire};
-  border: ${({ $active, theme }) =>
-    $active ? `1px solid ${theme.colors.border}` : `1px solid transparent`};
+    $active ? theme.colors.primary : theme.colors.foreground900};
 
   transition: background-color 0.3s ease-in-out;
 `;
@@ -98,27 +74,19 @@ const Container2 = styled.div`
   gap: 5px;
   border-radius: 16px 16px 0 0;
 
-  background-color: ${({ theme }) => theme.colors.offWhite};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+  background-color: ${({ theme }) => theme.colors.background100};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.borderLight};
 `;
 
 const Tab2 = styled.div<{ $active: boolean }>`
-  padding: 8px 16px;
+  padding: 8px 8px;
   cursor: pointer;
 
   font-weight: ${({ $active }) => ($active ? "600" : "400")};
   color: ${({ $active, theme }) =>
-    $active ? theme.colors.primary : theme.colors.sapphire};
+    $active ? theme.colors.primary : theme.colors.foreground900};
   border-bottom: ${({ $active, theme }) =>
     $active ? `2px solid ${theme.colors.primary}` : `2px solid transparent`};
 
   transition: border-bottom 0.3s linear;
-`;
-
-const Container3 = styled.div`
-  display: flex;
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
 `;

@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import { TabType, tabs } from "@navigation/tabs";
+import { TabType } from "@models/navigation";
+import { tabs } from "@navigation/tabs";
 
 interface Props {
   open: boolean;

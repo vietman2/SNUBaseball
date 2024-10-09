@@ -2,8 +2,8 @@ import { useState } from "react";
 import styled from "styled-components";
 
 import { Bases } from "@components/Bases";
+import { Chip } from "@components/Chips";
 import { AppIcon } from "@components/Icons";
-import { Tabs } from "@components/Tabs";
 
 const tabs = ["1회", "2회", "3회", "4회", "5회", "6회", "7회", "8회", "9회"];
 
@@ -13,12 +13,17 @@ export function GameStory() {
   return (
     <Container>
       <TabWrapper>
-        <Tabs
-          type={3}
-          tabs={tabs}
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-        />
+        <div>
+          {tabs.map((tab) => (
+            <Chip
+              key={tab}
+              label={tab}
+              bgColor={tab === activeTab ? "#0F0F70" : "#B5B6B6"}
+              color={tab === activeTab ? "#E8E6F2" : "#0B1623"}
+              onClick={() => setActiveTab(tab)}
+            />
+          ))}
+        </div>
       </TabWrapper>
       <Relay>
         <PlateAppearance />
@@ -41,13 +46,26 @@ const TabWrapper = styled.div`
   margin: 0 8px;
   padding: 8px;
 
-  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.borderLight};
+
+  > div {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    gap: 12px;
+
+    white-space: nowrap;
+    overflow-x: auto;
+  }
 `;
 
 const Relay = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
+  margin-bottom: 16px;
   padding: 0 16px;
   gap: 16px;
 `;
@@ -81,7 +99,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 16px;
-  background-color: ${({ theme }) => theme.colors.offWhite};
+  background-color: ${({ theme }) => theme.colors.background100};
   user-select: none;
 `;
 
@@ -94,7 +112,7 @@ const Header = styled.div<{ radius: string }>`
   border-radius: 16px;
   border-bottom-left-radius: ${(props) => props.radius};
   border-bottom-right-radius: ${(props) => props.radius};
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: ${({ theme }) => theme.colors.background700};
   cursor: pointer;
   user-select: none;
 
@@ -114,6 +132,7 @@ const Info = styled.div`
 
   font-size: 14px;
   font-weight: 600;
+  color: ${({ theme }) => theme.colors.primary};
 `;
 
 const Result = styled.div`

@@ -6,7 +6,10 @@ export type GuidelineType = {
   video_id: string;
   description: string;
   equipment: string;
-  tags: string[];
-  likes: number;
+  num_likes: number;
   is_liked: boolean;
+  num_comments: number;
+  is_drill: boolean;
+  is_indoor_possible: boolean;
+  num_people: string;
 };

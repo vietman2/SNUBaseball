@@ -78,7 +78,7 @@ const Container = styled.div`
   flex-direction: column;
   padding: 16px 16px 8px 28px;
   border-radius: 16px;
-  background-color: ${({ theme }) => theme.colors.lavender};
+  background-color: ${({ theme }) => theme.colors.background300};
 `;
 
 const Selectors = styled.div`

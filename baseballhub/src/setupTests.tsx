@@ -37,8 +37,19 @@ jest.mock("@components/Chips", () => ({
     </button>
   ),
 }));
+jest.mock("@components/Dividers", () => ({
+  VerticalDivider: () => <div>VerticalDivider</div>,
+}));
 jest.mock("@components/Frames", () => ({
   IFrame: () => <div>IFrame</div>,
+}));
+jest.mock("@components/Headers", () => ({
+  MobileHeader: ({ children }: { children: React.ReactNode }) => (
+    <div>{children}</div>
+  ),
+  PageHeader: ({ children }: { children: React.ReactNode }) => (
+    <div>{children}</div>
+  ),
 }));
 jest.mock("@components/Icons", () => ({
   AppIcon: ({ icon }: { icon: string }) => <span>{icon}</span>,
@@ -60,9 +71,6 @@ jest.mock("@components/Inputs", () => ({
     onChange: (value: string) => void;
   }) => <input value={value} onChange={(e) => onChange(e.target.value)} />,
 }));
-jest.mock("@components/Menus", () => ({
-  MenuList: () => <div>MenuList</div>,
-}));
 jest.mock("@components/Modals", () => ({
   NewMemberModal: ({ onClose }: { onClose: () => void }) => (
     <div onClick={onClose} data-testid="close" onKeyDown={() => {}}>
@@ -79,16 +87,8 @@ jest.mock("@components/RootLayout", () => ({
   ),
 }));
 jest.mock("@components/Selectors", () => ({
-  ChipSelector: () => <div>ChipSelector</div>,
   CollegeSelector: () => <div>CollegeSelector</div>,
   SimpleSelector: () => <div>SimpleSelector</div>,
-}));
-jest.mock("@components/Sidebar", () => ({
-  Sidebar: ({ toggleSidebar }: { toggleSidebar: () => void }) => (
-    <div onClick={toggleSidebar} data-testid="sidebar" onKeyDown={() => {}}>
-      Sidebar
-    </div>
-  ),
 }));
 jest.mock("@components/Tables", () => ({
   DailyTable: () => <div>DailyTable</div>,
@@ -96,6 +96,7 @@ jest.mock("@components/Tables", () => ({
   WeeklyTable: () => <div>WeeklyTable</div>,
 }));
 jest.mock("@components/Tabs", () => ({
+  ChipTabs: () => <div>ChipTabs</div>,
   ExpandableTab: ({ children }: { children: React.ReactNode }) => (
     <div>{children}</div>
   ),
@@ -106,12 +107,21 @@ jest.mock("@components/Texts", () => ({
   Subtitle: () => <div>Subtitle</div>,
   Title: () => <div>Title</div>,
 }));
-jest.mock("@pages/Auth/AuthProvider", () => ({
+jest.mock("@contexts/auth/AuthContext", () => ({
   AuthProvider: ({ children }: { children: React.ReactNode }) => (
-    <>{children}</>
+    <div>{children}</div>
   ),
   useAuth: () => ({
-    logout: jest.fn(),
     login: jest.fn(),
+    logout: jest.fn(),
+  })
+}));
+jest.mock("@contexts/theme/ThemeContext", () => ({
+  ThemeProvider: ({ children }: { children: React.ReactNode }) => (
+    <div>{children}</div>
+  ),
+  useTheme: () => ({
+    toggleTheme: jest.fn(),
+    isDarkMode: false,
   }),
 }));

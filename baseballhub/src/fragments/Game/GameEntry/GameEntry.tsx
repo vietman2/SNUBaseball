@@ -67,7 +67,6 @@ const Lineup = styled.div`
   flex-direction: column;
   padding: 8px;
   gap: 8px;
-  overflow-y: auto;
 `;
 
 const StartingPlayer = styled.div`
@@ -85,7 +84,7 @@ const StartingPlayer = styled.div`
     font-size: 14px;
     font-weight: 600;
     border-radius: 8px;
-    color: ${({ theme }) => theme.colors.sapphire};
+    color: ${({ theme }) => theme.colors.foreground900};
   }
 
   div:nth-child(2) {
@@ -97,8 +96,8 @@ const StartingPlayer = styled.div`
     font-size: 14px;
     font-weight: 600;
     border-radius: 8px;
-    background-color: ${({ theme }) => theme.colors.lavender};
-    color: ${({ theme }) => theme.colors.sapphire};
+    background-color: ${({ theme }) => theme.colors.background300};
+    color: ${({ theme }) => theme.colors.foreground900};
   }
 `;
 
@@ -113,6 +112,7 @@ const Right = styled.div`
 const Bench = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: center;
   flex-wrap: wrap;
   padding: 8px;
   gap: 8px;
@@ -127,8 +127,8 @@ const BenchPlayer = styled.div`
   padding: 4px;
   border-radius: 8px;
 
-  background-color: ${({ theme }) => theme.colors.lavender};
-  color: ${({ theme }) => theme.colors.sapphire};
+  background-color: ${({ theme }) => theme.colors.background300};
+  color: ${({ theme }) => theme.colors.foreground900};
 
   div:nth-child(1) {
     font-size: 14px;
@@ -137,6 +137,6 @@ const BenchPlayer = styled.div`
 
   div:nth-child(2) {
     font-size: 12px;
-    color: ${({ theme }) => theme.colors.linkText};
+    color: ${({ theme }) => theme.colors.primary};
   }
 `;

@@ -6,7 +6,7 @@ interface Props {
   text: string;
 }
 
-export function Callout({ text }: Props) {
+export function Callout({ text }: Readonly<Props>) {
   return (
     <Container>
       <AppIcon icon="lightbulb" size={24} color="yellow" />
@@ -19,7 +19,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  background-color: ${({ theme }) => theme.colors.offWhite};
+  background-color: ${({ theme }) => theme.colors.background100};
   padding: 0.25rem 0.75rem;
   margin: 0 0 1rem 0;
   border-radius: 5px;

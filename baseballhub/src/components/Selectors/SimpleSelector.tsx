@@ -87,7 +87,7 @@ const Selector = styled.div`
 
   font-weight: 600;
 
-  background-color: ${({ theme }) => theme.colors.offWhite};
+  background-color: ${({ theme }) => theme.colors.background100};
   border-radius: 8px;
 
   div:first-child {
@@ -101,7 +101,7 @@ const Dropdown = styled.div`
   left: 0;
   width: 100%;
 
-  background-color: ${({ theme }) => theme.colors.lavender};
+  background-color: ${({ theme }) => theme.colors.background300};
   border-radius: 8px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   z-index: 1;
@@ -117,11 +117,11 @@ const Item = styled.div<{ $isSelected?: boolean }>`
   font-weight: ${({ $isSelected }) => ($isSelected ? 600 : 400)};
 
   background-color: ${({ theme, $isSelected }) =>
-    $isSelected ? theme.colors.lavender : theme.colors.offWhite};
+    $isSelected ? theme.colors.background300 : theme.colors.background100};
   cursor: pointer;
 
   &:hover {
     background-color: ${({ theme }) =>
-      theme.colors.background}; /* Optional hover effect */
+      theme.colors.background700}; /* Optional hover effect */
   }
 `;

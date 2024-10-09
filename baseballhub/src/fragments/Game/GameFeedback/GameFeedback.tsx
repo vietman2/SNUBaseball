@@ -52,6 +52,7 @@ const Half = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
+  margin-bottom: 16px;
   padding: 0 4px;
   gap: 32px;
 `;
@@ -71,7 +72,7 @@ const Feedback = styled.div`
   font-size: 14px;
   padding: 0 16px;
   gap: 16px;
-  color: ${({ theme }) => theme.colors.sapphire};
+  color: ${({ theme }) => theme.colors.foreground900};
 
   div {
     display: flex;
