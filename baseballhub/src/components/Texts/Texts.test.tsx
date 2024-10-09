@@ -1,5 +1,3 @@
-import { render } from "@testing-library/react";
-
 import { Callout } from "./Callout";
 import { Subtitle, Title } from "./Title";
 import { renderWithProviders } from "@utils/test-utils";
@@ -11,13 +9,17 @@ describe("<Callout />", () => {
 });
 
 describe("<Subtitle />", () => {
-  it("renders correctly", () => {
+  it("renders small subtitle correctly", () => {
     renderWithProviders(<Subtitle>Hello, world!</Subtitle>);
+  });
+
+  it("renders large subtitle correctly", () => {
+    renderWithProviders(<Subtitle size="large">Hello, world!</Subtitle>);
   });
 });
 
 describe("<Title />", () => {
-  it("renders correctly", () => {
-    render(<Title>Hello, world!</Title>);
+  it("renders title correctly", () => {
+    renderWithProviders(<Title>Hello, world!</Title>);
   });
 });
