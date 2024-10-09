@@ -27,7 +27,12 @@ interface Props {
 
 const RoleChoices = ["선수", "매니저"];
 
-export function NewMemberModal({ colleges, isOpen, onClose, onSubmit }: Props) {
+export function NewMemberModal({
+  colleges,
+  isOpen,
+  onClose,
+  onSubmit,
+}: Readonly<Props>) {
   const [lastname, setLastname] = useState<string>("");
   const [firstname, setFirstname] = useState<string>("");
   const [studentId, setStudentId] = useState<string>("");

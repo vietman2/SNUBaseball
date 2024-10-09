@@ -6,7 +6,7 @@ interface Props {
   text: string;
 }
 
-export function Callout({ text }: Props) {
+export function Callout({ text }: Readonly<Props>) {
   return (
     <Container>
       <AppIcon icon="lightbulb" size={24} color="yellow" />
