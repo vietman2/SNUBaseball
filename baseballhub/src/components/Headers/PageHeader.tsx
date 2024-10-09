@@ -4,11 +4,11 @@ interface Props {
   children: React.ReactNode;
 }
 
-export function PageHeader({ children }: Props) {
+export function PageHeader({ children }: Readonly<Props>) {
   return <Header>{children}</Header>;
 }
 
-export function MobileHeader({ children }: Props) {
+export function MobileHeader({ children }: Readonly<Props>) {
   return <Mobile>{children}</Mobile>;
 }
 

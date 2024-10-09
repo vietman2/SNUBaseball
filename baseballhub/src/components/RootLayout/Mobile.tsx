@@ -35,7 +35,7 @@ export function Mobile() {
   return (
     <Container>
       <Header $isMenuOpen={isMenuOpen}>
-        <div onClick={toggleMenu} data-testid="toggle">
+        <div onClick={toggleMenu} role="button" data-testid="toggle">
           <AppIcon
             icon={isMenuOpen ? "close" : "menu"}
             size={24}
@@ -43,7 +43,7 @@ export function Mobile() {
           />
         </div>
         {isMenuOpen ? "서울대 야구부" : activeTab}
-        <div onClick={() => {}}>
+        <div onClick={() => {}} role="button">
           <AppIcon icon="person" size={24} color="#000" />
         </div>
       </Header>
@@ -86,9 +86,6 @@ export function Mobile() {
 }
 
 const Container = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
   width: 100%;
   height: 100dvh;
   background-color: ${({ theme }) => theme.colors.background700};

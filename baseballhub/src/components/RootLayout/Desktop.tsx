@@ -123,7 +123,7 @@ function Sidebar({ isSidebarOpen, toggleSidebar }: Props) {
                 </IconWrapper>
               </>
             ) : (
-              <div onClick={toggleTheme}>
+              <div onClick={toggleTheme} role="button">
                 <AppIcon
                   icon={isDarkMode ? "moon" : "sun"}
                   size={24}

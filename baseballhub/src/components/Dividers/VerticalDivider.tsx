@@ -6,7 +6,7 @@ interface Props {
   bold?: boolean;
 }
 
-export function VerticalDivider({ height, color, bold }: Props) {
+export function VerticalDivider({ height, color, bold }: Readonly<Props>) {
   return <Divider color={color} $bold={bold} height={height} />;
 }
 
