@@ -16,7 +16,7 @@ export function GuidelinePreview({ guideline }: Props) {
       return `${guideline.title.slice(0, 18)}...`;
     }
     return guideline.title;
-  }
+  };
 
   return (
     <Container>

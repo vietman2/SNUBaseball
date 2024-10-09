@@ -65,7 +65,7 @@ function Tournament({ tournament, onSelectGame }: Readonly<TournamentProps>) {
   const getHeight = () => {
     const height = 120 * Math.ceil(tournament.games.length / getNumColumns());
     return `${height}px`;
-  }
+  };
 
   const columns = getNumColumns();
 

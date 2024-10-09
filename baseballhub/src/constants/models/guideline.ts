@@ -1,11 +1,3 @@
-type TagType = {
-  id: number;
-  name: string;
-  bgColor: string;
-  color: string;
-  icon?: string;
-}
-
 export type GuidelineType = {
   id: number;
   title: string;
