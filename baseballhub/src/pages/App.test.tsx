@@ -37,7 +37,6 @@ jest.mock("@pages/Schedule", () => ({
 }));
 jest.mock("@pages/Training", () => ({
   Feedback: () => <div />,
-  Guidelines: () => <div />,
   Journals: () => <div />,
 }));
 

@@ -18,7 +18,7 @@ import { GuidelinesContainer } from "@pages/Guidelines";
 import { Home } from "@pages/Home";
 import { RecordsContainer } from "@pages/Records";
 import { ScheduleContainer } from "@pages/Schedule";
-import { Feedback, Guidelines, Journals } from "@pages/Training";
+import { Feedback, Journals } from "@pages/Training";
 
 import { RootLayout } from "@components/RootLayout";
 import { AuthProvider, useAuth } from "@contexts/auth";
