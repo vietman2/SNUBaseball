@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
-import { ChipSelector } from "@components/Selectors";
-import { ExpandableTab } from "@components/Tabs";
+import { ChipTabs, ExpandableTab } from "@components/Tabs";
 import { sampleTournaments } from "@data/records/games";
 import { GameSummary } from "@fragments/Game";
 import { useWindowSize } from "@hooks/useWindowSize";
@@ -25,7 +24,7 @@ export function Results({ onSelectGame }: Readonly<Props>) {
 
   return (
     <Container>
-      <ChipSelector
+      <ChipTabs
         options={years}
         selected={selectedYear}
         onSelect={setSelectedYear}

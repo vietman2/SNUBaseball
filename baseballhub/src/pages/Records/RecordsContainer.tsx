@@ -49,7 +49,6 @@ export default function RecordsContainer() {
             activeTab={selectedTab}
             setActiveTab={setSelectedTab}
           />
-          <div />
         </PageHeader>
       ) : (
         <MobileHeader>
