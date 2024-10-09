@@ -1,4 +1,4 @@
-import { GuidelineDetail } from "./GuidelineDetail";
+import { GuidelineDetail } from "./GuidelineDetail/GuidelineDetail";
 import { GuidelinePreview } from "./GuidelinePreview/GuidelinePreview";
 
 export { GuidelineDetail, GuidelinePreview };

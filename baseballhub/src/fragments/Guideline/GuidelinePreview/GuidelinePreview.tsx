@@ -68,6 +68,7 @@ const Container = styled.div`
   gap: 8px;
 
   color: ${({ theme }) => theme.colors.foreground700};
+  background-color: ${({ theme }) => theme.colors.background100};
   border-radius: 16px;
   border: 1px solid ${({ theme }) => theme.colors.borderLight};
 
