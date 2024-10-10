@@ -1,20 +1,11 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
-import { AppIcon } from "@components/Icons";
 import { sampleDailySchedule } from "@data/schedule/daily";
 import { DailyScheduleType } from "@models/schedule";
 
-interface Props {
-  handleDayChange: (day: string) => void;
-}
-
-export function DailySchedule({ handleDayChange }: Readonly<Props>) {
+export function DailySchedule() {
   const [schedule, setSchedule] = useState<DailyScheduleType>();
-
-  const handleBack = () => {
-    handleDayChange("전체");
-  };
 
   useEffect(() => {
     setSchedule(sampleDailySchedule);
@@ -26,10 +17,6 @@ export function DailySchedule({ handleDayChange }: Readonly<Props>) {
 
   return (
     <Container>
-      <Horizontal onClick={handleBack}>
-        <AppIcon icon="chevron-left" size={32} color={"#0f0f70"} />
-        뒤로
-      </Horizontal>
       <Subtitle>훈련 개요</Subtitle>
       <Outline>
         <div>
@@ -77,26 +64,11 @@ const Container = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
-  padding: 0 24px;
+  padding: 12px 24px;
   gap: 16px;
-`;
 
-const Horizontal = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  align-self: flex-start;
-  padding: 8px;
   border-radius: 16px;
-
-  font-size: 16px;
-  font-weight: bold;
-  color: ${({ theme }) => theme.colors.primary};
-
-  &:hover {
-    cursor: pointer;
-    background-color: ${({ theme }) => theme.colors.background100};
-  }
+  background-color: ${({ theme }) => theme.colors.background300};
 `;
 
 const Subtitle = styled.div`
@@ -116,7 +88,7 @@ const Outline = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    font-size: 12px;
+    font-size: 14px;
 
     div {
       padding: 8px 16px;
@@ -162,7 +134,7 @@ const Timetable = styled.div`
     display: flex;
     flex: 1;
 
-    font-size: 12px;
+    font-size: 14px;
     text-align: flex-start;
     color: ${({ theme }) => theme.colors.foreground900};
     border-top: 1px solid ${({ theme }) => theme.colors.borderLight};
@@ -201,7 +173,7 @@ const Notes = styled.div`
   margin-bottom: 24px;
   padding: 16px;
 
-  font-size: 12px;
+  font-size: 14px;
 
   border: 1px solid ${({ theme }) => theme.colors.borderLight};
   border-radius: 8px;

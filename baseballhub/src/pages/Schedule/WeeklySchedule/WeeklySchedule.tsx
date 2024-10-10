@@ -17,15 +17,6 @@ const monthOptions = [
   "9월",
 ];
 const weekOptions = ["첫째 주", "둘째 주", "셋째 주", "넷째 주"];
-const dayOptions = [
-  "전체",
-  "월요일",
-  "화요일",
-  "수요일",
-  "목요일",
-  "금요일",
-  "토요일",
-];
 
 export function WeeklySchedule() {
   const [selectedYear, setSelectedYear] = useState<string>("2024년");
@@ -63,6 +54,7 @@ const Container = styled.div`
   flex: 1;
   flex-direction: column;
   padding: 16px 16px 8px 28px;
+  
   border-radius: 16px;
   background-color: ${({ theme }) => theme.colors.background300};
 `;

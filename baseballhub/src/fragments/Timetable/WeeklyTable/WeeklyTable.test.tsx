@@ -1,4 +1,5 @@
 import { fireEvent, screen } from "@testing-library/react";
+
 import { WeeklyTable } from "./WeeklyTable";
 import { renderWithProviders } from "@utils/test-utils";
 
@@ -18,5 +19,7 @@ describe("<WeeklyTable />", () => {
     fireEvent.mouseOut(screen.getByText("금"));
     fireEvent.mouseOver(screen.getByText("토"));
     fireEvent.mouseOut(screen.getByText("토"));
+
+    fireEvent.click(screen.getByTestId("toggle-button"));
   });
 });

@@ -29,7 +29,11 @@ jest.mock("@components/Buttons", () => ({
       {text}
     </button>
   ),
-  ToggleButton: () => <div>ToggleButton</div>,
+  ToggleButton: ({ onClick }: { onClick: () => void }) => (
+    <button onClick={onClick} data-testid="toggle-button">
+      ToggleButton
+    </button>
+  ),
 }));
 jest.mock("@components/Chips", () => ({
   Chip: ({ label, onClick }: { label: string; onClick: () => void }) => (
@@ -108,7 +112,7 @@ jest.mock("@contexts/auth/AuthContext", () => ({
   useAuth: () => ({
     login: jest.fn(),
     logout: jest.fn(),
-  })
+  }),
 }));
 jest.mock("@contexts/theme/ThemeContext", () => ({
   ThemeProvider: ({ children }: { children: React.ReactNode }) => (

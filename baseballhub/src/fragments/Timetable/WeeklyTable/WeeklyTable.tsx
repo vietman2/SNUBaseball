@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 
+import { ToggleButton } from "@components/Buttons";
 import {
   sampleWeeklyData,
   sampleManagerWeeklyData,
 } from "@data/schedule/weekly";
 import { DailyPersonalScheduleType, WeeklyTimetableType } from "@models/schedule";
-import { ToggleButton } from "@components/Buttons";
 
 export function WeeklyTable() {
   const [players, setPlayers] = useState<WeeklyTimetableType[]>([]);

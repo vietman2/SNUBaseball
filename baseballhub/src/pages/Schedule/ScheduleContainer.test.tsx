@@ -10,6 +10,7 @@ jest.mock("@components/Tabs", () => ({
   Tabs: ({ setActiveTab }: { setActiveTab: (tab: string) => void }) => (
     <div>
       <button onClick={() => setActiveTab("주간 훈참표")}>주간 훈참표</button>
+      <button onClick={() => setActiveTab("훈련계획표")}>훈련계획표</button>
       <button onClick={() => setActiveTab("월간 캘린더")}>월간 캘린더</button>
       <button onClick={() => setActiveTab("asdf")}>asdf</button>
     </div>
@@ -24,6 +25,7 @@ describe("<ScheduleContainer />", () => {
     await waitFor(() => resizeWindow(600, 600));
 
     fireEvent.click(screen.getByText("주간 훈참표"));
+    fireEvent.click(screen.getByText("훈련계획표"));
     fireEvent.click(screen.getByText("월간 캘린더"));
     fireEvent.click(screen.getByText("asdf"));
   });
