@@ -101,6 +101,8 @@ const Contents = styled.div`
   flex-direction: column;
   margin-top: 16px;
   gap: 8px;
+
+  color: ${({ theme }) => theme.colors.foreground900};
 `;
 
 const Metadata = styled.div`

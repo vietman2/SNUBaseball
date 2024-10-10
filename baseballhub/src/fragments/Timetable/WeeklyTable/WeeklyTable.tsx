@@ -67,6 +67,7 @@ export function WeeklyTable() {
             }, 0)}
           </td>
         ))}
+        <td />
       </SumRow>
     ),
     [players]
@@ -100,6 +101,7 @@ export function WeeklyTable() {
             }, 0)}
           </td>
         ))}
+        <td />
       </SumRow>
     ),
     [managers]
@@ -214,6 +216,7 @@ const WeeklyRules = styled.div`
   font-size: 14px;
   font-weight: 600;
 
+  color: ${({ theme }) => theme.colors.foreground900};
   background-color: ${({ theme }) => theme.colors.background100};
   border-radius: 8px;
 
@@ -274,7 +277,7 @@ const Indeces = styled.div`
   }
 
   > div:nth-child(2) {
-    color: ${({ theme }) => theme.colors.secondary};
+    color: ${({ theme }) => theme.colors.tertiary};
   }
 `;
 
@@ -286,6 +289,7 @@ const TableWrapper = styled.div`
 const Table = styled.table<{ hoveredcolumn: number | null }>`
   width: 100%;
   font-size: 14px;
+
   border-collapse: collapse;
   border: 1px solid #ddd;
   table-layout: fixed;
@@ -296,36 +300,43 @@ const Table = styled.table<{ hoveredcolumn: number | null }>`
   }
 
   th {
-    border: 1px solid #ddd;
+    border: ${({ theme }) => `1px solid ${theme.colors.borderLight}`};
     padding: 7px;
     text-align: center;
+    color: ${({ theme }) => theme.colors.secondary};
   }
   th {
     ${({ hoveredcolumn, theme }) =>
       hoveredcolumn !== null &&
       `&:hover {
         cursor: pointer;
-      background-color: ${theme.colors.background300};
+        background-color: ${theme.colors.background300};
       }`}
   }
 
   td {
-    border: 1px solid #ddd;
+    border: ${({ theme }) => `1px solid ${theme.colors.borderLight}`};
     padding: 7px;
     text-align: center;
+    color: ${({ theme }) => theme.colors.foreground900};
   }
 `;
 
 const SumRow = styled.tr`
-  background-color: #f5f5f5 !important;
+  background-color: ${({ theme }) => theme.colors.borderLight};
+
+  td {
+    font-weight: 600;
+    color: ${({ theme }) => theme.colors.secondary};
+  }
 `;
 
 const TableData = styled.td<{ hoveredcolumn: number | null }>`
+  transition: background-color 0.3s;
+
   &:hover {
     background-color: ${({ theme }) => theme.colors.background300};
   }
-
-  transition: background-color 0.3s;
 
   ${({ hoveredcolumn, theme }) =>
     hoveredcolumn !== null &&

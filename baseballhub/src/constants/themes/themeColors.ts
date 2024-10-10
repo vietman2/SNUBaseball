@@ -1,7 +1,7 @@
 export const light = {
   primary: "#0F0F70", // 파랑
-  secondary: "#A01F1F", // 빨강
-  tertiary: "#C5A86F", // 골드
+  secondary: "#252525", // 검정
+  tertiary: "#DA1F1F", // 빨강
 
   // background: 흰색 계열
   background100: "#FAF9F6",
@@ -24,8 +24,8 @@ export const light = {
 
 export const dark = {
   primary: "#E8E6F2", // 흰색
-  secondary: "#0F0F70", // 파랑
-  tertiary: "#A01F1F", // 빨강
+  secondary: "#252525", // 검정
+  tertiary: "#DA1F1F", // 빨강
 
   // background: 검정 계열
   background100: "#03070B",
