@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { Chip } from "@components/Chips";
-import { NewMemberModal } from "@components/Modals";
 import { MembersTable } from "@components/Tables";
 import { Tabs } from "@components/Tabs";
 import { PersonType, CollegeType } from "@models/user/person";
@@ -10,28 +9,9 @@ import { addMember, getMajors, getMembers } from "@services/person";
 
 const tabs = ["YB", "OB", "지도자", "기타"];
 
-export default function Members() {
+export function Members() {
   const [selectedTab, setSelectedTab] = useState<string>("YB");
   const [members, setMembers] = useState<PersonType[]>([]);
-  const [majors, setMajors] = useState<CollegeType[]>([]);
-
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
-
-  const onOpen = () => {
-    setModalOpen(true);
-  };
-
-  const onClose = () => {
-    setModalOpen(false);
-  };
-
-  const fetchMajors = async () => {
-    const data = await getMajors();
-
-    if (data) {
-      setMajors(data);
-    }
-  };
 
   const fetchMembers = async () => {
     const data = await getMembers(selectedTab);
@@ -42,46 +22,8 @@ export default function Members() {
   };
 
   useEffect(() => {
-    fetchMajors();
-  }, []);
-
-  useEffect(() => {
     fetchMembers();
   }, [selectedTab]);
-
-  const addNewMember = async (
-    lastname: string,
-    firstname: string,
-    studentId: string,
-    phone: string,
-    email: string,
-    birthDate: string,
-    startDate: string,
-    departmentId: number,
-    role: string,
-    profileImage: File | null
-  ) => {
-    const response = await addMember(
-      lastname,
-      firstname,
-      studentId,
-      phone,
-      email,
-      birthDate,
-      startDate,
-      departmentId,
-      role,
-      profileImage
-    );
-
-    if (response) {
-      fetchMembers();
-
-      return true;
-    }
-
-    return false;
-  };
 
   return (
     <>
@@ -94,17 +36,11 @@ export default function Members() {
         />
         <Content>
           <Horizontal>
-            <Chip label="신입부원 추가" onClick={onOpen} />
+            <Chip label="신입부원 추가" onClick={() => {}} />
           </Horizontal>
           <MembersTable members={members} />
         </Content>
       </Container>
-      <NewMemberModal
-        colleges={majors}
-        isOpen={modalOpen}
-        onClose={onClose}
-        onSubmit={addNewMember}
-      />
     </>
   );
 }
