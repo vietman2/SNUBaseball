@@ -9,10 +9,10 @@ import { GuidelineSimpleType } from "@models/guidelines";
 
 interface Props {
   selectedCategory: string;
-  onSelectGuideline: (guideline: GuidelineSimpleType) => void;
+  onSelectGuidelineId: (guidelineId: number) => void;
 }
 
-export function GuidelineList({ selectedCategory, onSelectGuideline }: Readonly<Props>) {
+export function GuidelineList({ selectedCategory, onSelectGuidelineId }: Readonly<Props>) {
   const [actions, setActions] = useState<string[]>([]);
   const [selectedAction, setSelectedAction] = useState<string>("");
 
@@ -21,7 +21,7 @@ export function GuidelineList({ selectedCategory, onSelectGuideline }: Readonly<
   const { width } = useWindowSize();
 
   const handleGuidelineClick = (guideline: GuidelineSimpleType) => {
-    onSelectGuideline(guideline);
+    onSelectGuidelineId(guideline.id);
   };
 
   useEffect(() => {

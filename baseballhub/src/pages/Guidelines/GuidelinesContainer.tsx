@@ -8,14 +8,14 @@ import { MobileHeader, PageHeader } from "@components/Headers";
 import { Tabs } from "@components/Tabs";
 import { Title } from "@components/Texts";
 import { useWindowSize } from "@hooks/useWindowSize";
-import { GuidelineSimpleType } from "@models/guidelines";
 
 const tabs = ["내야", "외야", "포수", "투구", "타격", "주루", "기타"];
 
 export default function GuidelinesContainer() {
   const [selectedTab, setSelectedTab] = useState<string>("내야");
-  const [selectedGuideline, setSelectedGuideline] =
-    useState<GuidelineSimpleType | null>(null);
+  const [selectedGuidelineId, setSelectedGuidelineId] = useState<number | null>(
+    null
+  );
 
   const { width } = useWindowSize();
 
@@ -24,15 +24,20 @@ export default function GuidelinesContainer() {
   };
 
   const renderContent = () => {
-    if (selectedGuideline !== null) {
+    if (selectedGuidelineId !== null) {
       return (
         <GuidelineDetail
-          guidelineId={selectedGuideline.id}
-          goBack={() => setSelectedGuideline(null)}
+          guidelineId={selectedGuidelineId}
+          goBack={() => setSelectedGuidelineId(null)}
         />
       );
     } else {
-      return <GuidelineList selectedCategory={selectedTab!} onSelectGuideline={setSelectedGuideline} />;
+      return (
+        <GuidelineList
+          selectedCategory={selectedTab!}
+          onSelectGuidelineId={setSelectedGuidelineId}
+        />
+      );
     }
   };
 

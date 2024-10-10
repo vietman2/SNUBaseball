@@ -10,7 +10,7 @@ jest.mock("@fragments/Guideline", () => ({
 describe("<GuidelineList />", () => {
   it("renders and handles guideline click correctly", async () => {
     renderWithProviders(
-      <GuidelineList selectedCategory="내야" onSelectGuideline={jest.fn()} />
+      <GuidelineList selectedCategory="내야" onSelectGuidelineId={jest.fn()} />
     );
 
     await waitFor(() => resizeWindow(800, 800));

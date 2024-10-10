@@ -1,9 +1,7 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 
 import GuidelinesContainer from "./GuidelinesContainer";
-import { GuidelineSimpleType } from "@models/guidelines";
 import { renderWithProviders, resizeWindow } from "@utils/test-utils";
-import { sampleGuidelines } from "@data/guidelines";
 
 jest.mock("./GuidelineDetail/GuidelineDetail", () => ({
   GuidelineDetail: ({ goBack }: { goBack: () => void }) => (
@@ -14,13 +12,13 @@ jest.mock("./GuidelineDetail/GuidelineDetail", () => ({
 }));
 jest.mock("./GuidelineList/GuidelineList", () => ({
   GuidelineList: ({
-    onSelectGuideline,
+    onSelectGuidelineId,
   }: {
-    onSelectGuideline: (guideline: GuidelineSimpleType) => void;
+    onSelectGuidelineId: (guidelineId: number) => void;
   }) => (
     <div>
       <button
-        onClick={() => onSelectGuideline(sampleGuidelines[0])}
+        onClick={() => onSelectGuidelineId(1)}
         data-testid="guideline-1"
       >
         GuidelineList
