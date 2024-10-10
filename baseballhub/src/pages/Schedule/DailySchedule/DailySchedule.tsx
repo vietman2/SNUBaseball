@@ -9,7 +9,7 @@ interface Props {
   handleDayChange: (day: string) => void;
 }
 
-export function Daily({ handleDayChange }: Readonly<Props>) {
+export function DailySchedule({ handleDayChange }: Readonly<Props>) {
   const [schedule, setSchedule] = useState<DailyScheduleType>();
 
   const handleBack = () => {

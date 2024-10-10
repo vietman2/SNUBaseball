@@ -1,10 +1,10 @@
 import { fireEvent, screen } from "@testing-library/react";
-import { Daily } from "./Daily";
+import { DailySchedule } from "./DailySchedule";
 import { renderWithProviders } from "@utils/test-utils";
 
-describe("<Daily />", () => {
+describe("<DaDailyScheduleily />", () => {
   it("renders correctly and handles go back", () => {
-    renderWithProviders(<Daily handleDayChange={jest.fn()} />);
+    renderWithProviders(<DailySchedule handleDayChange={jest.fn()} />);
 
     fireEvent.click(screen.getByText("뒤로"));
   });
