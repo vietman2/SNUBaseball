@@ -6,7 +6,10 @@ import {
   sampleWeeklyData,
   sampleManagerWeeklyData,
 } from "@data/schedule/weekly";
-import { DailyPersonalScheduleType, WeeklyTimetableType } from "@models/schedule";
+import {
+  DailyPersonalScheduleType,
+  WeeklyTimetableType,
+} from "@models/schedule";
 
 export function WeeklyTable() {
   const [players, setPlayers] = useState<WeeklyTimetableType[]>([]);
@@ -25,7 +28,7 @@ export function WeeklyTable() {
 
   const handleToggleReason = () => {
     setViewReason(!viewReason);
-  }
+  };
 
   useEffect(() => {
     setPlayers(sampleWeeklyData);
@@ -37,7 +40,7 @@ export function WeeklyTable() {
     else {
       return viewReason ? schedule.reason : schedule.attendance;
     }
-  }
+  };
 
   const playerRows = useMemo(() => {
     return players.map((player) => (
@@ -123,10 +126,7 @@ export function WeeklyTable() {
           <div>{"09.23~09.28"}</div>
           <div>
             사유 보기
-            <ToggleButton
-              isOn={viewReason}
-              onClick={handleToggleReason}
-            />
+            <ToggleButton isOn={viewReason} onClick={handleToggleReason} />
           </div>
         </div>
         <div>{"* 부상자 이름은 빨간색으로 표시"}</div>
