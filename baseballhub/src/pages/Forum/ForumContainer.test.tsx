@@ -6,6 +6,9 @@ import { renderWithProviders, resizeWindow } from "@utils/test-utils";
 jest.mock("./Board/Board", () => ({
   Board: () => <div />,
 }));
+jest.mock("./Information/Information", () => ({
+  Information: () => <div />,
+}));
 jest.mock("@components/Tabs", () => ({
   Tabs: ({ setActiveTab }: { setActiveTab: (tab: string) => void }) => (
     <div>

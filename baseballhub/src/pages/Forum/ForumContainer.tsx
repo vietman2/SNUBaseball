@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 
 import { Board } from "./Board/Board";
+import { Information } from "./Information/Information";
 import { VerticalDivider } from "@components/Dividers";
 import { MobileHeader, PageHeader } from "@components/Headers";
 import { Tabs } from "@components/Tabs";
@@ -20,7 +21,7 @@ export default function ForumContainer() {
       case "공지":
         return <div>공지화면</div>;
       case "정보":
-        return <div>정보화면</div>;
+        return <Information />;
       case "자유게시판":
         return <Board />;
       case "갤러리":
