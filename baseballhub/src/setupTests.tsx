@@ -29,6 +29,7 @@ jest.mock("@components/Buttons", () => ({
       {text}
     </button>
   ),
+  ToggleButton: () => <div>ToggleButton</div>,
 }));
 jest.mock("@components/Chips", () => ({
   Chip: ({ label, onClick }: { label: string; onClick: () => void }) => (
