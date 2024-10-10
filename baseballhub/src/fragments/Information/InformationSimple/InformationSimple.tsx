@@ -1,10 +1,16 @@
 import styled from "styled-components";
 
-export function InformationSimple() {
+import { InformationSimpleType } from "@models/forum";
+
+interface Props {
+  information: InformationSimpleType
+}
+
+export function InformationSimple({ information }: Readonly<Props>) {
   return (
     <Container>
-      <Image />
-      <Body>부실 청소 가이드</Body>
+      <Image src={information.image} />
+      <Body>{information.title}</Body>
     </Container>
   );
 }
@@ -12,6 +18,8 @@ export function InformationSimple() {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
   padding: 8px 0;
 
   border-radius: 16px;
@@ -27,7 +35,7 @@ const Image = styled.img`
 const Body = styled.div`
   display: flex;
   flex: 1;
-  flex-direction: column;
+  flex-direction: row;
   padding: 8px 16px;
   gap: 8px;
 
