@@ -3,33 +3,51 @@ import { fireEvent, screen, waitFor } from "@testing-library/react";
 import GuidelinesContainer from "./GuidelinesContainer";
 import { renderWithProviders, resizeWindow } from "@utils/test-utils";
 
-jest.mock("@components/Tabs", () => ({
-  ChipTabs: () => <div>ChipTabs</div>,
-  Tabs: ({ setActiveTab }: { setActiveTab: (tab: string) => void }) => (
+jest.mock("./GuidelineDetail/GuidelineDetail", () => ({
+  GuidelineDetail: ({ goBack }: { goBack: () => void }) => (
     <div>
-      <button onClick={() => setActiveTab("내야")}>내야</button>
+      <button onClick={goBack}>goBack</button>
     </div>
   ),
 }));
-jest.mock("@fragments/Guideline", () => ({
-  GuidelineDetail: ({ goBack }: { goBack: () => void }) => (
+jest.mock("./GuidelineList/GuidelineList", () => ({
+  GuidelineList: ({
+    onSelectGuideline,
+  }: {
+    onSelectGuideline: (guideline: any) => void;
+  }) => (
     <div>
-      <button onClick={goBack}>GuidelineDetail</button>
+      <button
+        onClick={() => onSelectGuideline({ id: 1 })}
+        data-testid="guideline-1"
+      >
+        GuidelineList
+      </button>
     </div>
   ),
-  GuidelinePreview: () => <div>GuidelinePreview</div>,
+}));
+jest.mock("@components/Tabs", () => ({
+  Tabs: ({ setActiveTab }: { setActiveTab: (tab: string) => void }) => (
+    <div>
+      <button onClick={() => setActiveTab("tab")}>tab</button>
+    </div>
+  ),
 }));
 
 describe("<GuidelinesContainer />", () => {
-  it("renders and handles all buttons", async () => {
+  it("renders and handles tabs", async () => {
+    renderWithProviders(<GuidelinesContainer />);
+
+    await waitFor(() => resizeWindow(800, 800));
+    await waitFor(() => resizeWindow(600, 600));
+
+    fireEvent.click(screen.getByText("tab"));
+  });
+
+  it("handles guideline select", async () => {
     renderWithProviders(<GuidelinesContainer />);
 
     fireEvent.click(screen.getByTestId("guideline-1"));
-    fireEvent.click(screen.getByText("GuidelineDetail"));
-    fireEvent.click(screen.getByText("내야"));
-
-    await waitFor(() => resizeWindow(600, 600));
-
-    fireEvent.click(screen.getByText("내야"));
+    fireEvent.click(screen.getByText("goBack"));
   });
 });
