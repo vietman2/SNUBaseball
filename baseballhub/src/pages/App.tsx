@@ -11,14 +11,15 @@ import {
   createGlobalStyle,
 } from "styled-components";
 
-import { Members } from "@pages/Admin";
+import { AdminContainer } from "@pages/Admin";
 import { Login, SignUp } from "@pages/Auth";
-import { Board } from "@pages/Forum";
+import { ForumContainer } from "@pages/Forum";
 import { GuidelinesContainer } from "@pages/Guidelines";
 import { HomeContainer } from "@pages/Home";
+import { ManagementContainer } from "@pages/Management";
+import { NotesContainer } from "@pages/Notes";
 import { RecordsContainer } from "@pages/Records";
 import { ScheduleContainer } from "@pages/Schedule";
-import { Feedback, Journals } from "@pages/Training";
 
 import { RootLayout } from "@components/RootLayout";
 import { AuthProvider, useAuth } from "@contexts/auth";
@@ -45,12 +46,12 @@ const router = createBrowserRouter(
         <Route element={<RootLayout />}>
           <Route path="/home" element={<HomeContainer />} />
           <Route path="/records" element={<RecordsContainer />} />
+          <Route path="/forum" element={<ForumContainer />} />
           <Route path="/schedule" element={<ScheduleContainer />} />
+          <Route path="/notes" element={<NotesContainer />} />
           <Route path="/guidelines" element={<GuidelinesContainer />} />
-          <Route path="/journals" element={<Journals />} />
-          <Route path="/feedback" element={<Feedback />} />
-          <Route path="/forum" element={<Board />} />
-          <Route path="/members" element={<Members />} />
+          <Route path="/management" element={<ManagementContainer />} />
+          <Route path="/admin" element={<AdminContainer />} />
         </Route>
       </Route>
     </>
