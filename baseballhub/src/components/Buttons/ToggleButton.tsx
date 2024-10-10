@@ -19,12 +19,12 @@ const Container = styled.div`
   justify-content: space-between;
   width: 40px;
   border-radius: 16px;
-  background-color: #f2f2f2;
+  background-color: ${({ theme }) => theme.colors.background700};
   cursor: pointer;
   transition: all 0.3s;
 
   &:hover {
-    background-color: #e2e2e2;
+    background-color: ${({ theme }) => theme.colors.background300};
   }
 `;
 
