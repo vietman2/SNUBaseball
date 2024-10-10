@@ -13,6 +13,9 @@ jest.mock("@components/Tabs", () => ({
     </div>
   ),
 }));
+jest.mock("./Feedback/Feedback", () => ({
+  Feedback: () => <div>Feedback</div>,
+}));
 
 describe("<NotesContainer />", () => {
   it("renders", async () => {

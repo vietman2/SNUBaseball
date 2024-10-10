@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 
+import { Feedback } from "./Feedback/Feedback";
 import { VerticalDivider } from "@components/Dividers";
 import { MobileHeader, PageHeader } from "@components/Headers";
 import { Tabs } from "@components/Tabs";
@@ -19,7 +20,7 @@ export default function NotesContainer() {
       case "훈련 일지":
         return <div>훈련 일지화면</div>;
       case "피드백":
-        return <div>피드백화면</div>;
+        return <Feedback />;
       case "전력분석":
         return <div>전력분석화면</div>;
       default:
