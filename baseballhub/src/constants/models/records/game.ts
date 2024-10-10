@@ -1,17 +1,3 @@
-export type GameSummaryType = {
-  id: number;
-  date: string;
-  time: string;
-  opponent: string;
-  location: string;
-  tournament: string;
-  home_runs: number;
-  away_runs: number;
-  result: string;
-  home: boolean;
-  notes: string;
-};
-
 type PlayerType = {
   name: string;
   number: number;
@@ -48,7 +34,7 @@ export type GamePitcherType = {
   earned_runs: number;
 };
 
-export type BattingOrderType = {
+type BattingOrderType = {
   order: number;
   batters: GameBatterType[];
 };
@@ -103,11 +89,4 @@ export type GameResultsType = {
   pitchers: GamePitcherType[];
   bench: PlayerType[];
   feedback: string[];
-};
-
-export type TournamentType = {
-  id: number;
-  name: string;
-  year: number;
-  games: GameSummaryType[];
 };
