@@ -71,13 +71,6 @@ jest.mock("@components/Inputs", () => ({
     onChange: (value: string) => void;
   }) => <input value={value} onChange={(e) => onChange(e.target.value)} />,
 }));
-jest.mock("@components/Modals", () => ({
-  NewMemberModal: ({ onClose }: { onClose: () => void }) => (
-    <div onClick={onClose} data-testid="close" onKeyDown={() => {}}>
-      NewMemberModal
-    </div>
-  ),
-}));
 jest.mock("@components/Progressbars", () => ({
   Statsbar: () => <div>Statsbar</div>,
 }));
