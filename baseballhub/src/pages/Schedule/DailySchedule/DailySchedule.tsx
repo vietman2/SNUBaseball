@@ -173,6 +173,7 @@ const Notes = styled.div`
   margin-bottom: 24px;
   padding: 16px;
 
+  color: ${({ theme }) => theme.colors.foreground900};
   font-size: 14px;
 
   border: 1px solid ${({ theme }) => theme.colors.borderLight};
