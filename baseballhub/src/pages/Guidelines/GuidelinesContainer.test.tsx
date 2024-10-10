@@ -1,4 +1,5 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react";
+
 import GuidelinesContainer from "./GuidelinesContainer";
 import { renderWithProviders, resizeWindow } from "@utils/test-utils";
 

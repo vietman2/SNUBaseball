@@ -59,7 +59,7 @@ export function GameDetail({ selectedGame, goBack }: Readonly<Props>) {
   };
 
   useEffect(() => {
-    // fetch game detail from server
+    // TODO: fetch game detail from server
     console.log(selectedGame);
   }, []);
 

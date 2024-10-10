@@ -4,8 +4,8 @@ import styled from "styled-components";
 import { Chip } from "@components/Chips";
 import { MembersTable } from "@components/Tables";
 import { Tabs } from "@components/Tabs";
-import { PersonType, CollegeType } from "@models/user/person";
-import { addMember, getMajors, getMembers } from "@services/person";
+import { PersonType } from "@models/user/person";
+import { getMembers } from "@services/person";
 
 const tabs = ["YB", "OB", "지도자", "기타"];
 
