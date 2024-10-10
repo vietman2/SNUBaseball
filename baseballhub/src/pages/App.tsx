@@ -60,71 +60,82 @@ const router = createBrowserRouter(
 
 const GlobalStyles = createGlobalStyle`
   @font-face {
-    font-family: 'SCDream';
-    src: url('/assets/fonts/SCDream1.otf') format('opentype');
+    font-family: 'Freesentation';
+    src: url('/assets/fonts/Freesentation100.woff2') format('woff2'),
+    font-display: fallback;
+    font-style: normal;
     font-weight: 100;
-    font-style: normal;
   }
 
   @font-face {
-    font-family: 'SCDream';
-    src: url('/assets/fonts/SCDream2.otf') format('opentype');
+    font-family: 'Freesentation';
+    src: url('/assets/fonts/Freesentation200.woff2') format('woff2'),
+    font-display: fallback;
+    font-style: normal;
     font-weight: 200;
-    font-style: normal;
   }
 
   @font-face {
-    font-family: 'SCDream';
-    src: url('/assets/fonts/SCDream3.otf') format('opentype');
+    font-family: 'Freesentation';
+    src: url('/assets/fonts/Freesentation300.woff2') format('woff2'),
+    font-display: fallback;
+    font-style: normal;
     font-weight: 300;
-    font-style: normal;
   }
 
   @font-face {
-    font-family: 'SCDream';
-    src: url('/assets/fonts/SCDream4.otf') format('opentype');
+    font-family: 'Freesentation';
+    src: url('/assets/fonts/Freesentation400.woff2') format('woff2'),
+    font-display: fallback;
+    font-style: normal;
     font-weight: 400;
-    font-style: normal;
   }
 
   @font-face {
-    font-family: 'SCDream';
-    src: url('/assets/fonts/SCDream5.otf') format('opentype');
+    font-family: 'Freesentation';
+    src: url('/assets/fonts/Freesentation500.woff2') format('woff2'),
+    font-display: fallback;
+    font-style: normal;
     font-weight: 500;
-    font-style: normal;
   }
 
   @font-face {
-    font-family: 'SCDream';
-    src: url('/assets/fonts/SCDream6.otf') format('opentype');
+    font-family: 'Freesentation';
+    src: url('/assets/fonts/Freesentation600.woff2') format('woff2'),
+    font-display: fallback;
+    font-style: normal;
     font-weight: 600;
-    font-style: normal;
   }
 
   @font-face {
-    font-family: 'SCDream';
-    src: url('/assets/fonts/SCDream7.otf') format('opentype');
+    font-family: 'Freesentation';
+    src: url('/assets/fonts/Freesentation700.woff2') format('woff2'),
+    font-display: fallback;
+    font-style: normal;
     font-weight: 700;
-    font-style: normal;
   }
 
   @font-face {
-    font-family: 'SCDream';
-    src: url('/assets/fonts/SCDream8.otf') format('opentype');
-    font-weight: 800;
+    font-family: 'Freesentation';
+    src: url('/assets/fonts/Freesentation800.woff2') format('woff2'),
+    font-display: fallback;
     font-style: normal;
+    font-weight: 800;
+  }
+
+  @font-face {
+    font-family: 'Freesentation';
+    src: url('/assets/fonts/Freesentation900.woff2') format('woff2'),
+    font-display: fallback;
+    font-style: normal;
+    font-weight: 900;
   }
 
   @font-face {
     font-family: 'SCDream';
     src: url('/assets/fonts/SCDream9.otf') format('opentype');
+    font-display: fallback;
     font-weight: 900;
-    font-style: normal;
-  }
-
-  @font-face {
-    font-family: 'Freesentation';
-    src: url('/assets/fonts/FreesentationVF.ttf') format('truetype');
     font-style: normal;
   }
     
