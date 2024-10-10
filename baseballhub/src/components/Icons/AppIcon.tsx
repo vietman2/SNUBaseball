@@ -5,6 +5,7 @@ import { ReactComponent as BaseballIcon } from "./baseball.svg";
 import { ReactComponent as CalendarIcon } from "./calendar.svg";
 import { ReactComponent as ChatIcon } from "./chat.svg";
 import { ReactComponent as CheckIcon } from "./check.svg";
+import { ReactComponent as ChecklistIcon } from "./checklist.svg";
 import { ReactComponent as ChevronDownIcon } from "./chevron-down.svg";
 import { ReactComponent as ChevronLeftIcon } from "./chevron-left.svg";
 import { ReactComponent as ChevronRightIcon } from "./chevron-right.svg";
@@ -51,6 +52,8 @@ export const AppIcon = ({ icon, size, color }: Props) => {
       return <ChatIcon width={size} height={size} color={color} />;
     case "check":
       return <CheckIcon width={size} height={size} color={color} />;
+    case "checklist":
+      return <ChecklistIcon width={size} height={size} color={color} />;
     case "chevron-down":
       return <ChevronDownIcon width={size} height={size} color={color} />;
     case "chevron-left":
