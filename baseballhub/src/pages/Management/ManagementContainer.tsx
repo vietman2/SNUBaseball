@@ -59,6 +59,7 @@ export default function ManagementContainer() {
 }
 
 const Container = styled.div`
+  display: flex;
   flex: 1;
   flex-direction: column;
 `;

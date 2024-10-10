@@ -55,6 +55,7 @@ export default function NotesContainer() {
 }
 
 const Container = styled.div`
+  display: flex;
   flex: 1;
   flex-direction: column;
 `;

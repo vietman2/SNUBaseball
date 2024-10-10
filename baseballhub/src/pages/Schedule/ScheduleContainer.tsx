@@ -54,6 +54,7 @@ export default function ScheduleContainer() {
 }
 
 const Container = styled.div`
+  display: flex;
   flex: 1;
   flex-direction: column;
 `;
