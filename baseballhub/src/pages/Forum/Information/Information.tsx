@@ -4,13 +4,10 @@ import styled from "styled-components";
 import { Callout } from "@components/Texts";
 import { sampleInformations } from "@data/forum";
 import { InformationSimple } from "@fragments/Information";
-import { useWindowSize } from "@hooks/useWindowSize";
 import { InformationSimpleType } from "@models/forum";
 
 export function Information() {
   const [informations, setInformations] = useState<InformationSimpleType[]>([]);
-
-  const { width } = useWindowSize();
 
   useEffect(() => {
     // TODO: Fetch information data from the server
@@ -20,7 +17,7 @@ export function Information() {
   return (
     <Container>
       <Callout text="각종 야구부 가이드" />
-      <Content align={width > 768 ? "flex-start" : "center"}>
+      <Content>
         {informations.map((information) => (
           <InformationSimple key={information.id} information={information} />
         ))}
@@ -39,10 +36,9 @@ const Container = styled.div`
   background-color: ${({ theme }) => theme.colors.background300};
 `;
 
-const Content = styled.div<{ align: string }>`
+const Content = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: ${({ align }) => align};
   gap: 16px;
 `;
