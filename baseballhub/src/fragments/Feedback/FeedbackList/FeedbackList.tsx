@@ -9,7 +9,7 @@ import { sampleFeedbacks } from "@data/notes";
 import { FeedbackType, FeedbackResponseType } from "@models/notes";
 
 interface Props {
-  onSelect: (feedback: FeedbackType) => void;
+  onSelect: (feedbackId: number) => void;
 }
 
 export function FeedbackList({ onSelect }: Readonly<Props>) {
@@ -43,7 +43,7 @@ export function FeedbackList({ onSelect }: Readonly<Props>) {
         </TopRow>
         <List>
           {feedbacks.new.map((feedback) => (
-            <button key={feedback.id} onClick={() => onSelect(feedback)}>
+            <button key={feedback.id} onClick={() => onSelect(feedback.id)}>
               <FeedbackSimple feedback={feedback} />
             </button>
           ))}

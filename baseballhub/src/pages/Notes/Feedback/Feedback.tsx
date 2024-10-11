@@ -1,15 +1,22 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-import { FeedbackList } from "@fragments/Feedback";
-import { FeedbackType } from "@models/notes";
+import { FeedbackDetail, FeedbackList } from "@fragments/Feedback";
 
 export function Feedback() {
-  const [selectedFeedback, setSelectedFeedback] = useState<FeedbackType | null>(
+  const [selectedFeedbackId, setSelectedFeedbackId] = useState<number | null>(
     null
   );
 
-  return <Container>{selectedFeedback ? null : <FeedbackList />}</Container>;
+  return (
+    <Container>
+      {selectedFeedbackId ? (
+        <FeedbackDetail feedbackId={selectedFeedbackId} />
+      ) : (
+        <FeedbackList onSelect={setSelectedFeedbackId} />
+      )}
+    </Container>
+  );
 }
 
 const Container = styled.div`

@@ -1,3 +1,3 @@
-import { sampleFeedbacks } from "./feedback";
+import { sampleFeedback, sampleFeedbacks } from "./feedback";
 
-export { sampleFeedbacks };
+export { sampleFeedback, sampleFeedbacks };

@@ -1,16 +1,14 @@
 import styled from "styled-components";
 
-import { FeedbackType } from "@models/notes";
-
 interface Props {
-  feedback: FeedbackType;
+  feedbackId: number;
 }
 
-export function FeedbackDetail({ feedback }: Readonly<Props>) {
+export function FeedbackDetail({ feedbackId }: Readonly<Props>) {
   return (
     <Container>
       FeedbackDetail
-      {feedback.title}
+      {feedbackId}
     </Container>
   );
 }
