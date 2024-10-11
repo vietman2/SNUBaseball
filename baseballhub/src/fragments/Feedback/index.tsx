@@ -1,3 +1,3 @@
-import { FeedbackSimple } from "./FeedbackSimple/FeedbackSimple";
+import { FeedbackList } from "./FeedbackList/FeedbackList";
 
-export { FeedbackSimple };
+export { FeedbackList };
