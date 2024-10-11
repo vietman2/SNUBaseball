@@ -26,6 +26,7 @@ import { ReactComponent as MenuIcon } from "./menu.svg";
 import { ReactComponent as MoonIcon } from "./moon.svg";
 import { ReactComponent as PeopleIcon } from "./people.svg";
 import { ReactComponent as PersonIcon } from "./person.svg";
+import { ReactComponent as PlusIcon } from "./plus.svg";
 import { ReactComponent as RecordIcon } from "./record.svg";
 import { ReactComponent as StorageIcon } from "./storage.svg";
 import { ReactComponent as SunIcon } from "./sun.svg";
@@ -94,6 +95,8 @@ export const AppIcon = ({ icon, size, color }: Props) => {
       return <PeopleIcon width={size} height={size} color={color} />;
     case "person":
       return <PersonIcon width={size} height={size} color={color} />;
+    case "plus":
+      return <PlusIcon width={size} height={size} color={color} />;
     case "record":
       return <RecordIcon width={size} height={size} color={color} />;
     case "storage":
