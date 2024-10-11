@@ -97,6 +97,5 @@
       "^@themes/(.*)$": "<rootDir>/src/constants/themes/$1",
       "^@utils/(.*)$": "<rootDir>/src/utils/$1"
     }
-  },
-  "proxy": "http://localhost:8000"
+  }
 }
