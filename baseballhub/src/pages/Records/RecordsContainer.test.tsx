@@ -17,6 +17,9 @@ jest.mock("./GameDetail/GameDetail", () => ({
     </div>
   ),
 }));
+jest.mock("./Stats/Stats", () => ({
+  Stats: () => <div>Stats</div>,
+}));
 jest.mock("@components/Tabs", () => ({
   Tabs: ({ setActiveTab }: { setActiveTab: (tab: string) => void }) => (
     <div>

@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import { Results } from "./Results/Results";
 import { GameDetail } from "./GameDetail/GameDetail";
+import { Stats } from "./Stats/Stats";
 import { VerticalDivider } from "@components/Dividers";
 import { MobileHeader, PageHeader } from "@components/Headers";
 import { Tabs } from "@components/Tabs";
@@ -28,7 +29,7 @@ export default function RecordsContainer() {
           return <Results onSelectGame={setSelectedGame} />;
         }
       case "개인기록":
-        return <div>개인기록</div>;
+        return <Stats />;
       case "연습경기":
         return <div>연습경기</div>;
       case "체력측정":
