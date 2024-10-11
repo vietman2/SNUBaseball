@@ -1,3 +1,11 @@
-import { FeedbackType } from "./feedback";
+import {
+  ClassificationType,
+  FeedbackType,
+  FeedbackResponseType,
+} from "./feedback";
 
-export { type FeedbackType };
+export {
+  type ClassificationType,
+  type FeedbackType,
+  type FeedbackResponseType,
+};
