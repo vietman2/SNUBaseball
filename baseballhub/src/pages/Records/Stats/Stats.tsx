@@ -1,9 +1,12 @@
 import styled from "styled-components";
 
+import { StatsTable } from "@fragments/Stats";
+
 export function Stats() {
   return (
     <Container>
       <div>Stats</div>
+      <StatsTable />
     </Container>
   );
 }
