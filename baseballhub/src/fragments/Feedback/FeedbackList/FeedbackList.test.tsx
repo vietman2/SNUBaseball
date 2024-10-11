@@ -2,6 +2,9 @@ import { FeedbackList } from "./FeedbackList";
 import * as ThemeContext from "@contexts/theme";
 import { renderWithProviders } from "@utils/test-utils";
 
+jest.mock("@components/Chips", () => ({
+  Chip: () => <div>Chip</div>,
+}));
 jest.mock("@contexts/theme", () => ({
   ThemeProvider: ({ children }: { children: React.ReactNode }) => (
     <div>{children}</div>
@@ -20,7 +23,7 @@ describe("<FeedbackList />", () => {
       toggleTheme: jest.fn(),
     });
 
-    renderWithProviders(<FeedbackList />);
+    renderWithProviders(<FeedbackList onSelect={jest.fn()} />);
   });
 
   it("renders in dark mode", () => {
@@ -29,6 +32,6 @@ describe("<FeedbackList />", () => {
       toggleTheme: jest.fn(),
     });
 
-    renderWithProviders(<FeedbackList />);
+    renderWithProviders(<FeedbackList onSelect={jest.fn()} />);
   });
 });

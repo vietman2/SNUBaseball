@@ -8,14 +8,22 @@ import { useTheme } from "@contexts/theme";
 import { sampleFeedbacks } from "@data/notes";
 import { FeedbackType, FeedbackResponseType } from "@models/notes";
 
-export function FeedbackList() {
-  const [feedbacks, setFeedbacks] = useState<FeedbackResponseType>();
+interface Props {
+  onSelect: (feedback: FeedbackType) => void;
+}
+
+export function FeedbackList({ onSelect }: Readonly<Props>) {
+  const [feedbacks, setFeedbacks] = useState<FeedbackResponseType | null>(null);
 
   const { isDarkMode } = useTheme();
 
   useEffect(() => {
     setFeedbacks(sampleFeedbacks);
   }, []);
+
+  if (!feedbacks) {
+    return null;
+  }
 
   return (
     <Container>
@@ -34,8 +42,10 @@ export function FeedbackList() {
           <Count>1</Count>
         </TopRow>
         <List>
-          {feedbacks?.new.map((feedback) => (
-            <FeedbackSimple key={feedback.id} feedback={feedback} />
+          {feedbacks.new.map((feedback) => (
+            <button key={feedback.id} onClick={() => onSelect(feedback)}>
+              <FeedbackSimple feedback={feedback} />
+            </button>
           ))}
           <AddButton>
             <AppIcon
@@ -54,7 +64,7 @@ export function FeedbackList() {
           <Count>1</Count>
         </TopRow>
         <List>
-          {feedbacks?.in_progress.map((feedback) => (
+          {feedbacks.in_progress.map((feedback) => (
             <FeedbackSimple key={feedback.id} feedback={feedback} />
           ))}
           <AddButton>
@@ -74,7 +84,7 @@ export function FeedbackList() {
           <Count>1</Count>
         </TopRow>
         <List>
-          {feedbacks?.under_review.map((feedback) => (
+          {feedbacks.under_review.map((feedback) => (
             <FeedbackSimple key={feedback.id} feedback={feedback} />
           ))}
           <AddButton>
@@ -94,7 +104,7 @@ export function FeedbackList() {
           <Count>1</Count>
         </TopRow>
         <List>
-          {feedbacks?.done.map((feedback) => (
+          {feedbacks.done.map((feedback) => (
             <FeedbackSimple key={feedback.id} feedback={feedback} />
           ))}
           <AddButton>
@@ -203,11 +213,11 @@ const AddButton = styled.div`
   font-weight: 600;
 `;
 
-interface Props {
+interface SimpleProps {
   feedback: FeedbackType;
 }
 
-function FeedbackSimple({ feedback }: Readonly<Props>) {
+function FeedbackSimple({ feedback }: Readonly<SimpleProps>) {
   return (
     <Feedback>
       <ChipWrapper>

@@ -1,3 +1,4 @@
+import { FeedbackDetail } from "./FeedbackDetail/FeedbackDetail";
 import { FeedbackList } from "./FeedbackList/FeedbackList";
 
-export { FeedbackList };
+export { FeedbackDetail, FeedbackList };
