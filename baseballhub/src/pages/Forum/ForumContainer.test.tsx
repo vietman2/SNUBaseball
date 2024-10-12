@@ -9,6 +9,9 @@ jest.mock("./Board/Board", () => ({
 jest.mock("./Information/Information", () => ({
   Information: () => <div />,
 }));
+jest.mock("./Notices/Notices", () => ({
+  Notices: () => <div />,
+}));
 jest.mock("@components/Tabs", () => ({
   Tabs: ({ setActiveTab }: { setActiveTab: (tab: string) => void }) => (
     <div>
