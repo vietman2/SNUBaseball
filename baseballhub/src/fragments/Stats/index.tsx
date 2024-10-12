@@ -1,3 +1,4 @@
-import { StatsTable } from "./StatsTable/StatsTable";
+import { BattingTable } from "./StatsTable/BattingTable";
+import { PitchingTable } from "./StatsTable/PitchingTable";
 
-export { StatsTable };
+export { BattingTable, PitchingTable };
