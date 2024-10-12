@@ -5,7 +5,7 @@ interface Props {
   onClick: () => void;
 }
 
-export function ToggleButton({ isOn, onClick }: Props) {
+export function ToggleButton({ isOn, onClick }: Readonly<Props>) {
   return (
     <Container onClick={onClick} data-testid="button">
       <Button $isOn={isOn} />

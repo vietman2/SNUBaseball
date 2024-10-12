@@ -27,7 +27,7 @@ export default function GuidelinesContainer() {
     } else {
       return (
         <GuidelineList
-          selectedCategory={selectedTab!}
+          selectedCategory={selectedTab}
           onSelectGuidelineId={setSelectedGuidelineId}
         />
       );

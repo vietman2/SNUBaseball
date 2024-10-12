@@ -43,10 +43,7 @@ export function TeamTable() {
             <RoleChip role={member.role} />
           </SmallCell>
           <NameCell>
-            <img
-              src={member.profile_image}
-              alt={member.name}
-            />
+            <img src={member.profile_image} alt={member.name} />
             <div>
               <div>
                 {member.name}
@@ -84,7 +81,11 @@ export function TeamTable() {
   );
 }
 
-function RoleChip({ role }: { role: string }) {
+interface RoleProps {
+  role: string;
+}
+
+function RoleChip({ role }: Readonly<RoleProps>) {
   if (role === "주장") {
     return <Chip label={role} color="#263238" bgColor="#CFD8DC" />;
   } else if (role === "부주장") {
@@ -98,7 +99,11 @@ function RoleChip({ role }: { role: string }) {
   }
 }
 
-function StatusChip({ status }: { status: string }) {
+interface StatusProps {
+  status: string;
+}
+
+function StatusChip({ status }: Readonly<StatusProps>) {
   if (status === "활동중") {
     return <Chip label={status} color="#01579B" bgColor="#B3E5FC" />;
   } else {

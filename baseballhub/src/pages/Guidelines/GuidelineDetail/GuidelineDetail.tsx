@@ -14,7 +14,7 @@ interface Props {
   goBack: () => void;
 }
 
-export function GuidelineDetail({ guidelineId, goBack }: Props) {
+export function GuidelineDetail({ guidelineId, goBack }: Readonly<Props>) {
   const [guideline, setGuideline] = useState<GuidelineDetailType | null>(null);
 
   const { width } = useWindowSize();
