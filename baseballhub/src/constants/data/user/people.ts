@@ -66,7 +66,7 @@ export const sampleMembers: MemberType[] = [
     num_semesters: "1학기+",
     address: "서울시 관악구 관악로 1, 71동",
     profile_image:
-      "https://kr.object.ncloudstorage.com/snubaseball.test/profiles/2021-12345.jpg",
+      "https://kr.object.ncloudstorage.com/snubaseball.test/profiles/person.png",
     position: "매니저",
     hands: "",
   },
@@ -87,7 +87,7 @@ export const sampleMembers: MemberType[] = [
     num_semesters: "3학기+",
     address: "서울시 관악구 관악로 1, 71동",
     profile_image:
-      "https://kr.object.ncloudstorage.com/snubaseball.test/profiles/2021-12345.jpg",
+      "https://kr.object.ncloudstorage.com/snubaseball.test/profiles/person.png",
     position: "매니저",
     hands: "",
   },
@@ -108,7 +108,7 @@ export const sampleMembers: MemberType[] = [
     num_semesters: "2학기",
     address: "서울시 관악구 관악로 1, 71동",
     profile_image:
-      "https://kr.object.ncloudstorage.com/snubaseball.test/profiles/2021-12345.jpg",
+      "https://kr.object.ncloudstorage.com/snubaseball.test/profiles/person.png",
     position: "내야수",
     hands: "우투우타",
     height: 175,
