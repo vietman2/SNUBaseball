@@ -6,7 +6,7 @@ import { samplePosts } from "@data/forum";
 import { PostSimple } from "@fragments/Post";
 import { PostType } from "@models/forum";
 
-export default function Board() {
+export function Board() {
   const [posts, setPosts] = useState<PostType[]>([]);
 
   useEffect(() => {

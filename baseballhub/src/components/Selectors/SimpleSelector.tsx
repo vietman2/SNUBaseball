@@ -76,6 +76,7 @@ const Container = styled.div<{ $wide: boolean }>`
   position: relative;
 
   font-size: ${({ $wide }) => ($wide ? 16 : 12)}px;
+  color: ${({ theme }) => theme.colors.foreground900};
 `;
 
 const Selector = styled.div`

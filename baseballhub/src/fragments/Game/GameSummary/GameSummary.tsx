@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import { Chip } from "@components/Chips";
-import { GameSummaryType } from "@models/records/game";
+import { GameSummaryType } from "@models/records";
 import { colors } from "@themes/colors";
 
 interface Props {

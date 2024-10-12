@@ -1,3 +1,3 @@
-import Members from "./Members/Members";
+import AdminContainer from "./AdminContainer";
 
-export { Members };
+export { AdminContainer };

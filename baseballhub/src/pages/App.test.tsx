@@ -1,4 +1,4 @@
-import { fireEvent, screen, waitFor } from "@testing-library/react";
+import { waitFor } from "@testing-library/react";
 
 import App from "./App";
 import * as AuthContext from "@contexts/auth";
@@ -21,13 +21,26 @@ jest.mock("@contexts/theme", () => ({
 }));
 
 jest.mock("@pages/Admin", () => ({
-  Members: () => <div />,
+  AdminContainer: () => <div />,
+}));
+jest.mock("@pages/Auth", () => ({
+  Login: () => <div />,
+  SignUp: () => <div />,
 }));
 jest.mock("@pages/Forum", () => ({
-  Board: () => <div />,
+  ForumContainer: () => <div />,
+}));
+jest.mock("@pages/Guidelines", () => ({
+  GuidelinesContainer: () => <div />,
 }));
 jest.mock("@pages/Home", () => ({
   HomeContainer: () => <div />,
+}));
+jest.mock("@pages/Management", () => ({
+  ManagementContainer: () => <div />,
+}));
+jest.mock("@pages/Notes", () => ({
+  NotesContainer: () => <div />,
 }));
 jest.mock("@pages/Records", () => ({
   RecordsContainer: () => <div />,
@@ -35,31 +48,13 @@ jest.mock("@pages/Records", () => ({
 jest.mock("@pages/Schedule", () => ({
   ScheduleContainer: () => <div />,
 }));
-jest.mock("@pages/Training", () => ({
-  Feedback: () => <div />,
-  Journals: () => <div />,
-}));
 
 describe("<App />", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  it("renders no user and light mode", () => {
-    jest.spyOn(AuthContext, "useAuth").mockReturnValue({
-      user: null,
-      logout: jest.fn(),
-      login: jest.fn(),
-    });
-    jest.spyOn(ThemeContext, "useTheme").mockReturnValue({
-      isDarkMode: false,
-      toggleTheme: jest.fn(),
-    });
-
-    renderWithProviders(<App />);
-  });
-
-  it("renders user", () => {
+  it("renders user", async () => {
     jest.spyOn(AuthContext, "useAuth").mockReturnValue({
       user: sampleProfile,
       logout: jest.fn(),
@@ -70,10 +65,24 @@ describe("<App />", () => {
       toggleTheme: jest.fn(),
     });
 
-    renderWithProviders(<App />, {
-      initialUser: sampleProfile,
+    await waitFor(() =>
+      renderWithProviders(<App />, {
+        initialUser: sampleProfile,
+      })
+    );
+  });
+
+  it("renders no user and light mode", async () => {
+    jest.spyOn(AuthContext, "useAuth").mockReturnValue({
+      user: null,
+      logout: jest.fn(),
+      login: jest.fn(),
+    });
+    jest.spyOn(ThemeContext, "useTheme").mockReturnValue({
+      isDarkMode: false,
+      toggleTheme: jest.fn(),
     });
 
-    waitFor(() => fireEvent.click(screen.getByTestId("button-로그인")));
+    await waitFor(() => renderWithProviders(<App />));
   });
 });

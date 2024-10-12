@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import { Subtitle } from "@components/Texts";
-import { LineupType, GamePitcherType } from "@models/records/game";
+import { LineupType, GamePitcherType } from "@models/records";
 
 interface Props {
   lineup: LineupType;

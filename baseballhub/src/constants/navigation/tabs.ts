@@ -16,8 +16,6 @@ const Main: TabGroup = {
     { title: "Home", icon: "home", path: "/home" },
     { title: "기록실", icon: "record", path: "/records" },
     { title: "게시판", icon: "forum", path: "/forum" },
-    { title: "갤러리", icon: "gallery", path: "/gallery" },
-    { title: "자료실", icon: "archive", path: "/archive" },
   ],
   limited: false,
 };
@@ -25,8 +23,17 @@ const Main: TabGroup = {
 const Training: TabGroup = {
   title: "Training",
   tabs: [
-    { title: "훈련 일정", icon: "calendar", path: "/schedule" },
-    { title: "훈련 가이드라인", icon: "guide", path: "/guidelines" },
+    { title: "스케줄", icon: "calendar", path: "/schedule" },
+    { title: "Notes", icon: "diary", path: "/notes" },
+    { title: "훈련 가이드", icon: "guide", path: "/guidelines" },
+  ],
+  limited: false,
+};
+
+const Management: TabGroup = {
+  title: "Management",
+  tabs: [
+    { title: "매니지먼트", icon: "checklist", path: "/management" },
   ],
   limited: false,
 };
@@ -34,9 +41,9 @@ const Training: TabGroup = {
 const Admin: TabGroup = {
   title: "Admin",
   tabs: [
-    { title: "부원 관리", icon: "people", path: "/members" },
+    { title: "주장단 업무", icon: "people", path: "/admin" },
   ],
   limited: true,
 };
 
-export const tabgroups: TabGroup[] = [Main, Training, Admin];
+export const tabgroups: TabGroup[] = [Main, Training, Management, Admin];

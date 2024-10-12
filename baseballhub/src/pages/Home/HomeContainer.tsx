@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 import { PageHeader } from "@components/Headers";
-import { Title } from "@components/Texts";
 import { useWindowSize } from "@hooks/useWindowSize";
 
 export default function HomeContainer() {
@@ -10,9 +9,12 @@ export default function HomeContainer() {
   return (
     <Container>
       {width > 768 ? (
-        <PageHeader>
-          <Title>Home</Title>
-        </PageHeader>
+        <PageHeader
+          title="Home"
+          tabs={[]}
+          selectedTab={""}
+          setSelectedTab={() => {}}
+        />
       ) : (
         <div />
       )}
@@ -21,6 +23,7 @@ export default function HomeContainer() {
 }
 
 const Container = styled.div`
+  display: flex;
   flex: 1;
   flex-direction: column;
 `;

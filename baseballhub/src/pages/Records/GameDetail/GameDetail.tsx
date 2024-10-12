@@ -5,7 +5,7 @@ import { IFrame } from "@components/Frames";
 import { AppIcon } from "@components/Icons";
 import { ExpandableTab, Tabs } from "@components/Tabs";
 import { useTheme } from "@contexts/theme";
-import { sampleGameResult } from "@data/records/games";
+import { sampleGameResult } from "@data/records";
 import {
   GameEntry,
   GameFeedback,
@@ -59,7 +59,7 @@ export function GameDetail({ selectedGame, goBack }: Readonly<Props>) {
   };
 
   useEffect(() => {
-    // fetch game detail from server
+    // TODO: fetch game detail from server
     console.log(selectedGame);
   }, []);
 

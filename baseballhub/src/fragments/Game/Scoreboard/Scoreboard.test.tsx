@@ -1,5 +1,5 @@
 import { Scoreboard } from "./Scoreboard";
-import { sampleGameResult } from "@data/records/games";
+import { sampleGameResult } from "@data/records";
 import { renderWithProviders } from "@utils/test-utils";
 
 describe("<Scoreboard />", () => {

@@ -2,10 +2,10 @@ import styled from "styled-components";
 
 import { Chip } from "@components/Chips";
 import { AppIcon } from "@components/Icons";
-import { GuidelineType } from "@models/guideline";
+import { GuidelineSimpleType } from "@models/guidelines";
 
 interface Props {
-  guideline: GuidelineType;
+  guideline: GuidelineSimpleType;
 }
 
 export function GuidelinePreview({ guideline }: Props) {

@@ -1,8 +1,8 @@
 import { fireEvent, screen } from "@testing-library/react";
 
 import { GameDetail } from "./GameDetail";
-import * as Hook from "@hooks/useWindowSize";
 import * as ThemeContext from "@contexts/theme";
+import * as Hook from "@hooks/useWindowSize";
 import { renderWithProviders } from "@utils/test-utils";
 
 jest.mock("@components/Tabs", () => ({

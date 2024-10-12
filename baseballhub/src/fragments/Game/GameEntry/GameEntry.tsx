@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import { Subtitle } from "@components/Texts";
-import { GameResultsType } from "@models/records/game";
+import { GameResultsType } from "@models/records";
 
 interface Props {
   game: GameResultsType;

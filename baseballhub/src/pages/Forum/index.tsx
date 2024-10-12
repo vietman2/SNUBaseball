@@ -1,3 +1,3 @@
-import Board from "./Board/Board";
+import ForumContainer from "./ForumContainer";
 
-export { Board };
+export { ForumContainer };

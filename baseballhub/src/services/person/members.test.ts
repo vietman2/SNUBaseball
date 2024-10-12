@@ -1,14 +1,14 @@
 import axios from "axios";
 
 import { getMembers, addMember } from "./members";
-import { samplePeople } from "@data/user/people";
+import { sampleMembers } from "@data/user/people";
 
 describe("getMembers", () => {
   it("should return an array of members", async () => {
-    jest.spyOn(axios, "get").mockResolvedValue({ data: samplePeople });
+    jest.spyOn(axios, "get").mockResolvedValue({ data: sampleMembers });
 
     const response = await getMembers("");
-    expect(response).toEqual(samplePeople);
+    expect(response).toEqual(sampleMembers);
   });
 
   it("should return null if an error occurs", async () => {
@@ -21,7 +21,7 @@ describe("getMembers", () => {
 
 describe("addMember", () => {
   it("should return the new member", async () => {
-    jest.spyOn(axios, "post").mockResolvedValue({ data: samplePeople[0] });
+    jest.spyOn(axios, "post").mockResolvedValue({ data: sampleMembers[0] });
 
     const response = await addMember(
       "Doe",
@@ -35,7 +35,7 @@ describe("addMember", () => {
       "Member",
       null
     );
-    expect(response).toEqual(samplePeople[0]);
+    expect(response).toEqual(sampleMembers[0]);
   });
 
   it("should return null if an error occurs", async () => {

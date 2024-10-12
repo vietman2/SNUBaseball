@@ -5,12 +5,18 @@ jest.unmock("@components/Headers");
 
 describe("<PageHeader />", () => {
   it("renders correctly", () => {
-    renderWithProviders(<PageHeader>children</PageHeader>);
+    renderWithProviders(<PageHeader title="title" tabs={["tab1", "tab2"]} selectedTab="tab1" setSelectedTab={jest.fn()} />);
   });
 });
 
 describe("<MobileHeader />", () => {
   it("renders correctly", () => {
-    renderWithProviders(<MobileHeader>children</MobileHeader>);
+    renderWithProviders(
+      <MobileHeader
+        tabs={["tab1", "tab2"]}
+        selectedTab="tab1"
+        setSelectedTab={jest.fn()}
+      />
+    );
   });
 });

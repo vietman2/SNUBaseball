@@ -160,7 +160,8 @@ const MenuItem = styled.div<{ $isActive: boolean }>`
   cursor: pointer;
   border-radius: 8px;
 
-  font-weight: 400;
+  font-size: 18px;
+  font-weight: 600;
   background-color: ${({ $isActive }) =>
     $isActive ? activeTabBackgroundColor : "transparent"};
 `;

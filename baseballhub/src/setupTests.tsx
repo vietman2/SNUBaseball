@@ -29,6 +29,11 @@ jest.mock("@components/Buttons", () => ({
       {text}
     </button>
   ),
+  ToggleButton: ({ onClick }: { onClick: () => void }) => (
+    <button onClick={onClick} data-testid="toggle-button">
+      ToggleButton
+    </button>
+  ),
 }));
 jest.mock("@components/Chips", () => ({
   Chip: ({ label, onClick }: { label: string; onClick: () => void }) => (
@@ -38,6 +43,7 @@ jest.mock("@components/Chips", () => ({
   ),
 }));
 jest.mock("@components/Dividers", () => ({
+  Divider: () => <div>Divider</div>,
   VerticalDivider: () => <div>VerticalDivider</div>,
 }));
 jest.mock("@components/Frames", () => ({
@@ -71,13 +77,6 @@ jest.mock("@components/Inputs", () => ({
     onChange: (value: string) => void;
   }) => <input value={value} onChange={(e) => onChange(e.target.value)} />,
 }));
-jest.mock("@components/Modals", () => ({
-  NewMemberModal: ({ onClose }: { onClose: () => void }) => (
-    <div onClick={onClose} data-testid="close" onKeyDown={() => {}}>
-      NewMemberModal
-    </div>
-  ),
-}));
 jest.mock("@components/Progressbars", () => ({
   Statsbar: () => <div>Statsbar</div>,
 }));
@@ -89,11 +88,6 @@ jest.mock("@components/RootLayout", () => ({
 jest.mock("@components/Selectors", () => ({
   CollegeSelector: () => <div>CollegeSelector</div>,
   SimpleSelector: () => <div>SimpleSelector</div>,
-}));
-jest.mock("@components/Tables", () => ({
-  DailyTable: () => <div>DailyTable</div>,
-  MembersTable: () => <div>MembersTable</div>,
-  WeeklyTable: () => <div>WeeklyTable</div>,
 }));
 jest.mock("@components/Tabs", () => ({
   ChipTabs: () => <div>ChipTabs</div>,
@@ -114,7 +108,7 @@ jest.mock("@contexts/auth/AuthContext", () => ({
   useAuth: () => ({
     login: jest.fn(),
     logout: jest.fn(),
-  })
+  }),
 }));
 jest.mock("@contexts/theme/ThemeContext", () => ({
   ThemeProvider: ({ children }: { children: React.ReactNode }) => (

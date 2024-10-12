@@ -1,4 +1,3 @@
-import { Daily } from "./Daily/Daily";
-import { Weekly } from "./Weekly/Weekly";
+import { WeeklyTable } from "./WeeklyTable/WeeklyTable";
 
-export { Daily, Weekly };
+export { WeeklyTable };
