@@ -43,6 +43,7 @@ jest.mock("@components/Chips", () => ({
   ),
 }));
 jest.mock("@components/Dividers", () => ({
+  Divider: () => <div>Divider</div>,
   VerticalDivider: () => <div>VerticalDivider</div>,
 }));
 jest.mock("@components/Frames", () => ({
