@@ -88,11 +88,6 @@ jest.mock("@components/Selectors", () => ({
   CollegeSelector: () => <div>CollegeSelector</div>,
   SimpleSelector: () => <div>SimpleSelector</div>,
 }));
-jest.mock("@components/Tables", () => ({
-  DailyTable: () => <div>DailyTable</div>,
-  MembersTable: () => <div>MembersTable</div>,
-  WeeklyTable: () => <div>WeeklyTable</div>,
-}));
 jest.mock("@components/Tabs", () => ({
   ChipTabs: () => <div>ChipTabs</div>,
   ExpandableTab: ({ children }: { children: React.ReactNode }) => (
