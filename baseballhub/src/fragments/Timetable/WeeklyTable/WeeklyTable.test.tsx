@@ -4,8 +4,8 @@ import { WeeklyTable } from "./WeeklyTable";
 import { renderWithProviders } from "@utils/test-utils";
 
 describe("<WeeklyTable />", () => {
-  it("renders correctly and handles header mouse actions", () => {
-    renderWithProviders(<WeeklyTable />);
+  it("renders correctly with reasons and handles header mouse actions", () => {
+    renderWithProviders(<WeeklyTable viewReason={true} />);
 
     fireEvent.mouseOver(screen.getByText("월"));
     fireEvent.mouseOut(screen.getByText("월"));
@@ -19,7 +19,9 @@ describe("<WeeklyTable />", () => {
     fireEvent.mouseOut(screen.getByText("금"));
     fireEvent.mouseOver(screen.getByText("토"));
     fireEvent.mouseOut(screen.getByText("토"));
+  });
 
-    fireEvent.click(screen.getByTestId("toggle-button"));
+  it("renders correctly without reasons", () => {
+    renderWithProviders(<WeeklyTable viewReason={false} />);
   });
 });

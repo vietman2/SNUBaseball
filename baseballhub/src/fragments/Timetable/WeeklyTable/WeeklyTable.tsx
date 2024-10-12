@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 
-import { ToggleButton } from "@components/Buttons";
 import {
   sampleWeeklyData,
   sampleManagerWeeklyData,
@@ -11,10 +10,13 @@ import {
   WeeklyTimetableType,
 } from "@models/schedule";
 
-export function WeeklyTable() {
+interface Props {
+  viewReason: boolean;
+}
+
+export function WeeklyTable({ viewReason }: Readonly<Props>) {
   const [players, setPlayers] = useState<WeeklyTimetableType[]>([]);
   const [managers, setManagers] = useState<WeeklyTimetableType[]>([]);
-  const [viewReason, setViewReason] = useState<boolean>(false);
 
   const [hoveredColumn, setHoveredColumn] = useState<number | null>(null);
 
@@ -24,10 +26,6 @@ export function WeeklyTable() {
 
   const handleMouseLeave = () => {
     setHoveredColumn(null);
-  };
-
-  const handleToggleReason = () => {
-    setViewReason(!viewReason);
   };
 
   useEffect(() => {
@@ -111,187 +109,81 @@ export function WeeklyTable() {
   );
 
   return (
-    <Container>
-      <WeeklyRules>
-        <div>{"<주간훈참규칙>"}</div>
-        <div>{"- 화, 목, 토 3 필참입니다."}</div>
-        <Duties>
-          <div>{"9/24(화) 물 뿌리기 담당: 유찬휘, 이상현, 심민수"}</div>
-          <div>{"9/26(목) 물 뿌리기 담당: 양서진, 김택원, 심민수"}</div>
-          <div>{"9/28(토) 부실청소: 이유용, 이두희, 손주형"}</div>
-        </Duties>
-      </WeeklyRules>
-      <Indeces>
-        <div>
-          <div>{"09.23~09.28"}</div>
-          <div>
-            사유 보기
-            <ToggleButton isOn={viewReason} onClick={handleToggleReason} />
-          </div>
-        </div>
-        <div>{"* 부상자 이름은 빨간색으로 표시"}</div>
-      </Indeces>
-      <TableWrapper>
-        <Table hoveredcolumn={hoveredColumn}>
-          <colgroup>
-            <col style={{ width: "7%" }} />
-            <col style={{ width: "15%" }} />
-            <col style={{ width: "15%" }} />
-            <col style={{ width: "5%" }} />
-            <col style={{ width: "7%" }} />
-            <col style={{ width: "7%" }} />
-            <col style={{ width: "7%" }} />
-            <col style={{ width: "7%" }} />
-            <col style={{ width: "7%" }} />
-            <col style={{ width: "7%" }} />
-            <col style={{ width: "5%" }} />
-          </colgroup>
-          <thead>
-            <tr>
-              <th>이름</th>
-              <th>전공</th>
-              <th>전화번호</th>
-              <th>학년</th>
-              <th
-                onMouseEnter={() => handleMouseEnter(4)}
-                onMouseLeave={handleMouseLeave}
-              >
-                월
-              </th>
-              <th
-                onMouseEnter={() => handleMouseEnter(5)}
-                onMouseLeave={handleMouseLeave}
-              >
-                화
-              </th>
-              <th
-                onMouseEnter={() => handleMouseEnter(6)}
-                onMouseLeave={handleMouseLeave}
-              >
-                수
-              </th>
-              <th
-                onMouseEnter={() => handleMouseEnter(7)}
-                onMouseLeave={handleMouseLeave}
-              >
-                목
-              </th>
-              <th
-                onMouseEnter={() => handleMouseEnter(8)}
-                onMouseLeave={handleMouseLeave}
-              >
-                금
-              </th>
-              <th
-                onMouseEnter={() => handleMouseEnter(9)}
-                onMouseLeave={handleMouseLeave}
-              >
-                토
-              </th>
-              <th>합</th>
-            </tr>
-          </thead>
-          <tbody>
-            {playerRows}
-            {playerSumRow}
-            {managerRows}
-            {managerSumRow}
-          </tbody>
-        </Table>
-      </TableWrapper>
-    </Container>
+    <Table hoveredcolumn={hoveredColumn}>
+      <colgroup>
+        <col style={{ width: "80px" }} />
+        <col style={{ width: "120px" }} />
+        <col style={{ width: "120px" }} />
+        <col style={{ width: "40px" }} />
+        <col style={{ width: "60px" }} />
+        <col style={{ width: "60px" }} />
+        <col style={{ width: "60px" }} />
+        <col style={{ width: "60px" }} />
+        <col style={{ width: "60px" }} />
+        <col style={{ width: "60px" }} />
+        <col style={{ width: "60px" }} />
+      </colgroup>
+      <thead>
+        <tr>
+          <th>이름</th>
+          <th>전공</th>
+          <th>전화번호</th>
+          <th>학년</th>
+          <th
+            onMouseEnter={() => handleMouseEnter(4)}
+            onMouseLeave={handleMouseLeave}
+          >
+            월
+          </th>
+          <th
+            onMouseEnter={() => handleMouseEnter(5)}
+            onMouseLeave={handleMouseLeave}
+          >
+            화
+          </th>
+          <th
+            onMouseEnter={() => handleMouseEnter(6)}
+            onMouseLeave={handleMouseLeave}
+          >
+            수
+          </th>
+          <th
+            onMouseEnter={() => handleMouseEnter(7)}
+            onMouseLeave={handleMouseLeave}
+          >
+            목
+          </th>
+          <th
+            onMouseEnter={() => handleMouseEnter(8)}
+            onMouseLeave={handleMouseLeave}
+          >
+            금
+          </th>
+          <th
+            onMouseEnter={() => handleMouseEnter(9)}
+            onMouseLeave={handleMouseLeave}
+          >
+            토
+          </th>
+          <th>합</th>
+        </tr>
+      </thead>
+      <tbody>
+        {playerRows}
+        {playerSumRow}
+        {managerRows}
+        {managerSumRow}
+      </tbody>
+    </Table>
   );
 }
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const WeeklyRules = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 8px 16px;
-
-  font-size: 14px;
-  font-weight: 600;
-
-  color: ${({ theme }) => theme.colors.foreground900};
-  background-color: ${({ theme }) => theme.colors.background100};
-  border-radius: 8px;
-
-  > div {
-    padding: 4px 8px;
-  }
-
-  > div:nth-child(2) {
-    border-top: 1px solid ${({ theme }) => theme.colors.borderLight};
-    border-bottom: 1px solid ${({ theme }) => theme.colors.borderLight};
-  }
-`;
-
-const Duties = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: row;
-
-  font-weight: 400;
-
-  border-bottom: none;
-
-  div {
-    display: flex;
-    flex: 1;
-    align-items: center;
-    justify-content: center;
-
-    color: ${({ theme }) => theme.colors.primary};
-  }
-
-  > div:nth-child(3) {
-    color: ${({ theme }) => theme.colors.foreground100};
-  }
-`;
-
-const Indeces = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 16px;
-  padding: 8px;
-  gap: 8px;
-
-  > div:nth-child(1) {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 8px;
-    color: ${({ theme }) => theme.colors.foreground500};
-
-    > div:nth-child(2) {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-  }
-
-  > div:nth-child(2) {
-    color: ${({ theme }) => theme.colors.tertiary};
-  }
-`;
-
-const TableWrapper = styled.div`
-  position: relative;
-  min-width: 800px;
-`;
 
 const Table = styled.table<{ hoveredcolumn: number | null }>`
   width: 100%;
   font-size: 14px;
 
   border-collapse: collapse;
-  border: 1px solid #ddd;
+  border: ${({ theme }) => `1px solid ${theme.colors.borderLight}`};
   table-layout: fixed;
   background-color: ${({ theme }) => theme.colors.background100};
 
