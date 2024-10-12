@@ -3,6 +3,10 @@ import { fireEvent, screen, waitFor } from "@testing-library/react";
 import ManagementContainer from "./ManagementContainer";
 import { renderWithProviders, resizeWindow } from "@utils/test-utils";
 
+jest.mock("./Team/Team", () => ({
+  Team: () => <div>Team Page</div>,
+}));
+
 jest.mock("@components/Tabs", () => ({
   Tabs: ({ setActiveTab }: { setActiveTab: (tab: string) => void }) => (
     <div>
@@ -15,7 +19,6 @@ jest.mock("@components/Tabs", () => ({
     </div>
   ),
 }));
-
 describe("<ManagementContainer />", () => {
   it("renders", async () => {
     renderWithProviders(<ManagementContainer />);

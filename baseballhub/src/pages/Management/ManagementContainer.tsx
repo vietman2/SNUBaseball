@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 
+import { Team } from "./Team/Team";
 import { VerticalDivider } from "@components/Dividers";
 import { MobileHeader, PageHeader } from "@components/Headers";
 import { Tabs } from "@components/Tabs";
@@ -17,7 +18,7 @@ export default function ManagementContainer() {
   const renderContent = () => {
     switch (selectedTab) {
       case "Team":
-        return <div>Team화면</div>;
+        return <Team />;
       case "메디컬":
         return <div>메디컬화면</div>;
       case "장비 현황":
