@@ -2,6 +2,7 @@ import { ReactComponent as AddIcon } from "./add.svg";
 import { ReactComponent as AdminIcon } from "./admin.svg";
 import { ReactComponent as ArchiveIcon } from "./archive.svg";
 import { ReactComponent as BaseballIcon } from "./baseball.svg";
+import { ReactComponent as BaseballIcon2 } from "./baseball2.svg";
 import { ReactComponent as CalendarIcon } from "./calendar.svg";
 import { ReactComponent as ChatIcon } from "./chat.svg";
 import { ReactComponent as CheckIcon } from "./check.svg";
@@ -22,6 +23,7 @@ import { ReactComponent as HeartIcon } from "./heart.svg";
 import { ReactComponent as HomeIcon } from "./home.svg";
 import { ReactComponent as LightBulbIcon } from "./lightbulb.svg";
 import { ReactComponent as LikeIcon } from "./like.svg";
+import { ReactComponent as LockIcon } from "./lock.svg";
 import { ReactComponent as MenuIcon } from "./menu.svg";
 import { ReactComponent as MoonIcon } from "./moon.svg";
 import { ReactComponent as PeopleIcon } from "./people.svg";
@@ -47,6 +49,8 @@ export const AppIcon = ({ icon, size, color }: Props) => {
       return <ArchiveIcon width={size} height={size} color={color} />;
     case "baseball":
       return <BaseballIcon width={size} height={size} color={color} />;
+    case "baseball2":
+      return <BaseballIcon2 width={size} height={size} color={color} />;
     case "calendar":
       return <CalendarIcon width={size} height={size} color={color} />;
     case "chat":
@@ -87,6 +91,8 @@ export const AppIcon = ({ icon, size, color }: Props) => {
       return <LightBulbIcon width={size} height={size} color={color} />;
     case "like":
       return <LikeIcon width={size} height={size} color={color} />;
+    case "lock":
+      return <LockIcon width={size} height={size} color={color} />;
     case "menu":
       return <MenuIcon width={size} height={size} color={color} />;
     case "moon":
