@@ -7,15 +7,20 @@ jest.mock("./Team/Team", () => ({
   Team: () => <div>Team Page</div>,
 }));
 
-jest.mock("@components/Tabs", () => ({
-  Tabs: ({ setActiveTab }: { setActiveTab: (tab: string) => void }) => (
+jest.mock("@components/Headers", () => ({
+  PageHeader: () => <div />,
+  MobileHeader: ({
+    setSelectedTab,
+  }: {
+    setSelectedTab: (tab: string) => void;
+  }) => (
     <div>
-      <button onClick={() => setActiveTab("Team")}>Team</button>
-      <button onClick={() => setActiveTab("메디컬")}>메디컬</button>
-      <button onClick={() => setActiveTab("장비 현황")}>장비 현황</button>
-      <button onClick={() => setActiveTab("활동보고")}>활동보고</button>
-      <button onClick={() => setActiveTab("회의록")}>회의록</button>
-      <button onClick={() => setActiveTab("asdf")}>asdf</button>
+      <button onClick={() => setSelectedTab("Team")}>Team</button>
+      <button onClick={() => setSelectedTab("메디컬")}>메디컬</button>
+      <button onClick={() => setSelectedTab("장비 현황")}>장비 현황</button>
+      <button onClick={() => setSelectedTab("활동보고")}>활동보고</button>
+      <button onClick={() => setSelectedTab("회의록")}>회의록</button>
+      <button onClick={() => setSelectedTab("asdf")}>asdf</button>
     </div>
   ),
 }));

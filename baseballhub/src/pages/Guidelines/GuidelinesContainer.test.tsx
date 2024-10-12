@@ -26,10 +26,15 @@ jest.mock("./GuidelineList/GuidelineList", () => ({
     </div>
   ),
 }));
-jest.mock("@components/Tabs", () => ({
-  Tabs: ({ setActiveTab }: { setActiveTab: (tab: string) => void }) => (
+jest.mock("@components/Headers", () => ({
+  MobileHeader: () => <div />,
+  PageHeader: ({
+    setSelectedTab,
+  }: {
+    setSelectedTab: (tab: string) => void;
+  }) => (
     <div>
-      <button onClick={() => setActiveTab("tab")}>tab</button>
+      <button onClick={() => setSelectedTab("tab")}>tab</button>
     </div>
   ),
 }));
@@ -38,8 +43,8 @@ describe("<GuidelinesContainer />", () => {
   it("renders and handles tabs", async () => {
     renderWithProviders(<GuidelinesContainer />);
 
-    await waitFor(() => resizeWindow(800, 800));
     await waitFor(() => resizeWindow(600, 600));
+    await waitFor(() => resizeWindow(800, 800));
 
     fireEvent.click(screen.getByText("tab"));
   });

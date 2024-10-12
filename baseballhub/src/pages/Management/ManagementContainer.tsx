@@ -2,10 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 
 import { Team } from "./Team/Team";
-import { VerticalDivider } from "@components/Dividers";
 import { MobileHeader, PageHeader } from "@components/Headers";
-import { Tabs } from "@components/Tabs";
-import { Title } from "@components/Texts";
 import { useWindowSize } from "@hooks/useWindowSize";
 
 const tabs = ["Team", "메디컬", "장비 현황", "활동보고", "회의록"];
@@ -35,24 +32,18 @@ export default function ManagementContainer() {
   return (
     <Container>
       {width > 768 ? (
-        <PageHeader>
-          <Title>매니지먼트</Title>
-          <VerticalDivider height="45%" bold />
-          <Tabs
-            tabs={tabs}
-            activeTab={selectedTab}
-            setActiveTab={setSelectedTab}
-          />
-        </PageHeader>
+        <PageHeader
+          title="매니지먼트"
+          tabs={tabs}
+          selectedTab={selectedTab}
+          setSelectedTab={setSelectedTab}
+        />
       ) : (
-        <MobileHeader>
-          <Tabs
-            tabs={tabs}
-            activeTab={selectedTab}
-            setActiveTab={setSelectedTab}
-            textSize="small"
-          />
-        </MobileHeader>
+        <MobileHeader
+          tabs={tabs}
+          selectedTab={selectedTab}
+          setSelectedTab={setSelectedTab}
+        />
       )}
       <Content>{renderContent()}</Content>
     </Container>

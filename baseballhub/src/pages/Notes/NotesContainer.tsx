@@ -2,10 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 
 import { Feedback } from "./Feedback/Feedback";
-import { VerticalDivider } from "@components/Dividers";
 import { MobileHeader, PageHeader } from "@components/Headers";
-import { Tabs } from "@components/Tabs";
-import { Title } from "@components/Texts";
 import { useWindowSize } from "@hooks/useWindowSize";
 
 const tabs = ["훈련 일지", "피드백", "전력분석"];
@@ -31,24 +28,18 @@ export default function NotesContainer() {
   return (
     <Container>
       {width > 768 ? (
-        <PageHeader>
-          <Title>Notes</Title>
-          <VerticalDivider height="45%" bold />
-          <Tabs
-            tabs={tabs}
-            activeTab={selectedTab}
-            setActiveTab={setSelectedTab}
-          />
-        </PageHeader>
+        <PageHeader
+          title="Notes"
+          tabs={tabs}
+          selectedTab={selectedTab}
+          setSelectedTab={setSelectedTab}
+        />
       ) : (
-        <MobileHeader>
-          <Tabs
-            tabs={tabs}
-            activeTab={selectedTab}
-            setActiveTab={setSelectedTab}
-            textSize="small"
-          />
-        </MobileHeader>
+        <MobileHeader
+          tabs={tabs}
+          selectedTab={selectedTab}
+          setSelectedTab={setSelectedTab}
+        />
       )}
       <Content>{renderContent()}</Content>
     </Container>

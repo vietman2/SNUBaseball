@@ -4,10 +4,7 @@ import styled from "styled-components";
 import { Board } from "./Board/Board";
 import { Information } from "./Information/Information";
 import { Notices } from "./Notices/Notices";
-import { VerticalDivider } from "@components/Dividers";
 import { MobileHeader, PageHeader } from "@components/Headers";
-import { Tabs } from "@components/Tabs";
-import { Title } from "@components/Texts";
 import { useWindowSize } from "@hooks/useWindowSize";
 
 const tabs = ["공지", "정보", "자유게시판", "갤러리"];
@@ -35,24 +32,18 @@ export default function ForumContainer() {
   return (
     <Container>
       {width > 768 ? (
-        <PageHeader>
-          <Title>게시판</Title>
-          <VerticalDivider height="45%" bold />
-          <Tabs
-            tabs={tabs}
-            activeTab={selectedTab}
-            setActiveTab={setSelectedTab}
-          />
-        </PageHeader>
+        <PageHeader
+          title="게시판"
+          tabs={tabs}
+          selectedTab={selectedTab}
+          setSelectedTab={setSelectedTab}
+        />
       ) : (
-        <MobileHeader>
-          <Tabs
-            tabs={tabs}
-            activeTab={selectedTab}
-            setActiveTab={setSelectedTab}
-            textSize="small"
-          />
-        </MobileHeader>
+        <MobileHeader
+          tabs={tabs}
+          selectedTab={selectedTab}
+          setSelectedTab={setSelectedTab}
+        />
       )}
       <Content>{renderContent()}</Content>
     </Container>

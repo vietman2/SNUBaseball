@@ -12,14 +12,19 @@ jest.mock("./Information/Information", () => ({
 jest.mock("./Notices/Notices", () => ({
   Notices: () => <div />,
 }));
-jest.mock("@components/Tabs", () => ({
-  Tabs: ({ setActiveTab }: { setActiveTab: (tab: string) => void }) => (
+jest.mock("@components/Headers", () => ({
+  PageHeader: () => <div />,
+  MobileHeader: ({
+    setSelectedTab,
+  }: {
+    setSelectedTab: (tab: string) => void;
+  }) => (
     <div>
-      <button onClick={() => setActiveTab("공지")}>공지</button>
-      <button onClick={() => setActiveTab("정보")}>정보</button>
-      <button onClick={() => setActiveTab("자유게시판")}>자유게시판</button>
-      <button onClick={() => setActiveTab("갤러리")}>갤러리</button>
-      <button onClick={() => setActiveTab("asdf")}>asdf</button>
+      <button onClick={() => setSelectedTab("공지")}>공지</button>
+      <button onClick={() => setSelectedTab("정보")}>정보</button>
+      <button onClick={() => setSelectedTab("자유게시판")}>자유게시판</button>
+      <button onClick={() => setSelectedTab("갤러리")}>갤러리</button>
+      <button onClick={() => setSelectedTab("asdf")}>asdf</button>
     </div>
   ),
 }));

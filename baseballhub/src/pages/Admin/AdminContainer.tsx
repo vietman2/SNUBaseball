@@ -2,10 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 
 import { Members } from "./Members/Members";
-import { VerticalDivider } from "@components/Dividers";
 import { MobileHeader, PageHeader } from "@components/Headers";
-import { Tabs } from "@components/Tabs";
-import { Title } from "@components/Texts";
 import { useWindowSize } from "@hooks/useWindowSize";
 
 const tabs = ["명부관리", "회계"];
@@ -29,24 +26,18 @@ export default function AdminContainer() {
   return (
     <Container>
       {width > 768 ? (
-        <PageHeader>
-          <Title>주장단 메뉴</Title>
-          <VerticalDivider height="45%" bold />
-          <Tabs
-            tabs={tabs}
-            activeTab={selectedTab}
-            setActiveTab={setSelectedTab}
-          />
-        </PageHeader>
+        <PageHeader
+          title="주장단 메뉴"
+          tabs={tabs}
+          selectedTab={selectedTab}
+          setSelectedTab={setSelectedTab}
+        />
       ) : (
-        <MobileHeader>
-          <Tabs
-            tabs={tabs}
-            activeTab={selectedTab}
-            setActiveTab={setSelectedTab}
-            textSize="small"
-          />
-        </MobileHeader>
+        <MobileHeader
+          tabs={tabs}
+          selectedTab={selectedTab}
+          setSelectedTab={setSelectedTab}
+        />
       )}
       <Content>{renderContent()}</Content>
     </Container>

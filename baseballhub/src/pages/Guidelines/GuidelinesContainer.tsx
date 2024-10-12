@@ -3,10 +3,7 @@ import styled from "styled-components";
 
 import { GuidelineDetail } from "./GuidelineDetail/GuidelineDetail";
 import { GuidelineList } from "./GuidelineList/GuidelineList";
-import { VerticalDivider } from "@components/Dividers";
 import { MobileHeader, PageHeader } from "@components/Headers";
-import { Tabs } from "@components/Tabs";
-import { Title } from "@components/Texts";
 import { useWindowSize } from "@hooks/useWindowSize";
 
 const tabs = ["내야", "외야", "포수", "투구", "타격", "주루", "기타"];
@@ -18,10 +15,6 @@ export default function GuidelinesContainer() {
   );
 
   const { width } = useWindowSize();
-
-  const setActiveTab = (tab: string) => {
-    setSelectedTab(tab);
-  };
 
   const renderContent = () => {
     if (selectedGuidelineId !== null) {
@@ -44,24 +37,18 @@ export default function GuidelinesContainer() {
   return (
     <Container>
       {width > 768 ? (
-        <PageHeader>
-          <Title>훈련 가이드라인</Title>
-          <VerticalDivider height="45%" bold />
-          <Tabs
-            tabs={tabs}
-            activeTab={selectedTab}
-            setActiveTab={setActiveTab}
-          />
-        </PageHeader>
+        <PageHeader
+          title="훈련 가이드라인"
+          tabs={tabs}
+          selectedTab={selectedTab}
+          setSelectedTab={setSelectedTab}
+        />
       ) : (
-        <MobileHeader>
-          <Tabs
-            tabs={tabs}
-            activeTab={selectedTab}
-            setActiveTab={setActiveTab}
-            textSize="small"
-          />
-        </MobileHeader>
+        <MobileHeader
+          tabs={tabs}
+          selectedTab={selectedTab}
+          setSelectedTab={setSelectedTab}
+        />
       )}
       <Content>{renderContent()}</Content>
     </Container>

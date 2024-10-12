@@ -20,14 +20,19 @@ jest.mock("./GameDetail/GameDetail", () => ({
 jest.mock("./Stats/Stats", () => ({
   Stats: () => <div>Stats</div>,
 }));
-jest.mock("@components/Tabs", () => ({
-  Tabs: ({ setActiveTab }: { setActiveTab: (tab: string) => void }) => (
+jest.mock("@components/Headers", () => ({
+  MobileHeader: () => <div />,
+  PageHeader: ({
+    setSelectedTab,
+  }: {
+    setSelectedTab: (tab: string) => void;
+  }) => (
     <div>
-      <button onClick={() => setActiveTab("경기결과")}>경기결과</button>
-      <button onClick={() => setActiveTab("개인기록")}>개인기록</button>
-      <button onClick={() => setActiveTab("연습경기")}>연습경기</button>
-      <button onClick={() => setActiveTab("체력측정")}>체력측정</button>
-      <button onClick={() => setActiveTab("asdf")}>asdf</button>
+      <button onClick={() => setSelectedTab("경기결과")}>경기결과</button>
+      <button onClick={() => setSelectedTab("개인기록")}>개인기록</button>
+      <button onClick={() => setSelectedTab("연습경기")}>연습경기</button>
+      <button onClick={() => setSelectedTab("체력측정")}>체력측정</button>
+      <button onClick={() => setSelectedTab("asdf")}>asdf</button>
     </div>
   ),
 }));
@@ -36,8 +41,8 @@ describe("<RecordsContainer />", () => {
   it("renders all tabs", async () => {
     renderWithProviders(<RecordsContainer />);
 
-    await waitFor(() => resizeWindow(800, 800));
     await waitFor(() => resizeWindow(600, 600));
+    await waitFor(() => resizeWindow(800, 800));
 
     fireEvent.click(screen.getByText("개인기록"));
     fireEvent.click(screen.getByText("연습경기"));
