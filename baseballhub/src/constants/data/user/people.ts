@@ -1,4 +1,4 @@
-import { MemberType, UserProfileType } from "@models/user/person";
+import { MemberType, UserProfileType } from "@models/user";
 
 export const sampleMembers: MemberType[] = [
   {
@@ -124,7 +124,7 @@ export const sampleProfile: UserProfileType = {
   token: "token",
 };
 
-export const tempProfile: UserProfileType = {
+export const sampleAdmin: UserProfileType = {
   uuid: "1234",
   name: "김유안",
   profile_image:

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
-import { sampleDailySchedule } from "@data/schedule/daily";
+import { sampleDailySchedule } from "@data/schedule";
 import { DailyScheduleType } from "@models/schedule";
 
 export function DailySchedule() {

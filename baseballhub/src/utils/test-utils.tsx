@@ -4,7 +4,7 @@ import { ThemeProvider } from "styled-components";
 
 import { AuthProvider } from "@contexts/auth";
 import { ThemeProvider as MyThemeProvider } from "@contexts/theme";
-import { UserProfileType } from "@models/user/person";
+import { UserProfileType } from "@models/user";
 import { light } from "@themes/themeColors";
 
 interface RenderWithProvidersOptions extends Omit<RenderOptions, "queries"> {

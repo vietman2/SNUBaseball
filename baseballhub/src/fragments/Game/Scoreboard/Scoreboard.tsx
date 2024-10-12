@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import { AppIcon, MainLogo } from "@components/Icons";
-import { GameResultsType } from "@models/records/game";
+import { GameResultsType } from "@models/records";
 
 interface Props {
   game: GameResultsType;

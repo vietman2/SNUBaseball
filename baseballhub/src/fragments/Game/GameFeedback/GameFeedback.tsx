@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import { Statsbar } from "@components/Progressbars";
 import { Subtitle } from "@components/Texts";
-import { GameResultsType } from "@models/records/game";
+import { GameResultsType } from "@models/records";
 
 interface Props {
   game: GameResultsType;

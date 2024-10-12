@@ -1,6 +1,6 @@
 import { sampleGameResult } from "./games";
-import { sampleBattingStats, sampleBattingStatsList } from "./batting";
-import { samplePitchingStats, samplePitchingStatsList } from "./pitching";
+import { sampleBattingStatsList } from "./batting";
+import { samplePitchingStatsList } from "./pitching";
 import {
   sampleGameSummary_draw,
   sampleGameSummary_loss,
@@ -11,9 +11,7 @@ import {
 
 export {
   sampleGameResult,
-  sampleBattingStats,
   sampleBattingStatsList,
-  samplePitchingStats,
   samplePitchingStatsList,
   sampleGameSummary_draw,
   sampleGameSummary_loss,

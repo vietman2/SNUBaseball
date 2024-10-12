@@ -7,7 +7,7 @@ import {
   useState,
 } from "react";
 
-import { UserProfileType } from "@models/user/person";
+import { UserProfileType } from "@models/user";
 
 interface AuthContextType {
   user: UserProfileType | null;

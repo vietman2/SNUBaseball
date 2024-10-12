@@ -22,21 +22,6 @@ export type MemberType = {
   weight?: number;
 };
 
-
-
-export type DepartmentType = {
-  id: number;
-  name: string;
-  short_name: string;
-};
-
-export type CollegeType = {
-  id: number;
-  name: string;
-  short_name: string;
-  departments: DepartmentType[];
-};
-
 export type UserProfileType = {
   uuid: string;
   name: string;

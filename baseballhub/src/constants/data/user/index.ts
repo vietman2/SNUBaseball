@@ -1,3 +1,4 @@
-import { sampleMembers } from "./people";
+import { sampleColleges } from "./colleges";
+import { sampleMembers, sampleAdmin, sampleProfile } from "./people";
 
-export { sampleMembers };
+export { sampleColleges, sampleMembers, sampleAdmin, sampleProfile };

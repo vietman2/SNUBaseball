@@ -4,7 +4,7 @@ import styled from "styled-components";
 import {
   sampleWeeklyData,
   sampleManagerWeeklyData,
-} from "@data/schedule/weekly";
+} from "@data/schedule";
 import {
   DailyPersonalScheduleType,
   WeeklyTimetableType,

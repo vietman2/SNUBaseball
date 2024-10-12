@@ -6,7 +6,7 @@ import Logo from "@assets/images/logo.png";
 import { TextButton } from "@components/Buttons";
 import { TextInput } from "@components/Inputs";
 import { useAuth } from "@contexts/auth";
-import { tempProfile } from "@data/user/people";
+import { sampleAdmin } from "@data/user";
 
 export function Login() {
   const [username, setUsername] = useState<string>("");
@@ -21,7 +21,7 @@ export function Login() {
 
   const handleLogin = () => {
     // TODO: Implement login logic
-    login(tempProfile);
+    login(sampleAdmin);
     navigate("/home");
   };
 

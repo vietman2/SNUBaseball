@@ -1,6 +1,6 @@
 import { PostType, CommentType } from "@models/forum";
 
-export const sampleComments: CommentType[] = [
+const sampleComments: CommentType[] = [
   {
     id: 1,
     content: "유감입니다.",

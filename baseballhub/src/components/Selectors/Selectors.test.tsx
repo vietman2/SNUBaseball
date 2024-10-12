@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 
 import { CollegeSelector } from "./CollegeSelector";
 import { SimpleSelector } from "./SimpleSelector";
-import { sampleColleges } from "@data/user/colleges";
+import { sampleColleges } from "@data/user";
 import { renderWithProviders } from "@utils/test-utils";
 
 jest.unmock("@components/Selectors");

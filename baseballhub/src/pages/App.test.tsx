@@ -1,4 +1,4 @@
-import { fireEvent, screen, waitFor } from "@testing-library/react";
+import { waitFor } from "@testing-library/react";
 
 import App from "./App";
 import * as AuthContext from "@contexts/auth";

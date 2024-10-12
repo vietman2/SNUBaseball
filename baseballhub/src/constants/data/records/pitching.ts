@@ -1,6 +1,6 @@
 import { PitchingStatsType } from "@models/records";
 
-export const samplePitchingStats: PitchingStatsType = {
+const samplePitchingStats: PitchingStatsType = {
   name: "김유안",
   num_games: 12,
   innings_pitched: 40,

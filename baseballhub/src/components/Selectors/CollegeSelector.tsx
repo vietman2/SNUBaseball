@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { CollegeType } from "@models/user/person";
+import { CollegeType } from "@models/user";
 
 interface Props {
   colleges: CollegeType[];

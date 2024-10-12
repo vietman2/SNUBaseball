@@ -1,8 +1,4 @@
-import {
-  ClassificationType,
-  FeedbackResponseType,
-  FeedbackType,
-} from "@models/notes";
+import { ClassificationType, FeedbackResponseType } from "@models/notes";
 
 const classification_defense: ClassificationType = {
   type: "수비",
@@ -20,18 +16,6 @@ const classification_running: ClassificationType = {
   type: "주루",
   backgroundColor: "#B3E5FC",
   color: "#01579B",
-};
-
-export const sampleFeedback: FeedbackType = {
-  id: 1,
-  title: "asdf",
-  content: "qwer",
-  player: "zxcv",
-  coach: "asdf",
-  classification: classification_batting,
-  status: "완료",
-  created_at: "2024-08-01",
-  updated_at: "2024-10-01",
 };
 
 export const sampleFeedbacks: FeedbackResponseType = {
