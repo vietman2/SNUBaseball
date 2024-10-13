@@ -14,7 +14,7 @@ def generate_photo_file():
     return file
 
 class MajorViewSetTest(APITestCase):
-    fixtures = ["data/initial/majors.json"]
+    fixtures = ["core/data/initial/majors.json"]
 
     def test_unallowed_methods(self):
         response = self.client.get('/api/majors/1/')
@@ -25,7 +25,7 @@ class MajorViewSetTest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
 class PersonViewSetTest(APITestCase):
-    fixtures = ["data/initial/majors.json", "data/initial/obs.json", "data/initial/ybs.json"]
+    fixtures = ["core/data/initial/majors.json", "core/data/initial/obs.json", "core/data/initial/ybs.json"]
 
     def setUp(self):
         self.image = generate_photo_file()
