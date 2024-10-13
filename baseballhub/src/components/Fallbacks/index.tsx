@@ -1,4 +1,4 @@
-import { Error } from "./Error";
+import { ErrorComponent } from "./Error";
 import { Loading } from "./Loading";
 
-export { Error, Loading };
+export { ErrorComponent, Loading };

@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { Chip } from "@components/Chips";
 import { Divider } from "@components/Dividers";
-import { Error } from "@components/Fallbacks";
+import { ErrorComponent } from "@components/Fallbacks";
 import { Subtitle } from "@components/Texts";
 import { sampleNoticeDetail } from "@data/forum";
 import { NoticeDetailType } from "@models/forum";
@@ -22,7 +22,7 @@ export function NoticeDetail({ noticeId, goBack }: Readonly<Props>) {
   }, []);
 
   if (noticeId === null || notice === undefined)
-    return <Error onRefresh={goBack} label="뒤로가기" />;
+    return <ErrorComponent onRefresh={goBack} label="뒤로가기" />;
 
   return (
     <Container>

@@ -1,12 +1,12 @@
-import { Error } from "./Error";
+import { ErrorComponent } from "./Error";
 import { Loading } from "./Loading";
 import { renderWithProviders } from "@utils/test-utils";
 
 jest.unmock("@components/Fallbacks");
 
-describe("<Error />", () => {
+describe("<ErrorComponent />", () => {
   it("renders", () => {
-    renderWithProviders(<Error onRefresh={jest.fn()} />);
+    renderWithProviders(<ErrorComponent onRefresh={jest.fn()} />);
   });
 });
 

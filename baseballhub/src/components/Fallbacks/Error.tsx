@@ -6,7 +6,7 @@ interface Props {
   label?: string;
 }
 
-export function Error({
+export function ErrorComponent({
   onRefresh,
   text = "오류가 발생했습니다.",
   label = "새로고침",
