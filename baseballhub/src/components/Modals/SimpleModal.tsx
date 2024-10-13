@@ -49,5 +49,4 @@ const ModalContainer = styled.div<{ $isOpen: boolean }>`
 const Content = styled.div`
   display: flex;
   flex: 1;
-  padding: 32px 16px;
 `;
