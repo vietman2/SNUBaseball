@@ -40,11 +40,15 @@ export function NoticeDetail({ noticeId, goBack }: Readonly<Props>) {
           <div>{notice.created_at}</div>
         </Metadata>
       </Header>
-      <Divider bold />
+      <DividerWrapper>
+        <Divider bold />
+      </DividerWrapper>
       <Content>
         <div>{notice.content}</div>
       </Content>
-      <Divider bold />
+      <DividerWrapper>
+        <Divider bold />
+      </DividerWrapper>
       <Comments>
         {notice.comments.map((comment, index) => (
           <div key={index}>{comment}</div>
@@ -89,6 +93,7 @@ const Content = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
+  min-height: 300px;
   padding: 16px 8px;
 `;
 
@@ -98,4 +103,8 @@ const Comments = styled.div`
   flex-direction: column;
   padding: 16px 8px;
   gap: 8px;
+`;
+
+const DividerWrapper = styled.div`
+  display: flex;
 `;
