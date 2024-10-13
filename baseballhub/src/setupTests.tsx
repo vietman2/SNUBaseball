@@ -82,7 +82,9 @@ jest.mock("@components/Inputs", () => ({
   }) => <input value={value} onChange={(e) => onChange(e.target.value)} />,
 }));
 jest.mock("@components/Modals", () => ({
-  SimpleModal: () => <div>SimpleModal</div>,
+  SimpleModal: ({ children }: { children: React.ReactNode }) => (
+    <div>{children}</div>
+  ),
 }));
 jest.mock("@components/Progressbars", () => ({
   Statsbar: () => <div>Statsbar</div>,
