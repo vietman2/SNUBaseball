@@ -5,7 +5,7 @@ import { renderWithProviders, resizeWindow } from "@utils/test-utils";
 
 jest.mock("@fragments/Notices", () => ({
   NoticeDetail: ({ goBack }: { goBack: () => void }) => (
-    <div onClick={goBack}>NoticeDetail</div>
+    <button onClick={goBack}>NoticeDetail</button>
   ),
   NoticeSimple: () => <div>NoticeSimple</div>,
   NoticeSimpleWide: () => <div>NoticeSimpleWide</div>,
