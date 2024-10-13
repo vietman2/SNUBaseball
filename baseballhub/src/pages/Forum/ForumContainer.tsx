@@ -1,13 +1,12 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-import { Board } from "./Board/Board";
 import { Information } from "./Information/Information";
 import { Notices } from "./Notices/Notices";
 import { MobileHeader, PageHeader } from "@components/Headers";
 import { useWindowSize } from "@hooks/useWindowSize";
 
-const tabs = ["공지", "정보", "자유게시판", "갤러리"];
+const tabs = ["공지", "정보", "갤러리"];
 
 export default function ForumContainer() {
   const [selectedTab, setSelectedTab] = useState<string>("공지");
@@ -20,8 +19,6 @@ export default function ForumContainer() {
         return <Notices />;
       case "정보":
         return <Information />;
-      case "자유게시판":
-        return <Board />;
       case "갤러리":
         return <div>갤러리화면</div>;
       default:
