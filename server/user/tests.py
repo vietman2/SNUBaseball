@@ -25,7 +25,11 @@ class MajorViewSetTest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
 class PersonViewSetTest(APITestCase):
-    fixtures = ["core/data/initial/majors.json", "core/data/initial/obs.json", "core/data/initial/ybs.json"]
+    fixtures = [
+        "core/data/initial/majors.json",
+            "core/data/initial/obs.json",
+            "core/data/initial/ybs.json"
+        ]
 
     def setUp(self):
         self.image = generate_photo_file()
