@@ -42,6 +42,7 @@ const Admin: TabGroup = {
   title: "Admin",
   tabs: [
     { title: "주장단 업무", icon: "people", path: "/admin" },
+    { title: "회계", icon: "money", path: "/accountings" },
   ],
   limited: true,
 };

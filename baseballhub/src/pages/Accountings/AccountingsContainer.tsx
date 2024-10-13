@@ -1,23 +1,23 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-import { Members } from "./Members/Members";
+import { History } from "./History/History";
 import { MobileHeader, PageHeader } from "@components/Headers";
 import { useWindowSize } from "@hooks/useWindowSize";
 
-const tabs = ["명부관리", "회의록"];
+const tabs = ["대시보드", "전체 내역"];
 
-export default function AdminContainer() {
-  const [selectedTab, setSelectedTab] = useState<string>("명부관리");
+export default function AccountingsContainer() {
+  const [selectedTab, setSelectedTab] = useState<string>("대시보드");
 
   const { width } = useWindowSize();
 
   const renderContent = () => {
     switch (selectedTab) {
-      case "명부관리":
-        return <Members />;
-      case "회의록":
-        return <div>회의록화면</div>;
+      case "대시보드":
+        return <div>대시보드 화면</div>;
+      case "전체 내역":
+        return <History />;
       default:
         return <div>경기결과</div>;
     }
@@ -27,7 +27,7 @@ export default function AdminContainer() {
     <Container>
       {width > 768 ? (
         <PageHeader
-          title="주장단 메뉴"
+          title="회계"
           tabs={tabs}
           selectedTab={selectedTab}
           setSelectedTab={setSelectedTab}
