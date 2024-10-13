@@ -5,7 +5,7 @@ import { Team } from "./Team/Team";
 import { MobileHeader, PageHeader } from "@components/Headers";
 import { useWindowSize } from "@hooks/useWindowSize";
 
-const tabs = ["Team", "메디컬", "장비 현황", "활동보고"];
+const tabs = ["Team", "메디컬", "장비 현황"];
 
 export default function ManagementContainer() {
   const [selectedTab, setSelectedTab] = useState<string>("Team");
@@ -20,8 +20,6 @@ export default function ManagementContainer() {
         return <div>메디컬화면</div>;
       case "장비 현황":
         return <div>장비 현황화면</div>;
-      case "활동보고":
-        return <div>활동보고화면</div>;
       default:
         return <div>경기결과화면</div>;
     }
