@@ -11,6 +11,7 @@ import {
   createGlobalStyle,
 } from "styled-components";
 
+import { AccountingsContainer } from "@pages/Accountings";
 import { AdminContainer } from "@pages/Admin";
 import { Login, SignUp } from "@pages/Auth";
 import { ForumContainer } from "@pages/Forum";
@@ -52,6 +53,7 @@ const router = createBrowserRouter(
           <Route path="/guidelines" element={<GuidelinesContainer />} />
           <Route path="/management" element={<ManagementContainer />} />
           <Route path="/admin" element={<AdminContainer />} />
+          <Route path="/accountings" element={<AccountingsContainer />} />
         </Route>
       </Route>
     </>

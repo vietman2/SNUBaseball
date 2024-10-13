@@ -1,11 +1,11 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 
-import AdminContainer from "./AdminContainer";
+import AccountingsContainer from "./AccountingsContainer";
 import { renderWithProviders, resizeWindow } from "@utils/test-utils";
 
-jest.mock("./Members/Members", () => ({
-  Members: () => <div />,
-}));
+jest.mock("./History/History", () => ({
+    History: () => <div />,
+    }));
 jest.mock("@components/Headers", () => ({
   MobileHeader: () => <div />,
   PageHeader: ({
@@ -14,24 +14,22 @@ jest.mock("@components/Headers", () => ({
     setSelectedTab: (tab: string) => void;
   }) => (
     <div>
-      <button onClick={() => setSelectedTab("명부관리")}>명부관리</button>
-      <button onClick={() => setSelectedTab("회계")}>회계</button>
-      <button onClick={() => setSelectedTab("회의록")}>회의록</button>
+      <button onClick={() => setSelectedTab("대시보드")}>대시보드</button>
+      <button onClick={() => setSelectedTab("전체 내역")}>전체 내역</button>
       <button onClick={() => setSelectedTab("asdf")}>asdf</button>
     </div>
   ),
 }));
 
-describe("<AdminContainer />", () => {
+describe("<AccountingsContainer />", () => {
   it("renders without crashing", async () => {
-    renderWithProviders(<AdminContainer />);
+    renderWithProviders(<AccountingsContainer />);
 
     await waitFor(() => resizeWindow(600, 600));
     await waitFor(() => resizeWindow(800, 800));
 
-    fireEvent.click(screen.getByText("명부관리"));
-    fireEvent.click(screen.getByText("회계"));
-    fireEvent.click(screen.getByText("회의록"));
+    fireEvent.click(screen.getByText("대시보드"));
+    fireEvent.click(screen.getByText("전체 내역"));
     fireEvent.click(screen.getByText("asdf"));
   });
 });

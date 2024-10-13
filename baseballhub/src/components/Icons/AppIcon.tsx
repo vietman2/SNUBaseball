@@ -25,6 +25,7 @@ import { ReactComponent as LightBulbIcon } from "./lightbulb.svg";
 import { ReactComponent as LikeIcon } from "./like.svg";
 import { ReactComponent as LockIcon } from "./lock.svg";
 import { ReactComponent as MenuIcon } from "./menu.svg";
+import { ReactComponent as MoneyIcon } from "./money.svg";
 import { ReactComponent as MoonIcon } from "./moon.svg";
 import { ReactComponent as PeopleIcon } from "./people.svg";
 import { ReactComponent as PersonIcon } from "./person.svg";
@@ -70,6 +71,7 @@ const iconMap: Record<
   like: LikeIcon,
   lock: LockIcon,
   menu: MenuIcon,
+  money: MoneyIcon,
   moon: MoonIcon,
   people: PeopleIcon,
   person: PersonIcon,

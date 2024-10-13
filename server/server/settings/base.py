@@ -33,7 +33,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'archive.memories.apps.MemoriesConfig',
     'user.apps.UserConfig',
 
     "corsheaders",

@@ -20,6 +20,9 @@ jest.mock("@contexts/theme", () => ({
   useTheme: jest.fn(),
 }));
 
+jest.mock("@pages/Accountings", () => ({
+  AccountingsContainer: () => <div />,
+}));
 jest.mock("@pages/Admin", () => ({
   AdminContainer: () => <div />,
 }));

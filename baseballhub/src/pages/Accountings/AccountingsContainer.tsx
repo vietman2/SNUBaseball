@@ -1,26 +1,23 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-import { Analysis } from "./Analysis/Analysis";
-import { Feedback } from "./Feedback/Feedback";
+import { History } from "./History/History";
 import { MobileHeader, PageHeader } from "@components/Headers";
 import { useWindowSize } from "@hooks/useWindowSize";
 
-const tabs = ["훈련 일지", "피드백", "전력분석"];
+const tabs = ["대시보드", "전체 내역"];
 
-export default function NotesContainer() {
-  const [selectedTab, setSelectedTab] = useState<string>("훈련 일지");
+export default function AccountingsContainer() {
+  const [selectedTab, setSelectedTab] = useState<string>("대시보드");
 
   const { width } = useWindowSize();
 
   const renderContent = () => {
     switch (selectedTab) {
-      case "훈련 일지":
-        return <div>훈련 일지화면</div>;
-      case "피드백":
-        return <Feedback />;
-      case "전력분석":
-        return <Analysis />;
+      case "대시보드":
+        return <div>대시보드 화면</div>;
+      case "전체 내역":
+        return <History />;
       default:
         return <div>경기결과</div>;
     }
@@ -30,7 +27,7 @@ export default function NotesContainer() {
     <Container>
       {width > 768 ? (
         <PageHeader
-          title="Notes"
+          title="회계"
           tabs={tabs}
           selectedTab={selectedTab}
           setSelectedTab={setSelectedTab}
