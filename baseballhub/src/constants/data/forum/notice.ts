@@ -51,9 +51,16 @@ export const sampleNotices: NoticeSimpleType[] = [
   {
     id: 4,
     category: sampleCategories[2],
-    title:
-      "2024년도 선수등록 부원 교육영상 시청",
+    title: "2024년도 선수등록 부원 교육영상 시청",
     author: "김유안",
+    num_views: 100,
+    created_at: "2024-10-01",
+  },
+  {
+    id: 5,
+    category: sampleCategories[0],
+    title: "2024년 10월 야구부 활동보고",
+    author: "박영서",
     num_views: 100,
     created_at: "2024-10-01",
   },
