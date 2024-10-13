@@ -46,6 +46,10 @@ jest.mock("@components/Dividers", () => ({
   Divider: () => <div>Divider</div>,
   VerticalDivider: () => <div>VerticalDivider</div>,
 }));
+jest.mock("@components/Fallbacks", () => ({
+  ErrorComponent: () => <div>Error</div>,
+  Loading: () => <div>Loading</div>,
+}));
 jest.mock("@components/Frames", () => ({
   IFrame: () => <div>IFrame</div>,
 }));
@@ -76,6 +80,14 @@ jest.mock("@components/Inputs", () => ({
     value: string;
     onChange: (value: string) => void;
   }) => <input value={value} onChange={(e) => onChange(e.target.value)} />,
+}));
+jest.mock("@components/Modals", () => ({
+  MobileModal: ({ children }: { children: React.ReactNode }) => (
+    <div>{children}</div>
+  ),
+  SimpleModal: ({ children }: { children: React.ReactNode }) => (
+    <div>{children}</div>
+  ),
 }));
 jest.mock("@components/Progressbars", () => ({
   Statsbar: () => <div>Statsbar</div>,

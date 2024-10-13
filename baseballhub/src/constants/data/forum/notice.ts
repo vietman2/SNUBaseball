@@ -1,4 +1,8 @@
-import { NoticeCategoryType, NoticeSimpleType } from "@models/forum";
+import {
+  NoticeCategoryType,
+  NoticeDetailType,
+  NoticeSimpleType,
+} from "@models/forum";
 
 const sampleCategories: NoticeCategoryType[] = [
   {
@@ -51,10 +55,28 @@ export const sampleNotices: NoticeSimpleType[] = [
   {
     id: 4,
     category: sampleCategories[2],
-    title:
-      "2024년도 선수등록 부원 교육영상 시청",
+    title: "2024년도 선수등록 부원 교육영상 시청",
     author: "김유안",
     num_views: 100,
     created_at: "2024-10-01",
   },
+  {
+    id: 5,
+    category: sampleCategories[0],
+    title: "2024년 10월 야구부 활동보고",
+    author: "박영서",
+    num_views: 100,
+    created_at: "2024-10-01",
+  },
 ];
+
+export const sampleNoticeDetail: NoticeDetailType = {
+  id: 1,
+  category: sampleCategories[0],
+  title: "유계결석 인정 요청서",
+  content: "유계결석 인정 요청서입니다.",
+  author: "임준원",
+  num_views: 100,
+  created_at: "2024-04-01",
+  comments: ["확인했습니다.", "감사합니다."],
+};

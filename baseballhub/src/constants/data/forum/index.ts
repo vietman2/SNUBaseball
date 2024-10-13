@@ -1,4 +1,4 @@
 import { sampleInformations } from "./information";
-import { sampleNotices } from "./notice";
+import { sampleNotices, sampleNoticeDetail } from "./notice";
 
-export { sampleInformations, sampleNotices };
+export { sampleInformations, sampleNotices, sampleNoticeDetail };

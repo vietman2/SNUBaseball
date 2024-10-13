@@ -1,8 +1,9 @@
 import { InformationSimpleType } from "./information";
-import { NoticeCategoryType, NoticeSimpleType } from "./notices";
+import { NoticeCategoryType, NoticeDetailType, NoticeSimpleType } from "./notices";
 
 export {
   type InformationSimpleType,
   type NoticeCategoryType,
+  type NoticeDetailType,
   type NoticeSimpleType,
 };
