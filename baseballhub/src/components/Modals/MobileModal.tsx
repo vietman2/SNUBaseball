@@ -6,7 +6,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-export function SimpleModal({ isOpen, onClose, children }: Readonly<Props>) {
+export function MobileModal({ isOpen, onClose, children }: Readonly<Props>) {
   return (
     <>
       {isOpen && <Backdrop onClick={onClose} />}
@@ -33,16 +33,16 @@ const ModalContainer = styled.div<{ $isOpen: boolean }>`
   position: fixed;
   top: 88px;
   right: 0;
-  height: calc(100dvh - 96px);
-  width: 600px;
+  height: calc(100dvh - 128px);
+  width: calc(100vw - 48px);
 
-  border-radius: 16px 0 0 16px;
+  border-radius: 16px;
   background-color: ${({ theme }) => theme.colors.background900};
   box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
-  z-index: 20;
+  z-index: 200;
 
   transform: ${({ $isOpen }) =>
-    $isOpen ? "translateX(0)" : "translateX(100%)"};
+    $isOpen ? "translateX(-16px)" : "translateX(100%)"};
   transition: transform 0.3s ease-in-out;
 `;
 

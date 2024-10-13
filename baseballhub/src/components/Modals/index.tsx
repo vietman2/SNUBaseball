@@ -1,3 +1,4 @@
+import { MobileModal } from "./MobileModal";
 import { SimpleModal } from "./SimpleModal";
 
-export { SimpleModal };
+export { MobileModal, SimpleModal };
