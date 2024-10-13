@@ -19,7 +19,6 @@ jest.mock("@components/Headers", () => ({
       <button onClick={() => setSelectedTab("메디컬")}>메디컬</button>
       <button onClick={() => setSelectedTab("장비 현황")}>장비 현황</button>
       <button onClick={() => setSelectedTab("활동보고")}>활동보고</button>
-      <button onClick={() => setSelectedTab("회의록")}>회의록</button>
       <button onClick={() => setSelectedTab("asdf")}>asdf</button>
     </div>
   ),
@@ -35,7 +34,6 @@ describe("<ManagementContainer />", () => {
     fireEvent.click(screen.getByText("메디컬"));
     fireEvent.click(screen.getByText("장비 현황"));
     fireEvent.click(screen.getByText("활동보고"));
-    fireEvent.click(screen.getByText("회의록"));
     fireEvent.click(screen.getByText("asdf"));
   });
 });

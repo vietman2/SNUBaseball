@@ -5,7 +5,7 @@ import { Members } from "./Members/Members";
 import { MobileHeader, PageHeader } from "@components/Headers";
 import { useWindowSize } from "@hooks/useWindowSize";
 
-const tabs = ["명부관리", "회계"];
+const tabs = ["명부관리", "회계", "회의록"];
 
 export default function AdminContainer() {
   const [selectedTab, setSelectedTab] = useState<string>("명부관리");
@@ -18,6 +18,8 @@ export default function AdminContainer() {
         return <Members />;
       case "회계":
         return <div>회계</div>;
+      case "회의록":
+        return <div>회의록화면</div>;
       default:
         return <div>경기결과</div>;
     }
