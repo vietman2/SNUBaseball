@@ -3,6 +3,7 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { MobileModal } from "@components/Modals";
 import "@testing-library/jest-dom";
 
 jest.mock("react-router-dom", () => {
@@ -82,6 +83,9 @@ jest.mock("@components/Inputs", () => ({
   }) => <input value={value} onChange={(e) => onChange(e.target.value)} />,
 }));
 jest.mock("@components/Modals", () => ({
+  MobileModal: ({ children }: { children: React.ReactNode }) => (
+    <div>{children}</div>
+  ),
   SimpleModal: ({ children }: { children: React.ReactNode }) => (
     <div>{children}</div>
   ),
