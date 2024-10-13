@@ -12,3 +12,14 @@ export type NoticeSimpleType = {
   num_views: number;
   created_at: string;
 };
+
+export type NoticeDetailType = {
+  id: number;
+  category: NoticeCategoryType;
+  title: string;
+  content: string;
+  author: string;
+  num_views: number;
+  created_at: string;
+  comments: string[]; // TODO: Change to CommentType[]
+};
