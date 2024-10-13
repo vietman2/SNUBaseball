@@ -3,6 +3,12 @@ import { fireEvent, screen, waitFor } from "@testing-library/react";
 import NotesContainer from "./NotesContainer";
 import { renderWithProviders, resizeWindow } from "@utils/test-utils";
 
+jest.mock("./Analysis/Analysis", () => ({
+  Analysis: () => <div>Analysis</div>,
+}));
+jest.mock("./Feedback/Feedback", () => ({
+  Feedback: () => <div>Feedback</div>,
+}));
 jest.mock("@components/Headers", () => ({
   MobileHeader: () => <div />,
   PageHeader: ({
@@ -17,9 +23,6 @@ jest.mock("@components/Headers", () => ({
       <button onClick={() => setSelectedTab("asdf")}>asdf</button>
     </div>
   ),
-}));
-jest.mock("./Feedback/Feedback", () => ({
-  Feedback: () => <div>Feedback</div>,
 }));
 
 describe("<NotesContainer />", () => {

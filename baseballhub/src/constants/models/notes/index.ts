@@ -1,3 +1,4 @@
+import { AnalysisSimpleType } from "./analysis";
 import {
   ClassificationType,
   FeedbackType,
@@ -5,6 +6,7 @@ import {
 } from "./feedback";
 
 export {
+  type AnalysisSimpleType,
   type ClassificationType,
   type FeedbackType,
   type FeedbackResponseType,

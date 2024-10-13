@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 
+import { Analysis } from "./Analysis/Analysis";
 import { Feedback } from "./Feedback/Feedback";
 import { MobileHeader, PageHeader } from "@components/Headers";
 import { useWindowSize } from "@hooks/useWindowSize";
@@ -19,7 +20,7 @@ export default function NotesContainer() {
       case "피드백":
         return <Feedback />;
       case "전력분석":
-        return <div>전력분석화면</div>;
+        return <Analysis />;
       default:
         return <div>경기결과</div>;
     }
