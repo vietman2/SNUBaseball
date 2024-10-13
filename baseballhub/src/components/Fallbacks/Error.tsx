@@ -2,13 +2,19 @@ import styled from "styled-components";
 
 interface Props {
   onRefresh: () => void;
+  text?: string;
+  label?: string;
 }
 
-export function Error({ onRefresh }: Readonly<Props>) {
+export function Error({
+  onRefresh,
+  text = "오류가 발생했습니다.",
+  label = "새로고침",
+}: Readonly<Props>) {
   return (
     <Container>
-        <div>오류가 발생했습니다.</div>
-      <RefreshButton onClick={onRefresh}>새로고침</RefreshButton>
+      <div>{text}</div>
+      <RefreshButton onClick={onRefresh}>{label}</RefreshButton>
     </Container>
   );
 }
