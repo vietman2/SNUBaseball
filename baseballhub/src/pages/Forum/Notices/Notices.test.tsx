@@ -25,5 +25,7 @@ describe("<Notices />", () => {
     renderWithProviders(<Notices />);
 
     await waitFor(() => resizeWindow(600, 600));
+    await waitFor(() => fireEvent.click(screen.getByTestId("notice-1")));
+    fireEvent.click(screen.getByText("NoticeDetail"));
   });
 });

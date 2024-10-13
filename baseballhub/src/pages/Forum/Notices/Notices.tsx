@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { Divider } from "@components/Dividers";
-import { SimpleModal } from "@components/Modals";
+import { MobileModal, SimpleModal } from "@components/Modals";
 import { Subtitle } from "@components/Texts";
 import { sampleNotices } from "@data/forum";
 import {
@@ -62,8 +62,17 @@ export function Notices() {
         <>
           <Divider bold />
           {notices.map((notice) => (
-            <NoticeSimple key={notice.id} notice={notice} />
+            <button
+              key={notice.id}
+              onClick={() => handleNoticeClick(notice)}
+              data-testid={`notice-${notice.id}`}
+            >
+              <NoticeSimple key={notice.id} notice={notice} />
+            </button>
           ))}
+          <MobileModal isOpen={modalOpen} onClose={closeModal}>
+            <NoticeDetail noticeId={selectedNoticeId} goBack={closeModal} />
+          </MobileModal>
         </>
       )}
     </Container>
