@@ -46,6 +46,10 @@ jest.mock("@components/Dividers", () => ({
   Divider: () => <div>Divider</div>,
   VerticalDivider: () => <div>VerticalDivider</div>,
 }));
+jest.mock("@components/Fallbacks", () => ({
+  Error: () => <div>Error</div>,
+  Loading: () => <div>Loading</div>,
+}));
 jest.mock("@components/Frames", () => ({
   IFrame: () => <div>IFrame</div>,
 }));
