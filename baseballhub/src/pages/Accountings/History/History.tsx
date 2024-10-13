@@ -19,6 +19,7 @@ export function History() {
         <div>계좌별 필터</div>
         <div>유형 필터</div>
         <div>지출/수입 필터</div>
+        <div>추가 버튼</div>
       </FiltersWrapper>
       <ContentWrapper>
         <HistorySimpleHeader />
