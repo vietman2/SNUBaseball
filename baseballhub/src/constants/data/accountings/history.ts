@@ -1,4 +1,8 @@
-import { CategoryType, HistorySimpleType } from "@models/accountings";
+import {
+  CategoryType,
+  HistoryDetailType,
+  HistorySimpleType,
+} from "@models/accountings";
 
 const sampleIncomeCategories: CategoryType[] = [
   {
@@ -120,3 +124,18 @@ export const sampleHistory: HistorySimpleType[] = [
     method: "카드결제",
   },
 ];
+
+export const sampleHistoryDetail: HistoryDetailType = {
+  id: 1,
+  account: "부비계좌",
+  amount: 100000,
+  description: "신인식 교수님 후원금",
+  type: "수입",
+  category: sampleIncomeCategories[0],
+  date: "2024-09-01",
+  method: "계좌이체",
+  counterparty: "신인식 교수님",
+  balance: 1000000,
+  manager: "김유안",
+  note: "신인식 교수님 후원금",
+};
