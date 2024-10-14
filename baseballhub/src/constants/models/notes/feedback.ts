@@ -4,7 +4,7 @@ export type ClassificationType = {
   color: string;
 };
 
-export type FeedbackType = {
+export type FeedbackSimpleType = {
   id: number;
   title: string;
   content: string;
@@ -17,8 +17,20 @@ export type FeedbackType = {
 };
 
 export type FeedbackResponseType = {
-  new: FeedbackType[];
-  in_progress: FeedbackType[];
-  under_review: FeedbackType[];
-  done: FeedbackType[];
+  new: FeedbackSimpleType[];
+  in_progress: FeedbackSimpleType[];
+  under_review: FeedbackSimpleType[];
+  done: FeedbackSimpleType[];
+};
+
+export type FeedbackDetailType = {
+  id: number;
+  title: string;
+  content: string;
+  player: string;
+  coach: string;
+  classification: ClassificationType;
+  status: string;
+  created_at: string;
+  updated_at: string;
 };

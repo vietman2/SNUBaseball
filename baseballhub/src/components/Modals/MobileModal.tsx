@@ -37,12 +37,12 @@ const ModalContainer = styled.div<{ $isOpen: boolean }>`
   width: calc(100vw - 48px);
 
   border-radius: 16px;
-  background-color: ${({ theme }) => theme.colors.background900};
+  background-color: ${({ theme }) => theme.colors.background300};
   box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
   z-index: 200;
 
   transform: ${({ $isOpen }) =>
-    $isOpen ? "translateX(-16px)" : "translateX(100%)"};
+    $isOpen ? "translateX(-24px)" : "translateX(100%)"};
   transition: transform 0.3s ease-in-out;
 `;
 

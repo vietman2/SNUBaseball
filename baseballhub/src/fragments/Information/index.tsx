@@ -1,3 +1,4 @@
+import { InformationDetail } from "./InformationDetail/InformationDetail";
 import { InformationSimple } from "./InformationSimple/InformationSimple";
 
-export { InformationSimple };
+export { InformationDetail, InformationSimple };

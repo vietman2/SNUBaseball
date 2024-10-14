@@ -1,4 +1,8 @@
-import { ClassificationType, FeedbackResponseType } from "@models/notes";
+import {
+  ClassificationType,
+  FeedbackResponseType,
+  FeedbackDetailType,
+} from "@models/notes";
 
 const classification_defense: ClassificationType = {
   type: "수비",
@@ -72,3 +76,5 @@ export const sampleFeedbacks: FeedbackResponseType = {
     },
   ],
 };
+
+export const sampleFeedbackDetail: FeedbackDetailType = sampleFeedbacks.new[0];

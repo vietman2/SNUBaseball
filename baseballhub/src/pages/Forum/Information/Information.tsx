@@ -1,13 +1,33 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
-import { Callout } from "@components/Texts";
+import { MobileModal, SimpleModal } from "@components/Modals";
 import { sampleInformations } from "@data/forum";
-import { InformationSimple } from "@fragments/Information";
+import { InformationDetail, InformationSimple } from "@fragments/Information";
+import { useWindowSize } from "@hooks/useWindowSize";
 import { InformationSimpleType } from "@models/forum";
 
 export function Information() {
   const [informations, setInformations] = useState<InformationSimpleType[]>([]);
+  const [selectedInformationId, setSelectedInformationId] = useState<
+    number | null
+  >(null);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+
+  const { width } = useWindowSize();
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  const handleInformationClick = (information: InformationSimpleType) => {
+    setSelectedInformationId(information.id);
+    openModal();
+  };
 
   useEffect(() => {
     // TODO: Fetch information data from the server
@@ -16,12 +36,32 @@ export function Information() {
 
   return (
     <Container>
-      <Callout text="각종 야구부 가이드" />
       <Content>
         {informations.map((information) => (
-          <InformationSimple key={information.id} information={information} />
+          <button
+            key={information.id}
+            onClick={() => handleInformationClick(information)}
+            data-testid={`information-${information.id}`}
+          >
+            <InformationSimple information={information} />
+          </button>
         ))}
       </Content>
+      {width > 768 ? (
+        <SimpleModal isOpen={modalOpen} onClose={closeModal}>
+          <InformationDetail
+            informationId={selectedInformationId}
+            goBack={closeModal}
+          />
+        </SimpleModal>
+      ) : (
+        <MobileModal isOpen={modalOpen} onClose={closeModal}>
+          <InformationDetail
+            informationId={selectedInformationId}
+            goBack={closeModal}
+          />
+        </MobileModal>
+      )}
     </Container>
   );
 }

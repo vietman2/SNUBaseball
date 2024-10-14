@@ -3,28 +3,28 @@ import styled from "styled-components";
 
 import { ErrorComponent } from "@components/Fallbacks";
 import { Subtitle } from "@components/Texts";
-import { sampleFeedbackDetail } from "@data/notes";
-import { FeedbackDetailType } from "@models/notes";
+import { sampleInformationDetail } from "@data/forum";
+import { InformationDetailType } from "@models/forum";
 
 interface Props {
-  feedbackId: number | null;
+  informationId: number | null;
   goBack: () => void;
 }
 
-export function FeedbackDetail({ feedbackId, goBack }: Readonly<Props>) {
-  const [feedback, setFeedback] = useState<FeedbackDetailType>();
+export function InformationDetail({ informationId, goBack }: Readonly<Props>) {
+  const [information, setInformation] = useState<InformationDetailType>();
 
   useEffect(() => {
-    setFeedback(sampleFeedbackDetail);
+    setInformation(sampleInformationDetail);
   }, []);
 
-  if (feedbackId === null || feedback === undefined)
+  if (informationId === null || information === undefined)
     return <ErrorComponent onRefresh={goBack} label="뒤로가기" />;
 
   return (
     <Container>
       <Header>
-        <Subtitle size="large">{feedback.title}</Subtitle>
+        <Subtitle size="large">{information.title}</Subtitle>
       </Header>
     </Container>
   );

@@ -37,7 +37,7 @@ const ModalContainer = styled.div<{ $isOpen: boolean }>`
   width: 600px;
 
   border-radius: 16px 0 0 16px;
-  background-color: ${({ theme }) => theme.colors.background900};
+  background-color: ${({ theme }) => theme.colors.background300};
   box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
   z-index: 20;
 
