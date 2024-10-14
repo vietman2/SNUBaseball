@@ -109,7 +109,6 @@ jest.mock("@components/Tabs", () => ({
   Tabs: () => <div>Tabs</div>,
 }));
 jest.mock("@components/Texts", () => ({
-  Callout: () => <div>Callout</div>,
   Subtitle: () => <div>Subtitle</div>,
   Title: () => <div>Title</div>,
 }));
