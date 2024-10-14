@@ -132,6 +132,9 @@ const Location = styled.div`
   align-items: center;
   justify-content: center;
 
+  color: ${({ theme }) => theme.colors.foreground500};
+  font-weight: 500;
+
   > div:first-child {
     display: flex;
     flex: 1;

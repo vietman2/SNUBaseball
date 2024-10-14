@@ -95,6 +95,8 @@ const Content = styled.div`
   flex-direction: column;
   min-height: 300px;
   padding: 16px 8px;
+
+  color: ${({ theme }) => theme.colors.foreground500};
 `;
 
 const Comments = styled.div`
@@ -103,6 +105,8 @@ const Comments = styled.div`
   flex-direction: column;
   padding: 16px 8px;
   gap: 8px;
+
+  color: ${({ theme }) => theme.colors.foreground500};
 `;
 
 const DividerWrapper = styled.div`

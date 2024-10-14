@@ -113,6 +113,8 @@ const Comments = styled.div`
   flex-direction: column;
   padding: 16px 8px;
   gap: 8px;
+
+  color: ${({ theme }) => theme.colors.foreground500};
 `;
 
 const DividerWrapper = styled.div`

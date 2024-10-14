@@ -83,6 +83,8 @@ const Content = styled.div`
   min-height: 300px;
   padding: 16px;
 
+  color: ${({ theme }) => theme.colors.foreground500};
+
   > div {
     padding: 8px 0;
   }
@@ -105,6 +107,8 @@ const History = styled.div`
   flex-direction: row;
   align-items: center;
   padding: 8px 0;
+
+  color: ${({ theme }) => theme.colors.foreground500};
 
   > div {
     display: flex;

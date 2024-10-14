@@ -17,6 +17,8 @@ const Container = styled.div`
   padding: 12px 16px;
   gap: 16px;
 
+  color: ${({ theme }) => theme.colors.foreground300};
+
   border-radius: 16px;
   background-color: ${({ theme }) => theme.colors.background300};
 `;
