@@ -13,7 +13,7 @@ jest.mock("@contexts/auth", () => ({
 }));
 jest.mock("@fragments/Member", () => ({
   MemberDetail: ({ goBack }: { goBack: () => void }) => (
-    <div onClick={goBack}>MemberDetail</div>
+    <button onClick={goBack}>MemberDetail</button>
   ),
   MemberSimple: () => <div>MemberSimple</div>,
   MemberSimpleHeader: () => <div>MemberSimpleHeader</div>,
