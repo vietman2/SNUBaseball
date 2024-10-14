@@ -16,7 +16,7 @@ export default function ManagementContainer() {
 
   const handleReset = () => {
     setSelectedTab("Team");
-  }
+  };
 
   const renderContent = () => {
     switch (selectedTab) {

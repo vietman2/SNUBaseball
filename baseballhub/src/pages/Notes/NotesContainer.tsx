@@ -16,7 +16,7 @@ export default function NotesContainer() {
 
   const handleReset = () => {
     setSelectedTab("훈련 일지");
-  }
+  };
 
   const renderContent = () => {
     switch (selectedTab) {

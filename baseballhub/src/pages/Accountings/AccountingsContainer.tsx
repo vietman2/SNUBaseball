@@ -15,7 +15,7 @@ export default function AccountingsContainer() {
 
   const handleReset = () => {
     setSelectedTab("대시보드");
-  }
+  };
 
   const renderContent = () => {
     switch (selectedTab) {

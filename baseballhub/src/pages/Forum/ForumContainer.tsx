@@ -16,7 +16,7 @@ export default function ForumContainer() {
 
   const handleReset = () => {
     setSelectedTab("공지");
-  }
+  };
 
   const renderContent = () => {
     switch (selectedTab) {

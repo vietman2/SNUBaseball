@@ -16,7 +16,7 @@ export default function ScheduleContainer() {
 
   const handleReset = () => {
     setSelectedTab("주간 훈참표");
-  }
+  };
 
   const renderContent = () => {
     switch (selectedTab) {
