@@ -3,6 +3,9 @@ import { fireEvent, screen, waitFor } from "@testing-library/react";
 import AdminContainer from "./AdminContainer";
 import { renderWithProviders, resizeWindow } from "@utils/test-utils";
 
+jest.mock("./Minutes/Minutes", () => ({
+  Minutes: () => <div />,
+}));
 jest.mock("./Members/Members", () => ({
   Members: () => <div />,
 }));

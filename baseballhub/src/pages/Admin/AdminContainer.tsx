@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 
 import { Members } from "./Members/Members";
+import { Minutes } from "./Minutes/Minutes";
 import { ErrorComponent } from "@components/Fallbacks";
 import { MobileHeader, PageHeader } from "@components/Headers";
 import { useWindowSize } from "@hooks/useWindowSize";
@@ -22,7 +23,7 @@ export default function AdminContainer() {
       case "명부관리":
         return <Members />;
       case "회의록":
-        return <div>회의록화면</div>;
+        return <Minutes />;
       default:
         return <ErrorComponent onRefresh={handleReset} label="새로고침" />;
     }
