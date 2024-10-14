@@ -4,7 +4,7 @@ import { renderWithProviders } from "@utils/test-utils";
 
 describe("<MinutesSimple />", () => {
   it("renders correctly", () => {
-    const { container } = renderWithProviders(
+    renderWithProviders(
       <MinutesSimple minutes={sampleMinutes[0]} />
     );
   });
