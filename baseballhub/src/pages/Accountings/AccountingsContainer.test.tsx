@@ -31,5 +31,6 @@ describe("<AccountingsContainer />", () => {
     fireEvent.click(screen.getByText("대시보드"));
     fireEvent.click(screen.getByText("전체 내역"));
     fireEvent.click(screen.getByText("asdf"));
+    fireEvent.click(screen.getByText("새로고침"));
   });
 });

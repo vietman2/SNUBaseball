@@ -33,5 +33,6 @@ describe("<ScheduleContainer />", () => {
     fireEvent.click(screen.getByText("훈련계획표"));
     fireEvent.click(screen.getByText("월간 캘린더"));
     fireEvent.click(screen.getByText("asdf"));
+    fireEvent.click(screen.getByText("새로고침"));
   });
 });

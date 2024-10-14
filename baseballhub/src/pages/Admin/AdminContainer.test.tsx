@@ -33,5 +33,6 @@ describe("<AdminContainer />", () => {
     fireEvent.click(screen.getByText("회계"));
     fireEvent.click(screen.getByText("회의록"));
     fireEvent.click(screen.getByText("asdf"));
+    fireEvent.click(screen.getByText("새로고침"));
   });
 });

@@ -36,5 +36,6 @@ describe("<ManagementContainer />", () => {
     fireEvent.click(screen.getByText("메디컬"));
     fireEvent.click(screen.getByText("장비 현황"));
     fireEvent.click(screen.getByText("asdf"));
+    fireEvent.click(screen.getByText("새로고침"));
   });
 });

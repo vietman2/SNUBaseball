@@ -48,6 +48,7 @@ describe("<RecordsContainer />", () => {
     fireEvent.click(screen.getByText("연습경기"));
     fireEvent.click(screen.getByText("체력측정"));
     fireEvent.click(screen.getByText("asdf"));
+    fireEvent.click(screen.getByText("새로고침"));
   });
 
   it("renders game detail", () => {
