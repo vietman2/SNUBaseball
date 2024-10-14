@@ -1,4 +1,4 @@
-import { InformationSimpleType } from "@models/forum";
+import { InformationDetailType, InformationSimpleType } from "@models/forum";
 
 export const sampleInformations: InformationSimpleType[] = [
   {
@@ -17,3 +17,10 @@ export const sampleInformations: InformationSimpleType[] = [
     image: "https://via.placeholder.com/150",
   },
 ];
+
+export const sampleInformationDetail: InformationDetailType = {
+  id: 1,
+  title: "부실 청소 가이드",
+  content: "부실 청소 가이드입니다.",
+  image: "https://via.placeholder.com/150",
+};
