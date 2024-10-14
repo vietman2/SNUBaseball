@@ -1,4 +1,4 @@
-import { AnalysisSimpleType } from "@models/notes";
+import { AnalysisSimpleType, AnalysisDetailType } from "@models/notes";
 
 export const sampleAnalyses: AnalysisSimpleType[] = [
   {
@@ -26,3 +26,11 @@ export const sampleAnalyses: AnalysisSimpleType[] = [
     date: "2024-01-01",
   },
 ];
+
+export const sampleAnalysisDetail: AnalysisDetailType = {
+  id: 1,
+  title: "[2024] 제주국제대",
+  cover_image: "https://via.placeholder.com/150",
+  date: "2024-01-01",
+  content: "제주국제대 분석 내용",
+};
