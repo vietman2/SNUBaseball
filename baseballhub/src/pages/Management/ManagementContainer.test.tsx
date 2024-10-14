@@ -3,6 +3,9 @@ import { fireEvent, screen, waitFor } from "@testing-library/react";
 import ManagementContainer from "./ManagementContainer";
 import { renderWithProviders, resizeWindow } from "@utils/test-utils";
 
+jest.mock("./Equipment/Equipment", () => ({
+  Equipment: () => <div>Equipment Page</div>,
+}));
 jest.mock("./Team/Team", () => ({
   Team: () => <div>Team Page</div>,
 }));

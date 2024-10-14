@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 
+import { Equipment } from "./Equipment/Equipment";
 import { Team } from "./Team/Team";
 import { MobileHeader, PageHeader } from "@components/Headers";
 import { useWindowSize } from "@hooks/useWindowSize";
@@ -19,7 +20,7 @@ export default function ManagementContainer() {
       case "메디컬":
         return <div>메디컬화면</div>;
       case "장비 현황":
-        return <div>장비 현황화면</div>;
+        return <Equipment />;
       default:
         return <div>경기결과화면</div>;
     }
