@@ -1,9 +1,56 @@
-import { MemberType, UserProfileType } from "@models/user";
+import {
+  RoleType,
+  StatusType,
+  MemberType,
+  MemberDetailType,
+  UserProfileType,
+} from "@models/user";
+
+export const sampleRoles: RoleType[] = [
+  {
+    name: "주장",
+    color: "#263238",
+    bgColor: "#CFD8DC",
+  },
+  {
+    name: "부주장",
+    color: "#0D47A1",
+    bgColor: "#BBDEFB",
+  },
+  {
+    name: "수석",
+    color: "#4A148C",
+    bgColor: "#D1C4E9",
+  },
+  {
+    name: "매니저",
+    color: "#BF360C",
+    bgColor: "#FFCCBC",
+  },
+  {
+    name: "부원",
+    color: "#1B5E20",
+    bgColor: "#C8E6C9",
+  },
+];
+
+export const sampleStatus: StatusType[] = [
+  {
+    name: "활동중",
+    color: "#01579B",
+    bgColor: "#B3E5FC",
+  },
+  {
+    name: "군휴학",
+    color: "#3E2723",
+    bgColor: "#D7CCC8",
+  },
+];
 
 export const sampleMembers: MemberType[] = [
   {
     id: 1,
-    role: "주장",
+    role: sampleRoles[0],
     name: "김유안",
     phone: "010-1234-4321",
     email: "2024-12345@snu.ac.kr",
@@ -13,7 +60,7 @@ export const sampleMembers: MemberType[] = [
     department: "건설환경공학과",
     year_level: 3,
     birth_date: "2000-01-01",
-    status: "활동중",
+    status: sampleStatus[0],
     joined_at: "2021/03",
     num_semesters: "3학기+",
     address: "서울시 관악구 관악로 1, 71동",
@@ -27,7 +74,7 @@ export const sampleMembers: MemberType[] = [
   },
   {
     id: 2,
-    role: "부주장",
+    role: sampleRoles[1],
     name: "양서진",
     phone: "010-5678-8765",
     email: "2024-67890@snu.ac.kr",
@@ -37,7 +84,7 @@ export const sampleMembers: MemberType[] = [
     department: "건설환경공학과",
     year_level: 3,
     birth_date: "2000-01-01",
-    status: "활동중",
+    status: sampleStatus[0],
     joined_at: "2021/09",
     num_semesters: "3학기+",
     address: "서울시 관악구 관악로 1, 71동",
@@ -51,7 +98,7 @@ export const sampleMembers: MemberType[] = [
   },
   {
     id: 3,
-    role: "수석",
+    role: sampleRoles[2],
     name: "강지민",
     phone: "010-3333-3333",
     email: "2024-33333@snu.ac.kr",
@@ -61,7 +108,7 @@ export const sampleMembers: MemberType[] = [
     department: "미학과",
     year_level: 3,
     birth_date: "2000-01-01",
-    status: "활동중",
+    status: sampleStatus[0],
     joined_at: "2024/08",
     num_semesters: "1학기+",
     address: "서울시 관악구 관악로 1, 71동",
@@ -72,7 +119,7 @@ export const sampleMembers: MemberType[] = [
   },
   {
     id: 4,
-    role: "매니저",
+    role: sampleRoles[3],
     name: "박영서",
     phone: "010-2222-2222",
     email: "2024-22222@snu.ac.kr",
@@ -82,7 +129,7 @@ export const sampleMembers: MemberType[] = [
     department: "기계공학부",
     year_level: 3,
     birth_date: "2000-01-01",
-    status: "활동중",
+    status: sampleStatus[0],
     joined_at: "2023/09",
     num_semesters: "3학기+",
     address: "서울시 관악구 관악로 1, 71동",
@@ -93,7 +140,7 @@ export const sampleMembers: MemberType[] = [
   },
   {
     id: 5,
-    role: "부원",
+    role: sampleRoles[4],
     name: "노희재",
     phone: "010-1111-1111",
     email: "2024-11111@snu.ac.kr",
@@ -103,7 +150,7 @@ export const sampleMembers: MemberType[] = [
     department: "경영학과",
     year_level: 3,
     birth_date: "2000-01-01",
-    status: "군휴학",
+    status: sampleStatus[1],
     joined_at: "2022/09",
     num_semesters: "2학기",
     address: "서울시 관악구 관악로 1, 71동",
@@ -115,6 +162,8 @@ export const sampleMembers: MemberType[] = [
     weight: 75,
   },
 ];
+
+export const sampleMemberDetail: MemberDetailType = sampleMembers[0];
 
 export const sampleProfile: UserProfileType = {
   uuid: "1",

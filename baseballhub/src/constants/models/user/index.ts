@@ -1,8 +1,17 @@
 import { DepartmentType, CollegeType } from "./major";
-import { MemberType, UserProfileType } from "./person";
+import {
+  RoleType,
+  StatusType,
+  MemberType,
+  MemberDetailType,
+  UserProfileType,
+} from "./person";
 
 export {
+  type RoleType,
+  type StatusType,
   type MemberType,
+  type MemberDetailType,
   type UserProfileType,
   type DepartmentType,
   type CollegeType,
