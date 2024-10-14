@@ -1,6 +1,18 @@
+export type RoleType = {
+  name: string;
+  color: string;
+  bgColor: string;
+};
+
+export type StatusType = {
+  name: string;
+  color: string;
+  bgColor: string;
+};
+
 export type MemberType = {
   id: number;
-  role: string;
+  role: RoleType;
   name: string;
   phone: string;
   email: string;
@@ -10,7 +22,7 @@ export type MemberType = {
   department: string;
   year_level: number;
   birth_date: string;
-  status: string;
+  status: StatusType;
   joined_at: string;
   num_semesters: string;
   address: string;
@@ -21,6 +33,8 @@ export type MemberType = {
   height?: number;
   weight?: number;
 };
+
+export type MemberDetailType = MemberType;
 
 export type UserProfileType = {
   uuid: string;

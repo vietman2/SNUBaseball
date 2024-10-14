@@ -1,4 +1,15 @@
 import { sampleColleges } from "./colleges";
-import { sampleMembers, sampleAdmin, sampleProfile } from "./people";
+import {
+  sampleMembers,
+  sampleMemberDetail,
+  sampleAdmin,
+  sampleProfile,
+} from "./people";
 
-export { sampleColleges, sampleMembers, sampleAdmin, sampleProfile };
+export {
+  sampleColleges,
+  sampleMembers,
+  sampleMemberDetail,
+  sampleAdmin,
+  sampleProfile,
+};
