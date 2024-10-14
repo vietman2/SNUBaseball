@@ -1,3 +1,4 @@
-import { AnalysisSimple } from "./Analysis/AnalysisSimple";
+import { AnalysisDetail } from "./AnalysisDetail/AnalysisDetail";
+import { AnalysisSimple } from "./AnalysisSimple/AnalysisSimple";
 
-export { AnalysisSimple };
+export { AnalysisDetail, AnalysisSimple };

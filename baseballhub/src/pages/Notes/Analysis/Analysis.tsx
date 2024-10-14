@@ -1,12 +1,33 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
+import { MobileModal, SimpleModal } from "@components/Modals";
 import { sampleAnalyses } from "@data/notes";
-import { AnalysisSimple } from "@fragments/Analysis";
+import { AnalysisDetail, AnalysisSimple } from "@fragments/Analysis";
+import { useWindowSize } from "@hooks/useWindowSize";
 import { AnalysisSimpleType } from "@models/notes";
 
 export function Analysis() {
   const [analyses, setAnalyses] = useState<AnalysisSimpleType[]>([]);
+  const [selectedAnalysisId, setSelectedAnalysisId] = useState<number | null>(
+    null
+  );
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+
+  const { width } = useWindowSize();
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  const handleAnalysisClick = (analysis: AnalysisSimpleType) => {
+    setSelectedAnalysisId(analysis.id);
+    openModal();
+  };
 
   useEffect(() => {
     setAnalyses(sampleAnalyses);
@@ -19,9 +40,24 @@ export function Analysis() {
       </FilterWrapper>
       <ContentWrapper>
         {analyses.map((analysis) => (
-          <AnalysisSimple key={analysis.id} analysis={analysis} />
+          <button
+            key={analysis.id}
+            onClick={() => handleAnalysisClick(analysis)}
+            data-testid={`analysis-${analysis.id}`}
+          >
+            <AnalysisSimple analysis={analysis} />
+          </button>
         ))}
       </ContentWrapper>
+      {width > 768 ? (
+        <SimpleModal isOpen={modalOpen} onClose={closeModal}>
+          <AnalysisDetail analysisId={selectedAnalysisId} goBack={closeModal} />
+        </SimpleModal>
+      ) : (
+        <MobileModal isOpen={modalOpen} onClose={closeModal}>
+          <AnalysisDetail analysisId={selectedAnalysisId} goBack={closeModal} />
+        </MobileModal>
+      )}
     </Container>
   );
 }
@@ -46,5 +82,5 @@ const ContentWrapper = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 16px;
 `;
