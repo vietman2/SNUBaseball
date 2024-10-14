@@ -1,4 +1,4 @@
 import { sampleAnalyses } from "./analysis";
-import { sampleFeedbacks } from "./feedback";
+import { sampleFeedbacks, sampleFeedbackDetail } from "./feedback";
 
-export { sampleAnalyses, sampleFeedbacks };
+export { sampleAnalyses, sampleFeedbacks, sampleFeedbackDetail };
