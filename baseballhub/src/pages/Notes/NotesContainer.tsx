@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import { Analysis } from "./Analysis/Analysis";
 import { Feedback } from "./Feedback/Feedback";
+import { ComingSoon, ErrorComponent } from "@components/Fallbacks";
 import { MobileHeader, PageHeader } from "@components/Headers";
 import { useWindowSize } from "@hooks/useWindowSize";
 
@@ -13,16 +14,20 @@ export default function NotesContainer() {
 
   const { width } = useWindowSize();
 
+  const handleReset = () => {
+    setSelectedTab("훈련 일지");
+  }
+
   const renderContent = () => {
     switch (selectedTab) {
       case "훈련 일지":
-        return <div>훈련 일지화면</div>;
+        return <ComingSoon />;
       case "피드백":
         return <Feedback />;
       case "전력분석":
         return <Analysis />;
       default:
-        return <div>경기결과</div>;
+        return <ErrorComponent onRefresh={handleReset} label="새로고침" />;
     }
   };
 

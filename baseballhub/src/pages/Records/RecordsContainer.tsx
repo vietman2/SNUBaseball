@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Results } from "./Results/Results";
 import { GameDetail } from "./GameDetail/GameDetail";
 import { Stats } from "./Stats/Stats";
+import { ComingSoon, ErrorComponent } from "@components/Fallbacks";
 import { MobileHeader, PageHeader } from "@components/Headers";
 import { useWindowSize } from "@hooks/useWindowSize";
 
@@ -14,6 +15,11 @@ export default function RecordsContainer() {
   const [selectedGame, setSelectedGame] = useState<number | null>(null);
 
   const { width } = useWindowSize();
+
+  const handleReset = () => {
+    setSelectedTab("경기결과");
+    setSelectedGame(null);
+  };
 
   const renderContent = () => {
     switch (selectedTab) {
@@ -28,11 +34,11 @@ export default function RecordsContainer() {
       case "개인기록":
         return <Stats />;
       case "연습경기":
-        return <div>연습경기</div>;
+        return <ComingSoon />;
       case "체력측정":
-        return <div>체력측정</div>;
+        return <ComingSoon />;
       default:
-        return <div>경기결과</div>;
+        return <ErrorComponent onRefresh={handleReset} label="새로고침" />;
     }
   };
 

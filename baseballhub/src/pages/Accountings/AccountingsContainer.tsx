@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 
 import { History } from "./History/History";
+import { ComingSoon, ErrorComponent } from "@components/Fallbacks";
 import { MobileHeader, PageHeader } from "@components/Headers";
 import { useWindowSize } from "@hooks/useWindowSize";
 
@@ -12,14 +13,18 @@ export default function AccountingsContainer() {
 
   const { width } = useWindowSize();
 
+  const handleReset = () => {
+    setSelectedTab("대시보드");
+  }
+
   const renderContent = () => {
     switch (selectedTab) {
       case "대시보드":
-        return <div>대시보드 화면</div>;
+        return <ComingSoon />;
       case "전체 내역":
         return <History />;
       default:
-        return <div>경기결과</div>;
+        return <ErrorComponent onRefresh={handleReset} label="새로고침" />;
     }
   };
 

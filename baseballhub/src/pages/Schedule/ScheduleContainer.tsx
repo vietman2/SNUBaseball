@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import { DailySchedule } from "./DailySchedule/DailySchedule";
 import { WeeklySchedule } from "./WeeklySchedule/WeeklySchedule";
+import { ComingSoon, ErrorComponent } from "@components/Fallbacks";
 import { MobileHeader, PageHeader } from "@components/Headers";
 import { useWindowSize } from "@hooks/useWindowSize";
 
@@ -13,6 +14,10 @@ export default function ScheduleContainer() {
 
   const { width } = useWindowSize();
 
+  const handleReset = () => {
+    setSelectedTab("주간 훈참표");
+  }
+
   const renderContent = () => {
     switch (selectedTab) {
       case "주간 훈참표":
@@ -20,9 +25,9 @@ export default function ScheduleContainer() {
       case "훈련계획표":
         return <DailySchedule />;
       case "월간 캘린더":
-        return <div>월간 캘린더</div>;
+        return <ComingSoon />;
       default:
-        return <div>경기결과</div>;
+        return <ErrorComponent onRefresh={handleReset} label="새로고침" />;
     }
   };
 

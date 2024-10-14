@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 
 import { Members } from "./Members/Members";
+import { ErrorComponent } from "@components/Fallbacks";
 import { MobileHeader, PageHeader } from "@components/Headers";
 import { useWindowSize } from "@hooks/useWindowSize";
 
@@ -12,6 +13,10 @@ export default function AdminContainer() {
 
   const { width } = useWindowSize();
 
+  const handleReset = () => {
+    setSelectedTab("명부관리");
+  };
+
   const renderContent = () => {
     switch (selectedTab) {
       case "명부관리":
@@ -19,7 +24,7 @@ export default function AdminContainer() {
       case "회의록":
         return <div>회의록화면</div>;
       default:
-        return <div>경기결과</div>;
+        return <ErrorComponent onRefresh={handleReset} label="새로고침" />;
     }
   };
 
