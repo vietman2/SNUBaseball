@@ -1,27 +1,41 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
+import { MobileModal, SimpleModal } from "@components/Modals";
 import { ChipTabs } from "@components/Tabs";
 import { sampleGuidelines } from "@data/guidelines";
-import { GuidelinePreview } from "@fragments/Guideline";
+import { GuidelineDetail, GuidelineSimple } from "@fragments/Guideline";
 import { useWindowSize } from "@hooks/useWindowSize";
 import { GuidelineSimpleType } from "@models/guidelines";
 
 interface Props {
   selectedCategory: string;
-  onSelectGuidelineId: (guidelineId: number) => void;
 }
 
-export function GuidelineList({ selectedCategory, onSelectGuidelineId }: Readonly<Props>) {
+export function Guidelines({ selectedCategory }: Readonly<Props>) {
   const [actions, setActions] = useState<string[]>([]);
   const [selectedAction, setSelectedAction] = useState<string>("");
 
   const [guidelines, setGuidelines] = useState<GuidelineSimpleType[]>([]);
+  const [selectedGuidelineId, setSelectedGuidelineId] = useState<number | null>(
+    null
+  );
+
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
 
   const { width } = useWindowSize();
 
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   const handleGuidelineClick = (guideline: GuidelineSimpleType) => {
-    onSelectGuidelineId(guideline.id);
+    setSelectedGuidelineId(guideline.id);
+    openModal();
   };
 
   useEffect(() => {
@@ -51,10 +65,25 @@ export function GuidelineList({ selectedCategory, onSelectGuidelineId }: Readonl
             onClick={() => handleGuidelineClick(guideline)}
             data-testid={`guideline-${guideline.id}`}
           >
-            <GuidelinePreview guideline={guideline} />
+            <GuidelineSimple guideline={guideline} />
           </button>
         ))}
       </Wrapper>
+      {width > 768 ? (
+        <SimpleModal isOpen={modalOpen} onClose={closeModal}>
+          <GuidelineDetail
+            guidelineId={selectedGuidelineId}
+            goBack={closeModal}
+          />
+        </SimpleModal>
+      ) : (
+        <MobileModal isOpen={modalOpen} onClose={closeModal}>
+          <GuidelineDetail
+            guidelineId={selectedGuidelineId}
+            goBack={closeModal}
+          />
+        </MobileModal>
+      )}
     </Container>
   );
 }

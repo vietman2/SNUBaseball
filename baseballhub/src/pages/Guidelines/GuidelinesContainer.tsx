@@ -1,8 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-import { GuidelineDetail } from "./GuidelineDetail/GuidelineDetail";
-import { GuidelineList } from "./GuidelineList/GuidelineList";
+import { Guidelines } from "./Guidelines/Guidelines";
 import { MobileHeader, PageHeader } from "@components/Headers";
 import { useWindowSize } from "@hooks/useWindowSize";
 
@@ -10,29 +9,8 @@ const tabs = ["내야", "외야", "포수", "투구", "타격", "주루", "기�
 
 export default function GuidelinesContainer() {
   const [selectedTab, setSelectedTab] = useState<string>("내야");
-  const [selectedGuidelineId, setSelectedGuidelineId] = useState<number | null>(
-    null
-  );
 
   const { width } = useWindowSize();
-
-  const renderContent = () => {
-    if (selectedGuidelineId !== null) {
-      return (
-        <GuidelineDetail
-          guidelineId={selectedGuidelineId}
-          goBack={() => setSelectedGuidelineId(null)}
-        />
-      );
-    } else {
-      return (
-        <GuidelineList
-          selectedCategory={selectedTab}
-          onSelectGuidelineId={setSelectedGuidelineId}
-        />
-      );
-    }
-  };
 
   return (
     <Container>
@@ -50,7 +28,9 @@ export default function GuidelinesContainer() {
           setSelectedTab={setSelectedTab}
         />
       )}
-      <Content>{renderContent()}</Content>
+      <Content>
+        <Guidelines selectedCategory={selectedTab} />
+      </Content>
     </Container>
   );
 }

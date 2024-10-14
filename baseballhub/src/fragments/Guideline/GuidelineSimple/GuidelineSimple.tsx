@@ -8,7 +8,7 @@ interface Props {
   guideline: GuidelineSimpleType;
 }
 
-export function GuidelinePreview({ guideline }: Props) {
+export function GuidelineSimple({ guideline }: Readonly<Props>) {
   const imageUri = `https://img.youtube.com/vi/${guideline.video_id}/0.jpg`;
 
   const renderTitle = () => {

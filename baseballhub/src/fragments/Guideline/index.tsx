@@ -1,3 +1,4 @@
-import { GuidelinePreview } from "./GuidelinePreview/GuidelinePreview";
+import { GuidelineDetail } from "./GuidelineDetail/GuidelineDetail";
+import { GuidelineSimple } from "./GuidelineSimple/GuidelineSimple";
 
-export { GuidelinePreview };
+export { GuidelineDetail, GuidelineSimple };
