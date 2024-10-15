@@ -29,7 +29,7 @@ export function Mobile() {
 
   const doRender = (tabgroup: TabGroup) => {
     if (!tabgroup.limited) return true;
-    return user?.role === "주장";
+    return user?.is_admin;
   };
 
   return (

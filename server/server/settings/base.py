@@ -33,7 +33,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'user.apps.UserConfig',
+    'media.image.apps.ImageConfig',
+    'person.major.apps.MajorConfig',
+    'person.member.apps.MemberConfig',
+    'person.user.apps.UserConfig',
 
     "corsheaders",
     "allauth",

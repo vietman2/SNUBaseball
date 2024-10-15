@@ -3,9 +3,6 @@ from django.utils import timezone
 
 class UserManager(BaseUserManager):
     def get_queryset(self):
-        return super().get_queryset().filter(is_active=True)
-
-    def get_all_users(self):
         return super().get_queryset()
 
     def delete_user(self, user):
@@ -20,17 +17,6 @@ class UserManager(BaseUserManager):
             **extra_fields
         )
         user.set_password(password)
-        user.save(using=self._db)
-
-        return user
-
-    def create_superuser(self, password=None, **extra_fields):
-        user = self.create_user(
-            password=password,
-            **extra_fields
-        )
-        user.is_superuser = True
-
         user.save(using=self._db)
 
         return user

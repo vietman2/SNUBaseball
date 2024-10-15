@@ -169,8 +169,7 @@ export const sampleProfile: UserProfileType = {
   uuid: "1",
   name: "John Doe",
   profile_image: "https://via.placeholder.com/150",
-  role: "Member",
-  token: "token",
+  is_admin: false,
 };
 
 export const sampleAdmin: UserProfileType = {
@@ -178,6 +177,5 @@ export const sampleAdmin: UserProfileType = {
   name: "김유안",
   profile_image:
     "https://kr.object.ncloudstorage.com/snubaseball.test/profiles/2021-12452.jpg",
-  role: "주장",
-  token: "abcd",
+  is_admin: true,
 };
