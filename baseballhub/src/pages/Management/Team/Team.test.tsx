@@ -24,6 +24,7 @@ describe("<Team />", () => {
     jest.spyOn(AuthContext, "useAuth").mockReturnValue({
       user: sampleProfile,
       logout: jest.fn(),
+      setToken: jest.fn(),
       login: jest.fn(),
     });
 
@@ -39,6 +40,7 @@ describe("<Team />", () => {
     jest.spyOn(AuthContext, "useAuth").mockReturnValue({
       user: sampleAdmin,
       logout: jest.fn(),
+      setToken: jest.fn(),
       login: jest.fn(),
     });
 

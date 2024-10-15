@@ -15,6 +15,7 @@ if (process.env.NODE_ENV === "production") {
 } else {
   axios.defaults.baseURL = "http://localhost:8000";
 }
+axios.defaults.withCredentials = true;
 axios.interceptors.request.use(function (config: any) {
   return config;
 });

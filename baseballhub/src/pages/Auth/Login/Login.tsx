@@ -1,29 +1,76 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 import Logo from "@assets/images/logo.png";
 import { TextButton } from "@components/Buttons";
+import { Loading } from "@components/Fallbacks";
 import { TextInput } from "@components/Inputs";
 import { useAuth } from "@contexts/auth";
-import { sampleAdmin } from "@data/user";
+import { getProfile, login as loginRequest, refresh } from "@services/auth";
 
 export function Login() {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(true);
 
-  const { login } = useAuth();
+  const { login, setToken } = useAuth();
   const navigate = useNavigate();
 
   const handleSignUp = () => {
     navigate("/signup");
   };
 
-  const handleLogin = () => {
-    // TODO: Implement login logic
-    login(sampleAdmin);
-    navigate("/home");
+  const handleLogin = async () => {
+    const response = await loginRequest(username, password);
+
+    if (!response) {
+      alert("로그인에 실패했습니다.");
+      return;
+    } else {
+      const userProfile = response.data.user;
+      const token = response.data.access;
+
+      setToken(token);
+      login(userProfile);
+
+      navigate("/home");
+    }
   };
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const response = await getProfile();
+
+      if (response && response.status === 200) {
+        login(response.data);
+        navigate("/home");
+      }
+
+      setLoading(false);
+    };
+
+    const refreshToken = async () => {
+      const response = await refresh();
+      if (response && response.status === 200) {
+        setToken(response.data.access);
+
+        fetchUser();
+      } else {
+        setLoading(false);
+      }
+    };
+
+    refreshToken();
+  }, []);
+
+  if (loading) {
+    return (
+      <Container>
+        <Loading />
+      </Container>
+    );
+  }
 
   return (
     <Container>
@@ -38,6 +85,7 @@ export function Login() {
           placeholder="비밀번호"
           value={password}
           onChange={setPassword}
+          password
         />
         <Buttons>
           <TextButton text="로그인" onClick={handleLogin} />

@@ -1,0 +1,62 @@
+[
+  {
+    "model": "member.member",
+    "pk": 1,
+    "fields": {
+      "student_id": "2024-12345",
+      "first_name": "길동",
+      "last_name": "홍",
+      "birth_date": null,
+      "admission_year": 2024,
+      "major": null,
+      "role": 3,
+      "status": 3,
+      "phone": "+821012345678",
+      "email": null,
+      "address": "",
+      "notes": "",
+      "date_joined": null,
+      "profile_image": null
+    }
+  },
+  {
+    "model": "member.member",
+    "pk": 2,
+    "fields": {
+      "student_id": "2023-12345",
+      "first_name": "철수",
+      "last_name": "김",
+      "birth_date": null,
+      "admission_year": 2023,
+      "major": null,
+      "role": 1,
+      "status": 3,
+      "phone": "+821098765432",
+      "email": "",
+      "address": "",
+      "notes": "",
+      "date_joined": null,
+      "profile_image": 1
+    }
+  },
+  {
+    "model": "member.member",
+    "pk": 3,
+    "fields": {
+      "student_id": "2022-12345",
+      "first_name": "영희",
+      "last_name": "이",
+      "birth_date": null,
+      "admission_year": 2022,
+      "major": null,
+      "role": 2,
+      "status": 3,
+      "phone": "+821013579246",
+      "email": null,
+      "address": "",
+      "notes": "",
+      "date_joined": null,
+      "profile_image": null
+    }
+  }
+]

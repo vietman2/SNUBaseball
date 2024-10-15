@@ -1,26 +1,70 @@
 from rest_framework.test import APITestCase
 from rest_framework import status
 
+from media.image.models import Image as ImageModel
 from person.member.models import Member
 from person.user.models import User
 
+class UserProfileAPITestCase(APITestCase):
+    fixtures = ["core/data/test/mock_image.json", "core/data/test/people.json"]
+
+    def setUp(self):
+        self.url = '/api/profiles/'
+        self.image = ImageModel.objects.get(pk=1)
+        self.member = Member.objects.get(student_id='2024-12345')
+        self.member2 = Member.objects.get(student_id='2023-12345')
+        self.member3 = Member.objects.get(student_id='2022-12345')
+        self.user = User.objects.create(
+            username='testuser',
+            member=self.member,
+            is_superuser=True
+        )
+        self.user2 = User.objects.create(
+            username='testuser2',
+            member=self.member2
+        )
+        self.user3 = User.objects.create(
+            username='testuser3',
+            member=self.member3
+        )
+
+    def test_unallowed_method(self):
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+        self.client.force_authenticate(user=self.user)
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+
+    def test_profile_success(self):
+        self.client.force_authenticate(user=self.user)
+        response = self.client.get(f'{self.url}{self.user.uuid}/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        self.client.force_authenticate(user=self.user2)
+        response = self.client.get(f'{self.url}{self.user2.uuid}/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        self.client.force_authenticate(user=self.user3)
+        response = self.client.get(f'{self.url}{self.user3.uuid}/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_profile_fail_not_logged_in(self):
+        response = self.client.get(f'{self.url}{self.user.uuid}/')
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_profile_fail_not_self(self):
+        self.client.force_authenticate(user=self.user2)
+        response = self.client.get(f'{self.url}{self.user.uuid}/')
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
 class StudentIdCheckAPITestCase(APITestCase):
+    fixtures = ["core/data/test/mock_image.json", "core/data/test/people.json"]
+
     def setUp(self):
         self.url = '/api/student_id/'
-        self.member = Member.objects.create(
-            student_id='2024-12345',
-            first_name='홍',
-            last_name='길동',
-            phone='01012345678',
-            admission_year=2024
-        )
-        self.member2 = Member.objects.create(
-            student_id='2023-12345',
-            first_name='김',
-            last_name='철수',
-            phone='01098765432',
-            admission_year=2023
-        )
+        self.member = Member.objects.get(student_id='2024-12345')
+        self.member2 = Member.objects.get(student_id='2023-12345')
         self.user = User.objects.create(
             username='testuser',
             member=self.member2
@@ -46,15 +90,12 @@ class StudentIdCheckAPITestCase(APITestCase):
         self.assertEqual(response.data['error'], '이미 가입된 학번입니다.')
 
 class RegisterAPITestCase(APITestCase):
+    fixtures = ["core/data/test/mock_image.json", "core/data/test/people.json"]
+
     def setUp(self):
         self.url = '/api/register/'
-        self.member = Member.objects.create(
-            student_id='2024-12345',
-            first_name='홍',
-            last_name='길동',
-            phone='01012345678',
-            admission_year=2024
-        )
+        self.member = Member.objects.get(student_id='2024-12345')
+        self.member2 = Member.objects.get(student_id='2023-12345')
         self.data = {
             'member_id': self.member.id,
             'username': 'testuser',
@@ -94,6 +135,24 @@ class RegisterAPITestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(response.data['error'], '아이디를 입력해주세요.')
 
+    def test_register_invalid_username(self):
+        # 1. username is too long
+        self.data["username"] = "a" * 151
+        response = self.client.post(self.url, data=self.data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+        # 2. username contains invalid characters
+        self.data["username"] = "test!"
+        response = self.client.post(self.url, data=self.data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+        # 3. username is already in use
+        self.data["member_id"] = self.member2.id
+        self.data["username"] = "testuser"
+        self.client.post(self.url, data=self.data)
+        response = self.client.post(self.url, data=self.data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
     def test_register_no_password(self):
         self.data['password'] = ''
         response = self.client.post(self.url, self.data)
@@ -120,3 +179,33 @@ class RegisterAPITestCase(APITestCase):
         response = self.client.post(self.url, self.data)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(response.data['error'], '비밀번호가 일치하지 않습니다.')
+
+    def test_register_fail_password(self):
+        # 1. password is not matched
+        self.data["password2"] = "test1"
+        response = self.client.post(self.url, data=self.data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+        # 2. password is too short
+        self.data["password"] = "test"
+        self.data["password2"] = "test"
+        response = self.client.post(self.url, data=self.data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+        # 3. password doesn't contain alphabets
+        self.data["password"] = "12341234!!"
+        self.data["password2"] = "12341234!!"
+        response = self.client.post(self.url, data=self.data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+        # 4. password doesn't contain numbers
+        self.data["password"] = "asdfasdf!!"
+        self.data["password2"] = "asdfasdf!!"
+        response = self.client.post(self.url, data=self.data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+        # 5. password doesn't contain special characters
+        self.data["password"] = "asdfasdf1234"
+        self.data["password2"] = "asdfasdf1234"
+        response = self.client.post(self.url, data=self.data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)

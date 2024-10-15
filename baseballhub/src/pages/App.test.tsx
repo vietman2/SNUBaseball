@@ -61,6 +61,7 @@ describe("<App />", () => {
     jest.spyOn(AuthContext, "useAuth").mockReturnValue({
       user: sampleProfile,
       logout: jest.fn(),
+      setToken: jest.fn(),
       login: jest.fn(),
     });
     jest.spyOn(ThemeContext, "useTheme").mockReturnValue({
@@ -79,6 +80,7 @@ describe("<App />", () => {
     jest.spyOn(AuthContext, "useAuth").mockReturnValue({
       user: null,
       logout: jest.fn(),
+      setToken: jest.fn(),
       login: jest.fn(),
     });
     jest.spyOn(ThemeContext, "useTheme").mockReturnValue({

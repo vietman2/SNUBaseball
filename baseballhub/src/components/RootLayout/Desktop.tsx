@@ -140,7 +140,7 @@ function Sidebar({ isSidebarOpen, toggleSidebar }: Props) {
       </SidebarContainer>
       <SidebarToggleIcon
         onClick={toggleSidebar}
-        left={isSidebarOpen ? "225px" : "75px"}
+        $left={isSidebarOpen ? "225px" : "75px"}
         data-testid="toggle"
       >
         <AppIcon
@@ -286,10 +286,10 @@ const IconWrapper = styled.div<{ $isSelected: boolean }>`
     $isSelected ? theme.colors.background300 : "transparent"};
 `;
 
-const SidebarToggleIcon = styled.div<{ left: string }>`
+const SidebarToggleIcon = styled.div<{ $left: string }>`
   position: fixed;
   top: 20px;
-  left: ${(props) => props.left};
+  left: ${(props) => props.$left};
   cursor: pointer;
   transition: left 0.3s ease-in-out;
   background-color: ${({ theme }) => theme.colors.background300};

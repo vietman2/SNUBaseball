@@ -3,8 +3,42 @@ from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
 from core.validators import UsernameValidator
+from person.member.enums import RoleType
 from person.member.models import Member
 from .models import User
+
+class ProfileSerializer(ModelSerializer):
+    name            = serializers.SerializerMethodField()
+    profile_image   = serializers.SerializerMethodField()
+    is_admin        = serializers.SerializerMethodField()
+
+    class Meta:
+        model = User
+        fields = [
+            'uuid',
+            'name',
+            'profile_image',
+            'is_admin'
+        ]
+
+    def get_name(self, obj):
+        return obj.member.full_name
+
+    def get_profile_image(self, obj):
+        if obj.member.profile_image is None:
+            return None
+
+        return obj.member.profile_image.image.url
+
+    def get_is_admin(self, obj):
+        ## TODO: 주장, 부주장 로직 처리
+        if obj.is_superuser:
+            return True
+
+        if obj.member.role == RoleType.MANAGER:
+            return True
+
+        return False
 
 class RegisterSerializer(ModelSerializer):
     member_id   = serializers.IntegerField(

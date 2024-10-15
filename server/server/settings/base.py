@@ -88,11 +88,13 @@ REST_AUTH = {
     'USE_JWT': True,
     'JWT_AUTH_COOKIE': 'access',
     'JWT_AUTH_REFRESH_COOKIE': 'refresh',
-    'JWT_AUTH_HTTPONLY': False,
+    'JWT_AUTH_SECURE': False,
+    'JWT_AUTH_HTTPONLY': True,
     'JWT_AUTH_RETURN_EXPIRATION': True,
+    'JWT_AUTH_COOKIE_USE_CSRF' : True,
+    'SESSION_LOGIN': False,
 
-    'USER_DETAILS_SERIALIZER': 'userprofile.serializers.UserSerializer',
-    'JWT_TOKEN_CLAIMS_SERIALIZER': 'core.serializers.MyTokenObtainPairSerializer',
+    'USER_DETAILS_SERIALIZER': 'person.user.serializers.ProfileSerializer',
 }
 
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
@@ -111,11 +113,7 @@ SIMPLE_JWT = {
 
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
-
-    'AUTH_COOKIE': 'refresh_token',
-    'AUTH_COOKIE_SECURE': True,
-    'AUTH_COOKIE_HTTP_ONLY': True,
-    'AUTH_COOKIE_SAMESITE': 'Lax',
+    'UPDATE_LAST_LOGIN': True,
 
     'ALGORITHM': 'HS256',
     'SIGNING_KEY': config("SECRET_KEY"),
