@@ -2,16 +2,9 @@ import { act, render, screen } from "@testing-library/react";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
 
 import { AuthProvider, useAuth } from "./AuthContext";
+import { sampleProfile } from "@data/user";
 
 jest.unmock("@contexts/auth/AuthContext");
-
-const mockUser = {
-  token: "token",
-  uuid: "1",
-  name: "Test User",
-  role: "admin",
-  profile_image: "image",
-};
 
 const TestComponent = () => {
   const { user, login, logout } = useAuth();
@@ -19,7 +12,7 @@ const TestComponent = () => {
   return (
     <div>
       <span>{user ? `Logged in as ${user.name}` : "Not logged in"}</span>
-      <button onClick={() => login(mockUser)}>Login</button>
+      <button onClick={() => login(sampleProfile, "token")}>Login</button>
       <button onClick={logout}>Logout</button>
     </div>
   );
@@ -28,30 +21,7 @@ const TestComponent = () => {
 describe("<AuthProvider />", () => {
   const Child = () => <div>Children</div>;
 
-  beforeEach(() => {
-    localStorage.clear();
-  });
-
   it("should render children without token", () => {
-    const { getByText } = render(
-      <MemoryRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <AuthProvider>
-                <Child />
-              </AuthProvider>
-            }
-          ></Route>
-        </Routes>
-      </MemoryRouter>
-    );
-    expect(getByText("Children")).toBeInTheDocument();
-  });
-
-  it("should render children with token", () => {
-    localStorage.setItem("user", JSON.stringify({ token: "token", uuid: "1" }));
     const { getByText } = render(
       <MemoryRouter>
         <Routes>
@@ -84,15 +54,11 @@ describe("<AuthProvider />", () => {
     });
 
     expect(
-      screen.getByText(`Logged in as ${mockUser.name}`)
+      screen.getByText(`Logged in as ${sampleProfile.name}`)
     ).toBeInTheDocument();
-    expect(localStorage.getItem("user")).toEqual(JSON.stringify(mockUser));
   });
 
   it("should allow logout and remove the user from localStorage", () => {
-    // Set user in localStorage
-    localStorage.setItem("user", JSON.stringify(mockUser));
-
     render(
       <AuthProvider>
         <TestComponent />
@@ -107,7 +73,6 @@ describe("<AuthProvider />", () => {
     });
 
     expect(screen.getByText("Not logged in")).toBeInTheDocument();
-    expect(localStorage.getItem("user")).toBeNull();
   });
 
   it("should throw an error when useAuth is used outside of AuthProvider without logging the error", () => {
@@ -125,19 +90,5 @@ describe("<AuthProvider />", () => {
 
     // Restore console.error
     spy.mockRestore();
-  });
-
-  it("should load user from localStorage if present on mount", () => {
-    localStorage.setItem("user", JSON.stringify(mockUser));
-
-    render(
-      <AuthProvider>
-        <TestComponent />
-      </AuthProvider>
-    );
-
-    expect(
-      screen.getByText(`Logged in as ${mockUser.name}`)
-    ).toBeInTheDocument();
   });
 });

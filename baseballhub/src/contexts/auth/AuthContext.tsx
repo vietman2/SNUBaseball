@@ -6,44 +6,43 @@ import {
   useMemo,
   useState,
 } from "react";
+import axios from "axios";
 
 import { UserProfileType } from "@models/user";
 
 interface AuthContextType {
   user: UserProfileType | null;
-  login: (user: UserProfileType) => void;
+  login: (user: UserProfileType, accessToken: string) => void;
   logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const AuthProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
   const [user, setUser] = useState<UserProfileType | null>(null);
 
-  const login = (user: UserProfileType) => {
+  const login = (
+    user: UserProfileType,
+    accessToken: string
+  ) => {
     setUser(user);
-    localStorage.setItem("user", JSON.stringify(user));
+    axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem("user");
+    delete axios.defaults.headers.common["Authorization"];
   };
 
   useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (user) {
-      setUser(JSON.parse(user));
-    }
+    // TODO: refresh token
   }, []);
 
   const value = useMemo(() => ({ user, login, logout }), [user]);
 
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = (): AuthContextType => {
