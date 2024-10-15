@@ -7,22 +7,31 @@ from person.member.models import Member
 from .models import User
 
 class RegisterSerializer(ModelSerializer):
-    member_id   = serializers.IntegerField(write_only=True)
+    member_id   = serializers.IntegerField(
+        write_only=True,
+        error_messages={
+            'required': '오류가 발생했습니다.',
+        }
+    )
     username    = serializers.CharField(
+        write_only=True,
         error_messages={
             'blank': '아이디를 입력해주세요.',
+            'required': '아이디를 입력해주세요.',
         }
     )
     password    = serializers.CharField(
         write_only=True,
         error_messages={
             'blank': '비밀번호를 입력해주세요.',
+            'required': '비밀번호를 입력해주세요.',
         }
     )
     password2   = serializers.CharField(
         write_only=True,
         error_messages={
             'blank': '비밀번호 확인을 입력해주세요.',
+            'required': '비밀번호 확인을 입력해주세요.',
         }
     )
 
@@ -49,10 +58,17 @@ class RegisterSerializer(ModelSerializer):
         validator(value)
         return value
 
+    def validate_member_id(self, value):
+        try:
+            Member.objects.get(id=value)
+        except Member.DoesNotExist:
+            raise serializers.ValidationError("회원 정보가 존재하지 않습니다.")
+        return value
+
     def create(self, validated_data):
         validated_data.pop("password2")
         person = Member.objects.get(id=validated_data.pop("member_id"))
-        validated_data["person"] = person
+        validated_data["member"] = person
         user = User.objects.create_user(**validated_data)
         return user
 

@@ -57,6 +57,7 @@ class StudentIdCheckView(GenericAPIView):
         ## Member object가 있으면서, User object가 없는 경우만 가입이 가능하다
         ## 즉, Member object가 있으면서 User object가 있는 경우는 이미 가입한 경우이고
         ## Member object가 없는 경우는 가입이 불가능한 경우이다
+
         try:
             member = Member.objects.get(student_id=student_id)
         except Member.DoesNotExist:
@@ -64,7 +65,7 @@ class StudentIdCheckView(GenericAPIView):
                 "error": "학번이 존재하지 않습니다. 주장단에 문의해주세요."
             }, status=status.HTTP_400_BAD_REQUEST)
 
-        if User.objects.filter(username=student_id).exists():
+        if User.objects.filter(member=member).exists():
             return Response(data={
                 "error": "이미 가입된 학번입니다."
             }, status=status.HTTP_400_BAD_REQUEST)

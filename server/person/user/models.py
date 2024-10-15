@@ -8,7 +8,7 @@ from .managers import UserManager
 class User(AbstractBaseUser):
     uuid            = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     username        = models.CharField(max_length=150, unique=True)
-    person          = models.OneToOneField(Member, on_delete=models.CASCADE, related_name='user')
+    member          = models.OneToOneField(Member, on_delete=models.CASCADE, related_name='user')
 
     joined_at       = models.DateTimeField(auto_now_add=True)
 
