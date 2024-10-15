@@ -3,6 +3,9 @@ import { fireEvent, screen, waitFor } from "@testing-library/react";
 import ManagementContainer from "./ManagementContainer";
 import { renderWithProviders, resizeWindow } from "@utils/test-utils";
 
+jest.mock("./Equipment/Equipment", () => ({
+  Equipment: () => <div>Equipment Page</div>,
+}));
 jest.mock("./Team/Team", () => ({
   Team: () => <div>Team Page</div>,
 }));
@@ -33,5 +36,6 @@ describe("<ManagementContainer />", () => {
     fireEvent.click(screen.getByText("메디컬"));
     fireEvent.click(screen.getByText("장비 현황"));
     fireEvent.click(screen.getByText("asdf"));
+    fireEvent.click(screen.getByText("새로고침"));
   });
 });

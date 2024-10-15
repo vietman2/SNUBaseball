@@ -1,6 +1,8 @@
 import { ReactComponent as AddIcon } from "./add.svg";
 import { ReactComponent as AdminIcon } from "./admin.svg";
 import { ReactComponent as ArchiveIcon } from "./archive.svg";
+import { ReactComponent as ArrowDownIcon } from "./arrow-down.svg";
+import { ReactComponent as ArrowUpIcon } from "./arrow-up.svg";
 import { ReactComponent as BaseballIcon } from "./baseball.svg";
 import { ReactComponent as BaseballIcon2 } from "./baseball2.svg";
 import { ReactComponent as CalendarIcon } from "./calendar.svg";
@@ -47,6 +49,8 @@ const iconMap: Record<
   add: AddIcon,
   admin: AdminIcon,
   archive: ArchiveIcon,
+  "arrow-down": ArrowDownIcon,
+  "arrow-up": ArrowUpIcon,
   baseball: BaseballIcon,
   baseball2: BaseballIcon2,
   calendar: CalendarIcon,

@@ -36,5 +36,6 @@ describe("<NotesContainer />", () => {
     fireEvent.click(screen.getByText("피드백"));
     fireEvent.click(screen.getByText("전력분석"));
     fireEvent.click(screen.getByText("asdf"));
+    fireEvent.click(screen.getByText("새로고침"));
   });
 });

@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import { Information } from "./Information/Information";
 import { Notices } from "./Notices/Notices";
+import { ComingSoon, ErrorComponent } from "@components/Fallbacks";
 import { MobileHeader, PageHeader } from "@components/Headers";
 import { useWindowSize } from "@hooks/useWindowSize";
 
@@ -13,6 +14,10 @@ export default function ForumContainer() {
 
   const { width } = useWindowSize();
 
+  const handleReset = () => {
+    setSelectedTab("공지");
+  };
+
   const renderContent = () => {
     switch (selectedTab) {
       case "공지":
@@ -20,9 +25,9 @@ export default function ForumContainer() {
       case "정보":
         return <Information />;
       case "갤러리":
-        return <div>갤러리화면</div>;
+        return <ComingSoon />;
       default:
-        return <div>경기결과</div>;
+        return <ErrorComponent onRefresh={handleReset} label="새로고침" />;
     }
   };
 

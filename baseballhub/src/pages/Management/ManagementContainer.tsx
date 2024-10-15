@@ -1,7 +1,9 @@
 import { useState } from "react";
 import styled from "styled-components";
 
+import { Equipment } from "./Equipment/Equipment";
 import { Team } from "./Team/Team";
+import { ComingSoon, ErrorComponent } from "@components/Fallbacks";
 import { MobileHeader, PageHeader } from "@components/Headers";
 import { useWindowSize } from "@hooks/useWindowSize";
 
@@ -12,16 +14,20 @@ export default function ManagementContainer() {
 
   const { width } = useWindowSize();
 
+  const handleReset = () => {
+    setSelectedTab("Team");
+  };
+
   const renderContent = () => {
     switch (selectedTab) {
       case "Team":
         return <Team />;
       case "메디컬":
-        return <div>메디컬화면</div>;
+        return <ComingSoon />;
       case "장비 현황":
-        return <div>장비 현황화면</div>;
+        return <Equipment />;
       default:
-        return <div>경기결과화면</div>;
+        return <ErrorComponent onRefresh={handleReset} label="새로고침" />;
     }
   };
 

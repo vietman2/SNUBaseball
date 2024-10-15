@@ -1,12 +1,37 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
+import { MobileModal, SimpleModal } from "@components/Modals";
 import { sampleHistory } from "@data/accountings";
-import { HistorySimple, HistorySimpleHeader } from "@fragments/Accountings";
+import {
+  HistoryDetail,
+  HistorySimple,
+  HistorySimpleHeader,
+} from "@fragments/Accountings";
+import { useWindowSize } from "@hooks/useWindowSize";
 import { HistorySimpleType } from "@models/accountings";
 
 export function History() {
   const [historyList, setHistoryList] = useState<HistorySimpleType[]>([]);
+  const [selectedHistoryId, setSelectedHistoryId] = useState<number | null>(
+    null
+  );
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+
+  const { width } = useWindowSize();
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  const handleHistoryClick = (history: HistorySimpleType) => {
+    setSelectedHistoryId(history.id);
+    openModal();
+  };
 
   useEffect(() => {
     setHistoryList(sampleHistory);
@@ -24,9 +49,24 @@ export function History() {
       <ContentWrapper>
         <HistorySimpleHeader />
         {historyList.map((history) => (
-          <HistorySimple key={history.id} history={history} />
+          <button
+            key={history.id}
+            onClick={() => handleHistoryClick(history)}
+            data-testid={`history-${history.id}`}
+          >
+            <HistorySimple history={history} />
+          </button>
         ))}
       </ContentWrapper>
+      {width > 768 ? (
+        <SimpleModal isOpen={modalOpen} onClose={closeModal}>
+          <HistoryDetail historyId={selectedHistoryId} goBack={closeModal} />
+        </SimpleModal>
+      ) : (
+        <MobileModal isOpen={modalOpen} onClose={closeModal}>
+          <HistoryDetail historyId={selectedHistoryId} goBack={closeModal} />
+        </MobileModal>
+      )}
     </Container>
   );
 }

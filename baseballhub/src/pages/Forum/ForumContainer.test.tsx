@@ -36,5 +36,6 @@ describe("<ArchiveContainer />", () => {
     fireEvent.click(screen.getByText("정보"));
     fireEvent.click(screen.getByText("갤러리"));
     fireEvent.click(screen.getByText("asdf"));
+    fireEvent.click(screen.getByText("새로고침"));
   });
 });

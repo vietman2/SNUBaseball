@@ -1,3 +1,7 @@
-import { HistorySimpleHeader, HistorySimple } from "./History/HistorySimple";
+import { HistoryDetail } from "./HistoryDetail/HistoryDetail";
+import {
+  HistorySimpleHeader,
+  HistorySimple,
+} from "./HistorySimple/HistorySimple";
 
-export { HistorySimpleHeader, HistorySimple };
+export { HistoryDetail, HistorySimpleHeader, HistorySimple };

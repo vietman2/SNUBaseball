@@ -1,3 +1,3 @@
-import { sampleHistory } from "./history";
+import { sampleHistory, sampleHistoryDetail } from "./history";
 
-export { sampleHistory };
+export { sampleHistory, sampleHistoryDetail };

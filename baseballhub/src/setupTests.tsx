@@ -47,7 +47,10 @@ jest.mock("@components/Dividers", () => ({
   VerticalDivider: () => <div>VerticalDivider</div>,
 }));
 jest.mock("@components/Fallbacks", () => ({
-  ErrorComponent: () => <div>Error</div>,
+  ComingSoon: () => <div>ComingSoon</div>,
+  ErrorComponent: ({ onRefresh, label }: { onRefresh: () => void; label: string }) => (
+    <button onClick={onRefresh}>{label}</button>
+  ),
   Loading: () => <div>Loading</div>,
 }));
 jest.mock("@components/Frames", () => ({

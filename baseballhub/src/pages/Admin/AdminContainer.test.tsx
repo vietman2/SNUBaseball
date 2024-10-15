@@ -3,6 +3,9 @@ import { fireEvent, screen, waitFor } from "@testing-library/react";
 import AdminContainer from "./AdminContainer";
 import { renderWithProviders, resizeWindow } from "@utils/test-utils";
 
+jest.mock("./Minutes/Minutes", () => ({
+  Minutes: () => <div />,
+}));
 jest.mock("./Members/Members", () => ({
   Members: () => <div />,
 }));
@@ -33,5 +36,6 @@ describe("<AdminContainer />", () => {
     fireEvent.click(screen.getByText("회계"));
     fireEvent.click(screen.getByText("회의록"));
     fireEvent.click(screen.getByText("asdf"));
+    fireEvent.click(screen.getByText("새로고침"));
   });
 });
