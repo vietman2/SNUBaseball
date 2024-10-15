@@ -133,6 +133,7 @@ jest.mock("@contexts/auth/AuthContext", () => ({
   ),
   useAuth: () => ({
     login: jest.fn(),
+    setToken: jest.fn(),
     logout: jest.fn(),
   }),
 }));
