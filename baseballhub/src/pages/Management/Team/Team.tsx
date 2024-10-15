@@ -41,7 +41,7 @@ export function Team() {
   return (
     <Container>
       <FilterWrapper>
-        {user?.role === "주장" && (
+        {user?.is_admin && (
           <Chip label="신입부원 추가" onClick={() => {}} />
         )}
       </FilterWrapper>
