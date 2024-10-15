@@ -4,11 +4,26 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.generics import GenericAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
+from rest_framework.viewsets import ModelViewSet
 
 from core.validators import UsernameValidator
 from person.member.models import Member
 from .models import User
-from .serializers import RegisterSerializer
+from .serializers import RegisterSerializer, ProfileSerializer
+
+class UserProfileView(ModelViewSet):
+    serializer_class = ProfileSerializer
+    queryset = User.objects.all()
+    http_method_names = ['get']
+
+    @extend_schema(summary="프로필 조회", tags=["회원 관리"])
+    def get(self, request):
+        serializer = self.get_serializer(request.user)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    @extend_schema(exclude=True)
+    def list(self, request, *args, **kwargs):
+        return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 class RegisterView(GenericAPIView):
     serializer_class = RegisterSerializer
