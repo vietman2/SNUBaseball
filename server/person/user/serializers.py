@@ -28,7 +28,7 @@ class ProfileSerializer(ModelSerializer):
         if obj.member.profile_image is None:
             return None
 
-        return obj.member.profile_image.url
+        return obj.member.profile_image.image.url
 
     def get_is_admin(self, obj):
         ## TODO: 주장, 부주장 로직 처리

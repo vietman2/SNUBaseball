@@ -11,9 +11,6 @@ class UsernameValidator:
     ## condition 5: minimum length of 4, maximum length of 150
 
     def __call__(self, value):
-        if not value:
-            raise ValidationError("아이디를 입력해주세요.")
-
         if User.objects.filter(username__iexact=value).exists():
             raise ValidationError("이미 사용 중인 아이디입니다.")
 
@@ -37,6 +34,3 @@ class MyPasswordValidator:
             raise ValidationError(
                 "비밀번호는 적어도 하나 이상의 특수문자가 포함되어야 합니다."
             )
-
-    def get_help_text(self): # 2)
-        return "비밀번호는 8자리 이상이며 영문, 숫자, 특수문자를 포함해야 합니다."
