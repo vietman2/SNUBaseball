@@ -48,9 +48,13 @@ jest.mock("@components/Dividers", () => ({
 }));
 jest.mock("@components/Fallbacks", () => ({
   ComingSoon: () => <div>ComingSoon</div>,
-  ErrorComponent: ({ onRefresh, label }: { onRefresh: () => void; label: string }) => (
-    <button onClick={onRefresh}>{label}</button>
-  ),
+  ErrorComponent: ({
+    onRefresh,
+    label,
+  }: {
+    onRefresh: () => void;
+    label: string;
+  }) => <button onClick={onRefresh}>{label}</button>,
   Loading: () => <div>Loading</div>,
 }));
 jest.mock("@components/Frames", () => ({
@@ -77,12 +81,20 @@ jest.mock("@components/Inputs", () => ({
     onChange: (value: string) => void;
   }) => <input value={value} onChange={(e) => onChange(e.target.value)} />,
   TextInput: ({
+    placeholder,
     value,
     onChange,
   }: {
+    placeholder: string;
     value: string;
     onChange: (value: string) => void;
-  }) => <input value={value} onChange={(e) => onChange(e.target.value)} />,
+  }) => (
+    <input
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      data-testid={`textinput-${placeholder}`}
+    />
+  ),
 }));
 jest.mock("@components/Modals", () => ({
   MobileModal: ({ children }: { children: React.ReactNode }) => (
