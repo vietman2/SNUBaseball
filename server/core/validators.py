@@ -1,7 +1,7 @@
 import re
 from rest_framework.exceptions import ValidationError
 
-from user.models import User
+from person.user.models import User
 
 class UsernameValidator:
     ## condition 1: usernames are case-insensitive
