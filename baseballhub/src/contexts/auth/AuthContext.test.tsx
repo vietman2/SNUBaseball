@@ -7,12 +7,13 @@ import { sampleProfile } from "@data/user";
 jest.unmock("@contexts/auth/AuthContext");
 
 const TestComponent = () => {
-  const { user, login, logout } = useAuth();
+  const { user, login, setToken, logout } = useAuth();
 
   return (
     <div>
       <span>{user ? `Logged in as ${user.name}` : "Not logged in"}</span>
-      <button onClick={() => login(sampleProfile, "token")}>Login</button>
+      <button onClick={() => login(sampleProfile)}>Login</button>
+      <button onClick={() => setToken("token")}>Set Token</button>
       <button onClick={logout}>Logout</button>
     </div>
   );
@@ -39,7 +40,7 @@ describe("<AuthProvider />", () => {
     expect(getByText("Children")).toBeInTheDocument();
   });
 
-  it("should allow login and save the user in localStorage", () => {
+  it("should allow login", () => {
     render(
       <AuthProvider>
         <TestComponent />
@@ -58,7 +59,24 @@ describe("<AuthProvider />", () => {
     ).toBeInTheDocument();
   });
 
-  it("should allow logout and remove the user from localStorage", () => {
+  it("should allow setting the token", () => {
+    render(
+      <AuthProvider>
+        <TestComponent />
+      </AuthProvider>
+    );
+
+    const setTokenButton = screen.getByText("Set Token");
+
+    // Simulate setting token action
+    act(() => {
+      setTokenButton.click();
+    });
+
+    expect(screen.getByText("Not logged in")).toBeInTheDocument();
+  });
+
+  it("should allow logout", () => {
     render(
       <AuthProvider>
         <TestComponent />
