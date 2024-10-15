@@ -28,4 +28,10 @@ describe("<TextInput />", () => {
       target: { value: "test2" },
     });
   });
+  
+  it("should render password", () => {
+    renderWithProviders(
+      <TextInput placeholder="Test" value="test" password onChange={jest.fn()} />
+    );
+  });
 });
