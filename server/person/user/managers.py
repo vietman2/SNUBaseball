@@ -3,9 +3,6 @@ from django.utils import timezone
 
 class UserManager(BaseUserManager):
     def get_queryset(self):
-        return super().get_queryset().filter(is_active=True)
-
-    def get_all_users(self):
         return super().get_queryset()
 
     def delete_user(self, user):

@@ -6,10 +6,3 @@ class TimeStampedModel(models.Model):
 
     class Meta:
         abstract = True
-
-class Image(TimeStampedModel):
-    title       = models.CharField(max_length=40)
-    file        = models.FileField()
-
-    class Meta:
-        abstract = True
