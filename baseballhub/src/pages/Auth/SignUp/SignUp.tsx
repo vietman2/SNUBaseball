@@ -8,7 +8,7 @@ import { TextInput } from "@components/Inputs";
 import { checkStudentId, signUp } from "@services/auth";
 
 export function SignUp() {
-  const [member_id, setMemberId] = useState<number>();
+  const [memberId, setMemberId] = useState<number>();
   const [student_id, setStudentId] = useState<string>("");
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -34,13 +34,13 @@ export function SignUp() {
   };
 
   const handleSignUp = async () => {
-    if (!member_id) {
+    if (!memberId) {
       alert("학번을 확인해주세요.");
       return;
     }
 
     const response = await signUp(
-      member_id,
+      memberId,
       username,
       password,
       passwordConfirm
@@ -65,9 +65,9 @@ export function SignUp() {
             placeholder="학번"
             value={student_id}
             onChange={setStudentId}
-            disabled={!!member_id}
+            disabled={!!memberId}
           />
-          <button onClick={handleCheckStudentId} disabled={!!member_id}>
+          <button onClick={handleCheckStudentId} disabled={!!memberId}>
             확인
           </button>
         </Wrapper>
