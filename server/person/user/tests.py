@@ -6,34 +6,14 @@ from person.member.models import Member
 from person.user.models import User
 
 class UserProfileAPITestCase(APITestCase):
-    fixtures = ["core/data/test/mock_image.json"]
+    fixtures = ["core/data/test/mock_image.json", "core/data/test/people.json"]
 
     def setUp(self):
         self.url = '/api/profiles/'
         self.image = ImageModel.objects.get(pk=1)
-        self.member = Member.objects.create(
-            student_id='2024-12345',
-            first_name='홍',
-            last_name='길동',
-            phone='01012345678',
-            admission_year=2024
-        )
-        self.member2 = Member.objects.create(
-            student_id='2023-12345',
-            first_name='김',
-            last_name='철수',
-            phone='01098765432',
-            admission_year=2023,
-            profile_image=self.image
-        )
-        self.member3 = Member.objects.create(
-            student_id='2022-12345',
-            first_name='이',
-            last_name='영희',
-            phone='01013579246',
-            admission_year=2022,
-            role=2
-        )
+        self.member = Member.objects.get(student_id='2024-12345')
+        self.member2 = Member.objects.get(student_id='2023-12345')
+        self.member3 = Member.objects.get(student_id='2022-12345')
         self.user = User.objects.create(
             username='testuser',
             member=self.member,
@@ -79,22 +59,12 @@ class UserProfileAPITestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
 class StudentIdCheckAPITestCase(APITestCase):
+    fixtures = ["core/data/test/mock_image.json", "core/data/test/people.json"]
+
     def setUp(self):
         self.url = '/api/student_id/'
-        self.member = Member.objects.create(
-            student_id='2024-12345',
-            first_name='홍',
-            last_name='길동',
-            phone='01012345678',
-            admission_year=2024
-        )
-        self.member2 = Member.objects.create(
-            student_id='2023-12345',
-            first_name='김',
-            last_name='철수',
-            phone='01098765432',
-            admission_year=2023
-        )
+        self.member = Member.objects.get(student_id='2024-12345')
+        self.member2 = Member.objects.get(student_id='2023-12345')
         self.user = User.objects.create(
             username='testuser',
             member=self.member2
@@ -120,22 +90,12 @@ class StudentIdCheckAPITestCase(APITestCase):
         self.assertEqual(response.data['error'], '이미 가입된 학번입니다.')
 
 class RegisterAPITestCase(APITestCase):
+    fixtures = ["core/data/test/mock_image.json", "core/data/test/people.json"]
+
     def setUp(self):
         self.url = '/api/register/'
-        self.member = Member.objects.create(
-            student_id='2024-12345',
-            first_name='홍',
-            last_name='길동',
-            phone='01012345678',
-            admission_year=2024
-        )
-        self.member2 = Member.objects.create(
-            student_id='2023-12345',
-            first_name='김',
-            last_name='철수',
-            phone='01098765432',
-            admission_year=2023
-        )
+        self.member = Member.objects.get(student_id='2024-12345')
+        self.member2 = Member.objects.get(student_id='2023-12345')
         self.data = {
             'member_id': self.member.id,
             'username': 'testuser',
