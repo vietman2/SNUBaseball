@@ -2,8 +2,9 @@ from django.core.validators import MinValueValidator as Min, MaxValueValidator a
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 
+from media.image.models import Image
 from person.major.models import Department
-from .enums import RoleType, StatusType
+from .enums import RoleType, StatusType, HandsType
 
 class Member(models.Model):
     student_id      = models.CharField(max_length=10, unique=True, null=True, blank=True)
@@ -26,6 +27,10 @@ class Member(models.Model):
     address         = models.TextField(default="")
     notes           = models.TextField(default="")
     date_joined     = models.DateField(null=True, blank=True)
+
+    profile_image   = models.ForeignKey(Image, on_delete=models.SET_NULL, null=True, blank=True)
+    position        = models.CharField(default="", max_length=10)
+    hands           = models.IntegerField(choices=HandsType.choices, default=HandsType.UNDEFINED)
 
     objects         = models.Manager()
 
