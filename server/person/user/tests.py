@@ -1,6 +1,3 @@
-from io import BytesIO
-from PIL import Image
-from django.core.files.uploadedfile import SimpleUploadedFile
 from rest_framework.test import APITestCase
 from rest_framework import status
 
@@ -8,22 +5,12 @@ from media.image.models import Image as ImageModel
 from person.member.models import Member
 from person.user.models import User
 
-def generate_photo_file():
-    file = BytesIO()
-    image = Image.new("RGBA", size=(100, 100), color=(155, 0, 0))
-    image.save(file, "png")
-    file.name = "test.png"
-    file.seek(0)
-    return file
-
 class UserProfileAPITestCase(APITestCase):
+    fixtures = ["core/data/test/mock_image.json"]
+
     def setUp(self):
         self.url = '/api/profiles/'
-        self.file = generate_photo_file()
-        self.image = ImageModel.objects.create(
-            title='test',
-            image=SimpleUploadedFile(self.file.name, self.file.getvalue())
-        )
+        self.image = ImageModel.objects.get(pk=1)
         self.member = Member.objects.create(
             student_id='2024-12345',
             first_name='홍',
