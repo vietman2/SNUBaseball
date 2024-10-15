@@ -3632,7 +3632,7 @@
     "model": "member.member",
     "pk": 192,
     "fields": {
-      "student_id": null,
+      "student_id": "2017-19331",
       "first_name": "승원",
       "last_name": "정",
       "birth_date": null,
