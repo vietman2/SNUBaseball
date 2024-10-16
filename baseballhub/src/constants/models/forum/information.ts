@@ -1,7 +1,10 @@
 export type InformationSimpleType = {
   id: number;
   title: string;
-  image: string;
+  author: string;
+  created_at: string;
+  num_views: number;
+  pin: boolean;
 };
 
 export type InformationDetailType = {
