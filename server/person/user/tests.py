@@ -3,7 +3,7 @@ from rest_framework import status
 
 from media.image.models import Image as ImageModel
 from person.member.models import Member
-from person.user.models import User
+from .models import User
 
 class UserProfileAPITestCase(APITestCase):
     fixtures = ["core/data/test/mock_image.json", "core/data/test/people.json"]
