@@ -25,3 +25,9 @@ class FeedbackAPITestCase(APITestCase):
         self.client.force_authenticate(user=self.user)
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_feedback_retrieve(self):
+        self.client.force_authenticate(user=self.user)
+        feedback = Feedback.objects.first()
+        response = self.client.get(f'{self.url}{feedback.id}/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
