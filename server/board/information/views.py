@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
-from .serializers import InformationSimpleSerializer
+from .serializers import InformationSimpleSerializer, InformationDetailSerializer
 from .models import Information
 
 class InformationView(ModelViewSet):
@@ -19,4 +19,10 @@ class InformationView(ModelViewSet):
 
     @extend_schema(summary="정보 상세 조회", tags=["정보 관리"])
     def retrieve(self, request, *args, **kwargs):
-        return Response(status=status.HTTP_403_FORBIDDEN)
+        instance = self.get_object()
+        serializer = InformationDetailSerializer(instance)
+
+        serializer.increment_num_views()
+        serializer.content_viewed(request.user)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
