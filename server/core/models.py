@@ -12,7 +12,7 @@ class Post(TimeStampedModel):
     content     = models.TextField()
 
     author      = models.ForeignKey('user.User', on_delete=models.CASCADE)
-    
+
     num_views   = models.IntegerField(default=0)
 
     is_deleted  = models.BooleanField(default=False)
