@@ -15,12 +15,12 @@ class UserProfileAPITestCase(APITestCase):
         self.member2 = Member.objects.get(student_id='2023-12345')
         self.member3 = Member.objects.get(student_id='2022-12345')
         self.user = User.objects.create(
-            username='testuser',
+            username='testuser2',
             member=self.member,
             is_superuser=True
         )
         self.user2 = User.objects.create(
-            username='testuser2',
+            username='testuser3',
             member=self.member2
         )
         self.user3 = User.objects.get(member=self.member3)
@@ -63,7 +63,7 @@ class StudentIdCheckAPITestCase(APITestCase):
         self.member = Member.objects.get(student_id='2024-12345')
         self.member2 = Member.objects.get(student_id='2023-12345')
         self.user = User.objects.create(
-            username='testuser',
+            username='testuser2',
             member=self.member2
         )
 
@@ -95,7 +95,7 @@ class RegisterAPITestCase(APITestCase):
         self.member2 = Member.objects.get(student_id='2023-12345')
         self.data = {
             'member_id': self.member.id,
-            'username': 'testuser',
+            'username': 'testuser2',
             'password': 'testpassword123!',
             'password2': 'testpassword123!'
         }

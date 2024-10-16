@@ -17,7 +17,7 @@
     "model": "notice.noticecontentview",
     "pk": 1,
     "fields": {
-      "user": "84a59a99-64a6-4f27-981a-714b4b792fd6",
+      "user": "44895c75-cebf-4125-9682-74d94e130bc7",
       "viewed_first_at": "2024-10-16T06:21:42.849Z",
       "viewed_last_at": "2024-10-16T06:34:35.165Z",
       "notice": 1

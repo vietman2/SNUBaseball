@@ -30,7 +30,7 @@ class NoticeView(ModelViewSet):
 
     @extend_schema(summary="공지 분류 조회", tags=["공지사항 관리"])
     @action(detail=False, methods=['get'])
-    def category(self, request, *args, **kwargs):
+    def categories(self, request, *args, **kwargs):
         categories = NoticeCategory.objects.all()
         serializer = NoticeCategorySerializer(categories, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
