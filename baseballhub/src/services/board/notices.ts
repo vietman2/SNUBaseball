@@ -26,4 +26,4 @@ export const getNoticeDetails = async (id: number) => {
   } catch (e: any) {
     return null;
   }
-}
+};
