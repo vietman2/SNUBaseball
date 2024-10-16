@@ -3,12 +3,14 @@ from dj_rest_auth.views import LoginView, LogoutView
 from dj_rest_auth.jwt_auth import get_refresh_view
 from rest_framework.routers import DefaultRouter
 
+from board.information.views import InformationView
 from board.notice.views import NoticeView
 from person.major.views import MajorViewSet
 from person.user.views import RegisterView, StudentIdCheckView, UserProfileView
 
 router = DefaultRouter()
 
+router.register('informations', InformationView, basename='informations')
 router.register('notices', NoticeView, basename='notices')
 router.register('majors', MajorViewSet, basename='majors')
 router.register('profiles', UserProfileView, basename='profile')

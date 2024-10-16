@@ -1,3 +1,4 @@
+import { getInformations, getInformationDetails } from "./information";
 import { getNotices, getNoticeDetails } from "./notices";
 
-export { getNotices, getNoticeDetails };
+export { getInformations, getInformationDetails, getNotices, getNoticeDetails };

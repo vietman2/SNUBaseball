@@ -48,7 +48,7 @@ class NoticeDetailSerializer(ModelSerializer):
         return self.instance
 
     def content_viewed(self, user):
-        content_view, created = NoticeContentView.objects.get_or_create(
+        content_view, _ = NoticeContentView.objects.get_or_create(
             user=user,
             notice=self.instance
         )

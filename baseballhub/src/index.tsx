@@ -15,16 +15,13 @@ if (process.env.NODE_ENV === "production") {
 } else {
   axios.defaults.baseURL = "http://localhost:8000";
 }
+axios.defaults.headers.common["Content-Type"] = "application/json";
 axios.defaults.withCredentials = true;
 axios.interceptors.request.use(function (config: any) {
   return config;
 });
 
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+root.render(<App />);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

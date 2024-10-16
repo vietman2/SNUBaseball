@@ -1,16 +1,26 @@
 import styled from "styled-components";
 
+import { AppIcon } from "@components/Icons";
 import { InformationSimpleType } from "@models/forum";
 
 interface Props {
-  information: InformationSimpleType
+  information: InformationSimpleType;
 }
 
 export function InformationSimple({ information }: Readonly<Props>) {
   return (
     <Container>
-      <Image src={information.image} />
-      <Body>{information.title}</Body>
+      <div>
+        <div>{information.created_at}</div>
+      </div>
+      <div>
+        {information.pin && <AppIcon icon="pin" size={16} color="white" />}
+        {information.title}
+      </div>
+      <div>
+        <div>{information.author}</div>
+        <div>{information.num_views}</div>
+      </div>
     </Container>
   );
 }
@@ -18,28 +28,42 @@ export function InformationSimple({ information }: Readonly<Props>) {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 8px 0;
-
-  border-radius: 16px;
-  background-color: ${({ theme }) => theme.colors.background100};
-`;
-
-const Image = styled.img`
-  width: 320px;
-  height: 200px;
-  object-fit: cover;
-`;
-
-const Body = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: row;
+  width: calc(100vw - 48px);
   padding: 8px 16px;
   gap: 8px;
 
-  color: ${({ theme }) => theme.colors.foreground900};
-  font-size: 18px;
-  font-weight: 700;
+  color: ${({ theme }) => theme.colors.foreground500};
+
+  border-radius: 16px;
+  background-color: ${({ theme }) => theme.colors.background100};
+
+  > div:nth-child(1) {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  > div:nth-child(2) {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 8px 0;
+    gap: 8px;
+
+    font-size: 18px;
+    font-weight: 700;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+  }
+
+  > div:nth-child(3) {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
 `;

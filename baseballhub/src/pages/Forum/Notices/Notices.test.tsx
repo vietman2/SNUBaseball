@@ -1,9 +1,9 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 
 import { Notices } from "./Notices";
+import { sampleNotices } from "@data/forum";
 import * as NoticesAPI from "@services/board/notices";
 import { renderWithProviders, resizeWindow } from "@utils/test-utils";
-import { sampleNotices } from "@data/forum";
 
 jest.mock("@fragments/Notices", () => ({
   NoticeDetail: ({ goBack }: { goBack: () => void }) => (
@@ -17,7 +17,10 @@ jest.mock("@fragments/Notices", () => ({
 describe("<Notices />", () => {
   it("handles bad response correctly", async () => {
     jest.spyOn(NoticesAPI, "getNotices").mockResolvedValue(null);
-    renderWithProviders(<Notices />);
+    await waitFor(() => renderWithProviders(<Notices />));
+
+    await waitFor(() => expect(screen.getByText("새로고침")).toBeInTheDocument());
+    waitFor(() => fireEvent.click(screen.getByText("새로고침")));
   });
 
   it("renders wide mode correctly and handles modals", async () => {

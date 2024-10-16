@@ -64,6 +64,19 @@ export function Login() {
     refreshToken();
   }, []);
 
+  useEffect(() => {
+    const handleEnterKey = (event: KeyboardEvent) => {
+      if (event.key === "Enter") {
+        handleLogin();
+      }
+    };
+
+    window.addEventListener("keydown", handleEnterKey);
+    return () => {
+      window.removeEventListener("keydown", handleEnterKey);
+    };
+  }, [handleLogin]);
+
   if (loading) {
     return (
       <Container>

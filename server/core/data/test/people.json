@@ -60,13 +60,75 @@
     }
   },
   {
+    "model": "member.member",
+    "pk": 4,
+    "fields": {
+      "student_id": "2021-12345",
+      "first_name": "미영",
+      "last_name": "박",
+      "birth_date": null,
+      "admission_year": 2021,
+      "major": null,
+      "role": 1,
+      "status": 3,
+      "phone": "+821057913468",
+      "email": null,
+      "address": "",
+      "notes": "",
+      "date_joined": null,
+      "profile_image": null
+    }
+  },
+  {
     "model": "user.user",
     "pk": "44895c75-cebf-4125-9682-74d94e130bc7",
     "fields": {
       "password": "pbkdf2_sha256$600000$8towsPItrlcxGGoDLb02L1$9Mz3HyuNXpLR/KAvKZE4bIWQipcafJ/YHUelHbAG+qU=",
       "last_login": null,
-      "username": "testuser",
+      "username": "testuser_1",
+      "member": 1,
+      "joined_at": "2024-10-16T05:57:45.973Z",
+      "is_superuser": false,
+      "is_blocked": false,
+      "is_active": true
+    }
+  },
+  {
+    "model": "user.user",
+    "pk": "87ebab07-82bb-40aa-bb33-d5a86d13adb8",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$8towsPItrlcxGGoDLb02L1$9Mz3HyuNXpLR/KAvKZE4bIWQipcafJ/YHUelHbAG+qU=",
+      "last_login": null,
+      "username": "testuser_2",
+      "member": 2,
+      "joined_at": "2024-10-16T05:57:45.973Z",
+      "is_superuser": false,
+      "is_blocked": false,
+      "is_active": true
+    }
+  },
+  {
+    "model": "user.user",
+    "pk": "ce9372c7-6e3d-42dc-9e0d-978e25a51c14",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$8towsPItrlcxGGoDLb02L1$9Mz3HyuNXpLR/KAvKZE4bIWQipcafJ/YHUelHbAG+qU=",
+      "last_login": null,
+      "username": "testuser_3",
       "member": 3,
+      "joined_at": "2024-10-16T05:57:45.973Z",
+      "is_superuser": false,
+      "is_blocked": false,
+      "is_active": true
+    }
+  },
+  {
+    "model": "user.user",
+    "pk": "ddea3128-e3b0-46f5-8f96-c7b2aebaf80a",
+    "fields": {
+      "password": "pbkdf2_sha256$600000$8towsPItrlcxGGoDLb02L1$9Mz3HyuNXpLR/KAvKZE4bIWQipcafJ/YHUelHbAG+qU=",
+      "last_login": null,
+      "username": "testuser_4",
+      "member": 4,
       "joined_at": "2024-10-16T05:57:45.973Z",
       "is_superuser": false,
       "is_blocked": false,

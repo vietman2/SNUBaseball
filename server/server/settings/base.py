@@ -33,8 +33,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'board.information.apps.InformationConfig',
     'board.notice.apps.NoticeConfig',
+
     'media.image.apps.ImageConfig',
+
     'person.major.apps.MajorConfig',
     'person.member.apps.MemberConfig',
     'person.user.apps.UserConfig',

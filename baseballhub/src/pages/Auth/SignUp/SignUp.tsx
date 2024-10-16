@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
@@ -55,6 +55,19 @@ export function SignUp() {
       alert(response.error);
     }
   };
+
+  useEffect(() => {
+    const handleEnterKey = (event: KeyboardEvent) => {
+      if (event.key === "Enter") {
+        handleSignUp();
+      }
+    };
+
+    window.addEventListener("keydown", handleEnterKey);
+    return () => {
+      window.removeEventListener("keydown", handleEnterKey);
+    };
+  }, [handleSignUp]);
 
   return (
     <Container>
