@@ -12,6 +12,9 @@ class InformationSimpleSerializer(ModelSerializer):
         model = Information
         fields = ['id', 'title', 'author', 'created_at', 'num_views', 'pin']
 
+    def get_author(self, obj):
+        return obj.author.member.full_name
+
 class InformationDetailSerializer(ModelSerializer):
     author      = AuthorSerializer()
     created_at  = serializers.DateTimeField(format="%Y-%m-%d")
@@ -19,9 +22,6 @@ class InformationDetailSerializer(ModelSerializer):
     class Meta:
         model = Information
         fields = ['id', 'title', 'content', 'author', 'created_at', 'num_views', 'pin']
-
-    def get_author(self, obj):
-        return obj.author.member.full_name
 
     def increment_num_views(self):
         self.instance.num_views += 1
