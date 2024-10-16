@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
@@ -26,7 +27,7 @@ class ProfileSerializer(ModelSerializer):
 
     def get_profile_image(self, obj):
         if obj.member.profile_image is None:
-            return None
+            return settings.FALLBACK_IMAGE
 
         return obj.member.profile_image.image.url
 
@@ -57,7 +58,7 @@ class AuthorSerializer(ModelSerializer):
 
     def get_profile_image(self, obj):
         if obj.member.profile_image is None:
-            return None
+            return settings.FALLBACK_IMAGE
 
         return obj.member.profile_image.image.url
 
