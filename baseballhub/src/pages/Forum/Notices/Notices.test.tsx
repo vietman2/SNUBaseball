@@ -17,7 +17,10 @@ jest.mock("@fragments/Notices", () => ({
 describe("<Notices />", () => {
   it("handles bad response correctly", async () => {
     jest.spyOn(NoticesAPI, "getNotices").mockResolvedValue(null);
-    renderWithProviders(<Notices />);
+    await waitFor(() => renderWithProviders(<Notices />));
+
+    await waitFor(() => expect(screen.getByText("새로고침")).toBeInTheDocument());
+    waitFor(() => fireEvent.click(screen.getByText("새로고침")));
   });
 
   it("renders wide mode correctly and handles modals", async () => {

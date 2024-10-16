@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { Divider } from "@components/Dividers";
+import { ErrorComponent, Loading } from "@components/Fallbacks";
 import { MobileModal, SimpleModal } from "@components/Modals";
 import { Subtitle } from "@components/Texts";
 import {
@@ -18,6 +19,9 @@ export function Notices() {
   const [notices, setNotices] = useState<NoticeSimpleType[]>([]);
   const [selectedNoticeId, setSelectedNoticeId] = useState<number | null>(null);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<boolean>(false);
+  const [refreshCount, setRefreshCount] = useState<number>(0);
 
   const { width } = useWindowSize();
 
@@ -30,6 +34,10 @@ export function Notices() {
     setSelectedNoticeId(null);
   };
 
+  const handleRefresh = () => {
+    setRefreshCount(refreshCount + 1);
+  };
+
   const handleNoticeClick = (notice: NoticeSimpleType) => {
     setSelectedNoticeId(notice.id);
     openModal();
@@ -37,15 +45,33 @@ export function Notices() {
 
   useEffect(() => {
     const fetchNotices = async () => {
+      setLoading(true);
       const response = await getNotices();
 
       if (response) {
         setNotices(response.data);
+        setError(false);
+      } else {
+        setError(true);
       }
+
+      setLoading(false);
     };
 
     fetchNotices();
-  }, []);
+  }, [refreshCount]);
+
+  if (loading) {
+    return (
+      <Container>
+        <Loading />
+      </Container>
+    );
+  }
+
+  if (error) {
+    return <ErrorComponent label="새로고침" onRefresh={handleRefresh} />;
+  }
 
   return (
     <Container>
