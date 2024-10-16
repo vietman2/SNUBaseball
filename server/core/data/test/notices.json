@@ -1,0 +1,26 @@
+[
+  {
+    "model": "notice.notice",
+    "pk": 1,
+    "fields": {
+      "created_at": "2024-10-16T06:03:08.900Z",
+      "updated_at": "2024-10-16T06:34:35.154Z",
+      "title": "유계결석 인정 요청서",
+      "content": "유계결석 인정 요청서입니다.",
+      "author": "44895c75-cebf-4125-9682-74d94e130bc7",
+      "num_views": 14,
+      "is_deleted": false,
+      "category": 1
+    }
+  },
+  {
+    "model": "notice.noticecontentview",
+    "pk": 1,
+    "fields": {
+      "user": "84a59a99-64a6-4f27-981a-714b4b792fd6",
+      "viewed_first_at": "2024-10-16T06:21:42.849Z",
+      "viewed_last_at": "2024-10-16T06:34:35.165Z",
+      "notice": 1
+    }
+  }
+]
