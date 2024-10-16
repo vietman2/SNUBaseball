@@ -13,9 +13,9 @@ export function FeedbackSimple({ feedback }: Readonly<SimpleProps>) {
     <Feedback>
       <ChipWrapper>
         <Chip
-          label={feedback.classification.type}
-          bgColor={feedback.classification.backgroundColor}
-          color={feedback.classification.color}
+          label={feedback.category.label}
+          bgColor={feedback.category.background_color}
+          color={feedback.category.color}
         />
       </ChipWrapper>
       <Title>{feedback.title}</Title>
