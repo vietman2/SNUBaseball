@@ -34,5 +34,32 @@
       "color": "#006064",
       "background_color": "#B2EBF2"
     }
+  },
+  {
+    "model": "feedback.feedbackcategory",
+    "pk": 1,
+    "fields": {
+      "label": "수비",
+      "color": "#1A237E",
+      "background_color": "#C5CAE9"
+    }
+  },
+  {
+    "model": "feedback.feedbackcategory",
+    "pk": 2,
+    "fields": {
+      "label": "타격",
+      "color": "#BF360C",
+      "background_color": "#FFCCBC"
+    }
+  },
+  {
+    "model": "feedback.feedbackcategory",
+    "pk": 3,
+    "fields": {
+      "label": "주루",
+      "color": "#01579B",
+      "background_color": "#B3E5FC"
+    }
   }
 ]
