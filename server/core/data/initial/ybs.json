@@ -20,5 +20,49 @@
       "position": "",
       "hands": 0
     }
+  },
+  {
+    "model": "member.member",
+    "pk": 203,
+    "fields": {
+      "student_id": "2021-18947",
+      "first_name": "서진",
+      "last_name": "양",
+      "birth_date": null,
+      "admission_year": 2021,
+      "major": null,
+      "role": 1,
+      "status": 1,
+      "phone": "+821098223646",
+      "email": null,
+      "address": "",
+      "notes": "",
+      "date_joined": null,
+      "profile_image": null,
+      "position": "",
+      "hands": 0
+    }
+  },
+  {
+    "model": "member.member",
+    "pk": 204,
+    "fields": {
+      "student_id": "2024-00001",
+      "first_name": "지민",
+      "last_name": "강",
+      "birth_date": null,
+      "admission_year": 2024,
+      "major": null,
+      "role": 1,
+      "status": 1,
+      "phone": "+821085526861",
+      "email": null,
+      "address": "",
+      "notes": "",
+      "date_joined": null,
+      "profile_image": null,
+      "position": "",
+      "hands": 0
+    }
   }
 ]
