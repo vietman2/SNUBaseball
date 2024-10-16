@@ -74,4 +74,22 @@ describe("<SignUp />", () => {
 
     await waitFor(() => fireEvent.click(screen.getByTestId("button-회원가입")));
   });
+
+  it("handles key presses", async () => {
+    jest.spyOn(RegisterAPI, "checkStudentId").mockResolvedValue({
+      status: 200,
+      data: { id: 1, name: "test" },
+    });
+    jest.spyOn(RegisterAPI, "signUp").mockResolvedValue({
+      status: 201,
+      data: {},
+    });
+
+    renderWithProviders(<SignUp />);
+
+    await waitFor(() => {
+      fireEvent.keyDown(window, { key: "Enter", code: "Enter" });
+      fireEvent.keyDown(window, { key: "A", code: "KeyA" });
+    });
+  });
 });

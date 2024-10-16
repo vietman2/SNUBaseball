@@ -62,4 +62,20 @@ describe("<Login />", () => {
 
     waitFor(() => renderWithProviders(<Login />));
   });
+
+  it("handles key presses", async () => {
+    jest
+      .spyOn(AuthAPI, "refresh")
+      .mockResolvedValue({ status: 200, data: { access: "asdf" } });
+    jest
+      .spyOn(ProfileAPI, "getProfile")
+      .mockResolvedValue({ status: 200, data: sampleProfile });
+
+    renderWithProviders(<Login />);
+
+    await waitFor(() => {
+      fireEvent.keyDown(window, { key: "Enter", code: "Enter" });
+      fireEvent.keyDown(window, { key: "A", code: "KeyA" });
+    });
+  });
 });
