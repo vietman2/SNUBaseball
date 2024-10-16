@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { Chip } from "@components/Chips";
 import { Divider } from "@components/Dividers";
-import { ErrorComponent } from "@components/Fallbacks";
+import { ErrorComponent, Loading } from "@components/Fallbacks";
 import { Subtitle } from "@components/Texts";
 import { NoticeDetailType } from "@models/forum";
 import { getNoticeDetails } from "@services/board";
@@ -15,26 +15,40 @@ interface Props {
 
 export function NoticeDetail({ noticeId, goBack }: Readonly<Props>) {
   const [notice, setNotice] = useState<NoticeDetailType>();
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchNoticeDetails = async () => {
       if (noticeId === null) return;
 
+      setLoading(true);
       const response = await getNoticeDetails(noticeId);
 
       if (response) {
         setNotice(response.data);
+        setError(false);
       } else {
         setError(true);
       }
+
+      setLoading(false);
     };
 
     fetchNoticeDetails();
   }, [noticeId]);
 
-  if (noticeId === null || notice === undefined || error)
+  if (loading) {
+    return (
+      <Container>
+        <Loading />
+      </Container>
+    );
+  }
+
+  if (noticeId === null || notice === undefined || error) {
     return <ErrorComponent onRefresh={goBack} label="뒤로가기" />;
+  }
 
   return (
     <Container>
