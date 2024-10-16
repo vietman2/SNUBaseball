@@ -23,10 +23,7 @@ class UserProfileAPITestCase(APITestCase):
             username='testuser2',
             member=self.member2
         )
-        self.user3 = User.objects.create(
-            username='testuser3',
-            member=self.member3
-        )
+        self.user3 = User.objects.get(member=self.member3)
 
     def test_unallowed_method(self):
         response = self.client.get(self.url)
