@@ -1,3 +1,4 @@
+import { sampleAuthor } from "@data/user";
 import {
   NoticeCategoryType,
   NoticeDetailType,
@@ -6,24 +7,24 @@ import {
 
 const sampleCategories: NoticeCategoryType[] = [
   {
-    name: "일반",
+    label: "일반",
     color: "#253238",
-    bgColor: "#CFD8DC",
+    background_color: "#CFD8DC",
   },
   {
-    name: "긴급",
+    label: "긴급",
     color: "#D84315",
-    bgColor: "#FFAB91",
+    background_color: "#FFAB91",
   },
   {
-    name: "선수등록",
+    label: "선수등록",
     color: "#3E2723",
-    bgColor: "#D7CCC8",
+    background_color: "#D7CCC8",
   },
   {
-    name: "시합",
+    label: "시합",
     color: "#006064",
-    bgColor: "#B2EBF2",
+    background_color: "#B2EBF2",
   },
 ];
 
@@ -75,7 +76,7 @@ export const sampleNoticeDetail: NoticeDetailType = {
   category: sampleCategories[0],
   title: "유계결석 인정 요청서",
   content: "유계결석 인정 요청서입니다.",
-  author: "임준원",
+  author: sampleAuthor,
   num_views: 100,
   created_at: "2024-04-01",
   comments: ["확인했습니다.", "감사합니다."],

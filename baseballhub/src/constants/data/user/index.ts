@@ -4,6 +4,7 @@ import {
   sampleMemberDetail,
   sampleAdmin,
   sampleProfile,
+  sampleAuthor,
 } from "./people";
 
 export {
@@ -12,4 +13,5 @@ export {
   sampleMemberDetail,
   sampleAdmin,
   sampleProfile,
+  sampleAuthor,
 };

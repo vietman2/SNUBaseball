@@ -1,7 +1,9 @@
+import { AuthorType } from "@models/user";
+
 export type NoticeCategoryType = {
-  name: string;
+  label: string;
   color: string;
-  bgColor: string;
+  background_color: string;
 };
 
 export type NoticeSimpleType = {
@@ -18,7 +20,7 @@ export type NoticeDetailType = {
   category: NoticeCategoryType;
   title: string;
   content: string;
-  author: string;
+  author: AuthorType;
   num_views: number;
   created_at: string;
   comments: string[]; // TODO: Change to CommentType[]
