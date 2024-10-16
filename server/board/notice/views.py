@@ -14,11 +14,11 @@ class NoticeView(ModelViewSet):
     permission_classes = [IsAuthenticated,]
     http_method_names = ['get']
 
-    @extend_schema(summary="공지사항 조회", tags=["공지사항 관리"])
+    @extend_schema(summary="공지 조회", tags=["공지 관리"])
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
 
-    @extend_schema(summary="공지사항 상세 조회", tags=["공지사항 관리"])
+    @extend_schema(summary="공지 상세 조회", tags=["공지 관리"])
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
         serializer = NoticeDetailSerializer(instance)
@@ -28,7 +28,7 @@ class NoticeView(ModelViewSet):
 
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    @extend_schema(summary="공지 분류 조회", tags=["공지사항 관리"])
+    @extend_schema(summary="공지 분류 조회", tags=["공지 관리"])
     @action(detail=False, methods=['get'])
     def categories(self, request, *args, **kwargs):
         categories = NoticeCategory.objects.all()
