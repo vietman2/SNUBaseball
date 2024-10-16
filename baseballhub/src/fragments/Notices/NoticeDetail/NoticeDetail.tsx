@@ -5,8 +5,8 @@ import { Chip } from "@components/Chips";
 import { Divider } from "@components/Dividers";
 import { ErrorComponent } from "@components/Fallbacks";
 import { Subtitle } from "@components/Texts";
-import { sampleNoticeDetail } from "@data/forum";
 import { NoticeDetailType } from "@models/forum";
+import { getNoticeDetails } from "@services/board";
 
 interface Props {
   noticeId: number | null;
@@ -15,13 +15,25 @@ interface Props {
 
 export function NoticeDetail({ noticeId, goBack }: Readonly<Props>) {
   const [notice, setNotice] = useState<NoticeDetailType>();
+  const [error, setError] = useState<boolean>(false);
 
   useEffect(() => {
-    // TODO: Fetch notice data from the server
-    setNotice(sampleNoticeDetail);
-  }, []);
+    const fetchNoticeDetails = async () => {
+      if (noticeId === null) return;
 
-  if (noticeId === null || notice === undefined)
+      const response = await getNoticeDetails(noticeId);
+
+      if (response) {
+        setNotice(response.data);
+      } else {
+        setError(true);
+      }
+    };
+
+    fetchNoticeDetails();
+  }, [noticeId]);
+
+  if (noticeId === null || notice === undefined || error)
     return <ErrorComponent onRefresh={goBack} label="뒤로가기" />;
 
   return (
@@ -29,14 +41,14 @@ export function NoticeDetail({ noticeId, goBack }: Readonly<Props>) {
       <Header>
         <ChipWrapper>
           <Chip
-            label={notice.category.name}
+            label={notice.category.label}
             color={notice.category.color}
-            bgColor={notice.category.bgColor}
+            bgColor={notice.category.background_color}
           />
         </ChipWrapper>
         <Subtitle size="large">{notice.title}</Subtitle>
         <Metadata>
-          <div>{notice.author}</div>
+          <div>{notice.author.name}</div>
           <div>{notice.created_at}</div>
         </Metadata>
       </Header>
