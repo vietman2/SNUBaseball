@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { Divider } from "@components/Dividers";
 import { MobileModal, SimpleModal } from "@components/Modals";
 import { Subtitle } from "@components/Texts";
-import { sampleNotices } from "@data/forum";
 import {
   NoticeDetail,
   NoticeSimple,
@@ -13,6 +12,7 @@ import {
 } from "@fragments/Notices";
 import { useWindowSize } from "@hooks/useWindowSize";
 import { NoticeSimpleType } from "@models/forum";
+import { getNotices } from "@services/board";
 
 export function Notices() {
   const [notices, setNotices] = useState<NoticeSimpleType[]>([]);
@@ -27,6 +27,7 @@ export function Notices() {
 
   const closeModal = () => {
     setModalOpen(false);
+    setSelectedNoticeId(null);
   };
 
   const handleNoticeClick = (notice: NoticeSimpleType) => {
@@ -35,8 +36,15 @@ export function Notices() {
   };
 
   useEffect(() => {
-    // TODO: Fetch notice data from the server
-    setNotices(sampleNotices);
+    const fetchNotices = async () => {
+      const response = await getNotices();
+
+      if (response) {
+        setNotices(response.data);
+      }
+    };
+
+    fetchNotices();
   }, []);
 
   return (

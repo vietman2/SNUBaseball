@@ -1,7 +1,9 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 
 import { Notices } from "./Notices";
+import * as NoticesAPI from "@services/board/notices";
 import { renderWithProviders, resizeWindow } from "@utils/test-utils";
+import { sampleNotices } from "@data/forum";
 
 jest.mock("@fragments/Notices", () => ({
   NoticeDetail: ({ goBack }: { goBack: () => void }) => (
@@ -13,7 +15,16 @@ jest.mock("@fragments/Notices", () => ({
 }));
 
 describe("<Notices />", () => {
+  it("handles bad response correctly", async () => {
+    jest.spyOn(NoticesAPI, "getNotices").mockResolvedValue(null);
+    renderWithProviders(<Notices />);
+  });
+
   it("renders wide mode correctly and handles modals", async () => {
+    jest.spyOn(NoticesAPI, "getNotices").mockResolvedValue({
+      status: 200,
+      data: sampleNotices,
+    });
     renderWithProviders(<Notices />);
 
     await waitFor(() => resizeWindow(800, 800));
@@ -22,6 +33,10 @@ describe("<Notices />", () => {
   });
 
   it("renders mobile mode correctly", async () => {
+    jest.spyOn(NoticesAPI, "getNotices").mockResolvedValue({
+      status: 200,
+      data: sampleNotices,
+    });
     renderWithProviders(<Notices />);
 
     await waitFor(() => resizeWindow(600, 600));
