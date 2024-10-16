@@ -12,7 +12,7 @@ class NoticeAPITestCase(APITestCase):
 
     def setUp(self):
         self.url = '/api/notices/'
-        self.user = User.objects.get(username='testuser')
+        self.user = User.objects.get(username='testuser_1')
 
     def test_unauthorized(self):
         response = self.client.get(self.url)
