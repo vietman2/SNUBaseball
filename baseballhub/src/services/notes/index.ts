@@ -1,3 +1,3 @@
-import { getFeedbacks } from "./feedbacks";
+import { getFeedbacks, getFeedbackDetail } from "./feedbacks";
 
-export { getFeedbacks };
+export { getFeedbacks, getFeedbackDetail };
