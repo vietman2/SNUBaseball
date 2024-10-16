@@ -11,7 +11,7 @@ class Post(TimeStampedModel):
     title       = models.CharField(max_length=40)
     content     = models.TextField()
 
-    author      = models.ForeignKey('user.User', on_delete=models.CASCADE)
+    author      = models.ForeignKey('user.User', on_delete=models.CASCADE, related_name='%(class)s')
 
     num_views   = models.IntegerField(default=0)
 

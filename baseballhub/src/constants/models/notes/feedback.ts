@@ -1,6 +1,8 @@
+import { AuthorType } from "@models/user";
+
 export type ClassificationType = {
-  type: string;
-  backgroundColor: string;
+  label: string;
+  background_color: string;
   color: string;
 };
 
@@ -9,11 +11,12 @@ export type FeedbackSimpleType = {
   title: string;
   content: string;
   player: string;
-  coach: string;
-  classification: ClassificationType;
+  author: string;
+  category: ClassificationType;
   status: string;
   created_at: string;
   updated_at: string;
+  num_comments: number;
 };
 
 export type FeedbackResponseType = {
@@ -27,10 +30,13 @@ export type FeedbackDetailType = {
   id: number;
   title: string;
   content: string;
-  player: string;
-  coach: string;
-  classification: ClassificationType;
+  player: AuthorType;
+  author: AuthorType;
+  category: ClassificationType;
   status: string;
   created_at: string;
   updated_at: string;
+  num_views: number;
+  comments: string[]; // TODO: Change to CommentType[]
+  num_comments: number;
 };

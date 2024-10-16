@@ -38,6 +38,8 @@ INSTALLED_APPS = [
 
     'media.image.apps.ImageConfig',
 
+    'notes.feedback.apps.FeedbackConfig',
+
     'person.major.apps.MajorConfig',
     'person.member.apps.MemberConfig',
     'person.user.apps.UserConfig',
