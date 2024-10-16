@@ -1,6 +1,6 @@
 export type ClassificationType = {
-  type: string;
-  backgroundColor: string;
+  label: string;
+  background_color: string;
   color: string;
 };
 
@@ -9,8 +9,8 @@ export type FeedbackSimpleType = {
   title: string;
   content: string;
   player: string;
-  coach: string;
-  classification: ClassificationType;
+  author: string;
+  category: ClassificationType;
   status: string;
   created_at: string;
   updated_at: string;
@@ -28,8 +28,8 @@ export type FeedbackDetailType = {
   title: string;
   content: string;
   player: string;
-  coach: string;
-  classification: ClassificationType;
+  author: string;
+  category: ClassificationType;
   status: string;
   created_at: string;
   updated_at: string;
