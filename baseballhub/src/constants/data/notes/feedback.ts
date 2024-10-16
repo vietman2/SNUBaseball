@@ -1,3 +1,4 @@
+import { sampleAuthor } from "@data/user";
 import {
   ClassificationType,
   FeedbackResponseType,
@@ -34,6 +35,7 @@ export const sampleFeedbacks: FeedbackResponseType = {
       status: "완료",
       created_at: "2024-08-01",
       updated_at: "2024-10-01",
+      num_comments: 0,
     },
   ],
   in_progress: [
@@ -47,6 +49,7 @@ export const sampleFeedbacks: FeedbackResponseType = {
       status: "진행중",
       created_at: "2024-08-01",
       updated_at: "2024-10-01",
+      num_comments: 1,
     },
   ],
   under_review: [
@@ -60,6 +63,7 @@ export const sampleFeedbacks: FeedbackResponseType = {
       status: "검토중",
       created_at: "2024-08-01",
       updated_at: "2024-10-01",
+      num_comments: 3,
     },
   ],
   done: [
@@ -73,8 +77,22 @@ export const sampleFeedbacks: FeedbackResponseType = {
       status: "완료",
       created_at: "2024-08-01",
       updated_at: "2024-10-01",
+      num_comments: 2,
     },
   ],
 };
 
-export const sampleFeedbackDetail: FeedbackDetailType = sampleFeedbacks.new[0];
+export const sampleFeedbackDetail: FeedbackDetailType = {
+  id: 1,
+  title: "스로잉",
+  content: "왼발을 끌면서 던지지 말고 바로 내리면서 던질 것",
+  player: sampleAuthor,
+  author: sampleAuthor,
+  category: classification_batting,
+  status: "완료",
+  created_at: "2024-08-01",
+  updated_at: "2024-10-01",
+  num_views: 100,
+  comments: [],
+  num_comments: 2,
+};
