@@ -25,9 +25,9 @@ export function NoticeSimpleWide({ notice }: Readonly<Props>) {
       <div>{notice.id}</div>
       <div>
         <Chip
-          label={notice.category.name}
+          label={notice.category.label}
           color={notice.category.color}
-          bgColor={notice.category.bgColor}
+          bgColor={notice.category.background_color}
         />
         {notice.title}
       </div>

@@ -12,9 +12,9 @@ export function NoticeSimple({ notice }: Readonly<Props>) {
     <Container>
       <div>
         <Chip
-          label={notice.category.name}
+          label={notice.category.label}
           color={notice.category.color}
-          bgColor={notice.category.bgColor}
+          bgColor={notice.category.background_color}
         />
         <div>{notice.created_at}</div>
       </div>
