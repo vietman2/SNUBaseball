@@ -1,3 +1,4 @@
+import { sampleAuthor } from "@data/user";
 import { InformationDetailType, InformationSimpleType } from "@models/forum";
 
 export const sampleInformations: InformationSimpleType[] = [
@@ -31,5 +32,8 @@ export const sampleInformationDetail: InformationDetailType = {
   id: 1,
   title: "부실 청소 가이드",
   content: "부실 청소 가이드입니다.",
-  image: "https://via.placeholder.com/150",
+  author: sampleAuthor,
+  created_at: "2024-09-01",
+  num_views: 100,
+  pin: true,
 };
