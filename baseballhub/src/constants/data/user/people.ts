@@ -4,6 +4,7 @@ import {
   MemberType,
   MemberDetailType,
   UserProfileType,
+  AuthorType,
 } from "@models/user";
 
 export const sampleRoles: RoleType[] = [
@@ -178,4 +179,11 @@ export const sampleAdmin: UserProfileType = {
   profile_image:
     "https://kr.object.ncloudstorage.com/snubaseball.test/profiles/2021-12452.jpg",
   is_admin: true,
+};
+
+export const sampleAuthor: AuthorType = {
+  uuid: "1234",
+  name: "김유안",
+  profile_image:
+    "https://kr.object.ncloudstorage.com/snubaseball.test/profiles/2021-12452.jpg",
 };

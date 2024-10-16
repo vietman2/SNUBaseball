@@ -40,6 +40,27 @@ class ProfileSerializer(ModelSerializer):
 
         return False
 
+class AuthorSerializer(ModelSerializer):
+    name            = serializers.SerializerMethodField()
+    profile_image   = serializers.SerializerMethodField()
+
+    class Meta:
+        model = User
+        fields = [
+            'uuid',
+            'name',
+            'profile_image'
+        ]
+
+    def get_name(self, obj):
+        return obj.member.full_name
+
+    def get_profile_image(self, obj):
+        if obj.member.profile_image is None:
+            return None
+
+        return obj.member.profile_image.image.url
+
 class RegisterSerializer(ModelSerializer):
     member_id   = serializers.IntegerField(
         write_only=True,

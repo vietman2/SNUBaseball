@@ -39,7 +39,7 @@ export function Tournament({ tournament, onSelectGame }: Readonly<TournamentProp
   return (
     <TournamentContainer>
       <ExpandableTab title={tournament.name} height={getHeight()}>
-        <Content columns={columns}>
+        <Content $columns={columns}>
           {tournament.games.map((game) => (
             <GameSummary
               key={game.id}
@@ -62,18 +62,18 @@ const TournamentContainer = styled.div`
   margin-top: 16px;
 `;
 
-const Content = styled.div<{ columns: number }>`
+const Content = styled.div<{ $columns: number }>`
   display: grid;
-  grid-template-columns: repeat(${(props) => props.columns}, 1fr);
+  grid-template-columns: repeat(${(props) => props.$columns}, 1fr);
 
   & > div {
     border-bottom: 1px solid ${({ theme }) => theme.colors.borderLight};
     border-right: 1px solid ${({ theme }) => theme.colors.borderLight};
   }
-  & > div:nth-child(${(props) => props.columns}n) {
+  & > div:nth-child(${(props) => props.$columns}n) {
     border-right: none;
   }
-  & > div:nth-last-child(-n + ${(props) => props.columns}) {
+  & > div:nth-last-child(-n + ${(props) => props.$columns}) {
     border-bottom: none;
   }
 `;

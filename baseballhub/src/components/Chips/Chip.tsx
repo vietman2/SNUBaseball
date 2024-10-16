@@ -34,7 +34,7 @@ export function Chip({
       style={{ color: color, backgroundColor: bgColor }}
       onClick={onClick}
       $hasOnClick={!!onClick}
-      padding={getPadding()}
+      $padding={getPadding()}
       data-testid="chip"
     >
       {icon && <AppIcon icon={icon} size={18} color={color} />}
@@ -43,11 +43,11 @@ export function Chip({
   );
 }
 
-const ChipWrapper = styled.div<{ $hasOnClick: boolean; padding: string; }>`
+const ChipWrapper = styled.div<{ $hasOnClick: boolean; $padding: string }>`
   display: flex;
   position: relative;
   align-items: center;
-  padding: ${({ padding }) => padding};
+  padding: ${({ $padding }) => $padding};
   gap: 4px;
 
   font-size: 14px;

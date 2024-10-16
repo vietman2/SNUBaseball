@@ -5,6 +5,7 @@ import {
   MemberType,
   MemberDetailType,
   UserProfileType,
+  AuthorType,
 } from "./person";
 
 export {
@@ -13,6 +14,7 @@ export {
   type MemberType,
   type MemberDetailType,
   type UserProfileType,
+  type AuthorType,
   type DepartmentType,
   type CollegeType,
 };
