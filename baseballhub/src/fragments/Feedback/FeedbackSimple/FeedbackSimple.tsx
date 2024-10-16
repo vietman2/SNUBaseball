@@ -24,7 +24,7 @@ export function FeedbackSimple({ feedback }: Readonly<SimpleProps>) {
         {feedback.player}
         <IconWrapper>
           <AppIcon icon="chat" size={16} color="#0F0F70" />
-          {1}
+          {feedback.num_comments}
         </IconWrapper>
       </Other>
     </Feedback>
