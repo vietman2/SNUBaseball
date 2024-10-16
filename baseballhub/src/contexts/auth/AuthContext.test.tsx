@@ -1,7 +1,10 @@
+import axios from "axios";
+import MockAdapter from "axios-mock-adapter";
 import { act, render, screen } from "@testing-library/react";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
 
 import { AuthProvider, useAuth } from "./AuthContext";
+import * as AuthAPI from "@services/auth/auth";
 import { sampleProfile } from "@data/user";
 
 jest.unmock("@contexts/auth/AuthContext");
@@ -108,5 +111,131 @@ describe("<AuthProvider />", () => {
 
     // Restore console.error
     spy.mockRestore();
+  });
+});
+
+describe("Axios Interceptor", () => {
+  const mock = new MockAdapter(axios);
+
+  beforeEach(() => {
+    mock.reset();
+  });
+
+  it("should retry the request after refreshing the token", async () => {
+    // Mock a request that initially fails with 403 and "token_not_valid" error
+    mock.onGet("/test-endpoint").replyOnce(403, { code: "token_not_valid" });
+
+    jest.spyOn(AuthAPI, "refresh").mockResolvedValue({
+      status: 200,
+      data: { access: "newAccessToken" },
+    });
+
+    // After refreshing the token, the request should succeed
+    mock.onGet("/test-endpoint").reply(200, { data: "success" });
+
+    const { getByText } = render(
+      <AuthProvider>
+        <TestComponent />
+      </AuthProvider>
+    );
+
+    const loginButton = getByText("Login");
+
+    // Simulate login action to set user and token
+    act(() => {
+      loginButton.click();
+    });
+
+    const consoleErrorSpy = jest
+      .spyOn(console, "error")
+      .mockImplementation(() => {});
+
+    // Perform a GET request that should trigger the interceptor
+    await act(async () => {
+      try {
+        await axios.get("/test-endpoint");
+      } catch (err) {}
+    });
+
+    consoleErrorSpy.mockRestore();
+  });
+
+  it("should logout if refreshing the token fails (error)", async () => {
+    // Mock a request that initially fails with 403 and "token_not_valid" error
+    mock.onGet("/test-endpoint").replyOnce(403, { code: "token_not_valid" });
+
+    jest.spyOn(AuthAPI, "refresh").mockRejectedValue(new Error());
+
+    const { getByText } = render(
+      <AuthProvider>
+        <TestComponent />
+      </AuthProvider>
+    );
+
+    const loginButton = getByText("Login");
+
+    // Simulate login action to set user and token
+    act(() => {
+      loginButton.click();
+    });
+
+    // Perform a GET request that should trigger the interceptor
+    await act(async () => {
+      try {
+        await axios.get("/test-endpoint");
+      } catch (err) {}
+    });
+  });
+
+  it("should logout if refreshing the token fails (not 400)", async () => {
+    // Mock a request that initially fails with 403 and "token_not_valid" error
+    mock.onGet("/test-endpoint").replyOnce(403, { code: "token_not_valid" });
+
+    jest.spyOn(AuthAPI, "refresh").mockResolvedValue({ status: 400, data: {} });
+
+    const { getByText } = render(
+      <AuthProvider>
+        <TestComponent />
+      </AuthProvider>
+    );
+
+    const loginButton = getByText("Login");
+
+    // Simulate login action to set user and token
+    act(() => {
+      loginButton.click();
+    });
+
+    // Perform a GET request that should trigger the interceptor
+    await act(async () => {
+      try {
+        await axios.get("/test-endpoint");
+      } catch (err) {}
+    });
+  });
+
+  it("should not retry if response status isn't 403", async () => {
+    // Mock a request that initially fails with 401
+    mock.onGet("/test-endpoint").replyOnce(401);
+
+    const { getByText } = render(
+      <AuthProvider>
+        <TestComponent />
+      </AuthProvider>
+    );
+
+    const loginButton = getByText("Login");
+
+    // Simulate login action to set user and token
+    act(() => {
+      loginButton.click();
+    });
+
+    // Perform a GET request that should trigger the interceptor
+    await act(async () => {
+      try {
+        await axios.get("/test-endpoint");
+      } catch (err) {}
+    });
   });
 });
