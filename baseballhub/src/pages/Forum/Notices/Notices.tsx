@@ -70,7 +70,11 @@ export function Notices() {
   }
 
   if (error) {
-    return <ErrorComponent label="새로고침" onRefresh={handleRefresh} />;
+    return (
+      <Container>
+        <ErrorComponent label="새로고침" onRefresh={handleRefresh} />
+      </Container>
+    );
   }
 
   return (
