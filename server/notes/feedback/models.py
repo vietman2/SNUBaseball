@@ -1,6 +1,6 @@
 from django.db import models
 
-from core.models import Post, Comment, ContentView, Chip
+from core.models import Post, Attachment, Comment, ContentView, Chip
 from .enums import StatusType
 
 class FeedbackCategory(Chip):
@@ -14,3 +14,21 @@ class Feedback(Post):
 
     class Meta:
         db_table = 'feedback'
+
+class FeedbackAttachment(Attachment):
+    feedback    = models.ForeignKey(Feedback, on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'feedback_attachment'
+
+class FeedbackComment(Comment):
+    feedback    = models.ForeignKey(Feedback, on_delete=models.CASCADE, related_name='comments')
+
+    class Meta:
+        db_table = 'feedback_comment'
+
+class FeedbackContentView(ContentView):
+    feedback    = models.ForeignKey(Feedback, on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'feedback_content_view'
