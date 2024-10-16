@@ -31,6 +31,7 @@ export function Feedback() {
 
   const closeModal = () => {
     setModalOpen(false);
+    setSelectedFeedbackId(null);
   };
 
   const handleRefresh = () => {
