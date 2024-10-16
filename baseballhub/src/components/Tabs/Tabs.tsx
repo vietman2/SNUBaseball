@@ -23,7 +23,7 @@ export function Tabs({
             key={tab}
             $active={activeTab === tab}
             onClick={() => setActiveTab(tab)}
-            textsize={textSize}
+            $textsize={textSize}
             data-testid={tab}
           >
             {tab}
@@ -55,10 +55,10 @@ const Container1 = styled.div`
   padding: 8px;
 `;
 
-const Tab1 = styled.div<{ $active: boolean; textsize: "small" | "large" }>`
-  padding: ${({ textsize }) => (textsize === "small" ? "4px 8px" : "8px 16px")};
+const Tab1 = styled.div<{ $active: boolean; $textsize: "small" | "large" }>`
+  padding: ${({ $textsize }) => ($textsize === "small" ? "4px 8px" : "8px 16px")};
 
-  font-size: ${({ textsize }) => (textsize === "small" ? "14px" : "18px")};
+  font-size: ${({ $textsize }) => ($textsize === "small" ? "14px" : "18px")};
   font-weight: ${({ $active }) => ($active ? "700" : "400")};
 
   cursor: pointer;
