@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { Divider } from "@components/Dividers";
+import { ErrorComponent, Loading } from "@components/Fallbacks";
 import { MobileModal, SimpleModal } from "@components/Modals";
 import {
   InformationDetail,
@@ -19,6 +20,9 @@ export function Information() {
     number | null
   >(null);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<boolean>(false);
+  const [refreshCount, setRefreshCount] = useState<number>(0);
 
   const { width } = useWindowSize();
 
@@ -31,6 +35,10 @@ export function Information() {
     setSelectedInformationId(null);
   };
 
+  const handleRefresh = () => {
+    setRefreshCount(refreshCount + 1);
+  };
+
   const handleInformationClick = (information: InformationSimpleType) => {
     setSelectedInformationId(information.id);
     openModal();
@@ -38,15 +46,37 @@ export function Information() {
 
   useEffect(() => {
     const fetchInformations = async () => {
+      setLoading(true);
       const response = await getInformations();
 
       if (response) {
         setInformations(response.data);
+        setError(false);
+      } else {
+        setError(true);
       }
+
+      setLoading(false);
     };
 
     fetchInformations();
-  }, []);
+  }, [refreshCount]);
+
+  if (loading) {
+    return (
+      <Container>
+        <Loading />
+      </Container>
+    );
+  }
+
+  if (error) {
+    return (
+      <Container>
+        <ErrorComponent label="새로고침" onRefresh={handleRefresh} />
+      </Container>
+    );
+  }
 
   return (
     <Container>

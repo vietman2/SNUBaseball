@@ -17,7 +17,12 @@ jest.mock("@fragments/Information", () => ({
 describe("<Information />", () => {
   it("handles bad response correctly", async () => {
     jest.spyOn(InformationAPI, "getInformations").mockResolvedValue(null);
-    renderWithProviders(<Information />);
+    await waitFor(() => renderWithProviders(<Information />));
+
+    await waitFor(() =>
+      expect(screen.getByText("새로고침")).toBeInTheDocument()
+    );
+    waitFor(() => fireEvent.click(screen.getByText("새로고침")));
   });
 
   it("renders wide screen correctly", async () => {
