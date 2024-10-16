@@ -1,11 +1,10 @@
 from drf_spectacular.utils import extend_schema
 from rest_framework import status
-from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
-from .serializers import FeedbackSimpleSerializer
+from .serializers import FeedbackSimpleSerializer, FeedbackDetailSerializer
 from .models import Feedback
 
 class FeedbackView(ModelViewSet):
@@ -37,9 +36,8 @@ class FeedbackView(ModelViewSet):
 
     @extend_schema(summary="피드백 상세 조회", tags=["피드백 관리"])
     def retrieve(self, request, *args, **kwargs):
-        return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         instance = self.get_object()
-        serializer = FeedbackSimpleSerializer(instance)
+        serializer = FeedbackDetailSerializer(instance)
 
         serializer.increment_num_views()
         serializer.content_viewed(request.user)
