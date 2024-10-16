@@ -14,3 +14,16 @@ export const getInformations = async () => {
     return null;
   }
 };
+
+export const getInformationDetails = async (id: number) => {
+  try {
+    const response = await axios.get(`/api/informations/${id}/`);
+
+    return {
+      status: 200,
+      data: response.data,
+    };
+  } catch (e: any) {
+    return null;
+  }
+};
