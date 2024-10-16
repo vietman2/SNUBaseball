@@ -1,9 +1,9 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 
 import { Notices } from "./Notices";
+import { sampleNotices } from "@data/forum";
 import * as NoticesAPI from "@services/board/notices";
 import { renderWithProviders, resizeWindow } from "@utils/test-utils";
-import { sampleNotices } from "@data/forum";
 
 jest.mock("@fragments/Notices", () => ({
   NoticeDetail: ({ goBack }: { goBack: () => void }) => (
