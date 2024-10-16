@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { AppIcon } from "@components/Icons";
-import { ErrorComponent } from "@components/Fallbacks";
+import { ErrorComponent, Loading } from "@components/Fallbacks";
 import { MobileModal, SimpleModal } from "@components/Modals";
 import { SimpleSelector } from "@components/Selectors";
 import { useTheme } from "@contexts/theme";
-import { sampleFeedbacks } from "@data/notes";
 import { FeedbackDetail, FeedbackSimple } from "@fragments/Feedback";
 import { useWindowSize } from "@hooks/useWindowSize";
 import { FeedbackSimpleType, FeedbackResponseType } from "@models/notes";
+import { getFeedbacks } from "@services/notes";
 
 export function Feedback() {
   const [feedbacks, setFeedbacks] = useState<FeedbackResponseType>();
@@ -18,6 +18,8 @@ export function Feedback() {
   );
 
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<boolean>(false);
   const [refreshCount, setRefreshCount] = useState<number>(0);
 
   const { isDarkMode } = useTheme();
@@ -31,21 +33,48 @@ export function Feedback() {
     setModalOpen(false);
   };
 
+  const handleRefresh = () => {
+    setRefreshCount(refreshCount + 1);
+  };
+
   const handleFeedbackClick = (feedback: FeedbackSimpleType) => {
     setSelectedFeedbackId(feedback.id);
     openModal();
   };
 
-  const handleRefresh = () => {
-    setRefreshCount(refreshCount + 1);
-  };
-
   useEffect(() => {
-    setFeedbacks(sampleFeedbacks);
+    const fetchFeedbacks = async () => {
+      setLoading(true);
+      const response = await getFeedbacks();
+
+      if (response) {
+        setFeedbacks(response.data);
+        setError(false);
+      } else {
+        setError(true);
+      }
+
+      setLoading(false);
+    };
+
+    fetchFeedbacks();
   }, [refreshCount]);
 
-  if (!feedbacks)
-    return <ErrorComponent onRefresh={handleRefresh} label="새로고침" />;
+  if (loading) {
+    return (
+      <Container>
+        <Loading />
+      </Container>
+    );
+  }
+
+  if (error || feedbacks === undefined) {
+    return (
+      <Container>
+        <ErrorComponent label="새로고침" onRefresh={handleRefresh} />
+      </Container>
+    );
+  }
 
   return (
     <Container>
