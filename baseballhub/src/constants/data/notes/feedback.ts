@@ -93,6 +93,6 @@ export const sampleFeedbackDetail: FeedbackDetailType = {
   created_at: "2024-08-01",
   updated_at: "2024-10-01",
   num_views: 100,
-  comments: [],
+  comments: ["asdf"],
   num_comments: 2,
 };
