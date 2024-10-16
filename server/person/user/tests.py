@@ -14,15 +14,8 @@ class UserProfileAPITestCase(APITestCase):
         self.member = Member.objects.get(student_id='2024-12345')
         self.member2 = Member.objects.get(student_id='2023-12345')
         self.member3 = Member.objects.get(student_id='2022-12345')
-        self.user = User.objects.create(
-            username='testuser2',
-            member=self.member,
-            is_superuser=True
-        )
-        self.user2 = User.objects.create(
-            username='testuser3',
-            member=self.member2
-        )
+        self.user = User.objects.get(member=self.member)
+        self.user2 = User.objects.get(member=self.member2)
         self.user3 = User.objects.get(member=self.member3)
 
     def test_unallowed_method(self):
@@ -62,13 +55,16 @@ class StudentIdCheckAPITestCase(APITestCase):
         self.url = '/api/student_id/'
         self.member = Member.objects.get(student_id='2024-12345')
         self.member2 = Member.objects.get(student_id='2023-12345')
-        self.user = User.objects.create(
-            username='testuser2',
-            member=self.member2
+        self.new_member = Member.objects.create(
+            student_id='2017-12345',
+            last_name='김',
+            first_name='철수',
+            admission_year=2017
         )
+        self.user = User.objects.get(member=self.member)
 
     def test_student_id_check_success(self):
-        response = self.client.get(f'{self.url}?student_id={self.member.student_id}')
+        response = self.client.get(f'{self.url}?student_id={self.new_member.student_id}')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_student_id_check_fail(self):
@@ -87,15 +83,25 @@ class StudentIdCheckAPITestCase(APITestCase):
         self.assertEqual(response.data['error'], '이미 가입된 학번입니다.')
 
 class RegisterAPITestCase(APITestCase):
-    fixtures = ["core/data/test/mock_image.json", "core/data/test/people.json"]
+    fixtures = ["core/data/test/mock_image.json"]
 
     def setUp(self):
         self.url = '/api/register/'
-        self.member = Member.objects.get(student_id='2024-12345')
-        self.member2 = Member.objects.get(student_id='2023-12345')
+        self.member = Member.objects.create(
+            student_id='2024-12345',
+            last_name='홍',
+            first_name='길동',
+            admission_year=2024
+        )
+        self.member2 = Member.objects.create(
+            student_id='2023-12345',
+            last_name='김',
+            first_name='철수',
+            admission_year=2023
+        )
         self.data = {
             'member_id': self.member.id,
-            'username': 'testuser2',
+            'username': 'newusername1',
             'password': 'testpassword123!',
             'password2': 'testpassword123!'
         }
