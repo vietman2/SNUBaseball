@@ -1,5 +1,5 @@
-import { login, refresh } from "./auth";
+import { login, logout, refresh } from "./auth";
 import { getProfile } from "./profiles";
 import { checkStudentId, signUp } from "./register";
 
-export { login, refresh, getProfile, checkStudentId, signUp };
+export { login, logout, refresh, getProfile, checkStudentId, signUp };

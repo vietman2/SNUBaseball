@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { login, refresh } from "./auth";
+import { login, logout, refresh } from "./auth";
 
 describe("login", () => {
   it("should return a user object if the login is successful", async () => {
@@ -13,6 +13,20 @@ describe("login", () => {
     jest.spyOn(axios, "post").mockRejectedValue(new Error());
 
     await login("test", "password");
+  });
+});
+
+describe("logout", () => {
+  it("should return a success message if the logout is successful", async () => {
+    jest.spyOn(axios, "post").mockResolvedValue({ data: {} });
+
+    await logout();
+  });
+
+  it("should return null if the logout is unsuccessful", async () => {
+    jest.spyOn(axios, "post").mockRejectedValue(new Error());
+
+    await logout();
   });
 });
 

@@ -4,6 +4,7 @@ import { Desktop } from "./Desktop";
 import { Mobile } from "./Mobile";
 import RootLayout from "./RootLayout";
 import * as ThemeContext from "@contexts/theme";
+import * as AuthAPI from "@services/auth/auth";
 import { renderWithProviders, resizeWindow } from "@utils/test-utils";
 
 jest.unmock("@components/RootLayout");
@@ -19,11 +20,12 @@ describe("<Desktop />", () => {
     jest.clearAllMocks();
   });
 
-  it("should render light mode", () => {
+  it("should render light mode and handle logout success", () => {
     jest.spyOn(ThemeContext, "useTheme").mockReturnValue({
       isDarkMode: false,
       toggleTheme: jest.fn(),
     });
+    jest.spyOn(AuthAPI, "logout").mockResolvedValue({ status: 200, data: {} });
     renderWithProviders(<Desktop />);
 
     fireEvent.click(screen.getByTestId("toggle"));
@@ -31,13 +33,16 @@ describe("<Desktop />", () => {
     fireEvent.click(screen.getByTestId("Home"));
     fireEvent.click(screen.getByTestId("light-mode"));
     fireEvent.click(screen.getByTestId("dark-mode"));
+
+    fireEvent.click(screen.getByTestId("logout"));
   });
 
-  it("should render dark mode", () => {
+  it("should render dark mode and handle logout fail", () => {
     jest.spyOn(ThemeContext, "useTheme").mockReturnValue({
       isDarkMode: true,
       toggleTheme: jest.fn(),
     });
+    jest.spyOn(AuthAPI, "logout").mockResolvedValue(null);
     renderWithProviders(<Desktop />);
 
     fireEvent.click(screen.getByTestId("toggle"));
@@ -45,6 +50,8 @@ describe("<Desktop />", () => {
     fireEvent.click(screen.getByTestId("Home"));
     fireEvent.click(screen.getByTestId("light-mode"));
     fireEvent.click(screen.getByTestId("dark-mode"));
+
+    fireEvent.click(screen.getByTestId("logout"));
   });
 });
 

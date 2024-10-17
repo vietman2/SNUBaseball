@@ -6,6 +6,7 @@ import { AppIcon, MainLogo } from "@components/Icons";
 import { useAuth } from "@contexts/auth";
 import { useTheme } from "@contexts/theme";
 import { TabGroup, tabgroups } from "@navigation/tabs";
+import { logout as logoutRequest } from "@services/auth";
 
 export function Desktop() {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);
@@ -34,7 +35,7 @@ interface Props {
 function Sidebar({ isSidebarOpen, toggleSidebar }: Props) {
   const [activeTab, setActiveTab] = useState<string>("/home");
 
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const { toggleTheme, isDarkMode } = useTheme();
   const navigate = useNavigate();
 
@@ -62,6 +63,15 @@ function Sidebar({ isSidebarOpen, toggleSidebar }: Props) {
 
   const getInactiveColor = () => {
     return isDarkMode ? "#C5A86F" : "#0B1623";
+  };
+
+  const handleLogout = async () => {
+    const response = await logoutRequest();
+
+    if (response) {
+      logout();
+      navigate("/login");
+    }
   };
 
   return (
@@ -136,6 +146,12 @@ function Sidebar({ isSidebarOpen, toggleSidebar }: Props) {
             <AppIcon icon="person" size={24} color={getInactiveColor()} />
             {isSidebarOpen && "정승원"}
           </TabItem>
+          <button onClick={handleLogout} data-testid="logout">
+            <LogoutButton $isOpen={isSidebarOpen} $isActive={false}>
+              <AppIcon icon="logout" size={24} color={getInactiveColor()} />
+              {isSidebarOpen && "로그아웃"}
+            </LogoutButton>
+          </button>
         </SidebarFooter>
       </SidebarContainer>
       <SidebarToggleIcon
@@ -257,6 +273,12 @@ const TabItem = styled.div<{ $isActive: boolean; $isOpen: boolean }>`
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.background500};
+  }
+`;
+
+const LogoutButton = styled(TabItem)`
+  &:hover {
+    background-color: #f44336;
   }
 `;
 
