@@ -1,18 +1,36 @@
 from drf_spectacular.utils import extend_schema
 from rest_framework import status
 from rest_framework.decorators import action
+from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
-from .serializers import NoticeSimpleSerializer, NoticeDetailSerializer, NoticeCategorySerializer
+from .serializers import (
+    NoticeSimpleSerializer, NoticeDetailSerializer,
+    NoticeCategorySerializer, NoticeCreateSerializer
+)
 from .models import Notice, NoticeCategory
 
 class NoticeView(ModelViewSet):
     queryset = Notice.objects.all()
     serializer_class = NoticeSimpleSerializer
     permission_classes = [IsAuthenticated,]
-    http_method_names = ['get']
+    http_method_names = ['get', 'post']
+
+    @extend_schema(summary="공지 생성", tags=["공지 관리"])
+    def create(self, request, *args, **kwargs):
+        serializer = NoticeCreateSerializer(data=request.data)
+        serializer.context['request'] = request
+
+        try:
+            serializer.is_valid(raise_exception=True)
+        except ValidationError as e:
+            return Response({'message': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+        serializer.save()
+
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     @extend_schema(summary="공지 조회", tags=["공지 관리"])
     def list(self, request, *args, **kwargs):
