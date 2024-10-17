@@ -14,9 +14,18 @@ jest.mock("@contexts/auth", () => ({
   useAuth: jest.fn(),
 }));
 jest.mock("@fragments/Notices", () => ({
-  NoticeCreate: () => <div>NoticeCreate</div>,
-  NoticeDetail: ({ goBack }: { goBack: () => void }) => (
-    <button onClick={goBack}>NoticeDetail</button>
+  NoticeWrite: () => <div>NoticeWrite</div>,
+  NoticeDetail: ({
+    handleEdit,
+    goBack,
+  }: {
+    handleEdit: () => void;
+    goBack: () => void;
+  }) => (
+    <>
+      <button onClick={goBack}>NoticeDetail</button>
+      <button onClick={handleEdit}>NoticeEdit</button>
+    </>
   ),
   NoticeSimple: () => <div>NoticeSimple</div>,
   NoticeSimpleWide: () => <div>NoticeSimpleWide</div>,
@@ -71,7 +80,7 @@ describe("<Notices />", () => {
     fireEvent.click(screen.getByText("새 공지 등록"));
 
     await waitFor(() =>
-      expect(screen.getByText("NoticeCreate")).toBeInTheDocument()
+      expect(screen.getByText("NoticeWrite")).toBeInTheDocument()
     );
   });
 
@@ -95,5 +104,16 @@ describe("<Notices />", () => {
     await waitFor(() => resizeWindow(600, 600));
 
     fireEvent.click(screen.getByText("새 공지 등록"));
+  });
+
+  it("handles edit mode correctly", async () => {
+    renderWithProviders(<Notices />);
+
+    await waitFor(() => resizeWindow(800, 800));
+    await waitFor(() => fireEvent.click(screen.getByTestId("notice-1")));
+    fireEvent.click(screen.getByText("NoticeDetail"));
+
+    await waitFor(() => expect(screen.getByText("NoticeDetail")).toBeInTheDocument());
+    fireEvent.click(screen.getByText("NoticeEdit"));
   });
 });

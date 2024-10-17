@@ -7,7 +7,7 @@ import { MobileModal, SimpleModal } from "@components/Modals";
 import { Subtitle } from "@components/Texts";
 import { useAuth } from "@contexts/auth";
 import {
-  NoticeCreate,
+  NoticeWrite,
   NoticeDetail,
   NoticeSimple,
   NoticeSimpleWide,
@@ -23,6 +23,7 @@ export function Notices() {
 
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [writeMode, setWriteMode] = useState<boolean>(false);
+  const [editMode, setEditMode] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
   const [refreshCount, setRefreshCount] = useState<number>(0);
@@ -41,6 +42,12 @@ export function Notices() {
     handleRefresh();
   };
 
+  const handleEdit = () => {
+    setEditMode(true);
+    setWriteMode(true);
+    openModal();
+  }
+
   const handleRefresh = () => {
     setRefreshCount(refreshCount + 1);
   };
@@ -52,6 +59,7 @@ export function Notices() {
   };
 
   const handleWriteClick = () => {
+    setEditMode(false);
     setWriteMode(true);
     openModal();
   };
@@ -112,9 +120,17 @@ export function Notices() {
           ))}
           <SimpleModal isOpen={modalOpen} onClose={closeModal}>
             {writeMode ? (
-              <NoticeCreate goBack={closeModal} />
+              <NoticeWrite
+                noticeId={selectedNoticeId}
+                editMode={editMode}
+                goBack={closeModal}
+              />
             ) : (
-              <NoticeDetail noticeId={selectedNoticeId} goBack={closeModal} />
+              <NoticeDetail
+                handleEdit={handleEdit}
+                noticeId={selectedNoticeId}
+                goBack={closeModal}
+              />
             )}
           </SimpleModal>
         </>
@@ -132,9 +148,17 @@ export function Notices() {
           ))}
           <MobileModal isOpen={modalOpen} onClose={closeModal}>
             {writeMode ? (
-              <NoticeCreate goBack={closeModal} />
+              <NoticeWrite
+                noticeId={selectedNoticeId}
+                editMode={editMode}
+                goBack={closeModal}
+              />
             ) : (
-              <NoticeDetail noticeId={selectedNoticeId} goBack={closeModal} />
+              <NoticeDetail
+                handleEdit={handleEdit}
+                noticeId={selectedNoticeId}
+                goBack={closeModal}
+              />
             )}
           </MobileModal>
         </>
