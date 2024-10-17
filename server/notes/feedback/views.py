@@ -4,8 +4,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
-from .serializers import FeedbackSimpleSerializer, FeedbackDetailSerializer
 from .models import Feedback
+from .serializers import FeedbackSimpleSerializer, FeedbackDetailSerializer
 
 class FeedbackView(ModelViewSet):
     queryset = Feedback.objects.all()
