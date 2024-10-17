@@ -13,7 +13,14 @@ export type NoticeSimpleType = {
   author: string;
   num_views: number;
   created_at: string;
+  has_attachment: boolean;
 };
+
+type NoticeAttachmentType = {
+  file: string;
+  name: string;
+  created_at: string;
+}
 
 export type NoticeDetailType = {
   id: number;
@@ -24,4 +31,5 @@ export type NoticeDetailType = {
   num_views: number;
   created_at: string;
   comments: string[]; // TODO: Change to CommentType[]
+  attachments: NoticeAttachmentType[];
 };
