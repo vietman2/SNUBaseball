@@ -4,6 +4,7 @@ interface Props {
   placeholder: string;
   value: string;
   onChange: (value: string) => void;
+  wide?: boolean;
   disabled?: boolean;
   password?: boolean;
 }
@@ -12,22 +13,40 @@ export function TextInput({
   placeholder,
   value,
   onChange,
+  wide = false,
   disabled = false,
   password = false,
 }: Readonly<Props>) {
-  return (
-    <InputWrapper>
-      <Input
-        type={password ? "password" : "text"}
-        placeholder=""
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        disabled={disabled}
-        data-testid="text-input"
-      />
-      <label className="placeholder">{placeholder}</label>
-    </InputWrapper>
-  );
+  if (wide) {
+    return (
+      <Container>
+        <WideWrapper>
+          <Input
+            type={password ? "password" : "text"}
+            placeholder=""
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
+            disabled={disabled}
+            data-testid="text-input"
+          />
+        </WideWrapper>
+      </Container>
+    );
+  } else {
+    return (
+      <InputWrapper>
+        <Input
+          type={password ? "password" : "text"}
+          placeholder=""
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          disabled={disabled}
+          data-testid="text-input"
+        />
+        <label className="placeholder">{placeholder}</label>
+      </InputWrapper>
+    );
+  }
 }
 
 const InputWrapper = styled.div`
@@ -69,4 +88,17 @@ const Input = styled.input`
     background-color: ${({ theme }) => theme.colors.background100};
     transform: translateY(calc(-1 * 2px - 22px));
   }
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 0 16px;
+`;
+
+const WideWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  box-sizing: border-box;
 `;
