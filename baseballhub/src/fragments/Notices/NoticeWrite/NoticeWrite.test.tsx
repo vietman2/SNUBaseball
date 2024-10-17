@@ -1,7 +1,7 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 
-import { NoticeCreate } from "./NoticeCreate";
-import { sampleNoticeCategories } from "@data/forum";
+import { NoticeWrite } from "./NoticeWrite";
+import { sampleNoticeCategories, sampleNoticeDetail } from "@data/forum";
 import * as NoticeAPI from "@services/board/notices";
 import * as MediaAPI from "@services/media/image";
 import { renderWithProviders } from "@utils/test-utils";
@@ -18,7 +18,7 @@ jest.mock("@components/Inputs", () => {
 });
 jest.spyOn(window, "alert").mockImplementation(() => {});
 
-describe("<NoticeCreate />", () => {
+describe("<NoticeWrite />", () => {
   beforeEach(() => {
     jest.clearAllMocks();
     jest
@@ -30,7 +30,9 @@ describe("<NoticeCreate />", () => {
     jest.spyOn(NoticeAPI, "getNoticeCategories").mockResolvedValue(null);
 
     await waitFor(() =>
-      renderWithProviders(<NoticeCreate goBack={jest.fn()} />)
+      renderWithProviders(
+        <NoticeWrite noticeId={1} editMode={false} goBack={jest.fn()} />
+      )
     );
 
     await waitFor(() =>
@@ -39,7 +41,11 @@ describe("<NoticeCreate />", () => {
   });
 
   it("renders correctly", async () => {
-    waitFor(() => renderWithProviders(<NoticeCreate goBack={jest.fn()} />));
+    waitFor(() =>
+      renderWithProviders(
+        <NoticeWrite noticeId={1} editMode={false} goBack={jest.fn()} />
+      )
+    );
 
     await waitFor(() => expect(screen.getByText("긴급")).toBeInTheDocument());
 
@@ -52,7 +58,11 @@ describe("<NoticeCreate />", () => {
       .spyOn(MediaAPI, "uploadImage")
       .mockResolvedValue({ status: 200, data: "" });
 
-    waitFor(() => renderWithProviders(<NoticeCreate goBack={jest.fn()} />));
+    waitFor(() =>
+      renderWithProviders(
+        <NoticeWrite noticeId={1} editMode={false} goBack={jest.fn()} />
+      )
+    );
 
     await waitFor(() =>
       expect(screen.getByText("ContentInput")).toBeInTheDocument()
@@ -64,7 +74,11 @@ describe("<NoticeCreate />", () => {
   it("handles image upload fail", async () => {
     jest.spyOn(MediaAPI, "uploadImage").mockResolvedValue(null);
 
-    waitFor(() => renderWithProviders(<NoticeCreate goBack={jest.fn()} />));
+    waitFor(() =>
+      renderWithProviders(
+        <NoticeWrite noticeId={1} editMode={false} goBack={jest.fn()} />
+      )
+    );
 
     await waitFor(() =>
       expect(screen.getByText("ContentInput")).toBeInTheDocument()
@@ -78,7 +92,11 @@ describe("<NoticeCreate />", () => {
       .spyOn(NoticeAPI, "createNotice")
       .mockResolvedValue({ status: 201, data: {} });
 
-    waitFor(() => renderWithProviders(<NoticeCreate goBack={jest.fn()} />));
+    waitFor(() =>
+      renderWithProviders(
+        <NoticeWrite noticeId={1} editMode={false} goBack={jest.fn()} />
+      )
+    );
 
     await waitFor(() =>
       expect(screen.getByText("파일 첨부")).toBeInTheDocument()
@@ -98,7 +116,11 @@ describe("<NoticeCreate />", () => {
   });
 
   it("handles file upload cancel", async () => {
-    waitFor(() => renderWithProviders(<NoticeCreate goBack={jest.fn()} />));
+    waitFor(() =>
+      renderWithProviders(
+        <NoticeWrite noticeId={1} editMode={false} goBack={jest.fn()} />
+      )
+    );
 
     await waitFor(() =>
       expect(screen.getByText("파일 첨부")).toBeInTheDocument()
@@ -115,8 +137,64 @@ describe("<NoticeCreate />", () => {
   it("handles create notice fail", async () => {
     jest.spyOn(NoticeAPI, "createNotice").mockResolvedValue(null);
 
-    waitFor(() => renderWithProviders(<NoticeCreate goBack={jest.fn()} />));
+    waitFor(() =>
+      renderWithProviders(<NoticeWrite noticeId={1} editMode={false} goBack={jest.fn()} />)
+    );
 
     await waitFor(() => fireEvent.click(screen.getByText("등록")));
+  });
+
+  it("handles bad config", async () => {
+    waitFor(() =>
+      renderWithProviders(<NoticeWrite noticeId={null} editMode goBack={jest.fn()} />)
+    );
+  });
+
+  it("handles edit mode initial load fail", async () => {
+    jest.spyOn(NoticeAPI, "getNoticeDetails").mockResolvedValue(null);
+
+    waitFor(() =>
+      renderWithProviders(
+        <NoticeWrite noticeId={1} editMode goBack={jest.fn()} />
+      )
+    );
+  });
+
+  it("handles edit mode correctly", async () => {
+    jest.spyOn(NoticeAPI, "getNoticeDetails").mockResolvedValue({
+      status: 200,
+      data: sampleNoticeDetail,
+    });
+    jest.spyOn(NoticeAPI, "updateNotice").mockResolvedValue({ status: 200, data: {} });
+
+    waitFor(() =>
+      renderWithProviders(
+        <NoticeWrite noticeId={1} editMode goBack={jest.fn()} />
+      )
+    );
+
+    await waitFor(() => expect(screen.getByText("등록")).toBeInTheDocument());
+
+    fireEvent.click(screen.getByText("등록"));
+  });
+
+  it("handles edit mode fail", async () => {
+    jest.spyOn(NoticeAPI, "getNoticeDetails").mockResolvedValue({
+      status: 200,
+      data: sampleNoticeDetail,
+    });
+    jest
+      .spyOn(NoticeAPI, "updateNotice")
+      .mockResolvedValue(null);
+
+    waitFor(() =>
+      renderWithProviders(
+        <NoticeWrite noticeId={1} editMode goBack={jest.fn()} />
+      )
+    );
+
+    await waitFor(() => expect(screen.getByText("등록")).toBeInTheDocument());
+
+    fireEvent.click(screen.getByText("등록"));
   });
 });
