@@ -30,6 +30,7 @@ describe("<NoticeDetail />", () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
+    jest.spyOn(window, "confirm").mockImplementation(() => true);
     jest.spyOn(AuthContext, "useAuth").mockReturnValue({
       user: sampleAdmin,
       logout: jest.fn(),
@@ -76,7 +77,6 @@ describe("<NoticeDetail />", () => {
   });
 
   it("handles delete correctly", async () => {
-    jest.spyOn(window, "confirm").mockImplementation(() => true);
     jest.spyOn(NoticesAPI, "deleteNotice").mockResolvedValue({
       status: 204,
       data: {},
@@ -94,7 +94,6 @@ describe("<NoticeDetail />", () => {
   });
 
   it("handles delete fail", async () => {
-    jest.spyOn(window, "confirm").mockImplementation(() => true);
     jest.spyOn(NoticesAPI, "deleteNotice").mockResolvedValue(null);
     await render();
 
@@ -123,7 +122,6 @@ describe("<NoticeDetail />", () => {
   });
 
   it("handles delete comment correctly", async () => {
-    jest.spyOn(window, "confirm").mockImplementation(() => true);
     jest.spyOn(NoticesAPI, "deleteNoticeComment").mockResolvedValue({
       status: 204,
       data: {},
@@ -141,7 +139,6 @@ describe("<NoticeDetail />", () => {
   });
 
   it("handles delete comment fail", async () => {
-    jest.spyOn(window, "confirm").mockImplementation(() => true);
     jest.spyOn(NoticesAPI, "deleteNoticeComment").mockResolvedValue(null);
     await render();
 
