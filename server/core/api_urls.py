@@ -6,6 +6,8 @@ from rest_framework.routers import DefaultRouter
 from board.information.views import InformationView
 from board.notice.views import NoticeView
 
+from media.image.views import ImageView
+
 from notes.feedback.views import FeedbackView
 
 from person.major.views import MajorViewSet
@@ -15,6 +17,8 @@ router = DefaultRouter()
 
 router.register('informations', InformationView, basename='informations')
 router.register('notices', NoticeView, basename='notices')
+
+router.register('images', ImageView, basename='images')
 
 router.register('feedbacks', FeedbackView, basename='feedbacks')
 
