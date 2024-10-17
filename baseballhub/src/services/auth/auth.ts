@@ -18,6 +18,19 @@ export const login = async (username: string, password: string) => {
   }
 };
 
+export const logout = async () => {
+  try {
+    const response = await axios.post(`/api/logout/`, {});
+
+    return {
+      status: 200,
+      data: response.data,
+    };
+  } catch (e: any) {
+    return null;
+  }
+};
+
 export const refresh = async () => {
   try {
     const response = await axios.post(`/api/token/refresh/`, {});

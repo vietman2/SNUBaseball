@@ -15,13 +15,13 @@ export function GameStory() {
       <TabWrapper>
         <div>
           {tabs.map((tab) => (
-            <Chip
-              key={tab}
-              label={tab}
-              bgColor={tab === activeTab ? "#0F0F70" : "#B5B6B6"}
-              color={tab === activeTab ? "#E8E6F2" : "#0B1623"}
-              onClick={() => setActiveTab(tab)}
-            />
+            <button key={tab} onClick={() => setActiveTab(tab)}>
+              <Chip
+                label={tab}
+                bgColor={tab === activeTab ? "#0F0F70" : "#B5B6B6"}
+                color={tab === activeTab ? "#E8E6F2" : "#0B1623"}
+              />
+            </button>
           ))}
         </div>
       </TabWrapper>

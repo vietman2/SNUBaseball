@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import { Chip } from "@components/Chips";
+import { AppIcon } from "@components/Icons";
 import { NoticeSimpleType } from "@models/forum";
 
 interface Props {
@@ -18,7 +19,12 @@ export function NoticeSimple({ notice }: Readonly<Props>) {
         />
         <div>{notice.created_at}</div>
       </div>
-      <div>{notice.title}</div>
+      <div>
+        <div>{notice.title}</div>
+        {notice.has_attachment && (
+          <AppIcon icon="attachment" size={16} color="gray" />
+        )}
+      </div>
       <div>
         <div>{notice.author}</div>
         <div>{notice.num_views}</div>
@@ -51,6 +57,7 @@ const Container = styled.div`
     flex-direction: row;
     align-items: center;
     padding: 8px 0;
+    gap: 8px;
 
     font-size: 18px;
     font-weight: 700;

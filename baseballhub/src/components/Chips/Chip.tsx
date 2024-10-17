@@ -6,7 +6,6 @@ interface Props {
   label: string;
   color?: string;
   bgColor?: string;
-  onClick?: () => void;
   size?: "small" | "medium"; // | "large";
   icon?: string;
 }
@@ -15,7 +14,6 @@ export function Chip({
   label,
   color = "white",
   bgColor = "#0f0f70",
-  onClick,
   size = "medium",
   icon,
 }: Readonly<Props>) {
@@ -32,8 +30,6 @@ export function Chip({
   return (
     <ChipWrapper
       style={{ color: color, backgroundColor: bgColor }}
-      onClick={onClick}
-      $hasOnClick={!!onClick}
       $padding={getPadding()}
       data-testid="chip"
     >
@@ -43,7 +39,7 @@ export function Chip({
   );
 }
 
-const ChipWrapper = styled.div<{ $hasOnClick: boolean; $padding: string }>`
+const ChipWrapper = styled.div<{ $padding: string }>`
   display: flex;
   position: relative;
   align-items: center;
@@ -54,7 +50,6 @@ const ChipWrapper = styled.div<{ $hasOnClick: boolean; $padding: string }>`
   font-weight: 500;
 
   border-radius: 5px;
-  cursor: ${({ $hasOnClick }) => ($hasOnClick ? "pointer" : "default")};
 
   white-space: nowrap;
 `;

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import { Chip } from "@components/Chips";
+import { AppIcon } from "@components/Icons";
 import { NoticeSimpleType } from "@models/forum";
 
 export function NoticeSimpleWideHeader() {
@@ -30,6 +31,7 @@ export function NoticeSimpleWide({ notice }: Readonly<Props>) {
           bgColor={notice.category.background_color}
         />
         {notice.title}
+        {notice.has_attachment && <AppIcon icon="attachment" size={16} color="gray" />}
       </div>
       <div>{notice.author}</div>
       <div>{notice.created_at}</div>

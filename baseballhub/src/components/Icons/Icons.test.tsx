@@ -14,6 +14,7 @@ describe("<AppIcon />", () => {
         <AppIcon icon="archive" size={16} color="black" />
         <AppIcon icon="arrow-down" size={16} color="black" />
         <AppIcon icon="arrow-up" size={16} color="black" />
+        <AppIcon icon="attachment" size={16} color="black" />
         <AppIcon icon="baseball" size={16} color="black" />
         <AppIcon icon="baseball2" size={16} color="black" />
         <AppIcon icon="calendar" size={16} color="black" />
@@ -27,6 +28,7 @@ describe("<AppIcon />", () => {
         <AppIcon icon="close" size={16} color="black" />
         <AppIcon icon="diary" size={16} color="black" />
         <AppIcon icon="down" size={16} color="black" />
+        <AppIcon icon="download" size={16} color="black" />
         <AppIcon icon="feedback" size={16} color="black" />
         <AppIcon icon="field" size={16} color="black" />
         <AppIcon icon="forum" size={16} color="black" />
@@ -45,6 +47,7 @@ describe("<AppIcon />", () => {
         <AppIcon icon="pin" size={16} color="black" />
         <AppIcon icon="plus" size={16} color="black" />
         <AppIcon icon="record" size={16} color="black" />
+        <AppIcon icon="send" size={16} color="black" />
         <AppIcon icon="storage" size={16} color="black" />
         <AppIcon icon="sun" size={16} color="black" />
       </>

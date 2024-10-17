@@ -1,9 +1,16 @@
 import { sampleInformationDetail, sampleInformations } from "./information";
-import { sampleNotices, sampleNoticeDetail } from "./notice";
+import {
+  sampleCategories,
+  sampleNotices,
+  sampleNoticeDetail,
+  sampleNoticeDetailWithAttachment,
+} from "./notice";
 
 export {
   sampleInformationDetail,
   sampleInformations,
+  sampleCategories as sampleNoticeCategories,
   sampleNotices,
   sampleNoticeDetail,
+  sampleNoticeDetailWithAttachment,
 };

@@ -1,11 +1,11 @@
-import { sampleAuthor } from "@data/user";
+import { sampleAdmin, sampleAuthor } from "@data/user";
 import {
   NoticeCategoryType,
   NoticeDetailType,
   NoticeSimpleType,
 } from "@models/forum";
 
-const sampleCategories: NoticeCategoryType[] = [
+export const sampleCategories: NoticeCategoryType[] = [
   {
     label: "일반",
     color: "#253238",
@@ -15,16 +15,6 @@ const sampleCategories: NoticeCategoryType[] = [
     label: "긴급",
     color: "#D84315",
     background_color: "#FFAB91",
-  },
-  {
-    label: "선수등록",
-    color: "#3E2723",
-    background_color: "#D7CCC8",
-  },
-  {
-    label: "시합",
-    color: "#006064",
-    background_color: "#B2EBF2",
   },
 ];
 
@@ -36,14 +26,7 @@ export const sampleNotices: NoticeSimpleType[] = [
     author: "임준원",
     num_views: 100,
     created_at: "2024-04-01",
-  },
-  {
-    id: 2,
-    category: sampleCategories[3],
-    title: "도쿄대 교류전 일정 공지",
-    author: "임준원",
-    num_views: 100,
-    created_at: "2024-08-01",
+    has_attachment: true,
   },
   {
     id: 3,
@@ -52,22 +35,7 @@ export const sampleNotices: NoticeSimpleType[] = [
     author: "강지민",
     num_views: 100,
     created_at: "2024-10-01",
-  },
-  {
-    id: 4,
-    category: sampleCategories[2],
-    title: "2024년도 선수등록 부원 교육영상 시청",
-    author: "김유안",
-    num_views: 100,
-    created_at: "2024-10-01",
-  },
-  {
-    id: 5,
-    category: sampleCategories[0],
-    title: "2024년 10월 야구부 활동보고",
-    author: "박영서",
-    num_views: 100,
-    created_at: "2024-10-01",
+    has_attachment: false,
   },
 ];
 
@@ -79,5 +47,44 @@ export const sampleNoticeDetail: NoticeDetailType = {
   author: sampleAuthor,
   num_views: 100,
   created_at: "2024-04-01",
-  comments: ["확인했습니다.", "감사합니다."],
+  comments: [
+    {
+      id: 1,
+      author: sampleAuthor,
+      content: "댓글입니다.",
+      created_at: "2024-04-02",
+    },
+    {
+      id: 2,
+      author: sampleAdmin,
+      content: "관리자 댓글입니다.",
+      created_at: "2024-04-03",
+    },
+  ],
+  attachments: [],
+};
+
+export const sampleNoticeDetailWithAttachment: NoticeDetailType = {
+  id: 1,
+  category: sampleCategories[0],
+  title: "유계결석 인정 요청서",
+  content: "유계결석 인정 요청서입니다.",
+  author: sampleAuthor,
+  num_views: 100,
+  created_at: "2024-04-01",
+  comments: [
+    {
+      id: 1,
+      author: sampleAuthor,
+      content: "댓글입니다.",
+      created_at: "2024-04-02",
+    },
+  ],
+  attachments: [
+    {
+      file: "유계결석 인정 요청서.hwp",
+      name: "유계결석 인정 요청서",
+      created_at: "2024-04-01",
+    },
+  ],
 };

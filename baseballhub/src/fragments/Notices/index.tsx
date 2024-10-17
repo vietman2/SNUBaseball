@@ -1,3 +1,4 @@
+import { NoticeWrite } from "./NoticeWrite/NoticeWrite";
 import { NoticeDetail } from "./NoticeDetail/NoticeDetail";
 import { NoticeSimple } from "./NoticeSimple/NoticeSimple";
 import {
@@ -5,4 +6,10 @@ import {
   NoticeSimpleWideHeader,
 } from "./NoticeSimple/NoticeSimpleWide";
 
-export { NoticeDetail, NoticeSimple, NoticeSimpleWide, NoticeSimpleWideHeader };
+export {
+  NoticeWrite,
+  NoticeDetail,
+  NoticeSimple,
+  NoticeSimpleWide,
+  NoticeSimpleWideHeader,
+};

@@ -3,6 +3,7 @@ from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
+from core.storage import get_presigned_url
 from core.validators import UsernameValidator
 from person.member.enums import RoleType
 from person.member.models import Member
@@ -29,14 +30,16 @@ class ProfileSerializer(ModelSerializer):
         if obj.member.profile_image is None:
             return settings.FALLBACK_IMAGE
 
-        return obj.member.profile_image.image.url
+        url = obj.member.profile_image.image.url
+        return get_presigned_url(url)
 
     def get_is_admin(self, obj):
-        ## TODO: 주장, 부주장 로직 처리
         if obj.is_superuser:
             return True
 
-        if obj.member.role == RoleType.MANAGER:
+        admin_roles = [RoleType.MANAGER, RoleType.CAPTAIN, RoleType.VICE_CAPTAIN]
+
+        if obj.member.role in admin_roles:
             return True
 
         return False
@@ -60,7 +63,8 @@ class AuthorSerializer(ModelSerializer):
         if obj.member.profile_image is None:
             return settings.FALLBACK_IMAGE
 
-        return obj.member.profile_image.image.url
+        url = obj.member.profile_image.image.url
+        return get_presigned_url(url)
 
 class RegisterSerializer(ModelSerializer):
     member_id   = serializers.IntegerField(
