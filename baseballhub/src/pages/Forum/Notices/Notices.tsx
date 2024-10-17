@@ -46,7 +46,7 @@ export function Notices() {
     setEditMode(true);
     setWriteMode(true);
     openModal();
-  }
+  };
 
   const handleRefresh = () => {
     setRefreshCount(refreshCount + 1);
