@@ -178,4 +178,16 @@ describe("<TextInput />", () => {
       />
     );
   });
+
+  it("should render compact", () => {
+    renderWithProviders(
+      <TextInput
+        placeholder="Test"
+        value="test"
+        wide
+        compact
+        onChange={jest.fn()}
+      />
+    );
+  });
 });

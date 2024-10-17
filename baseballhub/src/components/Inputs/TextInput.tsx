@@ -5,6 +5,7 @@ interface Props {
   value: string;
   onChange: (value: string) => void;
   wide?: boolean;
+  compact?: boolean;
   disabled?: boolean;
   password?: boolean;
 }
@@ -14,6 +15,7 @@ export function TextInput({
   value,
   onChange,
   wide = false,
+  compact = false,
   disabled = false,
   password = false,
 }: Readonly<Props>) {
@@ -27,6 +29,7 @@ export function TextInput({
             value={value}
             onChange={(e) => onChange(e.target.value)}
             disabled={disabled}
+            $compact={compact}
             data-testid="text-input"
           />
         </WideWrapper>
@@ -41,6 +44,7 @@ export function TextInput({
           value={value}
           onChange={(e) => onChange(e.target.value)}
           disabled={disabled}
+          $compact={compact}
           data-testid="text-input"
         />
         <label className="placeholder">{placeholder}</label>
@@ -67,11 +71,11 @@ const InputWrapper = styled.div`
   }
 `;
 
-const Input = styled.input`
+const Input = styled.input<{ $compact?: boolean }>`
   border: ${({ theme }) => `2px solid ${theme.colors.borderDark}`};
   outline: none;
   border-radius: 6px;
-  padding: 12px 8px;
+  padding: ${({ $compact }) => ($compact ? "8px" : "12px 8px")};
   width: 100%;
   box-sizing: border-box;
 
