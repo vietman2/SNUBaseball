@@ -1,3 +1,4 @@
+from django.utils import timezone
 from drf_spectacular.utils import extend_schema
 from rest_framework import status
 from rest_framework.decorators import action
@@ -8,9 +9,10 @@ from rest_framework.viewsets import ModelViewSet
 
 from .serializers import (
     NoticeSimpleSerializer, NoticeDetailSerializer,
-    NoticeCategorySerializer, NoticeWriteSerializer
+    NoticeCategorySerializer, NoticeWriteSerializer,
+    NoticeCommentSerializer
 )
-from .models import Notice, NoticeCategory
+from .models import Notice, NoticeCategory, NoticeComment
 
 class NoticeView(ModelViewSet):
     queryset = Notice.objects.filter(is_deleted=False)
@@ -65,6 +67,7 @@ class NoticeView(ModelViewSet):
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
         instance.is_deleted = True
+        instance.updated_at = timezone.now()
         instance.save()
 
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -75,3 +78,49 @@ class NoticeView(ModelViewSet):
         categories = NoticeCategory.objects.all()
         serializer = NoticeCategorySerializer(categories, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+class NoticeCommentView(ModelViewSet):
+    queryset = NoticeComment.objects.all()
+    serializer_class = NoticeCommentSerializer
+    permission_classes = [IsAuthenticated,]
+    http_method_names = ['post', 'delete', 'put']
+
+    @extend_schema(summary="댓글 생성", tags=["공지 관리"])
+    def create(self, request, *args, **kwargs):
+        serializer = NoticeCommentSerializer(data=request.data)
+        notice = Notice.objects.get(id=kwargs['notice_id'])
+        serializer.context['request'] = request
+        serializer.context['notice'] = notice
+
+        try:
+            serializer.is_valid(raise_exception=True)
+        except ValidationError as e:
+            return Response({'message': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+        serializer.save()
+
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    @extend_schema(summary="댓글 수정", tags=["공지 관리"])
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = NoticeCommentSerializer(instance, data=request.data)
+        serializer.context['request'] = request
+
+        try:
+            serializer.is_valid(raise_exception=True)
+        except ValidationError as e:
+            return Response({'message': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+        serializer.save()
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    @extend_schema(summary="댓글 삭제", tags=["공지 관리"])
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.is_deleted = True
+        instance.updated_at = timezone.now()
+        instance.save()
+
+        return Response(status=status.HTTP_204_NO_CONTENT)

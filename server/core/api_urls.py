@@ -4,7 +4,7 @@ from dj_rest_auth.jwt_auth import get_refresh_view
 from rest_framework.routers import DefaultRouter
 
 from board.information.views import InformationView
-from board.notice.views import NoticeView
+from board.notice.views import NoticeView, NoticeCommentView
 
 from media.image.views import ImageView
 
@@ -16,6 +16,9 @@ from person.user.views import RegisterView, StudentIdCheckView, UserProfileView
 router = DefaultRouter()
 
 router.register('informations', InformationView, basename='informations')
+router.register(
+    'notices/(?P<notice_id>[0-9]+)/comments', NoticeCommentView, basename='notice_comments'
+)
 router.register('notices', NoticeView, basename='notices')
 
 router.register('images', ImageView, basename='images')

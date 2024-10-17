@@ -6,7 +6,7 @@ from rest_framework.test import APITestCase
 from rest_framework import status
 
 from person.user.models import User
-from .models import Notice
+from .models import Notice, NoticeComment
 
 class NoticeAPITestCase(APITestCase):
     fixtures = [
@@ -123,4 +123,59 @@ class NoticeAPITestCase(APITestCase):
         self.client.force_authenticate(user=self.user)
         notice = Notice.objects.first()
         response = self.client.delete(f'{self.url}{notice.id}/')
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+class NoticeCommentAPITestCase(APITestCase):
+    fixtures = [
+        "core/data/initial/chips.json", "core/data/test/notices.json",
+        "core/data/test/people.json", "core/data/test/mock_image.json"
+    ]
+
+    def setUp(self):
+        self.url = '/api/notices/1/comments/'
+        self.user = User.objects.get(username='testuser_1')
+        self.data = {
+            'content': 'Test Comment',
+        }
+
+    def test_unauthorized(self):
+        response = self.client.post(self.url, self.data)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+        response = self.client.put(f'{self.url}1/', self.data)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+        response = self.client.delete(f'{self.url}1/')
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_comment_create(self):
+        self.client.force_authenticate(user=self.user)
+        response = self.client.post(self.url, self.data)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_comment_create_invalid(self):
+        self.client.force_authenticate(user=self.user)
+        data = self.data.copy()
+        data.pop('content')
+        response = self.client.post(self.url, data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_comment_update(self):
+        self.client.force_authenticate(user=self.user)
+        comment = NoticeComment.objects.first()
+        response = self.client.put(f'{self.url}{comment.id}/', self.data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_comment_update_invalid(self):
+        self.client.force_authenticate(user=self.user)
+        comment = NoticeComment.objects.first()
+        data = self.data.copy()
+        data.pop('content')
+        response = self.client.put(f'{self.url}{comment.id}/', data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_comment_delete(self):
+        self.client.force_authenticate(user=self.user)
+        comment = NoticeComment.objects.first()
+        response = self.client.delete(f'{self.url}{comment.id}/')
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)

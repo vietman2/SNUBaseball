@@ -29,11 +29,29 @@ class NoticeAttachmentSerializer(ModelSerializer):
         return filename[:50] + '...' if len(filename) > 50 else filename
 
 class NoticeCommentSerializer(ModelSerializer):
-    author = AuthorSerializer()
+    id = serializers.IntegerField(read_only=True)
+    author = AuthorSerializer(read_only=True)
+    created_at = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
 
     class Meta:
         model = NoticeComment
-        fields = ['content', 'author', 'created_at']
+        fields = ['id', 'content', 'author', 'created_at']
+
+    def create(self, validated_data):
+        user = self.context['request'].user
+        notice = self.context['notice']
+
+        return NoticeComment.objects.create(
+            author=user,
+            notice=notice,
+            **validated_data
+        )
+
+    def update(self, instance, validated_data):
+        instance.content = validated_data.get('content', instance.content)
+        instance.save()
+
+        return instance
 
 class NoticeSimpleSerializer(ModelSerializer):
     category        = NoticeCategorySerializer()
@@ -86,7 +104,8 @@ class NoticeDetailSerializer(ModelSerializer):
         return content_view
 
     def get_comments(self, obj):
-        comments = obj.noticecomment_set.all()
+        all_comments = obj.noticecomment_set.all()
+        comments = all_comments.filter(is_deleted=False)
         serializer = NoticeCommentSerializer(comments, many=True)
 
         return serializer.data

@@ -47,5 +47,29 @@
       "viewed_last_at": "2024-10-16T06:34:35.165Z",
       "notice": 1
     }
+  },
+  {
+    "model": "notice.noticecomment",
+    "pk": 1,
+    "fields": {
+      "created_at": "2024-10-17T16:47:37.446Z",
+      "updated_at": "2024-10-17T17:09:52.602Z",
+      "author": "87ebab07-82bb-40aa-bb33-d5a86d13adb8",
+      "content": "완료했습니다!!!!!",
+      "is_deleted": false,
+      "notice": 2
+    }
+  },
+  {
+    "model": "notice.noticecomment",
+    "pk": 2,
+    "fields": {
+      "created_at": "2024-10-17T17:10:03.517Z",
+      "updated_at": "2024-10-17T17:18:04.906Z",
+      "author": "87ebab07-82bb-40aa-bb33-d5a86d13adb8",
+      "content": "qwer",
+      "is_deleted": true,
+      "notice": 2
+    }
   }
 ]
