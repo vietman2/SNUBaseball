@@ -120,3 +120,67 @@ export const deleteNotice = async (id: number | undefined) => {
     return null;
   }
 };
+
+export const createNoticeComment = async (
+  noticeId: number | undefined,
+  content: string
+) => {
+  if (noticeId === undefined) return null;
+
+  try {
+    const response = await axios.post(`/api/notices/${noticeId}/comments/`, {
+      content,
+    });
+
+    return {
+      status: 201,
+      data: response.data,
+    };
+  } catch (e: any) {
+    return null;
+  }
+};
+
+export const editNoticeComment = async (
+  noticeId: number | undefined,
+  commentId: number | undefined,
+  content: string
+) => {
+  if (noticeId === undefined || commentId === undefined) return null;
+
+  try {
+    const response = await axios.put(
+      `/api/notices/${noticeId}/comments/${commentId}/`,
+      {
+        content,
+      }
+    );
+
+    return {
+      status: 200,
+      data: response.data,
+    };
+  } catch (e: any) {
+    return null;
+  }
+};
+
+export const deleteNoticeComment = async (
+  noticeId: number | undefined,
+  commentId: number | undefined
+) => {
+  if (noticeId === undefined || commentId === undefined) return null;
+
+  try {
+    const response = await axios.delete(
+      `/api/notices/${noticeId}/comments/${commentId}/`
+    );
+
+    return {
+      status: 204,
+      data: response.data,
+    };
+  } catch (e: any) {
+    return null;
+  }
+};

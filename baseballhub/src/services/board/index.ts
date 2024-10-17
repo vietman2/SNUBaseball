@@ -6,6 +6,9 @@ import {
   getNoticeCategories,
   updateNotice,
   deleteNotice,
+  createNoticeComment,
+  editNoticeComment,
+  deleteNoticeComment,
 } from "./notices";
 
 export {
@@ -17,4 +20,7 @@ export {
   getNoticeCategories,
   updateNotice,
   deleteNotice,
+  createNoticeComment,
+  editNoticeComment,
+  deleteNoticeComment,
 };
