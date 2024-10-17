@@ -42,7 +42,9 @@ export function Team() {
     <Container>
       <FilterWrapper>
         {user?.is_admin && (
-          <Chip label="신입부원 추가" onClick={() => {}} />
+          <button onClick={() => {}}>
+            <Chip label="신입부원 추가" />
+          </button>
         )}
       </FilterWrapper>
       <Table>

@@ -36,11 +36,7 @@ jest.mock("@components/Buttons", () => ({
   ),
 }));
 jest.mock("@components/Chips", () => ({
-  Chip: ({ label, onClick }: { label: string; onClick: () => void }) => (
-    <button onClick={onClick} data-testid={label}>
-      {label}
-    </button>
-  ),
+  Chip: ({label}: {label: string}) => <div>{label}</div>,
 }));
 jest.mock("@components/Dividers", () => ({
   Divider: () => <div>Divider</div>,
@@ -73,6 +69,7 @@ jest.mock("@components/Icons", () => ({
   MainLogo: () => <div>MainLogo</div>,
 }));
 jest.mock("@components/Inputs", () => ({
+  ContentInput: () => <div>ContentInput</div>,
   DateInput: ({
     value,
     onChange,

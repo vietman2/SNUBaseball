@@ -6,14 +6,14 @@ jest.unmock("@components/Chips");
 
 describe("<Chip />", () => {
   it("should render small", () => {
-    render(<Chip label="Test" onClick={jest.fn()} size="small" icon="icon" />);
+    render(<Chip label="Test" size="small" icon="icon" />);
 
     fireEvent.click(screen.getByTestId("chip"));
   });
+  
+  it("should render medium", () => {
+    render(<Chip label="Test" icon="icon" />);
 
-  it("should render chip without onClick", () => {
-    render(<Chip label="Test" />);
-
-    expect(screen.getByTestId("chip")).toBeInTheDocument();
+    fireEvent.click(screen.getByTestId("chip"));
   });
 });

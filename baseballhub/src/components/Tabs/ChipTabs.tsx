@@ -12,13 +12,13 @@ export function ChipTabs({ options, selected, onSelect }: Props) {
   return (
     <ChipSelectorWrapper>
       {options.map((option) => (
-        <Chip
-          key={option}
-          label={option}
-          bgColor={option === selected ? "#0F0F70" : "#B5B6B6"}
-          color={option === selected ? "#E8E6F2" : "#0B1623"}
-          onClick={() => onSelect(option)}
-        />
+        <button key={option} onClick={() => onSelect(option)}>
+          <Chip
+            label={option}
+            bgColor={option === selected ? "#0F0F70" : "#B5B6B6"}
+            color={option === selected ? "#E8E6F2" : "#0B1623"}
+          />
+        </button>
       ))}
     </ChipSelectorWrapper>
   );

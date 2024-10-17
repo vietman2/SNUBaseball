@@ -43,12 +43,9 @@ export function GameSummary({ game, onSelectGame }: Readonly<Props>) {
           />
         </Scores>
         <div>
-          <Chip
-            label="기록"
-            bgColor="#B5B6B6"
-            color="#0B1623"
-            onClick={() => onSelectGame(game.id)}
-          />
+          <button onClick={() => onSelectGame(game.id)}>
+            <Chip label="기록" bgColor="#B5B6B6" color="#0B1623" />
+          </button>
         </div>
       </Contents>
     </Container>
@@ -63,7 +60,6 @@ interface ScoreProps {
 }
 
 function Score({ team, runs_scored, our_team, result }: Readonly<ScoreProps>) {
-
   const getBackgroundColor = () => {
     if (result === "승") {
       return colors.win;
