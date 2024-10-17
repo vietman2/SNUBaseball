@@ -32,11 +32,12 @@ class ProfileSerializer(ModelSerializer):
         return obj.member.profile_image.image.url
 
     def get_is_admin(self, obj):
-        ## TODO: 주장, 부주장 로직 처리
         if obj.is_superuser:
             return True
 
-        if obj.member.role == RoleType.MANAGER:
+        admin_roles = [RoleType.MANAGER, RoleType.CAPTAIN, RoleType.VICE_CAPTAIN]
+
+        if obj.member.role in admin_roles:
             return True
 
         return False
