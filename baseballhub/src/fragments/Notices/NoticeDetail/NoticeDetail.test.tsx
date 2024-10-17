@@ -16,6 +16,7 @@ jest.mock("@contexts/auth", () => ({
   ),
   useAuth: jest.fn(),
 }));
+jest.spyOn(window, "alert").mockImplementation(() => null);
 jest.spyOn(window, "open").mockImplementation(() => null);
 
 describe("<NoticeDetail />", () => {
@@ -90,7 +91,7 @@ describe("<NoticeDetail />", () => {
       )
     );
 
-    await waitFor(() => fireEvent.click(screen.getByText("삭제")));
+    await waitFor(() => fireEvent.click(screen.getByTestId("delete-notice")));
   });
 
   it("handles delete reject", async () => {
@@ -101,7 +102,7 @@ describe("<NoticeDetail />", () => {
       )
     );
 
-    await waitFor(() => fireEvent.click(screen.getByText("삭제")));
+    await waitFor(() => fireEvent.click(screen.getByTestId("delete-notice")));
   });
 
   it("handles delete fail", async () => {
@@ -113,6 +114,98 @@ describe("<NoticeDetail />", () => {
       )
     );
 
-    await waitFor(() => fireEvent.click(screen.getByText("삭제")));
+    await waitFor(() => fireEvent.click(screen.getByTestId("delete-notice")));
+  });
+
+  it("handles edit comment correctly", async () => {
+    jest.spyOn(NoticesAPI, "editNoticeComment").mockResolvedValue({
+      status: 200,
+      data: {},
+    });
+    await waitFor(() =>
+      renderWithProviders(
+        <NoticeDetail noticeId={1} goBack={jest.fn()} handleEdit={jest.fn()} />
+      )
+    );
+
+    await waitFor(() => fireEvent.click(screen.getByTestId("edit-comment-1")));
+    await waitFor(() => fireEvent.click(screen.getByTestId("cancel-edit")));
+    await waitFor(() => fireEvent.click(screen.getByTestId("edit-comment-1")));
+    await waitFor(() => fireEvent.click(screen.getByTestId("confirm-edit")));
+  });
+
+  it("handles edit comment fail", async () => {
+    jest.spyOn(NoticesAPI, "editNoticeComment").mockResolvedValue(null);
+    await waitFor(() =>
+      renderWithProviders(
+        <NoticeDetail noticeId={1} goBack={jest.fn()} handleEdit={jest.fn()} />
+      )
+    );
+
+    await waitFor(() => fireEvent.click(screen.getByTestId("edit-comment-1")));
+    await waitFor(() => fireEvent.click(screen.getByTestId("confirm-edit")));
+  });
+
+  it("handles delete comment correctly", async () => {
+    jest.spyOn(window, "confirm").mockImplementation(() => true);
+    jest.spyOn(NoticesAPI, "deleteNoticeComment").mockResolvedValue({
+      status: 204,
+      data: {},
+    });
+    await waitFor(() =>
+      renderWithProviders(
+        <NoticeDetail noticeId={1} goBack={jest.fn()} handleEdit={jest.fn()} />
+      )
+    );
+
+    await waitFor(() => fireEvent.click(screen.getByTestId("delete-comment-1")));
+  });
+
+  it("handles delete comment reject", async () => {
+    jest.spyOn(window, "confirm").mockImplementation(() => false);
+    await waitFor(() =>
+      renderWithProviders(
+        <NoticeDetail noticeId={1} goBack={jest.fn()} handleEdit={jest.fn()} />
+      )
+    );
+
+    await waitFor(() => fireEvent.click(screen.getByTestId("delete-comment-1")));
+  });
+
+  it("handles delete comment fail", async () => {
+    jest.spyOn(window, "confirm").mockImplementation(() => true);
+    jest.spyOn(NoticesAPI, "deleteNoticeComment").mockResolvedValue(null);
+    await waitFor(() =>
+      renderWithProviders(
+        <NoticeDetail noticeId={1} goBack={jest.fn()} handleEdit={jest.fn()} />
+      )
+    );
+
+    await waitFor(() => fireEvent.click(screen.getByTestId("delete-comment-1")));
+  });
+
+  it("handles create comment correctly", async () => {
+    jest.spyOn(NoticesAPI, "createNoticeComment").mockResolvedValue({
+      status: 201,
+      data: {},
+    });
+    await waitFor(() =>
+      renderWithProviders(
+        <NoticeDetail noticeId={1} goBack={jest.fn()} handleEdit={jest.fn()} />
+      )
+    );
+
+    await waitFor(() => fireEvent.click(screen.getByTestId("new-comment")));
+  });
+
+  it("handles create comment fail", async () => {
+    jest.spyOn(NoticesAPI, "createNoticeComment").mockResolvedValue(null);
+    await waitFor(() =>
+      renderWithProviders(
+        <NoticeDetail noticeId={1} goBack={jest.fn()} handleEdit={jest.fn()} />
+      )
+    );
+
+    await waitFor(() => fireEvent.click(screen.getByTestId("new-comment")));
   });
 });

@@ -1,4 +1,4 @@
-import { sampleAuthor } from "@data/user";
+import { sampleAdmin, sampleAuthor } from "@data/user";
 import {
   NoticeCategoryType,
   NoticeDetailType,
@@ -47,7 +47,20 @@ export const sampleNoticeDetail: NoticeDetailType = {
   author: sampleAuthor,
   num_views: 100,
   created_at: "2024-04-01",
-  comments: ["확인했습니다.", "감사합니다."],
+  comments: [
+    {
+      id: 1,
+      author: sampleAuthor,
+      content: "댓글입니다.",
+      created_at: "2024-04-02",
+    },
+    {
+      id: 2,
+      author: sampleAdmin,
+      content: "관리자 댓글입니다.",
+      created_at: "2024-04-03",
+    },
+  ],
   attachments: [],
 };
 
@@ -59,7 +72,14 @@ export const sampleNoticeDetailWithAttachment: NoticeDetailType = {
   author: sampleAuthor,
   num_views: 100,
   created_at: "2024-04-01",
-  comments: ["확인했습니다.", "감사합니다."],
+  comments: [
+    {
+      id: 1,
+      author: sampleAuthor,
+      content: "댓글입니다.",
+      created_at: "2024-04-02",
+    },
+  ],
   attachments: [
     {
       file: "유계결석 인정 요청서.hwp",

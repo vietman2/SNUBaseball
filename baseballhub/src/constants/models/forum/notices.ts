@@ -22,6 +22,13 @@ type NoticeAttachmentType = {
   created_at: string;
 }
 
+type NoticeCommentType = {
+  id: number;
+  content: string;
+  author: AuthorType;
+  created_at: string;
+}
+
 export type NoticeDetailType = {
   id: number;
   category: NoticeCategoryType;
@@ -30,6 +37,6 @@ export type NoticeDetailType = {
   author: AuthorType;
   num_views: number;
   created_at: string;
-  comments: string[]; // TODO: Change to CommentType[]
+  comments: NoticeCommentType[]; // TODO: Change to CommentType[]
   attachments: NoticeAttachmentType[];
 };
