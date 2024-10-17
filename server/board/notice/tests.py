@@ -47,6 +47,12 @@ class NoticeAPITestCase(APITestCase):
         response = self.client.post(self.url, self.data)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
+        response = self.client.put(f'{self.url}1/', self.data)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+        response = self.client.delete(f'{self.url}1/')
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
     def test_notice_list(self):
         self.client.force_authenticate(user=self.user)
         response = self.client.get(self.url)
@@ -89,3 +95,32 @@ class NoticeAPITestCase(APITestCase):
         data['category_label'] = 'Invalid'
         response = self.client.post(self.url, data)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    @patch('django.core.files.storage.default_storage.save')
+    def test_notice_update(self, mock_save):
+        self.client.force_authenticate(user=self.user)
+        ## no attachment
+        notice = Notice.objects.first()
+        response = self.client.put(f'{self.url}{notice.id}/', self.data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        ## with attachment
+        mock_save.return_value = 'test1.png'
+        data = self.data.copy()
+        data['attachments'] = [self.attachment]
+        response = self.client.put(f'{self.url}{notice.id}/', data, format='multipart')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_notice_update_invalid_category(self):
+        self.client.force_authenticate(user=self.user)
+        notice = Notice.objects.first()
+        data = self.data.copy()
+        data['category_label'] = 'Invalid'
+        response = self.client.put(f'{self.url}{notice.id}/', data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_notice_delete(self):
+        self.client.force_authenticate(user=self.user)
+        notice = Notice.objects.first()
+        response = self.client.delete(f'{self.url}{notice.id}/')
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)

@@ -8,19 +8,19 @@ from rest_framework.viewsets import ModelViewSet
 
 from .serializers import (
     NoticeSimpleSerializer, NoticeDetailSerializer,
-    NoticeCategorySerializer, NoticeCreateSerializer
+    NoticeCategorySerializer, NoticeWriteSerializer
 )
 from .models import Notice, NoticeCategory
 
 class NoticeView(ModelViewSet):
-    queryset = Notice.objects.all()
+    queryset = Notice.objects.filter(is_deleted=False)
     serializer_class = NoticeSimpleSerializer
     permission_classes = [IsAuthenticated,]
-    http_method_names = ['get', 'post']
+    http_method_names = ['get', 'post', 'delete', 'put']
 
     @extend_schema(summary="공지 생성", tags=["공지 관리"])
     def create(self, request, *args, **kwargs):
-        serializer = NoticeCreateSerializer(data=request.data)
+        serializer = NoticeWriteSerializer(data=request.data)
         serializer.context['request'] = request
 
         try:
@@ -45,6 +45,29 @@ class NoticeView(ModelViewSet):
         serializer.content_viewed(request.user)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+    @extend_schema(summary="공지 수정", tags=["공지 관리"])
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = NoticeWriteSerializer(instance, data=request.data)
+        serializer.context['request'] = request
+
+        try:
+            serializer.is_valid(raise_exception=True)
+        except ValidationError as e:
+            return Response({'message': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+        serializer.save()
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    @extend_schema(summary="공지 삭제", tags=["공지 관리"])
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.is_deleted = True
+        instance.save()
+
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
     @extend_schema(summary="공지 분류 조회", tags=["공지 관리"])
     @action(detail=False, methods=['get'])

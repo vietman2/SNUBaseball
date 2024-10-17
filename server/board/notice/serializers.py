@@ -97,7 +97,7 @@ class NoticeDetailSerializer(ModelSerializer):
 
         return serializer.data
 
-class NoticeCreateSerializer(ModelSerializer):
+class NoticeWriteSerializer(ModelSerializer):
     category_label = serializers.CharField(write_only=True)
 
     class Meta:
@@ -126,3 +126,19 @@ class NoticeCreateSerializer(ModelSerializer):
                 NoticeAttachment.objects.create(notice=notice, file=uploaded_file)
 
             return notice
+
+    def update(self, instance, validated_data):
+        with transaction.atomic():
+            instance.title = validated_data.get('title', instance.title)
+            instance.content = validated_data.get('content', instance.content)
+            instance.category = validated_data.get('category_label', instance.category)
+
+            instance.save()
+
+            for attachment in self.context['request'].FILES.getlist('attachments'):
+                path = f"notices/{instance.id}/{attachment.name}"
+                uploaded_file = default_storage.save(path, attachment)
+
+                NoticeAttachment.objects.create(notice=instance, file=uploaded_file)
+
+            return instance
