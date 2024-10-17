@@ -4,11 +4,16 @@ import styled from "styled-components";
 import "react-quill/dist/quill.snow.css";
 
 interface Props {
-    setContent: (content: string) => void;
+  content: string;
+  setContent: (content: string) => void;
   uploadImage: (file: File) => Promise<{ status: number; data: any } | null>;
 }
 
-export function ContentInput({ setContent, uploadImage }: Readonly<Props>) {
+export function ContentInput({
+  content,
+  setContent,
+  uploadImage,
+}: Readonly<Props>) {
   const quillRef = useRef<ReactQuill>(null);
 
   const handleUpload = () => {
@@ -35,7 +40,6 @@ export function ContentInput({ setContent, uploadImage }: Readonly<Props>) {
           // Insert the image into the editor
           const quill = quillRef.current.getEditor();
           const range = quill.getSelection();
-
 
           if (range) {
             quill.insertEmbed(range.index, "image", imageUrl);
@@ -66,6 +70,7 @@ export function ContentInput({ setContent, uploadImage }: Readonly<Props>) {
         theme="snow"
         modules={modules}
         ref={quillRef}
+        value={content}
         onChange={setContent}
         style={{ height: "90%", width: "100%" }}
       />
@@ -78,4 +83,6 @@ const Container = styled.div`
   flex: 1;
   flex-direction: column;
   padding: 0 8px;
+
+  color: ${({ theme }) => theme.colors.foreground700};
 `;

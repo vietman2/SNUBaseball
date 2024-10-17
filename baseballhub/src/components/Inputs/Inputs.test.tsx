@@ -53,7 +53,7 @@ describe("<ContentInput />", () => {
         }),
       },
     }));
-    renderWithProviders(<ContentInput setContent={jest.fn()} uploadImage={mockUploadImage} />);
+    renderWithProviders(<ContentInput content="" setContent={jest.fn()} uploadImage={mockUploadImage} />);
 
     const originalCreateElement = document.createElement;
     const mockInput = document.createElement("input");
@@ -89,7 +89,11 @@ describe("<ContentInput />", () => {
       current: {},
     });
     renderWithProviders(
-      <ContentInput setContent={jest.fn()} uploadImage={mockUploadImage} />
+      <ContentInput
+        content=""
+        setContent={jest.fn()}
+        uploadImage={mockUploadImage}
+      />
     );
 
     const originalCreateElement = document.createElement;
