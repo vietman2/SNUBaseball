@@ -1,4 +1,4 @@
-import { NoticeCreate } from "./NoticeCreate/NoticeCreate";
+import { NoticeWrite } from "./NoticeWrite/NoticeWrite";
 import { NoticeDetail } from "./NoticeDetail/NoticeDetail";
 import { NoticeSimple } from "./NoticeSimple/NoticeSimple";
 import {
@@ -7,7 +7,7 @@ import {
 } from "./NoticeSimple/NoticeSimpleWide";
 
 export {
-  NoticeCreate,
+  NoticeWrite,
   NoticeDetail,
   NoticeSimple,
   NoticeSimpleWide,

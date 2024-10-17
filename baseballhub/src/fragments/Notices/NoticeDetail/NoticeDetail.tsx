@@ -7,21 +7,39 @@ import { Divider } from "@components/Dividers";
 import { ErrorComponent, Loading } from "@components/Fallbacks";
 import { AppIcon } from "@components/Icons";
 import { Subtitle } from "@components/Texts";
+import { useAuth } from "@contexts/auth";
 import { NoticeDetailType } from "@models/forum";
-import { getNoticeDetails } from "@services/board";
+import { getNoticeDetails, deleteNotice } from "@services/board";
 
 interface Props {
   noticeId: number | null;
   goBack: () => void;
+  handleEdit: () => void;
 }
 
-export function NoticeDetail({ noticeId, goBack }: Readonly<Props>) {
+export function NoticeDetail({
+  noticeId,
+  goBack,
+  handleEdit,
+}: Readonly<Props>) {
   const [notice, setNotice] = useState<NoticeDetailType>();
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
 
+  const { user } = useAuth();
+
   const handleDownload = (attachment: string) => {
     window.open(attachment);
+  };
+
+  const handleDelete = async () => {
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      const response = await deleteNotice(notice?.id);
+
+      if (response) {
+        goBack();
+      }
+    }
   };
 
   useEffect(() => {
@@ -65,6 +83,16 @@ export function NoticeDetail({ noticeId, goBack }: Readonly<Props>) {
             color={notice.category.color}
             bgColor={notice.category.background_color}
           />
+          {user?.uuid === notice.author.uuid && (
+            <div>
+              <button onClick={handleEdit}>
+                <Chip label="수정" color="#FFFFFF" bgColor="#0F0F70" />
+              </button>
+              <button onClick={handleDelete}>
+                <Chip label="삭제" color="#FFFFFF" bgColor="#F44336" />
+              </button>
+            </div>
+          )}
         </ChipWrapper>
         <Subtitle size="large">{notice.title}</Subtitle>
         <Metadata>
@@ -142,6 +170,8 @@ const Attachment = styled.div`
   align-items: center;
   justify-content: space-between;
 
+  color: ${({ theme }) => theme.colors.foreground700};
+
   &:hover {
     cursor: pointer;
   }
@@ -149,7 +179,15 @@ const Attachment = styled.div`
 
 const ChipWrapper = styled.div`
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   padding: 8px 12px;
+
+  > div {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+  }
 `;
 
 const Metadata = styled.div`
