@@ -3,6 +3,7 @@ import { ReactComponent as AdminIcon } from "./admin.svg";
 import { ReactComponent as ArchiveIcon } from "./archive.svg";
 import { ReactComponent as ArrowDownIcon } from "./arrow-down.svg";
 import { ReactComponent as ArrowUpIcon } from "./arrow-up.svg";
+import { ReactComponent as AttachmentIcon } from "./attachment.svg";
 import { ReactComponent as BaseballIcon } from "./baseball.svg";
 import { ReactComponent as BaseballIcon2 } from "./baseball2.svg";
 import { ReactComponent as CalendarIcon } from "./calendar.svg";
@@ -26,6 +27,7 @@ import { ReactComponent as HomeIcon } from "./home.svg";
 import { ReactComponent as LightBulbIcon } from "./lightbulb.svg";
 import { ReactComponent as LikeIcon } from "./like.svg";
 import { ReactComponent as LockIcon } from "./lock.svg";
+import { ReactComponent as LogoutIcon } from "./logout.svg";
 import { ReactComponent as MenuIcon } from "./menu.svg";
 import { ReactComponent as MoneyIcon } from "./money.svg";
 import { ReactComponent as MoonIcon } from "./moon.svg";
@@ -52,6 +54,7 @@ const iconMap: Record<
   archive: ArchiveIcon,
   "arrow-down": ArrowDownIcon,
   "arrow-up": ArrowUpIcon,
+  attachment: AttachmentIcon,
   baseball: BaseballIcon,
   baseball2: BaseballIcon2,
   calendar: CalendarIcon,
@@ -75,6 +78,7 @@ const iconMap: Record<
   lightbulb: LightBulbIcon,
   like: LikeIcon,
   lock: LockIcon,
+  logout: LogoutIcon,
   menu: MenuIcon,
   money: MoneyIcon,
   moon: MoonIcon,
