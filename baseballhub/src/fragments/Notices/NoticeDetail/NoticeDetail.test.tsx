@@ -26,7 +26,7 @@ describe("<NoticeDetail />", () => {
         <NoticeDetail noticeId={1} goBack={jest.fn()} handleEdit={jest.fn()} />
       )
     );
-  }
+  };
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -128,21 +128,27 @@ describe("<NoticeDetail />", () => {
     });
     await render();
 
-    await waitFor(() => fireEvent.click(screen.getByTestId("delete-comment-1")));
+    await waitFor(() =>
+      fireEvent.click(screen.getByTestId("delete-comment-1"))
+    );
   });
 
   it("handles delete comment reject", async () => {
     jest.spyOn(window, "confirm").mockImplementation(() => false);
     await render();
 
-    await waitFor(() => fireEvent.click(screen.getByTestId("delete-comment-1")));
+    await waitFor(() =>
+      fireEvent.click(screen.getByTestId("delete-comment-1"))
+    );
   });
 
   it("handles delete comment fail", async () => {
     jest.spyOn(NoticesAPI, "deleteNoticeComment").mockResolvedValue(null);
     await render();
 
-    await waitFor(() => fireEvent.click(screen.getByTestId("delete-comment-1")));
+    await waitFor(() =>
+      fireEvent.click(screen.getByTestId("delete-comment-1"))
+    );
   });
 
   it("handles create comment correctly", async () => {
