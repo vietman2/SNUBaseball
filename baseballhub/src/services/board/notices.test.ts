@@ -166,7 +166,7 @@ describe("createNoticeComment", () => {
 
 describe("editNoticeComment", () => {
   it("should return null if the comment ID is invalid", async () => {
-    const response = await editNoticeComment(1, undefined, "content");
+    const response = await editNoticeComment(1, null, "content");
     expect(response).toBeNull();
   });
 

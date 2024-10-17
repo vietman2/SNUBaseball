@@ -125,7 +125,7 @@ export const createNoticeComment = async (
   noticeId: number | undefined,
   content: string
 ) => {
-  if (noticeId === undefined) return null;
+  if (noticeId === undefined || content === "") return null;
 
   try {
     const response = await axios.post(`/api/notices/${noticeId}/comments/`, {
@@ -143,10 +143,11 @@ export const createNoticeComment = async (
 
 export const editNoticeComment = async (
   noticeId: number | undefined,
-  commentId: number | undefined,
+  commentId: number | null,
   content: string
 ) => {
-  if (noticeId === undefined || commentId === undefined) return null;
+  if (noticeId === undefined || commentId === null || content === "")
+    return null;
 
   try {
     const response = await axios.put(
