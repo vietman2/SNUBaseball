@@ -32,6 +32,10 @@ describe("<Notices />", () => {
       setToken: jest.fn(),
       login: jest.fn(),
     });
+    jest.spyOn(NoticesAPI, "getNotices").mockResolvedValue({
+      status: 200,
+      data: sampleNotices,
+    });
   });
 
   it("handles bad response correctly", async () => {
@@ -46,10 +50,6 @@ describe("<Notices />", () => {
   });
 
   it("renders wide mode correctly and handles modals", async () => {
-    jest.spyOn(NoticesAPI, "getNotices").mockResolvedValue({
-      status: 200,
-      data: sampleNotices,
-    });
     renderWithProviders(<Notices />);
 
     await waitFor(() => resizeWindow(800, 800));
@@ -64,10 +64,6 @@ describe("<Notices />", () => {
       setToken: jest.fn(),
       login: jest.fn(),
     });
-    jest.spyOn(NoticesAPI, "getNotices").mockResolvedValue({
-      status: 200,
-      data: sampleNotices,
-    });
     renderWithProviders(<Notices />);
 
     await waitFor(() => resizeWindow(800, 800));
@@ -80,10 +76,6 @@ describe("<Notices />", () => {
   });
 
   it("renders mobile mode correctly", async () => {
-    jest.spyOn(NoticesAPI, "getNotices").mockResolvedValue({
-      status: 200,
-      data: sampleNotices,
-    });
     renderWithProviders(<Notices />);
 
     await waitFor(() => resizeWindow(600, 600));
@@ -97,10 +89,6 @@ describe("<Notices />", () => {
       logout: jest.fn(),
       setToken: jest.fn(),
       login: jest.fn(),
-    });
-    jest.spyOn(NoticesAPI, "getNotices").mockResolvedValue({
-      status: 200,
-      data: sampleNotices,
     });
     renderWithProviders(<Notices />);
 

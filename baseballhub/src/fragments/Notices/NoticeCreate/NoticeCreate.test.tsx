@@ -105,9 +105,6 @@ describe("<NoticeCreate />", () => {
     );
     fireEvent.click(screen.getByText("파일 첨부"));
 
-    const file = new File(["dummy content"], "example.pdf", {
-      type: "application/pdf",
-    });
     await waitFor(() =>
       fireEvent.change(screen.getByTestId("file-upload"), {
         target: { files: null },
