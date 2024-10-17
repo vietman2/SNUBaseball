@@ -5,7 +5,9 @@ import { Divider } from "@components/Dividers";
 import { ErrorComponent, Loading } from "@components/Fallbacks";
 import { MobileModal, SimpleModal } from "@components/Modals";
 import { Subtitle } from "@components/Texts";
+import { useAuth } from "@contexts/auth";
 import {
+  NoticeCreate,
   NoticeDetail,
   NoticeSimple,
   NoticeSimpleWide,
@@ -18,11 +20,14 @@ import { getNotices } from "@services/board";
 export function Notices() {
   const [notices, setNotices] = useState<NoticeSimpleType[]>([]);
   const [selectedNoticeId, setSelectedNoticeId] = useState<number | null>(null);
+
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [writeMode, setWriteMode] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
   const [refreshCount, setRefreshCount] = useState<number>(0);
 
+  const { user } = useAuth();
   const { width } = useWindowSize();
 
   const openModal = () => {
@@ -30,8 +35,10 @@ export function Notices() {
   };
 
   const closeModal = () => {
+    setWriteMode(false);
     setModalOpen(false);
     setSelectedNoticeId(null);
+    handleRefresh();
   };
 
   const handleRefresh = () => {
@@ -39,7 +46,13 @@ export function Notices() {
   };
 
   const handleNoticeClick = (notice: NoticeSimpleType) => {
+    setWriteMode(false);
     setSelectedNoticeId(notice.id);
+    openModal();
+  };
+
+  const handleWriteClick = () => {
+    setWriteMode(true);
     openModal();
   };
 
@@ -79,7 +92,12 @@ export function Notices() {
 
   return (
     <Container>
-      <Subtitle size="large">공지사항</Subtitle>
+      <Header>
+        <Subtitle size="large">공지사항</Subtitle>
+        {user?.is_admin && (
+          <Button onClick={handleWriteClick}>새 공지 등록</Button>
+        )}
+      </Header>
       {width > 768 ? (
         <>
           <NoticeSimpleWideHeader />
@@ -93,7 +111,11 @@ export function Notices() {
             </button>
           ))}
           <SimpleModal isOpen={modalOpen} onClose={closeModal}>
-            <NoticeDetail noticeId={selectedNoticeId} goBack={closeModal} />
+            {writeMode ? (
+              <NoticeCreate goBack={closeModal} />
+            ) : (
+              <NoticeDetail noticeId={selectedNoticeId} goBack={closeModal} />
+            )}
           </SimpleModal>
         </>
       ) : (
@@ -109,7 +131,11 @@ export function Notices() {
             </button>
           ))}
           <MobileModal isOpen={modalOpen} onClose={closeModal}>
-            <NoticeDetail noticeId={selectedNoticeId} goBack={closeModal} />
+            {writeMode ? (
+              <NoticeCreate goBack={closeModal} />
+            ) : (
+              <NoticeDetail noticeId={selectedNoticeId} goBack={closeModal} />
+            )}
           </MobileModal>
         </>
       )}
@@ -126,4 +152,29 @@ const Container = styled.div`
 
   border-radius: 16px;
   background-color: ${({ theme }) => theme.colors.background300};
+`;
+
+const Header = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  gap: 16px;
+
+  color: ${({ theme }) => theme.colors.foreground500};
+`;
+
+const Button = styled.button`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 4px 12px;
+  gap: 8px;
+
+  color: ${({ theme }) => theme.colors.background100};
+  font-weight: 500;
+
+  border-radius: 8px;
+  background-color: ${({ theme }) => theme.colors.primary};
 `;
