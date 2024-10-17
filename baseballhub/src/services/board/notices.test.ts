@@ -3,6 +3,11 @@ import axios from "axios";
 import { createNotice, getNoticeDetails, getNotices, getNoticeCategories } from "./notices";
 
 describe("createNotice", () => {
+  it("should return null if category_label is empty", async () => {
+    const response = await createNotice("title", "content", undefined, []);
+    expect(response).toBeNull();
+  });
+
   it("should create a notice", async () => {
     jest.spyOn(axios, "post").mockResolvedValue({ data: {} });
 

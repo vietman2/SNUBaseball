@@ -44,9 +44,11 @@ export const getNoticeCategories = async () => {
 export const createNotice = async (
   title: string,
   content: string,
-  category_label: string,
+  category_label: string | undefined,
   attachments: File[]
 ) => {
+  if (!category_label) return null;
+
   const formData = new FormData();
   formData.append("title", title);
   formData.append("content", content);
