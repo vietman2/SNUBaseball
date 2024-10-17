@@ -106,7 +106,9 @@ export const updateNotice = async (
   }
 };
 
-export const deleteNotice = async (id: number) => {
+export const deleteNotice = async (id: number | undefined) => {
+  if (id === undefined) return null;
+
   try {
     const response = await axios.delete(`/api/notices/${id}/`);
 

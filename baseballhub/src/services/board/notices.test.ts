@@ -100,6 +100,11 @@ describe("updateNotice", () => {
 });
 
 describe("deleteNotice", () => {
+  it("should return null if the notice ID is invalid", async () => {
+    const response = await deleteNotice(undefined);
+    expect(response).toBeNull();
+  });
+
   it("should delete a notice", async () => {
     jest.spyOn(axios, "delete").mockResolvedValue({ data: {} });
 
