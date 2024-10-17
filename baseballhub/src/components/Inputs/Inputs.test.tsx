@@ -41,20 +41,7 @@ jest.mock("react-quill/dist/quill.snow.css", () => {
 jest.unmock("@components/Inputs");
 
 describe("<ContentInput />", () => {
-  it("should render without crashing and handles image upload", async () => {
-    const mockUploadImage = jest.fn();
-    mockUploadImage.mockResolvedValue({ status: 201, data: { image: "" } });
-
-    jest.spyOn(React, "useRef").mockImplementation(() => ({
-      current: {
-        getEditor: jest.fn().mockReturnValue({
-          getSelection: jest.fn().mockReturnValue({ index: 0 }),
-          insertEmbed: jest.fn(),
-        }),
-      },
-    }));
-    renderWithProviders(<ContentInput content="" setContent={jest.fn()} uploadImage={mockUploadImage} />);
-
+  const uploadImage = async () => {
     const originalCreateElement = document.createElement;
     const mockInput = document.createElement("input");
     mockInput.setAttribute("type", "file");
@@ -79,8 +66,31 @@ describe("<ContentInput />", () => {
 
     // Restore the original document.createElement
     document.createElement = originalCreateElement;
+  };
+
+  it("should render without crashing and handles image upload", async () => {
+    const mockUploadImage = jest.fn();
+    mockUploadImage.mockResolvedValue({ status: 201, data: { image: "" } });
+
+    jest.spyOn(React, "useRef").mockImplementation(() => ({
+      current: {
+        getEditor: jest.fn().mockReturnValue({
+          getSelection: jest.fn().mockReturnValue({ index: 0 }),
+          insertEmbed: jest.fn(),
+        }),
+      },
+    }));
+    renderWithProviders(
+      <ContentInput
+        content=""
+        setContent={jest.fn()}
+        uploadImage={mockUploadImage}
+      />
+    );
+
+    await uploadImage();
   });
-  
+
   it("should handles image fail", async () => {
     const mockUploadImage = jest.fn();
     mockUploadImage.mockResolvedValue(null);
@@ -96,30 +106,7 @@ describe("<ContentInput />", () => {
       />
     );
 
-    const originalCreateElement = document.createElement;
-    const mockInput = document.createElement("input");
-    mockInput.setAttribute("type", "file");
-    mockInput.setAttribute("accept", "image/*");
-
-    jest.spyOn(document, "createElement").mockImplementation((tagName) => {
-      if (tagName === "input") {
-        return mockInput;
-      }
-      return originalCreateElement(tagName);
-    });
-
-    await waitFor(() => fireEvent.click(screen.getByText("Insert Image")));
-
-    // Mock the file input and simulate a file being selected
-    const file = new File(["dummy content"], "example.png", {
-      type: "image/png",
-    });
-    await waitFor(() =>
-      fireEvent.change(mockInput, { target: { files: [file] } })
-    );
-
-    // Restore the original document.createElement
-    document.createElement = originalCreateElement;
+    await uploadImage();
   });
 });
 
