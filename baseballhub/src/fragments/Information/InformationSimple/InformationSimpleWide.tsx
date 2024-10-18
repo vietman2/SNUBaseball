@@ -26,6 +26,9 @@ export function InformationSimpleWide({ information }: Readonly<Props>) {
       <div>
         {information.pin && <AppIcon icon="pin" size={16} color="white" />}
         {information.title}
+        {information.has_attachment && (
+          <AppIcon icon="attachment" size={16} color="gray" />
+        )}
       </div>
       <div>{information.author}</div>
       <div>{information.created_at}</div>
