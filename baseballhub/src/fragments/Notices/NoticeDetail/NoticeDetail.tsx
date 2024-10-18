@@ -43,7 +43,7 @@ export function NoticeDetail({
 
   const { user } = useAuth();
 
-  const canDelete = notice?.author.uuid === user?.uuid || user?.is_admin;
+  const canDelete = user?.is_admin || notice?.author.uuid === user?.uuid;
 
   const handleRefresh = () => {
     setRefreshCount(refreshCount + 1);

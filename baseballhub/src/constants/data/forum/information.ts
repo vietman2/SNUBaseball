@@ -9,6 +9,7 @@ export const sampleInformations: InformationSimpleType[] = [
     created_at: "2024-09-01",
     num_views: 100,
     pin: true,
+    has_attachment: false,
   },
   {
     id: 2,
@@ -17,6 +18,7 @@ export const sampleInformations: InformationSimpleType[] = [
     created_at: "2024-09-02",
     num_views: 200,
     pin: true,
+    has_attachment: true,
   },
   {
     id: 3,
@@ -25,6 +27,7 @@ export const sampleInformations: InformationSimpleType[] = [
     created_at: "2024-09-03",
     num_views: 7,
     pin: false,
+    has_attachment: false,
   },
 ];
 
@@ -36,4 +39,11 @@ export const sampleInformationDetail: InformationDetailType = {
   created_at: "2024-09-01",
   num_views: 100,
   pin: true,
+  attachments: [
+    {
+      file: "부실 청소 가이드.hwp",
+      name: "부실 청소 가이드",
+      created_at: "2024-09-01",
+    }
+  ]
 };

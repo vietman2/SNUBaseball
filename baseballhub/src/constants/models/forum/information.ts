@@ -7,6 +7,13 @@ export type InformationSimpleType = {
   created_at: string;
   num_views: number;
   pin: boolean;
+  has_attachment: boolean;
+};
+
+type InformationAttachmentType = {
+  file: string;
+  name: string;
+  created_at: string;
 };
 
 export type InformationDetailType = {
@@ -17,4 +24,5 @@ export type InformationDetailType = {
   created_at: string;
   num_views: number;
   pin: boolean;
+  attachments: InformationAttachmentType[];
 };
