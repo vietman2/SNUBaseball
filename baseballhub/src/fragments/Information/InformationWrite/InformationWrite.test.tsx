@@ -31,7 +31,11 @@ describe("<InformationWrite />", () => {
 
     await waitFor(() =>
       renderWithProviders(
-        <InformationWrite informationId={1} editMode={true} goBack={jest.fn()} />
+        <InformationWrite
+          informationId={1}
+          editMode={true}
+          goBack={jest.fn()}
+        />
       )
     );
 
@@ -45,7 +49,11 @@ describe("<InformationWrite />", () => {
 
     await waitFor(() =>
       renderWithProviders(
-        <InformationWrite informationId={null} editMode={true} goBack={jest.fn()} />
+        <InformationWrite
+          informationId={null}
+          editMode={true}
+          goBack={jest.fn()}
+        />
       )
     );
   });
@@ -57,7 +65,11 @@ describe("<InformationWrite />", () => {
 
     await waitFor(() =>
       renderWithProviders(
-        <InformationWrite informationId={1} editMode={false} goBack={jest.fn()} />
+        <InformationWrite
+          informationId={1}
+          editMode={false}
+          goBack={jest.fn()}
+        />
       )
     );
 
@@ -69,7 +81,11 @@ describe("<InformationWrite />", () => {
 
     await waitFor(() =>
       renderWithProviders(
-        <InformationWrite informationId={1} editMode={false} goBack={jest.fn()} />
+        <InformationWrite
+          informationId={1}
+          editMode={false}
+          goBack={jest.fn()}
+        />
       )
     );
 
@@ -170,7 +186,7 @@ describe("<InformationWrite />", () => {
     await waitFor(() => expect(screen.getByText("등록")).toBeInTheDocument());
 
     fireEvent.click(screen.getByText("등록"));
-  })
+  });
 
   it("handles edit mode fail", async () => {
     jest.spyOn(InformationAPI, "updateInformation").mockResolvedValue(null);

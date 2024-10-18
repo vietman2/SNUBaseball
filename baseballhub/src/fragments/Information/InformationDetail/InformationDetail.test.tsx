@@ -27,7 +27,7 @@ describe("<InformationDetail />", () => {
         />
       )
     );
-  }
+  };
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -88,20 +88,26 @@ describe("<InformationDetail />", () => {
     });
     await render();
 
-    await waitFor(() => fireEvent.click(screen.getByTestId("delete-information")));
+    await waitFor(() =>
+      fireEvent.click(screen.getByTestId("delete-information"))
+    );
   });
 
   it("handles delete reject", async () => {
     jest.spyOn(window, "confirm").mockImplementation(() => false);
     await render();
 
-    await waitFor(() => fireEvent.click(screen.getByTestId("delete-information")));
+    await waitFor(() =>
+      fireEvent.click(screen.getByTestId("delete-information"))
+    );
   });
 
   it("handles delete fail", async () => {
     jest.spyOn(InformationAPI, "deleteInformation").mockResolvedValue(null);
     await render();
 
-    await waitFor(() => fireEvent.click(screen.getByTestId("delete-information")));
+    await waitFor(() =>
+      fireEvent.click(screen.getByTestId("delete-information"))
+    );
   });
 });
