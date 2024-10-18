@@ -43,6 +43,8 @@ export function NoticeDetail({
 
   const { user } = useAuth();
 
+  const canDelete = notice?.author.uuid === user?.uuid || user?.is_admin;
+
   const handleRefresh = () => {
     setRefreshCount(refreshCount + 1);
   };
@@ -157,16 +159,18 @@ export function NoticeDetail({
             color={notice.category.color}
             bgColor={notice.category.background_color}
           />
-          {user?.uuid === notice.author.uuid && (
-            <div>
+          <div>
+            {user?.uuid === notice.author.uuid && (
               <button onClick={handleEdit}>
                 <Chip label="수정" color="#FFFFFF" bgColor="#0F0F70" />
               </button>
+            )}
+            {canDelete && (
               <button onClick={handleDelete} data-testid={"delete-notice"}>
                 <Chip label="삭제" color="#FFFFFF" bgColor="#F44336" />
               </button>
-            </div>
-          )}
+            )}
+          </div>
         </ChipWrapper>
         <Subtitle size="large">{notice.title}</Subtitle>
         <Metadata>
@@ -222,7 +226,10 @@ export function NoticeDetail({
                   <button onClick={handleEditCancel} data-testid="cancel-edit">
                     <AppIcon icon="close" size={24} color="red" />
                   </button>
-                  <button onClick={handleEditConfirm} data-testid="confirm-edit">
+                  <button
+                    onClick={handleEditConfirm}
+                    data-testid="confirm-edit"
+                  >
                     <AppIcon icon="check" size={24} color="green" />
                   </button>
                 </div>
@@ -246,7 +253,10 @@ export function NoticeDetail({
                       >
                         <Chip label="수정" color="#F0F0F0" bgColor="#303090" />
                       </button>
-                      <button onClick={() => handleDeleteComment(comment.id)} data-testid={`delete-comment-${comment.id}`}>
+                      <button
+                        onClick={() => handleDeleteComment(comment.id)}
+                        data-testid={`delete-comment-${comment.id}`}
+                      >
                         <Chip label="삭제" color="#F8F8F8" bgColor="#FF7961" />
                       </button>
                     </>
