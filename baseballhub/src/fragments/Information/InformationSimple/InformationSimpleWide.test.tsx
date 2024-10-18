@@ -8,7 +8,10 @@ import { renderWithProviders } from "@utils/test-utils";
 describe("<InformationSimpleWide />", () => {
   it("renders correctly", () => {
     renderWithProviders(
-      <InformationSimpleWide information={sampleInformations[0]} />
+      <>
+        <InformationSimpleWide information={sampleInformations[0]} />
+        <InformationSimpleWide information={sampleInformations[1]} />
+      </>
     );
   });
 });

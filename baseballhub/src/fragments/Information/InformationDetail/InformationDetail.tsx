@@ -1,21 +1,49 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import DOMPurify from "isomorphic-dompurify";
 
+import { Chip } from "@components/Chips";
 import { Divider } from "@components/Dividers";
 import { ErrorComponent, Loading } from "@components/Fallbacks";
+import { AppIcon } from "@components/Icons";
 import { Subtitle } from "@components/Texts";
+import { useAuth } from "@contexts/auth";
 import { InformationDetailType } from "@models/forum";
-import { getInformationDetails } from "@services/board";
+import { getInformationDetails, deleteInformation } from "@services/board";
 
 interface Props {
   informationId: number | null;
   goBack: () => void;
+  handleEdit: () => void;
 }
 
-export function InformationDetail({ informationId, goBack }: Readonly<Props>) {
+export function InformationDetail({
+  informationId,
+  goBack,
+  handleEdit,
+}: Readonly<Props>) {
   const [information, setInformation] = useState<InformationDetailType>();
+
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
+
+  const { user } = useAuth();
+
+  const canDelete = user?.is_admin || user?.uuid === information?.author.uuid;
+
+  const handleDownload = (attachment: string) => {
+    window.open(attachment);
+  };
+
+  const handleDelete = async () => {
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      const response = await deleteInformation(information?.id);
+
+      if (response) {
+        goBack();
+      }
+    }
+  };
 
   useEffect(() => {
     const fetchInformationDetails = async () => {
@@ -51,7 +79,21 @@ export function InformationDetail({ informationId, goBack }: Readonly<Props>) {
   return (
     <Container>
       <Header>
-        <Subtitle size="large">{information.title}</Subtitle>
+        <Wrapper>
+          <Subtitle size="large">{information.title}</Subtitle>
+          <div>
+            {user?.uuid === information.author.uuid && (
+              <button onClick={handleEdit}>
+                <Chip label="수정" color="#FFFFFF" bgColor="#0F0F70" />
+              </button>
+            )}
+            {canDelete && (
+              <button onClick={handleDelete} data-testid={"delete-information"}>
+                <Chip label="삭제" color="#FFFFFF" bgColor="#F44336" />
+              </button>
+            )}
+          </div>
+        </Wrapper>
         <Metadata>
           <div>{information.author.name}</div>
           <div>{information.created_at}</div>
@@ -60,8 +102,30 @@ export function InformationDetail({ informationId, goBack }: Readonly<Props>) {
       <DividerWrapper>
         <Divider bold />
       </DividerWrapper>
+      <AttachmentsWrapper>
+        <Subtitle>첨부파일 ({information.attachments.length})</Subtitle>
+        {information.attachments.map((attachment) => (
+          <button
+            onClick={() => handleDownload(attachment.file)}
+            key={attachment.created_at}
+            data-testid={`${attachment.name}`}
+          >
+            <Attachment>
+              <div>{attachment.name}</div>
+              <AppIcon icon="download" size={24} color="gray" />
+            </Attachment>
+          </button>
+        ))}
+      </AttachmentsWrapper>
+      <DividerWrapper>
+        <Divider bold />
+      </DividerWrapper>
       <Content>
-        <div>{information.content}</div>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(information.content),
+          }}
+        />
       </Content>
     </Container>
   );
@@ -91,6 +155,39 @@ const Metadata = styled.div`
   margin-top: 8px;
   padding: 8px 16px;
   gap: 8px;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 8px 12px 8px 0;
+
+  > div {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+  }
+`;
+
+const AttachmentsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 16px;
+`;
+
+const Attachment = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  color: ${({ theme }) => theme.colors.foreground700};
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Content = styled.div`

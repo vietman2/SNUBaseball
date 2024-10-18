@@ -37,7 +37,7 @@ class ProfileSerializer(ModelSerializer):
         if obj.is_superuser:
             return True
 
-        admin_roles = [RoleType.MANAGER, RoleType.CAPTAIN, RoleType.VICE_CAPTAIN]
+        admin_roles = [RoleType.MANAGER, RoleType.CAPTAIN, RoleType.VICE_CAPTAIN, RoleType.MENTOR]
 
         if obj.member.role in admin_roles:
             return True

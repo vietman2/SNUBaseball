@@ -4,11 +4,14 @@ import styled from "styled-components";
 import { Divider } from "@components/Dividers";
 import { ErrorComponent, Loading } from "@components/Fallbacks";
 import { MobileModal, SimpleModal } from "@components/Modals";
+import { Subtitle } from "@components/Texts";
+import { useAuth } from "@contexts/auth";
 import {
   InformationDetail,
   InformationSimple,
   InformationSimpleWide,
   InformationSimpleWideHeader,
+  InformationWrite,
 } from "@fragments/Information";
 import { useWindowSize } from "@hooks/useWindowSize";
 import { InformationSimpleType } from "@models/forum";
@@ -19,11 +22,15 @@ export function Information() {
   const [selectedInformationId, setSelectedInformationId] = useState<
     number | null
   >(null);
+
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [writeMode, setWriteMode] = useState<boolean>(false);
+  const [editMode, setEditMode] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
   const [refreshCount, setRefreshCount] = useState<number>(0);
 
+  const { user } = useAuth();
   const { width } = useWindowSize();
 
   const openModal = () => {
@@ -31,8 +38,16 @@ export function Information() {
   };
 
   const closeModal = () => {
+    setWriteMode(false);
     setModalOpen(false);
     setSelectedInformationId(null);
+    handleRefresh();
+  };
+
+  const handleEdit = () => {
+    setEditMode(true);
+    setWriteMode(true);
+    openModal();
   };
 
   const handleRefresh = () => {
@@ -40,7 +55,14 @@ export function Information() {
   };
 
   const handleInformationClick = (information: InformationSimpleType) => {
+    setWriteMode(false);
     setSelectedInformationId(information.id);
+    openModal();
+  };
+
+  const handleWriteClick = () => {
+    setEditMode(false);
+    setWriteMode(true);
     openModal();
   };
 
@@ -80,6 +102,12 @@ export function Information() {
 
   return (
     <Container>
+      <Header>
+        <Subtitle size="large">정보</Subtitle>
+        {user?.is_admin && (
+          <Button onClick={handleWriteClick}>새 글 등록</Button>
+        )}
+      </Header>
       {width > 768 ? (
         <>
           <InformationSimpleWideHeader />
@@ -93,10 +121,19 @@ export function Information() {
             </button>
           ))}
           <SimpleModal isOpen={modalOpen} onClose={closeModal}>
-            <InformationDetail
-              informationId={selectedInformationId}
-              goBack={closeModal}
-            />
+            {writeMode ? (
+              <InformationWrite
+                informationId={selectedInformationId}
+                editMode={editMode}
+                goBack={closeModal}
+              />
+            ) : (
+              <InformationDetail
+                informationId={selectedInformationId}
+                goBack={closeModal}
+                handleEdit={handleEdit}
+              />
+            )}
           </SimpleModal>
         </>
       ) : (
@@ -112,10 +149,19 @@ export function Information() {
             </button>
           ))}
           <MobileModal isOpen={modalOpen} onClose={closeModal}>
-            <InformationDetail
-              informationId={selectedInformationId}
-              goBack={closeModal}
-            />
+            {writeMode ? (
+              <InformationWrite
+                informationId={selectedInformationId}
+                editMode={editMode}
+                goBack={closeModal}
+              />
+            ) : (
+              <InformationDetail
+                informationId={selectedInformationId}
+                goBack={closeModal}
+                handleEdit={handleEdit}
+              />
+            )}
           </MobileModal>
         </>
       )}
@@ -132,4 +178,29 @@ const Container = styled.div`
 
   border-radius: 16px;
   background-color: ${({ theme }) => theme.colors.background300};
+`;
+
+const Header = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  gap: 16px;
+
+  color: ${({ theme }) => theme.colors.foreground500};
+`;
+
+const Button = styled.button`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 4px 12px;
+  gap: 8px;
+
+  color: ${({ theme }) => theme.colors.background100};
+  font-weight: 500;
+
+  border-radius: 8px;
+  background-color: ${({ theme }) => theme.colors.primary};
 `;

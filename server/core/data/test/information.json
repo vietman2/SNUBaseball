@@ -20,7 +20,7 @@
       "created_at": "2024-10-16T06:03:08.900Z",
       "updated_at": "2024-10-16T06:34:35.154Z",
       "title": "창고 정리 가이드",
-      "content": "창고 정리 가이드",
+      "content": "<p>창고 정리 가이드</p>",
       "author": "44895c75-cebf-4125-9682-74d94e130bc7",
       "num_views": 17,
       "is_deleted": false,
@@ -34,7 +34,7 @@
       "created_at": "2024-10-16T06:03:08.900Z",
       "updated_at": "2024-10-16T06:34:35.154Z",
       "title": "신입생 가이드",
-      "content": "신입생 가이드",
+      "content": "<p>신입생 가이드</p>",
       "author": "ddea3128-e3b0-46f5-8f96-c7b2aebaf80a",
       "num_views": 4,
       "is_deleted": false,
@@ -48,11 +48,22 @@
       "created_at": "2024-10-16T06:03:08.900Z",
       "updated_at": "2024-10-16T06:34:35.154Z",
       "title": "시합 전 영양 보충",
-      "content": "시합 전 영양 보충",
+      "content": "<p>시합 전 영양 보충 정보</p><p><br></p><p><br></p><ul><li>어쩌구</li></ul>",
       "author": "ce9372c7-6e3d-42dc-9e0d-978e25a51c14",
       "num_views": 4,
       "is_deleted": false,
       "pin": false
+    }
+  },
+  {
+    "model": "information.informationattachment",
+    "pk": 1,
+    "fields": {
+      "created_at": "2024-10-18T15:19:47.603Z",
+      "updated_at": "2024-10-18T15:19:47.603Z",
+      "file": "information/3/OB 주소록.xlsx",
+      "uploaded_at": "2024-10-18T15:19:47.603Z",
+      "information": 3
     }
   }
 ]
