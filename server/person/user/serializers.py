@@ -30,7 +30,10 @@ class ProfileSerializer(ModelSerializer):
         if obj.member.profile_image is None:
             return settings.FALLBACK_IMAGE
 
-        return get_presigned_url(obj.member.profile_image.image.filename)
+        image_file = obj.member.profile_image.image
+        path = image_file.name[1:]
+
+        return get_presigned_url(path)
 
     def get_is_admin(self, obj):
         if obj.is_superuser:

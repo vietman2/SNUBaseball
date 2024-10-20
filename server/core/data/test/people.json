@@ -88,7 +88,7 @@
       "username": "testuser_1",
       "member": 1,
       "joined_at": "2024-10-16T05:57:45.973Z",
-      "is_superuser": false,
+      "is_superuser": true,
       "is_blocked": false,
       "is_active": true
     }
