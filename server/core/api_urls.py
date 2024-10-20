@@ -11,6 +11,7 @@ from media.image.views import ImageView
 from notes.feedback.views import FeedbackView
 
 from person.major.views import MajorViewSet
+from person.member.views import MemberViewSet
 from person.user.views import RegisterView, StudentIdCheckView, UserProfileView
 
 router = DefaultRouter()
@@ -26,6 +27,7 @@ router.register('images', ImageView, basename='images')
 router.register('feedbacks', FeedbackView, basename='feedbacks')
 
 router.register('majors', MajorViewSet, basename='majors')
+router.register('members', MemberViewSet, basename='members')
 router.register('profiles', UserProfileView, basename='profile')
 
 urlpatterns = [
