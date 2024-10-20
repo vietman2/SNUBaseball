@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from "axios";
-import FormData from "form-data";
 
 export const getMembers = async (filter: string) => {
   try {
