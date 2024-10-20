@@ -89,7 +89,7 @@ export const sampleFeedbackDetail: FeedbackDetailType = {
   player: sampleAuthor,
   author: sampleAuthor,
   category: classification_batting,
-  status: "완료",
+  status: "신규",
   created_at: "2024-08-01",
   updated_at: "2024-10-01",
   num_views: 100,
