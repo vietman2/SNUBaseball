@@ -55,11 +55,11 @@ class InformationView(ModelViewSet):
             serializer.is_valid(raise_exception=True)
         except ValidationError as e:
             return Response({'message': str(e)}, status=status.HTTP_400_BAD_REQUEST)
-        
+
         serializer.save()
 
         return Response(serializer.data, status=status.HTTP_200_OK)
-    
+
     @extend_schema(summary="정보 삭제", tags=["정보 관리"])
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
