@@ -99,14 +99,13 @@ export function InformationWrite({
   };
 
   useEffect(() => {
-    if (editMode) {
-      if (informationId === null) {
-        setError(true);
-        setLoading(false);
-        return;
-      }
-
-      const fetchInformationDetails = async () => {
+    const fetchInformationDetails = async () => {
+      if (editMode) {
+        if (informationId === null) {
+          setError(true);
+          setLoading(false);
+          return;
+        }
         setLoading(true);
 
         const response = await getInformationDetails(informationId);
@@ -120,14 +119,12 @@ export function InformationWrite({
         } else {
           setError(true);
         }
+      }
 
-        setLoading(false);
-      };
-
-      fetchInformationDetails();
-    } else {
       setLoading(false);
-    }
+    };
+
+    fetchInformationDetails();
   }, []);
 
   if (loading) {
@@ -161,7 +158,12 @@ export function InformationWrite({
         </div>
         <div>
           <Subtitle>상단 고정</Subtitle>
-          <input type="checkbox" checked={pin} onChange={togglePin} data-testid="toggle" />
+          <input
+            type="checkbox"
+            checked={pin}
+            onChange={togglePin}
+            data-testid="toggle"
+          />
         </div>
       </Header>
       <DividerWrapper>
