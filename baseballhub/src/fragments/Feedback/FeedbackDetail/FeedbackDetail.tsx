@@ -58,7 +58,12 @@ export function FeedbackDetail({ feedbackId, goBack }: Readonly<Props>) {
             color={feedback.category.color}
             bgColor={feedback.category.background_color}
           />
-          <StatusChip status={feedback.status} />
+          <StatusChipWrapper
+            style={{ backgroundColor: feedback.status.background_color }}
+          >
+            <Dot color={feedback.status.color} />
+            {feedback.status.label}
+          </StatusChipWrapper>
         </ChipWrapper>
         <Subtitle size="large">{feedback.title}</Subtitle>
         <Metadata>
@@ -95,45 +100,6 @@ export function FeedbackDetail({ feedbackId, goBack }: Readonly<Props>) {
         </Comments>
       </Header>
     </Container>
-  );
-}
-
-interface ChipProps {
-  status: string;
-}
-
-function StatusChip({ status }: Readonly<ChipProps>) {
-  const getColor = () => {
-    switch (status) {
-      case "신규":
-        return "#FF453A";
-      case "진행중":
-        return "#34C759";
-      case "검토중":
-        return "#FFD60A";
-      default:
-        return "#007AFF";
-    }
-  }
-  
-  const getBgColor = () => {
-    switch (status) {
-      case "신규":
-        return "#FF453A20";
-      case "진행중":
-        return "#34C75920";
-      case "검토중":
-        return "#FFD60A20";
-      default:
-        return "#007AFF20";
-    }
-  }
-
-  return (
-    <StatusChipWrapper style={{ backgroundColor: getBgColor() }}>
-      <Dot color={getColor()} />
-      {status}
-    </StatusChipWrapper>
   );
 }
 

@@ -19,40 +19,10 @@ describe("<FeedbackDetail />", () => {
     );
   });
 
-  it("renders new correctly", async () => {
+  it("renders correctly", async () => {
     jest.spyOn(FeedbackAPI, "getFeedbackDetail").mockResolvedValue({
       status: 200,
       data: sampleFeedbackDetail,
-    });
-    await waitFor(() =>
-      renderWithProviders(<FeedbackDetail feedbackId={1} goBack={jest.fn()} />)
-    );
-  });
-
-  it("renders in progress correctly", async () => {
-    jest.spyOn(FeedbackAPI, "getFeedbackDetail").mockResolvedValue({
-      status: 200,
-      data: {...sampleFeedbackDetail, status: "진행중"},
-    });
-    await waitFor(() =>
-      renderWithProviders(<FeedbackDetail feedbackId={1} goBack={jest.fn()} />)
-    );
-  });
-
-  it("renders under review correctly", async () => {
-    jest.spyOn(FeedbackAPI, "getFeedbackDetail").mockResolvedValue({
-      status: 200,
-      data: {...sampleFeedbackDetail, status: "검토중"},
-    });
-    await waitFor(() =>
-      renderWithProviders(<FeedbackDetail feedbackId={1} goBack={jest.fn()} />)
-    );
-  });
-
-  it("renders done correctly", async () => {
-    jest.spyOn(FeedbackAPI, "getFeedbackDetail").mockResolvedValue({
-      status: 200,
-      data: {...sampleFeedbackDetail, status: "완료"},
     });
     await waitFor(() =>
       renderWithProviders(<FeedbackDetail feedbackId={1} goBack={jest.fn()} />)
