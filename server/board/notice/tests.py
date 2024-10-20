@@ -10,8 +10,9 @@ from .models import Notice, NoticeComment
 
 class NoticeAPITestCase(APITestCase):
     fixtures = [
-        "core/data/initial/chips.json", "core/data/test/notices.json",
-        "core/data/test/people.json", "core/data/test/mock_image.json"
+        "core/data/initial/chips.json", "core/data/initial/majors.json",
+        "core/data/test/notices.json", "core/data/test/people.json",
+        "core/data/test/mock_image.json"
     ]
 
     def setUp(self):
@@ -127,8 +128,9 @@ class NoticeAPITestCase(APITestCase):
 
 class NoticeCommentAPITestCase(APITestCase):
     fixtures = [
-        "core/data/initial/chips.json", "core/data/test/notices.json",
-        "core/data/test/people.json", "core/data/test/mock_image.json"
+        "core/data/initial/chips.json", "core/data/initial/majors.json",
+        "core/data/test/notices.json", "core/data/test/people.json",
+        "core/data/test/mock_image.json"
     ]
 
     def setUp(self):

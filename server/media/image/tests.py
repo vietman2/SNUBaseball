@@ -9,7 +9,10 @@ from person.user.models import User
 from .models import Image
 
 class ImageAPITestCase(APITestCase):
-    fixtures = ["core/data/test/people.json", "core/data/test/mock_image.json"]
+    fixtures = [
+        "core/data/initial/majors.json",
+        "core/data/test/people.json", "core/data/test/mock_image.json"
+    ]
 
     def setUp(self):
         self.url = '/api/images/'

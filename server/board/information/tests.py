@@ -10,8 +10,8 @@ from .models import Information
 
 class InformationAPITestCase(APITestCase):
     fixtures = [
-        "core/data/test/people.json", "core/data/test/mock_image.json",
-        "core/data/test/information.json",
+        "core/data/initial/majors.json", "core/data/test/people.json",
+        "core/data/test/mock_image.json", "core/data/test/information.json",
     ]
 
     def setUp(self):
