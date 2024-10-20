@@ -19,11 +19,18 @@ export type FeedbackSimpleType = {
   num_comments: number;
 };
 
+export type FeedbackListType = {
+  label: string;
+  data: FeedbackSimpleType[];
+  color: string;
+  background_color: string;
+};
+
 export type FeedbackResponseType = {
-  new: FeedbackSimpleType[];
-  in_progress: FeedbackSimpleType[];
-  under_review: FeedbackSimpleType[];
-  done: FeedbackSimpleType[];
+  new: FeedbackListType;
+  in_progress: FeedbackListType;
+  under_review: FeedbackListType;
+  done: FeedbackListType;
 };
 
 export type FeedbackDetailType = {
@@ -33,7 +40,11 @@ export type FeedbackDetailType = {
   player: AuthorType;
   author: AuthorType;
   category: ClassificationType;
-  status: string;
+  status: {
+    label: string;
+    color: string;
+    background_color: string;
+  };
   created_at: string;
   updated_at: string;
   num_views: number;

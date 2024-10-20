@@ -4,6 +4,7 @@ import {
   FeedbackSimpleType,
   FeedbackResponseType,
   FeedbackDetailType,
+  FeedbackListType,
 } from "./feedback";
 
 export {
@@ -13,4 +14,5 @@ export {
   type FeedbackSimpleType,
   type FeedbackResponseType,
   type FeedbackDetailType,
+  type FeedbackListType,
 };

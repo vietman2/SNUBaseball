@@ -8,7 +8,7 @@ import { SimpleSelector } from "@components/Selectors";
 import { useTheme } from "@contexts/theme";
 import { FeedbackDetail, FeedbackSimple } from "@fragments/Feedback";
 import { useWindowSize } from "@hooks/useWindowSize";
-import { FeedbackSimpleType, FeedbackResponseType } from "@models/notes";
+import { FeedbackSimpleType, FeedbackResponseType, FeedbackListType } from "@models/notes";
 import { getFeedbacks } from "@services/notes";
 
 export function Feedback() {
@@ -88,110 +88,26 @@ export function Feedback() {
             onSelect={() => {}}
           />
         </FilterWrapper>
-        <ListWrapper>
-          <TopRow>
-            <Dot color="#FF453A" />
-            <Subtitle>New</Subtitle>
-            <Count>1</Count>
-          </TopRow>
-          <List>
-            {feedbacks.new.map((feedback) => (
-              <button
-                key={feedback.id}
-                onClick={() => handleFeedbackClick(feedback)}
-                data-testid={`feedback-${feedback.id}`}
-              >
-                <FeedbackSimple feedback={feedback} />
-              </button>
-            ))}
-            <AddButton>
-              <AppIcon
-                icon="plus"
-                size={14}
-                color={isDarkMode ? "#B1BDCD" : "#212529"}
-              />
-              피드백 추가
-            </AddButton>
-          </List>
-        </ListWrapper>
-        <ListWrapper>
-          <TopRow>
-            <Dot color="#34C759" />
-            <Subtitle>In Progress</Subtitle>
-            <Count>1</Count>
-          </TopRow>
-          <List>
-            {feedbacks.in_progress.map((feedback) => (
-              <button
-                key={feedback.id}
-                onClick={() => handleFeedbackClick(feedback)}
-                data-testid={`feedback-${feedback.id}`}
-              >
-                <FeedbackSimple feedback={feedback} />
-              </button>
-            ))}
-            <AddButton>
-              <AppIcon
-                icon="plus"
-                size={14}
-                color={isDarkMode ? "#B1BDCD" : "#212529"}
-              />
-              피드백 추가
-            </AddButton>
-          </List>
-        </ListWrapper>
-        <ListWrapper>
-          <TopRow>
-            <Dot color="#FFD60A" />
-            <Subtitle>Under Review</Subtitle>
-            <Count>1</Count>
-          </TopRow>
-          <List>
-            {feedbacks.under_review.map((feedback) => (
-              <button
-                key={feedback.id}
-                onClick={() => handleFeedbackClick(feedback)}
-                data-testid={`feedback-${feedback.id}`}
-              >
-                <FeedbackSimple key={feedback.id} feedback={feedback} />
-              </button>
-            ))}
-            <AddButton>
-              <AppIcon
-                icon="plus"
-                size={14}
-                color={isDarkMode ? "#B1BDCD" : "#212529"}
-              />
-              피드백 추가
-            </AddButton>
-          </List>
-        </ListWrapper>
-        <ListWrapper>
-          <TopRow>
-            <Dot color="#007AFF" />
-            <Subtitle>Done</Subtitle>
-            <Count>1</Count>
-          </TopRow>
-          <List>
-            {feedbacks.done.map((feedback) => (
-              <button
-                key={feedback.id}
-                onClick={() => handleFeedbackClick(feedback)}
-                data-testid={`feedback-${feedback.id}`}
-              >
-                <FeedbackSimple key={feedback.id} feedback={feedback} />
-              </button>
-            ))}
-            <AddButton>
-              <AppIcon
-                icon="plus"
-                size={14}
-                color={isDarkMode ? "#B1BDCD" : "#212529"}
-              />
-              피드백 추가
-            </AddButton>
-          </List>
-        </ListWrapper>
+        <ListContainer
+          list={feedbacks.new}
+          handleFeedbackClick={handleFeedbackClick}
+          isDarkMode={isDarkMode}
+        />
+        <ListContainer
+          list={feedbacks.in_progress}
+          handleFeedbackClick={handleFeedbackClick}
+          isDarkMode={isDarkMode}
+        />
+        <ListContainer
+          list={feedbacks.under_review}
+          handleFeedbackClick={handleFeedbackClick}
+          isDarkMode={isDarkMode}
+        />
+        <ListContainer
+          list={feedbacks.done}
+          handleFeedbackClick={handleFeedbackClick}
+          isDarkMode={isDarkMode}
+        />
       </Contents>
       {width > 768 ? (
         <SimpleModal isOpen={modalOpen} onClose={closeModal}>
@@ -203,6 +119,43 @@ export function Feedback() {
         </MobileModal>
       )}
     </Container>
+  );
+}
+
+interface Props {
+  list: FeedbackListType;
+  handleFeedbackClick: (feedback: FeedbackSimpleType) => void;
+  isDarkMode: boolean;
+}
+
+function ListContainer({ list, handleFeedbackClick, isDarkMode }: Readonly<Props>) {
+  return (
+    <ListWrapper>
+      <TopRow>
+        <Dot color={list.color} />
+        <Subtitle>{list.label}</Subtitle>
+        <Count>{list.data.length}</Count>
+      </TopRow>
+      <List>
+        {list.data.map((feedback) => (
+          <button
+            key={feedback.id}
+            onClick={() => handleFeedbackClick(feedback)}
+            data-testid={`feedback-${feedback.id}`}
+          >
+            <FeedbackSimple key={feedback.id} feedback={feedback} />
+          </button>
+        ))}
+        <AddButton>
+          <AppIcon
+            icon="plus"
+            size={14}
+            color={isDarkMode ? "#B1BDCD" : "#212529"}
+          />
+          피드백 추가
+        </AddButton>
+      </List>
+    </ListWrapper>
   );
 }
 
