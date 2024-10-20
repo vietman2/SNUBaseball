@@ -302,7 +302,7 @@ const AddButton = styled.div`
   gap: 4px;
 
   border-radius: 16px;
-  background-color: ${({ theme }) => theme.colors.background100};
+  background-color: ${({ theme }) => theme.colors.background900};
   color: ${({ theme }) => theme.colors.foreground700};
   font-size: 14px;
   font-weight: 600;
