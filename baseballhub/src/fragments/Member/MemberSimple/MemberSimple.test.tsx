@@ -1,5 +1,5 @@
-import { sampleMembers } from "@data/user";
 import { MemberSimple, MemberSimpleHeader } from "./MemberSimple";
+import { sampleMembers } from "@data/user";
 import { renderWithProviders } from "@utils/test-utils";
 
 describe("<MemberSimple />", () => {
@@ -7,7 +7,7 @@ describe("<MemberSimple />", () => {
     renderWithProviders(
       <>
         <MemberSimple member={sampleMembers[0]} wide={true} />
-        <MemberSimple member={sampleMembers[4]} wide={true} />
+        <MemberSimple member={sampleMembers[1]} wide={true} />
       </>
     );
   });
