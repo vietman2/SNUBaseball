@@ -21,7 +21,7 @@ class FeedbackSimpleSerializer(ModelSerializer):
     content     = serializers.SerializerMethodField()
     player      = serializers.SerializerMethodField()
     author      = serializers.SerializerMethodField()
-    status      = serializers.CharField(source='get_status_display')
+    status      = serializers.SerializerMethodField()
     created_at  = serializers.DateTimeField(format="%Y-%m-%d")
     updated_at  = serializers.DateTimeField(format="%Y-%m-%d")
     num_comments= serializers.SerializerMethodField()
@@ -41,6 +41,32 @@ class FeedbackSimpleSerializer(ModelSerializer):
 
     def get_author(self, obj):
         return obj.author.member.full_name
+    
+    def get_status(self, obj):
+        if obj.status == 0:
+            return {
+                'label': '신규',
+                'color': '#FF453A',
+                'background_color': '#FF453A20'
+            }
+        elif obj.status == 1:
+            return {
+                'label': '진행중',
+                'color': '#34C759',
+                'background_color': '#34C75920'
+            }
+        elif obj.status == 2:
+            return {
+                'label': '검토중',
+                'color': '#FFD60A',
+                'background_color': '#FFD60A20'
+            }
+        else:
+            return {
+                'label': '완료',
+                'color': '#007AFF',
+                'background_color': '#007AFF20'
+            }
 
     def get_num_comments(self, obj):
         return obj.comments.count()
