@@ -27,7 +27,38 @@ export type MemberType = {
   back_number: number | null;
 };
 
-export type MemberDetailType = MemberType;
+type PlayerTaleType = {
+  weight: number;
+  height: number;
+  reason: string;
+  goal: string;
+  rival: string;
+  role_model: string;
+  strength: string;
+  weakness: string;
+};
+
+export type MemberDetailType = {
+  id: number;
+  role: string;
+  name: string;
+  position: string;
+  hands: string;
+  student_id: string;
+  profile_image: string;
+  major: string;
+  phone: string;
+  email: string;
+  date_joined: string;
+  num_semester: string;
+  status: StatusType;
+  back_number: number | null;
+  birth_date: string;
+  notes: string;
+  address: string;
+  is_elite: boolean;
+  tale?: PlayerTaleType;
+};
 
 export type UserProfileType = {
   uuid: string;
