@@ -22,12 +22,12 @@ class MemberViewSet(ModelViewSet):
     @extend_schema(summary="회원 목록 조회", tags=["회원 관리"])
     def list(self, request, *args, **kwargs):
         ## 필터
-        filter = request.query_params.get('filter', None)
+        query = request.query_params.get('filter', None)
 
-        if filter is None or str(filter) == "":
+        if query is None or str(query) == "":
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
-        if str(filter) == "ybs":
+        if str(query) == "ybs":
             roles = [1, 2, 3, 4, 5]
             stati = [1, 2, 3]
             self.queryset = self.queryset.filter(status__in=stati, role__in=roles)
