@@ -22,7 +22,7 @@ export const getMemberDetail = async (id: number) => {
   } catch (e: any) {
     return null;
   }
-}
+};
 
 export const addMember = async (
   lastname: string,
