@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from "axios";
-import FormData from "form-data";
 
 export const getMembers = async (filter: string) => {
   try {
@@ -10,6 +9,15 @@ export const getMembers = async (filter: string) => {
         filter,
       },
     });
+    return response.data;
+  } catch (e: any) {
+    return null;
+  }
+};
+
+export const getMemberDetail = async (id: number) => {
+  try {
+    const response = await axios.get(`/api/members/${id}/`);
     return response.data;
   } catch (e: any) {
     return null;

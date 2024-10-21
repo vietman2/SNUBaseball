@@ -44,7 +44,7 @@ export function MemberSimple({ member, wide }: Readonly<Props>) {
         <Chip
           label={member.role.name}
           color={member.role.color}
-          bgColor={member.role.bgColor}
+          bgColor={member.role.background_color}
         />
       </SmallCell>
       <NameCell>
@@ -61,15 +61,15 @@ export function MemberSimple({ member, wide }: Readonly<Props>) {
         <>
           <MediumCell>
             <div>{member.student_id}</div>
-            <div>{member.department}</div>
+            <div>{member.major}</div>
           </MediumCell>
           <ContactCell>
             <div>{member.phone}</div>
             <div>{member.email}</div>
           </ContactCell>
           <MediumCell>
-            <div>입부: {member.joined_at}</div>
-            <div>기간: {member.num_semesters}</div>
+            <div>입부: {member.date_joined}</div>
+            <div>기간: {member.num_semester}</div>
           </MediumCell>
         </>
       )}
@@ -78,7 +78,7 @@ export function MemberSimple({ member, wide }: Readonly<Props>) {
           <Chip
             label={member.status.name}
             color={member.status.color}
-            bgColor={member.status.bgColor}
+            bgColor={member.status.background_color}
           />
         </span>
       </SmallCell>

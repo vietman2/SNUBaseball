@@ -6,8 +6,9 @@ from .models import Feedback
 
 class FeedbackAPITestCase(APITestCase):
     fixtures = [
-        "core/data/initial/chips.json", "core/data/test/feedbacks.json",
-        "core/data/test/people.json", "core/data/test/mock_image.json"
+        "core/data/initial/chips.json", "core/data/initial/majors.json",
+        "core/data/test/feedbacks.json", "core/data/test/people.json",
+        "core/data/test/mock_image.json"
     ]
 
     def setUp(self):

@@ -30,14 +30,16 @@ class ProfileSerializer(ModelSerializer):
         if obj.member.profile_image is None:
             return settings.FALLBACK_IMAGE
 
-        url = obj.member.profile_image.image.url
-        return get_presigned_url(url)
+        image_file = obj.member.profile_image.image
+        path = image_file.name[1:]
+
+        return get_presigned_url(path)
 
     def get_is_admin(self, obj):
         if obj.is_superuser:
             return True
 
-        admin_roles = [RoleType.MANAGER, RoleType.CAPTAIN, RoleType.VICE_CAPTAIN]
+        admin_roles = [RoleType.MANAGER, RoleType.CAPTAIN, RoleType.VICE_CAPTAIN, RoleType.MENTOR]
 
         if obj.member.role in admin_roles:
             return True
@@ -63,8 +65,10 @@ class AuthorSerializer(ModelSerializer):
         if obj.member.profile_image is None:
             return settings.FALLBACK_IMAGE
 
-        url = obj.member.profile_image.image.url
-        return get_presigned_url(url)
+        image_file = obj.member.profile_image.image
+        path = image_file.name[1:]
+
+        return get_presigned_url(path)
 
 class RegisterSerializer(ModelSerializer):
     member_id   = serializers.IntegerField(

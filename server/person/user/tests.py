@@ -6,7 +6,10 @@ from person.member.models import Member
 from .models import User
 
 class UserProfileAPITestCase(APITestCase):
-    fixtures = ["core/data/test/mock_image.json", "core/data/test/people.json"]
+    fixtures = [
+        "core/data/initial/majors.json",
+        "core/data/test/mock_image.json", "core/data/test/people.json"
+    ]
 
     def setUp(self):
         self.url = '/api/profiles/'
@@ -49,7 +52,10 @@ class UserProfileAPITestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
 class StudentIdCheckAPITestCase(APITestCase):
-    fixtures = ["core/data/test/mock_image.json", "core/data/test/people.json"]
+    fixtures = [
+        "core/data/initial/majors.json",
+        "core/data/test/mock_image.json", "core/data/test/people.json"
+    ]
 
     def setUp(self):
         self.url = '/api/student_id/'

@@ -1,40 +1,64 @@
 export type RoleType = {
   name: string;
   color: string;
-  bgColor: string;
+  background_color: string;
 };
 
 export type StatusType = {
   name: string;
   color: string;
-  bgColor: string;
+  background_color: string;
 };
 
 export type MemberType = {
   id: number;
   role: RoleType;
   name: string;
-  phone: string;
-  email: string;
-  student_id: string;
-  admission_year: number;
-  college: string;
-  department: string;
-  year_level: number;
-  birth_date: string;
-  status: StatusType;
-  joined_at: string;
-  num_semesters: string;
-  address: string;
-  profile_image: string;
-  back_number?: number;
   position: string;
   hands: string;
-  height?: number;
-  weight?: number;
+  student_id: string;
+  profile_image: string;
+  major: string;
+  phone: string;
+  email: string;
+  date_joined: string;
+  num_semester: string;
+  status: StatusType;
+  back_number: number | null;
 };
 
-export type MemberDetailType = MemberType;
+type PlayerTaleType = {
+  weight: number;
+  height: number;
+  reason: string;
+  goal: string;
+  rival: string;
+  role_model: string;
+  strength: string;
+  weakness: string;
+};
+
+export type MemberDetailType = {
+  id: number;
+  role: string;
+  name: string;
+  position: string;
+  hands: string;
+  student_id: string;
+  profile_image: string;
+  major: string;
+  phone: string;
+  email: string;
+  date_joined: string;
+  num_semester: string;
+  status: StatusType;
+  back_number: number | null;
+  birth_date: string;
+  notes: string;
+  address: string;
+  is_elite: boolean;
+  tale?: PlayerTaleType;
+};
 
 export type UserProfileType = {
   uuid: string;

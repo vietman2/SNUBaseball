@@ -1,17 +1,16 @@
-from io import BytesIO
-from PIL import Image as PilImage
 from unittest.mock import patch
-from django.core.files.uploadedfile import SimpleUploadedFile
 from rest_framework.test import APITestCase
 from rest_framework import status
 
+from core.tests import generate_test_image_file
 from person.user.models import User
 from .models import Notice, NoticeComment
 
 class NoticeAPITestCase(APITestCase):
     fixtures = [
-        "core/data/initial/chips.json", "core/data/test/notices.json",
-        "core/data/test/people.json", "core/data/test/mock_image.json"
+        "core/data/initial/chips.json", "core/data/initial/majors.json",
+        "core/data/test/notices.json", "core/data/test/people.json",
+        "core/data/test/mock_image.json"
     ]
 
     def setUp(self):
@@ -23,15 +22,7 @@ class NoticeAPITestCase(APITestCase):
             'category_label': '일반',
         }
 
-        image_file_1 = BytesIO()
-        pil_image_1 = PilImage.new('RGB', (100, 100), color='red')
-        pil_image_1.save(image_file_1, format='PNG')
-        image_file_1.seek(0)
-        self.attachment = SimpleUploadedFile(
-            "test1.png",
-            image_file_1.getvalue(),
-            content_type="image/png"
-        )
+        self.attachment = generate_test_image_file()
 
 
     def test_unauthorized(self):
@@ -127,8 +118,9 @@ class NoticeAPITestCase(APITestCase):
 
 class NoticeCommentAPITestCase(APITestCase):
     fixtures = [
-        "core/data/initial/chips.json", "core/data/test/notices.json",
-        "core/data/test/people.json", "core/data/test/mock_image.json"
+        "core/data/initial/chips.json", "core/data/initial/majors.json",
+        "core/data/test/notices.json", "core/data/test/people.json",
+        "core/data/test/mock_image.json"
     ]
 
     def setUp(self):

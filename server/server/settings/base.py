@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     'person.major.apps.MajorConfig',
     'person.member.apps.MemberConfig',
+    'person.tale.apps.TaleConfig',
     'person.user.apps.UserConfig',
 
     "corsheaders",

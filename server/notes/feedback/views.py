@@ -28,10 +28,30 @@ class FeedbackView(ModelViewSet):
         done_serializer = FeedbackSimpleSerializer(done_feedbacks, many=True)
 
         return Response({
-            'new': new_serializer.data,
-            'in_progress': in_progress_serializer.data,
-            'under_review': under_review_serializer.data,
-            'done': done_serializer.data
+            'new': {
+                "label": "New",
+                "data": new_serializer.data,
+                "color": "#FF453A",
+                "background_color": "#FF453A20"
+            },
+            'in_progress': {
+                "label": "In Progress",
+                "data": in_progress_serializer.data,
+                "color": "#34C759",
+                "background_color": "#34C75920"
+            },
+            'under_review': {
+                "label": "Under Review",
+                "data": under_review_serializer.data,
+                "color": "#FFD60A",
+                "background_color": "#FFD60A20"
+            },
+            'done': {
+                "label": "Done",
+                "data": done_serializer.data,
+                "color": "#007AFF",
+                "background_color": "#007AFF20"
+            },
         }, status=status.HTTP_200_OK)
 
     @extend_schema(summary="피드백 상세 조회", tags=["피드백 관리"])

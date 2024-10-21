@@ -27,10 +27,13 @@ class Member(models.Model):
     address         = models.TextField(default="")
     notes           = models.TextField(default="")
     date_joined     = models.DateField(null=True, blank=True)
+    num_semester    = models.IntegerField(validators=[Min(1), Max(20)], default=1)
 
     profile_image   = models.ForeignKey(Image, on_delete=models.SET_NULL, null=True, blank=True)
     position        = models.CharField(default="", max_length=10)
     hands           = models.IntegerField(choices=HandsType.choices, default=HandsType.UNDEFINED)
+    back_number     = models.IntegerField(validators=[Min(0), Max(99)], default=0)
+    is_elite        = models.BooleanField(default=False)
 
     objects         = models.Manager()
 

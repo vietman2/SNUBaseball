@@ -1,4 +1,10 @@
-import { getInformations, getInformationDetails } from "./information";
+import {
+  getInformations,
+  getInformationDetails,
+  createInformation,
+  updateInformation,
+  deleteInformation,
+} from "./information";
 import {
   createNotice,
   getNotices,
@@ -14,6 +20,9 @@ import {
 export {
   getInformations,
   getInformationDetails,
+  createInformation,
+  updateInformation,
+  deleteInformation,
   createNotice,
   getNotices,
   getNoticeDetails,
