@@ -32,6 +32,8 @@ export function Team() {
 
   const closeModal = () => {
     setModalOpen(false);
+    setSelectedMemberId(null);
+    handleRefresh();
   };
 
   const handleRefresh = () => {
@@ -116,7 +118,7 @@ const Container = styled.div`
   flex: 1;
   flex-direction: column;
   padding: 16px;
-  gap: 16px;
+  gap: 12px;
 
   border-radius: 16px;
   background-color: ${({ theme }) => theme.colors.background300};
@@ -136,7 +138,7 @@ const Header = styled.div`
 const Table = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 16px 0;
+  padding: 8px 0;
 `;
 
 const Button = styled.button`
