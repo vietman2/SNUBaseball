@@ -1,10 +1,8 @@
-from io import BytesIO
-from PIL import Image as PilImage
 from unittest.mock import patch
-from django.core.files.uploadedfile import SimpleUploadedFile
 from rest_framework.test import APITestCase
 from rest_framework import status
 
+from core.tests import generate_test_image_file
 from person.user.models import User
 from .models import Image
 
@@ -18,26 +16,8 @@ class ImageAPITestCase(APITestCase):
         self.url = '/api/images/'
         self.user = User.objects.get(username='testuser_1')
 
-        image_file_1 = BytesIO()
-        pil_image_1 = PilImage.new('RGB', (100, 100), color='red')
-        pil_image_1.save(image_file_1, format='PNG')
-        image_file_1.seek(0)
-
-        image_file_2 = BytesIO()
-        pil_image_2 = PilImage.new('RGB', (100, 100), color='blue')
-        pil_image_2.save(image_file_2, format='PNG')
-        image_file_2.seek(0)
-
-        test_image1 = SimpleUploadedFile(
-            "test1.png",
-            image_file_1.getvalue(),
-            content_type="image/png"
-        )
-        test_image2 = SimpleUploadedFile(
-            "test2.png",
-            image_file_2.getvalue(),
-            content_type="image/png"
-        )
+        test_image1 = generate_test_image_file()
+        test_image2 = generate_test_image_file()
         self.data1 = {
             "image": test_image1,
             "path": "test1.png",
