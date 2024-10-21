@@ -33,6 +33,7 @@ class Member(models.Model):
     position        = models.CharField(default="", max_length=10)
     hands           = models.IntegerField(choices=HandsType.choices, default=HandsType.UNDEFINED)
     back_number     = models.IntegerField(validators=[Min(0), Max(99)], default=0)
+    is_elite        = models.BooleanField(default=False)
 
     objects         = models.Manager()
 
