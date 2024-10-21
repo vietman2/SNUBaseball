@@ -15,6 +15,15 @@ export const getMembers = async (filter: string) => {
   }
 };
 
+export const getMemberDetail = async (id: number) => {
+  try {
+    const response = await axios.get(`/api/members/${id}/`);
+    return response.data;
+  } catch (e: any) {
+    return null;
+  }
+}
+
 export const addMember = async (
   lastname: string,
   firstname: string,

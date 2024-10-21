@@ -1,4 +1,4 @@
 import { getMajors } from "./majors";
-import { getMembers, addMember } from "./members";
+import { getMembers, getMemberDetail, addMember } from "./members";
 
-export { addMember, getMajors, getMembers };
+export { addMember, getMemberDetail, getMajors, getMembers };
