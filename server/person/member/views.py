@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
 from .models import Member
-from .serializers import MemberSimpleSerializer
+from .serializers import MemberSimpleSerializer, MemberDetailSerializer
 
 class MemberViewSet(ModelViewSet):
     serializer_class = MemberSimpleSerializer
@@ -15,7 +15,9 @@ class MemberViewSet(ModelViewSet):
 
     @extend_schema(summary="회원 상세 조회", tags=["회원 관리"])
     def retrieve(self, request, *args, **kwargs):
-        return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+        instance = self.get_object()
+        serializer = MemberDetailSerializer(instance)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     @extend_schema(summary="회원 목록 조회", tags=["회원 관리"])
     def list(self, request, *args, **kwargs):
