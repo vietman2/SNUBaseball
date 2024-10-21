@@ -16,11 +16,12 @@
       "address": "",
       "notes": "",
       "date_joined": "2021-02-01",
-      "num_semester": 1,
+      "num_semester": 4,
       "profile_image": 2,
       "position": "투수",
       "hands": 1,
-      "back_number": 7
+      "back_number": 7,
+      "is_elite": true
     }
   },
   {
@@ -40,11 +41,12 @@
       "address": "",
       "notes": "",
       "date_joined": "2021-09-01",
-      "num_semester": 1,
+      "num_semester": 3,
       "profile_image": 3,
       "position": "내야수",
       "hands": 1,
-      "back_number": 8
+      "back_number": 8,
+      "is_elite": false
     }
   },
   {
@@ -68,7 +70,8 @@
       "profile_image": null,
       "position": "매니저",
       "hands": 0,
-      "back_number": 0
+      "back_number": 0,
+      "is_elite": false
     }
   },
   {
@@ -92,7 +95,8 @@
       "profile_image": 4,
       "position": "외야수",
       "hands": 1,
-      "back_number": 2
+      "back_number": 2,
+      "is_elite": false
     }
   },
   {
@@ -116,7 +120,8 @@
       "profile_image": 5,
       "position": "투수",
       "hands": 4,
-      "back_number": 25
+      "back_number": 25,
+      "is_elite": true
     }
   }
 ]

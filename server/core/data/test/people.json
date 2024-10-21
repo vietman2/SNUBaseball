@@ -16,7 +16,12 @@
       "address": "",
       "notes": "",
       "date_joined": null,
-      "profile_image": null
+      "profile_image": null,
+      "num_semester": 4,
+      "position": "투수",
+      "hands": 1,
+      "back_number": 7,
+      "is_elite": false
     }
   },
   {
@@ -28,15 +33,20 @@
       "last_name": "김",
       "birth_date": null,
       "admission_year": 2023,
-      "major": 2,
+      "major": null,
       "role": 2,
-      "status": 1,
+      "status": 2,
       "phone": "+821098765432",
       "email": "",
       "address": "",
       "notes": "",
       "date_joined": null,
-      "profile_image": 1
+      "num_semester": 4,
+      "profile_image": 1,
+      "position": "투수",
+      "hands": 1,
+      "back_number": 7,
+      "is_elite": false
     }
   },
   {
@@ -50,13 +60,18 @@
       "admission_year": 2022,
       "major": 3,
       "role": 3,
-      "status": 2,
+      "status": 3,
       "phone": "+821013579246",
       "email": null,
       "address": "",
       "notes": "",
       "date_joined": null,
-      "profile_image": null
+      "num_semester": 4,
+      "profile_image": null,
+      "position": "투수",
+      "hands": 1,
+      "back_number": 7,
+      "is_elite": true
     }
   },
   {
@@ -76,7 +91,12 @@
       "address": "",
       "notes": "",
       "date_joined": null,
-      "profile_image": null
+      "num_semester": 4,
+      "profile_image": null,
+      "position": "투수",
+      "hands": 1,
+      "back_number": 7,
+      "is_elite": true
     }
   },
   {
@@ -96,7 +116,12 @@
       "address": "",
       "notes": "",
       "date_joined": null,
-      "profile_image": null
+      "num_semester": 4,
+      "profile_image": null,
+      "position": "투수",
+      "hands": 1,
+      "back_number": 7,
+      "is_elite": true
     }
   },
   {
@@ -116,7 +141,12 @@
       "address": "",
       "notes": "",
       "date_joined": null,
-      "profile_image": null
+      "num_semester": 4,
+      "profile_image": null,
+      "position": "투수",
+      "hands": 1,
+      "back_number": 7,
+      "is_elite": true
     }
   },
   {

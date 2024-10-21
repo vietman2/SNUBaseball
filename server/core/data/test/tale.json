@@ -1,0 +1,18 @@
+[
+  {
+    "model": "tale.playertale",
+    "pk": 1,
+    "fields": {
+      "member": 1,
+      "year": 2024,
+      "weight": 90,
+      "height": 185,
+      "reason": "야구가 하고싶어서",
+      "goal": "3점대 방어율",
+      "rival": "양서진",
+      "role_model": "양현종",
+      "strength": "멘탈",
+      "weakness": "스테미너"
+    }
+  }
+]
