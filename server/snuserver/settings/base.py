@@ -57,10 +57,10 @@ INSTALLED_APPS = [
     #'notes.feedback.apps.FeedbackConfig',
     #'notes.guidelines.apps.GuidelinesConfig',
 
-    #'person.major.apps.MajorConfig',
-    #'person.member.apps.MemberConfig',
+    'person.major.apps.MajorConfig',
+    'person.member.apps.MemberConfig',
     #'person.tale.apps.TaleConfig',
-    #'person.user.apps.UserConfig',
+    'person.user.apps.UserConfig',
 
     #'schedule.weekly.apps.WeeklyConfig',
 ]
@@ -78,7 +78,7 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
 ]
 
-ROOT_URLCONF = 'server.urls'
+ROOT_URLCONF = 'snuserver.urls'
 
 TEMPLATES = [
     {
@@ -96,7 +96,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'server.wsgi.application'
+WSGI_APPLICATION = 'snuserver.wsgi.application'
 
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
 ACCOUNT_EMAIL_REQUIRED = False
@@ -152,7 +152,7 @@ AUTH_PASSWORD_VALIDATORS = [
     }
 ]
 
-AUTH_USER_MODEL='user.User'
+#AUTH_USER_MODEL='user.User'
 PHONENUMBER_DEFAULT_REGION = 'KR'
 
 REST_FRAMEWORK = {
