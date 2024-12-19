@@ -18,12 +18,28 @@ describe("checkStudentId", () => {
         },
       },
     });
+    jest.spyOn(axios, "isAxiosError").mockReturnValue(true);
+
+    await checkStudentId("12345678");
+  });
+
+  it("handles server error", async () => {
+    jest.spyOn(axios, "get").mockRejectedValue({
+      response: {
+        status: 500,
+        data: {
+          error: "Internal server error",
+        },
+      },
+    });
+    jest.spyOn(axios, "isAxiosError").mockReturnValue(true);
 
     await checkStudentId("12345678");
   });
 
   it("should return null if an error occurs", async () => {
     jest.spyOn(axios, "get").mockRejectedValue(new Error());
+    jest.spyOn(axios, "isAxiosError").mockReturnValue(false);
 
     await checkStudentId("12345678");
   });
@@ -45,6 +61,21 @@ describe("signUp", () => {
         },
       },
     });
+    jest.spyOn(axios, "isAxiosError").mockReturnValue(true);
+
+    await signUp(1, "test", "password", "password");
+  });
+
+  it("handles server error", async () => {
+    jest.spyOn(axios, "post").mockRejectedValue({
+      response: {
+        status: 500,
+        data: {
+          error: "Internal server error",
+        },
+      },
+    });
+    jest.spyOn(axios, "isAxiosError").mockReturnValue(true);
 
     await signUp(1, "test", "password", "password");
   });

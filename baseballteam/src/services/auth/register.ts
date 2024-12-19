@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from "axios";
 
 export const checkStudentId = async (studentId: string) => {
@@ -13,7 +12,9 @@ export const checkStudentId = async (studentId: string) => {
       status: 200,
       data: response.data,
     };
-  } catch (e: any) {
+  } catch (e: unknown) {
+    if (!axios.isAxiosError(e)) return null;
+
     if (e.response && e.response.status === 400) {
       return {
         status: 400,
@@ -43,7 +44,9 @@ export const signUp = async (
       status: 201,
       data: response.data,
     };
-  } catch (e: any) {
+  } catch (e: unknown) {
+    if (!axios.isAxiosError(e)) return null;
+
     if (e.response && e.response.status === 400) {
       return {
         status: 400,
