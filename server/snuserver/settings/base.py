@@ -59,7 +59,7 @@ INSTALLED_APPS = [
 
     'person.major.apps.MajorConfig',
     'person.member.apps.MemberConfig',
-    #'person.tale.apps.TaleConfig',
+    'person.tale.apps.TaleConfig',
     'person.user.apps.UserConfig',
 
     #'schedule.weekly.apps.WeeklyConfig',
@@ -152,7 +152,7 @@ AUTH_PASSWORD_VALIDATORS = [
     }
 ]
 
-#AUTH_USER_MODEL='user.User'
+AUTH_USER_MODEL='user.User'
 PHONENUMBER_DEFAULT_REGION = 'KR'
 
 REST_FRAMEWORK = {

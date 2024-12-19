@@ -61,11 +61,10 @@ def get_num_semester_text(num_semester, status):
     return f"{num_semester}학기"
 
 def get_profile_image_url(image):
-    if image is None:
+    if image is None or image.name == "":
         return settings.FALLBACK_IMAGE
 
-    image_file = image.image
-    path = image_file.name[1:]
+    path = image.name[1:]
 
     return get_presigned_url(path)
 

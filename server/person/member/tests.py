@@ -8,7 +8,7 @@ from .models import Member
 class MemberAPITestCase(APITestCase):
     fixtures = [
         "core/data/initial/majors.json", "core/data/test/tale.json",
-        "core/data/test/mock_image.json", "core/data/test/people.json",
+        "core/data/test/people.json",
     ]
 
     def setUp(self):
@@ -91,10 +91,7 @@ class MemberAPITestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
 class MemberModelTest(TestCase):
-    fixtures = [
-        "core/data/test/people.json", "core/data/initial/majors.json",
-        "core/data/test/mock_image.json"
-    ]
+    fixtures = ["core/data/test/people.json", "core/data/initial/majors.json"]
 
     def setUp(self):
         self.member = Member.objects.get(student_id='2024-12345')

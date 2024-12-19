@@ -5,7 +5,7 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '192.168.45.248']
+ALLOWED_HOSTS = ['localhost']
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases

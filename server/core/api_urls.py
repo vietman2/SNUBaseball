@@ -18,8 +18,8 @@ from person.user.views import RegisterView, StudentIdCheckView, UserProfileView
 #from schedule.weekly.views import WeeklyScheduleViewSet
 
 router = DefaultRouter()
-
-"""router.register(
+"""
+router.register(
     'discussions/(?P<discussion_id>[0-9]+)/comments',
     DiscussionCommentView,
     basename='discussion_comments'
@@ -46,13 +46,13 @@ router.register(
     basename='guideline_comments'
 )
 router.register('guidelines', GuidelineView, basename='guidelines')
-
+"""
 router.register('majors', MajorViewSet, basename='majors')
 router.register('members', MemberViewSet, basename='members')
 router.register('profiles', UserProfileView, basename='profile')
 
-router.register('weekly', WeeklyScheduleViewSet, basename='weekly_schedules')
-"""
+#router.register('weekly', WeeklyScheduleViewSet, basename='weekly_schedules')
+
 urlpatterns = [
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),

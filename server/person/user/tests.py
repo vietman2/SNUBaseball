@@ -3,20 +3,15 @@ from django.test import TestCase, RequestFactory
 from rest_framework.test import APITestCase
 from rest_framework import status
 
-from media.image.models import Image as ImageModel
 from person.member.models import Member
 from .forms import UserAdmin, CustomUserCreationForm
 from .models import User
 
 class UserProfileAPITestCase(APITestCase):
-    fixtures = [
-        "core/data/initial/majors.json",
-        "core/data/test/mock_image.json", "core/data/test/people.json"
-    ]
+    fixtures = ["core/data/initial/majors.json", "core/data/test/people.json"]
 
     def setUp(self):
         self.url = '/v1/profiles/'
-        self.image = ImageModel.objects.get(pk=1)
         self.member = Member.objects.get(student_id='2024-12345')
         self.member2 = Member.objects.get(student_id='2023-12345')
         self.member3 = Member.objects.get(student_id='2022-12345')
@@ -55,10 +50,7 @@ class UserProfileAPITestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
 class StudentIdCheckAPITestCase(APITestCase):
-    fixtures = [
-        "core/data/initial/majors.json",
-        "core/data/test/mock_image.json", "core/data/test/people.json"
-    ]
+    fixtures = ["core/data/initial/majors.json", "core/data/test/people.json"]
 
     def setUp(self):
         self.url = '/v1/student_id/'
@@ -92,8 +84,6 @@ class StudentIdCheckAPITestCase(APITestCase):
         self.assertEqual(response.data['error'], '이미 가입된 학번입니다.')
 
 class RegisterAPITestCase(APITestCase):
-    fixtures = ["core/data/test/mock_image.json"]
-
     def setUp(self):
         self.url = '/v1/register/'
         self.member = Member.objects.create(
@@ -223,10 +213,7 @@ class RegisterAPITestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
 class UserModelTest(TestCase):
-    fixtures = [
-        "core/data/test/people.json", "core/data/test/mock_image.json",
-        "core/data/initial/majors.json"
-    ]
+    fixtures = ["core/data/test/people.json", "core/data/initial/majors.json"]
 
     def test_has_perm(self):
         user = User.objects.get(username="testuser_1")
@@ -278,10 +265,7 @@ class UserFormTest(TestCase):
         self.assertFalse(form.is_valid())
 
 class UserAdminTest(TestCase):
-    fixtures = [
-        "core/data/test/people.json", "core/data/test/mock_image.json",
-        "core/data/initial/majors.json"
-    ]
+    fixtures = ["core/data/test/people.json", "core/data/initial/majors.json"]
 
     def setUp(self):
         self.site = AdminSite()

@@ -1,6 +1,8 @@
 from django.contrib.auth.base_user import BaseUserManager
 from django.utils import timezone
 
+from person.member.models import Member
+
 class UserManager(BaseUserManager):
     def get_queryset(self):
         return super().get_queryset()
@@ -20,3 +22,17 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
 
         return user
+
+    def create_superuser(self, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+
+        member = Member.objects.create(
+            student_id="2017-19331",
+            first_name="승원",
+            last_name="정",
+            birth_date="1999-03-07",
+            admission_year=2017,
+        )
+
+        return self.create_user(password, member=member, **extra_fields)
