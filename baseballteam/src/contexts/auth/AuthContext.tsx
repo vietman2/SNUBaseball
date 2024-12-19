@@ -49,9 +49,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
               ] = `Bearer ${newAccessToken}`;
               return axios(originalRequest);
             }
-          } catch (refreshError: any) {
+          } catch {
             logout();
-            return Promise.reject(refreshError);
+            return Promise.reject(new Error("Failed to refresh token"));
           }
         }
         return Promise.reject(error);
