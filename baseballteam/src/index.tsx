@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom/client";
-import axios from "axios";
+import axios, { InternalAxiosRequestConfig } from "axios";
 
 import App from "@pages/App";
 import reportWebVitals from "./reportWebVitals";
@@ -11,11 +11,11 @@ const root = ReactDOM.createRoot(
 if (process.env.NODE_ENV === "production") {
   axios.defaults.baseURL = "https://api.snubaseball.com";
 } else {
-  axios.defaults.baseURL = "http://192.168.45.248:8000";
+  axios.defaults.baseURL = "http://localhost:8000";
 }
 axios.defaults.headers.common["Content-Type"] = "application/json";
 axios.defaults.withCredentials = true;
-axios.interceptors.request.use(function (config: any) {
+axios.interceptors.request.use(function (config: InternalAxiosRequestConfig) {
   return config;
 });
 
