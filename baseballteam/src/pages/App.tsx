@@ -14,6 +14,7 @@ import {
 
 import { RootLayout } from "@pages/_layout";
 import { Login, SignUp } from "@pages/Auth";
+import { ForumContainer } from "@pages/Forum";
 import { HomeContainer } from "@pages/Home";
 
 import { ErrorPage } from "@components/Fallbacks";
@@ -214,14 +215,15 @@ function AppRouter() {
         <Route element={<ProtectedRoutes />}>
           <Route element={<RootLayout />}>
             <Route path="/home/*" element={<HomeContainer />} />
-            {/*<Route path="/records/*" element={<RecordsContainer />} />
             <Route path="/forum/*" element={<ForumContainer />} />
+            {/*<Route path="/records/*" element={<RecordsContainer />} />
             <Route path="/schedule/*" element={<ScheduleContainer />} />
             <Route path="/notes/*" element={<NotesContainer />} />
             <Route path="/management/*" element={<ManagementContainer />} />
             <Route path="/admin/*" element={<AdminContainer />} />
             <Route path="/accountings/*" element={<AccountingsContainer />} />
-          */}</Route>
+          */}
+          </Route>
         </Route>
         <Route path="/*" element={<ErrorPage />} />
       </>
