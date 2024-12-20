@@ -18,12 +18,9 @@ export const login = async (username: string, password: string) => {
 
 export const logout = async () => {
   try {
-    const response = await axios.post(`/v1/logout/`, {});
+    await axios.post(`/v1/logout/`, {});
 
-    return {
-      status: 200,
-      data: response.data,
-    };
+    return true;
   } catch {
     return null;
   }
