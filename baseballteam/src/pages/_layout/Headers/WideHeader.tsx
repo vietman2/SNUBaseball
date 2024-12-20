@@ -71,8 +71,15 @@ export function Header({
           )}
         </IconWrapper>
         <VerticalDivider height="24px" />
-        <MenuContainer onMouseOver={showMenu} onMouseLeave={hideMenu} data-testid="menu">
-          <img src={user?.profile_image} alt="avatar" />
+        <MenuContainer
+          onMouseOver={showMenu}
+          onMouseLeave={hideMenu}
+          data-testid="menu"
+        >
+          <div>
+            <img src={user?.profile_image} alt="avatar" />
+            <span>{user?.name}</span>
+          </div>
           <Menu style={{ display: menuOpen ? "block" : "none" }}>
             <MenuItem onClick={() => {}}>내 프로필</MenuItem>
             <MenuItem onClick={handleLogout}>로그아웃</MenuItem>
@@ -113,14 +120,21 @@ const Wrapper = styled.div`
 const MenuContainer = styled.div`
   position: relative;
   display: inline-block;
-  padding-top: 4px;
 
-  > img {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
+  > div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-size: 0.95rem;
 
     cursor: pointer;
+
+    > img {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+    }
   }
 `;
 
