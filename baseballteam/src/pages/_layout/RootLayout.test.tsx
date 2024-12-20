@@ -1,25 +1,27 @@
-import { fireEvent, screen } from "@testing-library/react";
-import * as Router from "react-router-dom";
+import { screen, waitFor } from "@testing-library/react";
 
 import { RootLayout } from "./RootLayout";
-import { renderWithProviders } from "@utils/test-utils";
+import { renderWithProviders, resizeWindow } from "@utils/test-utils";
 
-jest.mock("./Headers/WideHeader", () => ({
-  Header: () => <div>Header</div>,
+jest.mock("./Desktop/Desktop", () => ({
+  DesktopLayout: () => <div data-testid="desktop" />,
+}));
+jest.mock("./Mobile/Mobile", () => ({
+  MobileLayout: () => <div data-testid="mobile" />,
 }));
 
 describe("<RootLayout />", () => {
-  it("toggles sidebar and handles navigate", () => {
-    jest.spyOn(Router, "useLocation").mockReturnValue({
-      pathname: "/home",
-      state: {},
-      search: "",
-      hash: "",
-      key: "",
-    });
+  it("renders both mobile and desktop", async() => {
     renderWithProviders(<RootLayout />);
 
-    fireEvent.click(screen.getByTestId("toggle"));
-    fireEvent.click(screen.getByTestId("Home"));
+    await waitFor(() => {
+      resizeWindow(800, 800);
+      expect(screen.getByTestId("desktop")).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      resizeWindow(400, 400);
+      expect(screen.getByTestId("mobile")).toBeInTheDocument();
+    });
   });
 });
