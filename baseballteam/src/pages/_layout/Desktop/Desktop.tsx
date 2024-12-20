@@ -16,7 +16,6 @@ export function DesktopLayout() {
   );
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);
 
-  const navigate = useNavigate();
   const location = useLocation();
 
   const toggleSidebar = () => {
@@ -24,16 +23,17 @@ export function DesktopLayout() {
   };
 
   useEffect(() => {
+    const path = location.pathname.split("/")[1];
+
     const tab = tabgroups
       .flatMap((group) => group.tabs)
-      .find((tab) => tab.path === location.pathname);
+      .find((tab) => tab.path === `/${path}`);
 
     if (tab) {
       setActiveTab(tab);
-    } else {
-      navigate("/home");
+      setActiveSubTab(tab.subtabs[0]);
     }
-  }, [location.pathname, navigate]);
+  }, [location.pathname]);
 
   return (
     <MainContainer>
@@ -160,6 +160,7 @@ function Header({
   const { user, logout } = useAuth();
   const { toggleTheme, isDarkMode, colors } = useTheme();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const showMenu = () => {
     setMenuOpen(true);
@@ -177,6 +178,14 @@ function Header({
       navigate("/login");
     }
   };
+
+  useEffect(() => {
+    const tab = subtabs.find((subtab) => subtab.path === location.pathname);
+
+    if (tab) {
+      setActiveSubtab(tab);
+    }
+  }, [location.pathname]);
 
   return (
     <HeaderContainer>
@@ -205,7 +214,7 @@ function Header({
         </IconWrapper>
         <VerticalDivider height="24px" />
         <MenuContainer
-          onMouseEnter={showMenu}
+          onMouseOver={showMenu}
           onMouseOut={hideMenu}
           data-testid="menu"
         >
