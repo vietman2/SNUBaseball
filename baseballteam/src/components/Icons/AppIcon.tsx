@@ -3,6 +3,7 @@ import { ReactComponent as ChevronLeftIcon } from "./chevron-left.svg";
 import { ReactComponent as ChevronRightIcon } from "./chevron-right.svg";
 import { ReactComponent as ChevronUpIcon } from "./chevron-up.svg";
 import { ReactComponent as CloseIcon } from "./close.svg";
+import { ReactComponent as ForumIcon } from "./forum.svg";
 import { ReactComponent as HomeIcon } from "./home.svg";
 import { ReactComponent as MenuIcon } from "./menu.svg";
 import { ReactComponent as MoonIcon } from "./moon.svg";
@@ -23,6 +24,7 @@ const iconMap: Record<
   "chevron-left": ChevronLeftIcon,
   "chevron-right": ChevronRightIcon,
   "chevron-up": ChevronUpIcon,
+  forum: ForumIcon,
   home: HomeIcon,
   menu: MenuIcon,
   moon: MoonIcon,
