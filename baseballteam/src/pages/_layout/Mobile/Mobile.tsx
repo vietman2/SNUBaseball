@@ -1,21 +1,25 @@
-import { useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 import { AppIcon } from "@components/Icons";
 import { useAuth } from "@contexts/auth";
 import { useTheme } from "@contexts/theme";
-import { TabGroup, TabType, tabgroups } from "@navigation/tabs";
+import { TabGroup, TabType, SubTabType, tabgroups } from "@navigation/tabs";
 import { logout as logoutRequest } from "@services/auth";
 
 export function MobileLayout() {
-  const [activeTab, setActiveTab] = useState<string>("Home");
+  const [activeTab, setActiveTab] = useState<TabType>(tabgroups[0].tabs[0]);
+  const [activeSubTab, setActiveSubTab] = useState<SubTabType>(
+    activeTab.subtabs[0]
+  );
   const [isTabsOpen, setIsTabsOpen] = useState<boolean>(false);
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   const { user, logout } = useAuth();
   const { colors } = useTheme();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const toggleTabs = () => {
     setIsTabsOpen(!isTabsOpen);
@@ -33,7 +37,7 @@ export function MobileLayout() {
 
   const handleTabClick = (tab: TabType) => {
     navigate(tab.path);
-    setActiveTab(tab.title);
+    setActiveTab(tab);
     setIsTabsOpen(false);
   };
 
@@ -51,6 +55,19 @@ export function MobileLayout() {
     }
   };
 
+  useEffect(() => {
+    const path = location.pathname.split("/")[1];
+
+    const tab = tabgroups
+      .flatMap((group) => group.tabs)
+      .find((tab) => tab.path === `/${path}`);
+
+    if (tab) {
+      setActiveTab(tab);
+      setActiveSubTab(tab.subtabs[0]);
+    }
+  }, [location.pathname]);
+
   return (
     <div onClick={hideMenu}>
       <Header $isOpen={isTabsOpen}>
@@ -61,7 +78,7 @@ export function MobileLayout() {
             color="#000"
           />
         </button>
-        {isTabsOpen ? "서울대 야구부" : activeTab}
+        {isTabsOpen ? "서울대 야구부" : activeSubTab.title}
         <MenuContainer>
           <Profile onClick={showMenu} data-testid="menu">
             <img src={user?.profile_image} alt="avatar" />
@@ -83,16 +100,14 @@ export function MobileLayout() {
                     <TabItem
                       key={tab.title}
                       onClick={() => handleTabClick(tab)}
-                      $isActive={activeTab === tab.title}
+                      $isActive={activeTab === tab}
                       data-testid={tab.title}
                     >
                       <AppIcon
                         icon={tab.icon}
                         size={24}
                         color={
-                          activeTab === tab.title
-                            ? colors.primary
-                            : colors.borderDark
+                          activeTab === tab ? colors.primary : colors.borderDark
                         }
                       />
                       {tab.title}
