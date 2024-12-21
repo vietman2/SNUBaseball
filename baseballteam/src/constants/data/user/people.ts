@@ -1,4 +1,4 @@
-import { UserProfileType } from "@models/user";
+import { AuthorType, UserProfileType } from "@models/user";
 
 export const sampleProfile: UserProfileType = {
   uuid: "1",
@@ -19,4 +19,10 @@ export const sampleAuthorProfile: UserProfileType = {
   name: "Lorem Ipsum",
   profile_image: "https://via.placeholder.com/150",
   is_admin: false,
+};
+
+export const sampleAuthor: AuthorType = {
+  uuid: "12",
+  name: "Lorem Ipsum",
+  profile_image: "https://via.placeholder.com/150",
 };
