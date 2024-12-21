@@ -68,7 +68,7 @@ export function NoticeWrite() {
 
       if (response) {
         window.alert("공지가 성공적으로 수정되었습니다.");
-        handleBack();
+        handleClose();
       } else {
         window.alert("공지 수정에 실패했습니다.");
       }
@@ -82,7 +82,7 @@ export function NoticeWrite() {
 
       if (response) {
         window.alert("공지가 성공적으로 등록되었습니다.");
-        handleBack();
+        handleClose();
       } else {
         window.alert("공지 등록에 실패했습니다.");
       }
@@ -91,8 +91,12 @@ export function NoticeWrite() {
     setLoading(false);
   };
 
-  const handleBack = () => {
+  const handleClose = () => {
     navigate("/forum/notices");
+  };
+
+  const handleBack = () => {
+    navigate(-1);
   };
 
   useEffect(() => {
@@ -159,7 +163,12 @@ export function NoticeWrite() {
   return (
     <Container>
       <Header>
-        <Title>{editMode ? "공지 수정" : "새 공지"}</Title>
+        <div>
+          <BackButton onClick={handleBack}>
+            <AppIcon icon="chevron-left" size={24} color="gray" />
+          </BackButton>
+          <Title>{editMode ? "공지 수정" : "새 공지"}</Title>
+        </div>
         <Tabs>
           {categoryOptions.map((option) => (
             <button
@@ -239,6 +248,15 @@ const Container = styled.div`
   padding: 16px 24px;
 `;
 
+const BackButton = styled.button`
+  display: none;
+
+  @media (max-width: 768px) {
+    display: flex;
+    justify-content: flex-start;
+  }
+`;
+
 const Header = styled.div`
   display: flex;
   flex-direction: column;
@@ -251,7 +269,7 @@ const Header = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 8px;
+    gap: 16px;
   }
 
   > div:last-child {

@@ -136,6 +136,13 @@ export function NoticeDetail() {
       <Header>
         <ChipWrapper>
           <div>
+            <BackButton onClick={handleClose}>
+              <AppIcon
+                icon="chevron-left"
+                size={24}
+                color={colors.borderDark}
+              />
+            </BackButton>
             <Chip
               label={notice.category.label}
               color={notice.category.color}
@@ -203,6 +210,9 @@ export function NoticeDetail() {
         <span>
           <VerticalDivider bold color={colors.borderDark} />
         </span>
+        <span>
+          <Divider color={colors.borderDark} />
+        </span>
         <div>
           <CommentsList
             postId={notice.id}
@@ -223,6 +233,10 @@ const Container = styled.div`
   flex: 1;
   flex-direction: column;
   padding: 16px 24px;
+
+  @media (max-width: 768px) {
+    padding: 0 12px;
+  }
 `;
 
 const Header = styled.div`
@@ -248,9 +262,26 @@ const Contents = styled.div`
     max-width: 50%;
     padding: 16px 12px 4px 12px;
   }
+
+  > span:last-child {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+
+    > div {
+      max-width: 100%;
+    }
+
+    > span:first-child {
+      display: none;
+    }
+  }
 `;
 
 const Subtitle = styled.div`
+  padding-bottom: 2px;
   font-size: 1.3rem;
   font-weight: 700;
   color: ${({ theme }) => theme.colors.foreground900};
@@ -287,12 +318,22 @@ const Attachment = styled.div`
 const ChipWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
 
   > div {
     display: flex;
     flex-direction: row;
-    gap: 12px;
+    align-items: center;
+    gap: 8px;
+  }
+`;
+
+const BackButton = styled.button`
+  padding-top: 4px;
+
+  @media (min-width: 768px) {
+    display: none;
   }
 `;
 
