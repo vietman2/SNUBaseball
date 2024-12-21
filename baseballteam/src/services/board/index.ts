@@ -1,4 +1,14 @@
-//import { createDiscussion, updateDiscussion, deleteDiscussion, likeDiscussion, getDiscussions, getDiscussionDetails, createDiscussionComment, editDiscussionComment, deleteDiscussionComment } from "./discussions";
+import {
+  createDiscussion,
+  updateDiscussion,
+  deleteDiscussion,
+  likeDiscussion,
+  getDiscussions,
+  getDiscussionDetails,
+  createDiscussionComment,
+  editDiscussionComment,
+  deleteDiscussionComment,
+} from "./discussions";
 import {
   createNotice,
   getNotices,
@@ -13,7 +23,7 @@ import {
 } from "./notices";
 
 export {
-  /*createDiscussion,
+  createDiscussion,
   updateDiscussion,
   deleteDiscussion,
   likeDiscussion,
@@ -21,7 +31,7 @@ export {
   getDiscussionDetails,
   createDiscussionComment,
   editDiscussionComment,
-  deleteDiscussionComment,*/
+  deleteDiscussionComment,
   createNotice,
   getNotices,
   getNoticeDetails,
