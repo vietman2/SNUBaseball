@@ -257,6 +257,7 @@ const SidebarToggleIcon = styled.div<{ $left: string }>`
   cursor: pointer;
   transition: left 0.3s ease-in-out;
   background-color: ${({ theme }) => theme.colors.background300};
+  box-shadow: 2px 0 1px rgba(0, 0, 0, 0.25);
   padding: 5px 0 0 0;
   border-radius: 8px;
   z-index: 101;
@@ -316,6 +317,7 @@ const SidebarContainer = styled.div<{ width: string }>`
   overflow-x: hidden;
   overflow-y: auto;
 
+  box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.25);
   border-radius: 0 16px 16px 0;
   transition: width 0.3s ease-in-out;
 `;
