@@ -57,7 +57,7 @@ const Container = styled.div`
   color: ${({ theme }) => theme.colors.foreground500};
 
   border-radius: 16px;
-  background-color: ${({ theme }) => theme.colors.background100};
+  background-color: ${({ theme }) => theme.colors.background300};
 
   > div {
     display: flex;
@@ -92,6 +92,10 @@ const Container = styled.div`
       align-items: center;
       gap: 8px;
     }
+  }
+
+  @media (max-width: 768px) {
+    width: 85vw;
   }
 `;
 

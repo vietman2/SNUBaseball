@@ -10,31 +10,31 @@ export function NoticeTableHeader() {
       <div />
       <div>
         <AppIcon icon="text" size={18} color="#212529" />
-        제목
+        <span>제목</span>
       </div>
       <div>
         <AppIcon icon="category" size={18} color="#212529" />
-        카테고리
+        <span>분류</span>
       </div>
       <div>
-        <AppIcon icon="person" size={18} color="#212529" />
-        작성자
+        <AppIcon icon="people" size={18} color="#212529" />
+        <span>작성자</span>
       </div>
       <div>
         <AppIcon icon="calendar" size={18} color="#212529" />
-        작성일
+        <span>작성일</span>
       </div>
       <div>
         <AppIcon icon="heart-outline" size={18} color="#212529" />
-        좋아요
+        <span>좋아요</span>
       </div>
       <div>
         <AppIcon icon="chat" size={20} color="#212529" />
-        댓글
+        <span>댓글</span>
       </div>
       <div>
         <AppIcon icon="eye" size={20} color="#212529" />
-        조회수
+        <span>조회수</span>
       </div>
     </Header>
   );
@@ -44,9 +44,7 @@ interface RowProps {
   notice: NoticeSimpleType;
 }
 
-export function NoticeTableRow({
-  notice,
-}: Readonly<RowProps>) {
+export function NoticeTableRow({ notice }: Readonly<RowProps>) {
   return (
     <Container>
       <div>{notice.id}</div>
@@ -77,37 +75,72 @@ const Container = styled.div`
   flex-direction: row;
   align-items: center;
 
-  font-size: 16px;
+  font-size: 0.9rem;
   color: ${({ theme }) => theme.colors.foreground700};
 
-  border-top: 1px solid ${({ theme }) => theme.colors.borderLight};
+  border-top: 0.5px solid ${({ theme }) => theme.colors.borderLight};
 
   > div {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 36px;
+    height: 32px;
+    width: 72px;
     padding: 8px;
     gap: 6px;
 
     white-space: nowrap;
 
-    border-right: 1px solid ${({ theme }) => theme.colors.borderLight};
+    border-right: 0.5px solid ${({ theme }) => theme.colors.borderLight};
+
+    > span {
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
   }
 
   > div:nth-child(1) {
+    width: 60px;
+
+    @media (max-width: 768px) {
     width: 40px;
+    }
   }
 
   > div:nth-child(2) {
     flex: 1;
     justify-content: flex-start;
     min-width: 80px;
-    max-width: 480px;
+    max-width: 360px;
 
     white-space: nowrap;
     overflow: hidden;
   }
+
+  > div:nth-child(5) {
+    @media (max-width: 768px) {
+      border-right: none;
+    }
+  }
+
+  > div:nth-child(6) {
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  > div:nth-child(7) {
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  > div:nth-child(8) {
+    border-right: none;
+    @media (max-width: 768px) {
+      display: none;
+    }
 `;
 
 const Header = styled(Container)`
@@ -119,5 +152,6 @@ const Header = styled(Container)`
   > div {
     justify-content: center !important;
     height: 32px;
+    border-right: none;
   }
 `;
