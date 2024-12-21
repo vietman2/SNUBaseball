@@ -13,7 +13,7 @@ export const Main: TabGroup = {
           path: "/home",
         },
       ],
-    },/*
+    } /*
     {
       title: "기록실",
       icon: "record",
@@ -36,7 +36,7 @@ export const Main: TabGroup = {
           path: "/records/physicals",
         },
       ],
-    },
+    },*/,
     {
       title: "게시판",
       icon: "forum",
@@ -45,7 +45,7 @@ export const Main: TabGroup = {
         {
           title: "공지",
           path: "/forum/notices",
-        },
+        } /*
         {
           title: "자유게시판",
           path: "/forum/discussions",
@@ -53,9 +53,9 @@ export const Main: TabGroup = {
         {
           title: "갤러리",
           path: "/forum/gallery",
-        },
+        },*/,
       ],
-    },*/
+    },
   ],
   limited: false,
 };

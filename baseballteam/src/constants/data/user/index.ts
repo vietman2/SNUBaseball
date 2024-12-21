@@ -1,3 +1,8 @@
-import { sampleAdmin, sampleAuthorProfile, sampleProfile } from "./people";
+import {
+  sampleAdmin,
+  sampleAuthor,
+  sampleAuthorProfile,
+  sampleProfile,
+} from "./people";
 
-export { sampleAdmin, sampleAuthorProfile, sampleProfile };
+export { sampleAdmin, sampleAuthor, sampleAuthorProfile, sampleProfile };

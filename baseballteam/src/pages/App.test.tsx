@@ -30,6 +30,9 @@ jest.mock("@pages/Auth", () => ({
   Login: () => <div>Login</div>,
   SignUp: () => <div />,
 }));
+jest.mock("@pages/Forum", () => ({
+  ForumContainer: () => <div>ForumContainer</div>,
+}));
 jest.mock("@pages/Home", () => ({
   HomeContainer: () => <div>HomeContainer</div>,
 }));

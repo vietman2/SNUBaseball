@@ -1,0 +1,47 @@
+[
+  {
+    "model": "notice.noticecategory",
+    "pk": 1,
+    "fields": {
+      "label": "일반",
+      "color": "#253238",
+      "background_color": "#CFD8DC"
+    }
+  },
+  {
+    "model": "notice.noticecategory",
+    "pk": 2,
+    "fields": {
+      "label": "긴급",
+      "color": "#C62828",
+      "background_color": "#FFEBEE"
+    }
+  },
+  {
+    "model": "notice.noticecategory",
+    "pk": 3,
+    "fields": {
+      "label": "선수등록",
+      "color": "#6A1B9A",
+      "background_color": "#F3E5F5"
+    }
+  },
+  {
+    "model": "notice.noticecategory",
+    "pk": 4,
+    "fields": {
+      "label": "시합",
+      "color": "#01579B",
+      "background_color": "#E1F5FE"
+    }
+  },
+  {
+    "model": "notice.noticecategory",
+    "pk": 5,
+    "fields": {
+      "label": "전력분석",
+      "color": "#2E7D32",
+      "background_color": "#E8F5E9"
+    }
+  }
+]
