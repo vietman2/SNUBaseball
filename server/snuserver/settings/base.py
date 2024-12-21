@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'core',
 
     ## Custom Apps
-    #'board.discussion.apps.DiscussionConfig',
+    'board.discussion.apps.DiscussionConfig',
     'board.notice.apps.NoticeConfig',
 
     #'management.equipment.apps.EquipmentConfig',
