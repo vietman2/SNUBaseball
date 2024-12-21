@@ -1,10 +1,10 @@
 import { Route, Routes, Navigate, Outlet } from "react-router-dom";
 
-/*import {
+import {
   DiscussionDetail,
   DiscussionLayout,
   DiscussionWrite,
-} from "./Discussions";*/
+} from "./Discussions";
 import { NoticeDetail, NoticeLayout, NoticeWrite } from "./Notices";
 
 export function ForumContainer() {
@@ -16,6 +16,11 @@ export function ForumContainer() {
           <Route path="new" element={<NoticeWrite />} />
           <Route path=":noticeId/edit" element={<NoticeWrite />} />
           <Route path=":noticeId" element={<NoticeDetail />} />
+        </Route>
+        <Route path="discussions" element={<DiscussionLayout />}>
+          <Route path="new" element={<DiscussionWrite />} />
+          <Route path=":discussionId/edit" element={<DiscussionWrite />} />
+          <Route path=":discussionId" element={<DiscussionDetail />} />
         </Route>
       </Route>
     </Routes>

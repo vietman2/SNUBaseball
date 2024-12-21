@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 
-import { Chip } from "@components/Chips";
 import { Divider, VerticalDivider } from "@components/Dividers";
 import { ErrorComponent, Loading } from "@components/Fallbacks";
 import { AppIcon } from "@components/Icons";
@@ -11,18 +10,18 @@ import { useAuth } from "@contexts/auth";
 import { useTheme } from "@contexts/theme";
 import { CommentsList } from "@fragments/Comments";
 import { MenuOptionType } from "@models/app";
-import { NoticeDetailType } from "@models/forum";
+import { DiscussionDetailType } from "@models/forum";
 import {
-  getNoticeDetails,
-  deleteNotice,
-  likeNotice,
-  createNoticeComment,
-  deleteNoticeComment,
-  editNoticeComment,
+  getDiscussionDetails,
+  deleteDiscussion,
+  likeDiscussion,
+  createDiscussionComment,
+  editDiscussionComment,
+  deleteDiscussionComment,
 } from "@services/board";
 
-export function NoticeDetail() {
-  const [notice, setNotice] = useState<NoticeDetailType>();
+export function DiscussionDetail() {
+  const [discussion, setDiscussion] = useState<DiscussionDetailType>();
   const [menu, setMenu] = useState<MenuOptionType[]>([]);
 
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -32,7 +31,7 @@ export function NoticeDetail() {
 
   const { user } = useAuth();
   const { colors } = useTheme();
-  const { noticeId } = useParams();
+  const { discussionId } = useParams();
   const navigation = useNavigate();
 
   const handleRefresh = () => {
@@ -47,31 +46,47 @@ export function NoticeDetail() {
     window.open(attachment);
   };
 
+  const handleEdit = () => {
+    navigation(`/forum/discussions/${discussion?.id}/edit`);
+  };
+
   const handleClose = () => {
-    navigation("/forum/notices");
+    navigation("/forum/discussions");
+  };
+
+  const handleBack = () => {
+    navigation(-1);
+  };
+
+  const handleDelete = async () => {
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      const response = await deleteDiscussion(discussion?.id);
+
+      if (response) {
+        handleClose();
+      } else {
+        window.alert("삭제에 실패했습니다.");
+      }
+    }
   };
 
   const handleLike = async () => {
-    setLoading(true);
-
-    const response = await likeNotice(notice?.id);
+    const response = await likeDiscussion(discussion?.id);
 
     if (response) {
       handleRefresh();
     }
-
-    setLoading(false);
   };
 
   useEffect(() => {
-    const fetchNoticeDetails = async () => {
-      if (!noticeId) return;
+    const fetchDiscussionDetails = async () => {
+      if (!discussionId) return;
 
       setLoading(true);
-      const response = await getNoticeDetails(parseInt(noticeId));
+      const response = await getDiscussionDetails(parseInt(discussionId));
 
       if (response) {
-        setNotice(response.data);
+        setDiscussion(response);
         setError(false);
       } else {
         setError(true);
@@ -80,27 +95,11 @@ export function NoticeDetail() {
       setLoading(false);
     };
 
-    fetchNoticeDetails();
-  }, [noticeId, refreshCount]);
+    fetchDiscussionDetails();
+  }, [discussionId, refreshCount]);
 
   useEffect(() => {
-    if (!user || !notice) return;
-
-    const handleEdit = () => {
-      navigation(`/forum/notices/${notice?.id}/edit`);
-    };
-
-    const handleDelete = async () => {
-      if (window.confirm("정말 삭제하시겠습니까?")) {
-        const response = await deleteNotice(notice?.id);
-
-        if (response) {
-          handleClose();
-        } else {
-          window.alert("삭제에 실패했습니다.");
-        }
-      }
-    };
+    if (!user || !discussion) return;
 
     const edit = {
       label: "수정하기",
@@ -112,12 +111,12 @@ export function NoticeDetail() {
       onClick: handleDelete,
     };
 
-    if (notice.is_author) {
+    if (discussion.is_author) {
       setMenu([edit, del]);
     } else if (user.is_admin) {
       setMenu([del]);
     }
-  }, [user, notice]);
+  }, [user, discussion]);
 
   if (loading) {
     return (
@@ -127,28 +126,23 @@ export function NoticeDetail() {
     );
   }
 
-  if (noticeId === null || notice === undefined || error) {
+  if (discussionId === null || discussion === undefined || error) {
     return <ErrorComponent onRefresh={handleClose} label="뒤로가기" />;
   }
 
   return (
     <Container>
       <Header>
-        <ChipWrapper>
+        <div>
           <div>
-            <BackButton onClick={handleClose}>
+            <BackButton onClick={handleBack} data-testid="back">
               <AppIcon
                 icon="chevron-left"
                 size={24}
                 color={colors.borderDark}
               />
             </BackButton>
-            <Chip
-              label={notice.category.label}
-              color={notice.category.color}
-              bgColor={notice.category.background_color}
-            />
-            <Subtitle>{notice.title}</Subtitle>
+            <Subtitle>{discussion.title}</Subtitle>
           </div>
           {menu.length > 0 && (
             <Menu
@@ -157,56 +151,56 @@ export function NoticeDetail() {
               toggleDropdown={toggleMenu}
             />
           )}
-        </ChipWrapper>
+        </div>
         <Metadata>
-          <span>{notice.author.name}</span>
-          <span>{notice.created_at}</span>
+          <div>{discussion.author.name}</div>
+          <div>{discussion.created_at}</div>
         </Metadata>
       </Header>
       <span>
         <Divider bold color={colors.borderDark} />
       </span>
-      <Contents>
-        <Content>
-          <div>{notice.content}</div>
+      <Wrapper>
+        <Box>
+          <div>{discussion.content}</div>
           <div>
-            <AttachmentsWrapper>
-              <span>첨부파일 ({notice.attachments.length})</span>
-              {notice.attachments.map((attachment) => (
+            <FilesWrapper>
+              <span>첨부파일 ({discussion.attachments.length})</span>
+              {discussion.attachments.map((attachment) => (
                 <button
                   onClick={() => handleDownload(attachment.file)}
                   key={attachment.created_at}
                   data-testid={`${attachment.name}`}
                 >
-                  <Attachment>
+                  <File>
                     <div>{attachment.name}</div>
                     <AppIcon icon="download" size={24} color="gray" />
-                  </Attachment>
+                  </File>
                 </button>
               ))}
-            </AttachmentsWrapper>
-            <Stats>
+            </FilesWrapper>
+            <Numbers>
               <Row>
                 <button onClick={handleLike} data-testid="like">
                   <AppIcon
-                    icon={notice.is_liked ? "heart" : "heart-outline"}
+                    icon={discussion.is_liked ? "heart" : "heart-outline"}
                     size={18}
-                    color={notice.is_liked ? "#FF0000" : colors.primary}
+                    color={discussion.is_liked ? "#FF0000" : colors.primary}
                   />
                 </button>
-                <div>{notice.num_likes}</div>
+                <div>{discussion.num_likes}</div>
               </Row>
               <Row>
                 <AppIcon icon="eye" size={20} color={colors.primary} />
-                <div>{notice.num_views}</div>
+                <div>{discussion.num_views}</div>
               </Row>
               <Row>
                 <AppIcon icon="chat" size={16} color={colors.primary} />
-                <div>{notice.comments.length}</div>
+                <div>{discussion.comments.length}</div>
               </Row>
-            </Stats>
+            </Numbers>
           </div>
-        </Content>
+        </Box>
         <span>
           <VerticalDivider bold color={colors.borderDark} />
         </span>
@@ -215,15 +209,15 @@ export function NoticeDetail() {
         </span>
         <div>
           <CommentsList
-            postId={notice.id}
-            comments={notice.comments}
-            createComment={createNoticeComment}
-            deleteComment={deleteNoticeComment}
-            editComment={editNoticeComment}
+            postId={discussion.id}
+            comments={discussion.comments}
+            createComment={createDiscussionComment}
+            deleteComment={deleteDiscussionComment}
+            editComment={editDiscussionComment}
             refresh={handleRefresh}
           />
         </div>
-      </Contents>
+      </Wrapper>
     </Container>
   );
 }
@@ -239,17 +233,7 @@ const Container = styled.div`
   }
 `;
 
-const Header = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 16px 12px;
-  gap: 16px;
-
-  color: ${({ theme }) => theme.colors.foreground500};
-  font-weight: 700;
-`;
-
-const Contents = styled.div`
+const Wrapper = styled.div`
   display: flex;
   flex: 1;
   flex-direction: row;
@@ -280,20 +264,45 @@ const Contents = styled.div`
   }
 `;
 
-const Subtitle = styled.div`
-  padding-bottom: 2px;
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: ${({ theme }) => theme.colors.foreground900};
+const BackButton = styled.button`
+  padding-top: 4px;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
 `;
 
-const AttachmentsWrapper = styled.div`
+const Header = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 16px 12px;
+  gap: 16px;
+
+  color: ${({ theme }) => theme.colors.foreground500};
+  font-weight: 700;
+
+  > div:first-child {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    > div {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 8px; 
+    }
+  }
+`;
+
+const FilesWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
 `;
 
-const Attachment = styled.div`
+const File = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -316,28 +325,6 @@ const Attachment = styled.div`
   }
 `;
 
-const ChipWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-
-  > div {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 8px;
-  }
-`;
-
-const BackButton = styled.button`
-  padding-top: 4px;
-
-  @media (min-width: 768px) {
-    display: none;
-  }
-`;
-
 const Metadata = styled.div`
   display: flex;
   flex-direction: row;
@@ -346,7 +333,13 @@ const Metadata = styled.div`
   gap: 8px;
 `;
 
-const Content = styled.div`
+const Numbers = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+`;
+
+const Box = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -368,12 +361,6 @@ const Content = styled.div`
   }
 `;
 
-const Stats = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 12px;
-`;
-
 const Row = styled.div`
   display: flex;
   flex-direction: row;
@@ -386,4 +373,11 @@ const Row = styled.div`
     display: flex;
     align-self: center;
   }
+`;
+
+const Subtitle = styled.div`
+  padding-bottom: 2px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.foreground900};
 `;

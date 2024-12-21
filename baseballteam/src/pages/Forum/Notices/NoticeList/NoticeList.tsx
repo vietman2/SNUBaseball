@@ -98,9 +98,7 @@ export function NoticeList() {
 
   return (
     <Container>
-      <Header>
-        <Subtitle>공지</Subtitle>
-      </Header>
+      <Subtitle>공지</Subtitle>
       <Contents>
         <ViewOptions>
           <ViewButtons
@@ -215,20 +213,6 @@ const Container = styled.div`
   gap: 8px;
 `;
 
-const Header = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 0 0 16px;
-
-  color: ${({ theme }) => theme.colors.foreground500};
-
-  @media (max-width: 768px) {
-    padding: 0;
-  }
-`;
-
 const Button = styled.button`
   display: flex;
   flex-direction: row;
@@ -245,6 +229,12 @@ const Button = styled.button`
 `;
 
 const Subtitle = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0 0 16px;
+
   font-size: 1.75rem;
   font-weight: 700;
   color: ${({ theme }) => theme.colors.foreground900};
