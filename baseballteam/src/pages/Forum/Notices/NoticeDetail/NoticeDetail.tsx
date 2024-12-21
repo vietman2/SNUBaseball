@@ -156,7 +156,9 @@ export function NoticeDetail() {
           <span>{notice.created_at}</span>
         </Metadata>
       </Header>
-      <Divider bold color={colors.borderDark} />
+      <span>
+        <Divider bold color={colors.borderDark} />
+      </span>
       <Contents>
         <Content>
           <div>{notice.content}</div>
@@ -198,9 +200,9 @@ export function NoticeDetail() {
             </Stats>
           </div>
         </Content>
-        <div>
+        <span>
           <VerticalDivider bold color={colors.borderDark} />
-        </div>
+        </span>
         <div>
           <CommentsList
             postId={notice.id}
@@ -237,6 +239,7 @@ const Contents = styled.div`
   display: flex;
   flex: 1;
   flex-direction: row;
+  padding-bottom: 16px;
 
   > div {
     display: flex;
@@ -244,11 +247,6 @@ const Contents = styled.div`
     flex-direction: column;
     max-width: 50%;
     padding: 16px 12px 4px 12px;
-  }
-
-  > div:nth-child(2) {
-    flex: 0;
-    padding: 0;
   }
 `;
 

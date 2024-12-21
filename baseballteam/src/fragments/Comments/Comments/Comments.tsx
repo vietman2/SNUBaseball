@@ -89,6 +89,7 @@ export function CommentsList({
   return (
     <>
       <Comments>
+        <span>댓글</span>
         {comments.map((comment) => (
           <div key={comment.id}>
             {editMode && selectedCommentId === comment.id ? (
@@ -206,9 +207,16 @@ const Comments = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
+  margin-bottom: 16px;
   gap: 16px;
 
   color: ${({ theme }) => theme.colors.foreground500};
+
+  > span {
+    font-size: 1rem;
+    font-weight: 600;
+    color: ${({ theme }) => theme.colors.foreground500};
+  }
 `;
 
 const Horizontal = styled.div`
@@ -228,7 +236,6 @@ const Horizontal = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 8px;
     gap: 4px;
 
     border-radius: 8px;
