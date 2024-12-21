@@ -45,15 +45,11 @@ export const Main: TabGroup = {
         {
           title: "공지",
           path: "/forum/notices",
-        } /*
+        },
         {
           title: "자유게시판",
           path: "/forum/discussions",
         },
-        {
-          title: "갤러리",
-          path: "/forum/gallery",
-        },*/,
       ],
     },
   ],

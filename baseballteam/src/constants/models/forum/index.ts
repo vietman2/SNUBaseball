@@ -1,4 +1,4 @@
-//import { DiscussionSimpleType, DiscussionDetailType } from "./discussion";
+import { DiscussionSimpleType, DiscussionDetailType } from "./discussion";
 import {
   NoticeCategoryType,
   NoticeCommentType,
@@ -7,8 +7,8 @@ import {
 } from "./notice";
 
 export {
-  //type DiscussionSimpleType,
-  //type DiscussionDetailType,
+  type DiscussionSimpleType,
+  type DiscussionDetailType,
   type NoticeCategoryType,
   type NoticeCommentType,
   type NoticeDetailType,

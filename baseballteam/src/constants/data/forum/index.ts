@@ -1,4 +1,4 @@
-//import { sampleDiscussions, sampleDiscussionDetail } from "./discussions";
+import { sampleDiscussions, sampleDiscussionDetail } from "./discussions";
 import {
   sampleCategories,
   sampleNotices,
@@ -7,8 +7,8 @@ import {
 } from "./notices";
 
 export {
-  //sampleDiscussions,
-  //sampleDiscussionDetail,
+  sampleDiscussions,
+  sampleDiscussionDetail,
   sampleCategories as sampleNoticeCategories,
   sampleNotices,
   sampleNoticeDetail,
