@@ -19,6 +19,7 @@ describe("<MobileLayout />", () => {
 
     fireEvent.click(screen.getByTestId("toggle-tabs")); // open tabs
     fireEvent.click(screen.getByTestId("Home")); // navigate to Home
+    fireEvent.click(screen.getByTestId("홈")); // navigate to Home
     fireEvent.click(screen.getByTestId("menu")); // open menu
     fireEvent.click(screen.getByText("로그아웃")); // open menu
   });
@@ -31,7 +32,17 @@ describe("<MobileLayout />", () => {
       search: "",
       state: "",
     });
-    jest.spyOn(AuthAPI, "logout").mockResolvedValue(true);
+    renderWithProviders(<MobileLayout />);
+  });
+
+  it("handles landing subtab", () => {
+    jest.spyOn(Router, "useLocation").mockReturnValue({
+      pathname: "/forum/discussions",
+      hash: "",
+      key: "",
+      search: "",
+      state: "",
+    });
     renderWithProviders(<MobileLayout />);
   });
 });

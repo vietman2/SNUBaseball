@@ -24,6 +24,8 @@ export function DesktopLayout() {
 
   useEffect(() => {
     const path = location.pathname.split("/")[1];
+    // subpath if exists
+    const subpath = location.pathname.split("/")[2];
 
     const tab = tabgroups
       .flatMap((group) => group.tabs)
@@ -31,9 +33,15 @@ export function DesktopLayout() {
 
     if (tab) {
       setActiveTab(tab);
-      setActiveSubTab(tab.subtabs[0]);
+
+      if (subpath) {
+        const subtab = tab.subtabs.find((subtab) => subtab.path === `/${path}/${subpath}`);
+        if (subtab) {
+          setActiveSubTab(subtab);
+        }
+      }
     }
-  }, [location.pathname]);
+  }, []);
 
   return (
     <MainContainer>
@@ -42,6 +50,8 @@ export function DesktopLayout() {
           isSidebarOpen={isSidebarOpen}
           toggleSidebar={toggleSidebar}
           activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          setActiveSubtab={setActiveSubTab}
         />
       </SidebarWrapper>
       <Contents>
@@ -63,15 +73,19 @@ interface Props {
   isSidebarOpen: boolean;
   toggleSidebar: () => void;
   activeTab: TabType;
+  setActiveTab: (tab: TabType) => void;
+  setActiveSubtab: (subtab: SubTabType) => void;
 }
 
-function Sidebar({ isSidebarOpen, toggleSidebar, activeTab }: Readonly<Props>) {
+function Sidebar({ isSidebarOpen, toggleSidebar, activeTab, setActiveTab, setActiveSubtab }: Readonly<Props>) {
   const { user } = useAuth();
   const { isDarkMode } = useTheme();
   const navigate = useNavigate();
 
-  const handleTabClick = (path: string) => {
-    navigate(path);
+  const handleTabClick = (tab: TabType) => {
+    navigate(tab.path);
+    setActiveTab(tab);
+    setActiveSubtab(tab.subtabs[0]);
   };
 
   const doRender = (tabgroup: TabGroup) => {
@@ -105,7 +119,7 @@ function Sidebar({ isSidebarOpen, toggleSidebar, activeTab }: Readonly<Props>) {
                   {tabgroup.tabs.map((tab) => (
                     <TabItem
                       key={tab.title}
-                      onClick={() => handleTabClick(tab.path)}
+                      onClick={() => handleTabClick(tab)}
                       $isActive={activeTab === tab}
                       $isOpen={isSidebarOpen}
                       data-testid={tab.title}
@@ -160,7 +174,6 @@ function Header({
   const { user, logout } = useAuth();
   const { toggleTheme, isDarkMode, colors } = useTheme();
   const navigate = useNavigate();
-  const location = useLocation();
 
   const showMenu = () => {
     setMenuOpen(true);
@@ -179,13 +192,10 @@ function Header({
     }
   };
 
-  useEffect(() => {
-    const tab = subtabs.find((subtab) => subtab.path === location.pathname);
-
-    if (tab) {
-      setActiveSubtab(tab);
-    }
-  }, [location.pathname]);
+  const handleTabClick = (subtab: SubTabType) => {
+    setActiveSubtab(subtab);
+    navigate(subtab.path);
+  };
 
   return (
     <HeaderContainer>
@@ -197,7 +207,7 @@ function Header({
             <Tab
               key={tab.title}
               $active={activeSubTab === tab}
-              onClick={() => setActiveSubtab(tab)}
+              onClick={() => handleTabClick(tab)}
             >
               {tab.title}
             </Tab>
