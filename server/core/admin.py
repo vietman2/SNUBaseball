@@ -6,6 +6,9 @@ from rest_framework.authtoken.models import TokenProxy
 from rest_framework_simplejwt.token_blacklist.models import OutstandingToken, BlacklistedToken
 
 ## Models to register
+from board.discussion.models import (
+    Discussion, DiscussionAttachment, DiscussionComment, DiscussionLike, DiscussionContentView
+)
 from board.notice.models import (
     Notice, NoticeCategory, NoticeAttachment, NoticeComment, NoticeLike, NoticeContentView
 )
@@ -16,6 +19,11 @@ from person.tale.models import PlayerTale
 from person.user.forms import UserAdmin
 from person.user.models import User
 
+admin.site.register(Discussion)
+admin.site.register(DiscussionAttachment)
+admin.site.register(DiscussionComment)
+admin.site.register(DiscussionLike)
+admin.site.register(DiscussionContentView)
 admin.site.register(Notice)
 admin.site.register(NoticeCategory)
 admin.site.register(NoticeAttachment)
