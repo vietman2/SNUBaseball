@@ -21,7 +21,7 @@ export function Chip({
     if (size === "small") {
       return "2px 6px";
     } else {
-      return "5px 10px";
+      return "4px 8px";
     } /*else {
       return "5px 12px";
     }*/
@@ -49,7 +49,7 @@ const ChipWrapper = styled.div<{ $padding: string }>`
   font-size: 14px;
   font-weight: 500;
 
-  border-radius: 5px;
+  border-radius: 4px;
 
   white-space: nowrap;
 `;

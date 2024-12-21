@@ -54,7 +54,7 @@ const Container = styled.div`
 const RefreshButton = styled.button`
   padding: 8px 16px;
   color: ${({ theme }) => theme.colors.background100};
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
 

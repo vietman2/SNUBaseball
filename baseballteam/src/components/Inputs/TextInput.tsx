@@ -64,7 +64,7 @@ const InputWrapper = styled.div`
     position: absolute;
     background-color: transparent;
     color: ${({ theme }) => theme.colors.borderDark};
-    font-size: 14px;
+    font-size: 0.9rem;
     top: 14px;
     left: 10px;
     transition: all 0.2s ease-in;
@@ -78,6 +78,7 @@ const Input = styled.input<{ $compact?: boolean }>`
   padding: ${({ $compact }) => ($compact ? "8px 12px" : "12px 8px")};
   width: 100%;
   box-sizing: border-box;
+  font-size: ${({ $compact }) => ($compact ? "0.85rem" : "1rem")};
 
   &:focus,
   &:not(:placeholder-shown) {
@@ -86,7 +87,7 @@ const Input = styled.input<{ $compact?: boolean }>`
   &:focus + .placeholder,
   &:not(:placeholder-shown) + .placeholder {
     padding: 2px 6px;
-    font-size: 14px;
+    font-size: 1rem;
     border-radius: 6px;
     color: ${({ theme }) => theme.colors.primary};
     background-color: ${({ theme }) => theme.colors.background100};
@@ -97,7 +98,6 @@ const Input = styled.input<{ $compact?: boolean }>`
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0 16px;
 `;
 
 const WideWrapper = styled.div`
