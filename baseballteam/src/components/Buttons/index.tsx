@@ -1,3 +1,4 @@
 import { TextButton } from "./TextButton";
+import { ViewButtons } from "./ViewButtons";
 
-export { TextButton };
+export { TextButton, ViewButtons };
