@@ -54,10 +54,10 @@ class AuthorSerializer(ModelSerializer):
         return obj.member.full_name
 
     def get_profile_image(self, obj):
-        if obj.member.profile_image is None:
+        if obj.member.profile_image is None or obj.member.profile_image == '':
             return settings.FALLBACK_IMAGE
 
-        image_file = obj.member.profile_image.image
+        image_file = obj.member.profile_image
         path = image_file.name[1:]
 
         return get_presigned_url(path)

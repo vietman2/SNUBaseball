@@ -4,7 +4,7 @@ from dj_rest_auth.jwt_auth import get_refresh_view
 from rest_framework.routers import DefaultRouter
 
 #from board.discussion.views import DiscussionView, DiscussionCommentView
-#from board.notice.views import NoticeView, NoticeCommentView
+from board.notice.views import NoticeView, NoticeCommentView
 
 #from management.equipment.views import EquipmentCategoryView
 
@@ -18,6 +18,14 @@ from person.user.views import RegisterView, StudentIdCheckView, UserProfileView
 #from schedule.weekly.views import WeeklyScheduleViewSet
 
 router = DefaultRouter()
+
+router.register(
+    'notices/(?P<notice_id>[0-9]+)/comments',
+    NoticeCommentView,
+    basename='notice_comments'
+)
+router.register('notices', NoticeView, basename='notices')
+
 """
 router.register(
     'discussions/(?P<discussion_id>[0-9]+)/comments',
@@ -25,12 +33,6 @@ router.register(
     basename='discussion_comments'
 )
 router.register('discussions', DiscussionView, basename='discussions')
-router.register(
-    'notices/(?P<notice_id>[0-9]+)/comments',
-    NoticeCommentView,
-    basename='notice_comments'
-)
-router.register('notices', NoticeView, basename='notices')
 
 router.register('equipment', EquipmentCategoryView, basename='equipment_categories')
 
