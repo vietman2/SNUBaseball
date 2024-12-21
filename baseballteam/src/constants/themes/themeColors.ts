@@ -18,7 +18,7 @@ export const light = {
   foreground100: "#AE7910",
 
   // 테두리
-  borderLight: "#D4D4D4",
+  borderLight: "#D0D0D0",
   borderDark: "#A1A1A1",
 };
 
