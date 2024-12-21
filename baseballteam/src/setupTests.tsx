@@ -4,6 +4,8 @@
 // learn more: https://github.com/testing-library/jest-dom
 import "@testing-library/jest-dom";
 
+import { MenuOptionType } from "@models/app";
+
 jest.mock("react-router-dom", () => {
   return {
     ...jest.requireActual("react-router-dom"),
@@ -21,6 +23,24 @@ jest.mock("@components/Buttons", () => ({
       {text}
     </button>
   ),
+  ViewButtons: ({
+    buttons,
+    onClick,
+  }: {
+    buttons: { label: string; icon: string }[];
+    onClick: (button: string) => void;
+  }) => (
+    <div>
+      {buttons.map((button) => (
+        <button key={button.icon} onClick={() => onClick(button.label)}>
+          {button.label}
+        </button>
+      ))}
+    </div>
+  ),
+}));
+jest.mock("@components/Chips", () => ({
+  Chip: ({ label }: { label: string }) => <div>{label}</div>,
 }));
 jest.mock("@components/Dividers", () => ({
   Divider: () => <div>Divider</div>,
@@ -59,6 +79,32 @@ jest.mock("@components/Inputs", () => ({
     />
   ),
 }));
+jest.mock("@components/Menus", () => ({
+  Menu: ({
+    options,
+    toggleDropdown,
+  }: {
+    options: MenuOptionType[];
+    toggleDropdown: () => void;
+  }) => (
+    <div>
+      {options.map((option) => (
+        <button key={option.label} onClick={option.onClick}>
+          {option.label}
+        </button>
+      ))}
+      <button onClick={toggleDropdown} data-testid="toggle" />
+    </div>
+  ),
+}));
+jest.mock("@components/Modals", () => ({
+  SimpleModal: ({ children }: { children: React.ReactNode }) => (
+    <div>{children}</div>
+  ),
+}));
+jest.mock("@components/Searchbar", () => ({
+  Searchbar: () => <div>Searchbar</div>,
+}));
 
 jest.mock("@contexts/auth/AuthContext", () => ({
   AuthProvider: ({ children }: { children: React.ReactNode }) => (
@@ -79,4 +125,9 @@ jest.mock("@contexts/theme/ThemeContext", () => ({
     isDarkMode: false,
     colors: {},
   }),
+}));
+jest.mock("@fragments/Comments", () => ({
+  CommentsList: ({ refresh }: { refresh: () => void }) => (
+    <button data-testid="refresh" onClick={refresh} />
+  ),
 }));
