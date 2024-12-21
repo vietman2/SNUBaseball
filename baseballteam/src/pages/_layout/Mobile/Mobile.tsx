@@ -41,6 +41,11 @@ export function MobileLayout() {
     setIsTabsOpen(false);
   };
 
+  const handleSubTabClick = (subtab: SubTabType) => {
+    navigate(subtab.path);
+    setActiveSubTab(subtab);
+  };
+
   const doRender = (tabgroup: TabGroup) => {
     if (!tabgroup.limited) return true;
     return user?.is_admin;
@@ -57,6 +62,7 @@ export function MobileLayout() {
 
   useEffect(() => {
     const path = location.pathname.split("/")[1];
+    const subpath = location.pathname.split("/")[2];
 
     const tab = tabgroups
       .flatMap((group) => group.tabs)
@@ -64,9 +70,17 @@ export function MobileLayout() {
 
     if (tab) {
       setActiveTab(tab);
-      setActiveSubTab(tab.subtabs[0]);
+
+      if (subpath) {
+        const subtab = tab.subtabs.find(
+          (subtab) => subtab.path === `/${path}/${subpath}`
+        );
+        if (subtab) {
+          setActiveSubTab(subtab);
+        }
+      }
     }
-  }, [location.pathname]);
+  }, []);
 
   return (
     <div onClick={hideMenu}>
@@ -78,7 +92,7 @@ export function MobileLayout() {
             color="#000"
           />
         </button>
-        {isTabsOpen ? "서울대 야구부" : activeSubTab.title}
+        {isTabsOpen ? "서울대 야구부" : activeTab.title}
         <MenuContainer>
           <Profile onClick={showMenu} data-testid="menu">
             <img src={user?.profile_image} alt="avatar" />
@@ -89,6 +103,18 @@ export function MobileLayout() {
           </Menu>
         </MenuContainer>
       </Header>
+      <Subheader>
+        {activeTab.subtabs.map((subtab) => (
+          <SubTab
+            key={subtab.title}
+            onClick={() => handleSubTabClick(subtab)}
+            $isActive={activeSubTab === subtab}
+            data-testid={subtab.title}
+          >
+            {subtab.title}
+          </SubTab>
+        ))}
+      </Subheader>
       <Container>
         <Tabs $isOpen={isTabsOpen}>
           {tabgroups.map(
@@ -107,7 +133,7 @@ export function MobileLayout() {
                         icon={tab.icon}
                         size={24}
                         color={
-                          activeTab === tab ? colors.primary : colors.borderDark
+                          activeTab === tab ? colors.primary : colors.foreground900
                         }
                       />
                       {tab.title}
@@ -131,7 +157,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: calc(100dvh - 48px);
+  height: calc(100dvh - 96px);
   user-select: none;
   overflow-y: auto;
 `;
@@ -162,6 +188,37 @@ const Header = styled.div<{ $isOpen: boolean }>`
   background-color: ${({ theme, $isOpen }) =>
     $isOpen ? theme.colors.background300 : theme.colors.background100};
   border-bottom: ${({ theme }) => `1px solid ${theme.colors.borderLight}`};
+`;
+
+const Subheader = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  gap: 8px;
+
+  color: ${({ theme }) => theme.colors.primary};
+  font-size: 1.05rem;
+  font-weight: 600;
+
+  background-color: ${({ theme }) => theme.colors.background100};
+  border-bottom: ${({ theme }) => `1px solid ${theme.colors.borderLight}`};
+`;
+
+const SubTab = styled.button<{ $isActive: boolean }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  cursor: pointer;
+
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: ${({ theme, $isActive }) =>
+    $isActive ? theme.colors.primary : theme.colors.foreground500};
+  background-color: ${({ theme, $isActive }) =>
+    $isActive ? theme.colors.background100 : "transparent"};
 `;
 
 const Tabs = styled.div<{ $isOpen: boolean }>`

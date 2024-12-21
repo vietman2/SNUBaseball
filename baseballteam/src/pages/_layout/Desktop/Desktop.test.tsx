@@ -40,4 +40,16 @@ describe("<DesktopLayout />", () => {
     fireEvent.click(screen.getByText("홈"));
     fireEvent.click(screen.getByText("로그아웃"));
   });
+
+  it("handles landing on subtab", () => {
+    jest.spyOn(Router, "useLocation").mockReturnValue({
+      pathname: "/forum/notices",
+      search: "",
+      key: "abc",
+      hash: "",
+      state: null,
+    });
+
+    renderWithProviders(<DesktopLayout />);
+  });
 });

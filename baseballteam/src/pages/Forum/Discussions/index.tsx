@@ -1,29 +1,29 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
-import { NoticeDetail } from "./NoticeDetail/NoticeDetail";
-import { NoticeList } from "./NoticeList/NoticeList";
-import { NoticeWrite } from "./NoticeWrite/NoticeWrite";
+import { DiscussionDetail } from "./DiscussionDetail/DiscussionDetail";
+import { DiscussionList } from "./DiscussionList/DiscussionList";
+import { DiscussionWrite } from "./DiscussionWrite/DiscussionWrite";
 import { SimpleModal } from "@components/Modals";
 import { useWindowSize } from "@hooks/useWindowSize";
 
-function NoticeLayout() {
+function DiscussionLayout() {
   const navigate = useNavigate();
   const location = useLocation();
   const { width } = useWindowSize();
 
   const isModalOpen =
-    location.pathname.includes("/forum/notices/") &&
-    location.pathname !== "/forum/notices";
+    location.pathname.includes("/forum/discussions/") &&
+    location.pathname !== "/forum/discussions";
 
   const isDetailPage =
     !location.pathname.includes("/new") && !location.pathname.includes("/edit");
 
-  const closeModal = () => navigate("/forum/notices");
+  const closeModal = () => navigate("/forum/discussions");
 
   if (width > 768) {
     return (
       <>
-        <NoticeList />
+        <DiscussionList />
         <SimpleModal
           isOpen={isModalOpen}
           onClose={closeModal}
@@ -39,7 +39,7 @@ function NoticeLayout() {
     return <Outlet />;
   }
 
-  return <NoticeList />;
+  return <DiscussionList />;
 }
 
-export { NoticeDetail, NoticeLayout, NoticeWrite };
+export { DiscussionDetail, DiscussionLayout, DiscussionWrite };

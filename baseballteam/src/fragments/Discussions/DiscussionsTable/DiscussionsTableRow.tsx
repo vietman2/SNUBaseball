@@ -1,20 +1,15 @@
 import styled from "styled-components";
 
-import { Chip } from "@components/Chips";
 import { AppIcon } from "@components/Icons";
-import { NoticeSimpleType } from "@models/forum";
+import { DiscussionSimpleType } from "@models/forum";
 
-export function NoticeTableHeader() {
+export function DiscussionsTableHeader() {
   return (
     <Header>
       <div />
       <div>
         <AppIcon icon="text" size={18} color="#212529" />
         <span>제목</span>
-      </div>
-      <div>
-        <AppIcon icon="category" size={18} color="#212529" />
-        <span>분류</span>
       </div>
       <div>
         <AppIcon icon="people" size={18} color="#212529" />
@@ -41,31 +36,26 @@ export function NoticeTableHeader() {
 }
 
 interface RowProps {
-  notice: NoticeSimpleType;
+  discussion: DiscussionSimpleType;
 }
 
-export function NoticeTableRow({ notice }: Readonly<RowProps>) {
+export function DiscussionsTableRow({
+  discussion,
+}: Readonly<RowProps>) {
   return (
     <Container>
-      <div>{notice.id}</div>
+      <div>{discussion.id}</div>
       <div>
-        {notice.title}
-        {notice.has_attachment && (
+        {discussion.title}
+        {discussion.has_attachment && (
           <AppIcon icon="attachment" size={16} color="gray" />
         )}
       </div>
-      <div>
-        <Chip
-          label={notice.category.label}
-          color={notice.category.color}
-          bgColor={notice.category.background_color}
-        />
-      </div>
-      <div>{notice.author}</div>
-      <div>{notice.created_at}</div>
-      <div>{notice.num_likes}</div>
-      <div>{notice.num_comments}</div>
-      <div>{notice.num_views}</div>
+      <div>{discussion.author}</div>
+      <div>{discussion.created_at}</div>
+      <div>{discussion.num_likes}</div>
+      <div>{discussion.num_comments}</div>
+      <div>{discussion.num_views}</div>
     </Container>
   );
 }
@@ -78,20 +68,20 @@ const Container = styled.div`
   font-size: 0.9rem;
   color: ${({ theme }) => theme.colors.foreground700};
 
-  border-top: 0.5px solid ${({ theme }) => theme.colors.borderLight};
+  border-top: 1px solid ${({ theme }) => theme.colors.borderLight};
 
   > div {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 32px;
     width: 72px;
+    height: 32px;
     padding: 8px;
     gap: 6px;
 
     white-space: nowrap;
 
-    border-right: 0.5px solid ${({ theme }) => theme.colors.borderLight};
+    border-right: 1px solid ${({ theme }) => theme.colors.borderLight};
 
     > span {
       @media (max-width: 768px) {
@@ -112,7 +102,7 @@ const Container = styled.div`
     flex: 1;
     justify-content: flex-start;
     min-width: 80px;
-    max-width: 360px;
+    max-width: 400px;
 
     white-space: nowrap;
     overflow: hidden;
@@ -120,7 +110,7 @@ const Container = styled.div`
 
   > div:nth-child(5) {
     @media (max-width: 768px) {
-      border-right: none;
+      display: none;
     }
   }
 
@@ -131,13 +121,6 @@ const Container = styled.div`
   }
 
   > div:nth-child(7) {
-    @media (max-width: 768px) {
-      display: none;
-    }
-  }
-
-  > div:nth-child(8) {
-    border-right: none;
     @media (max-width: 768px) {
       display: none;
     }
