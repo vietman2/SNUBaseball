@@ -1,0 +1,78 @@
+[
+  {
+    "model": "feedback.feedback",
+    "pk": 1,
+    "fields": {
+      "created_at": "2024-10-16T15:17:55.423Z",
+      "updated_at": "2024-10-16T15:17:55.423Z",
+      "title": "피드백 1",
+      "content": "피드백 1 내용",
+      "author": "44895c75-cebf-4125-9682-74d94e130bc7",
+      "num_views": 0,
+      "is_deleted": false,
+      "category": 1,
+      "player": "87ebab07-82bb-40aa-bb33-d5a86d13adb8",
+      "status": 0
+    }
+  },
+  {
+    "model": "feedback.feedback",
+    "pk": 2,
+    "fields": {
+      "created_at": "2024-10-16T15:17:55.423Z",
+      "updated_at": "2024-10-16T15:17:55.423Z",
+      "title": "피드백 2",
+      "content": "피드백 2 내용",
+      "author": "44895c75-cebf-4125-9682-74d94e130bc7",
+      "num_views": 0,
+      "is_deleted": false,
+      "category": 2,
+      "player": "87ebab07-82bb-40aa-bb33-d5a86d13adb8",
+      "status": 1
+    }
+  },
+  {
+    "model": "feedback.feedback",
+    "pk": 3,
+    "fields": {
+      "created_at": "2024-10-16T15:17:55.423Z",
+      "updated_at": "2024-10-16T15:17:55.423Z",
+      "title": "피드백 3",
+      "content": "피드백 3 내용",
+      "author": "44895c75-cebf-4125-9682-74d94e130bc7",
+      "num_views": 0,
+      "is_deleted": false,
+      "category": 3,
+      "player": "87ebab07-82bb-40aa-bb33-d5a86d13adb8",
+      "status": 2
+    }
+  },
+  {
+    "model": "feedback.feedback",
+    "pk": 4,
+    "fields": {
+      "created_at": "2024-10-16T15:17:55.423Z",
+      "updated_at": "2024-10-16T15:17:55.423Z",
+      "title": "피드백 4",
+      "content": "피드백 4 내용",
+      "author": "44895c75-cebf-4125-9682-74d94e130bc7",
+      "num_views": 0,
+      "is_deleted": false,
+      "category": 1,
+      "player": "87ebab07-82bb-40aa-bb33-d5a86d13adb8",
+      "status": 3
+    }
+  },
+  {
+    "model": "feedback.feedbackcomment",
+    "pk": 1,
+    "fields": {
+      "created_at": "2024-12-10T17:03:11.846Z",
+      "updated_at": "2024-12-10T17:17:05.234Z",
+      "author": "44895c75-cebf-4125-9682-74d94e130bc7",
+      "content": "1234qwer",
+      "is_deleted": false,
+      "feedback": 1
+    }
+  }
+]
