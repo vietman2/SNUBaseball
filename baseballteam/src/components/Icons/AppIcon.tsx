@@ -8,6 +8,7 @@ import { ReactComponent as ChevronLeftIcon } from "./chevron-left.svg";
 import { ReactComponent as ChevronRightIcon } from "./chevron-right.svg";
 import { ReactComponent as ChevronUpIcon } from "./chevron-up.svg";
 import { ReactComponent as CloseIcon } from "./close.svg";
+import { ReactComponent as DiaryIcon } from "./diary.svg";
 import { ReactComponent as DotsIcon } from "./dots.svg";
 import { ReactComponent as DownloadIcon } from "./download.svg";
 import { ReactComponent as EyeIcon } from "./eye.svg";
@@ -45,6 +46,7 @@ const iconMap: Record<
   "chevron-right": ChevronRightIcon,
   "chevron-up": ChevronUpIcon,
   close: CloseIcon,
+  diary: DiaryIcon,
   dots: DotsIcon,
   download: DownloadIcon,
   eye: EyeIcon,

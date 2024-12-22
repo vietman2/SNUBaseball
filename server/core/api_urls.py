@@ -8,13 +8,13 @@ from board.notice.views import NoticeView, NoticeCommentView
 
 #from management.equipment.views import EquipmentCategoryView
 
-#from notes.feedback.views import FeedbackView, FeedbackCommentView
 #from notes.guidelines.views import GuidelineView, GuidelineCommentView
 
 from person.major.views import MajorViewSet
 from person.member.views import MemberViewSet
 from person.user.views import RegisterView, StudentIdCheckView, UserProfileView
 
+from training.feedback.views import FeedbackView, FeedbackCommentView
 #from schedule.weekly.views import WeeklyScheduleViewSet
 
 router = DefaultRouter()
@@ -35,12 +35,6 @@ router.register('notices', NoticeView, basename='notices')
 #router.register('equipment', EquipmentCategoryView, basename='equipment_categories')
 
 #router.register(
-#    'feedbacks/(?P<feedback_id>[0-9]+)/comments',
-#    FeedbackCommentView,
-#    basename='feedback_comments'
-#)
-#router.register('feedbacks', FeedbackView, basename='feedbacks')
-#router.register(
 #    'guidelines/(?P<guideline_id>[0-9]+)/comments',
 #    GuidelineCommentView,
 #    basename='guideline_comments'
@@ -52,6 +46,13 @@ router.register('members', MemberViewSet, basename='members')
 router.register('profiles', UserProfileView, basename='profile')
 
 #router.register('weekly', WeeklyScheduleViewSet, basename='weekly_schedules')
+
+router.register(
+    'feedbacks/(?P<feedback_id>[0-9]+)/comments',
+    FeedbackCommentView,
+    basename='feedback_comments'
+)
+router.register('feedbacks', FeedbackView, basename='feedbacks')
 
 urlpatterns = [
     path('login/', LoginView.as_view(), name='login'),
