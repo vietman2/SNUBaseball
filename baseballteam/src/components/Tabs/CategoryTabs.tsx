@@ -33,7 +33,7 @@ const Container = styled.div`
   gap: 8px;
 `;
 
-const Tab = styled.div<{ $active: boolean;}>`
+const Tab = styled.div<{ $active: boolean }>`
   padding: 4px 12px;
   cursor: pointer;
 
@@ -45,4 +45,9 @@ const Tab = styled.div<{ $active: boolean;}>`
     $active ? `2px solid ${theme.colors.primary}` : `2px solid transparent`};
 
   transition: border-bottom 0.3s linear;
+
+  @media (max-width: 768px) {
+    padding: 4px 8px;
+    font-size: 0.875rem;
+  }
 `;

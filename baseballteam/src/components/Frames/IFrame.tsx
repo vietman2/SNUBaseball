@@ -25,10 +25,5 @@ const Container = styled.div`
   > iframe {
     width: 100%;
     height: 24vh;
-
-    @media (max-width: 768px) {
-      width: 100%;
-      height: 100%;
-    }
   }
 `;
