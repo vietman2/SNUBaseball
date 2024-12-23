@@ -6,16 +6,16 @@ import { ViewButtons } from "@components/Buttons";
 import { Chip } from "@components/Chips";
 import { ErrorComponent, Loading } from "@components/Fallbacks";
 import { Searchbar } from "@components/Searchbar";
+import { useTheme } from "@contexts/theme";
 import {
   FeedbackCard,
   FeedbackTableHeader,
   FeedbackTableRow,
 } from "@fragments/Feedback";
-import { useWindowSize } from "@hooks/useWindowSize";
 import { ClassificationType, FeedbackSimpleType } from "@models/training";
 import { MemberType } from "@models/user";
-import { getFeedbacks } from "@services/training";
 import { getMembers } from "@services/person";
+import { getFeedbacks, getCategoryOptions } from "@services/training";
 
 const views = [
   {
@@ -35,6 +35,7 @@ export function FeedbackList() {
     []
   );
   const [selectedMember, setSelectedMember] = useState<number | null>(null);
+  const [selectedStatus, setSelectedStatus] = useState<string>("");
   const [query, setQuery] = useState<string>("");
   const [view, setView] = useState<string>("보드");
 
@@ -82,14 +83,16 @@ export function FeedbackList() {
       const response1 = await getFeedbacks(
         query,
         selectedCategory,
-        selectedMember
+        selectedMember,
+        selectedStatus
       );
       const response2 = await getMembers("ybs");
+      const response3 = await getCategoryOptions();
 
-      if (response1 && response2) {
-        setFeedbacks(response1.feedbacks);
-        setClassifications(response1.classifications);
+      if (response1 && response2 && response3) {
+        setFeedbacks(response1);
         setMembers(response2);
+        setClassifications(response3);
         setError(false);
       } else {
         setError(true);
@@ -99,7 +102,14 @@ export function FeedbackList() {
     };
 
     fetchData();
-  }, [refreshCount, location, query, selectedCategory, selectedMember]);
+  }, [
+    refreshCount,
+    location,
+    query,
+    selectedCategory,
+    selectedMember,
+    selectedStatus,
+  ]);
 
   useEffect(() => {
     const view = localStorage.getItem("feedback_view");
@@ -121,18 +131,31 @@ export function FeedbackList() {
       </Menus>
       <Filters>
         <Searchbar query={query} setQuery={setQuery} />
-        <Classifications
-          classifications={classifications}
-          selectedCategory={selectedCategory}
-          handleCategoryClick={handleCategoryClick}
-        />
-        {members.length > 0 && (
-          <PlayerFilter
-            members={members}
-            selectedPlayer={selectedMember}
-            handlePlayerClick={handlePlayerClick}
+        <div>
+          <Classifications
+            classifications={classifications}
+            selectedCategory={selectedCategory}
+            handleCategoryClick={handleCategoryClick}
           />
-        )}
+          {members.length > 0 && (
+            <PlayerFilter
+              members={members}
+              selectedPlayer={selectedMember}
+              handlePlayerClick={handlePlayerClick}
+            />
+          )}
+          <select
+            value={selectedStatus}
+            onChange={(e) => setSelectedStatus(e.target.value)}
+            data-testid="status-select"
+          >
+            <option value="">상태</option>
+            <option value="신규">신규</option>
+            <option value="진행중">진행중</option>
+            <option value="검토중">검토중</option>
+            <option value="완료">완료</option>
+          </select>
+        </div>
       </Filters>
       {loading ? (
         <Loading />
@@ -143,14 +166,26 @@ export function FeedbackList() {
           {view === "보드" ? (
             <BoardView>
               {feedbacks.map((feedback) => (
-                <FeedbackCard key={feedback.id} feedback={feedback} />
+                <button
+                  key={feedback.id}
+                  onClick={() => handleFeedbackClick(feedback.id)}
+                  data-testid={`feedback-${feedback.id}`}
+                >
+                  <FeedbackCard feedback={feedback} />
+                </button>
               ))}
             </BoardView>
           ) : (
             <DesktopView>
               <FeedbackTableHeader />
               {feedbacks.map((feedback) => (
-                <FeedbackTableRow key={feedback.id} feedback={feedback} />
+                <button
+                  key={feedback.id}
+                  onClick={() => handleFeedbackClick(feedback.id)}
+                  data-testid={`feedback-${feedback.id}`}
+                >
+                  <FeedbackTableRow feedback={feedback} />
+                </button>
               ))}
             </DesktopView>
           )}
@@ -171,16 +206,15 @@ function Classifications({
   selectedCategory,
   handleCategoryClick,
 }: Readonly<FilterProps>) {
-  const disabledColor = "#BDBDBD";
-  const disabledBgColor = "#E0E0E0";
+  const { colors } = useTheme();
 
   return (
-    <ClassificationContainer>
+    <Queries>
       <button onClick={() => handleCategoryClick(null)} data-testid="all">
         <Chip
           label="전체"
-          color={selectedCategory ? disabledColor : "#FFFFFF"}
-          bgColor={selectedCategory ? disabledBgColor : "#424242"}
+          color={selectedCategory ? colors.borderDark : "#FFFFFF"}
+          bgColor={selectedCategory ? colors.background300 : "#424242"}
         />
       </button>
       {classifications.map((classification) => (
@@ -194,17 +228,17 @@ function Classifications({
             color={
               selectedCategory === classification.label
                 ? classification.color
-                : disabledColor
+                : colors.borderDark
             }
             bgColor={
               selectedCategory === classification.label
                 ? classification.background_color
-                : disabledBgColor
+                : colors.background300
             }
           />
         </button>
       ))}
-    </ClassificationContainer>
+    </Queries>
   );
 }
 
@@ -225,7 +259,7 @@ function PlayerFilter({
       onChange={(e) => handlePlayerClick(+e.target.value)}
       data-testid="player-select"
     >
-      <option value={0}>전체</option>
+      <option value={0}>선수</option>
       {members.map((member) => (
         <option key={member.id} value={member.id}>
           {member.name}
@@ -278,8 +312,26 @@ const Menus = styled(Horizontal)`
 
 const Filters = styled(Horizontal)`
   display: flex;
-  align-items: center;
-  margin: 0 16px;
+  flex-direction: column;
+  align-items: flex-start;
+
+  select {
+    align-items: center;
+    width: 60px;
+    height: 26px;
+    padding: 4px 8px;
+    border-radius: 8px;
+    border: none;
+    color: ${({ theme }) => theme.colors.foreground900};
+    background-color: ${({ theme }) => theme.colors.background700};
+  }
+
+  > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
 
   @media (max-width: 768px) {
     align-items: center;
@@ -307,7 +359,12 @@ const BoardView = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  padding: 8px 16px;
   gap: 16px;
+
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
 `;
 
 const Queries = styled.div`
@@ -317,16 +374,4 @@ const Queries = styled.div`
   align-self: flex-start;
   margin: 8px 0;
   gap: 8px;
-
-  select {
-    margin-left: 4px;
-    padding: 4px;
-    border-radius: 8px;
-    border: none;
-    background-color: ${({ theme }) => theme.colors.background100};
-  }
-`;
-
-const ClassificationContainer = styled(Queries)`
-  margin-left: 16px;
 `;
