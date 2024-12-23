@@ -3,6 +3,7 @@ import { TabGroup } from "./tabs";
 export const Training: TabGroup = {
   title: "Training",
   tabs: [
+    /*
     {
       title: "스케줄",
       icon: "calendar",
@@ -21,19 +22,19 @@ export const Training: TabGroup = {
           path: "/schedule/monthly",
         },
       ],
-    },
+    },*/
     {
-      title: "Notes",
+      title: "훈련",
       icon: "diary",
-      path: "/notes",
+      path: "/training",
       subtabs: [
         {
           title: "피드백",
-          path: "/notes/feedback",
+          path: "/training/feedback",
         },
         {
           title: "훈련 가이드",
-          path: "/notes/guidelines",
+          path: "/training/guidelines",
         },
       ],
     },

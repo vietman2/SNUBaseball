@@ -54,8 +54,6 @@ INSTALLED_APPS = [
 
     #'media.image.apps.ImageConfig',
 
-    #'notes.feedback.apps.FeedbackConfig',
-    #'notes.guidelines.apps.GuidelinesConfig',
 
     'person.major.apps.MajorConfig',
     'person.member.apps.MemberConfig',
@@ -63,6 +61,8 @@ INSTALLED_APPS = [
     'person.user.apps.UserConfig',
 
     #'schedule.weekly.apps.WeeklyConfig',
+    'training.feedback.apps.FeedbackConfig',
+    'training.guideline.apps.GuidelineConfig',
 ]
 
 MIDDLEWARE = [

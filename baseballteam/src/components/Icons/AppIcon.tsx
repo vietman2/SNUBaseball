@@ -8,6 +8,7 @@ import { ReactComponent as ChevronLeftIcon } from "./chevron-left.svg";
 import { ReactComponent as ChevronRightIcon } from "./chevron-right.svg";
 import { ReactComponent as ChevronUpIcon } from "./chevron-up.svg";
 import { ReactComponent as CloseIcon } from "./close.svg";
+import { ReactComponent as DiaryIcon } from "./diary.svg";
 import { ReactComponent as DotsIcon } from "./dots.svg";
 import { ReactComponent as DownloadIcon } from "./download.svg";
 import { ReactComponent as EyeIcon } from "./eye.svg";
@@ -21,6 +22,7 @@ import { ReactComponent as MoonIcon } from "./moon.svg";
 import { ReactComponent as PeopleIcon } from "./people.svg";
 import { ReactComponent as SearchIcon } from "./search.svg";
 import { ReactComponent as SendIcon } from "./send.svg";
+import { ReactComponent as StatusIcon } from "./status.svg";
 import { ReactComponent as SunIcon } from "./sun.svg";
 import { ReactComponent as TableIcon } from "./table.svg";
 import { ReactComponent as TextIcon } from "./text.svg";
@@ -45,6 +47,7 @@ const iconMap: Record<
   "chevron-right": ChevronRightIcon,
   "chevron-up": ChevronUpIcon,
   close: CloseIcon,
+  diary: DiaryIcon,
   dots: DotsIcon,
   download: DownloadIcon,
   eye: EyeIcon,
@@ -58,6 +61,7 @@ const iconMap: Record<
   people: PeopleIcon,
   search: SearchIcon,
   send: SendIcon,
+  status: StatusIcon,
   sun: SunIcon,
   table: TableIcon,
   text: TextIcon,

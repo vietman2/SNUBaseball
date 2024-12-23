@@ -1,3 +1,15 @@
-import { AuthorType, UserProfileType } from "./person";
+import {
+  AuthorType,
+  UserProfileType,
+  RoleType,
+  MemberType,
+  StatusType,
+} from "./person";
 
-export { type AuthorType, type UserProfileType };
+export {
+  type AuthorType,
+  type UserProfileType,
+  type RoleType,
+  type MemberType,
+  type StatusType,
+};
