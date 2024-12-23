@@ -133,6 +133,18 @@ const GlobalStyles = createGlobalStyle`
     transition: background-color 0.3s ease-in-out;
   }
 
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    background: url('/assets/icons/chevron-down.svg') no-repeat 90% 48%;
+  }
+
+  select::-ms-expand {
+    display: none;
+  }
+
   body {
     margin: 0;
     font-family: 'Freesentation', 'SCDream', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
