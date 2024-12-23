@@ -51,7 +51,8 @@ export const createFeedback = async (
   title: string,
   content: string,
   category: string | null,
-  player: number | undefined
+  player: number | undefined,
+  status: string
 ) => {
   if (player === undefined || player === 0) return null;
   if (category === null) return null;
@@ -62,6 +63,7 @@ export const createFeedback = async (
       content,
       category,
       player,
+      status,
     });
 
     return response.data;
@@ -75,7 +77,8 @@ export const editFeedback = async (
   title: string,
   content: string,
   category: string | null,
-  player: number | undefined
+  player: number | undefined,
+  status: string
 ) => {
   if (player === undefined || player === 0) return null;
   if (category === null) return null;
@@ -86,6 +89,7 @@ export const editFeedback = async (
       content,
       category,
       player,
+      status,
     });
 
     return response.data;

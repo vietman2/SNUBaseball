@@ -67,23 +67,23 @@ describe("createFeedback", () => {
   it("should create a feedback", async () => {
     jest.spyOn(axios, "post").mockResolvedValue({ data: {} });
 
-    await createFeedback("title", "content", "category", 1);
+    await createFeedback("title", "content", "category", 1, "status");
   });
 
   it("should return null if player is undefined", async () => {
-    const response = await createFeedback("title", "content", "category", undefined);
+    const response = await createFeedback("title", "content", "category", undefined, "status");
     expect(response).toBeNull();
   });
 
   it("should return null if category is null", async () => {
-    const response = await createFeedback("title", "content", null, 1);
+    const response = await createFeedback("title", "content", null, 1, "status");
     expect(response).toBeNull();
   });
 
   it("should return null if an error occurs", async () => {
     jest.spyOn(axios, "post").mockRejectedValue(new Error());
 
-    const response = await createFeedback("title", "content", "category", 1);
+    const response = await createFeedback("title", "content", "category", 1, "status");
     expect(response).toBeNull();
   });
 });
@@ -107,23 +107,23 @@ describe("editFeedback", () => {
   it("should edit a feedback", async () => {
     jest.spyOn(axios, "patch").mockResolvedValue({ data: {} });
 
-    await editFeedback(1, "title", "content", "category", 1);
+    await editFeedback(1, "title", "content", "category", 1, "status");
   });
 
   it("should return null if player is undefined", async () => {
-    const response = await editFeedback(1, "title", "content", "category", undefined);
+    const response = await editFeedback(1, "title", "content", "category", undefined, "status");
     expect(response).toBeNull();
   });
 
   it("should return null if category is null", async () => {
-    const response = await editFeedback(1, "title", "content", null, 1);
+    const response = await editFeedback(1, "title", "content", null, 1, "status");
     expect(response).toBeNull();
   });
 
   it("should return null if an error occurs", async () => {
     jest.spyOn(axios, "patch").mockRejectedValue(new Error());
 
-    const response = await editFeedback(1, "title", "content", "category", 1);
+    const response = await editFeedback(1, "title", "content", "category", 1, "status");
     expect(response).toBeNull();
   });
 });
