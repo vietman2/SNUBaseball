@@ -2,14 +2,14 @@ def get_type_chip(is_drill):
     if is_drill:
         return {
             "label": "드릴",
-            "color": "#FFFFFF",
-            "background_color": "#03A9F4"
+            "color": "#455A64",
+            "background_color": "#ECEFF1"
         }
     else:
         return {
             "label": "예시",
-            "color": "#FFFFFF",
-            "background_color": "#4A148C"
+            "color": "#6A1B9A",
+            "background_color": "#F3E5F5"
         }
 
 def get_location_chip(is_indoor):
