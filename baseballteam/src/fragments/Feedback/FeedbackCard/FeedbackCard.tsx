@@ -18,6 +18,13 @@ export function FeedbackCard({ feedback }: Readonly<Props>) {
             bgColor={feedback.category.background_color}
             color={feedback.category.color}
           />
+          <Status
+            $bgColor={feedback.status.background_color}
+            $color={feedback.status.color}
+          >
+            <Dot $color={feedback.status.color} />
+            {feedback.status.label}
+          </Status>
         </ChipWrapper>
         <Title>
           [{feedback.player}] {feedback.title}
@@ -44,7 +51,7 @@ const Container = styled.div`
   padding: 12px 16px;
 
   border-radius: 16px;
-  background-color: ${({ theme }) => theme.colors.background100};
+  background-color: ${({ theme }) => theme.colors.background300};
 
   > div:first-child {
     display: flex;
@@ -56,6 +63,28 @@ const Container = styled.div`
     white-space: nowrap;
   }
 }`;
+
+const Status = styled.div<{ $color: string; $bgColor: string }>`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 4px 8px;
+  gap: 8px;
+
+  font-size: 0.9rem;
+  color: ${({ $color }) => $color};
+
+  border-radius: 8px;
+  background-color: ${({ $bgColor }) => $bgColor};
+`;
+
+const Dot = styled.div<{ $color: string }>`
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+
+  background-color: ${({ $color }) => $color};
+`;
 
 const ChipWrapper = styled.div`
   display: flex;
