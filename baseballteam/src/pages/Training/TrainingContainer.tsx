@@ -1,7 +1,7 @@
 import { Route, Routes, Navigate, Outlet } from "react-router-dom";
 
 import { FeedbackDetail, FeedbackLayout, FeedbackWrite } from "./Feedback";
-//import { GuidelineDetail, GuidelineLayout, GuidelineWrite } from "./Guideline";
+import { GuidelineDetail, GuidelineLayout, GuidelineWrite } from "./Guideline";
 
 export function TrainingContainer() {
   return (
@@ -13,12 +13,11 @@ export function TrainingContainer() {
           <Route path=":feedbackId/edit" element={<FeedbackWrite />} />
           <Route path=":feedbackId" element={<FeedbackDetail />} />
         </Route>
-        {/*
         <Route path="guidelines" element={<GuidelineLayout />}>
           <Route path="new" element={<GuidelineWrite />} />
           <Route path=":guidelineId/edit" element={<GuidelineWrite />} />
           <Route path=":guidelineId" element={<GuidelineDetail />} />
-        </Route>*/}
+        </Route>
       </Route>
     </Routes>
   );
