@@ -3,7 +3,8 @@ import axios from "axios";
 export const getFeedbacks = async (
   query?: string,
   category?: string | null,
-  member?: number | null
+  member?: number | null,
+  status?: string | null
 ) => {
   if (member === 0) member = null;
 
@@ -13,8 +14,19 @@ export const getFeedbacks = async (
         query,
         category,
         player: member,
+        status,
       },
     });
+
+    return response.data;
+  } catch {
+    return null;
+  }
+};
+
+export const getCategoryOptions = async () => {
+  try {
+    const response = await axios.get(`/v1/feedbacks/categories/`);
 
     return response.data;
   } catch {
@@ -30,6 +42,53 @@ export const getFeedbackDetail = async (id: number) => {
       status: 200,
       data: response.data,
     };
+  } catch {
+    return null;
+  }
+};
+
+export const createFeedback = async (
+  title: string,
+  content: string,
+  category: string | null,
+  player: number | undefined
+) => {
+  if (player === undefined || player === 0) return null;
+  if (category === null) return null;
+
+  try {
+    const response = await axios.post(`/v1/feedbacks/`, {
+      title,
+      content,
+      category,
+      player,
+    });
+
+    return response.data;
+  } catch {
+    return null;
+  }
+};
+
+export const editFeedback = async (
+  id: number,
+  title: string,
+  content: string,
+  category: string | null,
+  player: number | undefined
+) => {
+  if (player === undefined || player === 0) return null;
+  if (category === null) return null;
+
+  try {
+    const response = await axios.patch(`/v1/feedbacks/${id}/`, {
+      title,
+      content,
+      category,
+      player,
+    });
+
+    return response.data;
   } catch {
     return null;
   }
