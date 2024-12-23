@@ -1,8 +1,11 @@
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
+from person.member.serializers import MemberSimpleSerializer
 from person.user.serializers import AuthorSerializer
+from .enums import StatusType
 from .models import Feedback, FeedbackCategory, FeedbackContentView, FeedbackComment
+from .utils import get_status_obj, get_status
 
 class FeedbackCategorySerializer(ModelSerializer):
     class Meta:
@@ -55,46 +58,23 @@ class FeedbackSimpleSerializer(ModelSerializer):
         return obj.content[:50]
 
     def get_player(self, obj):
-        return obj.player.member.full_name
+        return obj.player.full_name
 
     def get_author(self, obj):
         return obj.author.member.full_name
-    
+
     def get_status(self, obj):
-        if obj.status == 0:
-            return {
-                'label': '신규',
-                'color': '#B71C1C',
-                'background_color': '#F44336'
-            }
-        elif obj.status == 1:
-            return {
-                'label': '진행중',
-                'color': '#0D3B13',
-                'background_color': '#66BB6A'
-            }
-        elif obj.status == 2:
-            return {
-                'label': '검토중',
-                'color': '#4A148C',
-                'background_color': '#AB47BC'
-            }
-        else:
-            return {
-                'label': '완료',
-                'color': '#61AFFF',
-                'background_color': '#0056D2'
-            }
+        return get_status_obj(obj)
 
     def get_num_comments(self, obj):
-        return obj.comments.count()
+        return obj.comments.filter(is_deleted=False).count()
 
 class FeedbackDetailSerializer(ModelSerializer):
     category    = FeedbackCategorySerializer()
-    player      = AuthorSerializer()
+    player      = MemberSimpleSerializer()
     author      = AuthorSerializer()
     comments    = serializers.SerializerMethodField()
-    status      = serializers.CharField(source='get_status_display')
+    status      = serializers.SerializerMethodField()
     created_at  = serializers.DateTimeField(format="%Y-%m-%d")
     updated_at  = serializers.DateTimeField(format="%Y-%m-%d")
     num_comments= serializers.SerializerMethodField()
@@ -123,8 +103,39 @@ class FeedbackDetailSerializer(ModelSerializer):
 
         return content_view
 
+    def get_status(self, obj):
+        return get_status_obj(obj)
+
     def get_comments(self, obj):
         return FeedbackCommentSerializer(obj.comments.filter(is_deleted=False), many=True).data
 
     def get_num_comments(self, obj):
-        return obj.comments.count()
+        return obj.comments.filter(is_deleted=False).count()
+
+class FeedbackWriteSerializer(ModelSerializer):
+    category    = serializers.CharField()
+    status      = serializers.CharField()
+
+    class Meta:
+        model = Feedback
+        fields = ['title', 'content', 'category', 'player', 'status']
+
+    def validate_category(self, value):
+        category = FeedbackCategory.objects.filter(label=value).first()
+
+        if not category:
+            raise serializers.ValidationError('Invalid category')
+
+        return category
+
+    def validate_status(self, value):
+        return get_status(value)
+
+    def create(self, validated_data):
+        user = self.context['request'].user
+
+        return Feedback.objects.create(
+            author=user,
+            category_id=validated_data['category'].id,
+            **validated_data
+        )
