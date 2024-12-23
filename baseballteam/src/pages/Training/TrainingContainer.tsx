@@ -1,9 +1,7 @@
 import { Route, Routes, Navigate, Outlet } from "react-router-dom";
 
-import { FeedbackLayout, FeedbackWrite } from "./Feedback";
-//import { FeedbackDetail, FeedbackLayout } from "./Feedback";
+import { FeedbackDetail, FeedbackLayout, FeedbackWrite } from "./Feedback";
 //import { GuidelineDetail, GuidelineLayout, GuidelineWrite } from "./Guideline";
-import { ComingSoon } from "@components/Fallbacks";
 
 export function TrainingContainer() {
   return (
@@ -13,7 +11,7 @@ export function TrainingContainer() {
         <Route path="feedback" element={<FeedbackLayout />}>
           <Route path="new" element={<FeedbackWrite />} />
           <Route path=":feedbackId/edit" element={<FeedbackWrite />} />
-          <Route path=":feedbackId" element={<ComingSoon />} />
+          <Route path=":feedbackId" element={<FeedbackDetail />} />
         </Route>
         {/*
         <Route path="guidelines" element={<GuidelineLayout />}>
