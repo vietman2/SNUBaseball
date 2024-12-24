@@ -8,6 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
+from core.permissions import IsAuthor, IsAuthorOrAdmin
 from person.member.models import Member
 from .models import Feedback, FeedbackComment, FeedbackCategory
 from .serializers import (
@@ -19,8 +20,14 @@ from .utils import get_status
 class FeedbackView(ModelViewSet):
     queryset = Feedback.objects.filter(is_deleted=False)
     serializer_class = FeedbackSimpleSerializer
-    permission_classes = [IsAuthenticated,]
     http_method_names = ['get', 'post', 'delete', 'patch']
+
+    def get_permissions(self):
+        if self.action in ['destroy']:
+            return [IsAuthorOrAdmin(),]
+        if self.action in ['partial_update']:
+            return [IsAuthor(),]
+        return [IsAuthenticated(),]
 
     @extend_schema(summary="피드백 조회", tags=["피드백 관리"])
     def list(self, request, *args, **kwargs):
@@ -112,8 +119,14 @@ class FeedbackView(ModelViewSet):
 class FeedbackCommentView(ModelViewSet):
     queryset = FeedbackComment.objects.filter(is_deleted=False)
     serializer_class = FeedbackCommentSerializer
-    permission_classes = [IsAuthenticated,]
     http_method_names = ['post', 'delete', 'put']
+
+    def get_permissions(self):
+        if self.action in ['destroy']:
+            return [IsAuthorOrAdmin(),]
+        if self.action in ['update']:
+            return [IsAuthor(),]
+        return [IsAuthenticated(),]
 
     @extend_schema(summary="피드백 댓글 작성", tags=["피드백 관리"])
     def create(self, request, *args, **kwargs):
