@@ -8,6 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
+from core.permissions import IsAuthor, IsAuthorOrAdmin
 from .serializers import (
     DiscussionSimpleSerializer, DiscussionDetailSerializer,
     DiscussionWriteSerializer, DiscussionCommentSerializer
@@ -17,8 +18,19 @@ from .models import Discussion, DiscussionLike, DiscussionComment
 class DiscussionView(ModelViewSet):
     queryset = Discussion.objects.filter(is_deleted=False)
     serializer_class = DiscussionSimpleSerializer
-    permission_classes = [IsAuthenticated,]
     http_method_names = ['get', 'post', 'delete', 'put']
+
+    def get_permissions(self):
+        ## Edit can only be done by author
+        if self.action in ['update']:
+            return [IsAuthor(),]
+
+        ## Delete can only be done by author or admin
+        if self.action in ['destroy']:
+            return [IsAuthorOrAdmin(),]
+
+        ## otherwise only authenticated users can access
+        return [IsAuthenticated(),]
 
     @extend_schema(summary="게시글 생성", tags=["게시글 관리"])
     def create(self, request, *args, **kwargs):
@@ -99,8 +111,19 @@ class DiscussionView(ModelViewSet):
 class DiscussionCommentView(ModelViewSet):
     queryset = DiscussionComment.objects.filter(is_deleted=False)
     serializer_class = DiscussionCommentSerializer
-    permission_classes = [IsAuthenticated,]
     http_method_names = ['post', 'delete', 'put']
+
+    def get_permissions(self):
+        ## Edit can only be done by author
+        if self.action in ['update']:
+            return [IsAuthor(),]
+
+        ## Delete can only be done by author or admin
+        if self.action in ['destroy']:
+            return [IsAuthorOrAdmin(),]
+
+        ## otherwise only authenticated users can access
+        return [IsAuthenticated(),]
 
     @extend_schema(summary="댓글 생성", tags=["게시글 관리"])
     def create(self, request, *args, **kwargs):

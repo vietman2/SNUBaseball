@@ -8,6 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
+from core.permissions import IsAuthor, IsAuthorOrAdmin
 from .models import GuidelineCategory, Guideline, GuidelineComment, GuidelineLike
 from .serializers import (
     GuidelineSimpleSerializer, GuidelineDetailSerializer,
@@ -17,8 +18,14 @@ from .serializers import (
 class GuidelineView(ModelViewSet):
     queryset = Guideline.objects.filter(is_deleted=False)
     serializer_class = GuidelineSimpleSerializer
-    permission_classes = [IsAuthenticated,]
     http_method_names = ['get', 'post', 'delete', 'put']
+
+    def get_permissions(self):
+        if self.action in ['destroy']:
+            return [IsAuthorOrAdmin(),]
+        if self.action in ['update']:
+            return [IsAuthor(),]
+        return [IsAuthenticated(),]
 
     @extend_schema(summary="가이드라인 목록 조회", tags=["가이드라인 관리"])
     def list(self, request, *args, **kwargs):
@@ -113,8 +120,14 @@ class GuidelineView(ModelViewSet):
 class GuidelineCommentView(ModelViewSet):
     queryset = GuidelineComment.objects.filter(is_deleted=False)
     serializer_class = GuidelineCommentSerializer
-    permission_classes = [IsAuthenticated,]
     http_method_names = ['post', 'delete', 'put']
+
+    def get_permissions(self):
+        if self.action in ['destroy']:
+            return [IsAuthorOrAdmin(),]
+        if self.action in ['update']:
+            return [IsAuthor(),]
+        return [IsAuthenticated(),]
 
     @extend_schema(summary="가이드라인 댓글 작성", tags=["가이드라인 관리"])
     def create(self, request, *args, **kwargs):
