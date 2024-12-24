@@ -50,10 +50,9 @@ INSTALLED_APPS = [
     'board.discussion.apps.DiscussionConfig',
     'board.notice.apps.NoticeConfig',
 
-    #'management.equipment.apps.EquipmentConfig',
+    'management.equipment.apps.EquipmentConfig',
 
     #'media.image.apps.ImageConfig',
-
 
     'person.major.apps.MajorConfig',
     'person.member.apps.MemberConfig',

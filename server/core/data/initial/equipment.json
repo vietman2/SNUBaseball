@@ -1,0 +1,79 @@
+[
+  {
+    "model": "equipment.equipmentcategory",
+    "pk": 1,
+    "fields": { "name": "배트", "person_in_charge": [1, 2] }
+  },
+  {
+    "model": "equipment.equipmentcategory",
+    "pk": 2,
+    "fields": {
+      "name": "볼",
+      "person_in_charge": [1, 3]
+    }
+  },
+  {
+    "model": "equipment.equipmentcategory",
+    "pk": 3,
+    "fields": {
+      "name": "포수장비",
+      "person_in_charge": [2, 3]
+    }
+  },
+  {
+    "model": "equipment.equipmentcategory",
+    "pk": 4,
+    "fields": {
+      "name": "기타장비",
+      "person_in_charge": [3]
+    }
+  },
+  {
+    "model": "equipment.equipmentupdatehistory",
+    "pk": 1,
+    "fields": {
+      "category": 1,
+      "person": 1,
+      "summary": "초기데이터",
+      "details": "초기데이터",
+      "notes": "",
+      "updated_at": "2024-12-26T14:41:39.261Z"
+    }
+  },
+  {
+    "model": "equipment.equipmentupdatehistory",
+    "pk": 2,
+    "fields": {
+      "category": 2,
+      "person": 3,
+      "summary": "초기데이터",
+      "details": "초기데이터",
+      "notes": "",
+      "updated_at": "2024-12-26T14:41:39.261Z"
+    }
+  },
+  {
+    "model": "equipment.equipmentupdatehistory",
+    "pk": 3,
+    "fields": {
+      "category": 3,
+      "person": 2,
+      "summary": "초기데이터",
+      "details": "초기데이터",
+      "notes": "",
+      "updated_at": "2024-12-26T14:41:39.261Z"
+    }
+  },
+  {
+    "model": "equipment.equipmentupdatehistory",
+    "pk": 4,
+    "fields": {
+      "category": 4,
+      "person": 3,
+      "summary": "초기데이터",
+      "details": "초기데이터",
+      "notes": "",
+      "updated_at": "2024-12-26T14:41:39.261Z"
+    }
+  }
+]

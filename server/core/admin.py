@@ -13,6 +13,8 @@ from board.notice.models import (
     Notice, NoticeCategory, NoticeAttachment, NoticeComment, NoticeLike, NoticeContentView
 )
 
+from management.equipment.models import Equipment, EquipmentCategory, EquipmentUpdateHistory
+
 from person.major.models import College, Department
 from person.member.models import Member
 from person.tale.models import PlayerTale
@@ -37,6 +39,10 @@ admin.site.register(NoticeAttachment)
 admin.site.register(NoticeComment)
 admin.site.register(NoticeLike)
 admin.site.register(NoticeContentView)
+
+admin.site.register(Equipment)
+admin.site.register(EquipmentCategory)
+admin.site.register(EquipmentUpdateHistory)
 
 admin.site.register(College)
 admin.site.register(Department)
