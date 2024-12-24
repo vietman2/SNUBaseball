@@ -3,6 +3,7 @@ import { ReactComponent as CalendarIcon } from "./calendar.svg";
 import { ReactComponent as CategoryIcon } from "./category.svg";
 import { ReactComponent as ChatIcon } from "./chat.svg";
 import { ReactComponent as CheckIcon } from "./check.svg";
+import { ReactComponent as ChecklistIcon } from "./checklist.svg";
 import { ReactComponent as ChevronDownIcon } from "./chevron-down.svg";
 import { ReactComponent as ChevronLeftIcon } from "./chevron-left.svg";
 import { ReactComponent as ChevronRightIcon } from "./chevron-right.svg";
@@ -42,6 +43,7 @@ const iconMap: Record<
   category: CategoryIcon,
   chat: ChatIcon,
   check: CheckIcon,
+  checklist: ChecklistIcon,
   "chevron-down": ChevronDownIcon,
   "chevron-left": ChevronLeftIcon,
   "chevron-right": ChevronRightIcon,
