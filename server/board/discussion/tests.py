@@ -91,14 +91,33 @@ class DiscussionAPITestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_discussion_update_invalid(self):
+        ## no data
         self.client.force_authenticate(user=self.user)
         response = self.client.put(f'{self.url}1/', {})
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+        ## no auth
+        user = User.objects.get(username='testuser_3')
+        self.client.force_authenticate(user=user)
+        response = self.client.put(f'{self.url}1/', self.data)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_discussion_delete(self):
         self.client.force_authenticate(user=self.user)
         response = self.client.delete(f'{self.url}1/')
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+    def test_discussion_delete_fail(self):
+        ## no auth
+        user = User.objects.get(username='testuser_3')
+        self.client.force_authenticate(user=user)
+        response = self.client.delete(f'{self.url}1/')
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+        ## no discussion
+        self.client.force_authenticate(user=self.user)
+        response = self.client.delete(f'{self.url}100/')
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_discussion_like(self):
         ## 1. like
