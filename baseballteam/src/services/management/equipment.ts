@@ -26,6 +26,18 @@ export async function getEquipmentDetails(equipmentId: string | undefined) {
   }
 }
 
+export async function updateEquipmentTips(equipmentId: number, tips: string) {
+  try {
+    const response = await axios.patch(`/v1/equipment/${equipmentId}/`, {
+      management_tips: tips,
+    });
+
+    return response.data;
+  } catch {
+    return null;
+  }
+}
+
 export async function updateEquipmentQuantity(
   categoryId: number,
   equipmentId: number | undefined,

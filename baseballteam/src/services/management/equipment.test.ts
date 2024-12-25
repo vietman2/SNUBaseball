@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { getEquipment, getEquipmentDetails, updateEquipmentManager, updateEquipmentQuantity, addNewEquipment } from "./equipment";
+import { getEquipment, getEquipmentDetails, updateEquipmentTips, updateEquipmentManager, updateEquipmentQuantity, addNewEquipment } from "./equipment";
 
 describe("getEquipment", () => {
   it("hould return the data from the API", async () => {
@@ -39,6 +39,24 @@ describe("getEquipmentDetails", () => {
 
   it("should return null if no equipmentId", async () => {
     const result = await getEquipmentDetails(undefined);
+
+    expect(result).toEqual(null);
+  });
+});
+
+describe("updateEquipmentTips", () => {
+  it("should return the data from the API", async () => {
+    jest.spyOn(axios, "patch").mockResolvedValue({ data: {} });
+
+    const result = await updateEquipmentTips(1, "tips");
+
+    expect(result).toEqual({});
+  });
+
+  it("should return null if no response", async () => {
+    jest.spyOn(axios, "patch").mockRejectedValue(new Error());
+
+    const result = await updateEquipmentTips(1, "tips");
 
     expect(result).toEqual(null);
   });

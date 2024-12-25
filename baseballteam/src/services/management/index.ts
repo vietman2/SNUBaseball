@@ -1,6 +1,7 @@
 import {
   getEquipment,
   getEquipmentDetails,
+  updateEquipmentTips,
   updateEquipmentQuantity,
   updateEquipmentManager,
   addNewEquipment,
@@ -9,6 +10,7 @@ import {
 export {
   getEquipment,
   getEquipmentDetails,
+  updateEquipmentTips,
   updateEquipmentQuantity,
   updateEquipmentManager,
   addNewEquipment,
