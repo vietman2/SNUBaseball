@@ -110,6 +110,7 @@ jest.mock("@components/Searchbar", () => ({
 }));
 jest.mock("@components/Tabs", () => ({
   CategoryTabs: () => <div>CategoryTabs</div>,
+  ChipTabs: () => <div>ChipTabs</div>,
 }));
 
 jest.mock("@contexts/auth/AuthContext", () => ({
