@@ -1,4 +1,15 @@
-import { EquipmentTableHeader, EquipmentTableRow } from "./EquipmentTable/EquipmentTableRow";
-import { EquipmentUpdateModal } from "./EquipmentUpdate/EquipmentUpdate";
+import {
+  EquipmentTableHeader,
+  EquipmentTableRow,
+} from "./EquipmentTable/EquipmentTableRow";
+import {
+  EquipmentUpdateModal,
+  EquipmentUpdateTip,
+} from "./EquipmentUpdate/EquipmentUpdate";
 
-export { EquipmentTableHeader, EquipmentTableRow, EquipmentUpdateModal };
+export {
+  EquipmentTableHeader,
+  EquipmentTableRow,
+  EquipmentUpdateModal,
+  EquipmentUpdateTip,
+};

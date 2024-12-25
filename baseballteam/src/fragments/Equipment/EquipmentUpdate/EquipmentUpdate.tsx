@@ -8,6 +8,7 @@ import {
   updateEquipmentQuantity,
   updateEquipmentManager,
   addNewEquipment,
+  updateEquipmentTips,
 } from "@services/management";
 
 const updateTypeChoices = ["수량 업데이트", "담당자 변경", "신규 물품 추가"];
@@ -208,7 +209,10 @@ function ChangePersonInCharge({
           {selectedMembers.map((memberId) => (
             <SelectedMember key={memberId}>
               {options.find((option) => option.id === memberId)?.name}
-              <button onClick={() => handleRemove(memberId)} data-testid="remove-member">
+              <button
+                onClick={() => handleRemove(memberId)}
+                data-testid="remove-member"
+              >
                 <AppIcon icon="minus" size={14} color="red" />
               </button>
             </SelectedMember>
@@ -270,7 +274,11 @@ function UpdateQuantity({
     <Column>
       <Horizontal>
         <span>물품 선택</span>
-        <select value={selectedEquipmentId} onChange={handleSelect} data-testid="equipment-select">
+        <select
+          value={selectedEquipmentId}
+          onChange={handleSelect}
+          data-testid="equipment-select"
+        >
           <option value={0}>선택</option>
           {equipment.location.map((location) =>
             location.equipment.map((equipment) => (
@@ -309,6 +317,48 @@ function UpdateQuantity({
   );
 }
 
+interface TipProps {
+  equipment: EquipmentDetailType;
+  modalOpen: boolean;
+  closeModal: () => void;
+}
+
+export function EquipmentUpdateTip({
+  equipment,
+  modalOpen,
+  closeModal,
+}: Readonly<TipProps>) {
+  const [tip, setTip] = useState<string>(equipment.management_tips);
+
+  const handleSubmit = async () => {
+    const response = await updateEquipmentTips(equipment.id, tip);
+
+    if (response) {
+      alert("장비 관리 요령이 업데이트 되었습니다.");
+      closeModal();
+    } else {
+      alert("장비 관리 요령 업데이트에 실패했습니다.");
+    }
+  };
+
+  return (
+    <Overlay $open={modalOpen} onClick={closeModal}>
+      <Modal $open={modalOpen} onClick={(e) => e.stopPropagation()}>
+        <Column>
+          <Subtitle>장비 관리 요령 수정</Subtitle>
+          <textarea
+            value={tip}
+            onChange={(e) => setTip(e.target.value)}
+            placeholder="장비 관리 요령을 입력하세요."
+            data-testid="tip-textarea"
+          />
+          <Button onClick={handleSubmit}>저장</Button>
+        </Column>
+      </Modal>
+    </Overlay>
+  );
+}
+
 const Overlay = styled.div<{ $open: boolean }>`
   display: ${({ $open }) => ($open ? "flex" : "none")};
   position: fixed;
@@ -341,6 +391,13 @@ const Column = styled.div`
   flex-direction: column;
   gap: 12px;
   font-size: 14px;
+
+  > textarea {
+    height: 240px;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid ${({ theme }) => theme.colors.borderLight};
+  }
 `;
 
 const Subtitle = styled.div`
@@ -365,6 +422,14 @@ const Horizontal = styled.div`
 
   > select {
     flex: 1;
+    align-items: center;
+    height: 26px;
+    padding: 4px 8px;
+    border-radius: 8px;
+    border: none;
+    color: ${({ theme }) => theme.colors.foreground900};
+    background: url("/assets/icons/chevron-down.svg") no-repeat 96% 48%;
+    background-color: ${({ theme }) => theme.colors.background900};
   }
 
   > input {

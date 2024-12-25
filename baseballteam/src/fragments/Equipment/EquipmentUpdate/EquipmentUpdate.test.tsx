@@ -1,6 +1,6 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 
-import { EquipmentUpdateModal } from "./EquipmentUpdate";
+import { EquipmentUpdateModal, EquipmentUpdateTip } from "./EquipmentUpdate";
 import { sampleEquipmentDetail } from "@data/management";
 import { sampleMembers } from "@data/user";
 import * as EquipmentAPI from "@services/management/equipment";
@@ -106,6 +106,41 @@ describe("<EquipmentUpdateModal />", () => {
 
     await waitFor(() => {
       changeValue("type-select", "신규 물품 추가");
+      fireEvent.click(screen.getByText("저장"));
+    });
+  });
+});
+
+describe("<EquipmentUpdateTip />", () => {
+  it("handles update", async () => {
+    jest.spyOn(EquipmentAPI, "updateEquipmentTips").mockResolvedValueOnce({});
+    renderWithProviders(
+      <EquipmentUpdateTip
+        equipment={sampleEquipmentDetail}
+        modalOpen
+        closeModal={jest.fn()}
+      />
+    );
+
+    await waitFor(() => {
+      fireEvent.change(screen.getByTestId("tip-textarea"), {
+        target: { value: "test" },
+      });
+      fireEvent.click(screen.getByText("저장"));
+    });
+  });
+
+  it("handles update fail", async () => {
+    jest.spyOn(EquipmentAPI, "updateEquipmentTips").mockResolvedValueOnce(null);
+    renderWithProviders(
+      <EquipmentUpdateTip
+        equipment={sampleEquipmentDetail}
+        modalOpen
+        closeModal={jest.fn()}
+      />
+    );
+
+    await waitFor(() => {
       fireEvent.click(screen.getByText("저장"));
     });
   });
