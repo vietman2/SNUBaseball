@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import { ErrorComponent, Loading } from "@components/Fallbacks";
@@ -18,6 +18,7 @@ export function EquipmentList() {
   const [refreshCount, setRefreshCount] = useState<number>(0);
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleRefresh = () => {
     setRefreshCount(refreshCount + 1);
@@ -41,7 +42,7 @@ export function EquipmentList() {
     };
 
     fetchData();
-  }, [selectedTab, refreshCount]);
+  }, [selectedTab, refreshCount, location.pathname]);
 
   return (
     <Container>

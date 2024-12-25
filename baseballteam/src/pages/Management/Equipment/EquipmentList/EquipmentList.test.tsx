@@ -1,4 +1,5 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react";
+import * as Router from "react-router-dom";
 
 import { EquipmentList } from "./EquipmentList";
 import { sampleEquipmentCategory } from "@data/management";
@@ -15,6 +16,14 @@ describe("<EquipmentList />", () => {
     jest
       .spyOn(EquipmentAPI, "getEquipment")
       .mockResolvedValue(sampleEquipmentCategory);
+    jest.spyOn(Router, "useNavigate").mockReturnValue(jest.fn());
+    jest.spyOn(Router, "useLocation").mockReturnValue({
+      pathname: "/management/equipment",
+      hash: "",
+      search: "",
+      state: "",
+      key: "",
+    });
   });
 
   it("should handle error", async () => {
