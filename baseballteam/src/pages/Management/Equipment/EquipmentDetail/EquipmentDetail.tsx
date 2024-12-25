@@ -4,7 +4,8 @@ import styled from "styled-components";
 
 import { Divider } from "@components/Dividers";
 import { ErrorComponent, Loading } from "@components/Fallbacks";
-import { EquipmentUpdateModal } from "@fragments/Equipment";
+import { useAuth } from "@contexts/auth";
+import { EquipmentUpdateModal, EquipmentUpdateTip } from "@fragments/Equipment";
 import { EquipmentDetailType } from "@models/management";
 import { MemberType } from "@models/user";
 import { getEquipmentDetails } from "@services/management";
@@ -14,6 +15,7 @@ export function EquipmentDetail() {
   const [equipment, setEquipment] = useState<EquipmentDetailType>();
   const [activeMembers, setActiveMembers] = useState<MemberType[]>([]);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [tipModalOpen, setTipModalOpen] = useState<boolean>(false);
 
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
@@ -21,6 +23,7 @@ export function EquipmentDetail() {
 
   const { equipmentId } = useParams();
   const navigation = useNavigate();
+  const { user } = useAuth();
 
   const handleRefresh = () => {
     setRefreshCount((prev) => prev + 1);
@@ -36,6 +39,15 @@ export function EquipmentDetail() {
 
   const closeModal = () => {
     setModalOpen(false);
+    handleRefresh();
+  };
+
+  const openTipModal = () => {
+    setTipModalOpen(true);
+  };
+
+  const closeTipModal = () => {
+    setTipModalOpen(false);
     handleRefresh();
   };
 
@@ -81,12 +93,26 @@ export function EquipmentDetail() {
         </Wrapper>
         <Content>
           <SubtitleWrapper>
+            <Subtitle>
+              관리 요령 (담당자: {equipment.person_in_charge.join(", ")})
+            </Subtitle>
+            {user?.is_admin && (
+              <Button onClick={openTipModal}>수정</Button>
+            )}
+          </SubtitleWrapper>
+          <span>{equipment.management_tips}</span>
+        </Content>
+        <Wrapper>
+          <Divider />
+        </Wrapper>
+        <Content>
+          <SubtitleWrapper>
             <Subtitle>현황</Subtitle>
             {equipment.is_in_charge && (
               <Button onClick={openModal}>업데이트</Button>
             )}
           </SubtitleWrapper>
-          <Wrapper>
+          <Locations>
             {equipment.location.map((location, index) => (
               <LocationWrapper
                 key={location.name}
@@ -101,16 +127,7 @@ export function EquipmentDetail() {
                 ))}
               </LocationWrapper>
             ))}
-          </Wrapper>
-        </Content>
-        <Wrapper>
-          <Divider />
-        </Wrapper>
-        <Content>
-          <Subtitle>
-            관리 요령 (담당자: {equipment.person_in_charge.join(", ")})
-          </Subtitle>
-          <span>{equipment.management_tips}</span>
+          </Locations>
         </Content>
         <Wrapper>
           <Divider />
@@ -146,6 +163,11 @@ export function EquipmentDetail() {
         equipment={equipment}
         activeMembers={activeMembers}
       />
+      <EquipmentUpdateTip
+        modalOpen={tipModalOpen}
+        closeModal={closeTipModal}
+        equipment={equipment}
+      />
     </>
   );
 }
@@ -153,6 +175,10 @@ export function EquipmentDetail() {
 const Column = styled.div`
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 768px) {
+    overflow-x: auto;
+  }
 `;
 
 const Container = styled(Column)`
@@ -163,6 +189,11 @@ const Container = styled(Column)`
 
   overflow-x: hidden;
   overflow-y: auto;
+
+  @media (max-width: 768px) {
+    width: 100vw;
+    padding: 24px;
+  }
 `;
 
 const Header = styled(Column)`
@@ -205,17 +236,32 @@ const Wrapper = styled.div`
   }
 `;
 
+const Locations = styled(Wrapper)`
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
+`;
+
 const LocationWrapper = styled(Column)<{ $last?: boolean }>`
+  max-width: 280px;
   gap: 8px;
   border-right: ${({ theme, $last }) =>
     $last ? "none" : `1px solid ${theme.colors.borderLight}`};
+
+  @media (max-width: 768px) {
+    min-width: 280px;
+    max-width: 280px;
+    padding-bottom: 16px;
+    border-right: none;
+  }
 `;
 
 const LocationTitle = styled.div`
   align-self: center;
   margin-bottom: 4px;
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 1.05rem;
+  font-weight: 600;
 
   border-right: none;
 `;
@@ -228,7 +274,10 @@ const Row = styled.div`
   }
 
   > span:last-child {
+    display: flex;
     flex: 0.4;
+    justify-content: flex-end;
+    padding-right: 12px;
   }
 `;
 
