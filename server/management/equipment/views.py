@@ -130,4 +130,13 @@ class EquipmentCategoryView(ModelViewSet):
 
     @extend_schema(exclude=True)
     def partial_update(self, request, *args, **kwargs):
-        return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+        management_tips = request.data.get('management_tips', None)
+        if management_tips is None:
+            return Response({"message": "잘못된 요청입니다."}, status=status.HTTP_400_BAD_REQUEST)
+
+        instance = self.get_object()
+        instance.management_tips = management_tips
+        instance.save()
+
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data, status=status.HTTP_200_OK)
