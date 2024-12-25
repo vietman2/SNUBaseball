@@ -21,6 +21,15 @@
     "model": "feedback.feedbackcategory",
     "pk": 3,
     "fields": {
+      "label": "투구",
+      "color": "#33691E",
+      "background_color": "#DCEDC8"
+    }
+  },
+  {
+    "model": "feedback.feedbackcategory",
+    "pk": 4,
+    "fields": {
       "label": "주루",
       "color": "#01579B",
       "background_color": "#B3E5FC"

@@ -8,6 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
+from core.permissions import IsAuthor, IsAuthorOrAdmin, IsAdmin
 from .serializers import (
     NoticeSimpleSerializer, NoticeDetailSerializer,
     NoticeCategorySerializer, NoticeWriteSerializer,
@@ -18,8 +19,16 @@ from .models import Notice, NoticeCategory, NoticeComment, NoticeLike
 class NoticeView(ModelViewSet):
     queryset = Notice.objects.filter(is_deleted=False)
     serializer_class = NoticeSimpleSerializer
-    permission_classes = [IsAuthenticated,]
     http_method_names = ['get', 'post', 'delete', 'put']
+
+    def get_permissions(self):
+        if self.action in ['update']:
+            return [IsAuthor(),]
+        if self.action in ['destroy']:
+            return [IsAuthorOrAdmin(),]
+        if self.action in ['create']:
+            return [IsAdmin(),]
+        return [IsAuthenticated(),]
 
     @extend_schema(summary="공지 생성", tags=["공지 관리"])
     def create(self, request, *args, **kwargs):
@@ -120,8 +129,14 @@ class NoticeView(ModelViewSet):
 class NoticeCommentView(ModelViewSet):
     queryset = NoticeComment.objects.filter(is_deleted=False)
     serializer_class = NoticeCommentSerializer
-    permission_classes = [IsAuthenticated,]
     http_method_names = ['post', 'delete', 'put']
+
+    def get_permissions(self):
+        if self.action in ['update']:
+            return [IsAuthor(),]
+        if self.action in ['destroy']:
+            return [IsAuthorOrAdmin(),]
+        return [IsAuthenticated(),]
 
     @extend_schema(summary="댓글 생성", tags=["공지 관리"])
     def create(self, request, *args, **kwargs):

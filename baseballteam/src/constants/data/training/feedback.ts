@@ -1,4 +1,4 @@
-import { sampleAuthor } from "@data/user";
+import { sampleAuthor, sampleMembers } from "@data/user";
 import {
   ClassificationType,
   FeedbackSimpleType,
@@ -78,7 +78,7 @@ export const sampleFeedbackDetail: FeedbackDetailType = {
   id: 1,
   title: "스로잉",
   content: "왼발을 끌면서 던지지 말고 바로 내리면서 던질 것",
-  player: sampleAuthor,
+  player: sampleMembers[0],
   author: sampleAuthor,
   category: classification_batting,
   status: {

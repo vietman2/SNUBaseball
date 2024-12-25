@@ -1,7 +1,10 @@
 import {
   getFeedbacks,
+  getCategoryOptions,
   getFeedbackDetail,
+  createFeedback,
   deleteFeedback,
+  editFeedback,
   createFeedbackComment,
   deleteFeedbackComment,
   editFeedbackComment,
@@ -20,8 +23,11 @@ import {
 
 export {
   getFeedbacks,
+  getCategoryOptions,
   getFeedbackDetail,
+  createFeedback,
   deleteFeedback,
+  editFeedback,
   createFeedbackComment,
   deleteFeedbackComment,
   editFeedbackComment,

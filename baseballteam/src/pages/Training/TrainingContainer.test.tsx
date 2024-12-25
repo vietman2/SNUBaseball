@@ -4,6 +4,7 @@ import { renderWithProviders } from "@utils/test-utils";
 jest.mock("./Feedback", () => ({
   FeedbackDetail: () => <div>FeedbackDetail</div>,
   FeedbackLayout: () => <div>FeedbackLayout</div>,
+  FeedbackWrite: () => <div>FeedbackWrite</div>,
 }));
 jest.mock("./Guideline", () => ({
   GuidelineDetail: () => <div>GuidelineDetail</div>,

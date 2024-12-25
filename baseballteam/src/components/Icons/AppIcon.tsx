@@ -3,6 +3,7 @@ import { ReactComponent as CalendarIcon } from "./calendar.svg";
 import { ReactComponent as CategoryIcon } from "./category.svg";
 import { ReactComponent as ChatIcon } from "./chat.svg";
 import { ReactComponent as CheckIcon } from "./check.svg";
+import { ReactComponent as ChecklistIcon } from "./checklist.svg";
 import { ReactComponent as ChevronDownIcon } from "./chevron-down.svg";
 import { ReactComponent as ChevronLeftIcon } from "./chevron-left.svg";
 import { ReactComponent as ChevronRightIcon } from "./chevron-right.svg";
@@ -22,6 +23,7 @@ import { ReactComponent as MoonIcon } from "./moon.svg";
 import { ReactComponent as PeopleIcon } from "./people.svg";
 import { ReactComponent as SearchIcon } from "./search.svg";
 import { ReactComponent as SendIcon } from "./send.svg";
+import { ReactComponent as StatusIcon } from "./status.svg";
 import { ReactComponent as SunIcon } from "./sun.svg";
 import { ReactComponent as TableIcon } from "./table.svg";
 import { ReactComponent as TextIcon } from "./text.svg";
@@ -41,6 +43,7 @@ const iconMap: Record<
   category: CategoryIcon,
   chat: ChatIcon,
   check: CheckIcon,
+  checklist: ChecklistIcon,
   "chevron-down": ChevronDownIcon,
   "chevron-left": ChevronLeftIcon,
   "chevron-right": ChevronRightIcon,
@@ -60,6 +63,7 @@ const iconMap: Record<
   people: PeopleIcon,
   search: SearchIcon,
   send: SendIcon,
+  status: StatusIcon,
   sun: SunIcon,
   table: TableIcon,
   text: TextIcon,

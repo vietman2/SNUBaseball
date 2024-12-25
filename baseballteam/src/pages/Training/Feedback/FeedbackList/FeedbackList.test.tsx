@@ -2,17 +2,11 @@ import { fireEvent, screen, waitFor } from "@testing-library/react";
 
 import { FeedbackList } from "./FeedbackList";
 import { sampleClassification, sampleFeedbacks } from "@data/training";
-import * as FeedbackAPI from "@services/training/feedbacks";
-import * as MembersAPI from "@services/person/members";
-import { renderWithProviders, resizeWindow } from "@utils/test-utils";
 import { sampleMembers } from "@data/user";
+import * as MembersAPI from "@services/person/members";
+import * as FeedbackAPI from "@services/training/feedbacks";
+import { renderWithProviders, resizeWindow } from "@utils/test-utils";
 
-jest.mock("@contexts/theme", () => ({
-  ThemeProvider: ({ children }: { children: React.ReactNode }) => (
-    <div>{children}</div>
-  ),
-  useTheme: jest.fn(),
-}));
 jest.mock("@fragments/Feedback", () => ({
   FeedbackCard: () => <div>FeedbackCard</div>,
   FeedbackTableHeader: () => <div>FeedbackTableHeader</div>,
@@ -22,10 +16,10 @@ jest.mock("@fragments/Feedback", () => ({
 describe("<FeedbackList />", () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    jest.spyOn(FeedbackAPI, "getFeedbacks").mockResolvedValue({
-      feedbacks: sampleFeedbacks,
-      classifications: sampleClassification,
-    });
+    jest.spyOn(FeedbackAPI, "getFeedbacks").mockResolvedValue(sampleFeedbacks);
+    jest
+      .spyOn(FeedbackAPI, "getCategoryOptions")
+      .mockResolvedValue(sampleClassification);
     jest.spyOn(MembersAPI, "getMembers").mockResolvedValue(sampleMembers);
   });
 
@@ -55,6 +49,9 @@ describe("<FeedbackList />", () => {
       fireEvent.click(screen.getByTestId("classification-타격"));
       fireEvent.change(screen.getByTestId("player-select"), {
         target: { value: "1" },
+      });
+      fireEvent.change(screen.getByTestId("status-select"), {
+        target: { value: "신규" },
       });
     });
 

@@ -61,5 +61,6 @@ export const sampleGuidelineDetail: GuidelineDetailType = {
   min_people: 1,
   max_people: 3,
   is_liked: false,
+  is_drill: true,
   num_likes: 4,
 };

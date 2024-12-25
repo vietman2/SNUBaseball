@@ -58,6 +58,9 @@ jest.mock("@components/Fallbacks", () => ({
   ErrorPage: () => <div>ErrorPage</div>,
   Loading: () => <div>Loading</div>,
 }));
+jest.mock("@components/Frames", () => ({
+  IFrame: () => <div>IFrame</div>,
+}));
 jest.mock("@components/Icons", () => ({
   AppIcon: ({ icon }: { icon: string }) => <span>{icon}</span>,
   MainLogo: () => <div>MainLogo</div>,
@@ -104,6 +107,10 @@ jest.mock("@components/Modals", () => ({
 }));
 jest.mock("@components/Searchbar", () => ({
   Searchbar: () => <div>Searchbar</div>,
+}));
+jest.mock("@components/Tabs", () => ({
+  CategoryTabs: () => <div>CategoryTabs</div>,
+  ChipTabs: () => <div>ChipTabs</div>,
 }));
 
 jest.mock("@contexts/auth/AuthContext", () => ({

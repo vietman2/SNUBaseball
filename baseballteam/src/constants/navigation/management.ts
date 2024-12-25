@@ -8,6 +8,7 @@ export const Management: TabGroup = {
       icon: "checklist",
       path: "/management",
       subtabs: [
+        /*
         {
           title: "Team",
           path: "/management/team",
@@ -15,7 +16,7 @@ export const Management: TabGroup = {
         {
           title: "메디컬",
           path: "/management/medical",
-        },
+        },*/
         {
           title: "장비 현황",
           path: "/management/equipment",

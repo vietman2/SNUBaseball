@@ -35,5 +35,6 @@ export type GuidelineDetailType = {
   min_people: number;
   max_people: number;
   is_liked: boolean;
+  is_drill: boolean;
   num_likes: number;
 };

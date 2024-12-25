@@ -50,11 +50,9 @@ INSTALLED_APPS = [
     'board.discussion.apps.DiscussionConfig',
     'board.notice.apps.NoticeConfig',
 
-    #'management.equipment.apps.EquipmentConfig',
+    'management.equipment.apps.EquipmentConfig',
 
     #'media.image.apps.ImageConfig',
-
-    #'notes.guidelines.apps.GuidelinesConfig',
 
     'person.major.apps.MajorConfig',
     'person.member.apps.MemberConfig',
@@ -63,6 +61,7 @@ INSTALLED_APPS = [
 
     #'schedule.weekly.apps.WeeklyConfig',
     'training.feedback.apps.FeedbackConfig',
+    'training.guideline.apps.GuidelineConfig',
 ]
 
 MIDDLEWARE = [

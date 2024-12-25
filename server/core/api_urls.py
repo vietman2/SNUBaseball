@@ -6,15 +6,14 @@ from rest_framework.routers import DefaultRouter
 from board.discussion.views import DiscussionView, DiscussionCommentView
 from board.notice.views import NoticeView, NoticeCommentView
 
-#from management.equipment.views import EquipmentCategoryView
-
-#from notes.guidelines.views import GuidelineView, GuidelineCommentView
+from management.equipment.views import EquipmentCategoryView
 
 from person.major.views import MajorViewSet
 from person.member.views import MemberViewSet
 from person.user.views import RegisterView, StudentIdCheckView, UserProfileView
 
 from training.feedback.views import FeedbackView, FeedbackCommentView
+from training.guideline.views import GuidelineView, GuidelineCommentView
 #from schedule.weekly.views import WeeklyScheduleViewSet
 
 router = DefaultRouter()
@@ -32,14 +31,7 @@ router.register(
 )
 router.register('notices', NoticeView, basename='notices')
 
-#router.register('equipment', EquipmentCategoryView, basename='equipment_categories')
-
-#router.register(
-#    'guidelines/(?P<guideline_id>[0-9]+)/comments',
-#    GuidelineCommentView,
-#    basename='guideline_comments'
-#)
-#router.register('guidelines', GuidelineView, basename='guidelines')
+router.register('equipment', EquipmentCategoryView, basename='equipment_categories')
 
 router.register('majors', MajorViewSet, basename='majors')
 router.register('members', MemberViewSet, basename='members')
@@ -53,6 +45,12 @@ router.register(
     basename='feedback_comments'
 )
 router.register('feedbacks', FeedbackView, basename='feedbacks')
+router.register(
+    'guidelines/(?P<guideline_id>[0-9]+)/comments',
+    GuidelineCommentView,
+    basename='guideline_comments'
+)
+router.register('guidelines', GuidelineView, basename='guidelines')
 
 urlpatterns = [
     path('login/', LoginView.as_view(), name='login'),

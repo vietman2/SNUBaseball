@@ -11,7 +11,7 @@
       "num_views": 0,
       "is_deleted": false,
       "category": 1,
-      "player": "87ebab07-82bb-40aa-bb33-d5a86d13adb8",
+      "player": 1,
       "status": 0
     }
   },
@@ -27,7 +27,7 @@
       "num_views": 0,
       "is_deleted": false,
       "category": 2,
-      "player": "87ebab07-82bb-40aa-bb33-d5a86d13adb8",
+      "player": 2,
       "status": 1
     }
   },
@@ -43,7 +43,7 @@
       "num_views": 0,
       "is_deleted": false,
       "category": 3,
-      "player": "87ebab07-82bb-40aa-bb33-d5a86d13adb8",
+      "player": 1,
       "status": 2
     }
   },
@@ -59,7 +59,7 @@
       "num_views": 0,
       "is_deleted": false,
       "category": 1,
-      "player": "87ebab07-82bb-40aa-bb33-d5a86d13adb8",
+      "player": 2,
       "status": 3
     }
   },

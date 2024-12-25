@@ -7,25 +7,26 @@ import { FeedbackSimpleType } from "@models/training";
 export function FeedbackTableHeader() {
   return (
     <Header>
+      <div />
       <div>
         <AppIcon icon="text" size={20} color="#212529" />
-        제목
+        <span>제목</span>
       </div>
       <div>
-        <AppIcon icon="person" size={16} color="#212529" />
-        작성자
+        <AppIcon icon="people" size={16} color="#212529" />
+        <span>작성자</span>
       </div>
       <div>
         <AppIcon icon="category" size={20} color="#212529" />
-        분류
+        <span>분류</span>
       </div>
       <div>
         <AppIcon icon="status" size={20} color="#212529" />
-        상태
+        <span>상태</span>
       </div>
       <div>
         <AppIcon icon="calendar" size={20} color="#212529" />
-        날짜
+        <span>작성일</span>
       </div>
     </Header>
   );
@@ -38,6 +39,7 @@ interface Props {
 export function FeedbackTableRow({ feedback }: Readonly<Props>) {
   return (
     <Container>
+      <div>{feedback.id}</div>
       <div>
         [{feedback.player}] {feedback.title}
       </div>
@@ -50,8 +52,11 @@ export function FeedbackTableRow({ feedback }: Readonly<Props>) {
         />
       </div>
       <div>
-        <Status background_color={feedback.status.background_color}>
-          <Dot color={feedback.status.color} />
+        <Status
+          $bgColor={feedback.status.background_color}
+          $color={feedback.status.color}
+        >
+          <Dot $color={feedback.status.color} />
           {feedback.status.label}
         </Status>
       </div>
@@ -65,7 +70,7 @@ const Container = styled.div`
   flex-direction: row;
   align-items: center;
 
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: ${({ theme }) => theme.colors.foreground700};
 
   border-top: 1px solid ${({ theme }) => theme.colors.borderLight};
@@ -73,21 +78,51 @@ const Container = styled.div`
   > div {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    width: 100px;
-    height: 36px;
+    justify-content: center;
+    width: 72px;
+    height: 32px;
     padding: 8px;
     gap: 6px;
 
     white-space: nowrap;
 
     border-right: 1px solid ${({ theme }) => theme.colors.borderLight};
+
+    @media (max-width: 768px) {
+      width: 60px;
+    }
   }
 
   > div:first-child {
+    width: 60px;
+
+    @media (max-width: 768px) {
+      width: 40px;
+    }
+  }
+
+  > div:nth-child(2) {
     flex: 1;
+    justify-content: flex-start;
     min-width: 240px;
     max-width: 400px;
+
+    @media (max-width: 768px) {
+      min-width: 80px;
+      max-width: 360px;
+    }
+  }
+
+  > div:nth-child(5) {
+    @media (max-width: 768px) {
+      border-right: none;
+    }
+  }
+
+  > div:last-child {
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
 `;
 
@@ -97,12 +132,18 @@ const Header = styled(Container)`
 
   border-top: none;
 
-  > div {
-    height: 32px;
+  > div:nth-child(2) {
+    justify-content: center;
+  }
+
+  @media (max-width: 768px) {
+    span {
+      display: none;
+    }
   }
 `;
 
-const Status = styled.div<{ background_color: string }>`
+const Status = styled.div<{ $color: string; $bgColor: string }>`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -110,16 +151,18 @@ const Status = styled.div<{ background_color: string }>`
   gap: 8px;
 
   font-size: 0.9rem;
-  color: ${({ theme }) => theme.colors.background100};
+  color: ${({ $color }) => $color};
 
   border-radius: 8px;
-  background-color: ${({ background_color }) => background_color};
+  background-color: ${({ $bgColor }) => $bgColor};
 `;
 
-const Dot = styled.div<{ color: string }>`
+const Dot = styled.div<{ $color: string }>`
+  position: relative;
+  top: 1px;
   width: 8px;
   height: 8px;
   border-radius: 50%;
 
-  background-color: ${({ color }) => color};
+  background-color: ${({ $color }) => $color};
 `;

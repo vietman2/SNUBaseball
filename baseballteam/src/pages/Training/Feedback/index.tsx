@@ -1,7 +1,8 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
-//import { FeedbackDetail } from "./FeedbackDetail/FeedbackDetail";
+import { FeedbackDetail } from "./FeedbackDetail/FeedbackDetail";
 import { FeedbackList } from "./FeedbackList/FeedbackList";
+import { FeedbackWrite } from "./FeedbackWrite/FeedbackWrite";
 import { SimpleModal } from "@components/Modals";
 import { useWindowSize } from "@hooks/useWindowSize";
 
@@ -33,12 +34,12 @@ function FeedbackLayout() {
       </>
     );
   }
-  
-    if (isModalOpen) {
-      return <Outlet />;
-    }
-  
-    return <FeedbackList />;
+
+  if (isModalOpen) {
+    return <Outlet />;
+  }
+
+  return <FeedbackList />;
 }
 
-export { FeedbackLayout };
+export { FeedbackDetail, FeedbackLayout, FeedbackWrite };

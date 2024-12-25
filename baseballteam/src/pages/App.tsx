@@ -16,6 +16,7 @@ import { RootLayout } from "@pages/_layout";
 import { Login, SignUp } from "@pages/Auth";
 import { ForumContainer } from "@pages/Forum";
 import { HomeContainer } from "@pages/Home";
+import { ManagementContainer } from "@pages/Management";
 import { TrainingContainer } from "@pages/Training";
 
 import { ErrorPage } from "@components/Fallbacks";
@@ -133,6 +134,18 @@ const GlobalStyles = createGlobalStyle`
     transition: background-color 0.3s ease-in-out;
   }
 
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    background: url('/assets/icons/chevron-down.svg') no-repeat 90% 48%;
+  }
+
+  select::-ms-expand {
+    display: none;
+  }
+
   body {
     margin: 0;
     font-family: 'Freesentation', 'SCDream', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -218,9 +231,9 @@ function AppRouter() {
             <Route path="/home/*" element={<HomeContainer />} />
             <Route path="/forum/*" element={<ForumContainer />} />
             <Route path="/training/*" element={<TrainingContainer />} />
+            <Route path="/management/*" element={<ManagementContainer />} />
             {/*<Route path="/records/*" element={<RecordsContainer />} />
             <Route path="/schedule/*" element={<ScheduleContainer />} />
-            <Route path="/management/*" element={<ManagementContainer />} />
             <Route path="/admin/*" element={<AdminContainer />} />
             <Route path="/accountings/*" element={<AccountingsContainer />} />
           */}

@@ -365,7 +365,8 @@ const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 64px;
+  min-height: 64px;
+  max-height: 64px;
   padding: 0 24px 0 0;
 
   position: sticky;
@@ -373,6 +374,7 @@ const HeaderContainer = styled.div`
   z-index: 10;
 
   border-bottom: 0.5px solid ${({ theme }) => theme.colors.borderLight};
+  background-color: ${({ theme }) => theme.colors.background100};
 `;
 
 const Wrapper = styled.div`

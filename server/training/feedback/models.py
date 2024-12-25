@@ -1,6 +1,7 @@
 from django.db import models
 
 from core.models import Post, Comment, ContentView, Chip
+from person.member.models import Member
 from .enums import StatusType
 
 class FeedbackCategory(Chip):
@@ -9,7 +10,7 @@ class FeedbackCategory(Chip):
 
 class Feedback(Post):
     category    = models.ForeignKey(FeedbackCategory, on_delete=models.CASCADE)
-    player      = models.ForeignKey('user.User', on_delete=models.CASCADE, related_name='feedbacks')
+    player      = models.ForeignKey(Member, on_delete=models.CASCADE, related_name='feedbacks')
     status      = models.IntegerField(choices=StatusType.choices, default=StatusType.NEW)
 
     class Meta:

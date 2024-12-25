@@ -1,5 +1,5 @@
 import { GenericCommentType } from "@models/app";
-import { AuthorType } from "@models/user";
+import { AuthorType, MemberType } from "@models/user";
 
 export type ClassificationType = {
   label: string;
@@ -30,7 +30,7 @@ export type FeedbackDetailType = {
   id: number;
   title: string;
   content: string;
-  player: AuthorType;
+  player: MemberType;
   author: AuthorType;
   category: ClassificationType;
   status: {
