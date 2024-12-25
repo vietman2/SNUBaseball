@@ -6,8 +6,7 @@ from rest_framework.routers import DefaultRouter
 from board.discussion.views import DiscussionView, DiscussionCommentView
 from board.notice.views import NoticeView, NoticeCommentView
 
-#from management.equipment.views import EquipmentCategoryView
-
+from management.equipment.views import EquipmentCategoryView
 
 from person.major.views import MajorViewSet
 from person.member.views import MemberViewSet
@@ -32,7 +31,7 @@ router.register(
 )
 router.register('notices', NoticeView, basename='notices')
 
-#router.register('equipment', EquipmentCategoryView, basename='equipment_categories')
+router.register('equipment', EquipmentCategoryView, basename='equipment_categories')
 
 router.register('majors', MajorViewSet, basename='majors')
 router.register('members', MemberViewSet, basename='members')

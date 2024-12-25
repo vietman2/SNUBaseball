@@ -38,6 +38,7 @@ export function MobileLayout() {
   const handleTabClick = (tab: TabType) => {
     navigate(tab.path);
     setActiveTab(tab);
+    setActiveSubTab(tab.subtabs[0]);
     setIsTabsOpen(false);
   };
 
