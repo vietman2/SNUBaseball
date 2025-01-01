@@ -2,6 +2,7 @@ import { fireEvent, screen } from "@testing-library/react";
 
 import { CategoryTabs } from "./CategoryTabs";
 import { ChipTabs } from "./ChipTabs";
+import { ExpandableTab } from "./ExpandableTab";
 import { renderWithProviders } from "@utils/test-utils";
 
 jest.unmock("@components/Tabs");
@@ -31,5 +32,17 @@ describe("<ChipTabs />", () => {
     );
 
     fireEvent.click(screen.getByText("Option2"));
+  });
+});
+
+describe("<ExpandableTab />", () => {
+  it("should render", () => {
+    renderWithProviders(
+      <ExpandableTab title="Title" height="100px">
+        <div>Content</div>
+      </ExpandableTab>
+    );
+
+    fireEvent.click(screen.getByTestId("header"));
   });
 });
