@@ -13,7 +13,7 @@ export const Main: TabGroup = {
           path: "/home",
         },
       ],
-    } /*
+    },
     {
       title: "기록실",
       icon: "record",
@@ -36,7 +36,7 @@ export const Main: TabGroup = {
           path: "/records/physicals",
         },
       ],
-    },*/,
+    },
     {
       title: "게시판",
       icon: "forum",
