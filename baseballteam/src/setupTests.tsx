@@ -111,6 +111,9 @@ jest.mock("@components/Searchbar", () => ({
 jest.mock("@components/Tabs", () => ({
   CategoryTabs: () => <div>CategoryTabs</div>,
   ChipTabs: () => <div>ChipTabs</div>,
+  ExpandableTab: ({ children }: { children: React.ReactNode }) => (
+    <div>{children}</div>
+  ),
 }));
 
 jest.mock("@contexts/auth/AuthContext", () => ({
