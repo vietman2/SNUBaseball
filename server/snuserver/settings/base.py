@@ -59,6 +59,8 @@ INSTALLED_APPS = [
     'person.tale.apps.TaleConfig',
     'person.user.apps.UserConfig',
 
+    'records.officialgame.apps.OfficialgameConfig',
+
     #'schedule.weekly.apps.WeeklyConfig',
     'training.feedback.apps.FeedbackConfig',
     'training.guideline.apps.GuidelineConfig',

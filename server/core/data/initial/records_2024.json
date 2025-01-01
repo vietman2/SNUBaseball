@@ -1,0 +1,413 @@
+[
+  {
+    "model": "officialgame.tournament",
+    "pk": 1,
+    "fields": { "name": "대학리그 U리그" }
+  },
+  {
+    "model": "officialgame.tournament",
+    "pk": 2,
+    "fields": { "name": "전국대학야구선수권대회" }
+  },
+  {
+    "model": "officialgame.tournament",
+    "pk": 3,
+    "fields": { "name": "대통령기 전국대학야구대회" }
+  },
+  {
+    "model": "officialgame.tournament",
+    "pk": 4,
+    "fields": { "name": "전국체육대회/야구" }
+  },
+  {
+    "model": "officialgame.tournament",
+    "pk": 5,
+    "fields": { "name": "도쿄대학교 교류전" }
+  },
+  {
+    "model": "officialgame.tournamentevent",
+    "pk": 1,
+    "fields": {
+      "tournament": 1,
+      "name": "2024 KUSF 대학야구 U-리그 B조",
+      "year": 2024
+    }
+  },
+  {
+    "model": "officialgame.tournamentevent",
+    "pk": 2,
+    "fields": {
+      "tournament": 2,
+      "name": "제79회 전국대학야구선수권 대회 C조",
+      "year": 2024
+    }
+  },
+  {
+    "model": "officialgame.tournamentevent",
+    "pk": 3,
+    "fields": {
+      "tournament": 3,
+      "name": "제58회 대통령기 전국대학야구 대회 E조",
+      "year": 2024
+    }
+  },
+  {
+    "model": "officialgame.tournamentevent",
+    "pk": 4,
+    "fields": {
+      "tournament": 4,
+      "name": "제105회 전국체육대회 서울시 대표 선발전 (대학/일반부)",
+      "year": 2024
+    }
+  },
+  {
+    "model": "officialgame.tournamentevent",
+    "pk": 5,
+    "fields": {
+      "tournament": 5,
+      "name": "도쿄대학교 교류전",
+      "year": 2024
+    }
+  },
+  {
+    "model": "officialgame.myteam",
+    "pk": 1,
+    "fields": { "year": 2024 }
+  },
+  {
+    "model": "officialgame.opponent",
+    "pk": 1,
+    "fields": { "name": "신안산대", "year": 2024 }
+  },
+  {
+    "model": "officialgame.opponent",
+    "pk": 2,
+    "fields": { "name": "강릉영동대", "year": 2024 }
+  },
+  {
+    "model": "officialgame.opponent",
+    "pk": 3,
+    "fields": { "name": "한국골프대", "year": 2024 }
+  },
+  {
+    "model": "officialgame.opponent",
+    "pk": 4,
+    "fields": { "name": "경민대", "year": 2024 }
+  },
+  {
+    "model": "officialgame.opponent",
+    "pk": 5,
+    "fields": { "name": "여주대", "year": 2024 }
+  },
+  {
+    "model": "officialgame.opponent",
+    "pk": 6,
+    "fields": { "name": "건국대", "year": 2024 }
+  },
+  {
+    "model": "officialgame.opponent",
+    "pk": 7,
+    "fields": { "name": "연세대", "year": 2024 }
+  },
+  {
+    "model": "officialgame.opponent",
+    "pk": 8,
+    "fields": { "name": "경희대", "year": 2024 }
+  },
+  {
+    "model": "officialgame.opponent",
+    "pk": 9,
+    "fields": { "name": "제주국제대", "year": 2024 }
+  },
+  {
+    "model": "officialgame.opponent",
+    "pk": 10,
+    "fields": { "name": "웅지세무대", "year": 2024 }
+  },
+  {
+    "model": "officialgame.opponent",
+    "pk": 11,
+    "fields": { "name": "동원대", "year": 2024 }
+  },
+  {
+    "model": "officialgame.opponent",
+    "pk": 12,
+    "fields": { "name": "충북보건과학대", "year": 2024 }
+  },
+  {
+    "model": "officialgame.opponent",
+    "pk": 13,
+    "fields": { "name": "경남대", "year": 2024 }
+  },
+  {
+    "model": "officialgame.opponent",
+    "pk": 14,
+    "fields": { "name": "홍익대", "year": 2024 }
+  },
+  {
+    "model": "officialgame.opponent",
+    "pk": 15,
+    "fields": { "name": "동아대", "year": 2024 }
+  },
+  {
+    "model": "officialgame.opponent",
+    "pk": 16,
+    "fields": { "name": "도쿄대", "year": 2024 }
+  },
+  {
+    "model": "officialgame.ballpark",
+    "pk": 1,
+    "fields": { "name": "횡성 베이스볼 테마파크 A구장", "short_name": "횡성 A" }
+  },
+  {
+    "model": "officialgame.ballpark",
+    "pk": 2,
+    "fields": { "name": "횡성 베이스볼 테마파크 B구장", "short_name": "횡성 B" }
+  },
+  {
+    "model": "officialgame.ballpark",
+    "pk": 3,
+    "fields": { "name": "보은스포츠파크 A구장", "short_name": "보은 A" }
+  },
+  {
+    "model": "officialgame.ballpark",
+    "pk": 4,
+    "fields": { "name": "보은스포츠파크 B구장", "short_name": "보은 B" }
+  },
+  {
+    "model": "officialgame.ballpark",
+    "pk": 5,
+    "fields": { "name": "선샤인밀양스포츠파크 A구장", "short_name": "밀양 A" }
+  },
+  {
+    "model": "officialgame.ballpark",
+    "pk": 6,
+    "fields": { "name": "선샤인밀양스포츠파크 B구장", "short_name": "밀양 B" }
+  },
+  {
+    "model": "officialgame.ballpark",
+    "pk": 7,
+    "fields": { "name": "신월야구장", "short_name": "신월" }
+  },
+  {
+    "model": "officialgame.ballpark",
+    "pk": 8,
+    "fields": { "name": "메이지진구 야구장", "short_name": "도쿄" }
+  },
+  {
+    "model": "officialgame.game",
+    "pk": 1,
+    "fields": {
+      "tournament_event": 1,
+      "opponent": 1,
+      "location": 2,
+      "date_time": "2024-04-04T02:30:00Z",
+      "is_home": true,
+      "is_finished": true
+    }
+  },
+  {
+    "model": "officialgame.game",
+    "pk": 2,
+    "fields": {
+      "tournament_event": 1,
+      "opponent": 2,
+      "location": 2,
+      "date_time": "2024-04-05T05:00:00Z",
+      "is_home": true,
+      "is_finished": true
+    }
+  },
+  {
+    "model": "officialgame.game",
+    "pk": 3,
+    "fields": {
+      "tournament_event": 1,
+      "opponent": 3,
+      "location": 2,
+      "date_time": "2024-04-18T00:00:00Z",
+      "is_home": false,
+      "is_finished": true
+    }
+  },
+  {
+    "model": "officialgame.game",
+    "pk": 4,
+    "fields": {
+      "tournament_event": 1,
+      "opponent": 4,
+      "location": 2,
+      "date_time": "2024-04-19T02:30:00Z",
+      "is_home": true,
+      "is_finished": true
+    }
+  },
+  {
+    "model": "officialgame.game",
+    "pk": 5,
+    "fields": {
+      "tournament_event": 1,
+      "opponent": 5,
+      "location": 2,
+      "date_time": "2024-04-23T05:00:00Z",
+      "is_home": false,
+      "is_finished": true
+    }
+  },
+  {
+    "model": "officialgame.game",
+    "pk": 6,
+    "fields": {
+      "tournament_event": 1,
+      "opponent": 6,
+      "location": 2,
+      "date_time": "2024-04-24T05:00:00Z",
+      "is_home": true,
+      "is_finished": true
+    }
+  },
+  {
+    "model": "officialgame.game",
+    "pk": 7,
+    "fields": {
+      "tournament_event": 1,
+      "opponent": 7,
+      "location": 2,
+      "date_time": "2024-05-02T00:00:00Z",
+      "is_home": true,
+      "is_finished": true
+    }
+  },
+  {
+    "model": "officialgame.game",
+    "pk": 8,
+    "fields": {
+      "tournament_event": 1,
+      "opponent": 8,
+      "location": 2,
+      "date_time": "2024-05-03T05:00:00Z",
+      "is_home": true,
+      "is_finished": true
+    }
+  },
+  {
+    "model": "officialgame.game",
+    "pk": 9,
+    "fields": {
+      "tournament_event": 2,
+      "opponent": 9,
+      "location": 4,
+      "date_time": "2024-06-24T03:00:00Z",
+      "is_home": true,
+      "is_finished": true
+    }
+  },
+  {
+    "model": "officialgame.game",
+    "pk": 10,
+    "fields": {
+      "tournament_event": 2,
+      "opponent": 10,
+      "location": 4,
+      "date_time": "2024-06-25T06:00:00Z",
+      "is_home": false,
+      "is_finished": true
+    }
+  },
+  {
+    "model": "officialgame.game",
+    "pk": 11,
+    "fields": {
+      "tournament_event": 2,
+      "opponent": 11,
+      "location": 3,
+      "date_time": "2024-07-03T09:00:00Z",
+      "is_home": true,
+      "is_finished": true
+    }
+  },
+  {
+    "model": "officialgame.game",
+    "pk": 12,
+    "fields": {
+      "tournament_event": 2,
+      "opponent": 12,
+      "location": 4,
+      "date_time": "2024-07-06T04:00:00Z",
+      "is_home": true,
+      "is_finished": true
+    }
+  },
+  {
+    "model": "officialgame.game",
+    "pk": 13,
+    "fields": {
+      "tournament_event": 3,
+      "opponent": 13,
+      "location": 6,
+      "date_time": "2024-07-31T00:00:00Z",
+      "is_home": false,
+      "is_finished": true
+    }
+  },
+  {
+    "model": "officialgame.game",
+    "pk": 14,
+    "fields": {
+      "tournament_event": 3,
+      "opponent": 14,
+      "location": 6,
+      "date_time": "2024-08-06T00:00:00Z",
+      "is_home": true,
+      "is_finished": true
+    }
+  },
+  {
+    "model": "officialgame.game",
+    "pk": 15,
+    "fields": {
+      "tournament_event": 3,
+      "opponent": 2,
+      "location": 6,
+      "date_time": "2024-08-07T03:00:00Z",
+      "is_home": false,
+      "is_finished": true
+    }
+  },
+  {
+    "model": "officialgame.game",
+    "pk": 16,
+    "fields": {
+      "tournament_event": 3,
+      "opponent": 15,
+      "location": 5,
+      "date_time": "2024-08-12T03:00:00Z",
+      "is_home": true,
+      "is_finished": true
+    }
+  },
+  {
+    "model": "officialgame.game",
+    "pk": 17,
+    "fields": {
+      "tournament_event": 4,
+      "opponent": 6,
+      "location": 7,
+      "date_time": "2024-07-23T02:30:00Z",
+      "is_home": false,
+      "is_finished": true
+    }
+  },
+  {
+    "model": "officialgame.game",
+    "pk": 18,
+    "fields": {
+      "tournament_event": 5,
+      "opponent": 16,
+      "location": 8,
+      "date_time": "2024-08-23T00:00:00Z",
+      "is_home": false,
+      "is_finished": true
+    }
+  }
+]
