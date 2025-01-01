@@ -17,6 +17,7 @@ import { Login, SignUp } from "@pages/Auth";
 import { ForumContainer } from "@pages/Forum";
 import { HomeContainer } from "@pages/Home";
 import { ManagementContainer } from "@pages/Management";
+import { RecordsContainer } from "@pages/Records";
 import { TrainingContainer } from "@pages/Training";
 
 import { ErrorPage } from "@components/Fallbacks";
@@ -232,8 +233,8 @@ function AppRouter() {
             <Route path="/forum/*" element={<ForumContainer />} />
             <Route path="/training/*" element={<TrainingContainer />} />
             <Route path="/management/*" element={<ManagementContainer />} />
-            {/*<Route path="/records/*" element={<RecordsContainer />} />
-            <Route path="/schedule/*" element={<ScheduleContainer />} />
+            <Route path="/records/*" element={<RecordsContainer />} />
+            {/*<Route path="/schedule/*" element={<ScheduleContainer />} />
             <Route path="/admin/*" element={<AdminContainer />} />
             <Route path="/accountings/*" element={<AccountingsContainer />} />
           */}
