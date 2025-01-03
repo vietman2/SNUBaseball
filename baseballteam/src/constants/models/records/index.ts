@@ -1,3 +1,8 @@
-import { ResultType, TournamentType } from "./result";
+import {
+  GameDetailsType,
+  LineupType,
+  ResultType,
+  TournamentType,
+} from "./result";
 
-export type { ResultType, TournamentType };
+export type { GameDetailsType, ResultType, LineupType, TournamentType };

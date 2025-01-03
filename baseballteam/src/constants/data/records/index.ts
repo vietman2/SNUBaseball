@@ -1,3 +1,3 @@
-import { sampleTournament } from "./results";
+import { sampleTournament, sampleLineup, sampleGame } from "./results";
 
-export { sampleTournament };
+export { sampleTournament, sampleLineup, sampleGame };
