@@ -6,10 +6,7 @@ from person.user.models import User
 from .models import Member
 
 class MemberAPITestCase(APITestCase):
-    fixtures = [
-        "core/data/initial/majors.json", "core/data/test/tale.json",
-        "core/data/test/people.json",
-    ]
+    fixtures = ["core/data/initial/majors.json", "core/data/test/people.json"]
 
     def setUp(self):
         self.url = '/v1/members/'

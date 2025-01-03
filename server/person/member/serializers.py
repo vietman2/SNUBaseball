@@ -3,7 +3,6 @@ from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
 from person.major.models import Department
-from person.tale.serializers import PlayerTaleSerializer
 from .enums import StatusType, HandsType, RoleType
 from .models import Member
 from .utils import (
@@ -60,14 +59,13 @@ class MemberDetailSerializer(ModelSerializer):
     date_joined     = serializers.DateField(format="%Y/%m")
     num_semester    = serializers.SerializerMethodField()
     status          = serializers.SerializerMethodField()
-    tale            = serializers.SerializerMethodField()
     is_elite        = serializers.SerializerMethodField()
 
     class Meta:
         model = Member
         fields = [
             "id", "role", "name", "position", "hands", "student_id", "profile_image", "major",
-            "phone", "email", "date_joined", "num_semester", "status", "back_number", "tale", "is_elite"
+            "phone", "email", "date_joined", "num_semester", "status", "back_number", "is_elite"
         ]
 
     def get_profile_image(self, obj):
@@ -87,15 +85,6 @@ class MemberDetailSerializer(ModelSerializer):
 
     def get_status(self, obj):
         return get_status_chip(obj.status)
-
-    def get_tale(self, obj):
-        ## get the latest tale (in year)
-        tale = obj.tales.order_by('-year').first()
-
-        if tale is None:
-            return None
-
-        return PlayerTaleSerializer(tale).data
 
     def get_is_elite(self, obj):
         if obj.is_elite:
