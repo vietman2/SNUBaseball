@@ -1,0 +1,1249 @@
+[
+  {
+    "model": "officialgame.myplayer",
+    "pk": 1,
+    "fields": {
+      "member": 1,
+      "team": 1,
+      "weight": 95,
+      "height": 183,
+      "back_number": 16,
+      "reason": ".",
+      "goal": ".",
+      "rival": ".",
+      "role_model": ".",
+      "strength": ".",
+      "weakness": ".",
+      "is_registered": true
+    }
+  },
+  {
+    "model": "officialgame.myplayer",
+    "pk": 2,
+    "fields": {
+      "member": 18,
+      "team": 1,
+      "weight": 83,
+      "height": 181,
+      "back_number": 14,
+      "reason": ".",
+      "goal": ".",
+      "rival": ".",
+      "role_model": ".",
+      "strength": ".",
+      "weakness": ".",
+      "is_registered": true
+    }
+  },
+  {
+    "model": "officialgame.myplayer",
+    "pk": 3,
+    "fields": {
+      "member": 7,
+      "team": 1,
+      "weight": 70,
+      "height": 172,
+      "back_number": 5,
+      "reason": ".",
+      "goal": ".",
+      "rival": ".",
+      "role_model": ".",
+      "strength": ".",
+      "weakness": ".",
+      "is_registered": true
+    }
+  },
+  {
+    "model": "officialgame.myplayer",
+    "pk": 4,
+    "fields": {
+      "member": 15,
+      "team": 1,
+      "weight": 75,
+      "height": 175,
+      "back_number": 10,
+      "reason": ".",
+      "goal": ".",
+      "rival": ".",
+      "role_model": ".",
+      "strength": ".",
+      "weakness": ".",
+      "is_registered": true
+    }
+  },
+  {
+    "model": "officialgame.myplayer",
+    "pk": 5,
+    "fields": {
+      "member": 16,
+      "team": 1,
+      "weight": 85,
+      "height": 182,
+      "back_number": 11,
+      "reason": ".",
+      "goal": ".",
+      "rival": ".",
+      "role_model": ".",
+      "strength": ".",
+      "weakness": ".",
+      "is_registered": true
+    }
+  },
+  {
+    "model": "officialgame.myplayer",
+    "pk": 6,
+    "fields": {
+      "member": 9,
+      "team": 1,
+      "weight": 70,
+      "height": 175,
+      "back_number": 24,
+      "reason": ".",
+      "goal": ".",
+      "rival": ".",
+      "role_model": ".",
+      "strength": ".",
+      "weakness": ".",
+      "is_registered": true
+    }
+  },
+  {
+    "model": "officialgame.myplayer",
+    "pk": 7,
+    "fields": {
+      "member": 11,
+      "team": 1,
+      "weight": 72,
+      "height": 182,
+      "back_number": 2,
+      "reason": ".",
+      "goal": ".",
+      "rival": ".",
+      "role_model": ".",
+      "strength": ".",
+      "weakness": ".",
+      "is_registered": true
+    }
+  },
+  {
+    "model": "officialgame.myplayer",
+    "pk": 8,
+    "fields": {
+      "member": 12,
+      "team": 1,
+      "weight": 87,
+      "height": 189,
+      "back_number": 23,
+      "reason": ".",
+      "goal": ".",
+      "rival": ".",
+      "role_model": ".",
+      "strength": ".",
+      "weakness": ".",
+      "is_registered": true
+    }
+  },
+  {
+    "model": "officialgame.myplayer",
+    "pk": 9,
+    "fields": {
+      "member": 19,
+      "team": 1,
+      "weight": 80,
+      "height": 181,
+      "back_number": 30,
+      "reason": ".",
+      "goal": ".",
+      "rival": ".",
+      "role_model": ".",
+      "strength": ".",
+      "weakness": ".",
+      "is_registered": true
+    }
+  },
+  {
+    "model": "officialgame.myplayer",
+    "pk": 10,
+    "fields": {
+      "member": 2,
+      "team": 1,
+      "weight": 87,
+      "height": 186,
+      "back_number": 7,
+      "reason": ".",
+      "goal": ".",
+      "rival": ".",
+      "role_model": ".",
+      "strength": ".",
+      "weakness": ".",
+      "is_registered": true
+    }
+  },
+  {
+    "model": "officialgame.myplayer",
+    "pk": 11,
+    "fields": {
+      "member": 3,
+      "team": 1,
+      "weight": 75,
+      "height": 172,
+      "back_number": 8,
+      "reason": ".",
+      "goal": ".",
+      "rival": ".",
+      "role_model": ".",
+      "strength": ".",
+      "weakness": ".",
+      "is_registered": true
+    }
+  },
+  {
+    "model": "officialgame.myplayer",
+    "pk": 12,
+    "fields": {
+      "member": 20,
+      "team": 1,
+      "weight": 86,
+      "height": 179,
+      "back_number": 6,
+      "reason": ".",
+      "goal": ".",
+      "rival": ".",
+      "role_model": ".",
+      "strength": ".",
+      "weakness": ".",
+      "is_registered": true
+    }
+  },
+  {
+    "model": "officialgame.myplayer",
+    "pk": 13,
+    "fields": {
+      "member": 21,
+      "team": 1,
+      "weight": 84,
+      "height": 182,
+      "back_number": 15,
+      "reason": ".",
+      "goal": ".",
+      "rival": ".",
+      "role_model": ".",
+      "strength": ".",
+      "weakness": ".",
+      "is_registered": true
+    }
+  },
+  {
+    "model": "officialgame.myplayer",
+    "pk": 14,
+    "fields": {
+      "member": 5,
+      "team": 1,
+      "weight": 60,
+      "height": 163,
+      "back_number": 13,
+      "reason": ".",
+      "goal": ".",
+      "rival": ".",
+      "role_model": ".",
+      "strength": ".",
+      "weakness": ".",
+      "is_registered": true
+    }
+  },
+  {
+    "model": "officialgame.myplayer",
+    "pk": 15,
+    "fields": {
+      "member": 6,
+      "team": 1,
+      "weight": 76,
+      "height": 183,
+      "back_number": 21,
+      "reason": ".",
+      "goal": ".",
+      "rival": ".",
+      "role_model": ".",
+      "strength": ".",
+      "weakness": ".",
+      "is_registered": true
+    }
+  },
+  {
+    "model": "officialgame.myplayer",
+    "pk": 16,
+    "fields": {
+      "member": 8,
+      "team": 1,
+      "weight": 78,
+      "height": 183,
+      "back_number": 25,
+      "reason": ".",
+      "goal": ".",
+      "rival": ".",
+      "role_model": ".",
+      "strength": ".",
+      "weakness": ".",
+      "is_registered": true
+    }
+  },
+  {
+    "model": "officialgame.myplayer",
+    "pk": 17,
+    "fields": {
+      "member": 10,
+      "team": 1,
+      "weight": 80,
+      "height": 183,
+      "back_number": 1,
+      "reason": ".",
+      "goal": ".",
+      "rival": ".",
+      "role_model": ".",
+      "strength": ".",
+      "weakness": ".",
+      "is_registered": true
+    }
+  },
+  {
+    "model": "officialgame.myplayer",
+    "pk": 18,
+    "fields": {
+      "member": 14,
+      "team": 1,
+      "weight": 74,
+      "height": 185,
+      "back_number": 9,
+      "reason": ".",
+      "goal": ".",
+      "rival": ".",
+      "role_model": ".",
+      "strength": ".",
+      "weakness": ".",
+      "is_registered": true
+    }
+  },
+  {
+    "model": "officialgame.myplayer",
+    "pk": 19,
+    "fields": {
+      "member": 13,
+      "team": 1,
+      "weight": 71,
+      "height": 179,
+      "back_number": 18,
+      "reason": ".",
+      "goal": ".",
+      "rival": ".",
+      "role_model": ".",
+      "strength": ".",
+      "weakness": ".",
+      "is_registered": true
+    }
+  },
+  {
+    "model": "officialgame.myplayer",
+    "pk": 20,
+    "fields": {
+      "member": 17,
+      "team": 1,
+      "weight": 72,
+      "height": 168,
+      "back_number": 17,
+      "reason": ".",
+      "goal": ".",
+      "rival": ".",
+      "role_model": ".",
+      "strength": ".",
+      "weakness": ".",
+      "is_registered": true
+    }
+  },
+  {
+    "model": "officialgame.myplayer",
+    "pk": 21,
+    "fields": {
+      "member": 22,
+      "team": 1,
+      "weight": 0,
+      "height": 0,
+      "back_number": 20,
+      "reason": ".",
+      "goal": ".",
+      "rival": ".",
+      "role_model": ".",
+      "strength": ".",
+      "weakness": ".",
+      "is_registered": true
+    }
+  },
+  {
+    "model": "officialgame.myplayer",
+    "pk": 22,
+    "fields": {
+      "member": 23,
+      "team": 1,
+      "weight": 0,
+      "height": 0,
+      "back_number": 19,
+      "reason": ".",
+      "goal": ".",
+      "rival": ".",
+      "role_model": ".",
+      "strength": ".",
+      "weakness": ".",
+      "is_registered": false
+    }
+  },
+  {
+    "model": "officialgame.myplayer",
+    "pk": 23,
+    "fields": {
+      "member": 24,
+      "team": 1,
+      "weight": 0,
+      "height": 0,
+      "back_number": 12,
+      "reason": ".",
+      "goal": ".",
+      "rival": ".",
+      "role_model": ".",
+      "strength": ".",
+      "weakness": ".",
+      "is_registered": false
+    }
+  },
+  {
+    "model": "officialgame.myplayer",
+    "pk": 24,
+    "fields": {
+      "member": 4,
+      "team": 1,
+      "weight": 0,
+      "height": 0,
+      "back_number": 55,
+      "reason": ".",
+      "goal": ".",
+      "rival": ".",
+      "role_model": ".",
+      "strength": ".",
+      "weakness": ".",
+      "is_registered": false
+    }
+  },
+  {
+    "model": "officialgame.myplayer",
+    "pk": 25,
+    "fields": {
+      "member": 25,
+      "team": 1,
+      "weight": 0,
+      "height": 0,
+      "back_number": 57,
+      "reason": ".",
+      "goal": ".",
+      "rival": ".",
+      "role_model": ".",
+      "strength": ".",
+      "weakness": ".",
+      "is_registered": false
+    }
+  },
+  {
+    "model": "officialgame.myplayer",
+    "pk": 26,
+    "fields": {
+      "member": 26,
+      "team": 1,
+      "weight": 0,
+      "height": 0,
+      "back_number": 22,
+      "reason": ".",
+      "goal": ".",
+      "rival": ".",
+      "role_model": ".",
+      "strength": ".",
+      "weakness": ".",
+      "is_registered": false
+    }
+  },
+  {
+    "model": "officialgame.mygameplayer",
+    "pk": 1,
+    "fields": { "game": 1, "player": 1, "position": 3 }
+  },
+  {
+    "model": "officialgame.mygameplayer",
+    "pk": 2,
+    "fields": { "game": 1, "player": 2, "position": 12 }
+  },
+  {
+    "model": "officialgame.mygameplayer",
+    "pk": 3,
+    "fields": { "game": 1, "player": 3, "position": 12 }
+  },
+  {
+    "model": "officialgame.mygameplayer",
+    "pk": 4,
+    "fields": { "game": 1, "player": 4, "position": 1 }
+  },
+  {
+    "model": "officialgame.mygameplayer",
+    "pk": 5,
+    "fields": { "game": 1, "player": 6, "position": 7 }
+  },
+  {
+    "model": "officialgame.mygameplayer",
+    "pk": 6,
+    "fields": { "game": 1, "player": 7, "position": 12 }
+  },
+  {
+    "model": "officialgame.mygameplayer",
+    "pk": 7,
+    "fields": { "game": 1, "player": 8, "position": 12 }
+  },
+  {
+    "model": "officialgame.mygameplayer",
+    "pk": 8,
+    "fields": { "game": 1, "player": 9, "position": 2 }
+  },
+  {
+    "model": "officialgame.mygameplayer",
+    "pk": 9,
+    "fields": { "game": 1, "player": 10, "position": 4 }
+  },
+  {
+    "model": "officialgame.mygameplayer",
+    "pk": 10,
+    "fields": { "game": 1, "player": 11, "position": 12 }
+  },
+  {
+    "model": "officialgame.mygameplayer",
+    "pk": 11,
+    "fields": { "game": 1, "player": 12, "position": 5 }
+  },
+  {
+    "model": "officialgame.mygameplayer",
+    "pk": 12,
+    "fields": { "game": 1, "player": 13, "position": 12 }
+  },
+  {
+    "model": "officialgame.mygameplayer",
+    "pk": 13,
+    "fields": { "game": 1, "player": 14, "position": 12 }
+  },
+  {
+    "model": "officialgame.mygameplayer",
+    "pk": 14,
+    "fields": { "game": 1, "player": 15, "position": 8 }
+  },
+  {
+    "model": "officialgame.mygameplayer",
+    "pk": 15,
+    "fields": { "game": 1, "player": 16, "position": 12 }
+  },
+  {
+    "model": "officialgame.mygameplayer",
+    "pk": 16,
+    "fields": { "game": 1, "player": 17, "position": 6 }
+  },
+  {
+    "model": "officialgame.mygameplayer",
+    "pk": 17,
+    "fields": { "game": 1, "player": 18, "position": 12 }
+  },
+  {
+    "model": "officialgame.mygameplayer",
+    "pk": 18,
+    "fields": { "game": 1, "player": 19, "position": 9 }
+  },
+  {
+    "model": "officialgame.mygameplayer",
+    "pk": 19,
+    "fields": { "game": 1, "player": 20, "position": 12 }
+  },
+  {
+    "model": "officialgame.mygameplayer",
+    "pk": 20,
+    "fields": { "game": 1, "player": 21, "position": 12 }
+  },
+  {
+    "model": "officialgame.mygameplayer",
+    "pk": 21,
+    "fields": { "game": 1, "player": 25, "position": 11 }
+  },
+  {
+    "model": "officialgame.mygameplayer",
+    "pk": 22,
+    "fields": { "game": 1, "player": 26, "position": 11 }
+  },
+  {
+    "model": "officialgame.gamelineup",
+    "pk": 1,
+    "fields": {
+      "game": 1,
+      "starting_pitcher": 4,
+      "one": 4,
+      "two": 16,
+      "three": 11,
+      "four": 9,
+      "five": 14,
+      "six": 5,
+      "seven": 1,
+      "eight": 8,
+      "nine": 18,
+      "bench": [2, 3, 6, 7, 10, 12, 13, 15, 17, 19, 20],
+      "managers": [21, 22]
+    }
+  },
+  {
+    "model": "member.member",
+    "pk": 1,
+    "fields": {
+      "student_id": "2017-19331",
+      "first_name": "승원",
+      "last_name": "정",
+      "birth_date": "1999-03-07",
+      "admission_year": 2017,
+      "major": 84,
+      "role": 5,
+      "status": 4,
+      "phone": "+821045129459",
+      "email": "vietman0@gmail.com",
+      "address": "서울시 관악구 남부순환로 248길 56, 101동 910호",
+      "notes": ".",
+      "date_joined": "2024-12-19",
+      "num_semester": 10,
+      "profile_image": "",
+      "position": "내야수",
+      "hands": 1,
+      "back_number": 16,
+      "is_elite": false
+    }
+  },
+  {
+    "model": "member.member",
+    "pk": 2,
+    "fields": {
+      "student_id": "2021-12452",
+      "first_name": "유안",
+      "last_name": "김",
+      "birth_date": null,
+      "admission_year": 2021,
+      "major": 31,
+      "role": 1,
+      "status": 1,
+      "phone": "+821055359226",
+      "email": "youan1206@naver.com",
+      "address": "",
+      "notes": "",
+      "date_joined": "2021-02-01",
+      "num_semester": 4,
+      "profile_image": "",
+      "position": "투수",
+      "hands": 1,
+      "back_number": 7,
+      "is_elite": true
+    }
+  },
+  {
+    "model": "member.member",
+    "pk": 3,
+    "fields": {
+      "student_id": "2021-18947",
+      "first_name": "서진",
+      "last_name": "양",
+      "birth_date": null,
+      "admission_year": 2021,
+      "major": 31,
+      "role": 2,
+      "status": 1,
+      "phone": "+821098223646",
+      "email": null,
+      "address": "",
+      "notes": "",
+      "date_joined": "2021-09-01",
+      "num_semester": 3,
+      "profile_image": "",
+      "position": "내야수",
+      "hands": 1,
+      "back_number": 8,
+      "is_elite": false
+    }
+  },
+  {
+    "model": "member.member",
+    "pk": 4,
+    "fields": {
+      "student_id": "2024-00001",
+      "first_name": "지민",
+      "last_name": "강",
+      "birth_date": null,
+      "admission_year": 2024,
+      "major": 13,
+      "role": 3,
+      "status": 1,
+      "phone": "+821085526861",
+      "email": null,
+      "address": "",
+      "notes": "",
+      "date_joined": "2024-08-01",
+      "num_semester": 1,
+      "profile_image": "",
+      "position": "매니저",
+      "hands": 0,
+      "back_number": 0,
+      "is_elite": false
+    }
+  },
+  {
+    "model": "member.member",
+    "pk": 5,
+    "fields": {
+      "student_id": "2022-15623",
+      "first_name": "영",
+      "last_name": "김",
+      "birth_date": "2001-06-11",
+      "admission_year": 2022,
+      "major": 25,
+      "role": 5,
+      "status": 9,
+      "phone": "+821033093289",
+      "email": null,
+      "address": ".",
+      "notes": ".",
+      "date_joined": "2025-01-02",
+      "num_semester": 4,
+      "profile_image": "",
+      "position": "2루수",
+      "hands": 1,
+      "back_number": 13,
+      "is_elite": false
+    }
+  },
+  {
+    "model": "member.member",
+    "pk": 6,
+    "fields": {
+      "student_id": "2022-18634",
+      "first_name": "정규",
+      "last_name": "김",
+      "birth_date": "2003-01-21",
+      "admission_year": 2022,
+      "major": 68,
+      "role": 5,
+      "status": 3,
+      "phone": "+821029761332",
+      "email": null,
+      "address": ".",
+      "notes": ".",
+      "date_joined": "2025-01-02",
+      "num_semester": 4,
+      "profile_image": "",
+      "position": "포수",
+      "hands": 1,
+      "back_number": 21,
+      "is_elite": false
+    }
+  },
+  {
+    "model": "member.member",
+    "pk": 7,
+    "fields": {
+      "student_id": "2018-12820",
+      "first_name": "중협",
+      "last_name": "문",
+      "birth_date": "1999-01-07",
+      "admission_year": 2018,
+      "major": 42,
+      "role": 5,
+      "status": 4,
+      "phone": "+821072734280",
+      "email": null,
+      "address": ".",
+      "notes": ".",
+      "date_joined": null,
+      "num_semester": 6,
+      "profile_image": "",
+      "position": "외야수",
+      "hands": 1,
+      "back_number": 5,
+      "is_elite": false
+    }
+  },
+  {
+    "model": "member.member",
+    "pk": 8,
+    "fields": {
+      "student_id": "2022-19662",
+      "first_name": "건우",
+      "last_name": "박",
+      "birth_date": "2002-07-22",
+      "admission_year": 2022,
+      "major": 68,
+      "role": 5,
+      "status": 2,
+      "phone": "+821098979076",
+      "email": null,
+      "address": ".",
+      "notes": ".",
+      "date_joined": "2025-01-02",
+      "num_semester": 6,
+      "profile_image": "",
+      "position": "투수",
+      "hands": 4,
+      "back_number": 25,
+      "is_elite": true
+    }
+  },
+  {
+    "model": "member.member",
+    "pk": 9,
+    "fields": {
+      "student_id": "2020-10555",
+      "first_name": "동현",
+      "last_name": "윤",
+      "birth_date": "2001-01-17",
+      "admission_year": 2020,
+      "major": 63,
+      "role": 5,
+      "status": 2,
+      "phone": "+821050118462",
+      "email": null,
+      "address": ".",
+      "notes": ".",
+      "date_joined": "2025-01-02",
+      "num_semester": 8,
+      "profile_image": "",
+      "position": "외야수",
+      "hands": 4,
+      "back_number": 24,
+      "is_elite": false
+    }
+  },
+  {
+    "model": "member.member",
+    "pk": 10,
+    "fields": {
+      "student_id": "2022-10794",
+      "first_name": "서준",
+      "last_name": "이",
+      "birth_date": "2003-03-28",
+      "admission_year": 2022,
+      "major": 68,
+      "role": 5,
+      "status": 2,
+      "phone": "+821085273252",
+      "email": null,
+      "address": ".",
+      "notes": ".",
+      "date_joined": "2025-01-02",
+      "num_semester": 6,
+      "profile_image": "",
+      "position": "유격수",
+      "hands": 1,
+      "back_number": 1,
+      "is_elite": true
+    }
+  },
+  {
+    "model": "member.member",
+    "pk": 11,
+    "fields": {
+      "student_id": "2020-17137",
+      "first_name": "준원",
+      "last_name": "임",
+      "birth_date": "2000-03-22",
+      "admission_year": 2020,
+      "major": 63,
+      "role": 5,
+      "status": 2,
+      "phone": "+821026713120",
+      "email": null,
+      "address": ".",
+      "notes": ".",
+      "date_joined": "2025-01-02",
+      "num_semester": 7,
+      "profile_image": "",
+      "position": "외야수",
+      "hands": 1,
+      "back_number": 2,
+      "is_elite": false
+    }
+  },
+  {
+    "model": "member.member",
+    "pk": 12,
+    "fields": {
+      "student_id": "2020-18627",
+      "first_name": "유용",
+      "last_name": "이",
+      "birth_date": "2000-08-08",
+      "admission_year": 2020,
+      "major": 30,
+      "role": 5,
+      "status": 1,
+      "phone": "+821087386123",
+      "email": null,
+      "address": ".",
+      "notes": ".",
+      "date_joined": "2025-01-02",
+      "num_semester": 8,
+      "profile_image": "",
+      "position": "외야수",
+      "hands": 1,
+      "back_number": 23,
+      "is_elite": false
+    }
+  },
+  {
+    "model": "member.member",
+    "pk": 13,
+    "fields": {
+      "student_id": "2023-15781",
+      "first_name": "호성",
+      "last_name": "유",
+      "birth_date": "2004-02-11",
+      "admission_year": 2023,
+      "major": 19,
+      "role": 5,
+      "status": 1,
+      "phone": "+821027721397",
+      "email": null,
+      "address": ".",
+      "notes": ".",
+      "date_joined": "2025-01-02",
+      "num_semester": 3,
+      "profile_image": "",
+      "position": "외야수",
+      "hands": 2,
+      "back_number": 18,
+      "is_elite": false
+    }
+  },
+  {
+    "model": "member.member",
+    "pk": 14,
+    "fields": {
+      "student_id": "2022-12652",
+      "first_name": "승민",
+      "last_name": "이",
+      "birth_date": "2003-07-05",
+      "admission_year": 2022,
+      "major": 38,
+      "role": 5,
+      "status": 3,
+      "phone": "+821021712838",
+      "email": null,
+      "address": ".",
+      "notes": ".",
+      "date_joined": "2025-01-02",
+      "num_semester": 4,
+      "profile_image": "",
+      "position": "외야수",
+      "hands": 1,
+      "back_number": 9,
+      "is_elite": false
+    }
+  },
+  {
+    "model": "member.member",
+    "pk": 15,
+    "fields": {
+      "student_id": "2018-11459",
+      "first_name": "상엽",
+      "last_name": "이",
+      "birth_date": "1999-11-30",
+      "admission_year": 2018,
+      "major": 68,
+      "role": 5,
+      "status": 4,
+      "phone": "+821040191585",
+      "email": null,
+      "address": ".",
+      "notes": ".",
+      "date_joined": "2025-01-02",
+      "num_semester": 8,
+      "profile_image": "",
+      "position": "내야수",
+      "hands": 1,
+      "back_number": 10,
+      "is_elite": false
+    }
+  },
+  {
+    "model": "member.member",
+    "pk": 16,
+    "fields": {
+      "student_id": "2019-12370",
+      "first_name": "상현",
+      "last_name": "이",
+      "birth_date": "1999-07-27",
+      "admission_year": 2019,
+      "major": 68,
+      "role": 5,
+      "status": 1,
+      "phone": "+821026851770",
+      "email": null,
+      "address": ".",
+      "notes": ".",
+      "date_joined": "2025-01-02",
+      "num_semester": 4,
+      "profile_image": "",
+      "position": "투수",
+      "hands": 1,
+      "back_number": 11,
+      "is_elite": false
+    }
+  },
+  {
+    "model": "member.member",
+    "pk": 17,
+    "fields": {
+      "student_id": "2024-18123",
+      "first_name": "택원",
+      "last_name": "김",
+      "birth_date": "2005-03-07",
+      "admission_year": 2024,
+      "major": 49,
+      "role": 5,
+      "status": 2,
+      "phone": "+821040788647",
+      "email": null,
+      "address": ".",
+      "notes": ".",
+      "date_joined": "2025-01-02",
+      "num_semester": 3,
+      "profile_image": "",
+      "position": "3루수",
+      "hands": 1,
+      "back_number": 17,
+      "is_elite": false
+    }
+  },
+  {
+    "model": "member.member",
+    "pk": 18,
+    "fields": {
+      "student_id": "2017-16844",
+      "first_name": "찬휘",
+      "last_name": "유",
+      "birth_date": "1998-12-28",
+      "admission_year": 2017,
+      "major": 63,
+      "role": 5,
+      "status": 4,
+      "phone": "+821062799987",
+      "email": null,
+      "address": ".",
+      "notes": ".",
+      "date_joined": "2025-01-02",
+      "num_semester": 6,
+      "profile_image": "",
+      "position": "외야수",
+      "hands": 1,
+      "back_number": 14,
+      "is_elite": false
+    }
+  },
+  {
+    "model": "member.member",
+    "pk": 19,
+    "fields": {
+      "student_id": "2020-16668",
+      "first_name": "기헌",
+      "last_name": "남",
+      "birth_date": "2001-06-01",
+      "admission_year": 2020,
+      "major": 63,
+      "role": 5,
+      "status": 2,
+      "phone": "+821091523375",
+      "email": null,
+      "address": ".",
+      "notes": ".",
+      "date_joined": "2025-01-02",
+      "num_semester": 7,
+      "profile_image": "",
+      "position": "포수",
+      "hands": 1,
+      "back_number": 30,
+      "is_elite": false
+    }
+  },
+  {
+    "model": "member.member",
+    "pk": 20,
+    "fields": {
+      "student_id": "2021-17607",
+      "first_name": "진산",
+      "last_name": "이",
+      "birth_date": "2002-05-22",
+      "admission_year": 2021,
+      "major": 43,
+      "role": 5,
+      "status": 2,
+      "phone": "+821075746854",
+      "email": null,
+      "address": ".",
+      "notes": ".",
+      "date_joined": "2025-01-02",
+      "num_semester": 6,
+      "profile_image": "",
+      "position": "3루수",
+      "hands": 1,
+      "back_number": 6,
+      "is_elite": false
+    }
+  },
+  {
+    "model": "member.member",
+    "pk": 21,
+    "fields": {
+      "student_id": "2021-14976",
+      "first_name": "지민",
+      "last_name": "허",
+      "birth_date": "2000-06-29",
+      "admission_year": 2021,
+      "major": 35,
+      "role": 5,
+      "status": 2,
+      "phone": "+821031007166",
+      "email": null,
+      "address": ".",
+      "notes": ".",
+      "date_joined": "2025-01-02",
+      "num_semester": 4,
+      "profile_image": "",
+      "position": "외야수",
+      "hands": 1,
+      "back_number": 15,
+      "is_elite": false
+    }
+  },
+  {
+    "model": "member.member",
+    "pk": 22,
+    "fields": {
+      "student_id": "2024-12212",
+      "first_name": "준서",
+      "last_name": "허",
+      "birth_date": "2005-10-10",
+      "admission_year": 2024,
+      "major": 30,
+      "role": 5,
+      "status": 1,
+      "phone": "+821047257067",
+      "email": null,
+      "address": ".",
+      "notes": ".",
+      "date_joined": "2025-01-02",
+      "num_semester": 2,
+      "profile_image": "",
+      "position": "외야수",
+      "hands": 4,
+      "back_number": 20,
+      "is_elite": false
+    }
+  },
+  {
+    "model": "member.member",
+    "pk": 23,
+    "fields": {
+      "student_id": "2024-16694",
+      "first_name": "두희",
+      "last_name": "이",
+      "birth_date": "2005-05-12",
+      "admission_year": 2024,
+      "major": 49,
+      "role": 5,
+      "status": 1,
+      "phone": "+821042395416",
+      "email": null,
+      "address": ".",
+      "notes": ".",
+      "date_joined": "2025-01-02",
+      "num_semester": 2,
+      "profile_image": "",
+      "position": "포수",
+      "hands": 1,
+      "back_number": 19,
+      "is_elite": false
+    }
+  },
+  {
+    "model": "member.member",
+    "pk": 24,
+    "fields": {
+      "student_id": "2024-18477",
+      "first_name": "민수",
+      "last_name": "심",
+      "birth_date": "2004-01-06",
+      "admission_year": 2024,
+      "major": 59,
+      "role": 5,
+      "status": 1,
+      "phone": "+821065328547",
+      "email": null,
+      "address": ".",
+      "notes": ".",
+      "date_joined": "2025-01-02",
+      "num_semester": 2,
+      "profile_image": "",
+      "position": "포수",
+      "hands": 1,
+      "back_number": 12,
+      "is_elite": false
+    }
+  },
+  {
+    "model": "member.member",
+    "pk": 25,
+    "fields": {
+      "student_id": "2022-11111",
+      "first_name": "연우",
+      "last_name": "최",
+      "birth_date": "2003-07-11",
+      "admission_year": 2022,
+      "major": 38,
+      "role": 4,
+      "status": 2,
+      "phone": "+821092694522",
+      "email": null,
+      "address": ".",
+      "notes": ".",
+      "date_joined": "2025-01-02",
+      "num_semester": 6,
+      "profile_image": "",
+      "position": "매니저",
+      "hands": 0,
+      "back_number": 57,
+      "is_elite": false
+    }
+  },
+  {
+    "model": "member.member",
+    "pk": 26,
+    "fields": {
+      "student_id": "2022-22222",
+      "first_name": "영서",
+      "last_name": "박",
+      "birth_date": null,
+      "admission_year": 2022,
+      "major": 32,
+      "role": 4,
+      "status": 1,
+      "phone": null,
+      "email": null,
+      "address": ".",
+      "notes": ".",
+      "date_joined": "2025-01-02",
+      "num_semester": 4,
+      "profile_image": "",
+      "position": "매니저",
+      "hands": 0,
+      "back_number": 22,
+      "is_elite": false
+    }
+  }
+]

@@ -5,6 +5,7 @@ export const light = {
 
   // background: 흰색 계열
   background100: "#FAF9F6",
+  background200: "#F2F2F2",
   background300: "#E8E6F2",
   background500: "#D9D9D9",
   background700: "#D1D6DA",
@@ -29,6 +30,7 @@ export const dark = {
 
   // background: 검정 계열
   background100: "#03070B",
+  background200: "#E8E6F2",
   background300: "#0B1623",
   background500: "#212529",
   background700: "#495057",

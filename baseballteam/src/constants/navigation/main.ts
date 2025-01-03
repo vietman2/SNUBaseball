@@ -13,7 +13,7 @@ export const Main: TabGroup = {
           path: "/home",
         },
       ],
-    } /*
+    },
     {
       title: "기록실",
       icon: "record",
@@ -22,7 +22,7 @@ export const Main: TabGroup = {
         {
           title: "경기결과",
           path: "/records/results",
-        },
+        },/*
         {
           title: "개인기록",
           path: "/records/stats",
@@ -34,9 +34,9 @@ export const Main: TabGroup = {
         {
           title: "체력측정",
           path: "/records/physicals",
-        },
+        },*/
       ],
-    },*/,
+    },
     {
       title: "게시판",
       icon: "forum",

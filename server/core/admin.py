@@ -17,9 +17,14 @@ from management.equipment.models import Equipment, EquipmentCategory, EquipmentU
 
 from person.major.models import College, Department
 from person.member.models import Member
-from person.tale.models import PlayerTale
 from person.user.forms import UserAdmin
 from person.user.models import User
+
+from records.officialgame.modelsdir.ballpark import Ballpark
+from records.officialgame.modelsdir.game import Game, MyGamePlayer, GameLineup
+from records.officialgame.modelsdir.player import MyPlayer
+from records.officialgame.modelsdir.team import MyTeam, Opponent
+from records.officialgame.modelsdir.tournament import Tournament, TournamentEvent
 
 from training.feedback.models import (
     Feedback, FeedbackCategory, FeedbackComment, FeedbackContentView
@@ -47,8 +52,17 @@ admin.site.register(EquipmentUpdateHistory)
 admin.site.register(College)
 admin.site.register(Department)
 admin.site.register(Member)
-admin.site.register(PlayerTale)
 admin.site.register(User, UserAdmin)
+
+admin.site.register(Ballpark)
+admin.site.register(Game)
+admin.site.register(MyGamePlayer)
+admin.site.register(GameLineup)
+admin.site.register(MyPlayer)
+admin.site.register(MyTeam)
+admin.site.register(Opponent)
+admin.site.register(Tournament)
+admin.site.register(TournamentEvent)
 
 admin.site.register(Feedback)
 admin.site.register(FeedbackCategory)

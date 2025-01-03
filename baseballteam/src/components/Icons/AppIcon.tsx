@@ -21,6 +21,7 @@ import { ReactComponent as HomeIcon } from "./home.svg";
 import { ReactComponent as MenuIcon } from "./menu.svg";
 import { ReactComponent as MoonIcon } from "./moon.svg";
 import { ReactComponent as PeopleIcon } from "./people.svg";
+import { ReactComponent as RecordIcon } from "./record.svg";
 import { ReactComponent as SearchIcon } from "./search.svg";
 import { ReactComponent as SendIcon } from "./send.svg";
 import { ReactComponent as StatusIcon } from "./status.svg";
@@ -61,6 +62,7 @@ const iconMap: Record<
   menu: MenuIcon,
   moon: MoonIcon,
   people: PeopleIcon,
+  record: RecordIcon,
   search: SearchIcon,
   send: SendIcon,
   status: StatusIcon,
