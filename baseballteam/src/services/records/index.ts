@@ -1,3 +1,3 @@
-import { getResults } from "./results";
+import { getResults, getResultsDetail } from "./results";
 
-export { getResults };
+export { getResults, getResultsDetail };
