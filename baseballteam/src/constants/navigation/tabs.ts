@@ -1,4 +1,4 @@
-//import { Admin } from "./admin";
+import { Admin } from "./admin";
 import { Main } from "./main";
 import { Management } from "./management";
 import { Training } from "./training";
@@ -21,4 +21,4 @@ export type TabGroup = {
   limited: boolean;
 };
 
-export const tabgroups: TabGroup[] = [Main, Training, Management]; //, Management, Admin];
+export const tabgroups: TabGroup[] = [Main, Training, Management, Admin];

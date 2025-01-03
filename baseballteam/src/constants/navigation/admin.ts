@@ -4,17 +4,17 @@ export const Admin: TabGroup = {
   title: "Admin",
   tabs: [
     {
-      title: "주장단 업무",
-      icon: "people",
-      path: "/admin",
+      title: "팀 관리",
+      icon: "management",
+      path: "/team",
       subtabs: [
         {
-          title: "명부관리",
-          path: "/admin/members",
+          title: "팀 정보",
+          path: "/team/info",
         },
         {
           title: "회의록",
-          path: "/admin/minutes",
+          path: "/team/minutes",
         },
       ],
     },
