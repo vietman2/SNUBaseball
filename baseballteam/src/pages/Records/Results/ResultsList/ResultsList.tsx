@@ -6,7 +6,7 @@ import { Tournament } from "@fragments/Results";
 import { TournamentType } from "@models/records";
 import { getResults } from "@services/records";
 
-export function Results() {
+export function ResultsList() {
   const [selectedYear, setSelectedYear] = useState<number>(2024);
   const [tournaments, setTournaments] = useState<TournamentType[]>([]);
 
