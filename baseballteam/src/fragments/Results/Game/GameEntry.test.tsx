@@ -6,4 +6,8 @@ describe("<GameEntry />", () => {
   it("should render without errors", () => {
     renderWithProviders(<GameEntry lineup={sampleLineup} />);
   });
+
+  it("should render no data", () => {
+    renderWithProviders(<GameEntry lineup={undefined} />);
+  });
 });
