@@ -47,6 +47,8 @@ class MemberSimpleSerializer(ModelSerializer):
         return obj.major.name
 
     def get_phone(self, obj):
+        if obj.phone is None:
+            return None
         return obj.phone.as_national
 
 class MemberDetailSerializer(ModelSerializer):
