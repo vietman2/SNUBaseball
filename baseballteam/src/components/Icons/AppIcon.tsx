@@ -18,7 +18,10 @@ import { ReactComponent as GridIcon } from "./grid.svg";
 import { ReactComponent as HeartIcon } from "./heart.svg";
 import { ReactComponent as HeartOutlineIcon } from "./heart-outline.svg";
 import { ReactComponent as HomeIcon } from "./home.svg";
+import { ReactComponent as LightbulbIcon } from "./lightbulb.svg";
+import { ReactComponent as ManagementIcon } from "./management.svg";
 import { ReactComponent as MenuIcon } from "./menu.svg";
+import { ReactComponent as MoneyIcon } from "./money.svg";
 import { ReactComponent as MoonIcon } from "./moon.svg";
 import { ReactComponent as PeopleIcon } from "./people.svg";
 import { ReactComponent as RecordIcon } from "./record.svg";
@@ -59,7 +62,10 @@ const iconMap: Record<
   heart: HeartIcon,
   "heart-outline": HeartOutlineIcon,
   home: HomeIcon,
+  lightbulb: LightbulbIcon,
+  management: ManagementIcon,
   menu: MenuIcon,
+  money: MoneyIcon,
   moon: MoonIcon,
   people: PeopleIcon,
   record: RecordIcon,
