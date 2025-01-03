@@ -12,7 +12,7 @@ from person.major.views import MajorViewSet
 from person.member.views import MemberViewSet
 from person.user.views import RegisterView, StudentIdCheckView, UserProfileView
 
-from records.officialgame.views import ResultsView
+from records.officialgame.views import ResultsView, TeamView
 
 from training.feedback.views import FeedbackView, FeedbackCommentView
 from training.guideline.views import GuidelineView, GuidelineCommentView
@@ -40,6 +40,7 @@ router.register('members', MemberViewSet, basename='members')
 router.register('profiles', UserProfileView, basename='profile')
 
 router.register('results', ResultsView, basename='results')
+router.register('teams', TeamView, basename='teams')
 
 #router.register('weekly', WeeklyScheduleViewSet, basename='weekly_schedules')
 
