@@ -4,12 +4,13 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
+from .modelsdir.game import Game
 from .modelsdir.tournament import TournamentEvent
-from .serializers import TournamentSerializer
+from .serializers import TournamentSerializer, GameResultSerializer
 
 class ResultsView(ModelViewSet):
-    queryset = TournamentEvent.objects.all()
-    serializer_class = TournamentSerializer
+    queryset = Game.objects.all()
+    serializer_class = GameResultSerializer
     http_method_names = ['get']
 
     def get_permissions(self):
@@ -31,4 +32,7 @@ class ResultsView(ModelViewSet):
 
     @extend_schema(summary="대회별 경기결과 상세 조회", tags=["대회별 경기결과"])
     def retrieve(self, request, *args, **kwargs):
-        return Response(status=status.HTTP_501_NOT_IMPLEMENTED)
+        tournament = self.get_object()
+        serializer = GameResultSerializer(tournament)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
