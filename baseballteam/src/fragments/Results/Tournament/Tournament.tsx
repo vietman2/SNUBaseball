@@ -125,7 +125,7 @@ const Content = styled.div<{ $columns: number }>`
 const DummyComponent = styled.div`
   display: flex;
   flex: 1;
-  background-color: transparent;
+  background-color: ${({ theme }) => theme.colors.background200};
 `;
 
 const Container = styled.div`
