@@ -1,5 +1,126 @@
 [
   {
+    "model": "officialgame.ballpark",
+    "pk": 1,
+    "fields": { "name": "횡성 베이스볼 테마파크 A구장", "short_name": "횡성 A" }
+  },
+  {
+    "model": "officialgame.ballpark",
+    "pk": 2,
+    "fields": { "name": "횡성 베이스볼 테마파크 B구장", "short_name": "횡성 B" }
+  },
+  {
+    "model": "officialgame.ballpark",
+    "pk": 3,
+    "fields": { "name": "보은스포츠파크 A구장", "short_name": "보은 A" }
+  },
+  {
+    "model": "officialgame.ballpark",
+    "pk": 4,
+    "fields": { "name": "보은스포츠파크 B구장", "short_name": "보은 B" }
+  },
+  {
+    "model": "officialgame.ballpark",
+    "pk": 5,
+    "fields": { "name": "선샤인밀양스포츠파크 A구장", "short_name": "밀양 A" }
+  },
+  {
+    "model": "officialgame.ballpark",
+    "pk": 6,
+    "fields": { "name": "선샤인밀양스포츠파크 B구장", "short_name": "밀양 B" }
+  },
+  {
+    "model": "officialgame.ballpark",
+    "pk": 7,
+    "fields": { "name": "신월야구장", "short_name": "신월" }
+  },
+  {
+    "model": "officialgame.ballpark",
+    "pk": 8,
+    "fields": { "name": "메이지진구 야구장", "short_name": "도쿄" }
+  },
+  { "model": "officialgame.myteam", "pk": 1, "fields": { "year": 2024 } },
+  {
+    "model": "officialgame.opponent",
+    "pk": 1,
+    "fields": { "year": 2024, "name": "신안산대" }
+  },
+  {
+    "model": "officialgame.opponent",
+    "pk": 2,
+    "fields": { "year": 2024, "name": "강릉영동대" }
+  },
+  {
+    "model": "officialgame.opponent",
+    "pk": 3,
+    "fields": { "year": 2024, "name": "한국골프대" }
+  },
+  {
+    "model": "officialgame.opponent",
+    "pk": 4,
+    "fields": { "year": 2024, "name": "경민대" }
+  },
+  {
+    "model": "officialgame.opponent",
+    "pk": 5,
+    "fields": { "year": 2024, "name": "여주대" }
+  },
+  {
+    "model": "officialgame.opponent",
+    "pk": 6,
+    "fields": { "year": 2024, "name": "건국대" }
+  },
+  {
+    "model": "officialgame.opponent",
+    "pk": 7,
+    "fields": { "year": 2024, "name": "연세대" }
+  },
+  {
+    "model": "officialgame.opponent",
+    "pk": 8,
+    "fields": { "year": 2024, "name": "경희대" }
+  },
+  {
+    "model": "officialgame.opponent",
+    "pk": 9,
+    "fields": { "year": 2024, "name": "제주국제대" }
+  },
+  {
+    "model": "officialgame.opponent",
+    "pk": 10,
+    "fields": { "year": 2024, "name": "웅지세무대" }
+  },
+  {
+    "model": "officialgame.opponent",
+    "pk": 11,
+    "fields": { "year": 2024, "name": "동원대" }
+  },
+  {
+    "model": "officialgame.opponent",
+    "pk": 12,
+    "fields": { "year": 2024, "name": "충북보건과학대" }
+  },
+  {
+    "model": "officialgame.opponent",
+    "pk": 13,
+    "fields": { "year": 2024, "name": "경남대" }
+  },
+  {
+    "model": "officialgame.opponent",
+    "pk": 14,
+    "fields": { "year": 2024, "name": "홍익대" }
+  },
+  {
+    "model": "officialgame.opponent",
+    "pk": 15,
+    "fields": { "year": 2024, "name": "동아대" }
+  },
+  {
+    "model": "officialgame.opponent",
+    "pk": 16,
+    "fields": { "year": 2024, "name": "도쿄대" }
+  },
+  {
     "model": "officialgame.tournament",
     "pk": 1,
     "fields": { "name": "대학리그 U리그" }
@@ -63,136 +184,7 @@
   {
     "model": "officialgame.tournamentevent",
     "pk": 5,
-    "fields": {
-      "tournament": 5,
-      "name": "도쿄대학교 교류전",
-      "year": 2024
-    }
-  },
-  {
-    "model": "officialgame.myteam",
-    "pk": 1,
-    "fields": { "year": 2024 }
-  },
-  {
-    "model": "officialgame.opponent",
-    "pk": 1,
-    "fields": { "name": "신안산대", "year": 2024 }
-  },
-  {
-    "model": "officialgame.opponent",
-    "pk": 2,
-    "fields": { "name": "강릉영동대", "year": 2024 }
-  },
-  {
-    "model": "officialgame.opponent",
-    "pk": 3,
-    "fields": { "name": "한국골프대", "year": 2024 }
-  },
-  {
-    "model": "officialgame.opponent",
-    "pk": 4,
-    "fields": { "name": "경민대", "year": 2024 }
-  },
-  {
-    "model": "officialgame.opponent",
-    "pk": 5,
-    "fields": { "name": "여주대", "year": 2024 }
-  },
-  {
-    "model": "officialgame.opponent",
-    "pk": 6,
-    "fields": { "name": "건국대", "year": 2024 }
-  },
-  {
-    "model": "officialgame.opponent",
-    "pk": 7,
-    "fields": { "name": "연세대", "year": 2024 }
-  },
-  {
-    "model": "officialgame.opponent",
-    "pk": 8,
-    "fields": { "name": "경희대", "year": 2024 }
-  },
-  {
-    "model": "officialgame.opponent",
-    "pk": 9,
-    "fields": { "name": "제주국제대", "year": 2024 }
-  },
-  {
-    "model": "officialgame.opponent",
-    "pk": 10,
-    "fields": { "name": "웅지세무대", "year": 2024 }
-  },
-  {
-    "model": "officialgame.opponent",
-    "pk": 11,
-    "fields": { "name": "동원대", "year": 2024 }
-  },
-  {
-    "model": "officialgame.opponent",
-    "pk": 12,
-    "fields": { "name": "충북보건과학대", "year": 2024 }
-  },
-  {
-    "model": "officialgame.opponent",
-    "pk": 13,
-    "fields": { "name": "경남대", "year": 2024 }
-  },
-  {
-    "model": "officialgame.opponent",
-    "pk": 14,
-    "fields": { "name": "홍익대", "year": 2024 }
-  },
-  {
-    "model": "officialgame.opponent",
-    "pk": 15,
-    "fields": { "name": "동아대", "year": 2024 }
-  },
-  {
-    "model": "officialgame.opponent",
-    "pk": 16,
-    "fields": { "name": "도쿄대", "year": 2024 }
-  },
-  {
-    "model": "officialgame.ballpark",
-    "pk": 1,
-    "fields": { "name": "횡성 베이스볼 테마파크 A구장", "short_name": "횡성 A" }
-  },
-  {
-    "model": "officialgame.ballpark",
-    "pk": 2,
-    "fields": { "name": "횡성 베이스볼 테마파크 B구장", "short_name": "횡성 B" }
-  },
-  {
-    "model": "officialgame.ballpark",
-    "pk": 3,
-    "fields": { "name": "보은스포츠파크 A구장", "short_name": "보은 A" }
-  },
-  {
-    "model": "officialgame.ballpark",
-    "pk": 4,
-    "fields": { "name": "보은스포츠파크 B구장", "short_name": "보은 B" }
-  },
-  {
-    "model": "officialgame.ballpark",
-    "pk": 5,
-    "fields": { "name": "선샤인밀양스포츠파크 A구장", "short_name": "밀양 A" }
-  },
-  {
-    "model": "officialgame.ballpark",
-    "pk": 6,
-    "fields": { "name": "선샤인밀양스포츠파크 B구장", "short_name": "밀양 B" }
-  },
-  {
-    "model": "officialgame.ballpark",
-    "pk": 7,
-    "fields": { "name": "신월야구장", "short_name": "신월" }
-  },
-  {
-    "model": "officialgame.ballpark",
-    "pk": 8,
-    "fields": { "name": "메이지진구 야구장", "short_name": "도쿄" }
+    "fields": { "tournament": 5, "name": "도쿄대학교 교류전", "year": 2024 }
   },
   {
     "model": "officialgame.game",
@@ -202,6 +194,7 @@
       "opponent": 1,
       "location": 2,
       "date_time": "2024-04-04T02:30:00Z",
+      "youtube_videoid": "aN4ASOV20xo",
       "is_home": true,
       "is_finished": true
     }
@@ -214,6 +207,7 @@
       "opponent": 2,
       "location": 2,
       "date_time": "2024-04-05T05:00:00Z",
+      "youtube_videoid": "",
       "is_home": true,
       "is_finished": true
     }
@@ -226,6 +220,7 @@
       "opponent": 3,
       "location": 2,
       "date_time": "2024-04-18T00:00:00Z",
+      "youtube_videoid": "",
       "is_home": false,
       "is_finished": true
     }
@@ -238,6 +233,7 @@
       "opponent": 4,
       "location": 2,
       "date_time": "2024-04-19T02:30:00Z",
+      "youtube_videoid": "",
       "is_home": true,
       "is_finished": true
     }
@@ -250,6 +246,7 @@
       "opponent": 5,
       "location": 2,
       "date_time": "2024-04-23T05:00:00Z",
+      "youtube_videoid": "",
       "is_home": false,
       "is_finished": true
     }
@@ -262,6 +259,7 @@
       "opponent": 6,
       "location": 2,
       "date_time": "2024-04-24T05:00:00Z",
+      "youtube_videoid": "",
       "is_home": true,
       "is_finished": true
     }
@@ -274,6 +272,7 @@
       "opponent": 7,
       "location": 2,
       "date_time": "2024-05-02T00:00:00Z",
+      "youtube_videoid": "",
       "is_home": true,
       "is_finished": true
     }
@@ -286,6 +285,7 @@
       "opponent": 8,
       "location": 2,
       "date_time": "2024-05-03T05:00:00Z",
+      "youtube_videoid": "",
       "is_home": true,
       "is_finished": true
     }
@@ -298,6 +298,7 @@
       "opponent": 9,
       "location": 4,
       "date_time": "2024-06-24T03:00:00Z",
+      "youtube_videoid": "",
       "is_home": true,
       "is_finished": true
     }
@@ -310,6 +311,7 @@
       "opponent": 10,
       "location": 4,
       "date_time": "2024-06-25T06:00:00Z",
+      "youtube_videoid": "",
       "is_home": false,
       "is_finished": true
     }
@@ -322,6 +324,7 @@
       "opponent": 11,
       "location": 3,
       "date_time": "2024-07-03T09:00:00Z",
+      "youtube_videoid": "",
       "is_home": true,
       "is_finished": true
     }
@@ -334,6 +337,7 @@
       "opponent": 12,
       "location": 4,
       "date_time": "2024-07-06T04:00:00Z",
+      "youtube_videoid": "",
       "is_home": true,
       "is_finished": true
     }
@@ -346,6 +350,7 @@
       "opponent": 13,
       "location": 6,
       "date_time": "2024-07-31T00:00:00Z",
+      "youtube_videoid": "",
       "is_home": false,
       "is_finished": true
     }
@@ -358,6 +363,7 @@
       "opponent": 14,
       "location": 6,
       "date_time": "2024-08-06T00:00:00Z",
+      "youtube_videoid": "",
       "is_home": true,
       "is_finished": true
     }
@@ -370,6 +376,7 @@
       "opponent": 2,
       "location": 6,
       "date_time": "2024-08-07T03:00:00Z",
+      "youtube_videoid": "",
       "is_home": false,
       "is_finished": true
     }
@@ -382,6 +389,7 @@
       "opponent": 15,
       "location": 5,
       "date_time": "2024-08-12T03:00:00Z",
+      "youtube_videoid": "",
       "is_home": true,
       "is_finished": true
     }
@@ -394,6 +402,7 @@
       "opponent": 6,
       "location": 7,
       "date_time": "2024-07-23T02:30:00Z",
+      "youtube_videoid": "",
       "is_home": false,
       "is_finished": true
     }
@@ -406,6 +415,7 @@
       "opponent": 16,
       "location": 8,
       "date_time": "2024-08-23T00:00:00Z",
+      "youtube_videoid": "",
       "is_home": false,
       "is_finished": true
     }
