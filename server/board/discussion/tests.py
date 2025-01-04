@@ -4,7 +4,7 @@ from rest_framework import status
 
 from core.tests import generate_test_image_file
 from person.user.models import User
-from .models import DiscussionComment
+from .models import DiscussionComment, Discussion, DiscussionAttachment
 
 class DiscussionAPITestCase(APITestCase):
     fixtures = [
@@ -182,3 +182,18 @@ class DiscussionCommentAPITestCase(APITestCase):
         comment = DiscussionComment.objects.first()
         response = self.client.delete(f'{self.url}{comment.id}/')
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+class ModelsTestCase(APITestCase):
+    fixtures = [
+        "core/data/test/discussions.json", "core/data/initial/majors.json",
+        "core/data/test/people.json"
+    ]
+
+    def test_discussion_str(self):
+        discussion = Discussion.objects.first()
+        self.assertEqual(str(discussion), discussion.title)
+
+    def test_discussion_attachment_str(self):
+        attachment = DiscussionAttachment.objects.first()
+        name = attachment.file.name.split('/')[-1]
+        self.assertEqual(str(attachment), name)

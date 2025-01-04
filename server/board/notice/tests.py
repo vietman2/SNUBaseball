@@ -4,7 +4,7 @@ from rest_framework import status
 
 from core.tests import generate_test_image_file
 from person.user.models import User
-from .models import Notice, NoticeComment
+from .models import Notice, NoticeComment, NoticeAttachment, NoticeCategory
 
 class NoticeAPITestCase(APITestCase):
     fixtures = [
@@ -184,3 +184,21 @@ class NoticeCommentAPITestCase(APITestCase):
         comment = NoticeComment.objects.first()
         response = self.client.delete(f'{self.url}{comment.id}/')
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+class ModelsTestCase(APITestCase):
+    fixtures = [
+        "core/data/initial/chips.json", "core/data/initial/majors.json",
+        "core/data/test/notices.json", "core/data/test/people.json",
+    ]
+
+    def test_notice_model(self):
+        notice = Notice.objects.first()
+        self.assertEqual(str(notice), notice.title)
+
+    def test_notice_attachment_model(self):
+        attachment = NoticeAttachment.objects.first()
+        self.assertEqual(str(attachment), attachment.file.name.split('/')[-1])
+
+    def test_notice_category_model(self):
+        category = NoticeCategory.objects.first()
+        self.assertEqual(str(category), category.label)

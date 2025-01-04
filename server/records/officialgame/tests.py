@@ -3,6 +3,7 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 
 from person.user.models import User
+from records.officialgame.models import Game, MyGamePlayer, MyTeam, TournamentEvent
 
 class ResultsAPITestCase(APITestCase):
     fixtures = [
@@ -76,16 +77,17 @@ class ModelsTestCase(TestCase):
     ]
 
     def test_game_str(self):
-        from records.officialgame.models import Game
         game = Game.objects.get(pk=1)
         self.assertEqual(str(game), '24 신안산대전')
 
     def test_mygameplayer_str(self):
-        from records.officialgame.models import MyGamePlayer
         mygameplayer = MyGamePlayer.objects.get(pk=1)
         self.assertEqual(str(mygameplayer), '24 정승원 (24 신안산대전)')
 
     def test_myteam_str(self):
-        from records.officialgame.models import MyTeam
         myteam = MyTeam.objects.get(pk=1)
         self.assertEqual(str(myteam), '24 서울대')
+
+    def test_tournamentevent_str(self):
+        tournamentevent = TournamentEvent.objects.get(pk=1)
+        self.assertEqual(str(tournamentevent), '2024 2024 KUSF 대학야구 U-리그 B조')
