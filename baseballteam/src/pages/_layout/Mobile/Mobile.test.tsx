@@ -21,7 +21,7 @@ describe("<MobileLayout />", () => {
     fireEvent.click(screen.getByTestId("Home")); // navigate to Home
     fireEvent.click(screen.getByTestId("홈")); // navigate to Home
     fireEvent.click(screen.getByTestId("menu")); // open menu
-    fireEvent.click(screen.getByText("로그아웃")); // open menu
+    fireEvent.click(screen.getByText("로그아웃"));
   });
 
   it("handles landing tab", () => {
@@ -44,5 +44,20 @@ describe("<MobileLayout />", () => {
       state: "",
     });
     renderWithProviders(<MobileLayout />);
+  });
+
+  it("handles logout fail", () => {
+    jest.spyOn(Router, "useLocation").mockReturnValue({
+      pathname: "/forum/discussion",
+      hash: "",
+      key: "",
+      search: "",
+      state: "",
+    });
+    jest.spyOn(AuthAPI, "logout").mockResolvedValue(null);
+    renderWithProviders(<MobileLayout />);
+
+    fireEvent.click(screen.getByTestId("menu")); // open menu
+    fireEvent.click(screen.getByText("로그아웃")); // open menu
   });
 });
