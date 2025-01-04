@@ -21,6 +21,9 @@ class MyPlayer(models.Model):
     is_registered   = models.BooleanField(default=False)
     is_staff        = models.BooleanField(default=False)
     is_manager      = models.BooleanField(default=False)
+    is_captain      = models.BooleanField(default=False)
+    is_vice_captain = models.BooleanField(default=False)
+    is_head_manager = models.BooleanField(default=False)
 
     objects = models.Manager()
 
