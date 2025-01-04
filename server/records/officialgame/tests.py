@@ -34,6 +34,41 @@ class ResultsAPITestCase(APITestCase):
         response = self.client.get(f'{self.url}2/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+class TeamsAPITestCase(APITestCase):
+    fixtures = [
+        "core/data/test/people.json", "core/data/test/game.json",
+        "core/data/initial/records_2024.json", "core/data/initial/majors.json",
+    ]
+
+    def setUp(self):
+        self.url = '/v1/teams/'
+        self.user = User.objects.get(username='testuser_1')
+
+    def test_unallowed_method(self):
+        self.client.force_authenticate(user=self.user)
+        response = self.client.get(f'{self.url}1/')
+        self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+
+    def test_team_detail(self):
+        self.client.force_authenticate(user=self.user)
+        response = self.client.get(self.url, {'year': 2024})
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_team_detail_fail(self):
+        self.client.force_authenticate(user=self.user)
+        ## 1. not number
+        response = self.client.get(self.url, {'year': 'not_number'})
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+        ## 2. not exist
+        response = self.client.get(self.url, {'year': 1})
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_list(self):
+        self.client.force_authenticate(user=self.user)
+        response = self.client.get(f'{self.url}')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
 class ModelsTestCase(TestCase):
     fixtures = [
         "core/data/test/people.json", "core/data/test/game.json",

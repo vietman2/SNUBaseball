@@ -114,7 +114,7 @@ class PlayerSerializer(ModelSerializer):
         fields = ['id', 'name', 'position', 'back_number', 'weight', 'height', 'profile_image']
 
     def get_back_number(self, obj):
-        if obj.back_number is 0:
+        if obj.back_number == 0:
             return ""
         return obj.back_number
 
@@ -135,7 +135,7 @@ class StaffSerializer(ModelSerializer):
         fields = ['id', 'name', 'back_number', 'role', 'profile_image']
 
     def get_back_number(self, obj):
-        if obj.back_number is 0:
+        if obj.back_number == 0:
             return ""
         return obj.back_number
 
