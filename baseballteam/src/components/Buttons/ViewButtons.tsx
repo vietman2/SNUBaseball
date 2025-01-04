@@ -11,9 +11,15 @@ interface Props {
   buttons: ButtonType[];
   selected: string;
   onClick: (button: string) => void;
+  wide?: boolean;
 }
 
-export function ViewButtons({ buttons, selected, onClick }: Readonly<Props>) {
+export function ViewButtons({
+  buttons,
+  selected,
+  onClick,
+  wide = false,
+}: Readonly<Props>) {
   return (
     <Container>
       {buttons.map((button) => (
@@ -25,6 +31,7 @@ export function ViewButtons({ buttons, selected, onClick }: Readonly<Props>) {
             borderBottom: `2px solid ${
               button.label === selected ? "#0B1623" : "transparent"
             }`,
+            gap: wide ? "8px" : "4px",
           }}
         >
           <AppIcon
@@ -51,5 +58,4 @@ const Button = styled.button`
   flex-direction: row;
   align-items: center;
   padding: 8px;
-  gap: 4px;
 `;
