@@ -12,15 +12,17 @@ describe("getMembers", () => {
   it("should return an array of members", async () => {
     jest.spyOn(axios, "get").mockResolvedValue({ data: sampleMembers });
 
-    const response = await getMembers("");
+    const response = await getMembers("YB");
     expect(response).toEqual(sampleMembers);
   });
 
   it("should return null if an error occurs", async () => {
     jest.spyOn(axios, "get").mockRejectedValue(new Error());
 
-    const response = await getMembers("");
+    const response = await getMembers("OB");
     expect(response).toBeNull();
+    await getMembers("기타");
+    await getMembers("qwer");
   });
 });
 /*
