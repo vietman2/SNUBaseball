@@ -89,7 +89,7 @@ export function FeedbackWrite() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response1 = await getMembers("ybs");
+      const response1 = await getMembers("YB");
       const response2 = await getCategoryOptions();
 
       if (response1 && response2) {

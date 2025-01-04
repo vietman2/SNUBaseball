@@ -54,7 +54,7 @@ export function EquipmentDetail() {
   useEffect(() => {
     const fetchData = async () => {
       const response1 = await getEquipmentDetails(equipmentId);
-      const response2 = await getMembers("ybs");
+      const response2 = await getMembers("YB");
 
       if (response1 && response2) {
         setEquipment(response1);
