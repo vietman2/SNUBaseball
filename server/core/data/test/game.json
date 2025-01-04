@@ -403,7 +403,7 @@
       "team": 1,
       "weight": 0,
       "height": 0,
-      "back_number": 12,
+      "back_number": 0,
       "reason": ".",
       "goal": ".",
       "rival": ".",
@@ -446,7 +446,9 @@
       "role_model": ".",
       "strength": ".",
       "weakness": ".",
-      "is_registered": false
+      "is_registered": false,
+      "is_staff": false,
+      "is_manager": true
     }
   },
   {
@@ -464,7 +466,49 @@
       "role_model": ".",
       "strength": ".",
       "weakness": ".",
-      "is_registered": false
+      "is_registered": false,
+      "is_staff": false,
+      "is_manager": false
+    }
+  },
+  {
+    "model": "officialgame.myplayer",
+    "pk": 27,
+    "fields": {
+      "member": 28,
+      "team": 1,
+      "weight": 0,
+      "height": 0,
+      "back_number": 0,
+      "reason": ".",
+      "goal": ".",
+      "rival": ".",
+      "role_model": ".",
+      "strength": ".",
+      "weakness": ".",
+      "is_registered": false,
+      "is_staff": true,
+      "is_manager": false
+    }
+  },
+  {
+    "model": "officialgame.myplayer",
+    "pk": 28,
+    "fields": {
+      "member": 27,
+      "team": 1,
+      "weight": 0,
+      "height": 0,
+      "back_number": 74,
+      "reason": ".",
+      "goal": ".",
+      "rival": ".",
+      "role_model": ".",
+      "strength": ".",
+      "weakness": ".",
+      "is_registered": false,
+      "is_staff": true,
+      "is_manager": false
     }
   },
   {
@@ -1167,7 +1211,7 @@
       "profile_image": "",
       "position": "포수",
       "hands": 1,
-      "back_number": 19,
+      "back_number": 0,
       "is_elite": false
     }
   },
@@ -1243,6 +1287,56 @@
       "position": "매니저",
       "hands": 0,
       "back_number": 22,
+      "is_elite": false
+    }
+  },
+  {
+    "model": "member.member",
+    "pk": 27,
+    "fields": {
+      "student_id": "2013-12820",
+      "first_name": "정호",
+      "last_name": "이",
+      "birth_date": null,
+      "admission_year": 2013,
+      "major": 68,
+      "role": 6,
+      "status": 1,
+      "phone": null,
+      "email": null,
+      "address": ".",
+      "notes": ".",
+      "date_joined": null,
+      "num_semester": 10,
+      "profile_image": "",
+      "position": "투수",
+      "hands": 4,
+      "back_number": 74,
+      "is_elite": true
+    }
+  },
+  {
+    "model": "member.member",
+    "pk": 28,
+    "fields": {
+      "student_id": null,
+      "first_name": "원철",
+      "last_name": "장",
+      "birth_date": null,
+      "admission_year": 1990,
+      "major": 24,
+      "role": 6,
+      "status": 1,
+      "phone": null,
+      "email": null,
+      "address": ".",
+      "notes": ".",
+      "date_joined": null,
+      "num_semester": 0,
+      "profile_image": "",
+      "position": "지도교수",
+      "hands": 1,
+      "back_number": 0,
       "is_elite": false
     }
   }
