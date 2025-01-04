@@ -1,6 +1,6 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 
-import { MembersList } from "./MembersList";
+import { TeamList } from "./TeamList";
 import { sampleTeamInfo } from "@data/team";
 import * as TeamsAPI from "@services/team/teams";
 import { renderWithProviders } from "@utils/test-utils";
@@ -10,21 +10,23 @@ jest.mock("@fragments/Member", () => ({
   StaffSimple: () => <div data-testid="staff-simple" />,
 }));
 
-describe("<MembersList />", () => {
+describe("<TeamList />", () => {
   it("handles bad responses", async () => {
     jest.spyOn(TeamsAPI, "getTeamDetail").mockResolvedValue(null);
     jest.spyOn(TeamsAPI, "getTeams").mockResolvedValue(null);
-    renderWithProviders(<MembersList />);
+    renderWithProviders(<TeamList />);
   });
 
   it("renders player and staff", async () => {
     jest.spyOn(TeamsAPI, "getTeamDetail").mockResolvedValue(sampleTeamInfo);
     jest.spyOn(TeamsAPI, "getTeams").mockResolvedValue({ years: [2025, 2024] });
-    renderWithProviders(<MembersList />);
+    renderWithProviders(<TeamList />);
 
     await waitFor(() => {
       expect(screen.getByTestId("player-simple")).toBeInTheDocument();
-      fireEvent.change(screen.getByTestId("year-select"), { target: { value: "2024" } });
+      fireEvent.change(screen.getByTestId("year-select"), {
+        target: { value: "2024" },
+      });
     });
   });
 });

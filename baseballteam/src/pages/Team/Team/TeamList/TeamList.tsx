@@ -5,7 +5,7 @@ import { PlayerSimple, StaffSimple } from "@fragments/Member";
 import { TeamInfoType } from "@models/team";
 import { getTeams, getTeamDetail } from "@services/team";
 
-export function MembersList() {
+export function TeamList() {
   const [selectedYear, setSelectedYear] = useState<number>(2025);
   const [yearOptions, setYearOptions] = useState<number[]>([]);
   const [teamInfo, setTeamInfo] = useState<TeamInfoType>();
