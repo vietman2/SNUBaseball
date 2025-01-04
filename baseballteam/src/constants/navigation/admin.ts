@@ -9,6 +9,10 @@ export const Admin: TabGroup = {
       path: "/team",
       subtabs: [
         {
+          title: "명부관리",
+          path: "/team/members",
+        },
+        {
           title: "팀 정보",
           path: "/team/info",
         },

@@ -30,6 +30,7 @@ export type MemberType = {
   position: string;
   hands: string;
   student_id: string;
+  admission_year: string;
   profile_image: string;
   major: string;
   phone: string;
