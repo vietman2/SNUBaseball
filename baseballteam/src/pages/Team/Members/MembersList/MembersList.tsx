@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
+import { PlayerSimple, StaffSimple } from "@fragments/Member";
 import { TeamInfoType } from "@models/team";
 import { getTeams, getTeamDetail } from "@services/team";
-import { PlayerSimple, StaffSimple } from "@fragments/Member";
 
 export function MembersList() {
   const [selectedYear, setSelectedYear] = useState<number>(2025);

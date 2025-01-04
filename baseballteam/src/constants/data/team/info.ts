@@ -17,3 +17,9 @@ export const sampleStaffInfo: StaffInfoType = {
   back_number: 1,
   profile_image: "https://via.placeholder.com/150",
 };
+
+export const sampleTeamInfo = {
+  staff: [sampleStaffInfo],
+  managers: [sampleStaffInfo],
+  players: [samplePlayerInfo],
+};
