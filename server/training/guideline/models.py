@@ -9,6 +9,8 @@ class GuidelineCategory(models.Model):
 
     class Meta:
         db_table = "guideline_category"
+        verbose_name = "가이드라인 분류"
+        verbose_name_plural = "가이드라인 분류"
 
 class Guideline(Post):
     category    = models.ForeignKey(GuidelineCategory, on_delete=models.CASCADE)
@@ -23,6 +25,8 @@ class Guideline(Post):
 
     class Meta:
         db_table = "guideline"
+        verbose_name = "가이드라인"
+        verbose_name_plural = "가이드라인"
 
 class GuidelineComment(Comment):
     guideline   = models.ForeignKey(Guideline, on_delete=models.CASCADE, related_name="comments")
@@ -31,6 +35,8 @@ class GuidelineComment(Comment):
 
     class Meta:
         db_table = "guideline_comment"
+        verbose_name = "가이드라인 댓글"
+        verbose_name_plural = "가이드라인 댓글"
 
 class GuidelineLike(Like):
     guideline   = models.ForeignKey(Guideline, on_delete=models.CASCADE, related_name="likes")
@@ -39,6 +45,8 @@ class GuidelineLike(Like):
 
     class Meta:
         db_table = "guideline_like"
+        verbose_name = "가이드라인 좋아요"
+        verbose_name_plural = "가이드라인 좋아요"
 
 class GuidelineContentView(ContentView):
     guideline   = models.ForeignKey(Guideline, on_delete=models.CASCADE)
@@ -47,3 +55,5 @@ class GuidelineContentView(ContentView):
 
     class Meta:
         db_table = "guideline_content_view"
+        verbose_name = "가이드라인 조회"
+        verbose_name_plural = "가이드라인 조회"

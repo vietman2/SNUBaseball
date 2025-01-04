@@ -10,6 +10,8 @@ class EquipmentCategory(models.Model):
 
     class Meta:
         db_table = 'equipment_category'
+        verbose_name = '장비 분류'
+        verbose_name_plural = '장비 분류'
 
 class Equipment(models.Model):
     category    = models.ForeignKey(
@@ -24,6 +26,8 @@ class Equipment(models.Model):
 
     class Meta:
         db_table = 'equipment'
+        verbose_name = '장비'
+        verbose_name_plural = '장비'
         unique_together = ['location', 'name']
 
 class EquipmentUpdateHistory(models.Model):
@@ -38,4 +42,6 @@ class EquipmentUpdateHistory(models.Model):
 
     class Meta:
         db_table = 'equipment_update_history'
+        verbose_name = '장비 업데이트 기록'
+        verbose_name_plural = '장비 업데이트 기록'
         ordering = ['-updated_at']

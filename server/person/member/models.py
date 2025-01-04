@@ -45,4 +45,6 @@ class Member(models.Model):
 
     class Meta:
         db_table    = 'member'
+        verbose_name = '부원'
+        verbose_name_plural = '부원'
         ordering    = ['admission_year']
