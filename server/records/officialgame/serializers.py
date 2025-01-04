@@ -1,7 +1,10 @@
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
+from person.member.utils import get_profile_image_url
 from .modelsdir.game import Game, GameLineup, MyGamePlayer
+from .modelsdir.player import MyPlayer
+from .modelsdir.team import MyTeam
 from .modelsdir.tournament import TournamentEvent
 
 class ResultSerializer(ModelSerializer):
@@ -99,3 +102,70 @@ class GameResultSerializer(ModelSerializer):
         if lineup is None:
             return None
         return LineupSerializer(lineup).data
+
+class PlayerSerializer(ModelSerializer):
+    name            = serializers.CharField(source='member.full_name')
+    back_number     = serializers.SerializerMethodField()
+    position        = serializers.SerializerMethodField()
+    profile_image   = serializers.SerializerMethodField()
+
+    class Meta:
+        model = MyPlayer
+        fields = ['id', 'name', 'position', 'back_number', 'weight', 'height', 'profile_image']
+
+    def get_back_number(self, obj):
+        if obj.back_number == 0:
+            return ""
+        return obj.back_number
+
+    def get_position(self, obj):
+        return obj.member.position
+
+    def get_profile_image(self, obj):
+        return get_profile_image_url(obj.member.profile_image)
+
+class StaffSerializer(ModelSerializer):
+    name            = serializers.CharField(source='member.full_name')
+    back_number     = serializers.SerializerMethodField()
+    role            = serializers.SerializerMethodField()
+    profile_image   = serializers.SerializerMethodField()
+
+    class Meta:
+        model = MyPlayer
+        fields = ['id', 'name', 'back_number', 'role', 'profile_image']
+
+    def get_back_number(self, obj):
+        if obj.back_number == 0:
+            return ""
+        return obj.back_number
+
+    def get_role(self, obj):
+        if obj.is_staff:
+            return "지도자"
+
+        return "매니저"
+
+    def get_profile_image(self, obj):
+        return get_profile_image_url(obj.member.profile_image)
+
+class TeamSerializer(ModelSerializer):
+    staff       = serializers.SerializerMethodField()
+    managers    = serializers.SerializerMethodField()
+    players     = serializers.SerializerMethodField()
+
+    class Meta:
+        model = MyTeam
+        fields = ['staff', 'managers', 'players']
+
+    def get_staff(self, obj):
+        staff = obj.myplayer_set.filter(is_staff=True)
+        return StaffSerializer(staff, many=True).data
+
+    def get_managers(self, obj):
+        managers = obj.myplayer_set.filter(is_manager=True)
+        return StaffSerializer(managers, many=True).data
+
+    def get_players(self, obj):
+        players = obj.myplayer_set.filter(is_staff=False, is_manager=False)
+        players = players.order_by('back_number')
+        return PlayerSerializer(players, many=True).data

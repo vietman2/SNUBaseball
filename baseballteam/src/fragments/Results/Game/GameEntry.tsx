@@ -5,7 +5,7 @@ import { Ballpark } from "@components/Icons";
 import { LineupType } from "@models/records";
 
 interface Props {
-  lineup: LineupType;
+  lineup: LineupType | undefined;
 }
 
 export function GameEntry({ lineup }: Readonly<Props>) {

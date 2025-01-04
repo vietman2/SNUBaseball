@@ -80,6 +80,8 @@ class MemberDetailSerializer(ModelSerializer):
         return obj.major.name
 
     def get_phone(self, obj):
+        if obj.phone is None:
+            return None
         return obj.phone.as_national
 
     def get_num_semester(self, obj):

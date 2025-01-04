@@ -42,6 +42,9 @@ jest.mock("@pages/Management", () => ({
 jest.mock("@pages/Records", () => ({
   RecordsContainer: () => <div>RecordsContainer</div>,
 }));
+jest.mock("@pages/Team", () => ({
+  TeamContainer: () => <div>TeamContainer</div>,
+}));
 jest.mock("@pages/Training", () => ({
   TrainingContainer: () => <div>TrainingContainer</div>,
 }));
