@@ -1,4 +1,14 @@
+import { MemberAdd } from "./MemberAdd/MemberAdd";
 import { PlayerSimple, StaffSimple } from "./MemberSimple/MemberSimple";
-import { MembersRowHeader, MemberTableRow } from "./MemberTableRow/MemberTableRow";
+import {
+  MembersRowHeader,
+  MemberTableRow,
+} from "./MemberTableRow/MemberTableRow";
 
-export { PlayerSimple, StaffSimple, MembersRowHeader, MemberTableRow }; 
+export {
+  MemberAdd,
+  PlayerSimple,
+  StaffSimple,
+  MembersRowHeader,
+  MemberTableRow,
+};
