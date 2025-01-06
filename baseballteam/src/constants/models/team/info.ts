@@ -17,6 +17,21 @@ export type StaffInfoType = {
 };
 
 export type TeamInfoType = {
+  year: number;
+  professor: string;
+  head_coach: string;
+  head_manager: string;
+  captain: string;
+  vice_captain: string;
+  games: number;
+  wins: number;
+  ties: number;
+  losses: number;
+  num_managers: number;
+  num_players: number;
+};
+
+export type TeamMembersType = {
   staff: StaffInfoType[];
   managers: StaffInfoType[];
   players: PlayerInfoType[];

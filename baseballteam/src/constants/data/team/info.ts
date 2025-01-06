@@ -1,4 +1,9 @@
-import { PlayerInfoType, StaffInfoType } from "@models/team";
+import {
+  PlayerInfoType,
+  StaffInfoType,
+  TeamInfoType,
+  TeamMembersType,
+} from "@models/team";
 
 export const samplePlayerInfo: PlayerInfoType = {
   id: 1,
@@ -18,8 +23,23 @@ export const sampleStaffInfo: StaffInfoType = {
   profile_image: "https://via.placeholder.com/150",
 };
 
-export const sampleTeamInfo = {
+export const sampleTeamMembers: TeamMembersType = {
   staff: [sampleStaffInfo],
   managers: [sampleStaffInfo],
   players: [samplePlayerInfo],
+};
+
+export const sampleTeamInfo: TeamInfoType = {
+  year: 2023,
+  professor: "김교수",
+  head_coach: "김감독",
+  head_manager: "김매니저",
+  captain: "김주장",
+  vice_captain: "김부주장",
+  games: 10,
+  wins: 5,
+  ties: 2,
+  losses: 3,
+  num_managers: 2,
+  num_players: 20,
 };

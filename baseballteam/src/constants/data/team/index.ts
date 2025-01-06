@@ -1,3 +1,8 @@
-import { samplePlayerInfo, sampleStaffInfo, sampleTeamInfo } from "./info";
+import {
+  samplePlayerInfo,
+  sampleStaffInfo,
+  sampleTeamInfo,
+  sampleTeamMembers,
+} from "./info";
 
-export { samplePlayerInfo, sampleStaffInfo, sampleTeamInfo };
+export { samplePlayerInfo, sampleStaffInfo, sampleTeamInfo, sampleTeamMembers };
