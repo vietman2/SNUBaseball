@@ -21,7 +21,7 @@ describe("getTeams", () => {
 describe("getTeamDetail", () => {
   it("should return a team object", async () => {
     jest.spyOn(axios, "get").mockResolvedValue({ status: 200, data: {} });
-    const response = await getTeamDetail(2021);
+    const response = await getTeamDetail("2021");
 
     expect(response).toEqual({});
   });
@@ -34,7 +34,7 @@ describe("getTeamDetail", () => {
 
   it("should return null if there is an error", async () => {
     jest.spyOn(axios, "get").mockRejectedValue({});
-    const response = await getTeamDetail(2021);
+    const response = await getTeamDetail("2021");
 
     expect(response).toBe(null);
   });

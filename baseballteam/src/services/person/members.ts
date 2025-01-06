@@ -26,7 +26,23 @@ export const getMembers = async (filter: string) => {
   }
 };
 
-/*
+export const createMember = async (
+  firstName: string,
+  lastName: string,
+  admissionYear: number
+) => {
+  try {
+    const response = await axios.post("/v1/members/", {
+      first_name: firstName,
+      last_name: lastName,
+      admission_year: admissionYear,
+    });
+    return response.data;
+  } catch {
+    return null;
+  }
+};
+
 export const getMemberDetail = async (id: number) => {
   try {
     const response = await axios.get(`/v1/members/${id}/`);
@@ -36,6 +52,7 @@ export const getMemberDetail = async (id: number) => {
   }
 };
 
+/*
 export const addMember = async (
   last_name: string,
   first_name: string,

@@ -2,8 +2,8 @@ import axios from "axios";
 
 import {
   getMembers,
-  //getMemberDetail,
-  //addMember,
+  getMemberDetail,
+  createMember,
   //deleteMember,
 } from "./members";
 import { sampleMembers } from "@data/user";
@@ -25,7 +25,7 @@ describe("getMembers", () => {
     await getMembers("qwer");
   });
 });
-/*
+
 describe("getMemberDetail", () => {
   it("should return a member", async () => {
     jest.spyOn(axios, "get").mockResolvedValue({ data: sampleMembers[0] });
@@ -43,61 +43,21 @@ describe("getMemberDetail", () => {
 });
 
 describe("addMember", () => {
-  it("should handle no major", async () => {
-    const response = await addMember(
-      "Doe",
-      "John",
-      "123456789",
-      "123-456-7890",
-      "email@email.com",
-      undefined,
-      "Member",
-      true
-    );
-    expect(response).toBeNull();
-  });
-
   it("should return the new member", async () => {
     jest.spyOn(axios, "post").mockResolvedValue({ data: sampleMembers[0] });
 
-    const response = await addMember(
-      "Doe",
-      "John",
-      "123456789",
-      "123-456-7890",
-      "email@email.com",
-      1,
-      "Member",
-      true
-    );
+    const response = await createMember("Doe", "John", 2024);
     expect(response).toEqual(sampleMembers[0]);
   });
 
   it("should return null if an error occurs", async () => {
     jest.spyOn(axios, "post").mockRejectedValue(new Error());
 
-    jest.mock("form-data", () => {
-      return jest.fn().mockImplementation(() => {
-        return {
-          append: jest.fn(),
-        };
-      });
-    });
-
-    const response = await addMember(
-      "Doe",
-      "John",
-      "123456789",
-      "123-456-7890",
-      "email@email.com",
-      1,
-      "Member",
-      false
-    );
+    const response = await createMember("Doe", "John", 2024);
     expect(response).toBeNull();
   });
 });
-
+/*
 describe("deleteMember", () => {
   it("should handle no id", async () => {
     const response = await deleteMember(undefined);

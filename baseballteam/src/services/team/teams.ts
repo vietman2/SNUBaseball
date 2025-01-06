@@ -10,7 +10,7 @@ export async function getTeams() {
   }
 }
 
-export async function getTeamDetail(year: number | undefined) {
+export async function getTeamDetail(year: string | undefined) {
   if (!year) {
     return null;
   }

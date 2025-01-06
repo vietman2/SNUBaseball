@@ -1,9 +1,9 @@
 //import { getMajors } from "./majors";
 import {
   getMembers,
-  //getMemberDetail,
-  //addMember,
+  createMember,
+  getMemberDetail,
   //deleteMember,
 } from "./members";
 
-export { getMembers };
+export { getMembers, getMemberDetail, createMember };
