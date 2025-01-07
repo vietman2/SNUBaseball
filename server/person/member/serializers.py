@@ -1,14 +1,22 @@
-from django.utils import timezone
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
 from person.major.models import Department
-from .enums import StatusType, RoleType
 from .models import Member
 from .utils import (
     get_role_chip, get_status_chip, get_num_semester_text, get_profile_image_url,
     is_valid_student_id, get_status_choice, get_role_choice, get_hands_choice
 )
+
+class MemberMiniSerializer(ModelSerializer):
+    admission_year = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Member
+        fields = ["id", "full_name", "admission_year"]
+
+    def get_admission_year(self, obj):
+        return obj.admission_year % 100
 
 class MemberSimpleSerializer(ModelSerializer):
     role            = serializers.SerializerMethodField()
