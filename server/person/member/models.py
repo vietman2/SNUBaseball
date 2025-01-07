@@ -23,8 +23,8 @@ class Member(models.Model):
 
     phone           = PhoneNumberField(unique=True, null=True, blank=True)
     email           = models.EmailField(max_length=255, unique=True, null=True, blank=True)
-    address         = models.TextField(default="")
-    notes           = models.TextField(default="")
+    address         = models.TextField(default="", null=True, blank=True)
+    notes           = models.TextField(default="", null=True, blank=True)
     date_joined     = models.DateField(null=True, blank=True)
     num_semester    = models.IntegerField(validators=[Min(0), Max(20)], default=0)
 
