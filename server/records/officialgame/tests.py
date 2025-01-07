@@ -70,6 +70,98 @@ class TeamsAPITestCase(APITestCase):
         response = self.client.get(f'{self.url}')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+    def test_players(self):
+        self.client.force_authenticate(user=self.user)
+        response = self.client.get(f'{self.url}players/', {'year': 2025})
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_players_fail(self):
+        self.client.force_authenticate(user=self.user)
+        ## 1. not exist
+        response = self.client.get(f'{self.url}players/', {'year': 1})
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+        ## 2. no parameter
+        response = self.client.get(f'{self.url}players/')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_player_create(self):
+        self.client.force_authenticate(user=self.user)
+        response = self.client.post(f'{self.url}player/', {
+            'year': 2025,
+            'member_id': 1,
+            'role': '지도자',
+            'back_number': 1,
+            'is_registered': False,
+        })
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+        self.client.post(f'{self.url}player/', {
+            'year': 2025,
+            'member_id': 2,
+            'role': '매니저',
+            'back_number': 2,
+            'is_registered': False,
+        })
+
+        self.client.post(f'{self.url}player/', {
+            'year': 2025,
+            'member_id': 3,
+            'role': '주장',
+            'back_number': 3,
+            'is_registered': True,
+        })
+
+        self.client.post(f'{self.url}player/', {
+            'year': 2025,
+            'member_id': 4,
+            'role': '부주장',
+            'back_number': 4,
+            'is_registered': True,
+        })
+
+        self.client.post(f'{self.url}player/', {
+            'year': 2025,
+            'member_id': 5,
+            'role': '수석매니저',
+            'back_number': 5,
+            'is_registered': False,
+        })
+
+        self.client.post(f'{self.url}player/', {
+            'year': 2025,
+            'member_id': 6,
+            'role': '선수',
+            'back_number': 6,
+            'is_registered': True,
+        })
+
+    def test_player_create_fail(self):
+        self.client.force_authenticate(user=self.user)
+        ## 1. not exist
+        response = self.client.post(f'{self.url}player/', {
+            'year': 1,
+            'member_id': 1,
+            'role': '투수',
+            'back_number': 1,
+            'is_registered': False,
+        })
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+        ## 2. not exist member
+        response = self.client.post(f'{self.url}player/', {
+            'year': 2024,
+            'member_id': 1000,
+            'role': '투수',
+            'back_number': 1,
+            'is_registered': False,
+        })
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+        ## 3. no parameter
+        response = self.client.post(f'{self.url}player/', {})
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
 class ModelsTestCase(TestCase):
     fixtures = [
         "core/data/test/people.json", "core/data/test/game.json",
