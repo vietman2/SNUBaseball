@@ -1,3 +1,4 @@
+import { TeamDetail } from "./TeamDetail/TeamDetail";
 import { TeamList } from "./TeamList/TeamList";
 
-export { TeamList };
+export { TeamDetail, TeamList };

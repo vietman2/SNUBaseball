@@ -1,141 +1,50 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import { PlayerSimple, StaffSimple } from "@fragments/Member";
+import { TeamTableHeader, TeamTableRow } from "@fragments/Team";
 import { TeamInfoType } from "@models/team";
-import { getTeams, getTeamDetail } from "@services/team";
+import { getTeams } from "@services/team";
 
 export function TeamList() {
-  const [selectedYear, setSelectedYear] = useState<number>(2025);
-  const [yearOptions, setYearOptions] = useState<number[]>([]);
-  const [teamInfo, setTeamInfo] = useState<TeamInfoType>();
+  const [teams, setTeams] = useState<TeamInfoType[]>([]);
+
+  const navigate = useNavigate();
+
+  const handleDetail = (year: number) => {
+    navigate(`/team/info/${year}`);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await getTeamDetail(selectedYear);
+      const response = await getTeams();
 
       if (response) {
-        setTeamInfo(response);
+        setTeams(response);
       }
     };
 
     fetchData();
-  }, [selectedYear]);
-
-  useEffect(() => {
-    const fetchYears = async () => {
-      const response = await getTeams();
-
-      if (response) {
-        setYearOptions(response.years);
-        setSelectedYear(response.years[0]);
-      }
-    };
-
-    fetchYears();
   }, []);
 
   return (
     <Container>
-      <Filter>
-        <label>연도</label>
-        <select
-          value={selectedYear}
-          onChange={(e) => setSelectedYear(Number(e.target.value))}
-          data-testid="year-select"
+      <TeamTableHeader />
+      {teams.map((team) => (
+        <button
+          key={team.year}
+          onClick={() => handleDetail(team.year)}
+          data-testid={`team-${team.year}`}
         >
-          {yearOptions.map((year) => (
-            <option key={year} value={year}>
-              {year}
-            </option>
-          ))}
-        </select>
-      </Filter>
-      {teamInfo ? (
-        <>
-          <Wrapper>
-            <Subtitle>지도자</Subtitle>
-            <Members>
-              {teamInfo.staff.map((member) => (
-                <StaffSimple key={member.id} staff={member} />
-              ))}
-            </Members>
-          </Wrapper>
-          <Wrapper>
-            <Subtitle>매니저</Subtitle>
-            <Members>
-              {teamInfo.managers.map((member) => (
-                <StaffSimple key={member.id} staff={member} />
-              ))}
-            </Members>
-          </Wrapper>
-          <Wrapper>
-            <Subtitle>선수</Subtitle>
-            <Members>
-              {teamInfo.players.map((member) => (
-                <PlayerSimple key={member.id} player={member} />
-              ))}
-            </Members>
-          </Wrapper>
-        </>
-      ) : (
-        <NoData>데이터가 없습니다.</NoData>
-      )}
+          <TeamTableRow team={team} />
+        </button>
+      ))}
     </Container>
   );
 }
 
 const Container = styled.div`
   display: flex;
-  flex: 1;
   flex-direction: column;
-  padding: 12px 16px;
-  gap: 16px;
-`;
-
-const Filter = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 16px;
-
-  select {
-    align-items: center;
-    width: 60px;
-    height: 26px;
-    padding: 4px 8px;
-    border-radius: 8px;
-    border: none;
-    color: ${({ theme }) => theme.colors.foreground900};
-    background-color: ${({ theme }) => theme.colors.background700};
-  }
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-`;
-
-const Subtitle = styled.div`
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: ${({ theme }) => theme.colors.foreground900};
-`;
-
-const Members = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 8px;
-`;
-
-const NoData = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: ${({ theme }) => theme.colors.foreground900};
+  padding: 24px 0;
 `;
