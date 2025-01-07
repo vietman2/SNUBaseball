@@ -1,3 +1,4 @@
+import { sampleColleges } from "./majors";
 import {
   sampleAdmin,
   sampleAuthor,
@@ -7,6 +8,7 @@ import {
 } from "./people";
 
 export {
+  sampleColleges,
   sampleAdmin,
   sampleAuthor,
   sampleAuthorProfile,

@@ -75,6 +75,7 @@ export const sampleMembers: MemberType[] = [
     back_number: 7,
     position: "투수",
     hands: "우투우타",
+    is_elite: "O",
   },
   {
     id: 2,
@@ -86,15 +87,16 @@ export const sampleMembers: MemberType[] = [
     admission_year: "2024",
     major: "건설환경공학과",
     status: sampleStatus[0],
-    date_joined: "2021/09",
-    birth_date: "2002/02/02",
+    date_joined: "2021-09-01",
+    birth_date: "2002-02-02",
     num_semester: "3학기+",
     address: "서울시 관악구",
     notes: "",
     profile_image:
       "https://kr.object.ncloudstorage.com/snubaseball.test/profiles/2021-18947.jpg",
-    back_number: null,
+    back_number: 1,
     position: "내야수",
     hands: "우투우타",
+    is_elite: "X",
   },
 ];

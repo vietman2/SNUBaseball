@@ -41,5 +41,6 @@ export type MemberType = {
   notes: string;
   num_semester: string;
   status: StatusType;
-  back_number: number | null;
+  back_number: number;
+  is_elite: string;
 };
