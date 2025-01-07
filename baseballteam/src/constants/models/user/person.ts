@@ -36,6 +36,9 @@ export type MemberType = {
   phone: string;
   email: string;
   date_joined: string;
+  birth_date: string;
+  address: string;
+  notes: string;
   num_semester: string;
   status: StatusType;
   back_number: number | null;

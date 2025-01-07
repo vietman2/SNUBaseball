@@ -1,3 +1,4 @@
+import { CollegeType, DepartmentType } from "./major";
 import {
   AuthorType,
   UserProfileType,
@@ -7,6 +8,8 @@ import {
 } from "./person";
 
 export {
+  type CollegeType,
+  type DepartmentType,
   type AuthorType,
   type UserProfileType,
   type RoleType,

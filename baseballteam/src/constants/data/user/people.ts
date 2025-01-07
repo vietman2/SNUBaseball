@@ -66,7 +66,10 @@ export const sampleMembers: MemberType[] = [
     major: "건설환경공학과",
     status: sampleStatus[0],
     date_joined: "2021/03",
+    birth_date: "2002/01/01",
     num_semester: "3학기+",
+    address: "서울시 관악구",
+    notes: "",
     profile_image:
       "https://kr.object.ncloudstorage.com/snubaseball.test/profiles/2021-12452.jpg",
     back_number: 7,
@@ -84,7 +87,10 @@ export const sampleMembers: MemberType[] = [
     major: "건설환경공학과",
     status: sampleStatus[0],
     date_joined: "2021/09",
+    birth_date: "2002/02/02",
     num_semester: "3학기+",
+    address: "서울시 관악구",
+    notes: "",
     profile_image:
       "https://kr.object.ncloudstorage.com/snubaseball.test/profiles/2021-18947.jpg",
     back_number: null,
