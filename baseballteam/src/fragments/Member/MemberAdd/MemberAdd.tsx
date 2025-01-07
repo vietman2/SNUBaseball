@@ -92,7 +92,7 @@ const AddModal = styled.div`
     font-size: 1.25rem;
     font-weight: 600;
   }
-}`;
+`;
 
 const InputWrapper = styled.div`
   display: flex;
