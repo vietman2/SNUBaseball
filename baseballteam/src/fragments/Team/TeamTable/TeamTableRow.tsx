@@ -14,9 +14,6 @@ export function TeamTableHeader() {
       <div>매니저</div>
       <div>선수</div>
       <div>경기수</div>
-      <div>승</div>
-      <div>무</div>
-      <div>패</div>
     </Header>
   );
 }
@@ -37,9 +34,6 @@ export function TeamTableRow({ team }: Readonly<Props>) {
       <div>{team.num_managers}</div>
       <div>{team.num_players}</div>
       <div>{team.games}</div>
-      <div>{team.wins}</div>
-      <div>{team.ties}</div>
-      <div>{team.losses}</div>
     </Container>
   );
 }
@@ -48,12 +42,46 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
 
+  border-top: ${({ theme }) => `1px solid ${theme.colors.borderLight}`};
+
   > div {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 80px;
+    width: 72px;
+    height: 32px;
+
+    border-right: ${({ theme }) => `1px solid ${theme.colors.borderLight}`};
+  }
+
+  > div:nth-child(2) {
+    width: 100px;
+  }
+
+  > div:nth-child(3) {
+    width: 100px;
+  }
+
+  @media (max-width: 768px) {
+    > div {
+      width: 80px;
+    }
+
+    > div:nth-child(7) {
+      display: none;
+    }
+
+    > div:nth-child(8) {
+      display: none;
+    }
+
+    > div:nth-child(9) {
+      display: none;
+    }
   }
 `;
 
-const Header = styled(Container)``;
+const Header = styled(Container)`
+  border-top: none;
+  border-bottom: ${({ theme }) => `1px solid ${theme.colors.borderLight}`};
+`;

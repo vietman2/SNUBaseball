@@ -45,17 +45,18 @@ const Card = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  min-width: 200px;
-  max-width: 200px;
+  min-width: 180px;
+  max-width: 180px;
   padding: 8px;
+  margin: 4px;
   gap: 16px;
 
   border-radius: 8px;
   border: 1px solid ${({ theme }) => theme.colors.borderLight};
 
   > img {
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     border-radius: 8px;
   } 
 `;
