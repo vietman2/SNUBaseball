@@ -44,3 +44,9 @@ export type MemberType = {
   back_number: number;
   is_elite: string;
 };
+
+export type MemberMiniType = {
+  id: number;
+  full_name: string;
+  admission_year: string;
+}

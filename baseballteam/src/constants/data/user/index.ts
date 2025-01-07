@@ -5,6 +5,7 @@ import {
   sampleAuthorProfile,
   sampleProfile,
   sampleMembers,
+  sampleMemberMinis,
 } from "./people";
 
 export {
@@ -14,4 +15,5 @@ export {
   sampleAuthorProfile,
   sampleProfile,
   sampleMembers,
+  sampleMemberMinis,
 };

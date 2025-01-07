@@ -4,6 +4,7 @@ import {
   UserProfileType,
   RoleType,
   MemberType,
+  MemberMiniType,
   StatusType,
 } from "./person";
 
@@ -14,5 +15,6 @@ export {
   type UserProfileType,
   type RoleType,
   type MemberType,
+  type MemberMiniType,
   type StatusType,
 };

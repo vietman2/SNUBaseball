@@ -4,6 +4,7 @@ import {
   RoleType,
   StatusType,
   MemberType,
+  MemberMiniType,
 } from "@models/user";
 
 export const sampleProfile: UserProfileType = {
@@ -98,5 +99,18 @@ export const sampleMembers: MemberType[] = [
     position: "내야수",
     hands: "우투우타",
     is_elite: "X",
+  },
+];
+
+export const sampleMemberMinis: MemberMiniType[] = [
+  {
+    id: 1,
+    full_name: "김유안",
+    admission_year: "21",
+  },
+  {
+    id: 2,
+    full_name: "양서진",
+    admission_year: "21",
   },
 ];
