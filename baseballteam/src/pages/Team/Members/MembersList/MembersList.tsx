@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import { ViewButtons } from "@components/Buttons";
-import { MembersRowHeader, MemberTableRow } from "@fragments/Member";
+import { MemberAdd, MembersRowHeader, MemberTableRow } from "@fragments/Member";
 import { MemberType } from "@models/user";
 import { getMembers } from "@services/person";
 
@@ -29,6 +30,28 @@ export function MembersList() {
   const [view, setView] = useState<string>("전체");
   const [members, setMembers] = useState<MemberType[]>([]);
 
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [refreshCount, setRefreshCount] = useState<number>(0);
+
+  const navigate = useNavigate();
+
+  const handleRefresh = () => {
+    setRefreshCount(refreshCount + 1);
+  };
+
+  const handleClose = () => {
+    setModalOpen(false);
+    handleRefresh();
+  };
+
+  const handleOpen = () => {
+    setModalOpen(true);
+  };
+
+  const handleDetail = (id: number) => {
+    navigate(`/team/members/${id}`);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       const response = await getMembers(view);
@@ -39,28 +62,38 @@ export function MembersList() {
     };
 
     fetchData();
-  }, [view]);
+  }, [view, refreshCount]);
 
   return (
-    <Container>
-      <Header>
-        <ViewButtons buttons={views} selected={view} onClick={setView} wide />
-      </Header>
-      <List>
-        <MembersRowHeader />
-        <>
-          {members.length === 0 ? (
-            <div>데이터가 없습니다.</div>
-          ) : (
-            <>
-              {members.map((member, index) => (
-                <MemberTableRow key={member.id} index={index} member={member} />
-              ))}
-            </>
-          )}
-        </>
-      </List>
-    </Container>
+    <>
+      <Container>
+        <Header>
+          <ViewButtons buttons={views} selected={view} onClick={setView} wide />
+          <Button onClick={handleOpen}>추가</Button>
+        </Header>
+        <Vertical>
+          <MembersRowHeader />
+          <>
+            {members.length === 0 ? (
+              <div>데이터가 없습니다.</div>
+            ) : (
+              <>
+                {members.map((member, index) => (
+                  <button
+                    key={member.id}
+                    onClick={() => handleDetail(member.id)}
+                    data-testid={`member-${member.id}`}
+                  >
+                    <MemberTableRow index={index} member={member} />
+                  </button>
+                ))}
+              </>
+            )}
+          </>
+        </Vertical>
+      </Container>
+      {modalOpen && <MemberAdd handleClose={handleClose} />}
+    </>
   );
 }
 
@@ -70,11 +103,24 @@ const Vertical = styled.div`
 `;
 
 const Container = styled(Vertical)`
-  padding: 16px 0;
+  padding: 8px 0;
 `;
 
-const Header = styled(Vertical)`
+const Header = styled.div`
+  display: flex;
+  align-items: center;
   padding: 8px;
+  gap: 16px;
 `;
 
-const List = styled(Vertical)``;
+const Button = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  color: ${({ theme }) => theme.colors.background100};
+  background-color: ${({ theme }) => theme.colors.primary};
+  cursor: pointer;
+`;
