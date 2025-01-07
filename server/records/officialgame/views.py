@@ -7,7 +7,9 @@ from rest_framework.viewsets import ModelViewSet
 from .modelsdir.game import Game
 from .modelsdir.team import MyTeam
 from .modelsdir.tournament import TournamentEvent
-from .serializers import TournamentSerializer, GameResultSerializer, TeamSerializer
+from .serializers import (
+    TournamentSerializer, GameResultSerializer, TeamSerializer, TeamMembersSerialzier
+)
 
 class ResultsView(ModelViewSet):
     queryset = Game.objects.all()
@@ -53,11 +55,9 @@ class TeamView(ModelViewSet):
         if year is None:
             ## only return list of years
             teams = MyTeam.objects.all()
-            years = [team.year for team in teams]
+            serializer = TeamSerializer(teams, many=True)
 
-            return Response({
-                'years': years
-            }, status=status.HTTP_200_OK)
+            return Response(serializer.data, status=status.HTTP_200_OK)
 
         if not year.isdigit():
             return Response({
@@ -70,7 +70,7 @@ class TeamView(ModelViewSet):
                 'message': '해당 연도의 팀 정보가 없습니다.'
             }, status=status.HTTP_404_NOT_FOUND)
 
-        serializer = TeamSerializer(team)
+        serializer = TeamMembersSerialzier(team)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
 
