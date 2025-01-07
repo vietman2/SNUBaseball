@@ -1,3 +1,8 @@
-import { getTeams, getTeamDetail } from "./teams";
+import {
+  getTeams,
+  getTeamDetail,
+  getMemberOptions,
+  createTeamMember,
+} from "./teams";
 
-export { getTeams, getTeamDetail };
+export { getTeams, getTeamDetail, getMemberOptions, createTeamMember };
