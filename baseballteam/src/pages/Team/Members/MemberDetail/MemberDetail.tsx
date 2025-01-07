@@ -130,12 +130,12 @@ export function MemberDetail() {
           <Subtitle>프로필</Subtitle>
           <InfoRow>
             <span>야구부 입부</span>
-            <span>{member.date_joined}</span>
+            <span>{member.date_joined?.replace(/-/g, "/")}</span>
           </InfoRow>
           <Divider color={colors.borderDark} />
           <InfoRow>
             <span>활동기간</span>
-            <span>{member.num_semester}</span>
+            <span>{member.num_semester}학기</span>
           </InfoRow>
           <Divider color={colors.borderDark} />
           <InfoRow>
