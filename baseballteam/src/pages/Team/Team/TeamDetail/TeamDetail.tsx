@@ -5,11 +5,14 @@ import styled from "styled-components";
 import { AppIcon } from "@components/Icons";
 import { useTheme } from "@contexts/theme";
 import { PlayerSimple, StaffSimple } from "@fragments/Member";
+import { TeamMemberAddModal } from "@fragments/Team";
 import { TeamMembersType } from "@models/team";
 import { getTeamDetail } from "@services/team";
 
 export function TeamDetail() {
   const [teamInfo, setTeamInfo] = useState<TeamMembersType>();
+  const [modelOpen, setModelOpen] = useState<boolean>(false);
+  const [refreshCount, setRefreshCount] = useState<number>(0);
 
   const navigate = useNavigate();
   const { year } = useParams<{ year: string }>();
@@ -17,6 +20,19 @@ export function TeamDetail() {
 
   const goBack = () => {
     navigate(-1);
+  };
+
+  const handleRefresh = () => {
+    setRefreshCount(refreshCount + 1);
+  };
+
+  const openModal = () => {
+    setModelOpen(true);
+  };
+
+  const closeModal = () => {
+    setModelOpen(false);
+    handleRefresh();
   };
 
   useEffect(() => {
@@ -29,45 +45,51 @@ export function TeamDetail() {
     };
 
     fetchData();
-  }, []);
+  }, [refreshCount, year]);
 
   return (
-    <Container>
-      <BackButton onClick={goBack} data-testid="back">
-        <AppIcon icon="chevron-left" size={24} color={colors.foreground900} />
-        목록
-      </BackButton>
-      {teamInfo ? (
-        <>
-          <Wrapper>
-            <Subtitle>지도자</Subtitle>
-            <Members>
-              {teamInfo.staff.map((member) => (
-                <StaffSimple key={member.id} staff={member} />
-              ))}
-            </Members>
-          </Wrapper>
-          <Wrapper>
-            <Subtitle>매니저</Subtitle>
-            <Members>
-              {teamInfo.managers.map((member) => (
-                <StaffSimple key={member.id} staff={member} />
-              ))}
-            </Members>
-          </Wrapper>
-          <Wrapper>
-            <Subtitle>선수</Subtitle>
-            <Members>
-              {teamInfo.players.map((member) => (
-                <PlayerSimple key={member.id} player={member} />
-              ))}
-            </Members>
-          </Wrapper>
-        </>
-      ) : (
-        <NoData>데이터가 없습니다.</NoData>
-      )}
-    </Container>
+    <>
+      <Container>
+        <BackButton onClick={goBack} data-testid="back">
+          <AppIcon icon="chevron-left" size={24} color={colors.foreground900} />
+          목록
+        </BackButton>
+        {teamInfo ? (
+          <>
+            <div>
+              <Button onClick={openModal}>팀원 추가</Button>
+            </div>
+            <Wrapper>
+              <Subtitle>지도자</Subtitle>
+              <Members>
+                {teamInfo.staff.map((member) => (
+                  <StaffSimple key={member.id} staff={member} />
+                ))}
+              </Members>
+            </Wrapper>
+            <Wrapper>
+              <Subtitle>매니저</Subtitle>
+              <Members>
+                {teamInfo.managers.map((member) => (
+                  <StaffSimple key={member.id} staff={member} />
+                ))}
+              </Members>
+            </Wrapper>
+            <Wrapper>
+              <Subtitle>선수</Subtitle>
+              <Members>
+                {teamInfo.players.map((member) => (
+                  <PlayerSimple key={member.id} player={member} />
+                ))}
+              </Members>
+            </Wrapper>
+          </>
+        ) : (
+          <NoData>데이터가 없습니다.</NoData>
+        )}
+      </Container>
+      {modelOpen && <TeamMemberAddModal year={year} handleClose={closeModal} />}
+    </>
   );
 }
 
@@ -99,6 +121,19 @@ const BackButton = styled.button`
   font-size: 1.125rem;
   font-weight: 600;
   color: ${({ theme }) => theme.colors.foreground900};
+`;
+
+const Button = styled.button`
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  gap: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.background100};
+
+  border-radius: 8px;
+  background-color: ${({ theme }) => theme.colors.primary};
 `;
 
 const Wrapper = styled.div`

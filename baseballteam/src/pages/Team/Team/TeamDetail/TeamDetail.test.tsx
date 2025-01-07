@@ -10,6 +10,11 @@ jest.mock("@fragments/Member", () => ({
   PlayerSimple: () => <div>PlayerSimple</div>,
   StaffSimple: () => <div>StaffSimple</div>,
 }));
+jest.mock("@fragments/Team", () => ({
+  TeamMemberAddModal: ({ handleClose }: { handleClose: () => void }) => (
+    <button onClick={handleClose} data-testid="close" />
+  ),
+}));
 
 describe("<TeamDetail />", () => {
   beforeEach(() => {
@@ -31,6 +36,8 @@ describe("<TeamDetail />", () => {
 
     await waitFor(() => {
       expect(screen.getByText("PlayerSimple")).toBeInTheDocument();
+      fireEvent.click(screen.getByText("팀원 추가"));
+      fireEvent.click(screen.getByTestId("close"));
     });
 
     fireEvent.click(screen.getByTestId("back"));
