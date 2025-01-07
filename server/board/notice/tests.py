@@ -22,7 +22,6 @@ class NoticeAPITestCase(APITestCase):
         }
         self.attachment = generate_test_image_file()
 
-
     def test_unauthorized(self):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
