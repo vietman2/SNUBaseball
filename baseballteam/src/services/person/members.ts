@@ -52,49 +52,67 @@ export const getMemberDetail = async (id: number) => {
   }
 };
 
-/*
-export const addMember = async (
-  last_name: string,
-  first_name: string,
-  student_id: string,
-  phone: string,
-  email: string,
-  major: number | undefined,
-  role: string,
-  isElite: boolean
-) => {
-  if (!major) {
-    return null;
-  }
+export const updateProfileImage = async (id: string, file: File) => {
+  const formData = new FormData();
+  formData.append("profile_image", file);
 
   try {
-    const response = await axios.post("/v1/members/", {
-      last_name,
-      first_name,
-      student_id,
-      phone,
-      email,
-      major,
-      role,
-      is_elite: isElite,
+    await axios.post(`/v1/members/${id}/profiles/`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
     });
-    return response.data;
+    return true;
   } catch {
     return null;
   }
 };
 
-export const deleteMember = async (id: number | undefined) => {
-  if (id === undefined) return null;
-
+export const updateMember = async (
+  id: string | undefined,
+  data: {
+    admissionYear: number;
+    studentId: string;
+    majorId: number | undefined;
+    phone: string;
+    email: string;
+    address: string;
+    birthDate: string;
+    notes: string;
+    role: string;
+    status: string;
+    dateJoined: string;
+    numSemester: number;
+    hands: string;
+    position: string;
+    backNumber: number;
+    isElite: boolean;
+  }
+) => {
+  if (!id) {
+    return null;
+  }
   try {
-    const response = await axios.delete(`/v1/members/${id}/`);
-
-    return {
-      status: 204,
-      data: response.data,
-    };
+    await axios.put(`/v1/members/${id}/`, {
+      admission_year: data.admissionYear,
+      student_id: data.studentId,
+      major: data.majorId,
+      phone: data.phone,
+      email: data.email,
+      address: data.address,
+      birth_date: data.birthDate,
+      notes: data.notes,
+      role: data.role,
+      status: data.status,
+      date_joined: data.dateJoined,
+      num_semester: data.numSemester,
+      hands: data.hands,
+      position: data.position,
+      back_number: data.backNumber,
+      is_elite: data.isElite,
+    });
+    return true;
   } catch {
     return null;
   }
-};*/
+};
