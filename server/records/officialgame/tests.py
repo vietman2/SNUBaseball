@@ -44,6 +44,14 @@ class TeamsAPITestCase(APITestCase):
     def setUp(self):
         self.url = '/v1/teams/'
         self.user = User.objects.get(username='testuser_1')
+        self.create_data = {
+            'year': 2023,
+            'professor': '김교수',
+            'head_coach': '이감독',
+            'head_manager': '박매니저',
+            'captain': '정주장',
+            'vice_captain': '박부주장',
+        }
 
     def test_unallowed_method(self):
         self.client.force_authenticate(user=self.user)
@@ -69,6 +77,19 @@ class TeamsAPITestCase(APITestCase):
         self.client.force_authenticate(user=self.user)
         response = self.client.get(f'{self.url}')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_create(self):
+        self.client.force_authenticate(user=self.user)
+        response = self.client.post(f'{self.url}', self.create_data)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_create_fail(self):
+        ## 1. year already exists
+        self.client.force_authenticate(user=self.user)
+        data = self.create_data.copy()
+        data['year'] = 2024
+        response = self.client.post(f'{self.url}', data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_players(self):
         self.client.force_authenticate(user=self.user)
