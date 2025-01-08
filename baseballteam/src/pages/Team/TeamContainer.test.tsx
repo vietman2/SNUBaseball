@@ -2,7 +2,13 @@ import { TeamContainer } from "./TeamContainer";
 import { renderWithProviders } from "@utils/test-utils";
 
 jest.mock("./Members", () => ({
-  MembersList: () => <div>MembersList</div>,
+  MemberDetail: () => <div>MemberDetail</div>,
+  MemberEdit: () => <div>MemberEdit</div>,
+  MembersLayout: () => <div>MembersLayout</div>,
+}));
+jest.mock("./Team", () => ({
+  TeamDetail: () => <div>TeamDetail</div>,
+  TeamList: () => <div>TeamList</div>,
 }));
 
 describe("<TeamContainer />", () => {

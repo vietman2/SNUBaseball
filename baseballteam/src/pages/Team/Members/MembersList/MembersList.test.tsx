@@ -1,30 +1,34 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 
 import { MembersList } from "./MembersList";
-import { sampleTeamInfo } from "@data/team";
-import * as TeamsAPI from "@services/team/teams";
+import { sampleMembers } from "@data/user";
+import * as MembersAPI from "@services/person/members";
 import { renderWithProviders } from "@utils/test-utils";
 
 jest.mock("@fragments/Member", () => ({
-  PlayerSimple: () => <div data-testid="player-simple" />,
-  StaffSimple: () => <div data-testid="staff-simple" />,
+  MemberAdd: ({ handleClose }: { handleClose: () => void }) => (
+    <button onClick={handleClose} data-testid="close" />
+  ),
+  MembersRowHeader: () => <div data-testid="members-row-header" />,
+  MemberTableRow: () => <div data-testid="member-table-row" />,
 }));
 
 describe("<MembersList />", () => {
-  it("handles bad responses", async () => {
-    jest.spyOn(TeamsAPI, "getTeamDetail").mockResolvedValue(null);
-    jest.spyOn(TeamsAPI, "getTeams").mockResolvedValue(null);
+  it("handles bad response", async () => {
+    jest.spyOn(MembersAPI, "getMembers").mockResolvedValue(null);
     renderWithProviders(<MembersList />);
+
+    await waitFor(() => {});
   });
 
-  it("renders player and staff", async () => {
-    jest.spyOn(TeamsAPI, "getTeamDetail").mockResolvedValue(sampleTeamInfo);
-    jest.spyOn(TeamsAPI, "getTeams").mockResolvedValue({ years: [2025, 2024] });
+  it("should render members list", async () => {
+    jest.spyOn(MembersAPI, "getMembers").mockResolvedValue(sampleMembers);
     renderWithProviders(<MembersList />);
 
     await waitFor(() => {
-      expect(screen.getByTestId("player-simple")).toBeInTheDocument();
-      fireEvent.change(screen.getByTestId("year-select"), { target: { value: "2024" } });
+      fireEvent.click(screen.getByText("추가"));
+      fireEvent.click(screen.getByTestId("member-1"));
+      fireEvent.click(screen.getByTestId("close"));
     });
   });
 });

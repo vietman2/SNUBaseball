@@ -39,7 +39,30 @@
     "pk": 8,
     "fields": { "name": "메이지진구 야구장", "short_name": "도쿄" }
   },
-  { "model": "officialgame.myteam", "pk": 1, "fields": { "year": 2024 } },
+  {
+    "model": "officialgame.myteam",
+    "pk": 1,
+    "fields": {
+      "year": 2024,
+      "professor": "박재범",
+      "head_coach": "정석",
+      "head_manager": "최연우",
+      "captain": "임준원",
+      "vice_captain": "김정규"
+    }
+  },
+  {
+    "model": "officialgame.myteam",
+    "pk": 2,
+    "fields": {
+      "year": 2025,
+      "professor": "장원철",
+      "head_coach": "-",
+      "head_manager": "강지민",
+      "captain": "김유안",
+      "vice_captain": "양서진"
+    }
+  },
   {
     "model": "officialgame.opponent",
     "pk": 1,

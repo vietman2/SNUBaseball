@@ -1,19 +1,28 @@
-from django.utils import timezone
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
 from person.major.models import Department
-from .enums import StatusType, HandsType, RoleType
 from .models import Member
 from .utils import (
-    get_role_chip, get_status_chip, get_num_semester_text,
-    get_profile_image_url, is_valid_student_id
+    get_role_chip, get_status_chip, get_num_semester_text, get_profile_image_url,
+    is_valid_student_id, get_status_choice, get_role_choice, get_hands_choice
 )
+
+class MemberMiniSerializer(ModelSerializer):
+    admission_year = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Member
+        fields = ["id", "full_name", "admission_year"]
+
+    def get_admission_year(self, obj):
+        return obj.admission_year % 100
 
 class MemberSimpleSerializer(ModelSerializer):
     role            = serializers.SerializerMethodField()
     name            = serializers.CharField(source='full_name')
     profile_image   = serializers.SerializerMethodField()
+    student_id      = serializers.SerializerMethodField()
     hands           = serializers.CharField(source='get_hands_display')
     major           = serializers.SerializerMethodField()
     phone           = serializers.SerializerMethodField()
@@ -24,9 +33,15 @@ class MemberSimpleSerializer(ModelSerializer):
     class Meta:
         model = Member
         fields = [
-            "id", "role", "name", "position", "hands", "student_id", "profile_image",
-            "major", "phone", "email", "date_joined", "num_semester", "status", "back_number"
+            "id", "role", "name", "position", "hands", "student_id",
+            "profile_image", "admission_year", "major", "phone", "email",
+            "date_joined", "num_semester", "status", "back_number"
         ]
+
+    def get_student_id(self, obj):
+        if obj.student_id is None:
+            return "-"
+        return obj.student_id
 
     def get_role(self, obj):
         return get_role_chip(obj.role)
@@ -48,27 +63,32 @@ class MemberSimpleSerializer(ModelSerializer):
 
     def get_phone(self, obj):
         if obj.phone is None:
-            return None
+            return "-"
         return obj.phone.as_national
 
 class MemberDetailSerializer(ModelSerializer):
-    role            = serializers.CharField(source='get_role_display')
+    role            = serializers.SerializerMethodField()
     name            = serializers.CharField(source='full_name')
     profile_image   = serializers.SerializerMethodField()
+    birth_date      = serializers.DateField(format="%Y-%m-%d")
     hands           = serializers.CharField(source='get_hands_display')
     major           = serializers.SerializerMethodField()
     phone           = serializers.SerializerMethodField()
-    date_joined     = serializers.DateField(format="%Y/%m")
-    num_semester    = serializers.SerializerMethodField()
+    date_joined     = serializers.DateField(format="%Y-%m-%d")
     status          = serializers.SerializerMethodField()
     is_elite        = serializers.SerializerMethodField()
 
     class Meta:
         model = Member
         fields = [
-            "id", "role", "name", "position", "hands", "student_id", "profile_image", "major",
-            "phone", "email", "date_joined", "num_semester", "status", "back_number", "is_elite"
+            "id", "role", "name", "position", "hands", "student_id",
+            "profile_image", "major", "admission_year", "birth_date",
+            "phone", "email", "address", "date_joined", "num_semester",
+            "notes", "status", "back_number", "is_elite"
         ]
+
+    def get_role(self, obj):
+        return get_role_chip(obj.role)
 
     def get_profile_image(self, obj):
         return get_profile_image_url(obj.profile_image)
@@ -81,11 +101,8 @@ class MemberDetailSerializer(ModelSerializer):
 
     def get_phone(self, obj):
         if obj.phone is None:
-            return None
+            return "-"
         return obj.phone.as_national
-
-    def get_num_semester(self, obj):
-        return get_num_semester_text(obj.num_semester, obj.status)
 
     def get_status(self, obj):
         return get_status_chip(obj.status)
@@ -96,59 +113,54 @@ class MemberDetailSerializer(ModelSerializer):
 
         return "X"
 
+class MemberCreateSerializer(ModelSerializer):
+    class Meta:
+        model = Member
+        fields = ["first_name", "last_name", "admission_year"]
+
 class MemberWriteSerializer(ModelSerializer):
-    student_id      = serializers.CharField(error_messages={'required': '학번을 입력해주세요.'})
-    birth_date      = serializers.DateField(required=False)
-    major           = serializers.IntegerField(error_messages={'required': '학과를 선택해주세요.'})
+    student_id      = serializers.CharField(allow_null=True)
+    birth_date      = serializers.DateField(allow_null=True)
+    major           = serializers.IntegerField(allow_null=True)
     role            = serializers.CharField()
-    status          = serializers.ChoiceField(choices=StatusType.choices, required=False)
-    address         = serializers.CharField(required=False)
-    notes           = serializers.CharField(required=False)
-    date_joined     = serializers.DateField(required=False)
+    status          = serializers.CharField()
+    hands           = serializers.CharField(allow_blank=True)
+    address         = serializers.CharField(allow_blank=True)
+    notes           = serializers.CharField(allow_blank=True)
+    date_joined     = serializers.DateField(allow_null=True)
     num_semester    = serializers.IntegerField(required=False)
-    profile_image   = serializers.ImageField(required=False)
-    position        = serializers.CharField(required=False)
-    hands           = serializers.ChoiceField(choices=HandsType.choices, required=False)
+    position        = serializers.CharField(allow_blank=True)
     back_number     = serializers.IntegerField(required=False)
 
     class Meta:
         model = Member
         fields = [
-            "student_id", "first_name", "last_name", "birth_date", "major", "role",
-            "status", "phone", "email", "address", "notes", "date_joined", "num_semester",
-            "profile_image", "position", "hands", "back_number", "is_elite"
+            "admission_year", "student_id", "major", "phone", "email", "address",
+            "birth_date", "notes", "role", "status", "date_joined", "num_semester",
+            "hands", "position", "back_number", "is_elite"
         ]
 
     def validate_student_id(self, value):
+        if value == None:
+            return None
         if not is_valid_student_id(value):
             raise serializers.ValidationError("학번 형식이 올바르지 않습니다.")
 
         return value
 
     def validate_role(self, value):
-        if value == "선수":
-            return RoleType.PLAYER
-        elif value == "매니저":
-            return RoleType.MANAGER
+        return get_role_choice(value)
 
-        raise serializers.ValidationError("역할이 올바르지 않습니다.")
+    def validate_status(self, value):
+        return get_status_choice(value)
 
-    def create(self, validated_data):
-        ## TODO: 프로필 사진 로직
-        #profile_image = validated_data.pop('profile_image', None)
-        admission_year = validated_data['student_id'][:4]
-        validated_data['admission_year'] = admission_year
+    def validate_hands(self, value):
+        return get_hands_choice(value)
 
-        major = Department.objects.get(id=validated_data.pop('major'))
-        validated_data['major'] = major
+    def validate_major(self, value):
+        if value == None:
+            return None
 
-        validated_data['date_joined'] = validated_data.get('date_joined', timezone.now().date())
+        major = Department.objects.get(id=value)
 
-        if 'status' not in validated_data:
-            validated_data['status'] = StatusType.ACTIVE
-        if validated_data['role'] == RoleType.MANAGER:
-            validated_data['position'] = '매니저'
-
-        member = Member.objects.create(**validated_data)
-
-        return member
+        return major

@@ -86,7 +86,7 @@ export function FeedbackList() {
         selectedMember,
         selectedStatus
       );
-      const response2 = await getMembers("ybs");
+      const response2 = await getMembers("YB");
       const response3 = await getCategoryOptions();
 
       if (response1 && response2 && response3) {

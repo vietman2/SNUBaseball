@@ -29,4 +29,18 @@ describe("<ViewButtons />", () => {
 
     fireEvent.click(screen.getByText("Test2"));
   });
+
+  it("should render wide", () => {
+    renderWithProviders(
+      <ViewButtons
+        buttons={[
+          { label: "Test", icon: "test" },
+          { label: "Test2", icon: "test2" },
+        ]}
+        selected="Test"
+        onClick={jest.fn()}
+        wide
+      />
+    );
+  });
 });

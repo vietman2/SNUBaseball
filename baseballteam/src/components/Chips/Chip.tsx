@@ -46,7 +46,7 @@ const ChipWrapper = styled.div<{ $padding: string }>`
   padding: ${({ $padding }) => $padding};
   gap: 4px;
 
-  font-size: 14px;
+  font-size: 0.9rem;
   font-weight: 500;
 
   border-radius: 4px;

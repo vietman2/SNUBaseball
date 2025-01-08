@@ -149,6 +149,49 @@ class StaffSerializer(ModelSerializer):
         return get_profile_image_url(obj.member.profile_image)
 
 class TeamSerializer(ModelSerializer):
+    professor   = serializers.SerializerMethodField()
+    head_coach  = serializers.SerializerMethodField()
+    num_managers= serializers.SerializerMethodField()
+    num_players = serializers.SerializerMethodField()
+    games       = serializers.SerializerMethodField()
+    wins        = serializers.SerializerMethodField()
+    losses      = serializers.SerializerMethodField()
+    ties        = serializers.SerializerMethodField()
+
+    class Meta:
+        model = MyTeam
+        fields = [
+            'year', 'num_managers', 'num_players', 'professor', 'head_coach',
+            'head_manager', 'captain', 'vice_captain', 'games', 'wins', 'losses', 'ties'
+        ]
+
+    def get_professor(self, obj):
+        return f"{obj.professor} 교수님"
+
+    def get_head_coach(self, obj):
+        if obj.head_coach == "-":
+            return "-"
+        return f"{obj.head_coach} 감독님"
+
+    def get_num_managers(self, obj):
+        return obj.myplayer_set.filter(is_manager=True).count()
+
+    def get_num_players(self, obj):
+        return obj.myplayer_set.filter(is_staff=False, is_manager=False).count()
+
+    def get_games(self, obj):
+        return 10
+
+    def get_wins(self, obj):
+        return 0
+
+    def get_losses(self, obj):
+        return 10
+
+    def get_ties(self, obj):
+        return 0
+
+class TeamMembersSerialzier(ModelSerializer):
     staff       = serializers.SerializerMethodField()
     managers    = serializers.SerializerMethodField()
     players     = serializers.SerializerMethodField()

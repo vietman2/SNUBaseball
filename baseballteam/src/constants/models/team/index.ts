@@ -1,3 +1,3 @@
-import { PlayerInfoType, StaffInfoType, TeamInfoType } from "./info";
+import { PlayerInfoType, StaffInfoType, TeamInfoType, TeamMembersType } from "./info";
 
-export type { PlayerInfoType, StaffInfoType, TeamInfoType };
+export type { PlayerInfoType, StaffInfoType, TeamInfoType, TeamMembersType };

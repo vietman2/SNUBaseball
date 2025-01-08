@@ -1,7 +1,13 @@
 from django.db import models
 
 class MyTeam(models.Model):
-    year = models.IntegerField(unique=True)
+    year            = models.IntegerField(unique=True)
+
+    professor       = models.CharField(max_length=255)
+    head_coach      = models.CharField(max_length=255)
+    head_manager    = models.CharField(max_length=255)
+    captain         = models.CharField(max_length=255)
+    vice_captain    = models.CharField(max_length=255)
 
     def __str__(self):
         return f"{str(self.year)[-2:]} 서울대"

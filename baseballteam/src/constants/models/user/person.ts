@@ -30,12 +30,23 @@ export type MemberType = {
   position: string;
   hands: string;
   student_id: string;
+  admission_year: string;
   profile_image: string;
   major: string;
   phone: string;
   email: string;
   date_joined: string;
+  birth_date: string;
+  address: string;
+  notes: string;
   num_semester: string;
   status: StatusType;
-  back_number: number | null;
+  back_number: number;
+  is_elite: string;
 };
+
+export type MemberMiniType = {
+  id: number;
+  full_name: string;
+  admission_year: string;
+}

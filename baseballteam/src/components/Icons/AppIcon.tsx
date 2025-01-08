@@ -1,4 +1,5 @@
 import { ReactComponent as AttachmentIcon } from "./attachment.svg";
+import { ReactComponent as BaseballIcon } from "./baseball.svg";
 import { ReactComponent as CalendarIcon } from "./calendar.svg";
 import { ReactComponent as CategoryIcon } from "./category.svg";
 import { ReactComponent as ChatIcon } from "./chat.svg";
@@ -14,15 +15,18 @@ import { ReactComponent as DotsIcon } from "./dots.svg";
 import { ReactComponent as DownloadIcon } from "./download.svg";
 import { ReactComponent as EyeIcon } from "./eye.svg";
 import { ReactComponent as ForumIcon } from "./forum.svg";
+import { ReactComponent as GraduateIcon } from "./graduate.svg";
 import { ReactComponent as GridIcon } from "./grid.svg";
 import { ReactComponent as HeartIcon } from "./heart.svg";
 import { ReactComponent as HeartOutlineIcon } from "./heart-outline.svg";
 import { ReactComponent as HomeIcon } from "./home.svg";
 import { ReactComponent as LightbulbIcon } from "./lightbulb.svg";
+import { ReactComponent as ListIcon } from "./list.svg";
 import { ReactComponent as ManagementIcon } from "./management.svg";
 import { ReactComponent as MenuIcon } from "./menu.svg";
 import { ReactComponent as MoneyIcon } from "./money.svg";
 import { ReactComponent as MoonIcon } from "./moon.svg";
+import { ReactComponent as PencilIcon } from "./pencil.svg";
 import { ReactComponent as PeopleIcon } from "./people.svg";
 import { ReactComponent as RecordIcon } from "./record.svg";
 import { ReactComponent as SearchIcon } from "./search.svg";
@@ -43,6 +47,7 @@ const iconMap: Record<
   React.FunctionComponent<React.SVGProps<SVGSVGElement>>
 > = {
   attachment: AttachmentIcon,
+  baseball: BaseballIcon,
   calendar: CalendarIcon,
   category: CategoryIcon,
   chat: ChatIcon,
@@ -58,15 +63,18 @@ const iconMap: Record<
   download: DownloadIcon,
   eye: EyeIcon,
   forum: ForumIcon,
+  graduate: GraduateIcon,
   grid: GridIcon,
   heart: HeartIcon,
   "heart-outline": HeartOutlineIcon,
   home: HomeIcon,
   lightbulb: LightbulbIcon,
+  list: ListIcon,
   management: ManagementIcon,
   menu: MenuIcon,
   money: MoneyIcon,
   moon: MoonIcon,
+  pencil: PencilIcon,
   people: PeopleIcon,
   record: RecordIcon,
   search: SearchIcon,

@@ -6,8 +6,8 @@ import * as ThemeContext from "@contexts/theme";
 import { sampleProfile } from "@data/user";
 import * as AuthAPI from "@services/auth/auth";
 import * as ProfileAPI from "@services/auth/profiles";
-import { renderWithProviders } from "@utils/test-utils";
 import { dark, light } from "@themes/themeColors";
+import { renderWithProviders } from "@utils/test-utils";
 
 jest.unmock("react-router-dom");
 jest.mock("@contexts/auth", () => ({
