@@ -28,6 +28,30 @@ export async function getTeamDetail(year: string | undefined) {
   }
 }
 
+export async function createTeam(
+  year: string,
+  professor: string,
+  headCoach: string,
+  headManager: string,
+  captain: string,
+  viceCaptain: string
+) {
+  try {
+    const response = await axios.post("/v1/teams/", {
+      year,
+      professor,
+      head_coach: headCoach,
+      head_manager: headManager,
+      captain,
+      vice_captain: viceCaptain,
+    });
+
+    return response.data;
+  } catch {
+    return null;
+  }
+}
+
 export async function getMemberOptions(year: string | undefined) {
   if (!year) {
     return null;
