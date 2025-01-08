@@ -26,6 +26,9 @@ jest.mock("@contexts/theme", () => ({
 jest.mock("@pages/_layout", () => ({
   RootLayout: () => <div>RootLayout</div>,
 }));
+jest.mock("@pages/Accountings", () => ({
+  AccountingsContainer: () => <div>AccountingsContainer</div>,
+}));
 jest.mock("@pages/Auth", () => ({
   Login: () => <div>Login</div>,
   SignUp: () => <div />,
