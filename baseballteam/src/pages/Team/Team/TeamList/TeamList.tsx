@@ -101,7 +101,7 @@ export function TeamList() {
                   type="number"
                   value={year}
                   onChange={(e) => setYear(Number(e.target.value))}
-                  data-testid="year-input"
+                  data-testid="year"
                 />
               </Wrapper>
               <Wrapper>
@@ -109,7 +109,7 @@ export function TeamList() {
                 <input
                   value={professor}
                   onChange={(e) => setProfessor(e.target.value)}
-                  data-testid="professor-input"
+                  data-testid="professor"
                 />
               </Wrapper>
               <Wrapper>
@@ -117,7 +117,7 @@ export function TeamList() {
                 <input
                   value={headCoach}
                   onChange={(e) => setHeadCoach(e.target.value)}
-                  data-testid="head-coach-input"
+                  data-testid="head-coach"
                 />
               </Wrapper>
               <Wrapper>
@@ -125,7 +125,7 @@ export function TeamList() {
                 <input
                   value={headManager}
                   onChange={(e) => setHeadManager(e.target.value)}
-                  data-testid="head-manager-input"
+                  data-testid="head-manager"
                 />
               </Wrapper>
               <Wrapper>
@@ -133,7 +133,7 @@ export function TeamList() {
                 <input
                   value={captain}
                   onChange={(e) => setCaptain(e.target.value)}
-                  data-testid="captain-input"
+                  data-testid="captain"
                 />
               </Wrapper>
               <Wrapper>
@@ -141,7 +141,7 @@ export function TeamList() {
                 <input
                   value={viceCaptain}
                   onChange={(e) => setViceCaptain(e.target.value)}
-                  data-testid="vice-captain-input"
+                  data-testid="vice-captain"
                 />
               </Wrapper>
             </Contents>

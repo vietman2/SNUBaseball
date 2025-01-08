@@ -26,22 +26,22 @@ describe("<TeamList />", () => {
       fireEvent.click(screen.getByText("팀 추가"));
       fireEvent.click(screen.getByTestId("modal-overlay"));
       fireEvent.click(screen.getByText("팀 추가"));
-      fireEvent.change(screen.getByTestId("year-input"), {
+      fireEvent.change(screen.getByTestId("year"), {
         target: { value: "2023" },
       });
-      fireEvent.change(screen.getByTestId("professor-input"), {
+      fireEvent.change(screen.getByTestId("professor"), {
         target: { value: "professor" },
       });
-      fireEvent.change(screen.getByTestId("head-coach-input"), {
+      fireEvent.change(screen.getByTestId("head-coach"), {
         target: { value: "coach" },
       });
-      fireEvent.change(screen.getByTestId("head-manager-input"), {
+      fireEvent.change(screen.getByTestId("head-manager"), {
         target: { value: "manager" },
       });
-      fireEvent.change(screen.getByTestId("captain-input"), {
+      fireEvent.change(screen.getByTestId("captain"), {
         target: { value: "captain" },
       });
-      fireEvent.change(screen.getByTestId("vice-captain-input"), {
+      fireEvent.change(screen.getByTestId("vice-captain"), {
         target: { value: "vice-captain" },
       });
       fireEvent.click(screen.getByText("추가"));
