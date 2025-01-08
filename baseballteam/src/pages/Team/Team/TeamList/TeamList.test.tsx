@@ -11,20 +11,23 @@ jest.mock("@fragments/Team", () => ({
 }));
 
 describe("<TeamList />", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+    jest.spyOn(TeamsAPI, "getTeams").mockResolvedValue([sampleTeamInfo]);
+    jest.spyOn(window, "alert").mockImplementation(() => {});
+  });
+
   it("handles bad responses", async () => {
     jest.spyOn(TeamsAPI, "getTeams").mockResolvedValue(null);
     renderWithProviders(<TeamList />);
   });
 
   it("handles create new team", async () => {
-    jest.spyOn(TeamsAPI, "getTeams").mockResolvedValue([sampleTeamInfo]);
     jest.spyOn(TeamsAPI, "createTeam").mockResolvedValue(true);
     renderWithProviders(<TeamList />);
 
     await waitFor(() => {
       fireEvent.click(screen.getByTestId("team-2023"));
-      fireEvent.click(screen.getByText("팀 추가"));
-      fireEvent.click(screen.getByTestId("modal-overlay"));
       fireEvent.click(screen.getByText("팀 추가"));
       fireEvent.change(screen.getByTestId("year"), {
         target: { value: "2023" },
@@ -35,6 +38,18 @@ describe("<TeamList />", () => {
       fireEvent.change(screen.getByTestId("head-coach"), {
         target: { value: "coach" },
       });
+      fireEvent.click(screen.getByTestId("modal-overlay"));
+      fireEvent.click(screen.getByText("팀 추가"));
+      fireEvent.click(screen.getByText("추가"));
+    });
+  });
+
+  it("handles create fail", async () => {
+    jest.spyOn(TeamsAPI, "createTeam").mockResolvedValue(null);
+    renderWithProviders(<TeamList />);
+
+    await waitFor(() => {
+      fireEvent.click(screen.getByText("팀 추가"));
       fireEvent.change(screen.getByTestId("head-manager"), {
         target: { value: "manager" },
       });
@@ -44,18 +59,6 @@ describe("<TeamList />", () => {
       fireEvent.change(screen.getByTestId("vice-captain"), {
         target: { value: "vice-captain" },
       });
-      fireEvent.click(screen.getByText("추가"));
-    });
-  });
-
-  it("handles create fail", async () => {
-    jest.spyOn(window, "alert").mockImplementation(() => {});
-    jest.spyOn(TeamsAPI, "getTeams").mockResolvedValue([sampleTeamInfo]);
-    jest.spyOn(TeamsAPI, "createTeam").mockResolvedValue(null);
-    renderWithProviders(<TeamList />);
-
-    await waitFor(() => {
-      fireEvent.click(screen.getByText("팀 추가"));
       fireEvent.click(screen.getByText("추가"));
     });
   });
