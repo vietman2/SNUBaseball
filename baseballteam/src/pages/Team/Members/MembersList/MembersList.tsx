@@ -67,6 +67,7 @@ export function MembersList() {
   return (
     <>
       <Container>
+        <Subtitle>명부관리</Subtitle>
         <Header>
           <ViewButtons buttons={views} selected={view} onClick={setView} wide />
           <Button onClick={handleOpen}>추가</Button>
@@ -111,6 +112,22 @@ const Header = styled.div`
   align-items: center;
   padding: 8px;
   gap: 16px;
+`;
+
+const Subtitle = styled.span`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0 0 16px;
+
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.foreground900};
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const Button = styled.button`

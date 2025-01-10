@@ -149,29 +149,24 @@ class StaffSerializer(ModelSerializer):
         return get_profile_image_url(obj.member.profile_image)
 
 class TeamSerializer(ModelSerializer):
-    professor   = serializers.SerializerMethodField()
-    head_coach  = serializers.SerializerMethodField()
-    num_managers= serializers.SerializerMethodField()
-    num_players = serializers.SerializerMethodField()
-    games       = serializers.SerializerMethodField()
-    wins        = serializers.SerializerMethodField()
-    losses      = serializers.SerializerMethodField()
-    ties        = serializers.SerializerMethodField()
+    professor   = serializers.CharField()
+    head_coach  = serializers.CharField()
+    num_managers= serializers.SerializerMethodField(read_only=True)
+    num_players = serializers.SerializerMethodField(read_only=True)
+    games       = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = MyTeam
         fields = [
             'year', 'num_managers', 'num_players', 'professor', 'head_coach',
-            'head_manager', 'captain', 'vice_captain', 'games', 'wins', 'losses', 'ties'
+            'head_manager', 'captain', 'vice_captain', 'games',
         ]
 
-    def get_professor(self, obj):
-        return f"{obj.professor} 교수님"
-
-    def get_head_coach(self, obj):
-        if obj.head_coach == "-":
-            return "-"
-        return f"{obj.head_coach} 감독님"
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['professor'] = f"{instance.professor} 교수님" if instance.professor != "-" else "-"
+        data['head_coach'] = f"{instance.head_coach} 감독님" if instance.head_coach != "-" else "-"
+        return data
 
     def get_num_managers(self, obj):
         return obj.myplayer_set.filter(is_manager=True).count()
@@ -181,15 +176,6 @@ class TeamSerializer(ModelSerializer):
 
     def get_games(self, obj):
         return 10
-
-    def get_wins(self, obj):
-        return 0
-
-    def get_losses(self, obj):
-        return 10
-
-    def get_ties(self, obj):
-        return 0
 
 class TeamMembersSerialzier(ModelSerializer):
     staff       = serializers.SerializerMethodField()

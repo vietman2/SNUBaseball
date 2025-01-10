@@ -3,6 +3,7 @@ import axios from "axios";
 import {
   getTeams,
   getTeamDetail,
+  createTeam,
   getMemberOptions,
   createTeamMember,
 } from "./teams";
@@ -40,6 +41,22 @@ describe("getTeamDetail", () => {
   it("should return null if there is an error", async () => {
     jest.spyOn(axios, "get").mockRejectedValue({});
     const response = await getTeamDetail("2021");
+
+    expect(response).toBe(null);
+  });
+});
+
+describe("createTeam", () => {
+  it("should return a team object", async () => {
+    jest.spyOn(axios, "post").mockResolvedValue({ status: 200, data: {} });
+    const response = await createTeam("2021", "asdf", "asdf", "asdf", "asdf", "asdf");
+
+    expect(response).toEqual({});
+  });
+
+  it("should return null if there is an error", async () => {
+    jest.spyOn(axios, "post").mockRejectedValue({});
+    const response = await createTeam("2021", "asdf", "asdf", "asdf", "asdf", "asdf");
 
     expect(response).toBe(null);
   });

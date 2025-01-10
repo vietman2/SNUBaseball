@@ -1,8 +1,9 @@
 import {
   getTeams,
   getTeamDetail,
+  createTeam,
   getMemberOptions,
   createTeamMember,
 } from "./teams";
 
-export { getTeams, getTeamDetail, getMemberOptions, createTeamMember };
+export { getTeams, getTeamDetail, createTeam, getMemberOptions, createTeamMember };

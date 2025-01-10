@@ -13,6 +13,7 @@ import {
 } from "styled-components";
 
 import { RootLayout } from "@pages/_layout";
+import { AccountingsContainer } from "@pages/Accountings";
 import { Login, SignUp } from "@pages/Auth";
 import { ForumContainer } from "@pages/Forum";
 import { HomeContainer } from "@pages/Home";
@@ -236,9 +237,9 @@ function AppRouter() {
             <Route path="/management/*" element={<ManagementContainer />} />
             <Route path="/records/*" element={<RecordsContainer />} />
             <Route path="/team/*" element={<TeamContainer />} />
+            <Route path="/accountings/*" element={<AccountingsContainer />} />
             {/*<Route path="/schedule/*" element={<ScheduleContainer />} />
             <Route path="/admin/*" element={<AdminContainer />} />
-            <Route path="/accountings/*" element={<AccountingsContainer />} />
           */}
           </Route>
         </Route>

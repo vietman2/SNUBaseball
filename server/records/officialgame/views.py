@@ -1,6 +1,7 @@
 from drf_spectacular.utils import extend_schema
 from rest_framework import status
 from rest_framework.decorators import action
+from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
@@ -81,6 +82,22 @@ class TeamView(ModelViewSet):
     @extend_schema(exclude=True)
     def retrieve(self, request, *args, **kwargs):
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+    @extend_schema(summary="팀 정보 등록", tags=["팀 정보"])
+    def create(self, request, *args, **kwargs):
+        serializer = TeamSerializer(data=request.data)
+
+        try:
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+        except ValidationError as e:
+            return Response({
+                'message': str(e)
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response({
+            'message': '팀 정보 등록 완료'
+        }, status=status.HTTP_201_CREATED)
 
     @extend_schema(summary="팀 등록 가능 선수 조회", tags=["팀 정보"])
     @action(detail=False, methods=['get'])
