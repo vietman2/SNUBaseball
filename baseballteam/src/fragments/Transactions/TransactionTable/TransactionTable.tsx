@@ -1,0 +1,140 @@
+import styled from "styled-components";
+
+import { Chip } from "@components/Chips";
+import { AppIcon } from "@components/Icons";
+import { TransactionType } from "@models/accountings";
+
+function Income() {
+  return (
+    <Type>
+      <AppIcon icon="arrow-down" color="green" size={24} />
+      <span>수입</span>
+    </Type>
+  );
+}
+
+function Expense() {
+  return (
+    <Type>
+      <AppIcon icon="arrow-up" color="red" size={24} />
+      <span>지출</span>
+    </Type>
+  );
+}
+
+export function TransactionTableHeader() {
+  return (
+    <Header>
+      <div>ID</div>
+      <div>계좌</div>
+      <div>유형</div>
+      <div>금액</div>
+      <div>분류</div>
+      <div>내역</div>
+      <div>거래처</div>
+      <div>거래 후 잔액</div>
+      <div>담당자</div>
+      <div>날짜</div>
+    </Header>
+  );
+}
+
+interface Props {
+  transaction: TransactionType;
+}
+
+export function TransactionTableRow({ transaction }: Readonly<Props>) {
+  const formatDate = (date: string) => {
+    return `${date.split("-")[1]}/${date.split("-")[2]}`;
+  };
+
+  return (
+    <Container>
+      <div>{transaction.id}</div>
+      <div>
+        <Chip
+          label={transaction.account.label}
+          color={transaction.account.color}
+          bgColor={transaction.account.background_color}
+        />
+      </div>
+      <div>{transaction.type === "수입" ? <Income /> : <Expense />}</div>
+      <div>{transaction.amount.toLocaleString()}원</div>
+      <div>{transaction.category}</div>
+      <div>{transaction.description}</div>
+      <div>{transaction.counter_party}</div>
+      <div>{transaction.balance_after.toLocaleString()}원</div>
+      <div>{transaction.person_in_charge}</div>
+      <div>{formatDate(transaction.date)}</div>
+    </Container>
+  );
+}
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  border-top: ${({ theme }) => `1px solid ${theme.colors.borderLight}`};
+
+  > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 64px;
+    height: 32px;
+
+    border-right: ${({ theme }) => `1px solid ${theme.colors.borderLight}`};
+  }
+
+  > div:first-child {
+    width: 48px;
+  }
+
+  > div:nth-child(4) {
+    width: 108px;
+  }
+
+  > div:nth-child(6) {
+    width: 160px;
+  }
+
+  > div:nth-child(7) {
+    width: 120px;
+
+    @media (max-width: 1280px) {
+      display: none;
+    }
+  }
+
+  > div:nth-child(8) {
+    width: 108px;
+
+    @media (max-width: 1280px) {
+      display: none;
+    }
+  }
+
+  > div:nth-child(9) {
+    @media (max-width: 1280px) {
+      display: none;
+    }
+  }
+`;
+
+const Header = styled(Container)`
+  display: flex;
+  flex-direction: row;
+
+  border-top: none;
+  border-bottom: ${({ theme }) => `1px solid ${theme.colors.borderLight}`};
+`;
+
+const Type = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+
+  font-size: 0.95rem;
+  font-weight: 500;
+`;
