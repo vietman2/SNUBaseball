@@ -1,3 +1,5 @@
+import { ReactComponent as ArrowDownIcon } from "./arrow-down.svg";
+import { ReactComponent as ArrowUpIcon } from "./arrow-up.svg";
 import { ReactComponent as AttachmentIcon } from "./attachment.svg";
 import { ReactComponent as BaseballIcon } from "./baseball.svg";
 import { ReactComponent as CalendarIcon } from "./calendar.svg";
@@ -14,6 +16,7 @@ import { ReactComponent as DiaryIcon } from "./diary.svg";
 import { ReactComponent as DotsIcon } from "./dots.svg";
 import { ReactComponent as DownloadIcon } from "./download.svg";
 import { ReactComponent as EyeIcon } from "./eye.svg";
+import { ReactComponent as FilterIcon } from "./filter.svg";
 import { ReactComponent as ForumIcon } from "./forum.svg";
 import { ReactComponent as GraduateIcon } from "./graduate.svg";
 import { ReactComponent as GridIcon } from "./grid.svg";
@@ -46,6 +49,8 @@ const iconMap: Record<
   string,
   React.FunctionComponent<React.SVGProps<SVGSVGElement>>
 > = {
+  "arrow-down": ArrowDownIcon,
+  "arrow-up": ArrowUpIcon,
   attachment: AttachmentIcon,
   baseball: BaseballIcon,
   calendar: CalendarIcon,
@@ -62,6 +67,7 @@ const iconMap: Record<
   dots: DotsIcon,
   download: DownloadIcon,
   eye: EyeIcon,
+  filter: FilterIcon,
   forum: ForumIcon,
   graduate: GraduateIcon,
   grid: GridIcon,
