@@ -1,19 +1,20 @@
-type AccountType = {
-  id: string;
+export type AccountType = {
+  id: number;
   label: string;
   color: string;
   background_color: string;
 };
 
 export type TransactionType = {
-  id: string;
+  id: number;
   account: AccountType;
   amount: number;
   description: string;
   type: string;
   category: string;
+  method: string;
   counter_party: string;
   balance_after: number;
-  person_in_charge: string;
   date: string;
+  notes: string;
 };

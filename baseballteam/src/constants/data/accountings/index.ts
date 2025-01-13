@@ -1,3 +1,3 @@
-import { sampleTransactions } from "./transactions";
+import { sampleAccounts, sampleTransactions } from "./transactions";
 
-export { sampleTransactions };
+export { sampleAccounts, sampleTransactions };

@@ -1,3 +1,3 @@
-import { TransactionType } from "./transaction";
+import { AccountType, TransactionType } from "./transaction";
 
-export type { TransactionType };
+export type { AccountType, TransactionType };
