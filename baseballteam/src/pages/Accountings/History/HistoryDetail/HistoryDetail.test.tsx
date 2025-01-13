@@ -37,9 +37,7 @@ describe("<HistoryDetail />", () => {
     jest
       .spyOn(AccountingsAPI, "getTransaction")
       .mockResolvedValue(sampleTransactions[1]);
-    jest
-      .spyOn(AccountingsAPI, "deleteTransaction")
-      .mockResolvedValue(true);
+    jest.spyOn(AccountingsAPI, "deleteTransaction").mockResolvedValue(true);
     renderWithProviders(<HistoryDetail />);
 
     await waitFor(() => {
