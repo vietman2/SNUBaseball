@@ -35,7 +35,7 @@ const Container = styled.div`
     padding: 8px;
     border: none;
     outline: none;
-    font-size: 16px;
+    font-size: 1rem;
 
     background-color: transparent;
   }

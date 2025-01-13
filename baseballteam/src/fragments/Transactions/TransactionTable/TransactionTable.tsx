@@ -25,7 +25,7 @@ function Expense() {
 export function TransactionTableHeader() {
   return (
     <Header>
-      <div>ID</div>
+      <div>날짜</div>
       <div>계좌</div>
       <div>유형</div>
       <div>금액</div>
@@ -33,8 +33,6 @@ export function TransactionTableHeader() {
       <div>내역</div>
       <div>거래처</div>
       <div>거래 후 잔액</div>
-      <div>담당자</div>
-      <div>날짜</div>
     </Header>
   );
 }
@@ -50,7 +48,7 @@ export function TransactionTableRow({ transaction }: Readonly<Props>) {
 
   return (
     <Container>
-      <div>{transaction.id}</div>
+      <div>{formatDate(transaction.date)}</div>
       <div>
         <Chip
           label={transaction.account.label}
@@ -64,8 +62,6 @@ export function TransactionTableRow({ transaction }: Readonly<Props>) {
       <div>{transaction.description}</div>
       <div>{transaction.counter_party}</div>
       <div>{transaction.balance_after.toLocaleString()}원</div>
-      <div>{transaction.person_in_charge}</div>
-      <div>{formatDate(transaction.date)}</div>
     </Container>
   );
 }
@@ -80,14 +76,10 @@ const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 64px;
+    width: 72px;
     height: 32px;
 
     border-right: ${({ theme }) => `1px solid ${theme.colors.borderLight}`};
-  }
-
-  > div:first-child {
-    width: 48px;
   }
 
   > div:nth-child(4) {
@@ -109,12 +101,6 @@ const Container = styled.div`
   > div:nth-child(8) {
     width: 108px;
 
-    @media (max-width: 1280px) {
-      display: none;
-    }
-  }
-
-  > div:nth-child(9) {
     @media (max-width: 1280px) {
       display: none;
     }
