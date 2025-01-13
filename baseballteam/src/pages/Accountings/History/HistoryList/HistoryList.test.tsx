@@ -1,10 +1,10 @@
+import { fireEvent, screen, waitFor } from "@testing-library/react";
 import * as Router from "react-router-dom";
 
 import { HistoryList } from "./HistoryList";
+import { sampleTransactions } from "@data/accountings";
 import * as TransactionsAPI from "@services/accountings/transactions";
 import { renderWithProviders } from "@utils/test-utils";
-import { sampleTransactions } from "@data/accountings";
-import { fireEvent, screen, waitFor } from "@testing-library/dom";
 
 jest.mock("@fragments/Transactions", () => ({
   TransactionTableHeader: () => <div>TransactionTableHeader</div>,
