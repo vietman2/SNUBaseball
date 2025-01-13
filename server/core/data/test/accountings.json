@@ -1,0 +1,58 @@
+[
+  {
+    "model": "bankaccount.account",
+    "pk": 1,
+    "fields": {
+      "label": "계좌 1",
+      "color": "#1E14E5",
+      "background_color": "#BFD4DB",
+      "name": "계좌 1",
+      "cached_balance": 0,
+      "type": 2
+    }
+  },
+  {
+    "model": "bankaccount.account",
+    "pk": 2,
+    "fields": {
+      "label": "계좌 2",
+      "color": "#750E12",
+      "background_color": "#E4BED2",
+      "name": "계좌 2",
+      "cached_balance": 600000,
+      "type": 9
+    }
+  },
+  {
+    "model": "transaction.transaction",
+    "pk": 1,
+    "fields": {
+      "account": 2,
+      "amount": 1000000,
+      "description": "거래 1",
+      "type": 1,
+      "category": 9,
+      "method": 9,
+      "counter_party": "-",
+      "balance_after": 1230000,
+      "notes": ".",
+      "date": "2025-01-11"
+    }
+  },
+  {
+    "model": "transaction.transaction",
+    "pk": 2,
+    "fields": {
+      "account": 2,
+      "amount": 450000,
+      "description": "거래 2",
+      "type": 2,
+      "category": 4,
+      "method": 2,
+      "counter_party": "-",
+      "balance_after": 700000,
+      "notes": "150,000원 * 3자루",
+      "date": "2025-01-13"
+    }
+  }
+]
