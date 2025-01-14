@@ -20,15 +20,15 @@ describe("<HistoryList />", () => {
       state: null,
       key: "abc123",
     });
-    jest
-      .spyOn(TransactionsAPI, "getTransactions")
-      .mockResolvedValue(sampleTransactions);
+    jest.spyOn(TransactionsAPI, "getTransactions").mockResolvedValue({
+      results: sampleTransactions,
+      num_pages: 3,
+      current_page: 1,
+    });
   });
 
   it("handles api error", async () => {
-    jest
-      .spyOn(TransactionsAPI, "getTransactions")
-      .mockResolvedValue(null);
+    jest.spyOn(TransactionsAPI, "getTransactions").mockResolvedValue(null);
     renderWithProviders(<HistoryList />);
 
     await waitFor(() => {
@@ -48,6 +48,7 @@ describe("<HistoryList />", () => {
   });
 
   it("handles filters and navigate", async () => {
+    jest.spyOn(Router, "useNavigate").mockReturnValue(jest.fn());
     renderWithProviders(<HistoryList />);
 
     await waitFor(() => {
@@ -60,8 +61,13 @@ describe("<HistoryList />", () => {
       });
       fireEvent.click(screen.getByText("취소"));
       fireEvent.click(screen.getByText("적용"));
-      fireEvent.click(screen.getByTestId("transaction-1"));
       fireEvent.click(screen.getByText("내역 추가"));
+      fireEvent.click(screen.getByTestId("page-2"));
+    });
+
+    await waitFor(() => {
+      expect(screen.getByTestId("transaction-1")).toBeInTheDocument();
+      fireEvent.click(screen.getByTestId("transaction-1"));
     });
   });
 });

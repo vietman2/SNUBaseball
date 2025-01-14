@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import { ErrorComponent } from "@components/Fallbacks";
+import { ErrorComponent, Loading } from "@components/Fallbacks";
 import { AppIcon } from "@components/Icons";
 import { Searchbar } from "@components/Searchbar";
 import { useTheme } from "@contexts/theme";
@@ -15,12 +15,15 @@ import { getTransactions } from "@services/accountings";
 
 export function HistoryList() {
   const [transactions, setTransactions] = useState<TransactionType[]>([]);
+  const [selectedPage, setSelectedPage] = useState<number>(1);
+  const [numPages, setNumPages] = useState<number>(1);
   const [query, setQuery] = useState<string>("");
 
   const [filterOpen, setFilterOpen] = useState<boolean>(false);
   const [selectedMonth, setSelectedMonth] = useState<string>("");
   const [selectedAccount, setSelectedAccount] = useState<string>("");
 
+  const [loading, setLoading] = useState<boolean>(false);
   const [refreshCount, setRefreshCount] = useState<number>(0);
 
   const location = useLocation();
@@ -52,19 +55,29 @@ export function HistoryList() {
     handleRefresh();
   };
 
+  const handlePageSelect = (page: number) => {
+    setSelectedPage(page);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
-      const response = await getTransactions();
+      setLoading(true);
+
+      const response = await getTransactions(selectedPage);
 
       if (response) {
-        setTransactions(response);
+        setTransactions(response.results);
+        setNumPages(response.num_pages);
+        setSelectedPage(response.current_page);
       }
+
+      setLoading(false);
     };
 
     if (location.pathname === "/accountings/history") {
       fetchData();
     }
-  }, [refreshCount, location.pathname]);
+  }, [refreshCount, selectedPage, location.pathname]);
 
   return (
     <Container>
@@ -103,12 +116,8 @@ export function HistoryList() {
                 </select>
               </div>
               <div>
-                <Button onClick={closeFilter}>
-                  취소
-                </Button>
-                <Button onClick={applyFilters}>
-                  적용
-                </Button>
+                <Button onClick={closeFilter}>취소</Button>
+                <Button onClick={applyFilters}>적용</Button>
               </div>
             </FilterModal>
           </FilterWrapper>
@@ -116,19 +125,41 @@ export function HistoryList() {
         </Horizontal>
       </Header>
       <TransactionTableHeader />
-      {transactions.length === 0 ? (
-        <ErrorComponent label="새로고침" onRefresh={handleRefresh} />
+      {loading ? (
+        <Loading />
       ) : (
-        transactions.map((transaction) => (
-          <button
-            key={transaction.id}
-            onClick={() => handleDetail(transaction.id)}
-            data-testid={`transaction-${transaction.id}`}
-          >
-            <TransactionTableRow transaction={transaction} />
-          </button>
-        ))
+        <>
+          {transactions.length === 0 ? (
+            <ErrorComponent label="새로고침" onRefresh={handleRefresh} />
+          ) : (
+            transactions.map((transaction) => (
+              <button
+                key={transaction.id}
+                onClick={() => handleDetail(transaction.id)}
+                data-testid={`transaction-${transaction.id}`}
+              >
+                <TransactionTableRow transaction={transaction} />
+              </button>
+            ))
+          )}
+        </>
       )}
+      <Pages>
+        {Array.from({ length: numPages }, (_, i) => i + 1).map((page) => (
+          <button
+            key={page}
+            onClick={() => handlePageSelect(page)}
+            style={{
+              color:
+                selectedPage === page ? colors.primary : colors.foreground900,
+              fontWeight: selectedPage === page ? 700 : 400,
+            }}
+            data-testid={`page-${page}`}
+          >
+            {page}
+          </button>
+        ))}
+      </Pages>
     </Container>
   );
 }
@@ -246,4 +277,11 @@ const FilterModal = styled.div<{ $isOpen: boolean }>`
       background-color: ${({ theme }) => theme.colors.background300};
     }
   }
+`;
+
+const Pages = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 16px 0;
+  gap: 16px;
 `;
