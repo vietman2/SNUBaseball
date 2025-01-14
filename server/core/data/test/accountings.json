@@ -8,7 +8,9 @@
       "background_color": "#BFD4DB",
       "name": "계좌 1",
       "cached_balance": 0,
-      "type": 2
+      "type": 2,
+      "description": "계좌 1 설명",
+      "last_updated": "2025-01-01"
     }
   },
   {
@@ -20,7 +22,9 @@
       "background_color": "#E4BED2",
       "name": "계좌 2",
       "cached_balance": 600000,
-      "type": 9
+      "type": 9,
+      "description": "계좌 2 설명",
+      "last_updated": "2025-01-01"
     }
   },
   {
