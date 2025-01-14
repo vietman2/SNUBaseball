@@ -2,6 +2,7 @@ from django.db import transaction as db_transaction
 from drf_spectacular.utils import extend_schema
 from rest_framework import status
 from rest_framework.exceptions import ValidationError
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
@@ -10,18 +11,35 @@ from .models import Transaction
 from .serializers import TransactionSerializer
 from .utils import update_balance
 
+class TransactionPageNumberPagination(PageNumberPagination):
+    page_size = 200
+    page_size_query_param = 'page_size'
+    max_page_size = 1000
+    
+    def get_paginated_response(self, data):
+        return Response({
+            'count': self.page.paginator.count,
+            'next': self.get_next_link(),
+            'previous': self.get_previous_link(),
+            'results': data,
+            'num_pages': self.page.paginator.num_pages,
+            'current_page': self.page.number,
+        })
+
 class TransactionView(ModelViewSet):
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
+    pagination_class = TransactionPageNumberPagination
     permission_classes = [IsAdmin]
     http_method_names = ['get', 'post', 'put', 'delete']
 
     @extend_schema(summary="거래 조회", tags=["거래 관리"])
     def list(self, request, *args, **kwargs):
-        transactions = Transaction.objects.all()
-        serializer = TransactionSerializer(transactions, many=True)
+        queryset = self.filter_queryset(self.get_queryset())
+        page = self.paginate_queryset(queryset)
+        serializer = TransactionSerializer(page, many=True)
 
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return self.get_paginated_response(serializer.data)
 
     @extend_schema(summary="거래 상세 조회", tags=["거래 관리"])
     def retrieve(self, request, *args, **kwargs):
