@@ -9,6 +9,8 @@ class Account(Chip):
     type            = models.IntegerField(
         choices=AccountType.choices, default=AccountType.OTHER
     )
+    description     = models.TextField()
+    last_updated    = models.DateField(auto_now=True)
 
     objects         = models.Manager()
 
