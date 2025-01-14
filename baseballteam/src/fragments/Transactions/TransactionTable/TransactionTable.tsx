@@ -70,7 +70,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
 
-  border-top: ${({ theme }) => `1px solid ${theme.colors.borderLight}`};
+  border-bottom: ${({ theme }) => `1px solid ${theme.colors.borderLight}`};
 
   > div {
     display: flex;
@@ -111,8 +111,7 @@ const Header = styled(Container)`
   display: flex;
   flex-direction: row;
 
-  border-top: none;
-  border-bottom: ${({ theme }) => `1px solid ${theme.colors.borderLight}`};
+  border-bottom: ${({ theme }) => `2px solid ${theme.colors.borderLight}`};
 `;
 
 const Type = styled.div`
