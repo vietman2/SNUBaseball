@@ -1,8 +1,12 @@
 import axios from "axios";
 
-export async function getTransactions() {
+export async function getTransactions(page: number) {
   try {
-    const response = await axios.get("/v1/transactions/");
+    const response = await axios.get("/v1/transactions/", {
+      params: {
+        page,
+      },
+    });
 
     return response.data;
   } catch {

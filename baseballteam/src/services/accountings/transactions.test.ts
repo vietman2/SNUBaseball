@@ -11,14 +11,14 @@ import {
 describe("getTransactions", () => {
   it("should return transactions", async () => {
     jest.spyOn(axios, "get").mockResolvedValue({ data: "transactions" });
-    const transactions = await getTransactions();
+    const transactions = await getTransactions(1);
 
     expect(transactions).toBe("transactions");
   });
 
   it("should return null when an error occurs", async () => {
     jest.spyOn(axios, "get").mockRejectedValue(new Error());
-    const transactions = await getTransactions();
+    const transactions = await getTransactions(1);
 
     expect(transactions).toBeNull();
   });
