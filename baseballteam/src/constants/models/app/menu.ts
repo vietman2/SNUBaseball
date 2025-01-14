@@ -1,4 +1,4 @@
 export type MenuOptionType = {
   label: string;
-  onClick: () => void;
+  onClick: () => void | Promise<void>;
 };

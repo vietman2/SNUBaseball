@@ -51,7 +51,7 @@ export function HistoryDetail() {
     },
     {
       label: "삭제하기",
-      onClick: () => handleDelete(),
+      onClick: handleDelete,
     },
   ];
 
