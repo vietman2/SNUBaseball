@@ -8,7 +8,8 @@ import { renderWithProviders } from "@utils/test-utils";
 
 describe("<HistoryDetail />", () => {
   beforeEach(() => {
-    jest.spyOn(console, "error").mockImplementation(() => {});
+    jest.spyOn(window, "confirm").mockReturnValue(true);
+    jest.spyOn(window, "alert").mockImplementation(() => {});
     jest.spyOn(Router, "useParams").mockReturnValue({ id: "1" });
     jest
       .spyOn(AccountingsAPI, "getTransaction")
@@ -25,11 +26,13 @@ describe("<HistoryDetail />", () => {
   });
 
   it("handles edit navigation", async () => {
+    jest.spyOn(window, "confirm").mockReturnValue(false);
     renderWithProviders(<HistoryDetail />);
 
     await waitFor(() => {
       fireEvent.click(screen.getByTestId("toggle"));
       fireEvent.click(screen.getByText("수정하기"));
+      fireEvent.click(screen.getByText("삭제하기"));
     });
   });
 

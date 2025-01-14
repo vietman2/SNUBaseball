@@ -33,12 +33,14 @@ export function HistoryDetail() {
   };
 
   const handleDelete = async () => {
-    const response = await deleteTransaction(id);
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      const response = await deleteTransaction(id);
 
-    if (response) {
-      navigate(-1);
-    } else {
-      console.error("삭제에 실패했습니다.");
+      if (response) {
+        navigate(-1);
+      } else {
+        window.alert("삭제에 실패했습니다.");
+      }
     }
   };
 
