@@ -1,3 +1,4 @@
+import { getMinutes } from "./minutes";
 import {
   getTeams,
   getTeamDetail,
@@ -6,4 +7,11 @@ import {
   createTeamMember,
 } from "./teams";
 
-export { getTeams, getTeamDetail, createTeam, getMemberOptions, createTeamMember };
+export {
+  getMinutes,
+  getTeams,
+  getTeamDetail,
+  createTeam,
+  getMemberOptions,
+  createTeamMember,
+};
