@@ -4,5 +4,12 @@ import {
   sampleTeamInfo,
   sampleTeamMembers,
 } from "./info";
+import { sampleMinutes } from "./minutes";
 
-export { samplePlayerInfo, sampleStaffInfo, sampleTeamInfo, sampleTeamMembers };
+export {
+  sampleMinutes,
+  samplePlayerInfo,
+  sampleStaffInfo,
+  sampleTeamInfo,
+  sampleTeamMembers,
+};
