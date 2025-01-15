@@ -1,7 +1,10 @@
 import { Route, Routes, Navigate, Outlet } from "react-router-dom";
 
 import { MemberDetail, MemberEdit, MembersLayout } from "./Members";
+import { MinutesLayout } from "./Minutes";
 import { TeamDetail, TeamList } from "./Team";
+
+import { ComingSoon } from "@components/Fallbacks";
 
 export function TeamContainer() {
   return (
@@ -14,6 +17,11 @@ export function TeamContainer() {
         </Route>
         <Route path="info/:year" element={<TeamDetail />} />
         <Route path="info" element={<TeamList />} />
+        <Route path="minutes" element={<MinutesLayout />}>
+          <Route path="new" element={<ComingSoon />} />
+          <Route path=":minutesId/edit" element={<ComingSoon />} />
+          <Route path=":minutesId" element={<ComingSoon />} />
+        </Route>
       </Route>
     </Routes>
   );
