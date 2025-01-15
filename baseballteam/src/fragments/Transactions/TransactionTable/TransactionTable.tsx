@@ -43,7 +43,9 @@ interface Props {
 
 export function TransactionTableRow({ transaction }: Readonly<Props>) {
   const formatDate = (date: string) => {
-    return `${date.split("-")[1]}/${date.split("-")[2]}`;
+    const [year, month, day] = date.split("-");
+
+    return `${year.slice(2)}/${month}/${day}`;
   };
 
   return (
@@ -59,7 +61,9 @@ export function TransactionTableRow({ transaction }: Readonly<Props>) {
       <div>{transaction.type === "수입" ? <Income /> : <Expense />}</div>
       <div>{transaction.amount.toLocaleString()}원</div>
       <div>{transaction.category}</div>
-      <div>{transaction.description}</div>
+      <div>
+        <span>{transaction.description}</span>
+      </div>
       <div>{transaction.counter_party}</div>
       <div>{transaction.balance_after.toLocaleString()}원</div>
     </Container>
@@ -87,7 +91,13 @@ const Container = styled.div`
   }
 
   > div:nth-child(6) {
-    width: 160px;
+    width: 200px;
+    padding: 0 8px;
+    > span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 
   > div:nth-child(7) {
