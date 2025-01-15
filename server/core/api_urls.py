@@ -3,6 +3,9 @@ from dj_rest_auth.views import LoginView, LogoutView
 from dj_rest_auth.jwt_auth import get_refresh_view
 from rest_framework.routers import DefaultRouter
 
+from accountings.account.views import AccountView
+from accountings.transaction.views import TransactionView
+
 from board.discussion.views import DiscussionView, DiscussionCommentView
 from board.notice.views import NoticeView, NoticeCommentView
 
@@ -19,6 +22,9 @@ from training.guideline.views import GuidelineView, GuidelineCommentView
 #from schedule.weekly.views import WeeklyScheduleViewSet
 
 router = DefaultRouter()
+
+router.register('accounts', AccountView, basename='accounts')
+router.register('transactions', TransactionView, basename='transactions')
 
 router.register(
     'discussions/(?P<discussion_id>[0-9]+)/comments',

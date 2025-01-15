@@ -31,10 +31,11 @@ const Container = styled.div`
   background-color: ${({ theme }) => theme.colors.background300};
 
   input {
+    flex: 1;
     padding: 8px;
     border: none;
     outline: none;
-    font-size: 16px;
+    font-size: 1rem;
 
     background-color: transparent;
   }

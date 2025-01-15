@@ -47,6 +47,9 @@ INSTALLED_APPS = [
     'core',
 
     ## Custom Apps
+    'accountings.account.apps.AccountConfig',
+    'accountings.transaction.apps.TransactionConfig',
+
     'board.discussion.apps.DiscussionConfig',
     'board.notice.apps.NoticeConfig',
 
