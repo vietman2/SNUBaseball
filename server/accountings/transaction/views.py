@@ -38,7 +38,7 @@ class TransactionView(ModelViewSet):
     def list(self, request, *args, **kwargs):
         month = request.query_params.get('month', None)
         account = request.query_params.get('account', None)
-        type = request.query_params.get('type', None)
+        type_query = request.query_params.get('type', None)
         query = request.query_params.get('query', None)
 
         q = Q()
@@ -47,8 +47,8 @@ class TransactionView(ModelViewSet):
             q &= Q(date__year=month.split('-')[0], date__month=month.split('-')[1])
         if account:
             q &= Q(account__id=account)
-        if type:
-            q &= Q(type=get_type(type))
+        if type_query:
+            q &= Q(type=get_type(type_query))
         if query:
             q &= Q(description__icontains=query) | Q(notes__icontains=query)
 

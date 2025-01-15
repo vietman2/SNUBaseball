@@ -31,11 +31,11 @@ class TransactionsAPITestCase(APITestCase):
         self.client.force_authenticate(self.admin)
         ## no query
         response = self.client.get(self.url)
-
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         ## with queries
         response = self.client.get(f"{self.url}?month=2025-01&account=1&type=수입&query=test")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_retrieve(self):
         self.client.force_authenticate(self.admin)
