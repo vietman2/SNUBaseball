@@ -1,10 +1,20 @@
 import axios from "axios";
 
-export async function getTransactions(page: number) {
+export async function getTransactions(
+  page: number,
+  accountId?: string,
+  month?: string,
+  type?: string,
+  query?: string
+) {
   try {
     const response = await axios.get("/v1/transactions/", {
       params: {
         page,
+        account: accountId,
+        month,
+        type,
+        query,
       },
     });
 
