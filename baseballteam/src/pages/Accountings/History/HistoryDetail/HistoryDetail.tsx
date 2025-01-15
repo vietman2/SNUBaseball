@@ -249,7 +249,7 @@ const Contents = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
-  padding: 16px 12px;
+  padding: 4px 12px;
 `;
 
 const Row = styled.div`
@@ -262,6 +262,8 @@ const Row = styled.div`
   font-size: 1.125rem;
 
   > span:first-child {
+    min-width: 120px;
+    align-self: flex-start;
     color: ${({ theme }) => theme.colors.foreground300};
     font-weight: 600;
   }
@@ -269,5 +271,8 @@ const Row = styled.div`
   > span:last-child {
     color: ${({ theme }) => theme.colors.foreground900};
     font-weight: 500;
+    text-align: right;
+    line-height: 1.75;
+    white-space: pre-wrap;
   }
 `;
