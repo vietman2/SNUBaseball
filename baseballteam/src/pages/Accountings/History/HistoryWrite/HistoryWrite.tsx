@@ -14,7 +14,7 @@ import {
 export function HistoryWrite() {
   const [accountOptions, setAccountOptions] = useState<AccountType[]>([]);
 
-  const [selectedAccountId, setSelectedAccountId] = useState<string>("");
+  const [selectedAccountId, setSelectedAccountId] = useState<string>("1");
   const [amount, setAmount] = useState<number>(0);
   const [date, setDate] = useState<string>(
     new Date().toISOString().split("T")[0]
@@ -170,10 +170,12 @@ export function HistoryWrite() {
               onChange={(e) => setCategory(e.target.value)}
               data-testid="category-select"
             >
+              <option value="수입">수입</option>
               <option value="식비">식비</option>
               <option value="교통비">교통비</option>
               <option value="숙박비">숙박비</option>
-              <option value="훈련용품비">훈련용품비</option>
+              <option value="야구용품비">야구용품비</option>
+              <option value="선수등록비">선수등록비</option>
               <option value="기타">기타</option>
             </select>
           </div>
@@ -186,6 +188,7 @@ export function HistoryWrite() {
               onChange={(e) => setPaymentMethod(e.target.value)}
               data-testid="method-select"
             >
+              <option value="수입">수입</option>
               <option value="카드">카드</option>
               <option value="계좌이체">계좌이체</option>
               <option value="기타">기타</option>
@@ -221,6 +224,7 @@ export function HistoryWrite() {
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
+              {...(editMode && { disabled: true })}
               data-testid="date-input"
             />
           </div>
