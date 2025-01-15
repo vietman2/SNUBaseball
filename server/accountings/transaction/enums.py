@@ -9,7 +9,8 @@ class TransactionCategory(models.IntegerChoices):
     FOOD           = 1, "식비"
     TRANSPORTATION = 2, "교통비"
     ACCOMMODATION  = 3, "숙박비"
-    SUPPLIES       = 4, "훈련용품비"
+    SUPPLIES       = 4, "야구용품비"
+    REGISTRATION   = 5, "선수등록비"
     OTHER          = 9, "기타"
 
 class TransactionMethod(models.IntegerChoices):

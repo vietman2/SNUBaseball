@@ -8,8 +8,10 @@ def get_category(input):
         return TransactionCategory.TRANSPORTATION
     elif input == "숙박비":
         return TransactionCategory.ACCOMMODATION
-    elif input == "훈련용품비":
+    elif input == "야구용품비":
         return TransactionCategory.SUPPLIES
+    elif input == "선수등록비":
+        return TransactionCategory.REGISTRATION
     else:
         return TransactionCategory.OTHER
 

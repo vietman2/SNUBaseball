@@ -45,6 +45,12 @@ class TransactionSerializer(ModelSerializer):
         account = Account.objects.get(id=account_id)
 
         with db_transaction.atomic():
+            day_after = validated_data.get('date') + timedelta(days=1)
+            transactions = Transaction.objects.filter(
+                account=account, date__lt=day_after
+            ).order_by('-date', '-id')
+            transaction_before = transactions[0] if len(transactions) > 1 else None
+
             transaction = Transaction.objects.create(
                 account=account,
                 balance_after=0,
@@ -53,13 +59,6 @@ class TransactionSerializer(ModelSerializer):
 
             difference = transaction.amount if transaction.type == "수입" else -transaction.amount
             update_balance(transaction, difference)
-
-            day_after = transaction.date + timedelta(days=1)
-            ## 첫번째는 본 거래이기 때문에, 두번째가 이전 거래
-            transactions = Transaction.objects.filter(
-                account=account, date__lt=day_after
-            ).order_by("-date").order_by("-id")
-            transaction_before = transactions[1] if len(transactions) > 1 else None
 
             if transaction_before:
                 transaction.balance_after = transaction_before.balance_after + difference

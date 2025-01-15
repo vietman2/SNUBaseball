@@ -1,4 +1,5 @@
 from django.db import transaction as db_transaction
+from django.db.models import Q
 from drf_spectacular.utils import extend_schema
 from rest_framework import status
 from rest_framework.exceptions import ValidationError
@@ -9,7 +10,7 @@ from rest_framework.viewsets import ModelViewSet
 from core.permissions import IsAdmin
 from .models import Transaction
 from .serializers import TransactionSerializer
-from .utils import update_balance
+from .utils import update_balance, get_type
 
 class TransactionPageNumberPagination(PageNumberPagination):
     page_size = 200
@@ -35,7 +36,23 @@ class TransactionView(ModelViewSet):
 
     @extend_schema(summary="거래 조회", tags=["거래 관리"])
     def list(self, request, *args, **kwargs):
-        queryset = self.filter_queryset(self.get_queryset())
+        month = request.query_params.get('month', None)
+        account = request.query_params.get('account', None)
+        type = request.query_params.get('type', None)
+        query = request.query_params.get('query', None)
+
+        q = Q()
+        if month:
+            ## month is given as 'YYYY-MM'
+            q &= Q(date__year=month.split('-')[0], date__month=month.split('-')[1])
+        if account:
+            q &= Q(account__id=account)
+        if type:
+            q &= Q(type=get_type(type))
+        if query:
+            q &= Q(description__icontains=query) | Q(notes__icontains=query)
+
+        queryset = Transaction.objects.filter(q).order_by('-date', '-id')
         page = self.paginate_queryset(queryset)
         serializer = TransactionSerializer(page, many=True)
 

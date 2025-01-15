@@ -29,9 +29,13 @@ class TransactionsAPITestCase(APITestCase):
 
     def test_list(self):
         self.client.force_authenticate(self.admin)
+        ## no query
         response = self.client.get(self.url)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        ## with queries
+        response = self.client.get(f"{self.url}?month=2025-01&account=1&type=수입&query=test")
 
     def test_retrieve(self):
         self.client.force_authenticate(self.admin)
@@ -89,7 +93,8 @@ class TransactionsUtilsTestCase(TestCase):
         self.assertEqual(get_category("식비"), TransactionCategory.FOOD)
         self.assertEqual(get_category("교통비"), TransactionCategory.TRANSPORTATION)
         self.assertEqual(get_category("숙박비"), TransactionCategory.ACCOMMODATION)
-        self.assertEqual(get_category("훈련용품비"), TransactionCategory.SUPPLIES)
+        self.assertEqual(get_category("야구용품비"), TransactionCategory.SUPPLIES)
+        self.assertEqual(get_category("선수등록비"), TransactionCategory.REGISTRATION)
         self.assertEqual(get_category("기타"), TransactionCategory.OTHER)
 
     def test_get_method(self):
