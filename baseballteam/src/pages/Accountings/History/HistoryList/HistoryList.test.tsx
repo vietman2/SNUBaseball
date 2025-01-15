@@ -59,6 +59,9 @@ describe("<HistoryList />", () => {
       fireEvent.change(screen.getByTestId("account-filter"), {
         target: { value: "기타" },
       });
+      fireEvent.change(screen.getByTestId("type-filter"), {
+        target: { value: "수입" },
+      });
       fireEvent.click(screen.getByText("취소"));
       fireEvent.click(screen.getByText("적용"));
       fireEvent.click(screen.getByText("내역 추가"));

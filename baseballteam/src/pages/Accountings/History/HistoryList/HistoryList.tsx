@@ -16,6 +16,7 @@ import { getTransactions } from "@services/accountings";
 export function HistoryList() {
   const [transactions, setTransactions] = useState<TransactionType[]>([]);
   const [selectedPage, setSelectedPage] = useState<number>(1);
+  const [selectedType, setSelectedType] = useState<string>("");
   const [numPages, setNumPages] = useState<number>(1);
   const [query, setQuery] = useState<string>("");
 
@@ -63,7 +64,13 @@ export function HistoryList() {
     const fetchData = async () => {
       setLoading(true);
 
-      const response = await getTransactions(selectedPage);
+      const response = await getTransactions(
+        selectedPage,
+        selectedAccount,
+        selectedMonth,
+        selectedType,
+        query
+      );
 
       if (response) {
         setTransactions(response.results);
@@ -77,7 +84,7 @@ export function HistoryList() {
     if (location.pathname === "/accountings/history") {
       fetchData();
     }
-  }, [refreshCount, selectedPage, location.pathname]);
+  }, [refreshCount, selectedPage, location.pathname, query]);
 
   return (
     <Container>
@@ -108,11 +115,23 @@ export function HistoryList() {
                   data-testid="account-filter"
                 >
                   <option value="">전체</option>
-                  <option value="부비">부비</option>
-                  <option value="발전기금">발전기금</option>
-                  <option value="KUSF 지원금">KUSF 지원금</option>
-                  <option value="운동부 지원금">운동부 지원금</option>
-                  <option value="기타">기타</option>
+                  <option value="2">부비</option>
+                  <option value="1">발전기금</option>
+                  <option value="3">KUSF 지원금</option>
+                  <option value="4">운동부 지원금</option>
+                  <option value="5">기타</option>
+                </select>
+              </div>
+              <div>
+                <span>유형 필터</span>
+                <select
+                  value={selectedType}
+                  onChange={(e) => setSelectedType(e.target.value)}
+                  data-testid="type-filter"
+                >
+                  <option value="">전체</option>
+                  <option value="수입">수입</option>
+                  <option value="지출">지출</option>
                 </select>
               </div>
               <div>
