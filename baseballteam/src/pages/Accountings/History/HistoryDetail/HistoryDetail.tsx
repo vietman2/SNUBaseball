@@ -75,7 +75,16 @@ export function HistoryDetail() {
     <Container>
       <Header>
         <div>
-          <span>상세 내역</span>
+          <div>
+            <BackButton onClick={goBack}>
+              <AppIcon
+                icon="chevron-left"
+                size={24}
+                color={colors.borderDark}
+              />
+            </BackButton>
+            <span>상세 내역</span>
+          </div>
           <Menu
             options={actions}
             isOpen={isMenuOpen}
@@ -169,6 +178,14 @@ const Container = styled.div`
   }
 `;
 
+const BackButton = styled.button`
+  padding-top: 4px;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+`;
+
 const Header = styled.div`
   display: flex;
   flex-direction: column;
@@ -181,10 +198,16 @@ const Header = styled.div`
     align-items: center;
     justify-content: space-between;
 
-    > span {
-      font-size: 1.625rem;
-      font-weight: 700;
-      color: ${({ theme }) => theme.colors.foreground900};
+    > div {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      > span {
+        font-size: 1.625rem;
+        font-weight: 700;
+        color: ${({ theme }) => theme.colors.foreground900};
+      }
     }
   }
 `;

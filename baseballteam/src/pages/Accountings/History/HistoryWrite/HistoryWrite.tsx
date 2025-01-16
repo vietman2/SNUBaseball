@@ -3,6 +3,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import { ErrorComponent } from "@components/Fallbacks";
+import { AppIcon } from "@components/Icons";
 import { AccountType } from "@models/accountings";
 import {
   createTransaction,
@@ -120,7 +121,12 @@ export function HistoryWrite() {
 
   return (
     <Container>
-      <span>{editMode ? "내역 수정" : "내역 추가"}</span>
+      <div>
+        <BackButton onClick={goBack}>
+          <AppIcon icon="chevron-left" size={24} color="gray" />
+        </BackButton>
+        <span>{editMode ? "내역 수정" : "내역 추가"}</span>
+      </div>
       <Contents>
         <InputWrapper>
           <span>계좌</span>
@@ -252,12 +258,28 @@ const Container = styled.div`
   padding: 16px 24px;
   gap: 16px;
 
-  > span {
+  > div:first-child {
     display: flex;
-    padding: 8px 0;
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: ${({ theme }) => theme.colors.foreground900};
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+
+    > span {
+      display: flex;
+      padding: 8px 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: ${({ theme }) => theme.colors.foreground900};
+    }
+  }
+`;
+
+const BackButton = styled.button`
+  display: none;
+
+  @media (max-width: 768px) {
+    display: flex;
+    justify-content: flex-start;
   }
 `;
 
