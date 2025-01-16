@@ -108,6 +108,15 @@ const Filters = styled.div`
   align-items: center;
   padding: 0 16px;
   gap: 16px;
+
+  @media (max-width: 768px) {
+    justify-content: center;
+    padding: 8px;
+
+    > div:first-child {
+      width: 240px;
+    }
+  }
 `;
 
 const NewButton = styled.button`
@@ -123,14 +132,22 @@ const NewButton = styled.button`
 
   border-radius: 8px;
   background-color: ${({ theme }) => theme.colors.primary};
+
+  @media (max-width: 768px) {
+    gap: 4px;
+  }
 `;
 
 const List = styled.div`
   display: flex;
-  flex: 1;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: flex-start;
   padding: 16px;
   gap: 8px;
+
+  @media (max-width: 768px) {
+    justify-content: center;
+    gap: 16px;
+  }
 `;
