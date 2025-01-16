@@ -257,12 +257,14 @@ const FilterModal = styled.div<{ $isOpen: boolean }>`
   flex-direction: column;
   position: absolute;
   top: 120%;
+  right: 0;
   width: 240px;
   padding: 24px;
   gap: 16px;
 
   border-radius: 16px;
   background-color: ${({ theme }) => theme.colors.background500};
+  z-index: 100;
 
   > div {
     display: flex;

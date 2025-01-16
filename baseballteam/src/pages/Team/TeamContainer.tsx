@@ -1,6 +1,7 @@
 import { Route, Routes, Navigate, Outlet } from "react-router-dom";
 
 import { MemberDetail, MemberEdit, MembersLayout } from "./Members";
+import { MinutesDetail, MinutesLayout, MinutesWrite } from "./Minutes";
 import { TeamDetail, TeamList } from "./Team";
 
 export function TeamContainer() {
@@ -14,6 +15,11 @@ export function TeamContainer() {
         </Route>
         <Route path="info/:year" element={<TeamDetail />} />
         <Route path="info" element={<TeamList />} />
+        <Route path="minutes" element={<MinutesLayout />}>
+          <Route path="new" element={<MinutesWrite />} />
+          <Route path=":minutesId/edit" element={<MinutesWrite />} />
+          <Route path=":minutesId" element={<MinutesDetail />} />
+        </Route>
       </Route>
     </Routes>
   );

@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 import { Chip } from "@components/Chips";
 import { AppIcon } from "@components/Icons";
+import { useWindowSize } from "@hooks/useWindowSize";
 import { TransactionType } from "@models/accountings";
 
 function Income() {
@@ -42,8 +43,12 @@ interface Props {
 }
 
 export function TransactionTableRow({ transaction }: Readonly<Props>) {
+  const { width } = useWindowSize();
+
   const formatDate = (date: string) => {
     const [year, month, day] = date.split("-");
+
+    if (width < 1280) return `${month}/${day}`;
 
     return `${year.slice(2)}/${month}/${day}`;
   };
@@ -83,20 +88,43 @@ const Container = styled.div`
     width: 72px;
     height: 32px;
 
+    font-size: 1rem;
     border-right: ${({ theme }) => `1px solid ${theme.colors.borderLight}`};
+
+    @media (max-width: 1280px) {
+      font-size: 0.95rem;
+    }
+  }
+
+  > div:first-child {
+    @media (max-width: 1280px) {
+      width: 64px;
+    }
   }
 
   > div:nth-child(4) {
     width: 108px;
   }
 
+  > div:nth-child(5) {
+    @media (max-width: 1280px) {
+      display: none;
+    }
+  }
+
   > div:nth-child(6) {
     width: 200px;
     padding: 0 8px;
+
     > span {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+
+    @media (max-width: 1280px) {
+      min-width: 140px;
+      max-width: 140px;
     }
   }
 

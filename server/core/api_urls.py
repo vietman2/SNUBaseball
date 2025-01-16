@@ -10,6 +10,7 @@ from board.discussion.views import DiscussionView, DiscussionCommentView
 from board.notice.views import NoticeView, NoticeCommentView
 
 from management.equipment.views import EquipmentCategoryView
+from management.minutes.views import MinutesViewSet
 
 from person.major.views import MajorViewSet
 from person.member.views import MemberViewSet
@@ -40,6 +41,7 @@ router.register(
 router.register('notices', NoticeView, basename='notices')
 
 router.register('equipment', EquipmentCategoryView, basename='equipment_categories')
+router.register('minutes', MinutesViewSet, basename='minutes')
 
 router.register('majors', MajorViewSet, basename='majors')
 router.register('members', MemberViewSet, basename='members')

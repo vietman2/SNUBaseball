@@ -17,6 +17,7 @@ from board.notice.models import (
 )
 
 from management.equipment.models import Equipment, EquipmentCategory, EquipmentUpdateHistory
+from management.minutes.models import Minutes, MinutesAttachment
 
 from person.major.models import College, Department
 from person.member.models import Member
@@ -54,6 +55,8 @@ admin.site.register(NoticeContentView)
 admin.site.register(Equipment)
 admin.site.register(EquipmentCategory)
 admin.site.register(EquipmentUpdateHistory)
+admin.site.register(Minutes)
+admin.site.register(MinutesAttachment)
 
 admin.site.register(College)
 admin.site.register(Department)
