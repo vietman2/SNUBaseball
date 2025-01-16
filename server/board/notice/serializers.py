@@ -121,7 +121,7 @@ class NoticeDetailSerializer(ModelSerializer):
         serializer = NoticeCommentSerializer(comments, many=True)
 
         return serializer.data
-    
+
     def get_attachments(self, obj):
         attachments = obj.noticeattachment_set.all()
         serializer = NoticeAttachmentSerializer(attachments, many=True)
