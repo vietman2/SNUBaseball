@@ -1,10 +1,10 @@
+import { fireEvent, screen, waitFor } from "@testing-library/react";
 import * as Router from "react-router-dom";
 
 import { MinutesDetail } from "./MinutesDetail";
 import { sampleMinutes } from "@data/team";
 import * as MinutesAPI from "@services/team/minutes";
 import { renderWithProviders } from "@utils/test-utils";
-import { fireEvent, screen, waitFor } from "@testing-library/dom";
 
 describe("<MinutesDetail />", () => {
   beforeEach(() => {
