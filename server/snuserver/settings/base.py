@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'board.notice.apps.NoticeConfig',
 
     'management.equipment.apps.EquipmentConfig',
+    'management.minutes.apps.MinutesConfig',
 
     #'media.image.apps.ImageConfig',
 
