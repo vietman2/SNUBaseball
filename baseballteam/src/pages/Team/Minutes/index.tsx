@@ -1,6 +1,8 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
+import { MinutesDetail } from "./MinutesDetail/MinutesDetail";
 import { MinutesList } from "./MinutesList/MinutesList";
+import { MinutesWrite } from "./MinutesWrite/MinutesWrite";
 import { SimpleModal } from "@components/Modals";
 import { useWindowSize } from "@hooks/useWindowSize";
 
@@ -19,10 +21,7 @@ function MinutesLayout() {
     return (
       <>
         <MinutesList />
-        <SimpleModal
-          isOpen={isModalOpen}
-          onClose={closeModal}
-        >
+        <SimpleModal isOpen={isModalOpen} onClose={closeModal}>
           <Outlet />
         </SimpleModal>
       </>
@@ -36,4 +35,4 @@ function MinutesLayout() {
   return <MinutesList />;
 }
 
-export { MinutesLayout };
+export { MinutesDetail, MinutesLayout, MinutesWrite };

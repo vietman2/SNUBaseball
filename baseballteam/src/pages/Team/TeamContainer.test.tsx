@@ -7,7 +7,9 @@ jest.mock("./Members", () => ({
   MembersLayout: () => <div>MembersLayout</div>,
 }));
 jest.mock("./Minutes", () => ({
+  MinutesDetail: () => <div>MinutesDetail</div>,
   MinutesLayout: () => <div>MinutesLayout</div>,
+  MinutesWrite: () => <div>MinutesWrite</div>,
 }));
 jest.mock("./Team", () => ({
   TeamDetail: () => <div>TeamDetail</div>,
