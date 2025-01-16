@@ -63,9 +63,9 @@ export function MinutesList() {
         <ErrorComponent label="새로고침" onRefresh={handleRefresh} />
       ) : (
         <List>
-          {minutes.map((minutes, index) => (
+          {minutes.map((minutes) => (
             <button
-              key={index}
+              key={minutes.id}
               onClick={() => handleMinutesClick(minutes)}
               data-testid={`minutes-${minutes.id}`}
             >

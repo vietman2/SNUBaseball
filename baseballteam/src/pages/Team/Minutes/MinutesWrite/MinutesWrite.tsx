@@ -145,7 +145,7 @@ export function MinutesWrite() {
               </button>
               {attachments.map((file, index) => (
                 <Attachment
-                  key={index}
+                  key={file.name}
                   onClick={() => handleRemoveAttachment(index)}
                   data-testid="remove-attachment"
                 >
