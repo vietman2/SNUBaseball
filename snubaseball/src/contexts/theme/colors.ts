@@ -1,4 +1,4 @@
-import { ThemeColors } from "../styled";
+import { ThemeColors } from "./styled";
 
 export const colors: ThemeColors = {
   primary: "#0F0F70",
