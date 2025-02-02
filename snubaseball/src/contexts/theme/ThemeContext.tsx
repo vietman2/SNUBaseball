@@ -1,7 +1,7 @@
 import { createContext, useContext, useMemo } from "react";
 
 import { colors } from "./colors";
-import { ThemeColors } from "./styled";
+import { ThemeColors } from "../styled";
 
 interface ThemeContextProps {
   colors: ThemeColors;
