@@ -57,8 +57,8 @@ export function Home() {
         <ImageInnerContainer
           style={{ transform: `translateX(-${currentIndex * 100}vw)` }}
         >
-          {images.map((image, index) => (
-            <Image key={index} style={{ backgroundImage: `url(${image})` }} />
+          {images.map((image) => (
+            <Image key={image} style={{ backgroundImage: `url(${image})` }} />
           ))}
         </ImageInnerContainer>
         <LeftButton onClick={goToPrevious} data-testid="left">

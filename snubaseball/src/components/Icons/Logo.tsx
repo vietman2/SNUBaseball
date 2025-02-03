@@ -6,7 +6,7 @@ interface Props {
   size?: number;
 }
 
-export function Logo({ size = 40 }: Props) {
+export function Logo({ size = 40 }: Readonly<Props>) {
   return <Container size={size} src={LogoImage} alt="logo" />;
 }
 

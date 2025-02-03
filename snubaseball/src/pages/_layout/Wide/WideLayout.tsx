@@ -30,7 +30,7 @@ export function WideLayout() {
 
   return (
     <Container>
-      <div onMouseLeave={() => setMenuOpen(false)} data-testid="wide-layout">
+      <button onMouseLeave={() => setMenuOpen(false)} data-testid="wide-layout">
         <Header>
           <button onClick={handleHomeClick} data-testid="home-button">
             <Logo size={48} />
@@ -71,7 +71,7 @@ export function WideLayout() {
             </Tabs>
           ))}
         </Menu>
-      </div>
+      </button>
       <Contents>
         <Outlet />
       </Contents>
