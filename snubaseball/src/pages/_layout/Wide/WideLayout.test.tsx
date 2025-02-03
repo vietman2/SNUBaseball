@@ -1,8 +1,27 @@
 import { WideLayout } from "./WideLayout";
+import * as NavigationContext from "@contexts/navigation";
+import { fireEvent, screen } from "@testing-library/dom";
 import { renderWithProviders } from "@utils/test-utils";
 
 describe("<WideLayout />", () => {
-  it("should render", () => {
+  it("should render and handle navigation", () => {
+    const { tabs } = jest.requireActual("@contexts/navigation");
+
+    jest.spyOn(NavigationContext, "useNavigation").mockReturnValue({
+      currentTab: tabs[0],
+      tabs,
+      setCurrentTab: jest.fn(),
+      setCurrentSubTab: jest.fn(),
+    });
+
     renderWithProviders(<WideLayout />);
+
+    fireEvent.click(screen.getByTestId("home-button"));
+    fireEvent.click(screen.getByTestId("tab-아카이브"));
+    fireEvent.click(screen.getByTestId("tab-소개"));
+    fireEvent.click(screen.getByTestId("tab-연혁"));
+
+    fireEvent.mouseOver(screen.getByTestId("tabs"));
+    fireEvent.mouseOut(screen.getByTestId("wide-layout"));
   });
 });
