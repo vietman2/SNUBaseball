@@ -1,11 +1,12 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { createContext, useContext, useMemo, useState } from "react";
 
 import { TabType, SubTabType, tabs } from "./tabs";
 
 interface NavigationContextProps {
   tabs: TabType[];
   currentTab: TabType;
+  setCurrentTab: (tab: TabType) => void;
+  setCurrentSubTab: (subtab: SubTabType) => void;
   currentSubTab?: SubTabType | null;
 }
 
@@ -21,30 +22,14 @@ export const NavigationProvider = ({
   const [currentTab, setCurrentTab] = useState<TabType>(tabs[0]);
   const [currentSubTab, setCurrentSubTab] = useState<SubTabType | null>(null);
 
-  const location = useLocation();
-
-  useEffect(() => {
-    const path = location.pathname.split("/")[1];
-    const subpath = location.pathname.split("/")[2];
-
-    const tab = tabs.find((tab) => tab.path === `/${path}`);
-
-    if (tab) {
-      setCurrentTab(tab);
-
-      if (subpath) {
-        const subtab = tab.subtabs.find(
-          (subtab) => subtab.path === `/${path}/${subpath}`
-        );
-        if (subtab) {
-          setCurrentSubTab(subtab);
-        }
-      }
-    }
-  }, []);
-
   const value = useMemo(
-    () => ({ tabs, currentTab, currentSubTab }),
+    () => ({
+      tabs,
+      currentTab,
+      currentSubTab,
+      setCurrentTab,
+      setCurrentSubTab,
+    }),
     [currentTab, currentSubTab]
   );
 
