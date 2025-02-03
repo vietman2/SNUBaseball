@@ -61,7 +61,7 @@ export function WideLayout() {
                   ))}
                 </>
               ) : (
-                <div />
+                <>{tab.path !== "/" && <div />}</>
               )}
             </Tabs>
           ))}
@@ -90,7 +90,7 @@ const Header = styled.div`
   height: 80px;
   padding: 0 15%;
 
-  background-color: ${({ theme }) => theme.colors.background500};
+  background-color: ${({ theme }) => theme.colors.background300};
 
   > button:first-child {
     display: flex;
@@ -106,11 +106,17 @@ const Tabs = styled.div`
   gap: 36px;
 
   > button {
+    display: flex;
     width: 64px;
+    align-items: center;
+    justify-content: center;
   }
 
   > div {
+    display: flex;
     width: 64px;
+    align-items: center;
+    justify-content: center;
   }
 `;
 
@@ -123,7 +129,7 @@ const Menu = styled.div<{ $isOpen: boolean }>`
   gap: 36px;
 
   background-color: ${({ theme }) => theme.colors.background300};
-  transition: max-height 0.3s ease-in-out;
+  transition: max-height 0.5s ease-in-out;
   overflow: hidden;
 
   > div {

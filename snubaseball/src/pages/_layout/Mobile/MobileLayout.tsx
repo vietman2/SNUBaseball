@@ -99,7 +99,7 @@ const Header = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 80px;
+  height: 64px;
   padding: 0 16px;
 
   position: sticky;
@@ -128,7 +128,7 @@ const SidebarContainer = styled.div<{ $isOpen: boolean }>`
   justify-content: flex-end;
   transform: ${({ $isOpen }) =>
     $isOpen ? "translateX(0)" : "translateX(100%)"};
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.5s ease-in-out;
 `;
 
 const SidebarBackdrop = styled.button`
@@ -148,7 +148,6 @@ const Sidebar = styled.div`
   right: 0;
   width: 240px;
   height: 100%;
-  border-left: 1px solid ${({ theme }) => theme.colors.lowEmphasis};
   background-color: ${({ theme }) => theme.colors.background100};
   z-index: 1000;
   transition: transform 0.3s ease-in-out;
@@ -184,10 +183,10 @@ const SidebarItem = styled.div<{ $isActive: boolean }>`
   font-size: 1.1rem;
   font-weight: ${({ $isActive }) => ($isActive ? 700 : 400)};
   color: ${({ theme, $isActive }) =>
-    $isActive ? theme.colors.primary : theme.colors.highEmphasis};
+    $isActive ? theme.colors.background100 : theme.colors.primary};
 
   background-color: ${({ theme, $isActive }) =>
-    $isActive ? theme.colors.background500 : "transparent"};
+    $isActive ? theme.colors.primary : "transparent"};
 `;
 
 const SubTabsMenu = styled.div<{ $open: boolean }>`
@@ -196,6 +195,7 @@ const SubTabsMenu = styled.div<{ $open: boolean }>`
   max-height: ${({ $open }) => ($open ? "200px" : "0")};
   gap: 8px;
 
+  color: ${({ theme }) => theme.colors.primary};
   background-color: ${({ theme }) => theme.colors.background300};
 
   transition: max-height 0.3s ease-in-out;
