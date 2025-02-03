@@ -147,4 +147,5 @@ const Menu = styled.div<{ $isOpen: boolean }>`
 const Contents = styled.div`
   display: flex;
   flex: 1;
+  padding: 0 15%;
 `;

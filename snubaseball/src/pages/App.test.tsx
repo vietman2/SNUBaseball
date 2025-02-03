@@ -8,6 +8,9 @@ jest.mock("@pages/_layout", () => ({
 jest.mock("@pages/About", () => ({
   AboutContainer: () => <div>AboutContainer</div>,
 }));
+jest.mock("@pages/Archive", () => ({
+  ArchiveContainer: () => <div>ArchiveContainer</div>,
+}));
 jest.mock("@pages/Home", () => ({
   Home: () => <div>Home</div>,
 }));

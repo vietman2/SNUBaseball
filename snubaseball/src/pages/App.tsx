@@ -11,6 +11,7 @@ import {
 
 import { RootLayout } from "@pages/_layout";
 import { AboutContainer } from "@pages/About";
+import { ArchiveContainer } from "@pages/Archive";
 import { Home } from "@pages/Home";
 
 import { ErrorPage } from "@components/Fallbacks";
@@ -175,6 +176,7 @@ function AppRouter() {
         <Route path="/" element={<RootLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/about/*" element={<AboutContainer />} />
+          <Route path="/archive/*" element={<ArchiveContainer />} />
         </Route>
         <Route path="/*" element={<ErrorPage />} />
       </>
