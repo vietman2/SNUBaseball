@@ -24,7 +24,7 @@ jest.mock("@components/Icons", () => ({
 }));
 
 jest.mock("@contexts/navigation", () => {
-  const { tabs } = jest.requireActual("@contexts/navigation/tabs");
+  const { tabs } = jest.requireActual("@contexts/navigation");
 
   return {
     NavigationProvider: ({ children }: { children: React.ReactNode }) =>
@@ -32,6 +32,8 @@ jest.mock("@contexts/navigation", () => {
     useNavigation: jest.fn().mockReturnValue({
       currentTab: tabs[0],
       tabs: tabs,
+      setCurrentTab: jest.fn(),
+      setCurrentSubTab: jest.fn(),
     }),
     tabs,
   };
