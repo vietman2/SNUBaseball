@@ -1,3 +1,5 @@
+import { ReactComponent as ChevronLeftIcon } from "./chevron-left.svg";
+import { ReactComponent as ChevronRightIcon } from "./chevron-right.svg";
 import { ReactComponent as MenuIcon } from "./menu.svg";
 
 interface Props {
@@ -10,6 +12,8 @@ const iconMap: Record<
   string,
   React.FunctionComponent<React.SVGProps<SVGSVGElement>>
 > = {
+  "chevron-left": ChevronLeftIcon,
+  "chevron-right": ChevronRightIcon,
   menu: MenuIcon,
 };
 
