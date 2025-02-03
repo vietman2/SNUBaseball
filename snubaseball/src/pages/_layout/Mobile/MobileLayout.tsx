@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Outlet } from "react-router-dom";
 import styled from "styled-components";
 
 import { AppIcon, Logo } from "@components/Icons";
@@ -45,6 +45,9 @@ export function MobileLayout() {
             <AppIcon icon="menu" size={28} />
           </button>
         </Header>
+        <Content>
+          <Outlet />
+        </Content>
       </Container>
       <SidebarContainer $isOpen={sidebarOpen}>
         <SidebarBackdrop onClick={toggleSidebar} />
@@ -70,9 +73,7 @@ export function MobileLayout() {
                       onClick={() => navigate(subtab.path)}
                       data-testid={`tab-${subtab.title}`}
                     >
-                      <SidebarItem $isActive={currentTab.path === subtab.path}>
-                        {subtab.title}
-                      </SidebarItem>
+                      <SubTabItem>{subtab.title}</SubTabItem>
                     </button>
                   ))}
                 </SubTabsMenu>
@@ -109,6 +110,11 @@ const Header = styled.div`
     font-size: 1.4rem;
     font-weight: 600;
   }
+`;
+
+const Content = styled.div`
+  display: flex;
+  flex: 1;
 `;
 
 const SidebarContainer = styled.div<{ $isOpen: boolean }>`
@@ -161,11 +167,16 @@ const Sidebar = styled.div`
   > div:last-child {
     display: flex;
     flex-direction: column;
+
+    button {
+      width: 100%;
+    }
   }
 `;
 
 const SidebarItem = styled.div<{ $isActive: boolean }>`
   display: flex;
+  flex: 1;
   align-items: center;
   justify-content: center;
   padding: 16px 0;
@@ -173,7 +184,7 @@ const SidebarItem = styled.div<{ $isActive: boolean }>`
   font-size: 1.1rem;
   font-weight: ${({ $isActive }) => ($isActive ? 700 : 400)};
   color: ${({ theme, $isActive }) =>
-    $isActive ? theme.colors.primary : theme.colors.mediumEmphasis};
+    $isActive ? theme.colors.primary : theme.colors.highEmphasis};
 
   background-color: ${({ theme, $isActive }) =>
     $isActive ? theme.colors.background500 : "transparent"};
@@ -189,4 +200,18 @@ const SubTabsMenu = styled.div<{ $open: boolean }>`
 
   transition: max-height 0.3s ease-in-out;
   overflow: hidden;
+`;
+
+const SubTabItem = styled.div`
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 0;
+
+  font-size: 1rem;
+  font-weight: 500;
+  color: ${({ theme }) => theme.colors.primary};
+
+  background-color: transparent;
 `;

@@ -13,6 +13,8 @@ describe("<MobileLayout />", () => {
         subtabs: [],
       },
       tabs: [],
+      setCurrentTab: jest.fn(),
+      setCurrentSubTab: jest.fn(),
     });
     renderWithProviders(<MobileLayout />);
   });
@@ -23,6 +25,8 @@ describe("<MobileLayout />", () => {
     jest.spyOn(NavigationContext, "useNavigation").mockReturnValue({
       currentTab: tabs[1],
       tabs,
+      setCurrentTab: jest.fn(),
+      setCurrentSubTab: jest.fn(),
     });
 
     renderWithProviders(<MobileLayout />);
