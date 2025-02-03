@@ -9,7 +9,7 @@ export function MobileLayout() {
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const [openTab, setOpenTab] = useState<TabType | null>(null);
 
-  const { currentTab, tabs } = useNavigation();
+  const { currentTab, currentSubTab, tabs } = useNavigation();
   const navigate = useNavigate();
 
   const toggleSidebar = () => {
@@ -30,6 +30,11 @@ export function MobileLayout() {
     }
   };
 
+  const onSubTabClick = (path: string) => {
+    navigate(path);
+    toggleSidebar();
+  };
+
   return (
     <>
       <Container>
@@ -39,12 +44,25 @@ export function MobileLayout() {
             {currentTab.title === "Home"
               ? "서울대학교 야구부"
               : currentTab.title}
-            {sidebarOpen}
           </span>
           <button onClick={toggleSidebar} data-testid="menu-button">
             <AppIcon icon="menu" size={28} />
           </button>
         </Header>
+        {currentTab.subtabs.length > 0 && (
+          <SubHeader>
+            {currentTab.subtabs.map((subtab) => (
+              <SubTabHeaderItem
+                key={subtab.title}
+                onClick={() => navigate(subtab.path)}
+                $isActive={currentSubTab === subtab}
+                data-testid={`subtab-${subtab.title}`}
+              >
+                {subtab.title}
+              </SubTabHeaderItem>
+            ))}
+          </SubHeader>
+        )}
         <Content>
           <Outlet />
         </Content>
@@ -70,7 +88,7 @@ export function MobileLayout() {
                   {tab.subtabs.map((subtab) => (
                     <button
                       key={subtab.title}
-                      onClick={() => navigate(subtab.path)}
+                      onClick={() => onSubTabClick(subtab.path)}
                       data-testid={`tab-${subtab.title}`}
                     >
                       <SubTabItem>{subtab.title}</SubTabItem>
@@ -110,6 +128,17 @@ const Header = styled.div`
     font-size: 1.4rem;
     font-weight: 600;
   }
+`;
+
+const SubHeader = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+
+  position: sticky;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.lowEmphasis};
 `;
 
 const Content = styled.div`
@@ -214,4 +243,20 @@ const SubTabItem = styled.div`
   color: ${({ theme }) => theme.colors.primary};
 
   background-color: transparent;
+`;
+
+const SubTabHeaderItem = styled.button<{ $isActive: boolean }>`
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 0;
+
+  font-size: 1rem;
+  font-weight: ${({ $isActive }) => ($isActive ? 700 : 500)};
+  color: ${({ theme, $isActive }) =>
+    $isActive ? theme.colors.background100 : theme.colors.primary};
+
+  background-color: ${({ theme, $isActive }) =>
+    $isActive ? theme.colors.primary : "transparent"};
 `;

@@ -23,6 +23,11 @@ export function WideLayout() {
     navigate(tab.path);
   };
 
+  const handleSubTabClick = (path: string) => {
+    navigate(path);
+    setMenuOpen(false);
+  };
+
   return (
     <Container>
       <div onMouseLeave={() => setMenuOpen(false)} data-testid="wide-layout">
@@ -53,7 +58,7 @@ export function WideLayout() {
                   {tab.subtabs.map((subtab) => (
                     <button
                       key={subtab.title}
-                      onClick={() => navigate(subtab.path)}
+                      onClick={() => handleSubTabClick(subtab.path)}
                       data-testid={`tab-${subtab.title}`}
                     >
                       {subtab.title}
@@ -129,7 +134,7 @@ const Menu = styled.div<{ $isOpen: boolean }>`
   gap: 36px;
 
   background-color: ${({ theme }) => theme.colors.background300};
-  transition: max-height 0.5s ease-in-out;
+  transition: max-height 0.3s ease-in-out;
   overflow: hidden;
 
   > div {

@@ -27,6 +27,8 @@ export function RootLayout() {
         if (subtab) {
           setCurrentSubTab(subtab);
         }
+      } else {
+        setCurrentSubTab(null);
       }
     }
   }, [location, tabs, setCurrentTab, setCurrentSubTab]);

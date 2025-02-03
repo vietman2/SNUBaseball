@@ -24,6 +24,7 @@ describe("<MobileLayout />", () => {
 
     jest.spyOn(NavigationContext, "useNavigation").mockReturnValue({
       currentTab: tabs[1],
+      currentSubTab: tabs[1].subtabs[0],
       tabs,
       setCurrentTab: jest.fn(),
       setCurrentSubTab: jest.fn(),
@@ -37,5 +38,6 @@ describe("<MobileLayout />", () => {
     fireEvent.click(screen.getByTestId("tab-소개")); // close subtabs
     fireEvent.click(screen.getByTestId("tab-소개")); // open subtabs
     fireEvent.click(screen.getByTestId("tab-연혁")); // navigate to subtab
+    fireEvent.click(screen.getByTestId("subtab-연혁")); // navigate to subtab
   });
 });
