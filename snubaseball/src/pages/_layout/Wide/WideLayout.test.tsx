@@ -1,6 +1,7 @@
+import { fireEvent, screen } from "@testing-library/react";
+
 import { WideLayout } from "./WideLayout";
 import * as NavigationContext from "@contexts/navigation";
-import { fireEvent, screen } from "@testing-library/dom";
 import { renderWithProviders } from "@utils/test-utils";
 
 describe("<WideLayout />", () => {
