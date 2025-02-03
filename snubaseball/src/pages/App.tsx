@@ -10,6 +10,7 @@ import {
 } from "styled-components";
 
 import { RootLayout } from "@pages/_layout";
+import { AboutContainer } from "@pages/About";
 import { Home } from "@pages/Home";
 
 import { ErrorPage } from "@components/Fallbacks";
@@ -173,6 +174,7 @@ function AppRouter() {
       <>
         <Route path="/" element={<RootLayout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/about/*" element={<AboutContainer />} />
         </Route>
         <Route path="/*" element={<ErrorPage />} />
       </>
