@@ -4,6 +4,7 @@ import styled from "styled-components";
 import MainImage1 from "@assets/images/main1.jpg";
 import MainImage2 from "@assets/images/main2.jpg";
 import MainImage3 from "@assets/images/main3.jpg";
+import { AppIcon } from "@components/Icons";
 
 const images = [MainImage1, MainImage2, MainImage3];
 
@@ -61,14 +62,16 @@ export function Home() {
           ))}
         </ImageInnerContainer>
         <LeftButton onClick={goToPrevious} data-testid="left">
-          ❮
+          <AppIcon icon="chevron-left" color="white" />
         </LeftButton>
         <RightButton onClick={goToNext} data-testid="right">
-          ❯
+          <AppIcon icon="chevron-right" color="white" />
         </RightButton>
-        <Line1>WELCOME TO</Line1>
-        <Line2>SEOUL NAT'L UNIV. BASEBALL TEAM</Line2>
-        <Line3>서울대학교 야구부에 오신 것을 환영합니다</Line3>
+        <Texts>
+          <span>WELCOME TO</span>
+          <span>SEOUL NAT'L UNIV. BASEBALL TEAM</span>
+          <span>서울대학교 야구부에 오신 것을 환영합니다</span>
+        </Texts>
       </ImageContainer>
     </Container>
   );
@@ -82,7 +85,7 @@ const Container = styled.div`
 const ImageContainer = styled.div`
   position: relative;
   width: 100vw;
-  height: 40vh;
+  height: 50vh;
   overflow: hidden;
 `;
 
@@ -94,7 +97,7 @@ const ImageInnerContainer = styled.div`
 
 const Image = styled.div`
   width: 100vw;
-  height: 40vh;
+  height: 50vh;
   background-size: cover;
   background-position: center;
 `;
@@ -107,7 +110,7 @@ const Button = styled.button`
   color: white;
   border: none;
   border-radius: 25%;
-  padding: 10px;
+  padding: 8px 2px;
   cursor: pointer;
   z-index: 999;
 
@@ -124,29 +127,29 @@ const RightButton = styled(Button)`
   right: 10px;
 `;
 
-const Line1 = styled.span`
+const Texts = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+
   position: absolute;
   top: 35%;
   left: 10%;
-  font-size: 1.75rem;
-  font-weight: 400;
   color: white;
-`;
 
-const Line2 = styled.span`
-  position: absolute;
-  top: 50%;
-  left: 10%;
-  font-size: 2rem;
-  font-weight: 700;
-  color: white;
-`;
+  > span:first-child {
+    font-size: 1.75rem;
+    font-weight: 400;
+  }
 
-const Line3 = styled.span`
-  position: absolute;
-  top: 75%;
-  left: 10%;
-  font-size: 1rem;
-  font-weight: 500;
-  color: white;
+  > span:nth-child(2) {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  > span:last-child {
+    font-size: 1rem;
+    font-weight: 500;
+  }
 `;
