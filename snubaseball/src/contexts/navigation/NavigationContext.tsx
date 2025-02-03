@@ -6,7 +6,7 @@ interface NavigationContextProps {
   tabs: TabType[];
   currentTab: TabType;
   setCurrentTab: (tab: TabType) => void;
-  setCurrentSubTab: (subtab: SubTabType) => void;
+  setCurrentSubTab: (subtab: SubTabType | null) => void;
   currentSubTab?: SubTabType | null;
 }
 
