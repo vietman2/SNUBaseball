@@ -79,14 +79,16 @@ export function Home() {
 
 const Container = styled.div`
   display: flex;
+  flex: 1;
   flex-direction: column;
+
+  overflow-x: hidden;
 `;
 
 const ImageContainer = styled.div`
   position: relative;
-  width: 100vw;
+  width: 100%;
   height: 50vh;
-  overflow: hidden;
 `;
 
 const ImageInnerContainer = styled.div`
