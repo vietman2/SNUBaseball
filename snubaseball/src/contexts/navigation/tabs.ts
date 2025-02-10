@@ -27,6 +27,14 @@ export const tabs: TabType[] = [
         title: "팀 소개",
         path: "/about/team",
       },
+      {
+        title: "선수",
+        path: "/about/players",
+      },
+      {
+        title: "지도자",
+        path: "/about/staff",
+      },
     ],
   },
   {
