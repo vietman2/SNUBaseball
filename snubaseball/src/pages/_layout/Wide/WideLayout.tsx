@@ -30,7 +30,7 @@ export function WideLayout() {
 
   return (
     <Container>
-      <button onMouseLeave={() => setMenuOpen(false)} data-testid="wide-layout">
+      <div onMouseLeave={() => setMenuOpen(false)} data-testid="wide-layout">
         <Header>
           <button onClick={handleHomeClick} data-testid="home-button">
             <Logo size={48} />
@@ -71,7 +71,7 @@ export function WideLayout() {
             </Tabs>
           ))}
         </Menu>
-      </button>
+      </div>
       <Contents>
         <Outlet />
       </Contents>
@@ -82,6 +82,7 @@ export function WideLayout() {
 const Container = styled.div`
   position: relative;
   width: 100%;
+  max-width: 100vw;
   height: 100dvh;
   background-color: ${({ theme }) => theme.colors.background100};
 `;
@@ -128,7 +129,7 @@ const Tabs = styled.div`
 const Menu = styled.div<{ $isOpen: boolean }>`
   display: flex;
   max-height: ${({ $isOpen }) => ($isOpen ? "200px" : "0")};
-  width: 100%;
+  width: 100vw;
   justify-content: flex-end;
   padding: 0 15%;
   gap: 36px;
@@ -147,5 +148,6 @@ const Menu = styled.div<{ $isOpen: boolean }>`
 const Contents = styled.div`
   display: flex;
   flex: 1;
+  min-height: calc(100vh - 80px);
   padding: 0 15%;
 `;
