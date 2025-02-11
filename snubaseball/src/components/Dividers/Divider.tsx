@@ -2,25 +2,33 @@ import styled from "styled-components";
 
 interface Props {
   text?: string;
+  width?: string;
   type?: "solid" | "dashed";
 }
 
-export function Divider({ text, type = "solid" }: Readonly<Props>) {
+export function Divider({ text, width, type = "solid" }: Readonly<Props>) {
   if (type === "solid") {
-    return <span>TODO</span>;
+    return <SolidLine style={{ width }} />;
   } else {
     return (
-      <Line>
+      <DashedLine style={{ width }}>
         <span>{text}</span>
-      </Line>
+      </DashedLine>
     );
   }
 }
 
-const Line = styled.div`
+const SolidLine = styled.div`
+  height: 1px;
+  width: 100%;
+  margin: 15px 0 5px 0;
+  background: ${({ theme }) => theme.colors.lowEmphasis};
+`;
+
+const DashedLine = styled.div`
   position: relative;
   height: 1px;
-  width: 95%;
+  width: 100%;
   margin: 15px 0 5px 0;
   background: repeating-linear-gradient(
     to right,

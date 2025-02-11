@@ -144,6 +144,7 @@ const SubHeader = styled.div`
 const Content = styled.div`
   display: flex;
   flex: 1;
+  min-height: calc(100dvh - 100px);
 `;
 
 const SidebarContainer = styled.div<{ $isOpen: boolean }>`
