@@ -68,38 +68,6 @@ export const sampleInterviews: InterviewType[] = [
         id: 2,
         uri: "https://picsum.photos/200/200?random=2",
       },
-      {
-        id: 3,
-        uri: "https://picsum.photos/200/200?random=3",
-      },
-      {
-        id: 4,
-        uri: "https://picsum.photos/200/200?random=4",
-      },
-      {
-        id: 5,
-        uri: "https://picsum.photos/200/200?random=5",
-      },
-      {
-        id: 6,
-        uri: "https://picsum.photos/200/200?random=6",
-      },
-      {
-        id: 7,
-        uri: "https://picsum.photos/200/200?random=7",
-      },
-      {
-        id: 8,
-        uri: "https://picsum.photos/200/200?random=8",
-      },
-      {
-        id: 9,
-        uri: "https://picsum.photos/200/200?random=9",
-      },
-      {
-        id: 10,
-        uri: "https://picsum.photos/200/200?random=10",
-      },
     ],
   },
   {
@@ -115,38 +83,6 @@ export const sampleInterviews: InterviewType[] = [
       {
         id: 2,
         uri: "https://picsum.photos/200/200?random=2",
-      },
-      {
-        id: 3,
-        uri: "https://picsum.photos/200/200?random=3",
-      },
-      {
-        id: 4,
-        uri: "https://picsum.photos/200/200?random=4",
-      },
-      {
-        id: 5,
-        uri: "https://picsum.photos/200/200?random=5",
-      },
-      {
-        id: 6,
-        uri: "https://picsum.photos/200/200?random=6",
-      },
-      {
-        id: 7,
-        uri: "https://picsum.photos/200/200?random=7",
-      },
-      {
-        id: 8,
-        uri: "https://picsum.photos/200/200?random=8",
-      },
-      {
-        id: 9,
-        uri: "https://picsum.photos/200/200?random=9",
-      },
-      {
-        id: 10,
-        uri: "https://picsum.photos/200/200?random=10",
       },
     ],
   },
