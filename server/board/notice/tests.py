@@ -1,11 +1,10 @@
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 from rest_framework.test import APITestCase
 from rest_framework import status
 
 from core.tests import generate_test_image_file
 from person.user.models import User
 from .models import Notice, NoticeComment, NoticeAttachment, NoticeCategory
-from .serializers import NoticeDetailSerializer
 
 class NoticeAPITestCase(APITestCase):
     fixtures = [
