@@ -1,3 +1,4 @@
+from unittest.mock import patch
 from django.test import TestCase
 from rest_framework import status
 from rest_framework.test import APITestCase
@@ -42,8 +43,11 @@ class MemberAPITestCase(APITestCase):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
-    def test_list_success(self):
+    @patch('person.member.serializers.get_profile_image_url')
+    def test_list_success(self, mock_get_profile_image_url):
+        mock_get_profile_image_url.return_value = 'http://test.com'
         self.client.force_authenticate(user=self.user)
+
         ## 1. all
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -66,8 +70,11 @@ class MemberAPITestCase(APITestCase):
         response = self.client.get(self.url, {'filter': 'bad filter'})
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
-    def test_retrieve_success(self):
+    @patch('person.member.serializers.get_profile_image_url')
+    def test_retrieve_success(self, mock_get_profile_image_url):
+        mock_get_profile_image_url.return_value = 'http://test.com'
         self.client.force_authenticate(user=self.user)
+
         response = self.client.get(self.url+'1/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
