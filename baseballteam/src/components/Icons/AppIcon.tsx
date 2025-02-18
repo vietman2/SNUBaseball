@@ -1,3 +1,4 @@
+import { ReactComponent as ArchiveIcon } from "./archive.svg";
 import { ReactComponent as ArrowDownIcon } from "./arrow-down.svg";
 import { ReactComponent as ArrowUpIcon } from "./arrow-up.svg";
 import { ReactComponent as AttachmentIcon } from "./attachment.svg";
@@ -31,6 +32,7 @@ import { ReactComponent as MoneyIcon } from "./money.svg";
 import { ReactComponent as MoonIcon } from "./moon.svg";
 import { ReactComponent as PencilIcon } from "./pencil.svg";
 import { ReactComponent as PeopleIcon } from "./people.svg";
+import { ReactComponent as PlusIcon } from "./plus.svg";
 import { ReactComponent as RecordIcon } from "./record.svg";
 import { ReactComponent as SearchIcon } from "./search.svg";
 import { ReactComponent as SendIcon } from "./send.svg";
@@ -49,6 +51,7 @@ const iconMap: Record<
   string,
   React.FunctionComponent<React.SVGProps<SVGSVGElement>>
 > = {
+  archive: ArchiveIcon,
   "arrow-down": ArrowDownIcon,
   "arrow-up": ArrowUpIcon,
   attachment: AttachmentIcon,
@@ -82,6 +85,7 @@ const iconMap: Record<
   moon: MoonIcon,
   pencil: PencilIcon,
   people: PeopleIcon,
+  plus: PlusIcon,
   record: RecordIcon,
   search: SearchIcon,
   send: SendIcon,
