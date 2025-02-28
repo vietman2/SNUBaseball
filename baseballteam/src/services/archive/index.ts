@@ -1,3 +1,4 @@
-import { uploadFiles } from "./files";
+import { getAlbums, getTags } from "./archive";
+import { getFiles, uploadFiles, getMediaDetails } from "./files";
 
-export { uploadFiles };
+export { getFiles, getAlbums, getTags, uploadFiles, getMediaDetails };

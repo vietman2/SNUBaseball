@@ -29,3 +29,31 @@ export async function uploadFiles(
     return null;
   }
 }
+
+export async function getFiles(
+  albumId: number | undefined,
+  tagId: number | undefined,
+  memberId: number | undefined
+) {
+  const params = {
+    album: albumId,
+    tag: tagId,
+    member: memberId,
+  };
+
+  try {
+    const response = await axios.get("/v1/archive/", { params });
+    return response.data;
+  } catch {
+    return null;
+  }
+}
+
+export async function getMediaDetails(id: number) {
+  try {
+    const response = await axios.get(`/v1/archive/${id}/`);
+    return response.data;
+  } catch {
+    return null;
+  }
+}

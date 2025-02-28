@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { uploadFiles } from "./files";
+import { uploadFiles, getFiles, getMediaDetails } from "./files";
 
 describe("uploadFiles", () => {
   const mockFiles = [new File([""], "file1"), new File([""], "file2")];
@@ -41,6 +41,38 @@ describe("uploadFiles", () => {
 
     jest.spyOn(axios, "post").mockRejectedValueOnce(new Error());
     const response = await uploadFiles(mockFiles, onProgress);
+
+    expect(response).toBe(null);
+  });
+});
+
+describe("getFiles", () => {
+  it("should get files", async () => {
+    jest.spyOn(axios, "get").mockResolvedValue({ data: {} });
+    const response = await getFiles(1, 2, 3);
+
+    expect(response).toEqual({});
+  });
+
+  it("should return null if request fails", async () => {
+    jest.spyOn(axios, "get").mockRejectedValueOnce(new Error());
+    const response = await getFiles(1, 2, 3);
+
+    expect(response).toBe(null);
+  });
+});
+
+describe("getMediaDetails", () => {
+  it("should get media details", async () => {
+    jest.spyOn(axios, "get").mockResolvedValue({ data: {} });
+    const response = await getMediaDetails(1);
+
+    expect(response).toEqual({});
+  });
+
+  it("should return null if request fails", async () => {
+    jest.spyOn(axios, "get").mockRejectedValueOnce(new Error());
+    const response = await getMediaDetails(1);
 
     expect(response).toBe(null);
   });

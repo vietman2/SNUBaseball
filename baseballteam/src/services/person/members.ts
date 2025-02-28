@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const getMembers = async (filter: string) => {
+export const getMembers = async (filter?: string) => {
   const getQuery = () => {
     if (filter === "YB") {
       return "ybs";
