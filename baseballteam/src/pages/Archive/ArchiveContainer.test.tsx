@@ -1,8 +1,8 @@
 import { ArchiveContainer } from "./ArchiveContainer";
 import { renderWithProviders } from "@utils/test-utils";
 
-jest.mock("./Gallery/Gallery", () => ({
-  Gallery: () => <div>Gallery</div>,
+jest.mock("./Gallery/GalleryMain", () => ({
+  GalleryMain: () => <div>GalleryMain</div>,
 }));
 
 describe("<ArchiveContainer />", () => {
