@@ -3,6 +3,7 @@ export type UserProfileType = {
   name: string;
   profile_image: string;
   is_admin: boolean;
+  person_id: number;
 };
 
 export type AuthorType = {
