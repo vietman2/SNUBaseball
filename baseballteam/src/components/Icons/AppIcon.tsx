@@ -1,3 +1,4 @@
+import { ReactComponent as AlbumIcon } from "./album.svg";
 import { ReactComponent as ArchiveIcon } from "./archive.svg";
 import { ReactComponent as ArrowDownIcon } from "./arrow-down.svg";
 import { ReactComponent as ArrowUpIcon } from "./arrow-up.svg";
@@ -13,6 +14,7 @@ import { ReactComponent as ChevronLeftIcon } from "./chevron-left.svg";
 import { ReactComponent as ChevronRightIcon } from "./chevron-right.svg";
 import { ReactComponent as ChevronUpIcon } from "./chevron-up.svg";
 import { ReactComponent as CloseIcon } from "./close.svg";
+import { ReactComponent as DeleteIcon } from "./delete.svg";
 import { ReactComponent as DiaryIcon } from "./diary.svg";
 import { ReactComponent as DotsIcon } from "./dots.svg";
 import { ReactComponent as DownloadIcon } from "./download.svg";
@@ -24,6 +26,8 @@ import { ReactComponent as GridIcon } from "./grid.svg";
 import { ReactComponent as HeartIcon } from "./heart.svg";
 import { ReactComponent as HeartOutlineIcon } from "./heart-outline.svg";
 import { ReactComponent as HomeIcon } from "./home.svg";
+import { ReactComponent as ImageIcon } from "./image.svg";
+import { ReactComponent as InfoIcon } from "./info.svg";
 import { ReactComponent as LightbulbIcon } from "./lightbulb.svg";
 import { ReactComponent as ListIcon } from "./list.svg";
 import { ReactComponent as ManagementIcon } from "./management.svg";
@@ -40,6 +44,7 @@ import { ReactComponent as StatusIcon } from "./status.svg";
 import { ReactComponent as SunIcon } from "./sun.svg";
 import { ReactComponent as TableIcon } from "./table.svg";
 import { ReactComponent as TextIcon } from "./text.svg";
+import { ReactComponent as VideoIcon } from "./video.svg";
 
 interface Props {
   icon: string;
@@ -51,6 +56,7 @@ const iconMap: Record<
   string,
   React.FunctionComponent<React.SVGProps<SVGSVGElement>>
 > = {
+  album: AlbumIcon,
   archive: ArchiveIcon,
   "arrow-down": ArrowDownIcon,
   "arrow-up": ArrowUpIcon,
@@ -66,6 +72,7 @@ const iconMap: Record<
   "chevron-right": ChevronRightIcon,
   "chevron-up": ChevronUpIcon,
   close: CloseIcon,
+  delete: DeleteIcon,
   diary: DiaryIcon,
   dots: DotsIcon,
   download: DownloadIcon,
@@ -77,6 +84,8 @@ const iconMap: Record<
   heart: HeartIcon,
   "heart-outline": HeartOutlineIcon,
   home: HomeIcon,
+  image: ImageIcon,
+  info: InfoIcon,
   lightbulb: LightbulbIcon,
   list: ListIcon,
   management: ManagementIcon,
@@ -93,6 +102,7 @@ const iconMap: Record<
   sun: SunIcon,
   table: TableIcon,
   text: TextIcon,
+  video: VideoIcon,
 };
 
 export const AppIcon = ({ icon, size, color }: Props) => {
