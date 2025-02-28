@@ -1,4 +1,11 @@
-import { getAlbums, getTags } from "./archive";
+import { createAlbum, getAlbums, getTags } from "./archive";
 import { getFiles, uploadFiles, getMediaDetails } from "./files";
 
-export { getFiles, getAlbums, getTags, uploadFiles, getMediaDetails };
+export {
+  getFiles,
+  createAlbum,
+  getAlbums,
+  getTags,
+  uploadFiles,
+  getMediaDetails,
+};
