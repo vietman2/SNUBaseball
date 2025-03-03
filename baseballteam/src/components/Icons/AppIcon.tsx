@@ -43,7 +43,9 @@ import { ReactComponent as SendIcon } from "./send.svg";
 import { ReactComponent as StatusIcon } from "./status.svg";
 import { ReactComponent as SunIcon } from "./sun.svg";
 import { ReactComponent as TableIcon } from "./table.svg";
+import { ReactComponent as TagIcon } from "./tag.svg";
 import { ReactComponent as TextIcon } from "./text.svg";
+import { ReactComponent as UploadIcon } from "./upload.svg";
 import { ReactComponent as VideoIcon } from "./video.svg";
 
 interface Props {
@@ -101,7 +103,9 @@ const iconMap: Record<
   status: StatusIcon,
   sun: SunIcon,
   table: TableIcon,
+  tag: TagIcon,
   text: TextIcon,
+  upload: UploadIcon,
   video: VideoIcon,
 };
 
