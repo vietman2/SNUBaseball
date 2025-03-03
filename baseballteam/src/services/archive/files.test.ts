@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { uploadFiles, getFiles, getMediaDetails } from "./files";
+import { uploadFiles, getFiles, getMediaDetails, deleteMedia } from "./files";
 
 describe("uploadFiles", () => {
   const mockFiles = [new File([""], "file1"), new File([""], "file2")];
@@ -75,5 +75,21 @@ describe("getMediaDetails", () => {
     const response = await getMediaDetails(1);
 
     expect(response).toBe(null);
+  });
+});
+
+describe("deleteMedia", () => {
+  it("should delete media", async () => {
+    jest.spyOn(axios, "delete").mockResolvedValue({ data: {} });
+    const response = await deleteMedia(1);
+
+    expect(response).toEqual(true);
+  });
+
+  it("should return null if request fails", async () => {
+    jest.spyOn(axios, "delete").mockRejectedValueOnce(new Error());
+    const response = await deleteMedia(1);
+
+    expect(response).toBe(false);
   });
 });

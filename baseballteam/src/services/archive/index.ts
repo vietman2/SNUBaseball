@@ -1,5 +1,5 @@
 import { createAlbum, getAlbums, getTags } from "./archive";
-import { getFiles, uploadFiles, getMediaDetails } from "./files";
+import { getFiles, uploadFiles, getMediaDetails, deleteMedia } from "./files";
 
 export {
   getFiles,
@@ -8,4 +8,5 @@ export {
   getTags,
   uploadFiles,
   getMediaDetails,
+  deleteMedia,
 };

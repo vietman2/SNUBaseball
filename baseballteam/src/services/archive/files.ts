@@ -57,3 +57,12 @@ export async function getMediaDetails(id: number) {
     return null;
   }
 }
+
+export async function deleteMedia(id: number) {
+  try {
+    await axios.delete(`/v1/archive/${id}/`);
+    return true;
+  } catch {
+    return false;
+  }
+}
