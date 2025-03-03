@@ -12,7 +12,7 @@ export type AlbumType = {
 export type MediaTagType = {
   id: number;
   name: string;
-}
+};
 
 export type MediaResponseType = {
   count: number;
@@ -20,8 +20,7 @@ export type MediaResponseType = {
   next: string | null;
   num_pages: number;
   previous: string | null;
-  results: MediaType[];
-}
+};
 
 export type MediaType = {
   id: number;
@@ -30,11 +29,12 @@ export type MediaType = {
   width: number;
   height: number;
   length?: number; // 동영상만 해당
-}
+};
 
 export type ImageType = {
   id: number;
   url: string;
+  title: string;
   album: {
     id: number;
     title: string;
@@ -43,7 +43,11 @@ export type ImageType = {
   people: MemberMiniType[];
   uploaded_at: string;
   uploaded_by: MemberMiniType;
-  exif_data: any; // TODO: 타입 정의
+  exif_data: {
+    DateTimeOriginal: string;
+    Make: string;
+    Model: string;
+  }; // TODO: 타입 정의
 };
 
 export type VideoType = {
