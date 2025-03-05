@@ -40,6 +40,7 @@ import { ReactComponent as PlusIcon } from "./plus.svg";
 import { ReactComponent as RecordIcon } from "./record.svg";
 import { ReactComponent as SearchIcon } from "./search.svg";
 import { ReactComponent as SendIcon } from "./send.svg";
+import { ReactComponent as SettingsIcon } from "./setting.svg";
 import { ReactComponent as StatusIcon } from "./status.svg";
 import { ReactComponent as SunIcon } from "./sun.svg";
 import { ReactComponent as TableIcon } from "./table.svg";
@@ -100,6 +101,7 @@ const iconMap: Record<
   record: RecordIcon,
   search: SearchIcon,
   send: SendIcon,
+  settings: SettingsIcon,
   status: StatusIcon,
   sun: SunIcon,
   table: TableIcon,
