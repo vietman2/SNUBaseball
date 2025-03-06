@@ -30,12 +30,14 @@ import { ReactComponent as ImageIcon } from "./image.svg";
 import { ReactComponent as InfoIcon } from "./info.svg";
 import { ReactComponent as LightbulbIcon } from "./lightbulb.svg";
 import { ReactComponent as ListIcon } from "./list.svg";
+import { ReactComponent as LockIcon } from "./lock.svg";
 import { ReactComponent as ManagementIcon } from "./management.svg";
 import { ReactComponent as MenuIcon } from "./menu.svg";
 import { ReactComponent as MoneyIcon } from "./money.svg";
 import { ReactComponent as MoonIcon } from "./moon.svg";
 import { ReactComponent as PencilIcon } from "./pencil.svg";
 import { ReactComponent as PeopleIcon } from "./people.svg";
+import { ReactComponent as PlayIcon } from "./play.svg";
 import { ReactComponent as PlusIcon } from "./plus.svg";
 import { ReactComponent as RecordIcon } from "./record.svg";
 import { ReactComponent as SearchIcon } from "./search.svg";
@@ -91,12 +93,14 @@ const iconMap: Record<
   info: InfoIcon,
   lightbulb: LightbulbIcon,
   list: ListIcon,
+  lock: LockIcon,
   management: ManagementIcon,
   menu: MenuIcon,
   money: MoneyIcon,
   moon: MoonIcon,
   pencil: PencilIcon,
   people: PeopleIcon,
+  play: PlayIcon,
   plus: PlusIcon,
   record: RecordIcon,
   search: SearchIcon,
