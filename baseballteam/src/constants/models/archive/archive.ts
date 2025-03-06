@@ -3,10 +3,10 @@ import { MemberMiniType } from "@models/user";
 export type AlbumType = {
   id: number;
   title: string;
-  description: string;
   cover_images: MediaType[];
   num_images: number;
   num_videos: number;
+  members_only: boolean;
 };
 
 export type MediaTagType = {
@@ -31,26 +31,29 @@ export type MediaType = {
   length?: number; // 동영상만 해당
 };
 
-export type ImageType = {
+export type MediaDetailType = {
   id: number;
   url: string;
-  title: string;
   album: {
     id: number;
     title: string;
   };
   tags: MediaTagType[];
   people: MemberMiniType[];
+  title: string;
   uploaded_at: string;
   uploaded_by: MemberMiniType;
+};
+
+export type ImageType = {
   exif_data: {
     DateTimeOriginal: string;
     Make: string;
     Model: string;
   }; // TODO: 타입 정의
-};
+} & MediaDetailType;
 
 export type VideoType = {
-  id: number;
-  url: string;
-};
+  duration: number;
+  thumbnail: string;
+} & MediaDetailType;

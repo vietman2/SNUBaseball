@@ -4,6 +4,7 @@ import {
   MediaResponseType,
   MediaTagType,
   MediaType,
+  MediaDetailType,
   VideoType,
 } from "./archive";
 
@@ -13,5 +14,6 @@ export type {
   MediaResponseType,
   MediaTagType,
   MediaType,
+  MediaDetailType,
   VideoType,
 };

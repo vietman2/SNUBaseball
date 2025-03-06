@@ -4,6 +4,7 @@ import {
   sampleMedia,
   sampleMediaResponse,
   sampleTags,
+  sampleVideoDetail,
 } from "./archive";
 
 export {
@@ -12,4 +13,5 @@ export {
   sampleMedia,
   sampleMediaResponse,
   sampleTags,
+  sampleVideoDetail,
 };

@@ -2,9 +2,11 @@ import { sampleMemberMinis } from "@data/user";
 import {
   AlbumType,
   ImageType,
+  MediaDetailType,
   MediaResponseType,
   MediaTagType,
   MediaType,
+  VideoType,
 } from "@models/archive";
 
 export const sampleMedia: MediaType[] = [
@@ -21,7 +23,6 @@ export const sampleMedia: MediaType[] = [
     type: "비디오",
     width: 150,
     height: 150,
-    length: 180,
   },
 ];
 
@@ -29,33 +30,33 @@ export const sampleAlbums: AlbumType[] = [
   {
     id: 1,
     title: "2025년 1월",
-    description: "",
     cover_images: [],
     num_images: 0,
     num_videos: 0,
+    members_only: false,
   },
   {
     id: 2,
     title: "2025년 2월",
-    description: "",
     cover_images: [sampleMedia[0]],
     num_images: 0,
     num_videos: 0,
+    members_only: true,
   },
 ];
 
 export const sampleMediaResponse: MediaResponseType = {
   count: 1,
   current_page: 1,
-  next: null,
+  next: "next_url",
   num_pages: 1,
   previous: null,
 };
 
-export const sampleImageDetail: ImageType = {
+const sampleMediaDetail: MediaDetailType = {
   id: 1,
+  title: "미디어1",
   url: "https://via.placeholder.com/150",
-  title: "이미지1",
   album: {
     id: 1,
     title: "2025년 1월",
@@ -64,11 +65,25 @@ export const sampleImageDetail: ImageType = {
   people: [],
   uploaded_at: "2025-01-01T00:00:00",
   uploaded_by: sampleMemberMinis[0],
+};
+
+export const sampleImageDetail: ImageType = {
+  ...sampleMediaDetail,
+  id: 1,
+  title: "이미지1",
   exif_data: {
     DateTimeOriginal: "2025-01-01T00:00:00",
     Make: "Canon",
     Model: "EOS 5D",
   },
+};
+
+export const sampleVideoDetail: VideoType = {
+  ...sampleMediaDetail,
+  id: 2,
+  title: "비디오1",
+  duration: 60,
+  thumbnail: "https://via.placeholder.com/150",
 };
 
 export const sampleTags: MediaTagType[] = [
