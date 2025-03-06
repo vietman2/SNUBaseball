@@ -23,7 +23,7 @@ interface MediaContextType {
   selectMedia: (media: MediaType | null) => void;
   reloadData: (
     albumId: number | undefined,
-    tagId: number | undefined,
+    tagIds: number[],
     personId: number | undefined
   ) => void;
   loadMoreData: () => void;
@@ -77,12 +77,12 @@ export function MediaProvider({ children }: { children: React.ReactNode }) {
 
   const reloadData = async (
     albumId: number | undefined,
-    tagId: number | undefined,
+    tagIds: number[],
     personId: number | undefined
   ) => {
     setLoading(true);
 
-    const response = await getFiles(albumId, tagId, personId);
+    const response = await getFiles(albumId, tagIds, personId);
 
     if (response) {
       setMediaResponse(response);

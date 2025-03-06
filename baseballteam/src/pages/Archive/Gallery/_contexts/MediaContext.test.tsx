@@ -27,7 +27,7 @@ const TestComponent = () => {
       <button onClick={() => selectMedia(null)}>Unselect</button>
       <button onClick={() => selectMedia(sampleMedia[0])}>Select Image</button>
       <button onClick={() => selectMedia(sampleMedia[1])}>Select Video</button>
-      <button onClick={() => reloadData(1, 1, 1)}>Reload Data</button>
+      <button onClick={() => reloadData(1, [1], 1)}>Reload Data</button>
       <button onClick={loadMoreData}>Load More Data</button>
       <button onClick={() => deleteMedia(1)}>Delete Media</button>
       <button onClick={() => updateAlbum(1, 1, "이미지")}>

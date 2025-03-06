@@ -6,12 +6,13 @@ import * as MembersAPI from "@services/person/members";
 import { renderWithProviders } from "@utils/test-utils";
 
 const TestComponent = () => {
-  const { people, selectPerson } = useMember();
+  const { people, selectPerson, fetchMembers } = useMember();
 
   return (
     <div>
       <button onClick={() => selectPerson(null)}>Unselect</button>
       <button onClick={() => selectPerson(people[0])}>Select Person</button>
+      <button onClick={() => fetchMembers("query")}>Fetch Members</button>
     </div>
   );
 };
@@ -19,7 +20,9 @@ const TestComponent = () => {
 describe("<MemberProvider />", () => {
   beforeEach(() => {
     jest.spyOn(window, "alert").mockImplementation(() => {});
-    jest.spyOn(MembersAPI, "getMembers").mockResolvedValue(sampleMemberMinis);
+    jest
+      .spyOn(MembersAPI, "searchMembers")
+      .mockResolvedValue(sampleMemberMinis);
   });
 
   it("fetches members", async () => {
@@ -32,11 +35,12 @@ describe("<MemberProvider />", () => {
     await waitFor(() => {
       fireEvent.click(screen.getByText("Select Person"));
       fireEvent.click(screen.getByText("Unselect"));
+      fireEvent.click(screen.getByText("Fetch Members"));
     });
   });
 
   it("handles api error", async () => {
-    jest.spyOn(MembersAPI, "getMembers").mockResolvedValue(null);
+    jest.spyOn(MembersAPI, "searchMembers").mockResolvedValue(null);
     renderWithProviders(
       <MemberProvider>
         <TestComponent />
@@ -45,6 +49,7 @@ describe("<MemberProvider />", () => {
 
     await waitFor(() => {
       fireEvent.click(screen.getByText("Select Person"));
+      fireEvent.click(screen.getByText("Fetch Members"));
     });
   });
 

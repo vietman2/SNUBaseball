@@ -7,7 +7,11 @@ interface FileContextType {
   progress: number;
   dropFiles: (files: FileList | null) => void;
   removeFile: (file: File) => void;
-  submitFiles: () => Promise<boolean>;
+  submitFiles: (options?: {
+    albumId?: number;
+    tagsId?: number[];
+    membersId?: number[];
+  }) => Promise<boolean>;
 }
 
 const FilesContext = createContext<FileContextType | undefined>(undefined);
@@ -27,10 +31,18 @@ export function FilesProvider({ children }: { children: React.ReactNode }) {
     setUploadedFiles((prev) => prev.filter((f) => f !== file));
   };
 
-  const uploadFilesToServer = async () => {
-    const response = await uploadFiles(uploadedFiles, (progress) => {
-      setProgress(progress);
-    });
+  const uploadFilesToServer = async (options?: {
+    albumId?: number;
+    tagsId?: number[];
+    membersId?: number[];
+  }) => {
+    const response = await uploadFiles(
+      uploadedFiles,
+      (progress) => {
+        setProgress(progress);
+      },
+      options
+    );
 
     if (response) {
       setUploadedFiles([]);

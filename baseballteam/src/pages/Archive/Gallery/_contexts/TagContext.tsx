@@ -5,21 +5,29 @@ import { getTags } from "@services/archive";
 
 interface TagContextType {
   allTags: MediaTagType[];
-  selectedTag: MediaTagType | null;
-  selectTag: (tag: MediaTagType | null) => void;
+  selectedTags: MediaTagType[];
+  selectTag: (tag: MediaTagType) => void;
 }
 
 const TagContext = createContext<TagContextType | undefined>(undefined);
 
 export function TagProvider({ children }: { children: React.ReactNode }) {
   const [allTags, setAllTags] = useState<MediaTagType[]>([]);
-  const [selectedTag, setSelectedTag] = useState<MediaTagType | null>(null);
+  const [selectedTags, setSelectedTags] = useState<MediaTagType[]>([]);
 
   const fetchTags = async () => {
     const response = await getTags();
 
     if (response) {
       setAllTags(response);
+    }
+  };
+
+  const selectTag = (tag: MediaTagType) => {
+    if (selectedTags.includes(tag)) {
+      setSelectedTags((prev) => prev.filter((t) => t !== tag));
+    } else {
+      setSelectedTags((prev) => [...prev, tag]);
     }
   };
 
@@ -30,10 +38,10 @@ export function TagProvider({ children }: { children: React.ReactNode }) {
   const value = useMemo(
     () => ({
       allTags,
-      selectedTag,
-      selectTag: (tag: MediaTagType | null) => setSelectedTag(tag),
+      selectedTags,
+      selectTag,
     }),
-    [allTags, selectedTag]
+    [allTags, selectedTags]
   );
 
   return <TagContext.Provider value={value}>{children}</TagContext.Provider>;

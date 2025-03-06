@@ -10,7 +10,6 @@ const TestComponent = () => {
 
   return (
     <div>
-      <button onClick={() => selectTag(null)}>Unselect</button>
       <button onClick={() => selectTag(allTags[0])}>Select Tag</button>
     </div>
   );
@@ -30,7 +29,8 @@ describe("<TagProvider />", () => {
     );
 
     await waitFor(() => {
-      fireEvent.click(screen.getByText("Select Tag"));
+      fireEvent.click(screen.getByText("Select Tag")); // Select
+      fireEvent.click(screen.getByText("Select Tag")); // Unselect
     });
   });
 

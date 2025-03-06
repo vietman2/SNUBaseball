@@ -1,12 +1,13 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
 
 import { MemberMiniType } from "@models/user";
-import { getMembers } from "@services/person";
+import { searchMembers } from "@services/person";
 
 interface MemberContextType {
   people: MemberMiniType[];
   selectedPerson: MemberMiniType | null;
   selectPerson: (person: MemberMiniType | null) => void;
+  fetchMembers: (query: string) => Promise<boolean>;
 }
 
 const MemberContext = createContext<MemberContextType | undefined>(undefined);
@@ -17,8 +18,8 @@ export function MemberProvider({ children }: { children: React.ReactNode }) {
     null
   );
 
-  const fetchMembers = async () => {
-    const response = await getMembers();
+  const fetchMembers = async (query: string) => {
+    const response = await searchMembers(query);
 
     if (response) {
       setPeople(response);
@@ -27,11 +28,6 @@ export function MemberProvider({ children }: { children: React.ReactNode }) {
       return false;
     }
   };
-
-  useEffect(() => {
-    fetchMembers();
-  }, []);
-
 
   const value = useMemo(
     () => ({

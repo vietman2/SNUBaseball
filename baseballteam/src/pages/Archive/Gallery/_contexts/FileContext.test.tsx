@@ -26,7 +26,7 @@ const TestComponent = () => {
       <button onClick={() => dropFiles(files)}>Drop Files</button>
       <button onClick={() => dropFiles(null)}>Cancel File Drop</button>
       <button onClick={() => removeFile(fileList[0])}>Remove File</button>
-      <button onClick={submitFiles}>Submit Files</button>
+      <button onClick={() => submitFiles()}>Submit Files</button>
     </div>
   );
 };
