@@ -1,13 +1,18 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 import { AlbumType } from "@models/archive";
-import { createAlbum, getAlbums } from "@services/archive";
+import { createAlbum, getAlbums, removeAlbum, updateAlbum } from "@services/archive";
 
 interface AlbumContextType {
   albums: AlbumType[];
   selectedAlbum: AlbumType | null;
   selectAlbum: (album: AlbumType | null) => void;
-  createNewAlbum: (title: string) => Promise<boolean>;
+  createNewAlbum: (
+    title: string,
+    membersOnly: boolean
+  ) => Promise<boolean>;
+  deleteAlbum: (id: number) => Promise<boolean>;
+  editAlbum: (id: number, title: string, membersOnly: boolean) => Promise<boolean>;
 }
 
 const AlbumContext = createContext<AlbumContextType | undefined>(undefined);
@@ -28,8 +33,33 @@ export function AlbumProvider({ children }: { children: React.ReactNode }) {
     fetchAlbums();
   }, []);
 
-  const createNewAlbum = async (title: string) => {
-    const response = await createAlbum(title);
+  const createNewAlbum = async (
+    title: string,
+    membersOnly: boolean
+  ) => {
+    const response = await createAlbum(title, membersOnly);
+
+    if (response) {
+      await fetchAlbums();
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const deleteAlbum = async (id: number) => {
+    const response = await removeAlbum(id);
+
+    if (response) {
+      await fetchAlbums();
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const editAlbum = async (id: number, title: string, membersOnly: boolean) => {
+    const response = await updateAlbum(id, title, membersOnly);
 
     if (response) {
       await fetchAlbums();
@@ -45,6 +75,8 @@ export function AlbumProvider({ children }: { children: React.ReactNode }) {
       selectedAlbum,
       selectAlbum: (album: AlbumType | null) => setSelectedAlbum(album),
       createNewAlbum,
+      deleteAlbum,
+      editAlbum,
     }),
     [albums, selectedAlbum]
   );
