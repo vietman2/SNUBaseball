@@ -4,29 +4,26 @@ import styled from "styled-components";
 
 import { AlbumPreview, MediaPreview } from "../_components";
 import { useAlbum, useMedia, useMember, useTag } from "../_contexts";
-import { CreateAlbumModal, UploadModal } from "../_modals";
+import { FilterModal, UploadModal } from "../_modals";
 import { Loading } from "@components/Fallbacks";
 import { AppIcon } from "@components/Icons";
 import { useAuth } from "@contexts/auth";
-import { AlbumType } from "@models/archive";
 import { useIntersectionObserver } from "@hooks/useIntersectionObserver";
+import { AlbumType } from "@models/archive";
 
 export function GalleryMain() {
-  const [uploadModalVisible, setUploadModalVisible] = useState(false);
-  const [albumModalVisible, setAlbumModalVisible] = useState(false);
+  const [uploadModalVisible, setUploadModalVisible] = useState<boolean>(false);
+  const [filterModalVisible, setFilterModalVisible] = useState<boolean>(false);
 
   const navigate = useNavigate();
-  const observerRef = useIntersectionObserver<HTMLDivElement>(
-    () => loadMoreData(),
-    {
-      threshold: 0.01,
-    }
-  );
   const { user } = useAuth();
   const { albums, selectedAlbum, selectAlbum } = useAlbum();
   const { files, loading, reloadData, loadMoreData, selectMedia } = useMedia();
   const { selectedPerson } = useMember();
   const { selectedTag } = useTag();
+  const observerRef = useIntersectionObserver<HTMLDivElement>(loadMoreData, {
+    threshold: 0.2,
+  });
 
   const handleAlbumListClick = () => {
     if (user?.is_admin) {
@@ -44,8 +41,8 @@ export function GalleryMain() {
     setUploadModalVisible((prev) => !prev);
   };
 
-  const toggleAlbumModal = () => {
-    setAlbumModalVisible((prev) => !prev);
+  const toggleFilterModal = () => {
+    setFilterModalVisible((prev) => !prev);
   };
 
   useEffect(() => {
@@ -64,12 +61,6 @@ export function GalleryMain() {
             <button onClick={handleAlbumListClick} data-testid="album-list">
               앨범 <AppIcon icon="chevron-right" size={24} color="#6C757D" />
             </button>
-            {user?.is_admin && (
-              <button onClick={toggleAlbumModal} data-testid="add-album">
-                <AppIcon icon="plus" size={20} color="#0B1623" />
-                추가
-              </button>
-            )}
           </Horizontal>
           <List>
             {albums.map((album) => (
@@ -99,7 +90,7 @@ export function GalleryMain() {
               )}
             </BreadCrumb>
             <div>
-              <FilterButton onClick={() => {}} data-testid="filter">
+              <FilterButton onClick={toggleFilterModal} data-testid="filter">
                 <AppIcon icon="filter" size={18} color="#0F0F70" />
                 필터
               </FilterButton>
@@ -121,7 +112,7 @@ export function GalleryMain() {
             ))}
             <div
               ref={observerRef}
-              style={{ height: "20px" }}
+              style={{ height: "50px" }}
               data-testid="observer"
             />
           </MediaList>
@@ -129,7 +120,7 @@ export function GalleryMain() {
         </MediaWrapper>
       </Container>
       {uploadModalVisible && <UploadModal toggleModal={toggleUploadModal} />}
-      {albumModalVisible && <CreateAlbumModal toggleModal={toggleAlbumModal} />}
+      {filterModalVisible && <FilterModal toggleModal={toggleFilterModal} />}
     </>
   );
 }
@@ -169,7 +160,7 @@ const Horizontal = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  > button:first-child {
+  > button {
     display: flex;
     align-items: center;
     gap: 4px;
@@ -177,15 +168,6 @@ const Horizontal = styled.div`
     font-size: 1.5rem;
     font-weight: 600;
     color: ${({ theme }) => theme.colors.foreground900};
-  }
-
-  > button:last-child {
-    display: flex;
-    align-items: center;
-    padding: 4px 8px;
-    gap: 4px;
-    border-radius: 8px;
-    border: 1px solid ${({ theme }) => theme.colors.foreground900};
   }
 `;
 

@@ -33,7 +33,7 @@ jest.mock("../_contexts", () => ({
   useTag: jest.fn(),
 }));
 jest.mock("../_modals", () => ({
-  CreateAlbumModal: () => <div data-testid="create-album-modal" />,
+  FilterModal: () => <div data-testid="filter-modal" />,
   UploadModal: () => <div data-testid="upload-modal" />,
 }));
 jest.mock("@hooks/useIntersectionObserver");
@@ -82,11 +82,14 @@ describe("<GalleryMain />", () => {
       selectedAlbum: null,
       selectAlbum: jest.fn(),
       createNewAlbum: jest.fn(),
+      deleteAlbum: jest.fn(),
+      editAlbum: jest.fn(),
     });
     jest.spyOn(GalleryContexts, "useMember").mockReturnValue({
       people: sampleMemberMinis,
       selectedPerson: null,
       selectPerson: jest.fn(),
+      fetchMembers: jest.fn(),
     });
     jest
       .spyOn(GalleryContexts, "useMedia")
@@ -113,7 +116,6 @@ describe("<GalleryMain />", () => {
       fireEvent.click(screen.getByTestId("album-list")); // Navigate to albums
       fireEvent.click(screen.getByTestId("album-1")); // Select album
       fireEvent.click(screen.getByTestId("back")); // Unselect album
-      fireEvent.click(screen.getByTestId("add-album")); // Open create album modal
     });
 
     waitFor(() => {
@@ -135,6 +137,8 @@ describe("<GalleryMain />", () => {
       selectedAlbum: sampleAlbums[0],
       selectAlbum: jest.fn(),
       createNewAlbum: jest.fn(),
+      deleteAlbum: jest.fn(),
+      editAlbum: jest.fn(),
     });
     jest.spyOn(GalleryContexts, "useMedia").mockReturnValue({
       ...defaultMediaContext,
