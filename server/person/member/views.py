@@ -1,4 +1,6 @@
 from django.core.files.storage import default_storage
+from django.db.models import Q, CharField
+from django.db.models.functions import Concat
 from drf_spectacular.utils import extend_schema
 from rest_framework import status
 from rest_framework.decorators import action
@@ -9,7 +11,8 @@ from rest_framework.viewsets import ModelViewSet
 
 from .models import Member
 from .serializers import (
-    MemberSimpleSerializer, MemberDetailSerializer, MemberWriteSerializer, MemberCreateSerializer
+    MemberSimpleSerializer, MemberDetailSerializer, MemberWriteSerializer,
+    MemberCreateSerializer, MemberMiniSerializer
 )
 
 class MemberViewSet(ModelViewSet):
@@ -27,26 +30,43 @@ class MemberViewSet(ModelViewSet):
     @extend_schema(summary="회원 목록 조회", tags=["회원 관리"])
     def list(self, request, *args, **kwargs):
         ## 필터
-        query = request.query_params.get('filter', None)
+        filter_query = request.query_params.get('filter', None)
+        search_query = request.query_params.get('search', None)
 
-        if query is None or str(query) == "":
+        if search_query is not None:
+            ## 검색을 하면 Mini로 반환
+            members = self.queryset.annotate(
+                name=Concat('last_name', 'first_name', output_field=CharField())
+            ).filter(
+                Q(student_id__icontains=search_query) | Q(name__icontains=search_query)
+            )
+
+            ## only return first 10 members
+            serializer = MemberMiniSerializer(members[:10], many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        if filter_query is None:
+            ## 필터가 없으면 모든 회원을 반환
+            self.queryset = self.queryset.all()
+            self.queryset = self.queryset.order_by('status', 'role', 'admission_year')
+
             serializer = MemberSimpleSerializer(self.queryset, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
 
-        if str(query) == "ybs":
+        if str(filter_query) == "ybs":
             roles = [1, 2, 3, 4, 5, 6]
             stati = [1]
             self.queryset = self.queryset.filter(status__in=stati, role__in=roles)
-        elif str(query) == "obs":
+        elif str(filter_query) == "obs":
             roles = [4, 5, 6]
             stati = [4]
             self.queryset = self.queryset.filter(status__in=stati, role__in=roles)
-        elif str(query) == "others":
+        elif str(filter_query) == "others":
             stati = [1, 4]
             ## status 1, 4 제외
             self.queryset = self.queryset.exclude(status__in=stati)
         else:
-            return Response({'message': "잘못된 쿼리입니다."}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'message': "잘못된 필터입니다."}, status=status.HTTP_400_BAD_REQUEST)
 
         self.queryset = self.queryset.order_by('status', 'role', 'admission_year')
 

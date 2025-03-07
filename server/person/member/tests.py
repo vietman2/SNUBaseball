@@ -6,7 +6,7 @@ from rest_framework.test import APITestCase
 from core.tests import generate_test_image_file
 from person.user.models import User
 from .models import Member
-from .utils import get_status_choice, get_role_choice, get_hands_choice
+from .utils import get_status_choice, get_role_choice, get_hands_choice, get_profile_image_url
 
 class MemberAPITestCase(APITestCase):
     fixtures = ["core/data/initial/majors.json", "core/data/test/people.json"]
@@ -62,6 +62,10 @@ class MemberAPITestCase(APITestCase):
 
         ## 4. others
         response = self.client.get(self.url, {'filter': 'others'})
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        ## 5. search
+        response = self.client.get(self.url, {'search': '김철수'})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_list_bad_request(self):
@@ -125,7 +129,9 @@ class MemberAPITestCase(APITestCase):
         response = self.client.put(self.url+'1/', data)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
-    def test_update_profile_image(self):
+    @patch('django.core.files.storage.default_storage.save')
+    def test_update_profile_image(self, mock_save):
+        mock_save.return_value = 'test1.png'
         self.client.force_authenticate(user=self.user)
         profile_image = generate_test_image_file()
         response = self.client.post(self.url+'1/profiles/', {'profile_image': profile_image})
@@ -178,3 +184,14 @@ class MemberUtilTest(TestCase):
         self.assertEqual(get_hands_choice("좌투양타"), 8)
         self.assertEqual(get_hands_choice("양투양타"), 9)
         self.assertEqual(get_hands_choice("asdf"), 0)
+
+    @patch('person.member.utils.get_presigned_url')
+    def test_get_profile_image_url(self, mock_get_presigned_url):
+        mock_image = generate_test_image_file()
+        mock_image.name = 'person.png'
+        mock_get_presigned_url.return_value = 'http://test.com'
+        self.assertEqual(
+            get_profile_image_url(None),
+            'https://kr.object.ncloudstorage.com/snubaseball.test/profiles/person.png'
+        )
+        self.assertEqual(get_profile_image_url(mock_image), 'http://test.com')
