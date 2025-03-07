@@ -49,7 +49,7 @@ describe("<TagMenu />", () => {
   beforeEach(() => {
     jest.spyOn(Contexts, "useTag").mockReturnValue({
       allTags: sampleTags,
-      selectedTags: [],
+      selectedTag: null,
       selectTag: jest.fn(),
     });
   });
