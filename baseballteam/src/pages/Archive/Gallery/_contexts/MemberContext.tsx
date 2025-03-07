@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 import { MemberMiniType } from "@models/user";
 import { searchMembers } from "@services/person";
@@ -29,12 +29,19 @@ export function MemberProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const selectPerson = (person: MemberMiniType | null) => {
+    setSelectedPerson(person);
+  };
+
+  useEffect(() => {
+    fetchMembers("");
+  }, []);
+
   const value = useMemo(
     () => ({
       people,
       selectedPerson,
-      selectPerson: (person: MemberMiniType | null) =>
-        setSelectedPerson(person),
+      selectPerson,
       fetchMembers,
     }),
     [people, selectedPerson]

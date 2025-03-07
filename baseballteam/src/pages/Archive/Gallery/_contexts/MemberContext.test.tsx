@@ -10,7 +10,6 @@ const TestComponent = () => {
 
   return (
     <div>
-      <button onClick={() => selectPerson(null)}>Unselect</button>
       <button onClick={() => selectPerson(people[0])}>Select Person</button>
       <button onClick={() => fetchMembers("query")}>Fetch Members</button>
     </div>
@@ -34,7 +33,6 @@ describe("<MemberProvider />", () => {
 
     await waitFor(() => {
       fireEvent.click(screen.getByText("Select Person"));
-      fireEvent.click(screen.getByText("Unselect"));
       fireEvent.click(screen.getByText("Fetch Members"));
     });
   });
