@@ -1,8 +1,9 @@
 import json
 import numpy as np
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch, MagicMock, PropertyMock
+from django.core.files.images import ImageFile
 from django.core.files.uploadedfile import SimpleUploadedFile, TemporaryUploadedFile
-from django.test import override_settings, TestCase
+from django.test import TestCase
 from io import BytesIO
 from PIL import Image as PILImage
 from rest_framework import status
@@ -10,8 +11,6 @@ from rest_framework.test import APITestCase
 
 from core.tests import generate_test_image_file
 from person.user.models import User
-from .enums import MediaType
-from .models import Album, BaseMedia, Image, Video
 from .utils import create_image_thumbnail, create_video_thumbnail_and_duration
 
 class UploadAPITestCase(APITestCase):
@@ -94,26 +93,15 @@ class ArchiveAPITestCase(APITestCase):
     ]
 
     def setUp(self):
-        self.override = override_settings(
-            DEFAULT_FILE_STORAGE='django.core.files.storage.FileSystemStorage'
-        )
-        self.override.enable()
         self.url = '/v1/archive/'
         self.user = User.objects.get(username='testuser_1')
 
-        base_media = BaseMedia.objects.get(pk=1)
-        dummy_image = SimpleUploadedFile('dummy.jpg', b'file_content', content_type='image/jpeg')
-        Image.objects.create(base=base_media, file=dummy_image, thumbnail=dummy_image)
-
-        base_media = BaseMedia.objects.get(pk=2)
-        dummy_video = SimpleUploadedFile('dummy.mp4', b'file_content')
-        Video.objects.create(base=base_media, file=dummy_video)
-
-    def tearDown(self):
-        self.override.disable()
-
+    @patch.object(ImageFile, 'width', new_callable=PropertyMock)
+    @patch.object(ImageFile, 'height', new_callable=PropertyMock)
     @patch('archive.gallery.serializers.get_presigned_url')
-    def test_list(self, mock_presigned_url):
+    def test_list(self, mock_presigned_url, mock_height, mock_width):
+        mock_height.return_value = 100
+        mock_width.return_value = 100
         mock_presigned_url.return_value = 'http://test.com'
         self.client.force_authenticate(user=self.user)
 
@@ -156,7 +144,11 @@ class ArchiveAPITestCase(APITestCase):
         response = self.client.delete(f'{self.url}1/')
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
-    def test_update(self):
+    @patch.object(ImageFile, 'width', new_callable=PropertyMock)
+    @patch.object(ImageFile, 'height', new_callable=PropertyMock)
+    def test_update(self, mock_height, mock_width):
+        mock_height.return_value = 100
+        mock_width.return_value = 100
         self.client.force_authenticate(user=self.user)
 
         response = self.client.put(f'{self.url}1/', {})
@@ -199,25 +191,12 @@ class AlbumAPITestCase(APITestCase):
     def setUp(self):
         self.url = '/v1/archive/albums/'
         self.admin = User.objects.get(username='testuser_1')
-        self.override = override_settings(
-            DEFAULT_FILE_STORAGE='django.core.files.storage.FileSystemStorage'
-        )
-        self.override.enable()
 
-        base_media = BaseMedia.objects.get(pk=1)
-        dummy_image = SimpleUploadedFile('dummy.jpg', b'file_content', content_type='image/jpeg')
-        Image.objects.create(base=base_media, file=dummy_image)
-
-        album = Album.objects.get(pk=1)
-        ## create 5 images for album 1 for coverage
-        for i in range(5):
-            base_media = BaseMedia.objects.create(album=album, type=MediaType.IMAGE)
-            Image.objects.create(base=base_media, file=dummy_image)
-
-    def tearDown(self):
-        self.override.disable()
-
-    def test_list(self):
+    @patch.object(ImageFile, 'width', new_callable=PropertyMock)
+    @patch.object(ImageFile, 'height', new_callable=PropertyMock)
+    def test_list(self, mock_height, mock_width):
+        mock_height.return_value = 100
+        mock_width.return_value = 100
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
