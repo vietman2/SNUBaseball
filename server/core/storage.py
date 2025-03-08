@@ -17,5 +17,5 @@ def get_presigned_url(filename):
             'Bucket': settings.AWS_STORAGE_BUCKET_NAME,
             'Key': f'{filename}',
         },
-        ExpiresIn=300,
+        ExpiresIn=7200,
     )
