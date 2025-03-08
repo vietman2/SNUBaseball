@@ -20,6 +20,7 @@ boto3 = "*"
 gunicorn = "*"
 psycopg2-binary = "*"
 whitenoise = "*"
+moviepy = "*"
 
 [dev-packages]
 coverage = "*"
