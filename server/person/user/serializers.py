@@ -13,6 +13,10 @@ class ProfileSerializer(ModelSerializer):
     name            = serializers.SerializerMethodField()
     profile_image   = serializers.SerializerMethodField()
     is_admin        = serializers.SerializerMethodField()
+    person_id       = serializers.IntegerField(
+        source='member.id',
+        read_only=True
+    )
 
     class Meta:
         model = User
@@ -20,7 +24,8 @@ class ProfileSerializer(ModelSerializer):
             'uuid',
             'name',
             'profile_image',
-            'is_admin'
+            'is_admin',
+            'person_id'
         ]
 
     def get_name(self, obj):
