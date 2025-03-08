@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'accountings.account.apps.AccountConfig',
     'accountings.transaction.apps.TransactionConfig',
 
+    'archive.gallery.apps.GalleryConfig',
+
     'board.discussion.apps.DiscussionConfig',
     'board.notice.apps.NoticeConfig',
 
