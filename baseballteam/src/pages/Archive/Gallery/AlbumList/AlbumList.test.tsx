@@ -1,14 +1,14 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 
-import { GalleryProvider } from "../_contexts";
-import * as GalleryContext from "../_contexts";
 import { AlbumList } from "./AlbumList";
 import { useAlbumList } from "./_contexts";
+import { GalleryProvider } from "@contexts/gallery";
+import * as GalleryContext from "@contexts/gallery";
 import { sampleAlbums } from "@data/archive";
 import * as AlbumsAPI from "@services/archive/albums";
 import { renderWithProviders } from "@utils/test-utils";
 
-jest.mock("../_contexts", () => ({
+jest.mock("@contexts/gallery", () => ({
   GalleryProvider: ({ children }: { children: React.ReactNode }) => children,
   useGallery: jest.fn(),
 }));
@@ -28,6 +28,7 @@ describe("<AlbumList />", () => {
     allTags: [],
     memberQuery: "",
     setMemberQuery: jest.fn(),
+    refresh: jest.fn(),
   };
 
   beforeEach(() => {

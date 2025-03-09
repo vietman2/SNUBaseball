@@ -1,5 +1,6 @@
 import { createContext, useContext, useMemo, useState } from "react";
 
+import { useGallery } from "@contexts/gallery";
 import { AlbumType } from "@models/archive";
 import { createAlbum, removeAlbum, updateAlbum } from "@services/archive";
 
@@ -33,6 +34,8 @@ export function AlbumListProvider({ children }: { children: React.ReactNode }) {
   const [titleInput, setTitleInput] = useState<string>("");
   const [membersOnly, setMembersOnly] = useState<boolean>(false);
 
+  const { refresh } = useGallery();
+
   const toggleModal = () => {
     setModalOpen((prev) => !prev);
   };
@@ -61,22 +64,10 @@ export function AlbumListProvider({ children }: { children: React.ReactNode }) {
       const response = await removeAlbum(album.id);
 
       if (response) {
-        //await fetchAlbums();
-        return true;
+        refresh();
       } else {
-        return false;
+        window.alert("오류가 발생했습니다. 다시 시도해주세요.");
       }
-    }
-  };
-
-  const createNewAlbum = async (title: string, membersOnly: boolean) => {
-    const response = await createAlbum(title, membersOnly);
-
-    if (response) {
-      //await fetchAlbums();
-      return true;
-    } else {
-      return false;
     }
   };
 
@@ -89,13 +80,15 @@ export function AlbumListProvider({ children }: { children: React.ReactNode }) {
       );
       if (result) {
         toggleModal();
+        refresh();
       } else {
         window.alert("오류가 발생했습니다. 다시 시도해주세요.");
       }
     } else {
-      const result = await createNewAlbum(titleInput, membersOnly);
+      const result = await createAlbum(titleInput, membersOnly);
       if (result) {
         toggleModal();
+        refresh();
       } else {
         window.alert("오류가 발생했습니다. 다시 시도해주세요.");
       }

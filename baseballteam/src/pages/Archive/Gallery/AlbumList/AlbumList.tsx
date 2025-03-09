@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import { useGallery } from "../_contexts";
 import { AlbumListProvider, useAlbumList } from "./_contexts";
 import { AlbumModal } from "./_modals";
 import { AppIcon } from "@components/Icons";
+import { useGallery } from "@contexts/gallery";
 import { AlbumType } from "@models/archive";
 
 export function AlbumList() {
