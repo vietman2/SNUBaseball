@@ -1,44 +1,27 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import { useAlbum } from "../_contexts";
-import { AlbumModal } from "../_modals";
+import { useGallery } from "../_contexts";
+import { AlbumListProvider, useAlbumList } from "./_contexts";
+import { AlbumModal } from "./_modals";
 import { AppIcon } from "@components/Icons";
 import { AlbumType } from "@models/archive";
 
 export function AlbumList() {
-  const [modalOpen, setModalOpen] = useState(false);
+  return (
+    <AlbumListProvider>
+      <AlbumListContent />
+    </AlbumListProvider>
+  );
+}
 
+function AlbumListContent() {
   const navigate = useNavigate();
-  const { albums, selectAlbum, deleteAlbum } = useAlbum();
-
-  const toggleModal = () => {
-    setModalOpen((prev) => !prev);
-  };
+  const { albums } = useGallery();
+  const { modalOpen, listActions } = useAlbumList();
 
   const goBack = () => {
     navigate("../");
-  };
-
-  const handleCreateNew = () => {
-    selectAlbum(null);
-    toggleModal();
-  };
-
-  const handleDelete = async (album: AlbumType) => {
-    if (
-      window.confirm(
-        "정말 삭제하시겠습니까?\n앨범을 삭제하면, 앨범에 속한 모든 미디어는 미분류 앨범으로 이동합니다."
-      )
-    ) {
-      await deleteAlbum(album.id);
-    }
-  };
-
-  const handleEditModalOpen = (album: AlbumType) => {
-    selectAlbum(album);
-    toggleModal();
   };
 
   return (
@@ -49,7 +32,7 @@ export function AlbumList() {
             <AppIcon icon="chevron-left" size={24} color="#6C757D" />
             앨범 목록
           </button>
-          <button onClick={handleCreateNew} data-testid="open-modal">
+          <button onClick={listActions.createClick} data-testid="open-modal">
             <AppIcon icon="plus" size={14} color="#0F0F70" />
             새로 만들기
           </button>
@@ -59,13 +42,13 @@ export function AlbumList() {
             <AlbumSimple
               key={album.id}
               album={album}
-              onEdit={handleEditModalOpen}
-              onDelete={handleDelete}
+              onEdit={listActions.editClick}
+              onDelete={listActions.deleteClick}
             />
           ))}
         </List>
       </Container>
-      {modalOpen && <AlbumModal toggleModal={toggleModal} />}
+      {modalOpen && <AlbumModal />}
     </>
   );
 }
@@ -162,8 +145,9 @@ const List = styled.div`
   gap: 16px 32px;
 
   @media (max-width: 768px) {
-    overflow-x: auto;
-    flex-wrap: nowrap;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
   }
 `;
 
@@ -176,6 +160,11 @@ const AlbumWrapper = styled.div`
 
   background-color: ${({ theme }) => theme.colors.background200};
   border-radius: 16px;
+
+  @media (max-width: 768px) {
+    min-width: 85vw;
+    max-width: 85vw;
+  }
 `;
 
 const ImageWrapper = styled.div`
