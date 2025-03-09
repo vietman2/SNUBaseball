@@ -26,6 +26,19 @@ export const getMembers = async (filter?: string) => {
   }
 };
 
+export const searchMembers = async (query: string) => {
+  try {
+    const response = await axios.get("/v1/members/", {
+      params: {
+        search: query,
+      },
+    });
+    return response.data;
+  } catch {
+    return null;
+  }
+};
+
 export const createMember = async (
   firstName: string,
   lastName: string,

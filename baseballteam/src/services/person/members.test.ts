@@ -2,6 +2,7 @@ import axios from "axios";
 
 import {
   getMembers,
+  searchMembers,
   getMemberDetail,
   createMember,
   updateProfileImage,
@@ -23,6 +24,22 @@ describe("getMembers", () => {
     expect(response).toBeNull();
     await getMembers("기타");
     await getMembers("qwer");
+  });
+});
+
+describe("searchMembers", () => {
+  it("should return an array of members", async () => {
+    jest.spyOn(axios, "get").mockResolvedValue({ data: {} });
+
+    const response = await searchMembers("John");
+    expect(response).toEqual({});
+  });
+
+  it("should return null if an error occurs", async () => {
+    jest.spyOn(axios, "get").mockRejectedValue(new Error());
+
+    const response = await searchMembers("Doe");
+    expect(response).toBeNull();
   });
 });
 

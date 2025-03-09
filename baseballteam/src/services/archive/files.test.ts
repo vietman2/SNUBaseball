@@ -1,6 +1,14 @@
 import axios from "axios";
 
-import { uploadFiles, getFiles, getMediaDetails, deleteMedia } from "./files";
+import {
+  uploadFiles,
+  getFiles,
+  getMediaDetails,
+  deleteMedia,
+  setAlbum,
+  addOrRemovePerson,
+  addOrRemoveTag,
+} from "./files";
 
 describe("uploadFiles", () => {
   const mockFiles = [new File([""], "file1"), new File([""], "file2")];
@@ -91,5 +99,53 @@ describe("deleteMedia", () => {
     const response = await deleteMedia(1);
 
     expect(response).toBe(false);
+  });
+});
+
+describe("setAlbum", () => {
+  it("should set album", async () => {
+    jest.spyOn(axios, "patch").mockResolvedValue({ data: {} });
+    const response = await setAlbum(1, 2);
+
+    expect(response).toEqual({});
+  });
+
+  it("should return null if request fails", async () => {
+    jest.spyOn(axios, "patch").mockRejectedValueOnce(new Error());
+    const response = await setAlbum(1, 2);
+
+    expect(response).toBe(null);
+  });
+});
+
+describe("addOrRemovePerson", () => {
+  it("should add or remove person", async () => {
+    jest.spyOn(axios, "patch").mockResolvedValue({ data: {} });
+    const response = await addOrRemovePerson(1, 2);
+
+    expect(response).toEqual({});
+  });
+
+  it("should return null if request fails", async () => {
+    jest.spyOn(axios, "patch").mockRejectedValueOnce(new Error());
+    const response = await addOrRemovePerson(1, 2);
+
+    expect(response).toBe(null);
+  });
+});
+
+describe("addOrRemoveTag", () => {
+  it("should add or remove tag", async () => {
+    jest.spyOn(axios, "patch").mockResolvedValue({ data: {} });
+    const response = await addOrRemoveTag(1, 2);
+
+    expect(response).toEqual({});
+  });
+
+  it("should return null if request fails", async () => {
+    jest.spyOn(axios, "patch").mockRejectedValueOnce(new Error());
+    const response = await addOrRemoveTag(1, 2);
+
+    expect(response).toBe(null);
   });
 });

@@ -2,12 +2,18 @@ import axios from "axios";
 
 export async function uploadFiles(
   files: File[],
-  onProgress: (progress: number) => void
+  onProgress: (progress: number) => void,
+  options?: { albumId?: number; tagsId?: number[]; membersId?: number[] }
 ) {
   const formData = new FormData();
   files.forEach((file) => {
     formData.append("files", file);
   });
+  formData.append("options", JSON.stringify({
+    album_id: options?.albumId,
+    tag_ids: options?.tagsId,
+    member_ids: options?.membersId,
+  }));
 
   try {
     await axios.post("/v1/archive/", formData, {
@@ -32,12 +38,12 @@ export async function uploadFiles(
 
 export async function getFiles(
   albumId: number | undefined,
-  tagId: number | undefined,
+  tagIds: number | undefined,
   memberId: number | undefined
 ) {
   const params = {
     album: albumId,
-    tag: tagId,
+    tag: tagIds,
     member: memberId,
   };
 
@@ -64,5 +70,36 @@ export async function deleteMedia(id: number) {
     return true;
   } catch {
     return false;
+  }
+}
+
+export async function setAlbum(id: number, albumId: number) {
+  try {
+    const response = await axios.patch(`/v1/archive/${id}/`, {
+      album: albumId,
+    });
+    return response.data;
+  } catch {
+    return null;
+  }
+}
+
+export async function addOrRemoveTag(id: number, tagId: number) {
+  try {
+    const response = await axios.patch(`/v1/archive/${id}/`, { tag: tagId });
+    return response.data;
+  } catch {
+    return null;
+  }
+}
+
+export async function addOrRemovePerson(id: number, personId: number) {
+  try {
+    const response = await axios.patch(`/v1/archive/${id}/`, {
+      person: personId,
+    });
+    return response.data;
+  } catch {
+    return null;
   }
 }
