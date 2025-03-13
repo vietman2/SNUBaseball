@@ -41,6 +41,7 @@ export type MediaDetailType = {
   title: string;
   uploaded_at: string;
   uploaded_by: MemberMiniType;
+  type: "이미지" | "비디오";
 };
 
 export type ImageType = {

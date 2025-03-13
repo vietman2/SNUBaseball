@@ -28,17 +28,25 @@ export const sampleMedia: MediaType[] = [
 
 export const sampleAlbums: AlbumType[] = [
   {
-    id: 1,
-    title: "2025년 1월",
+    id: -1,
+    title: "미분류",
     cover_images: [],
     num_images: 0,
     num_videos: 0,
     members_only: false,
   },
   {
+    id: 1,
+    title: "2025년 1월",
+    cover_images: [sampleMedia[0]],
+    num_images: 0,
+    num_videos: 0,
+    members_only: true,
+  },
+  {
     id: 2,
     title: "2025년 2월",
-    cover_images: [sampleMedia[0]],
+    cover_images: [sampleMedia[1]],
     num_images: 0,
     num_videos: 0,
     members_only: true,
@@ -53,16 +61,28 @@ export const sampleMediaResponse: MediaResponseType = {
   previous: null,
 };
 
+export const sampleTags: MediaTagType[] = [
+  {
+    id: 1,
+    name: "태그1",
+  },
+  {
+    id: 2,
+    name: "태그2",
+  },
+];
+
 const sampleMediaDetail: MediaDetailType = {
   id: 1,
   base_id: 1,
   title: "미디어1",
   url: "https://via.placeholder.com/150",
   album: sampleAlbums[0],
-  tags: [],
-  people: [],
+  tags: sampleTags,
+  people: sampleMemberMinis,
   uploaded_at: "2025-01-01T00:00:00",
   uploaded_by: sampleMemberMinis[0],
+  type: "이미지",
 };
 
 export const sampleImageDetail: ImageType = {
@@ -83,14 +103,3 @@ export const sampleVideoDetail: VideoType = {
   duration: 60,
   thumbnail: "https://via.placeholder.com/150",
 };
-
-export const sampleTags: MediaTagType[] = [
-  {
-    id: 1,
-    name: "태그1",
-  },
-  {
-    id: 2,
-    name: "태그2",
-  },
-];
