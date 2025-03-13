@@ -192,6 +192,6 @@ class MemberUtilTest(TestCase):
         mock_get_presigned_url.return_value = 'https://test.com'
         self.assertEqual(
             get_profile_image_url(None),
-            'httpss://kr.object.ncloudstorage.com/snubaseball.test/profiles/person.png'
+            'https://kr.object.ncloudstorage.com/snubaseball.test/profiles/person.png'
         )
         self.assertEqual(get_profile_image_url(mock_image), 'https://test.com')
