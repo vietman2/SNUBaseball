@@ -36,7 +36,6 @@ describe("<AlbumList />", () => {
     memberQuery: "",
     updateCount: 0,
     setMemberQuery: jest.fn(),
-    refresh: jest.fn(),
     update: jest.fn(),
   };
 

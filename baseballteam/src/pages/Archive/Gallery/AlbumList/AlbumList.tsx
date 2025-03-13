@@ -16,7 +16,7 @@ export function AlbumList() {
   const [tagModal, setTagModal] = useState<boolean>(false);
 
   const navigate = useNavigate();
-  const { albums, allTags, refresh } = useGallery();
+  const { albums, allTags, update } = useGallery();
   const { colors } = useTheme();
 
   const goBack = () => {
@@ -50,7 +50,7 @@ export function AlbumList() {
       const response = await removeAlbum(album.id);
 
       if (response) {
-        refresh();
+        update();
       } else {
         window.alert("오류가 발생했습니다. 다시 시도해주세요.");
       }
