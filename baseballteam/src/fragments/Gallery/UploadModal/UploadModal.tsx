@@ -127,114 +127,112 @@ export function UploadModal({ toggleModal }: Readonly<Props>) {
 
   return (
     <Overlay onClick={toggleModal}>
-      <Modal>
-        <div onClick={(e) => e.stopPropagation()}>
-          <span>업로드</span>
-          <Options>
-            <div>
-              <button onClick={toggleAlbumMenu} data-testid="album-button">
-                <span>{selectedAlbum ? selectedAlbum.title : "앨범 선택"}</span>
-                <AppIcon
-                  icon="chevron-down"
-                  size={20}
-                  color={colors.borderDark}
-                />
+      <Modal onClick={(e) => e.stopPropagation()}>
+        <span>업로드</span>
+        <Options>
+          <div>
+            <button onClick={toggleAlbumMenu} data-testid="album-button">
+              <span>{selectedAlbum ? selectedAlbum.title : "앨범 선택"}</span>
+              <AppIcon
+                icon="chevron-down"
+                size={20}
+                color={colors.borderDark}
+              />
+            </button>
+            {albumMenuVisible && (
+              <AlbumMenu
+                toggleMenu={toggleAlbumMenu}
+                albums={albums}
+                selectedAlbum={selectedAlbum}
+                handleSelect={selectAlbum}
+              />
+            )}
+          </div>
+          <div>
+            <button onClick={toggleTagMenu} data-testid="tag-button">
+              <span>
+                {selectedTags.length > 0
+                  ? `태그 ${selectedTags.length}개 선택됨`
+                  : "태그 선택"}
+              </span>
+              <AppIcon
+                icon="chevron-down"
+                size={20}
+                color={colors.borderDark}
+              />
+            </button>
+            {tagMenuVisible && (
+              <TagMenu
+                toggleMenu={toggleTagMenu}
+                allTags={allTags}
+                selectedTags={selectedTags}
+                selectTag={selectTag}
+              />
+            )}
+          </div>
+          <div>
+            <button onClick={togglePersonMenu} data-testid="person-button">
+              <span>
+                {selectedPersons.length > 0
+                  ? `인물 ${selectedPersons.length}명 선택됨`
+                  : "인물 선택"}
+              </span>
+              <AppIcon
+                icon="chevron-down"
+                size={20}
+                color={colors.borderDark}
+              />
+            </button>
+            {personMenuVisible && (
+              <PersonMenu
+                toggleMenu={togglePersonMenu}
+                people={people}
+                selectedPeople={selectedPersons}
+                selectPerson={selectPerson}
+                searchQuery={memberQuery}
+                setSearchQuery={setMemberQuery}
+              />
+            )}
+          </div>
+        </Options>
+        <Files
+          onDragOver={handleDragOver}
+          onDrop={handleDrop}
+          onDragLeave={handleDragLeave}
+          $active={dragActive}
+          data-testid="dropzone"
+        >
+          <label htmlFor="file">
+            <AppIcon icon="plus" size={18} color={colors.primary} />
+            마우스로 파일을 끌고 오거나 여기를 클릭하세요
+          </label>
+          <input
+            type="file"
+            accept="image/*,video/*"
+            id="file"
+            multiple
+            onChange={(e) => dropFiles(e.target.files)}
+            data-testid="file-input"
+          />
+          {uploadedFiles.map((file) => (
+            <div key={file.name}>
+              <span>
+                {file.name}
+                <SizeText>{`\t(${getSize(file.size)})`}</SizeText>
+              </span>
+              <button
+                onClick={() => removeFile(file)}
+                data-testid="remove-file"
+              >
+                <AppIcon icon="close" size={18} color="red" />
               </button>
-              {albumMenuVisible && (
-                <AlbumMenu
-                  toggleMenu={toggleAlbumMenu}
-                  albums={albums}
-                  selectedAlbum={selectedAlbum}
-                  handleSelect={selectAlbum}
-                />
-              )}
             </div>
-            <div>
-              <button onClick={toggleTagMenu} data-testid="tag-button">
-                <span>
-                  {selectedTags.length > 0
-                    ? `태그 ${selectedTags.length}개 선택됨`
-                    : "태그 선택"}
-                </span>
-                <AppIcon
-                  icon="chevron-down"
-                  size={20}
-                  color={colors.borderDark}
-                />
-              </button>
-              {tagMenuVisible && (
-                <TagMenu
-                  toggleMenu={toggleTagMenu}
-                  allTags={allTags}
-                  selectedTags={selectedTags}
-                  selectTag={selectTag}
-                />
-              )}
-            </div>
-            <div>
-              <button onClick={togglePersonMenu} data-testid="person-button">
-                <span>
-                  {selectedPersons.length > 0
-                    ? `인물 ${selectedPersons.length}명 선택됨`
-                    : "인물 선택"}
-                </span>
-                <AppIcon
-                  icon="chevron-down"
-                  size={20}
-                  color={colors.borderDark}
-                />
-              </button>
-              {personMenuVisible && (
-                <PersonMenu
-                  toggleMenu={togglePersonMenu}
-                  people={people}
-                  selectedPeople={selectedPersons}
-                  selectPerson={selectPerson}
-                  searchQuery={memberQuery}
-                  setSearchQuery={setMemberQuery}
-                />
-              )}
-            </div>
-          </Options>
-          <Files
-            onDragOver={handleDragOver}
-            onDrop={handleDrop}
-            onDragLeave={handleDragLeave}
-            $active={dragActive}
-            data-testid="dropzone"
-          >
-            <label htmlFor="file">
-              <AppIcon icon="plus" size={18} color={colors.primary} />
-              마우스로 파일을 끌고 오거나 여기를 클릭하세요
-            </label>
-            <input
-              type="file"
-              accept="image/*,video/*"
-              id="file"
-              multiple
-              onChange={(e) => dropFiles(e.target.files)}
-              data-testid="file-input"
-            />
-            {uploadedFiles.map((file) => (
-              <div key={file.name}>
-                <span>
-                  {file.name}
-                  <SizeText>{`\t(${getSize(file.size)})`}</SizeText>
-                </span>
-                <button
-                  onClick={() => removeFile(file)}
-                  data-testid="remove-file"
-                >
-                  <AppIcon icon="close" size={18} color="red" />
-                </button>
-              </div>
-            ))}
-          </Files>
-          {progress > 0 && <span>전송중... {progress}%</span>}
-          <button onClick={handleSubmit} data-testid="submit-new-media">
-            전송 시작
-          </button>
-        </div>
+          ))}
+        </Files>
+        {progress > 0 && <span>전송중... {progress}%</span>}
+        <button onClick={handleSubmit} data-testid="submit-new-media">
+          전송 시작
+        </button>
       </Modal>
     </Overlay>
   );
