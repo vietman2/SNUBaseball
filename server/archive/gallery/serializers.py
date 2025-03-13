@@ -68,6 +68,7 @@ class BaseMediaDetailsSerializer(serializers.ModelSerializer):
     tags            = serializers.SerializerMethodField()
     people          = serializers.SerializerMethodField()
     title           = serializers.SerializerMethodField()
+    type            = serializers.SerializerMethodField()
     uploaded_at     = serializers.SerializerMethodField()
     uploaded_by     = serializers.SerializerMethodField()
     album_id        = serializers.IntegerField(write_only=True, required=False)
@@ -81,7 +82,7 @@ class BaseMediaDetailsSerializer(serializers.ModelSerializer):
     class Meta:
         model = BaseMedia
         fields = [
-            'id', 'url', 'album', 'tags', 'people', 'title',
+            'url', 'album', 'tags', 'people', 'title', 'type',
             'uploaded_at', 'uploaded_by', 'album_id', 'tag_ids', 'member_ids'
         ]
 
@@ -106,6 +107,9 @@ class BaseMediaDetailsSerializer(serializers.ModelSerializer):
 
     def get_title(self, obj):
         return obj.file.name.split('/')[-1]
+
+    def get_type(self, obj):
+        return obj.base.get_type_display()
 
     def get_uploaded_at(self, obj):
         return obj.base.uploaded_at.strftime('%Y-%m-%d')
@@ -147,10 +151,12 @@ class BaseMediaDetailsSerializer(serializers.ModelSerializer):
 class ImageSerializer(BaseMediaDetailsSerializer):
     ## TODO: Implement exif data
     #exif_data       = serializers.SerializerMethodField()
+    id              = serializers.IntegerField(read_only=True)
+    base_id         = serializers.IntegerField(read_only=True, source='base.id')
 
     class Meta(BaseMediaDetailsSerializer.Meta):
         model = Image
-        fields = BaseMediaDetailsSerializer.Meta.fields + ['file'] #, 'exif_data']
+        fields = BaseMediaDetailsSerializer.Meta.fields + ['id', 'base_id', 'file'] #, 'exif_data']
 
     def create(self, validated_data):
         with transaction.atomic():
@@ -168,12 +174,16 @@ class ImageSerializer(BaseMediaDetailsSerializer):
             return image
 
 class VideoSerializer(BaseMediaDetailsSerializer):
+    id              = serializers.IntegerField(read_only=True)
+    base_id         = serializers.IntegerField(read_only=True, source='base.id')
     duration        = serializers.IntegerField(read_only=True)
     thumbnail       = serializers.ImageField(read_only=True)
 
     class Meta(BaseMediaDetailsSerializer.Meta):
         model = Video
-        fields = BaseMediaDetailsSerializer.Meta.fields + ['file', 'duration', 'thumbnail']
+        fields = BaseMediaDetailsSerializer.Meta.fields + [
+            'id', 'base_id', 'file', 'duration', 'thumbnail'
+        ]
 
     def create(self, validated_data):
         with transaction.atomic():
