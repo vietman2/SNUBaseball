@@ -2,10 +2,19 @@ import { fireEvent, screen } from "@testing-library/react";
 import * as Router from "react-router-dom";
 
 import { MobileLayout } from "./Mobile";
+import * as AuthContext from "@contexts/auth";
 import * as AuthAPI from "@services/auth/auth";
 import { renderWithProviders } from "@utils/test-utils";
 
 describe("<MobileLayout />", () => {
+  beforeEach(() => {
+    jest.spyOn(AuthContext, "useAuth").mockReturnValue({
+      user: null,
+      logout: jest.fn(),
+      login: jest.fn(),
+    });
+  });
+  
   it("handles menu and tabs", () => {
     jest.spyOn(Router, "useLocation").mockReturnValue({
       pathname: "/",
