@@ -1,41 +1,50 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import axios from "axios";
 
-import { AlbumPreview, MediaPreview } from "../_components";
-import { useAlbum, useMedia, useMember, useTag } from "../_contexts";
-import { FilterModal, UploadModal } from "../_modals";
 import { Loading } from "@components/Fallbacks";
 import { AppIcon } from "@components/Icons";
 import { useAuth } from "@contexts/auth";
-import { useIntersectionObserver } from "@hooks/useIntersectionObserver";
-import { AlbumType } from "@models/archive";
+import { useGallery } from "@contexts/gallery";
+import { useTheme } from "@contexts/theme";
+import {
+  AlbumPreview,
+  FilterModal,
+  MediaSimple,
+  UploadModal,
+} from "@fragments/Gallery";
+import {
+  AlbumType,
+  MediaResponseType,
+  MediaType,
+  MediaTagType,
+} from "@models/archive";
+import { MemberMiniType } from "@models/user";
+import { getFiles } from "@services/archive";
 
 export function GalleryMain() {
+  const [mediaResponse, setMediaResponse] = useState<MediaResponseType | null>(
+    null
+  );
+  const [files, setFiles] = useState<MediaType[]>([]);
+
+  // Filters
+  const [selectedAlbum, setSelectedAlbum] = useState<AlbumType | null>(null);
+  const [selectedTag, setSelectedTag] = useState<MediaTagType | null>(null);
+  const [selectedPerson, setSelectedPerson] = useState<MemberMiniType | null>(
+    null
+  );
+
+  const [loading, setLoading] = useState<boolean>(false);
   const [uploadModalVisible, setUploadModalVisible] = useState<boolean>(false);
   const [filterModalVisible, setFilterModalVisible] = useState<boolean>(false);
+  const observerRef = useRef<HTMLDivElement>(null);
 
-  const navigate = useNavigate();
   const { user } = useAuth();
-  const { albums, selectedAlbum, selectAlbum } = useAlbum();
-  const { files, loading, reloadData, loadMoreData, selectMedia } = useMedia();
-  const { selectedPerson } = useMember();
-  const { selectedTag } = useTag();
-  const observerRef = useIntersectionObserver<HTMLDivElement>(loadMoreData, {
-    threshold: 0.2,
-  });
-
-  const handleAlbumListClick = () => {
-    if (user?.is_admin) {
-      navigate("./albums");
-    }
-  };
-
-  const handleAlbumClick = (album: AlbumType) => {
-    if (!loading) {
-      selectAlbum(album);
-    }
-  };
+  const { albums } = useGallery();
+  const { colors } = useTheme();
+  const navigate = useNavigate();
 
   const toggleUploadModal = () => {
     setUploadModalVisible((prev) => !prev);
@@ -45,28 +54,89 @@ export function GalleryMain() {
     setFilterModalVisible((prev) => !prev);
   };
 
-  useEffect(() => {
-    reloadData(selectedAlbum?.id, selectedTag?.id, selectedPerson?.id);
-  }, [selectedAlbum, selectedTag, selectedPerson]);
+  const navigateToAlbums = () => {
+    if (user?.is_admin) {
+      navigate("./albums");
+    }
+  };
+
+  const navigateToMediaDetail = (media: MediaType) => {
+    navigate(`/archive/gallery/${media.id.toString()}`);
+  };
+
+  const loadData = async (
+    albumId: number | undefined,
+    tagId: number | undefined,
+    personId: number | undefined
+  ) => {
+    setLoading(true);
+
+    const response = await getFiles(albumId, tagId, personId);
+
+    if (response) {
+      setMediaResponse(response);
+      setFiles(response.results);
+    }
+
+    setLoading(false);
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    loadData(selectedAlbum?.id, selectedTag?.id, selectedPerson?.id);
+  }, [selectedAlbum, selectedTag, selectedPerson]);
+
+  const loadMoreData = useCallback(async () => {
+    if (mediaResponse && mediaResponse.next && !loading) {
+      setLoading(true);
+      try {
+        const response = await axios.get(mediaResponse.next);
+        setMediaResponse(response.data);
+        setFiles((prev) => [...prev, ...response.data.results]);
+      } catch {
+        // Do nothing
+      }
+      setLoading(false);
+    }
+  }, [mediaResponse, loading]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          loadMoreData();
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (observerRef.current) {
+      observer.observe(observerRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [observerRef, loadMoreData]);
 
   return (
     <>
       <Container>
         <AlbumsWrapper $display={selectedAlbum === null}>
           <Horizontal>
-            <button onClick={handleAlbumListClick} data-testid="album-list">
-              앨범 <AppIcon icon="chevron-right" size={24} color="#6C757D" />
+            <span>앨범</span>
+            <button onClick={navigateToAlbums} data-testid="album-list">
+              <AppIcon icon="settings" size={24} color={colors.foreground900} />
             </button>
           </Horizontal>
           <List>
             {albums.map((album) => (
               <button
                 key={album.id}
-                onClick={() => handleAlbumClick(album)}
+                onClick={() => setSelectedAlbum(album)}
                 data-testid={`album-${album.id}`}
               >
                 <AlbumPreview album={album} />
@@ -77,7 +147,7 @@ export function GalleryMain() {
         <MediaWrapper>
           <Header>
             <BreadCrumb>
-              <button onClick={() => selectAlbum(null)} data-testid="back">
+              <button onClick={() => setSelectedAlbum(null)} data-testid="back">
                 <AppIcon icon="album" size={24} color="#0B1623" />
                 갤러리
               </button>
@@ -92,11 +162,11 @@ export function GalleryMain() {
             <div>
               <FilterButton onClick={toggleFilterModal} data-testid="filter">
                 <AppIcon icon="filter" size={18} color="#0F0F70" />
-                필터
+                <span>필터</span>
               </FilterButton>
               <button onClick={toggleUploadModal} data-testid="upload">
                 <AppIcon icon="plus" size={18} color="#FAF9F6" />
-                업로드
+                <span>업로드</span>
               </button>
             </div>
           </Header>
@@ -104,10 +174,10 @@ export function GalleryMain() {
             {files.map((file) => (
               <button
                 key={file.id}
-                onClick={() => selectMedia(file)}
+                onClick={() => navigateToMediaDetail(file)}
                 data-testid={`media-${file.id}`}
               >
-                <MediaPreview media={file} />
+                <MediaSimple media={file} />
               </button>
             ))}
             <div
@@ -120,7 +190,15 @@ export function GalleryMain() {
         </MediaWrapper>
       </Container>
       {uploadModalVisible && <UploadModal toggleModal={toggleUploadModal} />}
-      {filterModalVisible && <FilterModal toggleModal={toggleFilterModal} />}
+      {filterModalVisible && (
+        <FilterModal
+          selectedTag={selectedTag}
+          selectedMember={selectedPerson}
+          setSelectedTag={setSelectedTag}
+          setSelectedMember={setSelectedPerson}
+          toggleModal={toggleFilterModal}
+        />
+      )}
     </>
   );
 }
@@ -160,14 +238,14 @@ const Horizontal = styled.div`
   align-items: center;
   justify-content: space-between;
 
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.foreground900};
+
   > button {
     display: flex;
     align-items: center;
     gap: 4px;
-
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: ${({ theme }) => theme.colors.foreground900};
   }
 `;
 
@@ -200,6 +278,12 @@ const Header = styled.div`
     background-color: ${({ theme }) => theme.colors.primary};
 
     cursor: pointer;
+
+    @media (max-width: 768px) {
+      span {
+        display: none;
+      }
+    }
   }
 
   > div:last-child {
@@ -225,6 +309,10 @@ const BreadCrumb = styled.div`
     padding: 0;
     color: ${({ theme }) => theme.colors.foreground900};
     background-color: transparent;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
   }
 `;
 

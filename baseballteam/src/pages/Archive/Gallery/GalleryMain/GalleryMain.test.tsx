@@ -1,157 +1,172 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { fireEvent, screen, waitFor } from "@testing-library/react";
+import axios from "axios";
 
 import { GalleryMain } from "./GalleryMain";
-import {
-  AlbumProvider,
-  MediaProvider,
-  MemberProvider,
-  TagProvider,
-} from "../_contexts";
-import * as GalleryContexts from "../_contexts";
 import * as AuthContext from "@contexts/auth";
-import { sampleAlbums, sampleMedia, sampleTags } from "@data/archive";
+import { GalleryProvider } from "@contexts/gallery";
+import * as GalleryContext from "@contexts/gallery";
 import {
-  sampleAdmin,
-  sampleAuthorProfile,
-  sampleMemberMinis,
-} from "@data/user";
-import { useIntersectionObserver } from "@hooks/useIntersectionObserver";
+  sampleAlbums,
+  sampleMedia,
+  sampleMediaResponse,
+  sampleTags,
+} from "@data/archive";
+import { sampleAdmin, sampleAuthorProfile } from "@data/user";
+import * as FilesAPI from "@services/archive/files";
 import { renderWithProviders } from "@utils/test-utils";
 
-jest.mock("../_components", () => ({
-  AlbumPreview: () => <div data-testid="album-preview" />,
-  MediaPreview: () => <div data-testid="media-preview" />,
+jest.mock("@contexts/gallery", () => ({
+  GalleryProvider: ({ children }: { children: React.ReactNode }) => children,
+  useGallery: jest.fn(),
 }));
-jest.mock("../_contexts", () => ({
-  AlbumProvider: ({ children }: { children: React.ReactNode }) => children,
-  MediaProvider: ({ children }: { children: React.ReactNode }) => children,
-  MemberProvider: ({ children }: { children: React.ReactNode }) => children,
-  TagProvider: ({ children }: { children: React.ReactNode }) => children,
-  useAlbum: jest.fn(),
-  useMedia: jest.fn(),
-  useMember: jest.fn(),
-  useTag: jest.fn(),
+jest.mock("@fragments/Gallery", () => ({
+  AlbumPreview: () => <div>AlbumPreview</div>,
+  FilterModal: () => <div>FilterModal</div>,
+  MediaSimple: () => <div>MediaSimple</div>,
+  UploadModal: () => <div>UploadModal</div>,
 }));
-jest.mock("../_modals", () => ({
-  FilterModal: () => <div data-testid="filter-modal" />,
-  UploadModal: () => <div data-testid="upload-modal" />,
-}));
-jest.mock("@hooks/useIntersectionObserver");
-
-const mockUseIntersectionObserver = useIntersectionObserver as jest.Mock;
-
-const render = () => {
-  return renderWithProviders(
-    <AlbumProvider>
-      <MediaProvider>
-        <MemberProvider>
-          <TagProvider>
-            <GalleryMain />
-          </TagProvider>
-        </MemberProvider>
-      </MediaProvider>
-    </AlbumProvider>
-  );
-};
 
 describe("<GalleryMain />", () => {
-  const defaultMediaContext = {
-    files: sampleMedia,
-    selectedImage: null,
-    selectedVideo: null,
-    loading: false,
-    reloadData: jest.fn(),
-    loadMoreData: jest.fn(),
-    selectMedia: jest.fn(),
-    deleteMedia: jest.fn(),
-    updateAlbum: jest.fn(),
-    updatePerson: jest.fn(),
-    updateTags: jest.fn(),
+  const defaultContext = {
+    albums: sampleAlbums,
+    people: [],
+    allTags: sampleTags,
+    memberQuery: "",
+    updateCount: 0,
+    setMemberQuery: jest.fn(),
+    update: jest.fn(),
   };
-  let intersectionCallback: IntersectionObserverCallback;
+
+  beforeAll(() => {
+    class MockIntersectionObserver implements IntersectionObserver {
+      callback: IntersectionObserverCallback;
+      root: Element | null = null;
+      rootMargin: string = "";
+      thresholds: ReadonlyArray<number> = [];
+
+      constructor(
+        callback: IntersectionObserverCallback,
+        options?: IntersectionObserverInit
+      ) {
+        this.callback = callback;
+      }
+
+      observe(target: Element): void {
+        // Immediately trigger the callback as if the element is in view.
+        this.callback(
+          [{ isIntersecting: true, target } as IntersectionObserverEntry],
+          this
+        );
+      }
+
+      unobserve(target: Element): void {
+        // No operation needed.
+      }
+
+      disconnect(): void {
+        // No operation needed.
+      }
+
+      takeRecords(): IntersectionObserverEntry[] {
+        return [];
+      }
+    }
+
+    // Override the global IntersectionObserver.
+    global.IntersectionObserver = MockIntersectionObserver as any;
+  });
 
   beforeEach(() => {
+    jest.clearAllMocks();
     jest.spyOn(window, "scrollTo").mockImplementation(() => {});
     jest.spyOn(AuthContext, "useAuth").mockReturnValue({
       user: sampleAdmin,
       login: jest.fn(),
       logout: jest.fn(),
     });
-    jest.spyOn(GalleryContexts, "useAlbum").mockReturnValue({
-      albums: sampleAlbums,
-      selectedAlbum: null,
-      selectAlbum: jest.fn(),
-      createNewAlbum: jest.fn(),
-      deleteAlbum: jest.fn(),
-      editAlbum: jest.fn(),
+    jest.spyOn(GalleryContext, "useGallery").mockReturnValue(defaultContext);
+    jest.spyOn(FilesAPI, "getFiles").mockResolvedValue({
+      ...sampleMediaResponse,
+      results: sampleMedia,
     });
-    jest.spyOn(GalleryContexts, "useMember").mockReturnValue({
-      people: sampleMemberMinis,
-      selectedPerson: null,
-      selectPerson: jest.fn(),
-      fetchMembers: jest.fn(),
-    });
-    jest
-      .spyOn(GalleryContexts, "useMedia")
-      .mockReturnValue(defaultMediaContext);
-    jest.spyOn(GalleryContexts, "useTag").mockReturnValue({
-      allTags: sampleTags,
-      selectedTag: null,
-      selectTag: jest.fn(),
-    });
-    mockUseIntersectionObserver.mockImplementation((callback) => {
-      intersectionCallback = callback;
-      return { current: null };
+    jest.spyOn(axios, "get").mockResolvedValue({
+      data: { ...sampleMediaResponse, results: sampleMedia },
     });
   });
 
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
-  it("handles all actions in admin mode", async () => {
-    render();
+  it("renders and handles navigations", async () => {
+    renderWithProviders(
+      <GalleryProvider>
+        <GalleryMain />
+      </GalleryProvider>
+    );
 
     await waitFor(() => {
-      fireEvent.click(screen.getByTestId("album-list")); // Navigate to albums
-      fireEvent.click(screen.getByTestId("album-1")); // Select album
-      fireEvent.click(screen.getByTestId("back")); // Unselect album
+      fireEvent.click(screen.getByTestId("filter"));
+      fireEvent.click(screen.getByTestId("upload"));
+      fireEvent.click(screen.getByTestId("album-list"));
+      fireEvent.click(screen.getByTestId("album-1"));
+      fireEvent.click(screen.getByTestId("back"));
+      fireEvent.click(screen.getByTestId("media-1"));
     });
-
-    waitFor(() => {
-      intersectionCallback(
-        [{ isIntersecting: true }] as IntersectionObserverEntry[],
-        {} as IntersectionObserver
-      );
-    }); // Load more data
   });
 
-  it("handles all actions in normal mode", async () => {
+  it("renders as non admin and api failures", async () => {
     jest.spyOn(AuthContext, "useAuth").mockReturnValue({
       user: sampleAuthorProfile,
       login: jest.fn(),
       logout: jest.fn(),
     });
-    jest.spyOn(GalleryContexts, "useAlbum").mockReturnValue({
-      albums: sampleAlbums,
-      selectedAlbum: sampleAlbums[0],
-      selectAlbum: jest.fn(),
-      createNewAlbum: jest.fn(),
-      deleteAlbum: jest.fn(),
-      editAlbum: jest.fn(),
-    });
-    jest.spyOn(GalleryContexts, "useMedia").mockReturnValue({
-      ...defaultMediaContext,
-      loading: true,
-    });
-    render();
+    jest.spyOn(FilesAPI, "getFiles").mockResolvedValueOnce(null);
+    jest.spyOn(axios, "get").mockRejectedValueOnce(new Error("Failed to load"));
+
+    renderWithProviders(
+      <GalleryProvider>
+        <GalleryMain />
+      </GalleryProvider>
+    );
 
     await waitFor(() => {
-      fireEvent.click(screen.getByTestId("album-list")); // Do nothing
-      fireEvent.click(screen.getByTestId("album-1")); // Do nothing (loading)
-      fireEvent.click(screen.getByTestId("upload")); // Open upload modal
-      fireEvent.click(screen.getByTestId("filter")); // Open filter modal
-      fireEvent.click(screen.getByTestId("media-1")); // Select media
+      fireEvent.click(screen.getByTestId("album-list"));
+    });
+  });
+
+  it("handles observerRef not intersecting", async () => {
+    class NotIntersectingObserver implements IntersectionObserver {
+      callback: IntersectionObserverCallback;
+      root: Element | null = null;
+      rootMargin: string = "";
+      thresholds: ReadonlyArray<number> = [];
+      constructor(
+        callback: IntersectionObserverCallback,
+        options?: IntersectionObserverInit
+      ) {
+        this.callback = callback;
+      }
+      observe(target: Element): void {
+        // Simulate an entry that is NOT intersecting.
+        this.callback(
+          [{ isIntersecting: false, target } as IntersectionObserverEntry],
+          this
+        );
+      }
+      unobserve(target: Element): void {}
+      disconnect(): void {}
+      takeRecords(): IntersectionObserverEntry[] {
+        return [];
+      }
+    }
+    // Override global IntersectionObserver with our custom one.
+    global.IntersectionObserver = NotIntersectingObserver as any;
+
+    waitFor(() => {
+      renderWithProviders(
+        <GalleryProvider>
+          <GalleryMain />
+        </GalleryProvider>
+      );
     });
   });
 });
