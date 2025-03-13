@@ -10,7 +10,6 @@ interface GalleryContextType {
   people: MemberMiniType[];
   allTags: MediaTagType[];
   memberQuery: string;
-  updateCount: number;
   setMemberQuery: (query: string) => void;
   update: () => void;
 }
@@ -74,11 +73,10 @@ export function GalleryProvider({ children }: { children: React.ReactNode }) {
       allTags,
       people,
       memberQuery,
-      updateCount,
       setMemberQuery,
       update: handleUpdate,
     }),
-    [albums, allTags, people, memberQuery, updateCount]
+    [albums, allTags, people, memberQuery]
   );
 
   return (
