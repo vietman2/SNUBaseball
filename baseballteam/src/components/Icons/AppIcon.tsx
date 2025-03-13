@@ -37,6 +37,7 @@ import { ReactComponent as MoneyIcon } from "./money.svg";
 import { ReactComponent as MoonIcon } from "./moon.svg";
 import { ReactComponent as PencilIcon } from "./pencil.svg";
 import { ReactComponent as PeopleIcon } from "./people.svg";
+import { ReactComponent as PersonIcon } from "./person.svg";
 import { ReactComponent as PlayIcon } from "./play.svg";
 import { ReactComponent as PlusIcon } from "./plus.svg";
 import { ReactComponent as RecordIcon } from "./record.svg";
@@ -100,6 +101,7 @@ const iconMap: Record<
   moon: MoonIcon,
   pencil: PencilIcon,
   people: PeopleIcon,
+  person: PersonIcon,
   play: PlayIcon,
   plus: PlusIcon,
   record: RecordIcon,
