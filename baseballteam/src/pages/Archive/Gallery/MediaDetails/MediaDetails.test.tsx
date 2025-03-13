@@ -3,7 +3,6 @@ import * as Router from "react-router-dom";
 
 import { MediaDetails } from "./MediaDetails";
 import * as AuthContext from "@contexts/auth";
-import { GalleryProvider } from "@contexts/gallery";
 import * as GalleryContext from "@contexts/gallery";
 import { sampleAlbums, sampleImageDetail, sampleTags } from "@data/archive";
 import { sampleAdmin, sampleAuthorProfile } from "@data/user";
@@ -12,10 +11,6 @@ import { MemberMiniType } from "@models/user";
 import * as FilesAPI from "@services/archive/files";
 import { renderWithProviders } from "@utils/test-utils";
 
-jest.mock("@contexts/gallery", () => ({
-  GalleryProvider: ({ children }: { children: React.ReactNode }) => children,
-  useGallery: jest.fn(),
-}));
 jest.mock("@fragments/Gallery", () => {
   const { sampleAlbums, sampleTags } = jest.requireActual("@data/archive");
   const { sampleMemberMinis } = jest.requireActual("@data/user");
@@ -78,11 +73,7 @@ describe("<MediaDetails />", () => {
   it("handles api error", async () => {
     jest.spyOn(FilesAPI, "getMediaDetails").mockResolvedValue(null);
 
-    renderWithProviders(
-      <GalleryProvider>
-        <MediaDetails />
-      </GalleryProvider>
-    );
+    renderWithProviders(<MediaDetails />);
 
     await waitFor(() =>
       expect(screen.getByText("ErrorPage")).toBeInTheDocument()
@@ -90,11 +81,7 @@ describe("<MediaDetails />", () => {
   });
 
   it("handles image edit and delete", async () => {
-    renderWithProviders(
-      <GalleryProvider>
-        <MediaDetails />
-      </GalleryProvider>
-    );
+    renderWithProviders(<MediaDetails />);
 
     jest.spyOn(FilesAPI, "setAlbum").mockResolvedValueOnce(null);
     jest.spyOn(FilesAPI, "addOrRemoveTag").mockResolvedValueOnce(null);
@@ -151,11 +138,7 @@ describe("<MediaDetails />", () => {
       logout: jest.fn(),
     });
 
-    renderWithProviders(
-      <GalleryProvider>
-        <MediaDetails />
-      </GalleryProvider>
-    );
+    renderWithProviders(<MediaDetails />);
 
     await waitFor(() => {
       fireEvent.click(screen.getByTestId("media-info"));
@@ -167,10 +150,6 @@ describe("<MediaDetails />", () => {
   it("handles bad param", async () => {
     jest.spyOn(Router, "useParams").mockReturnValue({ mediaId: "" });
 
-    renderWithProviders(
-      <GalleryProvider>
-        <MediaDetails />
-      </GalleryProvider>
-    );
+    renderWithProviders(<MediaDetails />);
   });
 });

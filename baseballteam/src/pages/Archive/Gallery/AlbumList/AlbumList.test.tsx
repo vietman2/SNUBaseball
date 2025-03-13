@@ -1,16 +1,11 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 
 import { AlbumList } from "./AlbumList";
-import { GalleryProvider } from "@contexts/gallery";
 import * as GalleryContext from "@contexts/gallery";
 import { sampleAlbums, sampleTags } from "@data/archive";
 import * as AlbumsAPI from "@services/archive/albums";
 import { renderWithProviders } from "@utils/test-utils";
 
-jest.mock("@contexts/gallery", () => ({
-  GalleryProvider: ({ children }: { children: React.ReactNode }) => children,
-  useGallery: jest.fn(),
-}));
 jest.mock("@fragments/Gallery", () => ({
   AlbumModal: () => <div />,
   AlbumSimple: ({
@@ -45,11 +40,7 @@ describe("<AlbumList />", () => {
   });
 
   it("renders album list and handles album actions", async () => {
-    renderWithProviders(
-      <GalleryProvider>
-        <AlbumList />
-      </GalleryProvider>
-    );
+    renderWithProviders(<AlbumList />);
 
     fireEvent.click(screen.getByTestId("open-album-modal")); // Open create album modal
     fireEvent.click(screen.getAllByTestId("edit-album")[0]); // Open edit album modal
@@ -70,11 +61,7 @@ describe("<AlbumList />", () => {
   });
 
   it("handles tag actions and go back", async () => {
-    renderWithProviders(
-      <GalleryProvider>
-        <AlbumList />
-      </GalleryProvider>
-    );
+    renderWithProviders(<AlbumList />);
 
     fireEvent.click(screen.getByTestId("open-tag-modal")); // Open tag modal
     fireEvent.click(screen.getByTestId("back")); // Navigate back

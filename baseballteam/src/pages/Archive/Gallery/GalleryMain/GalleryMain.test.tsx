@@ -5,7 +5,6 @@ import axios from "axios";
 
 import { GalleryMain } from "./GalleryMain";
 import * as AuthContext from "@contexts/auth";
-import { GalleryProvider } from "@contexts/gallery";
 import * as GalleryContext from "@contexts/gallery";
 import {
   sampleAlbums,
@@ -17,10 +16,6 @@ import { sampleAdmin, sampleAuthorProfile } from "@data/user";
 import * as FilesAPI from "@services/archive/files";
 import { renderWithProviders } from "@utils/test-utils";
 
-jest.mock("@contexts/gallery", () => ({
-  GalleryProvider: ({ children }: { children: React.ReactNode }) => children,
-  useGallery: jest.fn(),
-}));
 jest.mock("@fragments/Gallery", () => ({
   AlbumPreview: () => <div>AlbumPreview</div>,
   FilterModal: () => <div>FilterModal</div>,
@@ -98,9 +93,7 @@ describe("<GalleryMain />", () => {
 
   it("renders and handles navigations", async () => {
     renderWithProviders(
-      <GalleryProvider>
         <GalleryMain />
-      </GalleryProvider>
     );
 
     await waitFor(() => {
@@ -123,9 +116,7 @@ describe("<GalleryMain />", () => {
     jest.spyOn(axios, "get").mockRejectedValueOnce(new Error("Failed to load"));
 
     renderWithProviders(
-      <GalleryProvider>
         <GalleryMain />
-      </GalleryProvider>
     );
 
     await waitFor(() => {
@@ -163,9 +154,7 @@ describe("<GalleryMain />", () => {
 
     waitFor(() => {
       renderWithProviders(
-        <GalleryProvider>
           <GalleryMain />
-        </GalleryProvider>
       );
     });
   });
