@@ -1,6 +1,6 @@
 import { Route, Routes, Navigate, Outlet } from "react-router-dom";
 
-import { AlbumList, GalleryLayout, GalleryMain } from "./Gallery";
+import { AlbumList, GalleryLayout, MediaDetails } from "./Gallery";
 
 export function ArchiveContainer() {
   return (
@@ -8,11 +8,8 @@ export function ArchiveContainer() {
       <Route path="/" element={<Outlet />}>
         <Route index element={<Navigate to="gallery" />} />
         <Route path="gallery" element={<GalleryLayout />}>
-          <Route index element={<GalleryMain />} />
-          <Route path=":mediaId" element={<GalleryMain />} />
-          <Route path="albums" element={<Outlet />}>
-            <Route index element={<AlbumList />} />
-          </Route>
+          <Route path=":mediaId" element={<MediaDetails />} />
+          <Route path="albums" element={<AlbumList />} />
         </Route>
       </Route>
     </Routes>
