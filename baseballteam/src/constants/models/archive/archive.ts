@@ -33,11 +33,9 @@ export type MediaType = {
 
 export type MediaDetailType = {
   id: number;
+  base_id: number;
   url: string;
-  album: {
-    id: number;
-    title: string;
-  };
+  album: AlbumType | null;
   tags: MediaTagType[];
   people: MemberMiniType[];
   title: string;

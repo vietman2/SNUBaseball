@@ -55,12 +55,10 @@ export const sampleMediaResponse: MediaResponseType = {
 
 const sampleMediaDetail: MediaDetailType = {
   id: 1,
+  base_id: 1,
   title: "미디어1",
   url: "https://via.placeholder.com/150",
-  album: {
-    id: 1,
-    title: "2025년 1월",
-  },
+  album: sampleAlbums[0],
   tags: [],
   people: [],
   uploaded_at: "2025-01-01T00:00:00",
