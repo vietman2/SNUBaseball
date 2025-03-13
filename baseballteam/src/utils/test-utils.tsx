@@ -4,6 +4,7 @@ import { render, RenderOptions } from "@testing-library/react";
 import { ThemeProvider } from "styled-components";
 
 import { AuthProvider } from "@contexts/auth";
+import { GalleryProvider } from "@contexts/gallery";
 import { ThemeProvider as MyThemeProvider } from "@contexts/theme";
 import { light } from "@themes/themeColors";
 
@@ -22,11 +23,13 @@ export const renderWithProviders = (
       <ThemeProvider theme={{ colors: light }}>
         <MyThemeProvider>
           <AuthProvider>
-            {renderOptions.withRouter ? (
-              <BrowserRouter>{children}</BrowserRouter>
-            ) : (
-              children
-            )}
+            <GalleryProvider>
+              {renderOptions.withRouter ? (
+                <BrowserRouter>{children}</BrowserRouter>
+              ) : (
+                children
+              )}
+            </GalleryProvider>
           </AuthProvider>
         </MyThemeProvider>
       </ThemeProvider>
