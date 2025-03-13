@@ -8,3 +8,12 @@ export async function getTags() {
     return null;
   }
 }
+
+export async function createTag(name: string) {
+  try {
+    const response = await axios.post("/v1/archive/tags/", { name });
+    return response.data;
+  } catch {
+    return null;
+  }
+}

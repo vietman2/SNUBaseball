@@ -1,5 +1,5 @@
 import { createAlbum, getAlbums, updateAlbum, removeAlbum } from "./albums";
-import { getTags } from "./archive";
+import { getTags, createTag } from "./tags";
 import {
   getFiles,
   uploadFiles,
@@ -17,6 +17,7 @@ export {
   updateAlbum,
   removeAlbum,
   getTags,
+  createTag,
   uploadFiles,
   getMediaDetails,
   deleteMedia,
