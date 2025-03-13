@@ -1,40 +1,78 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import { AlbumListProvider, useAlbumList } from "./_contexts";
-import { AlbumModal } from "./_modals";
 import { AppIcon } from "@components/Icons";
 import { useGallery } from "@contexts/gallery";
+import { useTheme } from "@contexts/theme";
+import { AlbumModal, AlbumSimple, TagModal } from "@fragments/Gallery";
 import { AlbumType } from "@models/archive";
+import { removeAlbum } from "@services/archive";
 
 export function AlbumList() {
-  return (
-    <AlbumListProvider>
-      <AlbumListContent />
-    </AlbumListProvider>
-  );
-}
+  const [selectedAlbum, setSelectedAlbum] = useState<AlbumType | null>(null);
 
-function AlbumListContent() {
+  const [albumModal, setAlbumModal] = useState<boolean>(false);
+  const [tagModal, setTagModal] = useState<boolean>(false);
+
   const navigate = useNavigate();
-  const { albums } = useGallery();
-  const { modalOpen, listActions } = useAlbumList();
+  const { albums, allTags, refresh } = useGallery();
+  const { colors } = useTheme();
 
   const goBack = () => {
     navigate("../");
   };
 
+  const toggleAlbumModal = () => {
+    setAlbumModal((prev) => !prev);
+  };
+
+  const toggleTagModal = () => {
+    setTagModal((prev) => !prev);
+  };
+
+  const handleCreateAlbum = () => {
+    setSelectedAlbum(null);
+    toggleAlbumModal();
+  };
+
+  const handleEditAlbum = (album: AlbumType) => {
+    setSelectedAlbum(album);
+    toggleAlbumModal();
+  };
+
+  const handleDeleteAlbum = async (album: AlbumType) => {
+    if (
+      window.confirm(
+        "정말 삭제하시겠습니까?\n앨범을 삭제하면, 앨범에 속한 모든 미디어는 미분류 앨범으로 이동합니다."
+      )
+    ) {
+      const response = await removeAlbum(album.id);
+
+      if (response) {
+        refresh();
+      } else {
+        window.alert("오류가 발생했습니다. 다시 시도해주세요.");
+      }
+    }
+  };
+
   return (
     <>
       <Container>
-        <Header>
+        <div>
           <button onClick={goBack} data-testid="back">
-            <AppIcon icon="chevron-left" size={24} color="#6C757D" />
-            앨범 목록
+            <AppIcon
+              icon="chevron-left"
+              size={24}
+              color={colors.foreground300}
+            />
           </button>
-          <button onClick={listActions.createClick} data-testid="open-modal">
-            <AppIcon icon="plus" size={14} color="#0F0F70" />
-            새로 만들기
+        </div>
+        <Header>
+          <span>앨범 목록</span>
+          <button onClick={handleCreateAlbum} data-testid="open-album-modal">
+            <AppIcon icon="plus" size={14} color="#0F0F70" />새 앨범
           </button>
         </Header>
         <List>
@@ -42,62 +80,34 @@ function AlbumListContent() {
             <AlbumSimple
               key={album.id}
               album={album}
-              onEdit={listActions.editClick}
-              onDelete={listActions.deleteClick}
+              onEdit={handleEditAlbum}
+              onDelete={handleDeleteAlbum}
             />
           ))}
         </List>
+        <Header>
+          <span>태그 목록</span>
+          <button onClick={toggleTagModal} data-testid="open-tag-modal">
+            <AppIcon icon="plus" size={14} color="#0F0F70" />새 태그
+          </button>
+        </Header>
+        <Tags>
+          {allTags.map((tag) => (
+            <TagChip key={tag.id}>
+              <AppIcon icon="tag" size={14} color={colors.primary} />
+              {tag.name}
+            </TagChip>
+          ))}
+        </Tags>
       </Container>
-      {modalOpen && <AlbumModal />}
-    </>
-  );
-}
-
-interface Props {
-  album: AlbumType;
-  onEdit: (album: AlbumType) => void;
-  onDelete: (album: AlbumType) => void;
-}
-
-function AlbumSimple({ album, onEdit, onDelete }: Readonly<Props>) {
-  return (
-    <AlbumWrapper>
-      <ImageWrapper>
-        {album.cover_images.length > 0 ? (
-          <img src={album.cover_images[0].url} alt={album.title} />
-        ) : (
-          <div />
-        )}
-      </ImageWrapper>
-      <InfoWrapper>
-        <span>
-          {album.title}
-          {album.members_only && (
-            <AppIcon icon="lock" size={16} color="#212529" />
-          )}
-        </span>
-        <div>
-          <span>
-            <AppIcon icon="image" size={14} color="#212529" />
-            {album.num_images}
-          </span>
-          <span>
-            <AppIcon icon="video" size={14} color="#212529" />
-            {album.num_videos}
-          </span>
-        </div>
-      </InfoWrapper>
-      {album.id > 0 && (
-        <ButtonsWrapper>
-          <button onClick={() => onEdit(album)} data-testid="open-edit-modal">
-            <AppIcon icon="pencil" size={14} color="#A1A1A1" />
-          </button>
-          <button onClick={() => onDelete(album)} data-testid="delete">
-            <AppIcon icon="delete" size={16} color="#FF8080" />
-          </button>
-        </ButtonsWrapper>
+      {albumModal && (
+        <AlbumModal
+          selectedAlbum={selectedAlbum}
+          toggleModal={toggleAlbumModal}
+        />
       )}
-    </AlbumWrapper>
+      {tagModal && <TagModal toggleModal={toggleTagModal} />}
+    </>
   );
 }
 
@@ -106,6 +116,12 @@ const Container = styled.div`
   flex-direction: column;
   padding: 16px 24px;
   gap: 32px;
+
+  button:first-child {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
 `;
 
 const Header = styled.div`
@@ -113,11 +129,7 @@ const Header = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  > button:first-child {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-
+  > span {
     font-size: 1.5rem;
     font-weight: 600;
     color: ${({ theme }) => theme.colors.foreground900};
@@ -151,73 +163,21 @@ const List = styled.div`
   }
 `;
 
-const AlbumWrapper = styled.div`
+const Tags = styled.div`
   display: flex;
   flex-direction: row;
-  min-width: 360px;
-  max-width: 360px;
-  gap: 16px;
-
-  background-color: ${({ theme }) => theme.colors.background200};
-  border-radius: 16px;
-
-  @media (max-width: 768px) {
-    min-width: 85vw;
-    max-width: 85vw;
-  }
-`;
-
-const ImageWrapper = styled.div`
-  display: flex;
-
-  > img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 16px 0 0 16px;
-  }
-
-  > div {
-    width: 100px;
-    height: 100px;
-    background-color: ${({ theme }) => theme.colors.background700};
-    border-radius: 16px 0 0 16px;
-  }
-`;
-
-const InfoWrapper = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: center;
-  gap: 12px;
-
-  > div {
-    display: flex;
-    gap: 8px;
-  }
-
-  span {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: ${({ theme }) => theme.colors.foreground700};
-  }
-`;
-
-const ButtonsWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  padding: 8px 12px;
+  flex-wrap: wrap;
   gap: 8px;
+`;
 
-  > button {
-    display: flex;
-    cursor: pointer;
-  }
+const TagChip = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+
+  color: ${({ theme }) => theme.colors.foreground900};
+
+  border-radius: 8px;
+  border: 1px solid ${({ theme }) => theme.colors.borderLight};
 `;

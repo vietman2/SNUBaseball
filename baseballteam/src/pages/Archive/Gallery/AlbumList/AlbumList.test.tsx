@@ -1,10 +1,9 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 
 import { AlbumList } from "./AlbumList";
-import { useAlbumList } from "./_contexts";
 import { GalleryProvider } from "@contexts/gallery";
 import * as GalleryContext from "@contexts/gallery";
-import { sampleAlbums } from "@data/archive";
+import { sampleAlbums, sampleTags } from "@data/archive";
 import * as AlbumsAPI from "@services/archive/albums";
 import { renderWithProviders } from "@utils/test-utils";
 
@@ -12,23 +11,33 @@ jest.mock("@contexts/gallery", () => ({
   GalleryProvider: ({ children }: { children: React.ReactNode }) => children,
   useGallery: jest.fn(),
 }));
-
-const render = () => {
-  renderWithProviders(
-    <GalleryProvider>
-      <AlbumList />
-    </GalleryProvider>
-  );
-};
+jest.mock("@fragments/Gallery", () => ({
+  AlbumModal: () => <div />,
+  AlbumSimple: ({
+    onEdit,
+    onDelete,
+  }: {
+    onEdit: () => void;
+    onDelete: () => void;
+  }) => (
+    <>
+      <button onClick={onEdit} data-testid="edit-album" />
+      <button onClick={onDelete} data-testid="delete-album" />
+    </>
+  ),
+  TagModal: () => <div />,
+}));
 
 describe("<AlbumList />", () => {
   const defaultContext = {
     albums: sampleAlbums,
     people: [],
-    allTags: [],
+    allTags: sampleTags,
     memberQuery: "",
+    updateCount: 0,
     setMemberQuery: jest.fn(),
     refresh: jest.fn(),
+    update: jest.fn(),
   };
 
   beforeEach(() => {
@@ -36,73 +45,39 @@ describe("<AlbumList />", () => {
     jest.spyOn(GalleryContext, "useGallery").mockReturnValue(defaultContext);
   });
 
-  it("renders album list and handles create", async () => {
-    render();
+  it("renders album list and handles album actions", async () => {
+    renderWithProviders(
+      <GalleryProvider>
+        <AlbumList />
+      </GalleryProvider>
+    );
 
-    fireEvent.click(screen.getByTestId("open-modal")); // Open create modal
-    fireEvent.change(screen.getByTestId("album-title-input"), {
-      target: { value: "New Album" },
-    });
-    fireEvent.click(screen.getByTestId("checkbox")); // Toggle checkbox
+    fireEvent.click(screen.getByTestId("open-album-modal")); // Open create album modal
+    fireEvent.click(screen.getAllByTestId("edit-album")[0]); // Open edit album modal
 
-    jest.spyOn(AlbumsAPI, "createAlbum").mockResolvedValueOnce(null);
-    await waitFor(() => {
-      fireEvent.click(screen.getByTestId("submit-album")); // Submit
-    });
-
-    jest.spyOn(AlbumsAPI, "createAlbum").mockResolvedValueOnce(true);
-    await waitFor(() => {
-      fireEvent.click(screen.getByTestId("submit-album")); // Submit
-    });
-  });
-
-  it("handles edit album", async () => {
-    render();
-
-    fireEvent.click(screen.getAllByTestId("open-edit-modal")[0]); // Open edit modal
-
-    jest.spyOn(AlbumsAPI, "updateAlbum").mockResolvedValueOnce(null);
-    await waitFor(() => {
-      fireEvent.click(screen.getByTestId("submit-album")); // Submit
-    });
-
-    jest.spyOn(AlbumsAPI, "updateAlbum").mockResolvedValueOnce(true);
-    await waitFor(() => {
-      fireEvent.click(screen.getByTestId("submit-album")); // Submit
-    });
-  });
-
-  it("handles delete album and navigate back", async () => {
-    render();
-
-    // Cancel delete
     jest.spyOn(window, "confirm").mockReturnValueOnce(false);
-    fireEvent.click(screen.getAllByTestId("delete")[0]); // Delete
+    fireEvent.click(screen.getAllByTestId("delete-album")[0]); // Delete album cancel
 
-    // Fail to delete
     jest.spyOn(window, "confirm").mockReturnValue(true);
     jest.spyOn(AlbumsAPI, "removeAlbum").mockResolvedValueOnce(null);
     await waitFor(() => {
-      fireEvent.click(screen.getAllByTestId("delete")[0]); // Delete
+      fireEvent.click(screen.getAllByTestId("delete-album")[0]); // Delete album fail
     });
 
-    // Delete successfully
     jest.spyOn(AlbumsAPI, "removeAlbum").mockResolvedValueOnce(true);
     await waitFor(() => {
-      fireEvent.click(screen.getAllByTestId("delete")[0]); // Delete
+      fireEvent.click(screen.getAllByTestId("delete-album")[0]); // Delete album success
     });
-
-    fireEvent.click(screen.getByTestId("back")); // Navigate back
   });
 
-  it("handles context misuse", async () => {
-    jest.spyOn(console, "error").mockImplementation(() => {});
+  it("handles tag actions and go back", async () => {
+    renderWithProviders(
+      <GalleryProvider>
+        <AlbumList />
+      </GalleryProvider>
+    );
 
-    const InvalidComponent = () => {
-      useAlbumList();
-      return <div />;
-    };
-
-    expect(() => renderWithProviders(<InvalidComponent />)).toThrow();
+    fireEvent.click(screen.getByTestId("open-tag-modal")); // Open tag modal
+    fireEvent.click(screen.getByTestId("back")); // Navigate back
   });
 });
