@@ -240,6 +240,9 @@ export function UploadModal({ toggleModal }: Readonly<Props>) {
 
 const Overlay = styled.div`
   display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
   position: fixed;
   top: 0;
   left: 0;
@@ -251,38 +254,30 @@ const Overlay = styled.div`
 
 const Modal = styled.div`
   display: flex;
-  flex: 1;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  padding: 16px;
+  gap: 16px;
 
-  > div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 16px;
-    gap: 16px;
+  border-radius: 16px;
+  background-color: ${({ theme }) => theme.colors.background300};
 
-    border-radius: 16px;
-    background-color: ${({ theme }) => theme.colors.background300};
+  > span {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: ${({ theme }) => theme.colors.foreground900};
+  }
 
-    > span {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: ${({ theme }) => theme.colors.foreground900};
-    }
+  > button {
+    width: 100%;
+    padding: 8px 16px;
 
-    > button {
-      width: 100%;
-      padding: 8px 16px;
+    color: ${({ theme }) => theme.colors.background100};
+    font-size: 1rem;
+    font-weight: 600;
 
-      color: ${({ theme }) => theme.colors.background100};
-      font-size: 1rem;
-      font-weight: 600;
-
-      border-radius: 8px;
-      background-color: ${({ theme }) => theme.colors.primary};
-    }
+    border-radius: 8px;
+    background-color: ${({ theme }) => theme.colors.primary};
   }
 `;
 
