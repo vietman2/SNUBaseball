@@ -55,7 +55,7 @@ class DiscussionAPITestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         ## 2. with attachments
-        mock_get_presigned_url.return_value = 'http://test.com/test1.png'
+        mock_get_presigned_url.return_value = 'https://test.com/test1.png'
         response = self.client.get(f'{self.url}2/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 

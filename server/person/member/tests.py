@@ -45,7 +45,7 @@ class MemberAPITestCase(APITestCase):
 
     @patch('person.member.serializers.get_profile_image_url')
     def test_list_success(self, mock_get_profile_image_url):
-        mock_get_profile_image_url.return_value = 'http://test.com'
+        mock_get_profile_image_url.return_value = 'https://test.com'
         self.client.force_authenticate(user=self.user)
 
         ## 1. all
@@ -76,7 +76,7 @@ class MemberAPITestCase(APITestCase):
 
     @patch('person.member.serializers.get_profile_image_url')
     def test_retrieve_success(self, mock_get_profile_image_url):
-        mock_get_profile_image_url.return_value = 'http://test.com'
+        mock_get_profile_image_url.return_value = 'https://test.com'
         self.client.force_authenticate(user=self.user)
 
         response = self.client.get(self.url+'1/')
@@ -189,9 +189,9 @@ class MemberUtilTest(TestCase):
     def test_get_profile_image_url(self, mock_get_presigned_url):
         mock_image = generate_test_image_file()
         mock_image.name = 'person.png'
-        mock_get_presigned_url.return_value = 'http://test.com'
+        mock_get_presigned_url.return_value = 'https://test.com'
         self.assertEqual(
             get_profile_image_url(None),
-            'https://kr.object.ncloudstorage.com/snubaseball.test/profiles/person.png'
+            'httpss://kr.object.ncloudstorage.com/snubaseball.test/profiles/person.png'
         )
-        self.assertEqual(get_profile_image_url(mock_image), 'http://test.com')
+        self.assertEqual(get_profile_image_url(mock_image), 'https://test.com')

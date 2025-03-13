@@ -24,7 +24,7 @@ class MinutesAPITestCase(APITestCase):
 
     @patch('management.minutes.serializers.get_presigned_url')
     def test_list(self, mock_get_presigned_url):
-        mock_get_presigned_url.return_value = 'http://test.com/test1.png'
+        mock_get_presigned_url.return_value = 'https://test.com/test1.png'
         self.client.force_authenticate(user=self.user)
 
         ## 1. without query
@@ -38,7 +38,7 @@ class MinutesAPITestCase(APITestCase):
     @patch('management.minutes.serializers.get_presigned_url')
     @patch('django.core.files.storage.default_storage.save')
     def test_create(self, mock_save, mock_get_presigned_url):
-        mock_get_presigned_url.return_value = 'http://test.com/test1.png'
+        mock_get_presigned_url.return_value = 'https://test.com/test1.png'
         self.client.force_authenticate(user=self.user)
 
         ## 1. no attachment
@@ -60,7 +60,7 @@ class MinutesAPITestCase(APITestCase):
 
     @patch('management.minutes.serializers.get_presigned_url')
     def test_retrieve(self, mock_get_presigned_url):
-        mock_get_presigned_url.return_value = 'http://test.com/test1.png'
+        mock_get_presigned_url.return_value = 'https://test.com/test1.png'
         self.client.force_authenticate(user=self.user)
 
         response = self.client.get(f'{self.url}1/')
@@ -68,7 +68,7 @@ class MinutesAPITestCase(APITestCase):
 
     @patch('management.minutes.serializers.get_presigned_url')
     def test_update(self, mock_get_presigned_url):
-        mock_get_presigned_url.return_value = 'http://test.com/test1.png'
+        mock_get_presigned_url.return_value = 'https://test.com/test1.png'
         self.client.force_authenticate(user=self.user)
 
         response = self.client.put(f'{self.url}1/', self.data)

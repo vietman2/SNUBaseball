@@ -30,7 +30,7 @@ class UserProfileAPITestCase(APITestCase):
 
     @patch('person.user.serializers.get_presigned_url')
     def test_profile_success(self, mock_get_presigned_url):
-        mock_get_presigned_url.return_value = 'http://test.com'
+        mock_get_presigned_url.return_value = 'https://test.com'
         self.client.force_authenticate(user=self.user)
 
         response = self.client.get(f'{self.url}{self.user.uuid}/')

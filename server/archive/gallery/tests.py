@@ -102,7 +102,7 @@ class ArchiveAPITestCase(APITestCase):
     def test_list(self, mock_presigned_url, mock_height, mock_width):
         mock_height.return_value = 100
         mock_width.return_value = 100
-        mock_presigned_url.return_value = 'http://test.com'
+        mock_presigned_url.return_value = 'https://test.com'
         self.client.force_authenticate(user=self.user)
 
         response = self.client.get(self.url)

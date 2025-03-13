@@ -56,7 +56,7 @@ class NoticeAPITestCase(APITestCase):
     @patch("board.notice.serializers.AuthorSerializer.to_representation")
     def test_notice_retrieve(self, mock_to_representation, mock_get_presigned_url):
         mock_to_representation.return_value = {"uuid": "testuser_1"}
-        mock_get_presigned_url.return_value = 'http://test.com/test1.png'
+        mock_get_presigned_url.return_value = 'https://test.com/test1.png'
         self.client.force_authenticate(user=self.user)
 
         ## no attachment
