@@ -13,6 +13,7 @@ export function WideLayout() {
 
   const handleHomeClick = () => {
     navigate("/");
+    setMenuOpen(false);
   };
 
   const handleTabClick = (tab: TabType) => {
@@ -21,6 +22,7 @@ export function WideLayout() {
     }
 
     navigate(tab.path);
+    setMenuOpen(false);
   };
 
   const handleSubTabClick = (path: string) => {
@@ -129,7 +131,7 @@ const Tabs = styled.div`
 const Menu = styled.div<{ $isOpen: boolean }>`
   display: flex;
   max-height: ${({ $isOpen }) => ($isOpen ? "200px" : "0")};
-  width: 100vw;
+  width: 100%;
   justify-content: flex-end;
   padding: 0 15%;
   gap: 36px;
