@@ -6,23 +6,19 @@ export const sampleMemories: MemoriesType[] = [
     images: [
       {
         id: 1,
-        uri: "https://picsum.photos/200",
-        caption: "Caption 1",
+        url: "https://picsum.photos/200",
       },
       {
         id: 2,
-        uri: "https://picsum.photos/201",
-        caption: "Caption 2",
+        url: "https://picsum.photos/201",
       },
       {
         id: 3,
-        uri: "https://picsum.photos/202",
-        caption: "Caption 3",
+        url: "https://picsum.photos/202",
       },
       {
         id: 4,
-        uri: "https://picsum.photos/203",
-        caption: "Caption 4",
+        url: "https://picsum.photos/203",
       },
     ],
   },
@@ -31,23 +27,19 @@ export const sampleMemories: MemoriesType[] = [
     images: [
       {
         id: 1,
-        uri: "https://picsum.photos/200",
-        caption: "Caption 1",
+        url: "https://picsum.photos/200",
       },
       {
         id: 2,
-        uri: "https://picsum.photos/201",
-        caption: "Caption 2",
+        url: "https://picsum.photos/201",
       },
       {
         id: 3,
-        uri: "https://picsum.photos/202",
-        caption: "Caption 3",
+        url: "https://picsum.photos/202",
       },
       {
         id: 4,
-        uri: "https://picsum.photos/203",
-        caption: "Caption 4",
+        url: "https://picsum.photos/203",
       },
     ],
   },
@@ -62,11 +54,11 @@ export const sampleInterviews: InterviewType[] = [
     images: [
       {
         id: 1,
-        uri: "https://picsum.photos/200/200?random=1",
+        url: "https://picsum.photos/200/200?random=1",
       },
       {
         id: 2,
-        uri: "https://picsum.photos/200/200?random=2",
+        url: "https://picsum.photos/200/200?random=2",
       },
     ],
   },
@@ -78,11 +70,11 @@ export const sampleInterviews: InterviewType[] = [
     images: [
       {
         id: 1,
-        uri: "https://picsum.photos/200/200?random=1",
+        url: "https://picsum.photos/200/200?random=1",
       },
       {
         id: 2,
-        uri: "https://picsum.photos/200/200?random=2",
+        url: "https://picsum.photos/200/200?random=2",
       },
     ],
   },
