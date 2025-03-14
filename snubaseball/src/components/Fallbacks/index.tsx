@@ -1,3 +1,4 @@
 import { ErrorPage } from "./ErrorPage";
+import { LoadingPage } from "./Loading";
 
-export { ErrorPage };
+export { ErrorPage, LoadingPage };
