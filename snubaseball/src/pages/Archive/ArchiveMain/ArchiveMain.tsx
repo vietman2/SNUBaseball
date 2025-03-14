@@ -3,10 +3,11 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import { Divider } from "@components/Dividers";
-import { sampleInterviews, sampleMemories } from "@data/archives";
+import { sampleInterviews } from "@data/archives";
 import { Interview } from "@fragments/Interviews";
 import { Memories } from "@fragments/Memories";
 import { InterviewType, MemoriesType } from "@models/archive";
+import { getMemories } from "@services/archive";
 
 export function ArchiveMain() {
   const [memories, setMemories] = useState<MemoriesType[]>([]);
@@ -14,8 +15,8 @@ export function ArchiveMain() {
 
   const navigate = useNavigate();
 
-  const navigateToMemories = () => {
-    navigate("/archive/memories");
+  const navigateToGallery = () => {
+    navigate("/archive/gallery");
   };
 
   const navigateToInterviews = () => {
@@ -24,9 +25,11 @@ export function ArchiveMain() {
 
   useEffect(() => {
     const fetchData = async () => {
-      // TODO: Fetch memories data from the server
+      const memories = await getMemories();
 
-      setMemories(sampleMemories);
+      if (memories) {
+        setMemories(memories);
+      }
       setInterviews(sampleInterviews);
     };
 
@@ -43,11 +46,11 @@ export function ArchiveMain() {
         {memories.map((memory) => (
           <Memories key={memory.year} memories={memory} />
         ))}
+        <Divider />
+        <Button onClick={navigateToGallery} data-testid="more-memories">
+          {"MORE >>"}
+        </Button>
       </Wrapper>
-      <Divider />
-      <Button onClick={navigateToMemories} data-testid="more-memories">
-        {"MORE >>"}
-      </Button>
       <Wrapper>
         <Subtitle>
           INTERVIEW
@@ -56,11 +59,11 @@ export function ArchiveMain() {
         {interviews.map((interview) => (
           <Interview key={interview.id} interview={interview} />
         ))}
+        <Divider />
+        <Button onClick={navigateToInterviews} data-testid="more-interviews">
+          {"MORE >>"}
+        </Button>
       </Wrapper>
-      <Divider />
-      <Button onClick={navigateToInterviews} data-testid="more-interviews">
-        {"MORE >>"}
-      </Button>
     </Container>
   );
 }
@@ -77,7 +80,7 @@ const Container = styled.div`
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 16px 0;
+  padding: 24px 0;
   gap: 16px;
 `;
 
