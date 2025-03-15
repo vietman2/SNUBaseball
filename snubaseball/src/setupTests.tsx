@@ -14,9 +14,16 @@ jest.mock("react-router-dom", () => {
 });
 
 jest.mock("@assets/images/logo.png", () => "logo.png");
+jest.mock("@assets/images/main1.jpg", () => "main1.jpg");
+jest.mock("@assets/images/main2.jpg", () => "main2.jpg");
+jest.mock("@assets/images/main3.jpg", () => "main3.jpg");
 
+jest.mock("@components/Dividers", () => ({
+  Divider: () => <div>Divider</div>,
+}));
 jest.mock("@components/Fallbacks", () => ({
   ErrorPage: () => <div>ErrorPage</div>,
+  LoadingPage: () => <div>LoadingPage</div>,
 }));
 jest.mock("@components/Icons", () => ({
   AppIcon: () => <div>AppIcon</div>,

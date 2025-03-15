@@ -76,7 +76,8 @@
       "!src/**/*/index.tsx",
       "!src/**/*/index.ts",
       "!src/reportWebVitals.ts",
-      "!src/constants/**/*.{js,jsx,ts,tsx}"
+      "!src/data/**/*.{js,jsx,ts,tsx}",
+      "!src/models/**/*.{js,jsx,ts,tsx}"
     ],
     "moduleNameMapper": {
       "^@assets/(.*)$": "<rootDir>/src/assets/$1",
@@ -86,6 +87,7 @@
       "^@fragments/(.*)$": "<rootDir>/src/fragments/$1",
       "^@models/(.*)$": "<rootDir>/src/models/$1",
       "^@pages/(.*)$": "<rootDir>/src/pages/$1",
+      "^@services/(.*)$": "<rootDir>/src/services/$1",
       "^@utils/(.*)$": "<rootDir>/src/utils/$1"
     }
   }
