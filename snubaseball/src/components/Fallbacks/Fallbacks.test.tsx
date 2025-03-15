@@ -8,6 +8,10 @@ describe("<ErrorPage />", () => {
   it("renders correctly", () => {
     renderWithProviders(<ErrorPage />);
   });
+
+  it("handles button correctly", () => {
+    renderWithProviders(<ErrorPage onClick={jest.fn()} />);
+  });
 });
 
 describe("<LoadingPage />", () => {
