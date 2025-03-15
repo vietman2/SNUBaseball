@@ -14,8 +14,7 @@ export function Memories({ memories }: Readonly<Props>) {
       <ImagesContainer>
         {memories.images.map((image) => (
           <div key={image.id}>
-            <img src={image.uri} alt={image.caption} />
-            <span>{image.caption}</span>
+            <img src={image.url} alt={image.url} />
           </div>
         ))}
       </ImagesContainer>
@@ -34,23 +33,16 @@ const ImagesContainer = styled.div`
   display: grid;
   grid-template-columns: 1.75fr 1fr 1fr;
   grid-template-rows: 1fr 1fr;
+  max-height: 360px;
   padding: 0 24px;
   gap: 8px;
 
   img {
     display: block;
+    flex: 1;
     width: 100%;
-    height: 35vh;
-    object-fit: fill;
-
-    @media (max-width: 768px) {
-      height: 20vh;
-    }
-  }
-
-  span {
-    font-size: 0.85rem;
-    text-align: center;
+    max-height: 360px;
+    object-fit: cover;
   }
 
   > div {
@@ -69,12 +61,8 @@ const ImagesContainer = styled.div`
     grid-column: 2 / 3;
     grid-row: 1 / 2;
 
-    > img {
-      height: 15vh;
-
-      @media (max-width: 768px) {
-        height: 8vh;
-      }
+    img {
+      max-height: 176px;
     }
   }
 
@@ -82,12 +70,8 @@ const ImagesContainer = styled.div`
     grid-column: 2 / 3;
     grid-row: 2 / 3;
 
-    > img {
-      height: 15vh;
-
-      @media (max-width: 768px) {
-        height: 8vh;
-      }
+    img {
+      max-height: 176px;
     }
   }
 

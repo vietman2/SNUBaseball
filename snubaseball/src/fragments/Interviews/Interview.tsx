@@ -15,7 +15,7 @@ export function Interview({ interview }: Readonly<Props>) {
         <ImagesContainer>
           {interview.images.map((image) => (
             <div key={image.id}>
-              <img src={image.uri} alt={image.uri} />
+              <img src={image.url} alt={image.url} />
             </div>
           ))}
         </ImagesContainer>
