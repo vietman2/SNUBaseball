@@ -18,7 +18,7 @@ describe("<WideLayout />", () => {
     renderWithProviders(<WideLayout />);
 
     fireEvent.click(screen.getByTestId("home-button"));
-    fireEvent.click(screen.getByTestId("tab-아카이브"));
+    fireEvent.click(screen.getByTestId("tab-일정"));
     fireEvent.click(screen.getByTestId("tab-소개"));
     fireEvent.click(screen.getByTestId("tab-연혁"));
 

@@ -113,6 +113,10 @@ const Tabs = styled.div`
   align-items: center;
   gap: 36px;
 
+  font-size: 1rem;
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.highEmphasis};
+
   > button {
     display: flex;
     width: 64px;
@@ -151,5 +155,6 @@ const Contents = styled.div`
   display: flex;
   flex: 1;
   min-height: calc(100vh - 80px);
+  margin: 8px 0;
   padding: 0 15%;
 `;
