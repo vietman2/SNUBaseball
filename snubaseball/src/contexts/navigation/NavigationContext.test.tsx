@@ -1,4 +1,5 @@
 import { render } from "@testing-library/react";
+import * as Router from "react-router-dom";
 
 import { NavigationProvider, useNavigation } from "./NavigationContext";
 
@@ -14,7 +15,49 @@ const TestComponent = () => {
 };
 
 describe("NavigationContext", () => {
-  it("should handle context use", () => {
+  beforeEach(() => {
+    jest.spyOn(Router, "useLocation").mockReturnValue({
+      pathname: "/",
+      hash: "",
+      search: "",
+      state: null,
+      key: "",
+    });
+  });
+
+  it("handles home", () => {
+    render(
+      <NavigationProvider>
+        <TestComponent />
+      </NavigationProvider>
+    );
+  });
+
+  it("handles tab", () => {
+    jest.spyOn(Router, "useLocation").mockReturnValue({
+      pathname: "/schedule",
+      hash: "",
+      search: "",
+      state: null,
+      key: "",
+    });
+
+    render(
+      <NavigationProvider>
+        <TestComponent />
+      </NavigationProvider>
+    );
+  });
+
+  it("handles subtab", () => {
+    jest.spyOn(Router, "useLocation").mockReturnValue({
+      pathname: "/gallery",
+      hash: "",
+      search: "",
+      state: null,
+      key: "",
+    });
+
     render(
       <NavigationProvider>
         <TestComponent />

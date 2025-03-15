@@ -1,7 +1,7 @@
 export type TabType = {
   title: string;
-  path: string;
   subtabs: SubTabType[];
+  path?: string;
 };
 
 export type SubTabType = {
@@ -17,7 +17,6 @@ export const tabs: TabType[] = [
   },
   {
     title: "소개",
-    path: "/about",
     subtabs: [
       {
         title: "연혁",
@@ -44,7 +43,6 @@ export const tabs: TabType[] = [
   },
   {
     title: "아카이브",
-    path: "/archive",
     subtabs: [
       {
         title: "갤러리",
