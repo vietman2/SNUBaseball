@@ -30,6 +30,16 @@ jest.mock("@components/Icons", () => ({
   Logo: () => <div>Logo</div>,
 }));
 
+jest.mock("@contexts/gallery", () => ({
+  GalleryProvider: ({ children }: { children: React.ReactNode }) => children,
+  useGallery: jest.fn().mockReturnValue({
+    albums: [],
+    currentAlbum: undefined,
+    currentMedia: undefined,
+    setCurrentAlbum: jest.fn(),
+    setCurrentMedia: jest.fn(),
+  }),
+}));
 jest.mock("@contexts/navigation", () => {
   const { tabs } = jest.requireActual("@contexts/navigation");
 
@@ -39,8 +49,7 @@ jest.mock("@contexts/navigation", () => {
     useNavigation: jest.fn().mockReturnValue({
       currentTab: tabs[0],
       tabs: tabs,
-      setCurrentTab: jest.fn(),
-      setCurrentSubTab: jest.fn(),
+      currentSubTab: null,
     }),
     tabs,
   };
