@@ -20,6 +20,8 @@
     }
   },
   { "model": "gallery.tag", "pk": 1, "fields": { "name": "Tag 1" } },
+  { "model": "gallery.tag", "pk": 2, "fields": { "name": "2024" } },
+  { "model": "gallery.tag", "pk": 3, "fields": { "name": "2025" } },
   {
     "model": "gallery.basemedia",
     "pk": 1,
@@ -28,7 +30,7 @@
       "uploaded_by": "44895c75-cebf-4125-9682-74d94e130bc7",
       "uploaded_at": "2025-02-28T08:56:25.838Z",
       "type": 1,
-      "tags": [1],
+      "tags": [2],
       "people": [1]
     }
   },
