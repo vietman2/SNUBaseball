@@ -1,44 +1,23 @@
-import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import { LoadingPage } from "@components/Fallbacks";
 import { AppIcon } from "@components/Icons";
+import { useGallery } from "@contexts/gallery";
 import { colors } from "@contexts/theme";
 import { MediaSimple } from "@fragments/Albums";
-import { MediaType } from "@models/archive";
-import { getAlbumImages } from "@services/archive";
 
 export function AlbumDetail() {
-  const [files, setFiles] = useState<MediaType[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-
-  const { albumId } = useParams<{ albumId: string }>();
+  const { files, loading } = useGallery();
   const navigate = useNavigate();
 
   const goBack = () => {
     navigate(-1);
   };
 
-  useEffect(() => {
-    const getData = async () => {
-      if (!albumId) {
-        return;
-      }
-
-      setLoading(true);
-
-      const files = await getAlbumImages(albumId);
-
-      if (files) {
-        setFiles(files);
-      }
-
-      setLoading(false);
-    };
-
-    getData();
-  }, [albumId]);
+  const handleMediaClick = (id: number) => {
+    navigate(`./${id}`);
+  };
 
   if (loading) {
     return <LoadingPage />;
@@ -57,7 +36,11 @@ export function AlbumDetail() {
         </button>
         <MediaList>
           {files.map((file) => (
-            <button key={file.id}>
+            <button
+              key={file.id}
+              onClick={() => handleMediaClick(file.id)}
+              data-testid={`media-${file.id}`}
+            >
               <MediaSimple media={file} />
             </button>
           ))}
@@ -72,6 +55,10 @@ const Container = styled.div`
   flex: 1;
   flex-direction: column;
   padding: 0 24px;
+
+  @media (max-width: 768px) {
+    padding: 16px 24px;
+  }
 `;
 
 const Wrapper = styled.div`

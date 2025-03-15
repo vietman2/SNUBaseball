@@ -1,44 +1,21 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import { ErrorPage, LoadingPage } from "@components/Fallbacks";
+import { LoadingPage } from "@components/Fallbacks";
+import { useGallery } from "@contexts/gallery";
 import { AlbumSimple } from "@fragments/Albums";
 import { AlbumType } from "@models/archive";
-import { getAlbums } from "@services/archive";
 
 export function AlbumList() {
-  const [albums, setAlbums] = useState<AlbumType[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-
+  const { albums, loading } = useGallery();
   const navigate = useNavigate();
 
   const handleSelectAlbum = (album: AlbumType) => {
     navigate(`/gallery/${album.id}`);
   };
 
-  useEffect(() => {
-    const getData = async () => {
-      setLoading(true);
-
-      const albums = await getAlbums();
-
-      if (albums) {
-        setAlbums(albums);
-      }
-
-      setLoading(false);
-    };
-
-    getData();
-  }, []);
-
   if (loading) {
     return <LoadingPage />;
-  }
-
-  if (!albums || albums.length === 0) {
-    return <ErrorPage />;
   }
 
   return (

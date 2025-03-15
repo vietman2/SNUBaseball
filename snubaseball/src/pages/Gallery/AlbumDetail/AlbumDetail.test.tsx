@@ -1,43 +1,39 @@
-import * as Router from "react-router-dom";
+import { fireEvent, screen, waitFor } from "@testing-library/react";
 
 import { AlbumDetail } from "./AlbumDetail";
+import * as GalleryContext from "@contexts/gallery";
 import { sampleMedia } from "@data/archives";
-import * as GalleryAPI from "@services/archive/gallery";
 import { renderWithProviders } from "@utils/test-utils";
-import { fireEvent, screen, waitFor } from "@testing-library/dom";
 
 jest.mock("@fragments/Albums", () => ({
   MediaSimple: () => <div data-testid="media-simple" />,
 }));
 
 describe("<AlbumDetail />", () => {
+  const defaultContext = {
+    albums: [],
+    files: sampleMedia,
+    media: undefined,
+    loading: false,
+  };
   beforeEach(() => {
-    jest.spyOn(Router, "useParams").mockReturnValue({ albumId: "1" });
+    jest.spyOn(GalleryContext, "useGallery").mockReturnValue(defaultContext);
   });
 
-  it("handles bad configuration", async () => {
-    jest.spyOn(Router, "useParams").mockReturnValue({ albumId: "" });
+  it("renders loading", async () => {
+    jest
+      .spyOn(GalleryContext, "useGallery")
+      .mockReturnValue({ ...defaultContext, loading: true });
 
     renderWithProviders(<AlbumDetail />);
   });
 
   it("renders and handles navigations", async () => {
-    jest.spyOn(GalleryAPI, "getAlbumImages").mockResolvedValue(sampleMedia);
-
     renderWithProviders(<AlbumDetail />);
 
     await waitFor(() => {
       fireEvent.click(screen.getByTestId("back"));
-    });
-  });
-
-  it("handles api error", async () => {
-    jest.spyOn(GalleryAPI, "getAlbumImages").mockResolvedValue(null);
-
-    renderWithProviders(<AlbumDetail />);
-
-    await waitFor(() => {
-      fireEvent.click(screen.getByTestId("back"));
+      fireEvent.click(screen.getByTestId("media-1"));
     });
   });
 });
