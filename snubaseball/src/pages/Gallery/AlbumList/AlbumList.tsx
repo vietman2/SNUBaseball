@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import { ErrorPage, LoadingPage } from "@components/Fallbacks";
-import { AppIcon } from "@components/Icons";
-import { colors } from "@contexts/theme";
 import { AlbumSimple } from "@fragments/Albums";
 import { AlbumType } from "@models/archive";
 import { getAlbums } from "@services/archive";
@@ -15,12 +13,8 @@ export function AlbumList() {
 
   const navigate = useNavigate();
 
-  const goBack = () => {
-    navigate(-1);
-  };
-
   const handleSelectAlbum = (album: AlbumType) => {
-    navigate(`/archive/gallery/${album.id}`);
+    navigate(`/gallery/${album.id}`);
   };
 
   useEffect(() => {
@@ -49,10 +43,6 @@ export function AlbumList() {
 
   return (
     <Container>
-      <button onClick={goBack} data-testid="back">
-        <AppIcon icon="chevron-left" size={24} color={colors.mediumEmphasis} />
-        아카이브 홈
-      </button>
       <AlbumsList>
         {albums.map((album) => (
           <button
@@ -74,18 +64,6 @@ const Container = styled.div`
   flex-direction: column;
   padding: 16px 24px;
   gap: 32px;
-
-  > button {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-
-    font-size: 1rem;
-    font-weight: 600;
-    color: ${({ theme }) => theme.colors.highEmphasis};
-
-    cursor: pointer;
-  }
 
   @media (max-width: 768px) {
     padding: 16px;

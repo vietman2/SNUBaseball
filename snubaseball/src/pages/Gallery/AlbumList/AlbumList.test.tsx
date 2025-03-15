@@ -16,7 +16,6 @@ describe("<AlbumList />", () => {
     renderWithProviders(<AlbumList />);
 
     await waitFor(() => {
-      fireEvent.click(screen.getByTestId("back"));
       fireEvent.click(screen.getByTestId("album-1"));
     });
   });
