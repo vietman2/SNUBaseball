@@ -74,7 +74,7 @@ const AlbumPreview = styled.div`
 
     overflow: hidden;
 
-    @media (max-width: 768px) {
+    @media (max-width: 1440px) {
       min-width: 120px;
       max-width: 120px;
       min-height: 120px;
@@ -99,7 +99,7 @@ const AlbumPreview = styled.div`
     opacity: 0.9;
     animation: ${fadeOut} 5s ease forwards;
 
-    @media (max-width: 768px) {
+    @media (max-width: 1440px) {
       max-height: 120px;
     }
   }
