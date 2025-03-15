@@ -160,9 +160,7 @@ export default function App() {
       <GlobalStyles />
       <StyledThemeProvider theme={{ colors: colors }}>
         <ThemeProvider>
-          <NavigationProvider>
-            <AppRouter />
-          </NavigationProvider>
+          <AppRouter />
         </ThemeProvider>
       </StyledThemeProvider>
     </>
@@ -173,7 +171,14 @@ function AppRouter() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
-        <Route path="/" element={<RootLayout />}>
+        <Route
+          path="/"
+          element={
+            <NavigationProvider>
+              <RootLayout />
+            </NavigationProvider>
+          }
+        >
           <Route path="/" element={<Home />} />
           <Route path="/about/*" element={<AboutContainer />} />
           <Route path="/gallery/*" element={<GalleryContainer />} />
