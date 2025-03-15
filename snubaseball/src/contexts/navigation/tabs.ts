@@ -45,6 +45,15 @@ export const tabs: TabType[] = [
   {
     title: "아카이브",
     path: "/archive",
-    subtabs: [],
+    subtabs: [
+      {
+        title: "갤러리",
+        path: "/gallery",
+      },
+      {
+        title: "인터뷰",
+        path: "/interviews",
+      },
+    ],
   },
 ];
