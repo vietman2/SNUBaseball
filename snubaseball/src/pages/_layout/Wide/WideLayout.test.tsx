@@ -11,8 +11,7 @@ describe("<WideLayout />", () => {
     jest.spyOn(NavigationContext, "useNavigation").mockReturnValue({
       currentTab: tabs[0],
       tabs,
-      setCurrentTab: jest.fn(),
-      setCurrentSubTab: jest.fn(),
+      currentSubTab: null,
     });
 
     renderWithProviders(<WideLayout />);

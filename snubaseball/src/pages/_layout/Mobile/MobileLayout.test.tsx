@@ -13,8 +13,7 @@ describe("<MobileLayout />", () => {
         subtabs: [],
       },
       tabs: [],
-      setCurrentTab: jest.fn(),
-      setCurrentSubTab: jest.fn(),
+      currentSubTab: null,
     });
     renderWithProviders(<MobileLayout />);
   });
@@ -26,13 +25,13 @@ describe("<MobileLayout />", () => {
       currentTab: tabs[1],
       currentSubTab: tabs[1].subtabs[0],
       tabs,
-      setCurrentTab: jest.fn(),
-      setCurrentSubTab: jest.fn(),
     });
 
     renderWithProviders(<MobileLayout />);
 
     fireEvent.click(screen.getByTestId("menu-button"));
+    fireEvent.click(screen.getByTestId("home-button-sidebar"));
+    fireEvent.click(screen.getByTestId("home-button"));
     fireEvent.click(screen.getByTestId("tab-Home")); // navigate to another tab
     fireEvent.click(screen.getByTestId("tab-소개")); // open subtabs
     fireEvent.click(screen.getByTestId("tab-소개")); // close subtabs

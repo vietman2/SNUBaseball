@@ -17,12 +17,10 @@ export function WideLayout() {
   };
 
   const handleTabClick = (tab: TabType) => {
-    if (tab.subtabs.length > 0) {
-      return;
+    if (tab.path) {
+      navigate(tab.path);
+      setMenuOpen(false);
     }
-
-    navigate(tab.path);
-    setMenuOpen(false);
   };
 
   const handleSubTabClick = (path: string) => {
