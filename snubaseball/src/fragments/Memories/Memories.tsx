@@ -42,6 +42,7 @@ const ImagesContainer = styled.div`
     flex: 1;
     width: 100%;
     max-height: 360px;
+    border-radius: 8px;
     object-fit: cover;
   }
 

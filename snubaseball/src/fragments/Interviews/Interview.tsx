@@ -57,13 +57,14 @@ const ImagesContainer = styled.div`
 
   img {
     display: block;
-    width: 25vw;
-    height: 25vw;
+    width: 15vw;
+    height: 15vw;
+    border-radius: 8px;
     object-fit: fill;
 
     @media (max-width: 768px) {
-      width: 50vw;
-      height: 50vw;
+      width: 40vw;
+      height: 40vw;
     }
   }
 `;

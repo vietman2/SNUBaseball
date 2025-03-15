@@ -147,6 +147,11 @@ const ImageContainer = styled.div`
   position: relative;
   width: 100%;
   height: 50vh;
+  overflow: hidden;
+
+  @media (min-width: 768px) {
+    border-radius: 8px;
+  }
 `;
 
 const ImageInnerContainer = styled.div`
