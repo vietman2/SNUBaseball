@@ -19,3 +19,13 @@ export async function getAlbumImages(albumId: string) {
     return null;
   }
 }
+
+export async function getMedia(id: string) {
+  try {
+    const response = await axios.get(`/v1/archive/${id}/`);
+
+    return response.data;
+  } catch {
+    return null;
+  }
+}
