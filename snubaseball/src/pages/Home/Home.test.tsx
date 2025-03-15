@@ -48,7 +48,9 @@ describe("<Home />", () => {
   });
 
   it("handles when ref is null and api error", async () => {
-    jest.spyOn(window, "setInterval").mockReturnValue(null);
+    jest
+      .spyOn(window, "setInterval")
+      .mockReturnValue(0 as unknown as ReturnType<typeof setInterval>);
     jest.spyOn(MemoriesAPI, "getMemories").mockResolvedValue(null);
 
     renderWithProviders(<Home />);
