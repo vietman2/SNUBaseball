@@ -12,6 +12,7 @@ export const sampleProfile: UserProfileType = {
   name: "John Doe",
   profile_image: "https://via.placeholder.com/150",
   is_admin: false,
+  person_id: 1,
 };
 
 export const sampleAdmin: UserProfileType = {
@@ -19,6 +20,7 @@ export const sampleAdmin: UserProfileType = {
   name: "김유안",
   profile_image: "https://via.placeholder.com/150",
   is_admin: true,
+  person_id: 1234,
 };
 
 export const sampleAuthorProfile: UserProfileType = {
@@ -26,6 +28,7 @@ export const sampleAuthorProfile: UserProfileType = {
   name: "Lorem Ipsum",
   profile_image: "https://via.placeholder.com/150",
   is_admin: false,
+  person_id: 12,
 };
 
 export const sampleAuthor: AuthorType = {

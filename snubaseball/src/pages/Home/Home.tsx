@@ -1,16 +1,27 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import MainImage1 from "@assets/images/main1.jpg";
 import MainImage2 from "@assets/images/main2.jpg";
 import MainImage3 from "@assets/images/main3.jpg";
+import { Divider } from "@components/Dividers";
 import { AppIcon } from "@components/Icons";
+import { sampleInterviews } from "@data/archives";
+import { Interview } from "@fragments/Interviews";
+import { Memories } from "@fragments/Memories";
+import { InterviewType, MemoriesType } from "@models/archive";
+import { getMemories } from "@services/archive";
 
 const images = [MainImage1, MainImage2, MainImage3];
 
 export function Home() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [memories, setMemories] = useState<MemoriesType[]>([]);
+  const [interviews, setInterviews] = useState<InterviewType[]>([]);
+
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const navigate = useNavigate();
 
   const startSlider = () => {
     intervalRef.current = setInterval(() => {
@@ -18,6 +29,14 @@ export function Home() {
         prevIndex === images.length - 1 ? 0 : prevIndex + 1
       );
     }, 5000);
+  };
+
+  const navigateToGallery = () => {
+    navigate("/gallery");
+  };
+
+  const navigateToInterviews = () => {
+    navigate("/interviews");
   };
 
   const resetInterval = () => {
@@ -42,6 +61,16 @@ export function Home() {
   };
 
   useEffect(() => {
+    const fetchData = async () => {
+      const memories = await getMemories();
+
+      if (memories) {
+        setMemories(memories);
+        setInterviews(sampleInterviews);
+      }
+    };
+
+    fetchData();
     startSlider();
 
     return () => {
@@ -73,6 +102,35 @@ export function Home() {
           <span>서울대학교 야구부에 오신 것을 환영합니다</span>
         </Texts>
       </ImageContainer>
+      <Wrapper>
+        <Subtitle>
+          MEMORIES
+          <span>_순간의 기록</span>
+        </Subtitle>
+        {memories.map((memory) => (
+          <Memories key={memory.year} memories={memory} />
+        ))}
+        <Divider />
+        <MoreButton onClick={navigateToGallery} data-testid="more-memories">
+          {"MORE >>"}
+        </MoreButton>
+      </Wrapper>
+      <Wrapper>
+        <Subtitle>
+          INTERVIEW
+          <span>_우리들의 이야기</span>
+        </Subtitle>
+        {interviews.map((interview) => (
+          <Interview key={interview.id} interview={interview} />
+        ))}
+        <Divider />
+        <MoreButton
+          onClick={navigateToInterviews}
+          data-testid="more-interviews"
+        >
+          {"MORE >>"}
+        </MoreButton>
+      </Wrapper>
     </Container>
   );
 }
@@ -154,4 +212,30 @@ const Texts = styled.div`
     font-size: 1rem;
     font-weight: 500;
   }
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 24px 0;
+  gap: 16px;
+`;
+
+const Subtitle = styled.span`
+  padding: 0 16px;
+  font-size: 1.5rem;
+  font-weight: 700;
+
+  > span {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+`;
+
+const MoreButton = styled.button`
+  display: flex;
+  justify-content: flex-start;
+  padding: 0 24px;
+
+  color: ${({ theme }) => theme.colors.primary};
 `;

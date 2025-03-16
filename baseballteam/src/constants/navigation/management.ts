@@ -23,6 +23,17 @@ export const Management: TabGroup = {
         },
       ],
     },
+    {
+      title: "아카이브",
+      icon: "archive",
+      path: "/archive",
+      subtabs: [
+        {
+          title: "갤러리",
+          path: "/archive/gallery",
+        },
+      ],
+    },
   ],
   limited: false,
 };

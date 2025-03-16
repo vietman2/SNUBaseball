@@ -1,6 +1,7 @@
 import { getMajors } from "./majors";
 import {
   getMembers,
+  searchMembers,
   createMember,
   getMemberDetail,
   updateProfileImage,
@@ -10,6 +11,7 @@ import {
 export {
   getMajors,
   getMembers,
+  searchMembers,
   getMemberDetail,
   createMember,
   updateProfileImage,

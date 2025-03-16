@@ -6,6 +6,8 @@ from rest_framework.routers import DefaultRouter
 from accountings.account.views import AccountView
 from accountings.transaction.views import TransactionView
 
+from archive.gallery.views import ArchiveViewSet, AlbumViewSet, TagViewSet
+
 from board.discussion.views import DiscussionView, DiscussionCommentView
 from board.notice.views import NoticeView, NoticeCommentView
 
@@ -26,6 +28,10 @@ router = DefaultRouter()
 
 router.register('accounts', AccountView, basename='accounts')
 router.register('transactions', TransactionView, basename='transactions')
+
+router.register('archive/albums', AlbumViewSet, basename='albums')
+router.register('archive/tags', TagViewSet, basename='tags')
+router.register('archive', ArchiveViewSet, basename='archive')
 
 router.register(
     'discussions/(?P<discussion_id>[0-9]+)/comments',

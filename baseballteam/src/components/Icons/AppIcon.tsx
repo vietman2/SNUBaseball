@@ -1,3 +1,5 @@
+import { ReactComponent as AlbumIcon } from "./album.svg";
+import { ReactComponent as ArchiveIcon } from "./archive.svg";
 import { ReactComponent as ArrowDownIcon } from "./arrow-down.svg";
 import { ReactComponent as ArrowUpIcon } from "./arrow-up.svg";
 import { ReactComponent as AttachmentIcon } from "./attachment.svg";
@@ -12,6 +14,7 @@ import { ReactComponent as ChevronLeftIcon } from "./chevron-left.svg";
 import { ReactComponent as ChevronRightIcon } from "./chevron-right.svg";
 import { ReactComponent as ChevronUpIcon } from "./chevron-up.svg";
 import { ReactComponent as CloseIcon } from "./close.svg";
+import { ReactComponent as DeleteIcon } from "./delete.svg";
 import { ReactComponent as DiaryIcon } from "./diary.svg";
 import { ReactComponent as DotsIcon } from "./dots.svg";
 import { ReactComponent as DownloadIcon } from "./download.svg";
@@ -23,21 +26,31 @@ import { ReactComponent as GridIcon } from "./grid.svg";
 import { ReactComponent as HeartIcon } from "./heart.svg";
 import { ReactComponent as HeartOutlineIcon } from "./heart-outline.svg";
 import { ReactComponent as HomeIcon } from "./home.svg";
+import { ReactComponent as ImageIcon } from "./image.svg";
+import { ReactComponent as InfoIcon } from "./info.svg";
 import { ReactComponent as LightbulbIcon } from "./lightbulb.svg";
 import { ReactComponent as ListIcon } from "./list.svg";
+import { ReactComponent as LockIcon } from "./lock.svg";
 import { ReactComponent as ManagementIcon } from "./management.svg";
 import { ReactComponent as MenuIcon } from "./menu.svg";
 import { ReactComponent as MoneyIcon } from "./money.svg";
 import { ReactComponent as MoonIcon } from "./moon.svg";
 import { ReactComponent as PencilIcon } from "./pencil.svg";
 import { ReactComponent as PeopleIcon } from "./people.svg";
+import { ReactComponent as PersonIcon } from "./person.svg";
+import { ReactComponent as PlayIcon } from "./play.svg";
+import { ReactComponent as PlusIcon } from "./plus.svg";
 import { ReactComponent as RecordIcon } from "./record.svg";
 import { ReactComponent as SearchIcon } from "./search.svg";
 import { ReactComponent as SendIcon } from "./send.svg";
+import { ReactComponent as SettingsIcon } from "./setting.svg";
 import { ReactComponent as StatusIcon } from "./status.svg";
 import { ReactComponent as SunIcon } from "./sun.svg";
 import { ReactComponent as TableIcon } from "./table.svg";
+import { ReactComponent as TagIcon } from "./tag.svg";
 import { ReactComponent as TextIcon } from "./text.svg";
+import { ReactComponent as UploadIcon } from "./upload.svg";
+import { ReactComponent as VideoIcon } from "./video.svg";
 
 interface Props {
   icon: string;
@@ -49,6 +62,8 @@ const iconMap: Record<
   string,
   React.FunctionComponent<React.SVGProps<SVGSVGElement>>
 > = {
+  album: AlbumIcon,
+  archive: ArchiveIcon,
   "arrow-down": ArrowDownIcon,
   "arrow-up": ArrowUpIcon,
   attachment: AttachmentIcon,
@@ -63,6 +78,7 @@ const iconMap: Record<
   "chevron-right": ChevronRightIcon,
   "chevron-up": ChevronUpIcon,
   close: CloseIcon,
+  delete: DeleteIcon,
   diary: DiaryIcon,
   dots: DotsIcon,
   download: DownloadIcon,
@@ -74,21 +90,31 @@ const iconMap: Record<
   heart: HeartIcon,
   "heart-outline": HeartOutlineIcon,
   home: HomeIcon,
+  image: ImageIcon,
+  info: InfoIcon,
   lightbulb: LightbulbIcon,
   list: ListIcon,
+  lock: LockIcon,
   management: ManagementIcon,
   menu: MenuIcon,
   money: MoneyIcon,
   moon: MoonIcon,
   pencil: PencilIcon,
   people: PeopleIcon,
+  person: PersonIcon,
+  play: PlayIcon,
+  plus: PlusIcon,
   record: RecordIcon,
   search: SearchIcon,
   send: SendIcon,
+  settings: SettingsIcon,
   status: StatusIcon,
   sun: SunIcon,
   table: TableIcon,
+  tag: TagIcon,
   text: TextIcon,
+  upload: UploadIcon,
+  video: VideoIcon,
 };
 
 export const AppIcon = ({ icon, size, color }: Props) => {

@@ -118,14 +118,26 @@ jest.mock("@components/Tabs", () => ({
   Tabs: () => <div>Tabs</div>,
 }));
 
-jest.mock("@contexts/auth/AuthContext", () => ({
+jest.mock("@contexts/auth", () => ({
   AuthProvider: ({ children }: { children: React.ReactNode }) => (
     <div>{children}</div>
   ),
-  useAuth: () => ({
+  useAuth: jest.fn().mockReturnValue({
+    user: null,
     login: jest.fn(),
-    setToken: jest.fn(),
     logout: jest.fn(),
+  }),
+}));
+jest.mock("@contexts/gallery", () => ({
+  GalleryProvider: ({ children }: { children: React.ReactNode }) => children,
+  useGallery: jest.fn().mockReturnValue({
+    albums: [],
+    people: [],
+    allTags: [],
+    memberQuery: "",
+    updateCount: 0,
+    setMemberQuery: jest.fn(),
+    update: jest.fn(),
   }),
 }));
 jest.mock("@contexts/theme/ThemeContext", () => ({

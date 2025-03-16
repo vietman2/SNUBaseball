@@ -22,7 +22,9 @@ class MinutesAPITestCase(APITestCase):
         }
         self.attachment = generate_test_image_file()
 
-    def test_list(self):
+    @patch('management.minutes.serializers.get_presigned_url')
+    def test_list(self, mock_get_presigned_url):
+        mock_get_presigned_url.return_value = 'https://test.com/test1.png'
         self.client.force_authenticate(user=self.user)
 
         ## 1. without query
@@ -33,8 +35,10 @@ class MinutesAPITestCase(APITestCase):
         response = self.client.get(f'{self.url}?query=Test')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+    @patch('management.minutes.serializers.get_presigned_url')
     @patch('django.core.files.storage.default_storage.save')
-    def test_create(self, mock_save):
+    def test_create(self, mock_save, mock_get_presigned_url):
+        mock_get_presigned_url.return_value = 'https://test.com/test1.png'
         self.client.force_authenticate(user=self.user)
 
         ## 1. no attachment
@@ -54,13 +58,17 @@ class MinutesAPITestCase(APITestCase):
         response = self.client.post(self.url, {})
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
-    def test_retrieve(self):
+    @patch('management.minutes.serializers.get_presigned_url')
+    def test_retrieve(self, mock_get_presigned_url):
+        mock_get_presigned_url.return_value = 'https://test.com/test1.png'
         self.client.force_authenticate(user=self.user)
 
         response = self.client.get(f'{self.url}1/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_update(self):
+    @patch('management.minutes.serializers.get_presigned_url')
+    def test_update(self, mock_get_presigned_url):
+        mock_get_presigned_url.return_value = 'https://test.com/test1.png'
         self.client.force_authenticate(user=self.user)
 
         response = self.client.put(f'{self.url}1/', self.data)

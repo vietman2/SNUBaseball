@@ -35,7 +35,9 @@ export function DesktopLayout() {
       setActiveTab(tab);
 
       if (subpath) {
-        const subtab = tab.subtabs.find((subtab) => subtab.path === `/${path}/${subpath}`);
+        const subtab = tab.subtabs.find(
+          (subtab) => subtab.path === `/${path}/${subpath}`
+        );
         if (subtab) {
           setActiveSubTab(subtab);
         }
@@ -44,7 +46,7 @@ export function DesktopLayout() {
   }, []);
 
   return (
-    <MainContainer>
+    <div>
       <SidebarWrapper width={isSidebarOpen ? "240px" : "90px"}>
         <Sidebar
           isSidebarOpen={isSidebarOpen}
@@ -54,18 +56,20 @@ export function DesktopLayout() {
           setActiveSubtab={setActiveSubTab}
         />
       </SidebarWrapper>
-      <Contents>
+      <HeaderContainer $isOpen={isSidebarOpen}>
         <Header
           title={activeTab.title}
           subtabs={activeTab.subtabs}
           activeSubTab={activeSubTab}
           setActiveSubtab={setActiveSubTab}
         />
-        <ContentWrapper>
+      </HeaderContainer>
+      <MainContainer>
+        <ContentWrapper $isOpen={isSidebarOpen}>
           <Outlet />
         </ContentWrapper>
-      </Contents>
-    </MainContainer>
+      </MainContainer>
+    </div>
   );
 }
 
@@ -77,7 +81,13 @@ interface Props {
   setActiveSubtab: (subtab: SubTabType) => void;
 }
 
-function Sidebar({ isSidebarOpen, toggleSidebar, activeTab, setActiveTab, setActiveSubtab }: Readonly<Props>) {
+function Sidebar({
+  isSidebarOpen,
+  toggleSidebar,
+  activeTab,
+  setActiveTab,
+  setActiveSubtab,
+}: Readonly<Props>) {
   const { user } = useAuth();
   const { isDarkMode } = useTheme();
   const navigate = useNavigate();
@@ -198,7 +208,7 @@ function Header({
   };
 
   return (
-    <HeaderContainer>
+    <>
       <Wrapper>
         <h1>{title}</h1>
         <VerticalDivider height="36px" bold />
@@ -238,7 +248,7 @@ function Header({
           </Menu>
         </MenuContainer>
       </Wrapper>
-    </HeaderContainer>
+    </>
   );
 }
 
@@ -273,16 +283,13 @@ const SidebarToggleIcon = styled.div<{ $left: string }>`
   z-index: 101;
 `;
 
-const Contents = styled.div`
+const ContentWrapper = styled.div<{ $isOpen: boolean }>`
   display: flex;
   flex: 1;
   flex-direction: column;
-`;
+  padding: ${({ $isOpen }) => ($isOpen ? "0 0 0 240px" : "0 0 0 90px")};
 
-const ContentWrapper = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
+  transition: padding 0.3s ease-in-out;
 `;
 
 const TabItem = styled.div<{ $isActive: boolean; $isOpen: boolean }>`
@@ -314,6 +321,7 @@ const SidebarWrapper = styled.div<{ width: string }>`
 `;
 
 const SidebarContainer = styled.div<{ width: string }>`
+  display: block;
   flex-direction: column;
   background-color: ${({ theme }) => theme.colors.background300};
   width: ${(props) => props.width};
@@ -361,13 +369,13 @@ const SidebarContent = styled.div`
   gap: 10px;
 `;
 
-const HeaderContainer = styled.div`
+const HeaderContainer = styled.div<{ $isOpen: boolean }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
   min-height: 64px;
   max-height: 64px;
-  padding: 0 24px 0 0;
+  padding: ${({ $isOpen }) => ($isOpen ? "0 24px 0 240px" : "0 24px 0 90px")};
 
   position: sticky;
   top: 0;
@@ -375,6 +383,8 @@ const HeaderContainer = styled.div`
 
   border-bottom: 0.5px solid ${({ theme }) => theme.colors.borderLight};
   background-color: ${({ theme }) => theme.colors.background100};
+
+  transition: padding 0.3s ease-in-out;
 `;
 
 const Wrapper = styled.div`

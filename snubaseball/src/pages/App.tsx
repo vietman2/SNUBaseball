@@ -11,7 +11,7 @@ import {
 
 import { RootLayout } from "@pages/_layout";
 import { AboutContainer } from "@pages/About";
-import { ArchiveContainer } from "@pages/Archive";
+import { GalleryContainer } from "@pages/Gallery";
 import { Home } from "@pages/Home";
 
 import { ErrorPage } from "@components/Fallbacks";
@@ -160,9 +160,7 @@ export default function App() {
       <GlobalStyles />
       <StyledThemeProvider theme={{ colors: colors }}>
         <ThemeProvider>
-          <NavigationProvider>
-            <AppRouter />
-          </NavigationProvider>
+          <AppRouter />
         </ThemeProvider>
       </StyledThemeProvider>
     </>
@@ -173,10 +171,17 @@ function AppRouter() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
-        <Route path="/" element={<RootLayout />}>
+        <Route
+          path="/"
+          element={
+            <NavigationProvider>
+              <RootLayout />
+            </NavigationProvider>
+          }
+        >
           <Route path="/" element={<Home />} />
           <Route path="/about/*" element={<AboutContainer />} />
-          <Route path="/archive/*" element={<ArchiveContainer />} />
+          <Route path="/gallery/*" element={<GalleryContainer />} />
         </Route>
         <Route path="/*" element={<ErrorPage />} />
       </>

@@ -14,6 +14,7 @@ import {
 
 import { RootLayout } from "@pages/_layout";
 import { AccountingsContainer } from "@pages/Accountings";
+import { ArchiveContainer } from "@pages/Archive";
 import { Login, SignUp } from "@pages/Auth";
 import { ForumContainer } from "@pages/Forum";
 import { HomeContainer } from "@pages/Home";
@@ -238,6 +239,7 @@ function AppRouter() {
             <Route path="/records/*" element={<RecordsContainer />} />
             <Route path="/team/*" element={<TeamContainer />} />
             <Route path="/accountings/*" element={<AccountingsContainer />} />
+            <Route path="/archive/*" element={<ArchiveContainer />} />
             {/*<Route path="/schedule/*" element={<ScheduleContainer />} />
             <Route path="/admin/*" element={<AdminContainer />} />
           */}

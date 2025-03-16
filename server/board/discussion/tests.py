@@ -47,13 +47,15 @@ class DiscussionAPITestCase(APITestCase):
         response = self.client.get(f'{self.url}?query=Test')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_discussion_retrieve(self):
+    @patch('board.discussion.serializers.get_presigned_url')
+    def test_discussion_retrieve(self, mock_get_presigned_url):
         ## 1. without attachments
         self.client.force_authenticate(user=self.user)
         response = self.client.get(f'{self.url}1/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         ## 2. with attachments
+        mock_get_presigned_url.return_value = 'https://test.com/test1.png'
         response = self.client.get(f'{self.url}2/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 

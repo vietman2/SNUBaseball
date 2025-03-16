@@ -2,13 +2,16 @@ import { fireEvent, screen } from "@testing-library/react";
 import * as Router from "react-router-dom";
 
 import { DesktopLayout } from "./Desktop";
+import * as AuthContext from "@contexts/auth";
 import * as ThemeContext from "@contexts/theme";
 import * as AuthAPI from "@services/auth/auth";
 import { light } from "@themes/themeColors";
 import { renderWithProviders } from "@utils/test-utils";
 
 jest.mock("@contexts/theme", () => ({
-  ThemeProvider: ({ children }: {children: React.ReactNode}) => <div>{children}</div>,
+  ThemeProvider: ({ children }: { children: React.ReactNode }) => (
+    <div>{children}</div>
+  ),
   useTheme: jest.fn(),
 }));
 
@@ -22,6 +25,11 @@ describe("<DesktopLayout />", () => {
       key: "abc",
       hash: "",
       state: null,
+    });
+    jest.spyOn(AuthContext, "useAuth").mockReturnValue({
+      user: null,
+      logout: jest.fn(),
+      login: jest.fn(),
     });
     jest.spyOn(ThemeContext, "useTheme").mockReturnValue({
       isDarkMode: true,

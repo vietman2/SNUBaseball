@@ -13,14 +13,14 @@ export function WideLayout() {
 
   const handleHomeClick = () => {
     navigate("/");
+    setMenuOpen(false);
   };
 
   const handleTabClick = (tab: TabType) => {
-    if (tab.subtabs.length > 0) {
-      return;
+    if (tab.path) {
+      navigate(tab.path);
+      setMenuOpen(false);
     }
-
-    navigate(tab.path);
   };
 
   const handleSubTabClick = (path: string) => {
@@ -111,6 +111,10 @@ const Tabs = styled.div`
   align-items: center;
   gap: 36px;
 
+  font-size: 1rem;
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.highEmphasis};
+
   > button {
     display: flex;
     width: 64px;
@@ -129,7 +133,7 @@ const Tabs = styled.div`
 const Menu = styled.div<{ $isOpen: boolean }>`
   display: flex;
   max-height: ${({ $isOpen }) => ($isOpen ? "200px" : "0")};
-  width: 100vw;
+  width: 100%;
   justify-content: flex-end;
   padding: 0 15%;
   gap: 36px;
@@ -149,5 +153,6 @@ const Contents = styled.div`
   display: flex;
   flex: 1;
   min-height: calc(100vh - 80px);
+  margin: 8px 0;
   padding: 0 15%;
 `;

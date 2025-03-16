@@ -1,4 +1,9 @@
-import { InterviewType, MemoriesType } from "@models/archive";
+import {
+  InterviewType,
+  MemoriesType,
+  AlbumType,
+  MediaType,
+} from "@models/archive";
 
 export const sampleMemories: MemoriesType[] = [
   {
@@ -6,23 +11,19 @@ export const sampleMemories: MemoriesType[] = [
     images: [
       {
         id: 1,
-        uri: "https://picsum.photos/200",
-        caption: "Caption 1",
+        url: "https://picsum.photos/200",
       },
       {
         id: 2,
-        uri: "https://picsum.photos/201",
-        caption: "Caption 2",
+        url: "https://picsum.photos/201",
       },
       {
         id: 3,
-        uri: "https://picsum.photos/202",
-        caption: "Caption 3",
+        url: "https://picsum.photos/202",
       },
       {
         id: 4,
-        uri: "https://picsum.photos/203",
-        caption: "Caption 4",
+        url: "https://picsum.photos/203",
       },
     ],
   },
@@ -31,23 +32,19 @@ export const sampleMemories: MemoriesType[] = [
     images: [
       {
         id: 1,
-        uri: "https://picsum.photos/200",
-        caption: "Caption 1",
+        url: "https://picsum.photos/200",
       },
       {
         id: 2,
-        uri: "https://picsum.photos/201",
-        caption: "Caption 2",
+        url: "https://picsum.photos/201",
       },
       {
         id: 3,
-        uri: "https://picsum.photos/202",
-        caption: "Caption 3",
+        url: "https://picsum.photos/202",
       },
       {
         id: 4,
-        uri: "https://picsum.photos/203",
-        caption: "Caption 4",
+        url: "https://picsum.photos/203",
       },
     ],
   },
@@ -62,11 +59,11 @@ export const sampleInterviews: InterviewType[] = [
     images: [
       {
         id: 1,
-        uri: "https://picsum.photos/200/200?random=1",
+        url: "https://picsum.photos/200/200?random=1",
       },
       {
         id: 2,
-        uri: "https://picsum.photos/200/200?random=2",
+        url: "https://picsum.photos/200/200?random=2",
       },
     ],
   },
@@ -78,12 +75,49 @@ export const sampleInterviews: InterviewType[] = [
     images: [
       {
         id: 1,
-        uri: "https://picsum.photos/200/200?random=1",
+        url: "https://picsum.photos/200/200?random=1",
       },
       {
         id: 2,
-        uri: "https://picsum.photos/200/200?random=2",
+        url: "https://picsum.photos/200/200?random=2",
       },
     ],
+  },
+];
+
+export const sampleAlbums: AlbumType[] = [
+  {
+    id: 1,
+    title: "2024 야구부 사진",
+    cover_images: [
+      {
+        id: 1,
+        url: "https://picsum.photos/200",
+      },
+      {
+        id: 2,
+        url: "https://picsum.photos/201",
+      },
+    ],
+    num_images: 10,
+    num_videos: 0,
+  },
+];
+
+export const sampleMedia: MediaType[] = [
+  {
+    id: 1,
+    url: "https://picsum.photos/200",
+    type: "이미지",
+    width: 200,
+    height: 200,
+  },
+  {
+    id: 2,
+    url: "https://picsum.photos/201",
+    type: "비디오",
+    width: 200,
+    height: 200,
+    length: 60,
   },
 ];

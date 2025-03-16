@@ -16,22 +16,27 @@ export function MobileLayout() {
     setSidebarOpen(!sidebarOpen);
   };
 
+  const goHome = () => {
+    navigate("/");
+
+    if (sidebarOpen) {
+      toggleSidebar();
+    }
+  };
+
   const onTabClick = (tab: TabType) => {
-    if (tab.subtabs.length > 0) {
-      if (openTab?.path === tab.path) {
-        setOpenTab(null);
-      } else {
-        setOpenTab(tab);
-      }
-    } else {
+    if (tab.path) {
       setOpenTab(null);
       navigate(tab.path);
       toggleSidebar();
+    } else {
+      setOpenTab(tab);
     }
   };
 
   const onSubTabClick = (path: string) => {
     navigate(path);
+    setOpenTab(null);
     toggleSidebar();
   };
 
@@ -39,7 +44,9 @@ export function MobileLayout() {
     <>
       <Container>
         <Header>
-          <Logo />
+          <button onClick={goHome} data-testid="home-button">
+            <Logo />
+          </button>
           <span>
             {currentTab.title === "Home"
               ? "서울대학교 야구부"
@@ -55,7 +62,7 @@ export function MobileLayout() {
               <SubTabHeaderItem
                 key={subtab.title}
                 onClick={() => navigate(subtab.path)}
-                $isActive={currentSubTab === subtab}
+                $isActive={currentSubTab?.title === subtab.title}
                 data-testid={`subtab-${subtab.title}`}
               >
                 {subtab.title}
@@ -71,7 +78,9 @@ export function MobileLayout() {
         <SidebarBackdrop onClick={toggleSidebar} />
         <Sidebar>
           <div>
-            <Logo size={64} />
+            <button onClick={goHome} data-testid="home-button-sidebar">
+              <Logo size={64} />
+            </button>
           </div>
           <div>
             {tabs.map((tab) => (
@@ -80,7 +89,7 @@ export function MobileLayout() {
                   onClick={() => onTabClick(tab)}
                   data-testid={`tab-${tab.title}`}
                 >
-                  <SidebarItem $isActive={currentTab.path === tab.path}>
+                  <SidebarItem $isActive={currentTab.title === tab.title}>
                     {tab.title}
                   </SidebarItem>
                 </button>

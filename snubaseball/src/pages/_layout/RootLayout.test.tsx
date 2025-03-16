@@ -25,8 +25,7 @@ describe("<RootLayout />", () => {
     jest.spyOn(NavigationContext, "useNavigation").mockReturnValue({
       currentTab: tabs[1],
       tabs,
-      setCurrentTab: jest.fn(),
-      setCurrentSubTab: jest.fn(),
+      currentSubTab: tabs[1].subtabs[0],
     });
     jest.spyOn(Router, "useLocation").mockReturnValue({
       pathname: "/about/history",

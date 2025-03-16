@@ -28,6 +28,7 @@
       "@fragments/*": ["fragments/*"],
       "@models/*": ["models/*"],
       "@pages/*": ["pages/*"],
+      "@services/*": ["services/*"],
       "@utils/*": ["utils/*"]
     }
   },

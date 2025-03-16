@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const getMembers = async (filter: string) => {
+export const getMembers = async (filter?: string) => {
   const getQuery = () => {
     if (filter === "YB") {
       return "ybs";
@@ -18,6 +18,19 @@ export const getMembers = async (filter: string) => {
     const response = await axios.get("/v1/members/", {
       params: {
         filter: getQuery(),
+      },
+    });
+    return response.data;
+  } catch {
+    return null;
+  }
+};
+
+export const searchMembers = async (query: string) => {
+  try {
+    const response = await axios.get("/v1/members/", {
+      params: {
+        search: query,
       },
     });
     return response.data;
