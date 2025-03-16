@@ -23,7 +23,7 @@ RUN chmod -R 777 /app/logs
 
 # Run the application
 ENTRYPOINT ["/app/entrypoint.sh"]
-CMD ["pipenv", "run", "gunicorn", "server.wsgi:application", \
+CMD ["pipenv", "run", "gunicorn", "snuserver.wsgi:application", \
      "--bind", "0.0.0.0:8000", \
      "--workers", "3", "--preload", \
      "--access-logfile", "/app/logs/access.log", \
