@@ -9,6 +9,8 @@ from rest_framework_simplejwt.token_blacklist.models import OutstandingToken, Bl
 from accountings.account.models import Account
 from accountings.transaction.models import Transaction
 
+from archive.gallery.models import Album, Tag, BaseMedia, Image, Video
+
 from board.discussion.models import (
     Discussion, DiscussionAttachment, DiscussionComment, DiscussionLike, DiscussionContentView
 )
@@ -39,6 +41,12 @@ from training.guideline.models import (
 
 admin.site.register(Account)
 admin.site.register(Transaction)
+
+admin.site.register(Album)
+admin.site.register(Tag)
+admin.site.register(BaseMedia)
+admin.site.register(Image)
+admin.site.register(Video)
 
 admin.site.register(Discussion)
 admin.site.register(DiscussionAttachment)
