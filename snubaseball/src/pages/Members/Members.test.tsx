@@ -1,4 +1,4 @@
-import { screen, waitFor } from "@testing-library/dom";
+import { screen, waitFor } from "@testing-library/react";
 
 import { Members } from "./Members";
 import { sampleManagers, samplePlayers } from "@data/about";
