@@ -36,7 +36,7 @@ describe("<Home />", () => {
     clickRight();
     clickRight();
     fireEvent.click(screen.getByTestId("more-memories"));
-    fireEvent.click(screen.getByTestId("more-interviews"));
+    //fireEvent.click(screen.getByTestId("more-interviews"));
 
     act(() => {
       jest.advanceTimersByTime(5000);

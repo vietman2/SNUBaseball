@@ -48,10 +48,10 @@ export const tabs: TabType[] = [
         title: "갤러리",
         path: "/gallery",
       },
-      {
+      /*{
         title: "인터뷰",
         path: "/interviews",
-      },
+      },*/
     ],
   },
 ];
