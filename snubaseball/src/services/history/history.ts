@@ -9,3 +9,17 @@ export async function getHistory() {
     return null;
   }
 }
+
+export async function getMembers(year: number) {
+  try {
+    const response = await axios.get("/v1/teams/", {
+      params: {
+        year,
+      },
+    });
+
+    return response.data;
+  } catch {
+    return null;
+  }
+}

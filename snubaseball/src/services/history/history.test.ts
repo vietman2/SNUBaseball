@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { getHistory } from "./history";
+import { getHistory, getMembers } from "./history";
 
 describe("getHistory", () => {
   it("returns data", async () => {
@@ -16,6 +16,25 @@ describe("getHistory", () => {
     jest.spyOn(axios, "get").mockRejectedValueOnce(new Error());
 
     const result = await getHistory();
+
+    expect(result).toBeNull();
+  });
+});
+
+describe("getMembers", () => {
+  it("returns data", async () => {
+    const sampleMembers = { data: "members" };
+    jest.spyOn(axios, "get").mockResolvedValueOnce(sampleMembers);
+
+    const result = await getMembers(2022);
+
+    expect(result).toEqual(sampleMembers.data);
+  });
+
+  it("handles api error", async () => {
+    jest.spyOn(axios, "get").mockRejectedValueOnce(new Error());
+
+    const result = await getMembers(2022);
 
     expect(result).toBeNull();
   });
