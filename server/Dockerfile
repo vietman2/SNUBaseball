@@ -29,4 +29,6 @@ CMD ["pipenv", "run", "gunicorn", "snuserver.wsgi:application", \
      "--access-logfile", "/app/logs/access.log", \
      "--error-logfile", "/app/logs/error.log", \
      "--log-level", "info", \
+     "--limit-request-field_size", "0", \
+     "--limit-request-line", "0", \
      "--access-logformat", "%(h)s %(u)s %(t)s \\\"%(r)s\\\" %(s)s %(b)s"]
