@@ -27,8 +27,8 @@ export const tabs: TabType[] = [
         path: "/history",
       },
       {
-        title: "선수",
-        path: "/players",
+        title: "선수\u2022매니저",
+        path: "/members",
       },
       {
         title: "지도자",
