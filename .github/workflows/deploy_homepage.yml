@@ -35,7 +35,7 @@ jobs:
         run: |
           cd snubaseball
           docker build \
-            --build-arg REACT_APP_API_URL=${{ secrets.API_URL }} \
+            --build-arg REACT_APP_API_URL_PROD=${{ secrets.API_URL }} \
             --build-arg NODE_ENV=production \
             -t ${{ secrets.DOCKER_REGISTRY }}/snubaseball:latest .
 
