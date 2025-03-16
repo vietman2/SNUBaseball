@@ -1,3 +1,4 @@
+import { Divider } from "@components/Dividers";
 import styled from "styled-components";
 
 export function Staff() {
@@ -7,7 +8,10 @@ export function Staff() {
         <span>지도교수</span>
         <Horizontal>
           <div>
-            <img src="https://picsum.photos/200/300?random=1" alt="teacher" />
+            <img
+              src="https://kr.object.ncloudstorage.com/snubaseball/profiles/person.png"
+              alt="professor"
+            />
             <span>장원철 교수님</span>
           </div>
           <div>
@@ -15,11 +19,15 @@ export function Staff() {
           </div>
         </Horizontal>
       </Wrapper>
+      <Divider />
       <Wrapper>
         <span>감독</span>
         <Horizontal>
           <div>
-            <img src="https://picsum.photos/200/300?random=2" alt="teacher" />
+            <img
+              src="https://kr.object.ncloudstorage.com/snubaseball/profiles/person.png"
+              alt="manager"
+            />
             <span>이광환 감독님</span>
           </div>
           <div>
@@ -27,11 +35,15 @@ export function Staff() {
           </div>
         </Horizontal>
       </Wrapper>
+      <Divider />
       <Wrapper>
         <span>코치</span>
         <Horizontal>
           <div>
-            <img src="https://picsum.photos/200/300?random=3" alt="teacher" />
+            <img
+              src="https://kr.object.ncloudstorage.com/snubaseball/profiles/KakaoTalk_20240826_205002993_12.jpg"
+              alt="coach"
+            />
             <span>이정호 코치님</span>
           </div>
           <div>
@@ -39,6 +51,7 @@ export function Staff() {
           </div>
         </Horizontal>
       </Wrapper>
+      <Divider />
     </Container>
   );
 }
@@ -72,17 +85,26 @@ const Horizontal = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4px;
+    gap: 8px;
 
     > img {
-      width: 80px;
-      height: 120px;
+      width: 180px;
+      height: 250px;
       object-fit: cover;
       border-radius: 8px;
+
+      @media (max-width: 768px) {
+        width: 120px;
+        height: 150px;
+      }
     }
 
     > span {
-      font-size: 1rem;
+      font-size: 1.25rem;
+
+      @media (max-width: 768px) {
+        font-size: 1.125rem;
+      }
     }
   }
 
