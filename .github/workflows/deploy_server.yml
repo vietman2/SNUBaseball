@@ -9,8 +9,11 @@ on:
 
 jobs:
   deploy:
-    if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == false
     runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://api.snubaseball.co.kr
 
     steps:
       # 1. Checkout the code
