@@ -76,7 +76,7 @@ REST_AUTH = {
 
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY')
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_KEY')
-AWS_STORAGE_BUCKET_NAME = 'snubaseball.test'
+AWS_STORAGE_BUCKET_NAME = 'snubaseball'
 AWS_S3_ENDPOINT_URL = 'https://kr.object.ncloudstorage.com'
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
