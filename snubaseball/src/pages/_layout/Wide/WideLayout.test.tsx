@@ -19,7 +19,7 @@ describe("<WideLayout />", () => {
     fireEvent.click(screen.getByTestId("home-button"));
     fireEvent.click(screen.getByTestId("tab-일정"));
     fireEvent.click(screen.getByTestId("tab-소개"));
-    fireEvent.click(screen.getByTestId("tab-연혁"));
+    fireEvent.click(screen.getByTestId("tab-팀 소개"));
 
     fireEvent.mouseOver(screen.getByTestId("tabs"));
     fireEvent.mouseOut(screen.getByTestId("wide-layout"));

@@ -2,6 +2,7 @@ import mimetypes
 from django.db.models import Q
 from drf_spectacular.utils import extend_schema
 from rest_framework import status
+from rest_framework.decorators import action
 from rest_framework.exceptions import ValidationError
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated, AllowAny
@@ -11,14 +12,14 @@ from rest_framework.viewsets import ModelViewSet
 from core.permissions import IsAdmin
 from person.member.models import Member
 from .enums import MediaType
-from .models import Album, BaseMedia, Tag
+from .models import Album, BaseMedia, Tag, Image
 from .serializers import (
     AlbumSerializer, ImageSerializer, VideoSerializer,
-    MediaSerializer, TagSerializer
+    MediaSerializer, TagSerializer, MemorySerializer
 )
 
 class ArchivePageNumberPagination(PageNumberPagination):
-    page_size = 20
+    page_size = 25
     page_size_query_param = 'page_size'
     max_page_size = 1000
 
@@ -36,8 +37,12 @@ class ArchiveViewSet(ModelViewSet):
     serializer_class = MediaSerializer
     queryset = BaseMedia.objects.all()
     pagination_class = ArchivePageNumberPagination
-    permission_classes = [IsAuthenticated,]
     http_method_names = ['post', 'get', 'delete', 'patch']
+
+    def get_permissions(self):
+        if self.action in ['memories', 'retrieve']:
+            return [AllowAny()]
+        return [IsAuthenticated()]
 
     @extend_schema(summary="파일 업로드", tags=["갤러리"])
     def create(self, request, *args, **kwargs):
@@ -169,13 +174,34 @@ class ArchiveViewSet(ModelViewSet):
 
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    @extend_schema(summary="홈피 대표 사진 조회", tags=["갤러리"])
+    @action(detail=False, methods=['get'])
+    def memories(self, request, *args, **kwargs):
+        tag1 = Tag.objects.get(name="2025")
+        ## get images that include the tag
+        queryset1 = Image.objects.filter(base__tags__id=tag1.id)
+        ## get random 4 images
+        queryset1 = queryset1.order_by('?')[:4]
+        serializer1 = MemorySerializer(queryset1, many=True)
+
+        tag2 = Tag.objects.get(name="2024")
+        queryset2 = Image.objects.filter(base__tags__id=tag2.id)
+        queryset2 = queryset2.order_by('?')[:4]
+        serializer2 = MemorySerializer(queryset2, many=True)
+
+        return Response(data=[
+            {'year': 2025, 'images': serializer1.data},
+            {'year': 2024, 'images': serializer2.data}
+        ], status=status.HTTP_200_OK)
+
 class AlbumViewSet(ModelViewSet):
     serializer_class = AlbumSerializer
+    pagination_class = ArchivePageNumberPagination
     queryset = Album.objects.all()
     http_method_names = ['get', 'post', 'delete', 'put']
 
     def get_permissions(self):
-        if self.action == 'list':
+        if self.action in ['list', 'retrieve']:
             return [AllowAny()]
         return [IsAdmin()]
 
@@ -213,19 +239,34 @@ class AlbumViewSet(ModelViewSet):
         media_without_album = BaseMedia.objects.filter(album__isnull=True)
         random_media = media_without_album.filter(type=MediaType.IMAGE).order_by('?')[:3]
 
-        data.append({
-            'id': -1,
-            'title': '미분류',
-            'cover_images': MediaSerializer(random_media, many=True).data,
-            'num_images': media_without_album.filter(type=MediaType.IMAGE).count(),
-            'num_videos': media_without_album.filter(type=MediaType.VIDEO).count()
-        })
+        if request.user.is_authenticated:
+            data.append({
+                'id': -1,
+                'title': '미분류',
+                'cover_images': MediaSerializer(random_media, many=True).data,
+                'num_images': media_without_album.filter(type=MediaType.IMAGE).count(),
+                'num_videos': media_without_album.filter(type=MediaType.VIDEO).count()
+            })
 
         return Response(data, status=status.HTTP_200_OK)
 
-    @extend_schema(exclude=True)
+    @extend_schema(summary="앨범 조회", tags=["갤러리"])
     def retrieve(self, request, *args, **kwargs):
-        return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+        album = self.get_object()
+
+        ## 로그인이 안돼있고, 멤버 전용 앨범이면 403
+        if not request.user.is_authenticated and album.members_only:
+            return Response(
+                status=status.HTTP_403_FORBIDDEN,
+                data={'message': 'This album is for members only.'}
+            )
+
+        media = album.media.all()
+
+        #page = self.paginate_queryset(media)
+        serializer = MediaSerializer(media, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+        #return self.get_paginated_response(serializer.data)
 
     @extend_schema(summary="앨범 수정", tags=["갤러리"])
     def update(self, request, *args, **kwargs):

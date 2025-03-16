@@ -10,9 +10,11 @@ import {
 } from "styled-components";
 
 import { RootLayout } from "@pages/_layout";
-import { AboutContainer } from "@pages/About";
+import { About } from "@pages/About";
 import { GalleryContainer } from "@pages/Gallery";
+import { HistoryContainer } from "@pages/History";
 import { Home } from "@pages/Home";
+import { Staff } from "@pages/Staff";
 
 import { ErrorPage } from "@components/Fallbacks";
 import { NavigationProvider } from "@contexts/navigation";
@@ -180,8 +182,10 @@ function AppRouter() {
           }
         >
           <Route path="/" element={<Home />} />
-          <Route path="/about/*" element={<AboutContainer />} />
+          <Route path="/about" element={<About />} />
           <Route path="/gallery/*" element={<GalleryContainer />} />
+          <Route path="/history/*" element={<HistoryContainer />} />
+          <Route path="/staff" element={<Staff />} />
         </Route>
         <Route path="/*" element={<ErrorPage />} />
       </>

@@ -2,7 +2,7 @@ from drf_spectacular.utils import extend_schema
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.exceptions import ValidationError
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
@@ -51,6 +51,9 @@ class TeamView(ModelViewSet):
     http_method_names = ['get', 'post']
 
     def get_permissions(self):
+        if self.action == 'list':
+            return [AllowAny(),]
+
         return [IsAuthenticated(),]
 
     @extend_schema(summary="팀 정보 목록 조회", tags=["팀 정보"])

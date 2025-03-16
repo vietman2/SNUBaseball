@@ -229,3 +229,13 @@ class AlbumSerializer(serializers.ModelSerializer):
 
     def get_num_videos(self, obj):
         return obj.media.filter(type=MediaType.VIDEO).count()
+
+class MemorySerializer(serializers.ModelSerializer):
+    url = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Image
+        fields = ['id', 'url']
+
+    def get_url(self, obj):
+        return get_presigned_url(obj.file)

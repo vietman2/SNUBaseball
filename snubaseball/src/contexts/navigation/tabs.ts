@@ -19,20 +19,20 @@ export const tabs: TabType[] = [
     title: "소개",
     subtabs: [
       {
-        title: "연혁",
-        path: "/about/history",
+        title: "팀 소개",
+        path: "/about",
       },
       {
-        title: "팀 소개",
-        path: "/about/team",
+        title: "팀 기록",
+        path: "/history",
       },
       {
         title: "선수",
-        path: "/about/players",
+        path: "/players",
       },
       {
         title: "지도자",
-        path: "/about/staff",
+        path: "/staff",
       },
     ],
   },

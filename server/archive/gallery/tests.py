@@ -125,11 +125,6 @@ class ArchiveAPITestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_retrieve(self):
-        response = self.client.get(f'{self.url}1/')
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-
-        self.client.force_authenticate(user=self.user)
-
         ## image
         response = self.client.get(f'{self.url}1/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -181,6 +176,10 @@ class ArchiveAPITestCase(APITestCase):
         response = self.client.patch(f'{self.url}2/', {'person': [1]})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+    def test_memories(self):
+        response = self.client.get(f'{self.url}memories/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
 class AlbumAPITestCase(APITestCase):
     fixtures = [
         "core/data/initial/chips.json", "core/data/initial/majors.json",
@@ -217,11 +216,24 @@ class AlbumAPITestCase(APITestCase):
         response = self.client.post(self.url, {})
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
-    def test_retrieve(self):
-        self.client.force_authenticate(user=self.admin)
+    @patch.object(ImageFile, 'width', new_callable=PropertyMock)
+    @patch.object(ImageFile, 'height', new_callable=PropertyMock)
+    def test_retrieve(self, mock_height, mock_width):
+        mock_height.return_value = 100
+        mock_width.return_value = 100
 
+        ## normal album without login
         response = self.client.get(f'{self.url}1/')
-        self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        ## members album without login
+        response = self.client.get(f'{self.url}2/')
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+        ## members album with login
+        self.client.force_authenticate(user=self.admin)
+        response = self.client.get(f'{self.url}2/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_update(self):
         self.client.force_authenticate(user=self.admin)

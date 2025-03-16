@@ -36,7 +36,7 @@ describe("<MobileLayout />", () => {
     fireEvent.click(screen.getByTestId("tab-소개")); // open subtabs
     fireEvent.click(screen.getByTestId("tab-소개")); // close subtabs
     fireEvent.click(screen.getByTestId("tab-소개")); // open subtabs
-    fireEvent.click(screen.getByTestId("tab-연혁")); // navigate to subtab
-    fireEvent.click(screen.getByTestId("subtab-연혁")); // navigate to subtab
+    fireEvent.click(screen.getByTestId("tab-팀 소개")); // navigate to subtab
+    fireEvent.click(screen.getByTestId("subtab-팀 소개")); // navigate to subtab
   });
 });
