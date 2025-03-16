@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export function Team() {
+export function About() {
   return (
     <Container>
       <Wrapper>

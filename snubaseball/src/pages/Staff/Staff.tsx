@@ -8,7 +8,7 @@ export function Staff() {
         <Horizontal>
           <div>
             <img src="https://picsum.photos/200/300?random=1" alt="teacher" />
-            <span>장원철 교수</span>
+            <span>장원철 교수님</span>
           </div>
           <div>
             <span>지도교수님 말씀</span>
@@ -20,7 +20,7 @@ export function Staff() {
         <Horizontal>
           <div>
             <img src="https://picsum.photos/200/300?random=2" alt="teacher" />
-            <span>-</span>
+            <span>이광환 감독님</span>
           </div>
           <div>
             <span>감독님 말씀</span>
@@ -32,7 +32,7 @@ export function Staff() {
         <Horizontal>
           <div>
             <img src="https://picsum.photos/200/300?random=3" alt="teacher" />
-            <span>이정호 코치</span>
+            <span>이정호 코치님</span>
           </div>
           <div>
             <span>코치님 말씀</span>
