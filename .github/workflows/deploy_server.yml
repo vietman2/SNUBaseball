@@ -3,13 +3,13 @@ name: Deploy Django Server
 on:
   pull_request:
     branches:
-      - prod
+      - dev
     paths:
       - 'server/**'
 
 jobs:
   deploy:
-    if: github.event.pull_request.merged == false
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
