@@ -1,4 +1,4 @@
-name: Deploy Homepage
+name: Deploy Teampage
 
 on:
   pull_request:
