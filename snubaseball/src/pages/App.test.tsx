@@ -17,6 +17,9 @@ jest.mock("@pages/History", () => ({
 jest.mock("@pages/Home", () => ({
   Home: () => <div>Home</div>,
 }));
+jest.mock("@pages/Members", () => ({
+  Members: () => <div>Members</div>,
+}));
 jest.mock("@pages/Staff", () => ({
   Staff: () => <div>Staff</div>,
 }));
