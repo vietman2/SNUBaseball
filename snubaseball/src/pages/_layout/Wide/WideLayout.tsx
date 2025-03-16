@@ -117,14 +117,14 @@ const Tabs = styled.div`
 
   > button {
     display: flex;
-    width: 64px;
+    width: 72px;
     align-items: center;
     justify-content: center;
   }
 
   > div {
     display: flex;
-    width: 64px;
+    width: 72px;
     align-items: center;
     justify-content: center;
   }

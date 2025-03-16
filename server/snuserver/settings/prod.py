@@ -101,6 +101,9 @@ CORS_ALLOW_HEADERS = [
 ]
 CSRF_TRUSTED_ORIGINS = [
     "https://api.snubaseball.co.kr",
+    "https://snubaseball.co.kr",
+    "https://www.snubaseball.co.kr",
+    "https://team.snubaseball.co.kr",
 ]
 CORS_PREFLIGHT_MAX_AGE = 3600
 

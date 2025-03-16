@@ -7,17 +7,16 @@ import MainImage2 from "@assets/images/main2.jpg";
 import MainImage3 from "@assets/images/main3.jpg";
 import { Divider } from "@components/Dividers";
 import { AppIcon } from "@components/Icons";
-import { sampleInterviews } from "@data/archives";
-import { Interview } from "@fragments/Interviews";
+//import { Interview } from "@fragments/Interviews";
 import { Memories } from "@fragments/Memories";
-import { InterviewType, MemoriesType } from "@models/archive";
+import { MemoriesType } from "@models/archive";
 import { getMemories } from "@services/archive";
 
 const images = [MainImage1, MainImage2, MainImage3];
 
 export function Home() {
   const [memories, setMemories] = useState<MemoriesType[]>([]);
-  const [interviews, setInterviews] = useState<InterviewType[]>([]);
+  //const [interviews, setInterviews] = useState<InterviewType[]>([]);
 
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -35,9 +34,9 @@ export function Home() {
     navigate("/gallery");
   };
 
-  const navigateToInterviews = () => {
+  /*const navigateToInterviews = () => {
     navigate("/interviews");
-  };
+  };*/
 
   const resetInterval = () => {
     if (intervalRef.current) {
@@ -66,7 +65,6 @@ export function Home() {
 
       if (memories) {
         setMemories(memories);
-        setInterviews(sampleInterviews);
       }
     };
 
@@ -115,7 +113,7 @@ export function Home() {
           {"MORE >>"}
         </MoreButton>
       </Wrapper>
-      <Wrapper>
+      {/*<Wrapper>
         <Subtitle>
           INTERVIEW
           <span>_우리들의 이야기</span>
@@ -130,7 +128,7 @@ export function Home() {
         >
           {"MORE >>"}
         </MoreButton>
-      </Wrapper>
+      </Wrapper>*/}
     </Container>
   );
 }
@@ -139,6 +137,7 @@ const Container = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
+  padding-bottom: 64px;
 
   overflow-x: hidden;
 `;

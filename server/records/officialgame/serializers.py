@@ -108,10 +108,15 @@ class PlayerSerializer(ModelSerializer):
     back_number     = serializers.SerializerMethodField()
     position        = serializers.SerializerMethodField()
     profile_image   = serializers.SerializerMethodField()
+    admission_year  = serializers.SerializerMethodField()
+    major           = serializers.CharField(source='member.major')
 
     class Meta:
         model = MyPlayer
-        fields = ['id', 'name', 'position', 'back_number', 'weight', 'height', 'profile_image']
+        fields = [
+            'id', 'name', 'position', 'back_number', 'weight', 'height',
+            'profile_image', 'major', 'admission_year'
+        ]
 
     def get_back_number(self, obj):
         if obj.back_number == 0:
@@ -121,6 +126,9 @@ class PlayerSerializer(ModelSerializer):
     def get_position(self, obj):
         return obj.member.position
 
+    def get_admission_year(self, obj):
+        return f"{str(obj.member.admission_year)[2:]}학번"
+
     def get_profile_image(self, obj):
         return get_profile_image_url(obj.member.profile_image)
 
@@ -129,10 +137,12 @@ class StaffSerializer(ModelSerializer):
     back_number     = serializers.SerializerMethodField()
     role            = serializers.SerializerMethodField()
     profile_image   = serializers.SerializerMethodField()
+    admission_year  = serializers.SerializerMethodField()
+    major           = serializers.CharField(source='member.major')
 
     class Meta:
         model = MyPlayer
-        fields = ['id', 'name', 'back_number', 'role', 'profile_image']
+        fields = ['id', 'name', 'back_number', 'role', 'profile_image', 'major', 'admission_year']
 
     def get_back_number(self, obj):
         if obj.back_number == 0:
@@ -144,6 +154,9 @@ class StaffSerializer(ModelSerializer):
             return "지도자"
 
         return "매니저"
+
+    def get_admission_year(self, obj):
+        return f"{str(obj.member.admission_year)[2:]}학번"
 
     def get_profile_image(self, obj):
         return get_profile_image_url(obj.member.profile_image)

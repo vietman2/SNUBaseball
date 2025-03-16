@@ -14,6 +14,7 @@ import { About } from "@pages/About";
 import { GalleryContainer } from "@pages/Gallery";
 import { HistoryContainer } from "@pages/History";
 import { Home } from "@pages/Home";
+import { Members } from "@pages/Members";
 import { Staff } from "@pages/Staff";
 
 import { ErrorPage } from "@components/Fallbacks";
@@ -103,6 +104,7 @@ const GlobalStyles = createGlobalStyle`
     
   * {
     box-sizing: border-box;
+    user-select: none;
   }
     
   button {
@@ -185,6 +187,7 @@ function AppRouter() {
           <Route path="/about" element={<About />} />
           <Route path="/gallery/*" element={<GalleryContainer />} />
           <Route path="/history/*" element={<HistoryContainer />} />
+          <Route path="/members" element={<Members />} />
           <Route path="/staff" element={<Staff />} />
         </Route>
         <Route path="/*" element={<ErrorPage />} />

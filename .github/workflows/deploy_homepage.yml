@@ -1,19 +1,19 @@
-name: Deploy Django Server
+name: Deploy Homepage
 
 on:
   pull_request:
     branches:
       - dev
     paths:
-      - 'server/**'
+      - 'snubaseball/**'
 
 jobs:
   deploy:
     if: github.event.pull_request.merged == false
     runs-on: ubuntu-latest
     environment:
-      name: server
-      url: https://api.snubaseball.co.kr
+      name: homepage
+      url: https://snubaseball.co.kr
 
     steps:
       # 1. Checkout the code
@@ -33,12 +33,15 @@ jobs:
       # 3. Build the Docker image
       - name: Build Docker image
         run: |
-          cd server
-          docker build -t ${{ secrets.DOCKER_REGISTRY }}/server:latest .
+          cd snubaseball
+          docker build \
+            --build-arg REACT_APP_API_URL_PROD=${{ secrets.API_URL }} \
+            --build-arg NODE_ENV=production \
+            -t ${{ secrets.DOCKER_REGISTRY }}/snubaseball:latest .
 
       # 4. Push the Docker image
       - name: Push Docker image
-        run: docker push ${{ secrets.DOCKER_REGISTRY }}/server:latest
+        run: docker push ${{ secrets.DOCKER_REGISTRY }}/snubaseball:latest
 
       # 5. SSH and deploy the server
       - name: SSH and deploy the server
@@ -48,7 +51,7 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
-            docker stop server
-            docker rm server
-            docker pull ${{ secrets.DOCKER_REGISTRY }}/server:latest
-            docker run --env-file .env -d -p 8000:8000 -v certbot-etc:/etc/letsencrypt --name server ${{ secrets.DOCKER_REGISTRY }}/server:latest
+            docker stop snubaseball
+            docker rm snubaseball
+            docker pull ${{ secrets.DOCKER_REGISTRY }}/snubaseball:latest
+            docker run -d -p 3000:80 --name snubaseball ${{ secrets.DOCKER_REGISTRY }}/snubaseball:latest

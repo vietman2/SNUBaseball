@@ -1,3 +1,3 @@
-import { getHistory } from "./history";
+import { getHistory, getMembers } from "./history";
 
-export { getHistory };
+export { getHistory, getMembers };

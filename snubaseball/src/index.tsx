@@ -9,9 +9,9 @@ const root = ReactDOM.createRoot(
 );
 
 if (process.env.NODE_ENV === "production") {
-  axios.defaults.baseURL = "https://api.snubaseball.com";
+  axios.defaults.baseURL = process.env.REACT_APP_API_URL_PROD;
 } else {
-  axios.defaults.baseURL = "http://localhost:8000";
+  axios.defaults.baseURL = process.env.REACT_APP_API_URL_DEV;
 }
 axios.defaults.headers.common["Content-Type"] = "application/json";
 axios.defaults.withCredentials = true;

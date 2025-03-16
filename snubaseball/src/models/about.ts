@@ -1,9 +1,19 @@
-export type PlayerType = {
+type MemberType = {
   id: string;
   name: string;
-  backNumber: number;
-  profileImage: string;
+  back_number: number;
+  profile_image: string;
+  major: string;
+  admission_year: number;
 };
+
+export type PlayerType = {
+  position: string;
+} & MemberType;
+
+export type ManagerType = {
+  role: string;
+} & MemberType;
 
 export type HistoryType = {
   year: number;
@@ -15,4 +25,4 @@ export type HistoryType = {
   games: number;
   num_players: number;
   num_managers: number;
-}
+};
