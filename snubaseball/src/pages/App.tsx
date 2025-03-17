@@ -16,6 +16,7 @@ import { HistoryContainer } from "@pages/History";
 import { Home } from "@pages/Home";
 import { Members } from "@pages/Members";
 import { Staff } from "@pages/Staff";
+import { Terms } from "@pages/Terms";
 
 import { ErrorPage } from "@components/Fallbacks";
 import { NavigationProvider } from "@contexts/navigation";
@@ -189,6 +190,7 @@ function AppRouter() {
           <Route path="/history/*" element={<HistoryContainer />} />
           <Route path="/members" element={<Members />} />
           <Route path="/staff" element={<Staff />} />
+          <Route path="/terms" element={<Terms />} />
         </Route>
         <Route path="/*" element={<ErrorPage />} />
       </>
