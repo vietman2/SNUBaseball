@@ -14,6 +14,9 @@ jest.mock("@contexts/auth", () => ({
   ),
   useAuth: jest.fn(),
 }));
+jest.mock("@fragments/Guideline", () => ({
+  InstagramContent: () => <div>InstagramContent</div>,
+}));
 
 describe("<GuidelineDetail />", () => {
   beforeEach(() => {
@@ -96,7 +99,10 @@ describe("<GuidelineDetail />", () => {
     await waitFor(() => fireEvent.click(screen.getByTestId("like")));
   });
 
-  it("render correctly as normal user", async () => {
+  it("render instagram correctly as normal user", async () => {
+    jest
+      .spyOn(GuidelinesAPI, "getGuidelinesDetail")
+      .mockResolvedValue({ ...sampleGuidelineDetail, is_youtube: false });
     jest.spyOn(AuthContext, "useAuth").mockReturnValue({
       user: sampleProfile,
       logout: jest.fn(),

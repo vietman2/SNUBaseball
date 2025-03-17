@@ -11,6 +11,7 @@ import { Menu } from "@components/Menus";
 import { useAuth } from "@contexts/auth";
 import { useTheme } from "@contexts/theme";
 import { CommentsList } from "@fragments/Comments";
+import { InstagramContent } from "@fragments/Guideline";
 import { MenuOptionType } from "@models/app";
 import { GuidelineDetailType } from "@models/training";
 import {
@@ -138,6 +139,13 @@ export function GuidelineDetail() {
       <Header>
         <Horizontal>
           <ChipWrapper>
+            <button onClick={handleClose}>
+              <AppIcon
+                icon="chevron-left"
+                size={24}
+                color={colors.borderDark}
+              />
+            </button>
             <Chip
               label={guideline.type.label}
               bgColor={guideline.type.background_color}
@@ -175,7 +183,15 @@ export function GuidelineDetail() {
       <Contents>
         <div>
           <div>
-            <IFrame videoId={guideline.video_id} />
+            {guideline.is_youtube ? (
+              <IFrame videoId={guideline.video_id} />
+            ) : (
+              <InstagramContent
+                id={guideline.video_id}
+                thumbnail={guideline.thumbnail}
+                video={guideline.video_url}
+              />
+            )}
             <Content>{guideline.content}</Content>
           </div>
           <Stats>
@@ -241,7 +257,16 @@ const Horizontal = styled.div`
 
 const ChipWrapper = styled.div`
   display: flex;
+  align-items: center;
   gap: 8px;
+
+  > button {
+    display: none;
+
+    @media (max-width: 768px) {
+      display: flex;
+    }
+  }
 `;
 
 const Metadata = styled.div`
@@ -274,8 +299,9 @@ const Contents = styled.div`
       display: flex;
       flex: 1;
       flex-direction: column;
+      margin-bottom: 16px;
       gap: 8px;
-      
+
       @media (max-width: 768px) {
         min-height: 300px;
       }
