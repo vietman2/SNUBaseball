@@ -1,8 +1,12 @@
-from rest_framework.test import APITestCase
+from unittest.mock import patch
+from django.test import TestCase
 from rest_framework import status
+from rest_framework.exceptions import ValidationError
+from rest_framework.test import APITestCase
 
 from person.user.models import User
 from .models import GuidelineComment
+from .utils import parse_media_url
 
 class GuidelineAPITestCase(APITestCase):
     fixtures = [
@@ -17,7 +21,7 @@ class GuidelineAPITestCase(APITestCase):
         self.data = {
             "title": "가이드라인 제목",
             "content": "가이드라인 내용",
-            "video_id": "https://www.youtube.com/watch?v=123456",
+            "url": "https://www.youtube.com/watch?v=123456",
             "category": "내야",
             "is_drill": False,
             "is_indoor": False,
@@ -47,8 +51,11 @@ class GuidelineAPITestCase(APITestCase):
         response = self.client.patch(f'{self.url}1/')
         self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
-    def test_guideline_list(self):
+    @patch('training.guideline.serializers.get_presigned_url')
+    def test_guideline_list(self, mock_get_presigned_url):
+        mock_get_presigned_url.return_value = 'https://test.com/test1.png'
         self.client.force_authenticate(user=self.user)
+
         response = self.client.get(self.url, {'category': "내야", 'filter': "전체"})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
@@ -66,16 +73,28 @@ class GuidelineAPITestCase(APITestCase):
         response = self.client.get(self.url, {'category': "내야", 'filter': "invalid"})
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
-    def test_guideline_retrieve(self):
+    @patch('training.guideline.serializers.get_presigned_url')
+    def test_guideline_retrieve(self, mock_get_presigned_url):
+        mock_get_presigned_url.return_value = 'https://test.com/test1.png'
         self.client.force_authenticate(user=self.user)
+
         response = self.client.get(f'{self.url}1/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         response = self.client.get(f'{self.url}2/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_guideline_create(self):
+    @patch('training.guideline.serializers.parse_media_url')
+    @patch('training.guideline.serializers.default_storage.save')
+    def test_guideline_create(self, mock_save, mock_parse_media_url):
+        mock_save.return_value = 'test1.png'
+        mock_parse_media_url.return_value = {
+            'video_id': '123456',
+            'is_youtube': True,
+            'thumbnail': 'test1.png'
+        }
         self.client.force_authenticate(user=self.user)
+
         response = self.client.post(self.url, self.data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
@@ -84,25 +103,22 @@ class GuidelineAPITestCase(APITestCase):
         response = self.client.post(self.url, self.data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-        self.data['video_id'] = "https://youtu.be/123456?list=PL123456"
-        response = self.client.post(self.url, self.data)
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-
-    def test_guideline_create_invalid(self):
+    @patch('training.guideline.serializers.parse_media_url')
+    def test_guideline_create_invalid(self, mock_parse_media_url):
+        mock_parse_media_url.return_value = {
+            'video_id': '123456',
+            'is_youtube': True,
+            'thumbnail': 'test1.png'
+        }
         self.client.force_authenticate(user=self.user)
+
         ## 1. invalid category
         self.data['category'] = "invalid"
         response = self.client.post(self.url, self.data)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
-        ## 2. invalid video_id
+        ## 2. min > max
         self.data['category'] = "내야"
-        self.data['video_id'] = "invalid"
-        response = self.client.post(self.url, self.data)
-        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-
-        ## 3. min > max
-        self.data['video_id'] = "https://www.youtube.com/watch?v=123456"
         self.data['min_people'] = 3
         self.data['max_people'] = 1
         response = self.client.post(self.url, self.data)
@@ -189,3 +205,71 @@ class GuidelineCommentAPITestCase(APITestCase):
         comment = GuidelineComment.objects.first()
         response = self.client.delete(f'{self.url}{comment.id}/')
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+class URLParseTestCase(TestCase):
+    def test_parse_youtube_url(self):
+        ## Case 1. YouTube URL: https://www.youtube.com/watch?v=VIDEO_ID
+        url = "https://www.youtube.com/watch?v=123456"
+        result = parse_media_url(url)
+        self.assertTrue(result['is_youtube'])
+        self.assertEqual(result['video_id'], '123456')
+
+        ## Case 2. YouTube Shorts: https://www.youtube.com/shorts/VIDEO_ID
+        url = "https://www.youtube.com/shorts/12345678901"
+        result = parse_media_url(url)
+        self.assertTrue(result['is_youtube'])
+        self.assertEqual(result['video_id'], '12345678901')
+
+        ## Case 3. youtu.be shortened URL: https://youtu.be/VIDEO_ID
+        url = "https://youtu.be/12345678901"
+        result = parse_media_url(url)
+        self.assertTrue(result['is_youtube'])
+        self.assertEqual(result['video_id'], '12345678901')
+
+    def test_parse_youtube_url_fail(self):
+        ## Case 1. Invalid YouTube URL
+        url = "https://www.youtube.com/watch"
+        with self.assertRaises(ValidationError):
+            parse_media_url(url)
+
+        ## Case 2. Not 11 characters
+        url = "https://www.youtube.com/shorts/123456"
+        with self.assertRaises(ValidationError):
+            parse_media_url(url)
+
+        ## Case 3. Invalid youtu.be URL
+        url = "https://youtu.be/123456"
+        with self.assertRaises(ValidationError):
+            parse_media_url(url)
+
+    @patch('training.guideline.utils.requests.get')
+    @patch('training.guideline.utils.instaloader.Post.from_shortcode')
+    def test_parse_instagram_url(self, mock_instaloader, mock_requests):
+        mock_requests.return_value.status_code = 200
+        mock_requests.return_value.content = b"test"
+        mock_instaloader.return_value.video_url = "https://www.instagram.com/p/123456"
+        mock_instaloader.return_value.is_video = True
+        mock_instaloader.return_value.url = "https://www.instagram.com/p/123456"
+
+        ## Case 1. Instagram post URL: https://www.instagram.com/p/SHORTCODE
+        url = "https://www.instagram.com/p/123456"
+        result = parse_media_url(url)
+        self.assertFalse(result['is_youtube'])
+
+    @patch('training.guideline.utils.requests.get')
+    @patch('training.guideline.utils.instaloader.Post.from_shortcode')
+    def test_parse_instagram_url_fail(self, mock_instaloader, mock_requests):
+        mock_requests.return_value.status_code = 404
+        mock_instaloader.return_value.video_url = "https://www.instagram.com/p/123456"
+        mock_instaloader.return_value.is_video = True
+        mock_instaloader.return_value.url = "https://www.instagram.com/p/123456"
+
+        ## Case 1. Invalid Instagram URL
+        url = "https://www.instagram.com/invalid/123456"
+        with self.assertRaises(ValidationError):
+            parse_media_url(url)
+
+        ## Case 2. Bad response
+        url = "https://www.instagram.com/p/123456"
+        with self.assertRaises(ValidationError):
+            parse_media_url(url)

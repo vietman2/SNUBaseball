@@ -1,11 +1,13 @@
+from django.core.files.storage import default_storage
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
+from core.storage import get_presigned_url
 from person.user.serializers import AuthorSerializer
 from .models import (
     Guideline, GuidelineComment, GuidelineContentView, GuidelineCategory, GuidelineLike
 )
-from .utils import get_type_chip, get_location_chip
+from .utils import get_type_chip, get_location_chip, parse_media_url
 
 class GuidelineSimpleSerializer(ModelSerializer):
     author          = serializers.CharField(source='author.member.full_name')
@@ -20,12 +22,15 @@ class GuidelineSimpleSerializer(ModelSerializer):
     class Meta:
         model = Guideline
         fields = [
-            'id', 'title', 'author', 'created_at', 'preview_image',
+            'id', 'title', 'author', 'created_at', 'preview_image', "is_youtube",
             'num_likes', 'num_comments', 'type', 'location', 'num_people'
         ]
 
     def get_preview_image(self, obj):
-        return f"https://img.youtube.com/vi/{obj.video_id}/0.jpg"
+        if obj.is_youtube:
+            return f"https://img.youtube.com/vi/{obj.video_id}/0.jpg"
+
+        return get_presigned_url(obj.thumbnail)
 
     def get_num_likes(self, obj):
         return obj.likes.count()
@@ -77,13 +82,15 @@ class GuidelineDetailSerializer(ModelSerializer):
     location        = serializers.SerializerMethodField()
     is_liked        = serializers.SerializerMethodField()
     num_likes       = serializers.SerializerMethodField()
+    thumbnail       = serializers.SerializerMethodField()
 
     class Meta:
         model = Guideline
         fields = [
             "id", "title", "author", "content", "category", "created_at",
             "video_id", "comments", "type", "location", "min_people",
-            "max_people", "is_drill", "is_indoor", "is_liked", "num_likes"
+            "max_people", "is_drill", "is_indoor", "is_liked", "num_likes",
+            "is_youtube", "video_url", "thumbnail"
         ]
 
     def increment_num_views(self):
@@ -124,15 +131,19 @@ class GuidelineDetailSerializer(ModelSerializer):
     def get_num_likes(self, obj):
         return obj.likes.count()
 
+    def get_thumbnail(self, obj):
+        return get_presigned_url(obj.thumbnail) if obj.thumbnail else None
+
 class GuidelineWriteSerializer(ModelSerializer):
     category    = serializers.CharField()
-    video_id    = serializers.CharField()
+    video_id    = serializers.CharField(read_only=True)
+    url         = serializers.CharField(write_only=True)
 
     class Meta:
         model = Guideline
         fields = [
             "title", "content", "video_id", "is_drill", "category",
-            "is_indoor", "min_people", "max_people"
+            "is_indoor", "min_people", "max_people", "url"
         ]
 
     def validate_category(self, value):
@@ -142,23 +153,6 @@ class GuidelineWriteSerializer(ModelSerializer):
             raise serializers.ValidationError("존재하지 않는 카테고리입니다.")
 
         return category
-
-    def validate_video_id(self, value):
-        video_id = value
-        ## video links can be https://youtu.be/{video_id} format
-        if "youtu.be" in video_id:
-            if "?" in video_id:
-                video_id = video_id.split("?")[0]
-            video_id = video_id.split("/")[-1]
-        else:
-            if not value.startswith("https://www.youtube.com/watch?v="):
-                raise serializers.ValidationError("유효한 유튜브 링크가 아닙니다.")
-            ## cut the video id from the link
-            video_id = value.split("v=")[1]
-            ## cut the additional parameters
-            video_id = video_id.split("&")[0]
-
-        return video_id
 
     def validate(self, attrs):
         ## check min_people and max_people
@@ -171,6 +165,19 @@ class GuidelineWriteSerializer(ModelSerializer):
         return attrs
 
     def create(self, validated_data):
+        url = validated_data.pop("url")
+        parsed_media_url = parse_media_url(url)
+
+        video_id = parsed_media_url.get("video_id")
+        validated_data["is_youtube"] = parsed_media_url.get("is_youtube")
+        validated_data["video_url"] = parsed_media_url.get("video_url", None)
+        thumbnail_file = parsed_media_url.get("thumbnail", None)
+
+        path = f"guideline/thumbnails/{video_id}.jpg"
+        uploaded_file = default_storage.save(path, thumbnail_file)
+        validated_data["video_id"] = video_id
+        validated_data["thumbnail"] = uploaded_file
+
         request = self.context.get("request")
         author = request.user
 
