@@ -23,6 +23,9 @@ jest.mock("@pages/Members", () => ({
 jest.mock("@pages/Staff", () => ({
   Staff: () => <div>Staff</div>,
 }));
+jest.mock("@pages/Terms", () => ({
+  Terms: () => <div>Terms</div>,
+}));
 
 describe("<App />", () => {
   it("renders without crashing", () => {
