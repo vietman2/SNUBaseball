@@ -38,7 +38,7 @@ export const createGuideline = async (
   const data = {
     title,
     content,
-    video_id: videoLink,
+    url: videoLink,
     category: subcategory,
     is_drill: isDrill,
     is_indoor: indoor,

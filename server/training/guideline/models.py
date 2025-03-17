@@ -16,6 +16,10 @@ class Guideline(Post):
     category    = models.ForeignKey(GuidelineCategory, on_delete=models.CASCADE)
     video_id    = models.CharField(max_length=20, null=True, blank=True)
 
+    video_url   = models.URLField(null=True, blank=True)
+    thumbnail   = models.FileField(upload_to="guideline/thumbnails/", null=True, blank=True)
+
+    is_youtube  = models.BooleanField(default=True)
     is_drill    = models.BooleanField(default=False)
     is_indoor   = models.BooleanField(default=False)
     min_people  = models.IntegerField(default=0)

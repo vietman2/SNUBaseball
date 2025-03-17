@@ -31,7 +31,14 @@ export function GuidelineSimple({ guideline }: Readonly<Props>) {
       </Tags>
       <img src={guideline.preview_image} alt={guideline.title} />
       <Title>
-        <span>{guideline.title}</span>
+        <span>
+          <AppIcon
+            icon={guideline.is_youtube ? "youtube" : "instagram"}
+            size={16}
+            color="#0F0F70"
+          />
+          {guideline.title}
+        </span>
         <Icons>
           <IconWrapper>
             <AppIcon icon="heart-outline" size={16} color="#0F0F70" />
@@ -68,6 +75,9 @@ const Container = styled.div`
     width: 300px;
     height: 180px;
     border-radius: 8px;
+    background-color: ${({ theme }) => theme.colors.background500};
+
+    object-fit: contain;
   }
 
   > div:last-child {
@@ -86,6 +96,10 @@ const Title = styled.div`
   justify-content: space-between;
 
   > span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
     font-size: 1.1rem;
     font-weight: 600;
 

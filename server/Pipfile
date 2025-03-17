@@ -21,6 +21,9 @@ gunicorn = "*"
 psycopg2-binary = "*"
 whitenoise = "*"
 moviepy = "*"
+requests = "*"
+beautifulsoup4 = "*"
+instaloader = "*"
 
 [dev-packages]
 coverage = "*"

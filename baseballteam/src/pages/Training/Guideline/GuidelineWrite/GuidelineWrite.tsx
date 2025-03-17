@@ -214,10 +214,10 @@ export function GuidelineWrite() {
         />
       </Wrapper>
       <Wrapper>
-        <Subtitle>유튜브 영상 (링크)</Subtitle>
+        <Subtitle>유튜브/인스타 링크</Subtitle>
         <TextInput
           wide
-          placeholder="유튜브 영상 링크를 입력하세요."
+          placeholder="링크를 입력하세요."
           value={videoLink}
           onChange={setVideoLink}
         />

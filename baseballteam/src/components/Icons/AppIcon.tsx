@@ -28,6 +28,7 @@ import { ReactComponent as HeartOutlineIcon } from "./heart-outline.svg";
 import { ReactComponent as HomeIcon } from "./home.svg";
 import { ReactComponent as ImageIcon } from "./image.svg";
 import { ReactComponent as InfoIcon } from "./info.svg";
+import { ReactComponent as InstagramIcon } from "./instagram.svg";
 import { ReactComponent as LightbulbIcon } from "./lightbulb.svg";
 import { ReactComponent as ListIcon } from "./list.svg";
 import { ReactComponent as LockIcon } from "./lock.svg";
@@ -51,6 +52,7 @@ import { ReactComponent as TagIcon } from "./tag.svg";
 import { ReactComponent as TextIcon } from "./text.svg";
 import { ReactComponent as UploadIcon } from "./upload.svg";
 import { ReactComponent as VideoIcon } from "./video.svg";
+import { ReactComponent as YoutubeIcon } from "./youtube.svg";
 
 interface Props {
   icon: string;
@@ -92,6 +94,7 @@ const iconMap: Record<
   home: HomeIcon,
   image: ImageIcon,
   info: InfoIcon,
+  instagram: InstagramIcon,
   lightbulb: LightbulbIcon,
   list: ListIcon,
   lock: LockIcon,
@@ -115,6 +118,7 @@ const iconMap: Record<
   text: TextIcon,
   upload: UploadIcon,
   video: VideoIcon,
+  youtube: YoutubeIcon,
 };
 
 export const AppIcon = ({ icon, size, color }: Props) => {

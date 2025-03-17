@@ -15,6 +15,7 @@ export type GuidelineSimpleType = {
   author: string;
   created_at: string;
   preview_image: string;
+  is_youtube: boolean;
   num_likes: number;
   num_comments: number;
   num_people: string;
@@ -36,5 +37,8 @@ export type GuidelineDetailType = {
   max_people: number;
   is_liked: boolean;
   is_drill: boolean;
+  is_youtube: boolean;
   num_likes: number;
+  video_url: string | null;
+  thumbnail: string;
 };
