@@ -1,5 +1,5 @@
-import { sampleGraduatesGroup } from "@data/events";
 import { GraduatesGroup } from "./GraduatesGroup";
+import { sampleGraduatesGroup } from "@data/events";
 import { renderWithProviders } from "@utils/test-utils";
 
 describe("<GraduatesGroup />", () => {
