@@ -39,14 +39,14 @@ const DashedLine = styled.div`
   background: repeating-linear-gradient(
     to right,
     black 0,
-    black 2px,
-    transparent 2px,
-    transparent 6px,
-    black 6px,
     black 8px,
     transparent 8px,
     transparent 12px,
     black 12px,
+    black 14px,
+    transparent 14px,
+    transparent 18px,
+    black 18px,
     black 20px,
     transparent 20px,
     transparent 24px
