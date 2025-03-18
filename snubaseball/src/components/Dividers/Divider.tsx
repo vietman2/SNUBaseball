@@ -4,15 +4,21 @@ interface Props {
   text?: string;
   width?: string;
   type?: "solid" | "dashed";
+  paddingRight?: string;
 }
 
-export function Divider({ text, width, type = "solid" }: Readonly<Props>) {
+export function Divider({
+  text,
+  width,
+  type = "solid",
+  paddingRight = "20px",
+}: Readonly<Props>) {
   if (type === "solid") {
     return <SolidLine style={{ width }} />;
   } else {
     return (
       <DashedLine style={{ width }}>
-        <span>{text}</span>
+        <span style={{ paddingRight }}>{text}</span>
       </DashedLine>
     );
   }
@@ -33,14 +39,14 @@ const DashedLine = styled.div`
   background: repeating-linear-gradient(
     to right,
     black 0,
-    black 2px,
-    transparent 2px,
-    transparent 6px,
-    black 6px,
     black 8px,
     transparent 8px,
     transparent 12px,
     black 12px,
+    black 14px,
+    transparent 14px,
+    transparent 18px,
+    black 18px,
     black 20px,
     transparent 20px,
     transparent 24px

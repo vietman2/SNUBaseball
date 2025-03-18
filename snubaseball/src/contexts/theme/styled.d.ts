@@ -7,6 +7,7 @@ export type ThemeColors = {
   background100: string;
   background300: string;
   background500: string;
+  background700: string;
   lowEmphasis: string;
   mediumEmphasis: string;
   highEmphasis: string;

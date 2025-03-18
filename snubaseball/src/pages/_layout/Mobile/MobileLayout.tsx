@@ -154,6 +154,7 @@ const Content = styled.div`
   display: flex;
   flex: 1;
   min-height: calc(100dvh - 100px);
+  padding-bottom: 64px;
 `;
 
 const SidebarContainer = styled.div<{ $isOpen: boolean }>`

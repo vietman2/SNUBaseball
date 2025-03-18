@@ -7,6 +7,7 @@ export const colors: ThemeColors = {
   background100: "#FFFFFF",
   background300: "#E5E5E5",
   background500: "#C5C5C5",
+  background700: "#D9E8F3",
   lowEmphasis: "#B5B6B6",
   mediumEmphasis: "#6B6B6B",
   highEmphasis: "#262626",

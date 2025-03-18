@@ -132,15 +132,20 @@ const Tabs = styled.div`
 
 const Menu = styled.div<{ $isOpen: boolean }>`
   display: flex;
-  max-height: ${({ $isOpen }) => ($isOpen ? "200px" : "0")};
   width: 100%;
   justify-content: flex-end;
+  position: absolute;
+  top: 80px;
   padding: 0 15%;
   gap: 36px;
+  z-index: 999;
 
   background-color: ${({ theme }) => theme.colors.background300};
-  transition: max-height 0.3s ease-in-out;
-  overflow: hidden;
+
+  transform: ${({ $isOpen }) =>
+    $isOpen ? "translateY(0)" : "translateY(-20px)"};
+  opacity: ${({ $isOpen }) => ($isOpen ? "1" : "0")};
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 
   > div {
     flex-direction: column;
@@ -154,5 +159,5 @@ const Contents = styled.div`
   flex: 1;
   min-height: calc(100vh - 80px);
   margin: 8px 0;
-  padding: 0 15%;
+  padding: 0 15% 64px 15%;
 `;

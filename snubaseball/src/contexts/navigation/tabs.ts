@@ -38,8 +38,20 @@ export const tabs: TabType[] = [
   },
   {
     title: "일정",
-    path: "/schedule",
-    subtabs: [],
+    subtabs: [
+      {
+        title: "경기",
+        path: "/schedule",
+      },
+      {
+        title: "훈련",
+        path: "/training",
+      },
+      {
+        title: "행사",
+        path: "/events",
+      },
+    ],
   },
   {
     title: "아카이브",

@@ -1,6 +1,10 @@
+import { ReactComponent as BaseballIcon } from "./baseball.svg";
 import { ReactComponent as ChevronLeftIcon } from "./chevron-left.svg";
 import { ReactComponent as ChevronRightIcon } from "./chevron-right.svg";
+import { ReactComponent as EventIcon } from "./event.svg";
+import { ReactComponent as GraduationIcon } from "./graduation.svg";
 import { ReactComponent as MenuIcon } from "./menu.svg";
+import { ReactComponent as ResultsIcon } from "./results.svg";
 
 interface Props {
   icon: string;
@@ -12,9 +16,13 @@ const iconMap: Record<
   string,
   React.FunctionComponent<React.SVGProps<SVGSVGElement>>
 > = {
+  baseball: BaseballIcon,
   "chevron-left": ChevronLeftIcon,
   "chevron-right": ChevronRightIcon,
+  event: EventIcon,
+  graduation: GraduationIcon,
   menu: MenuIcon,
+  results: ResultsIcon,
 };
 
 export const AppIcon = ({ icon, size = 24, color = "black" }: Props) => {

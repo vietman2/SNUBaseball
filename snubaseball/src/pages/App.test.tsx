@@ -8,6 +8,9 @@ jest.mock("@pages/_layout", () => ({
 jest.mock("@pages/About", () => ({
   About: () => <div>About</div>,
 }));
+jest.mock("@pages/Events", () => ({
+  EventsContainer: () => <div>EventsContainer</div>,
+}));
 jest.mock("@pages/Gallery", () => ({
   GalleryContainer: () => <div>GalleryContainer</div>,
 }));
@@ -20,8 +23,14 @@ jest.mock("@pages/Home", () => ({
 jest.mock("@pages/Members", () => ({
   Members: () => <div>Members</div>,
 }));
+jest.mock("@pages/Schedule", () => ({
+  Schedule: () => <div>Schedule</div>,
+}));
 jest.mock("@pages/Staff", () => ({
   Staff: () => <div>Staff</div>,
+}));
+jest.mock("@pages/Training", () => ({
+  Training: () => <div>Training</div>,
 }));
 
 describe("<App />", () => {

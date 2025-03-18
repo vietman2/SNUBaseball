@@ -29,6 +29,9 @@ jest.mock("@components/Icons", () => ({
   AppIcon: () => <div>AppIcon</div>,
   Logo: () => <div>Logo</div>,
 }));
+jest.mock("@components/Texts", () => ({
+  Subtitle: () => <div>Subtitle</div>,
+}));
 
 jest.mock("@contexts/gallery", () => ({
   GalleryProvider: ({ children }: { children: React.ReactNode }) => children,
