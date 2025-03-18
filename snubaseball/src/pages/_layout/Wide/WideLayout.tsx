@@ -154,5 +154,5 @@ const Contents = styled.div`
   flex: 1;
   min-height: calc(100vh - 80px);
   margin: 8px 0;
-  padding: 0 15%;
+  padding: 0 15% 64px 15%;
 `;
