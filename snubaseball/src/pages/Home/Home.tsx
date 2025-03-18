@@ -7,6 +7,7 @@ import MainImage2 from "@assets/images/main2.jpg";
 import MainImage3 from "@assets/images/main3.jpg";
 import { Divider } from "@components/Dividers";
 import { AppIcon } from "@components/Icons";
+import { Subtitle } from "@components/Texts";
 //import { Interview } from "@fragments/Interviews";
 import { Memories } from "@fragments/Memories";
 import { MemoriesType } from "@models/archive";
@@ -223,16 +224,9 @@ const Wrapper = styled.div`
   flex-direction: column;
   padding: 24px 0;
   gap: 16px;
-`;
 
-const Subtitle = styled.span`
-  padding: 0 16px;
-  font-size: 1.5rem;
-  font-weight: 700;
-
-  > span {
-    font-size: 1rem;
-    font-weight: 400;
+  > span:first-child {
+    padding: 0 16px;
   }
 `;
 
