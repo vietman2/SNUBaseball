@@ -4,15 +4,21 @@ interface Props {
   text?: string;
   width?: string;
   type?: "solid" | "dashed";
+  paddingRight?: string;
 }
 
-export function Divider({ text, width, type = "solid" }: Readonly<Props>) {
+export function Divider({
+  text,
+  width,
+  type = "solid",
+  paddingRight = "20px",
+}: Readonly<Props>) {
   if (type === "solid") {
     return <SolidLine style={{ width }} />;
   } else {
     return (
       <DashedLine style={{ width }}>
-        <span>{text}</span>
+        <span style={{ paddingRight }}>{text}</span>
       </DashedLine>
     );
   }
