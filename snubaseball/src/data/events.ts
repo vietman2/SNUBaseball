@@ -1,4 +1,4 @@
-import { HomecomingResultType } from "@models/events";
+import { HomecomingResultType, GraduateType } from "@models/events";
 
 export const sampleResults: HomecomingResultType[] = [
   {
@@ -48,3 +48,51 @@ export const sampleResults: HomecomingResultType[] = [
     ],
   },
 ];
+
+const sampleGraduates: GraduateType[] = [
+  {
+    student_id: "1",
+    name: "홍길동",
+    admission_year: 2020,
+    major: "체육교육과",
+    role: "선수",
+    num_semesters: 8,
+    thoughts: "소감입니다.",
+    profile_image: "https://picsum.photos/200/300",
+  },
+  {
+    student_id: "2",
+    name: "김철수",
+    admission_year: 2019,
+    major: "기계공학과",
+    role: "선수",
+    num_semesters: 10,
+    thoughts: "소감입니다.",
+    profile_image: "https://picsum.photos/200/300",
+  },
+  {
+    student_id: "3",
+    name: "박영희",
+    admission_year: 2021,
+    major: "경영학과",
+    role: "매니저",
+    num_semesters: 6,
+    thoughts: "소감입니다.",
+    profile_image: "https://picsum.photos/200/300",
+  },
+  {
+    student_id: "4",
+    name: "이철민",
+    admission_year: 2019,
+    major: "체육교육과",
+    role: "선수",
+    num_semesters: 10,
+    thoughts: "소감입니다.",
+    profile_image: "https://picsum.photos/200/300",
+  },
+];
+
+export const sampleGraduatesGroup = {
+  year: 2024,
+  graduates: sampleGraduates,
+};

@@ -9,3 +9,19 @@ export type HomecomingResultType = {
     content: string;
   }[];
 };
+
+export type GraduateType = {
+  student_id: string;
+  admission_year: number;
+  name: string;
+  major: string;
+  role: string;
+  num_semesters: number;
+  thoughts: string;
+  profile_image: string;
+};
+
+export type GraduatesGroupType = {
+  year: number;
+  graduates: GraduateType[];
+};
