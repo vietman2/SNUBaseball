@@ -177,7 +177,7 @@ const Button = styled.button`
   border-radius: 25%;
   padding: 8px 2px;
   cursor: pointer;
-  z-index: 999;
+  z-index: 1;
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.5);
