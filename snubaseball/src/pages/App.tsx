@@ -11,11 +11,14 @@ import {
 
 import { RootLayout } from "@pages/_layout";
 import { About } from "@pages/About";
+import { EventsContainer } from "@pages/Events";
 import { GalleryContainer } from "@pages/Gallery";
 import { HistoryContainer } from "@pages/History";
 import { Home } from "@pages/Home";
 import { Members } from "@pages/Members";
+import { Schedule } from "@pages/Schedule";
 import { Staff } from "@pages/Staff";
+import { Training } from "@pages/Training";
 
 import { ErrorPage } from "@components/Fallbacks";
 import { NavigationProvider } from "@contexts/navigation";
@@ -185,10 +188,13 @@ function AppRouter() {
         >
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/events/*" element={<EventsContainer />} />
           <Route path="/gallery/*" element={<GalleryContainer />} />
           <Route path="/history/*" element={<HistoryContainer />} />
           <Route path="/members" element={<Members />} />
+          <Route path="/schedule" element={<Schedule />} />
           <Route path="/staff" element={<Staff />} />
+          <Route path="/training" element={<Training />} />
         </Route>
         <Route path="/*" element={<ErrorPage />} />
       </>
