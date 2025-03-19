@@ -80,7 +80,6 @@
       "!src/models/**/*.{js,jsx,ts,tsx}"
     ],
     "moduleNameMapper": {
-      "^@assets/(.*)$": "<rootDir>/src/assets/$1",
       "^@components/(.*)$": "<rootDir>/src/components/$1",
       "^@contexts/(.*)$": "<rootDir>/src/contexts/$1",
       "^@data/(.*)$": "<rootDir>/src/data/$1",
