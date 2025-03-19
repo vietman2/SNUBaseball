@@ -158,6 +158,7 @@ const ImageInnerContainer = styled.div`
   display: flex;
   transition: transform 0.5s ease-in-out;
   width: 300vw;
+  will-change: transform;
 `;
 
 const Image = styled.div`
@@ -165,6 +166,7 @@ const Image = styled.div`
   height: 50vh;
   background-size: cover;
   background-position: center;
+  backface-visibility: hidden;
 `;
 
 const Button = styled.button`
