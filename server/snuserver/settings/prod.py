@@ -6,6 +6,8 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['api.snubaseball.co.kr']
 
+TEAM_PAGE_URL = 'https://team.snubaseball.co.kr'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
