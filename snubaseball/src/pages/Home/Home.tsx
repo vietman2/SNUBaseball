@@ -2,9 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import MainImage1 from "@assets/images/main1.jpg";
-import MainImage2 from "@assets/images/main2.jpg";
-import MainImage3 from "@assets/images/main3.jpg";
 import { Divider } from "@components/Dividers";
 import { AppIcon } from "@components/Icons";
 import { Subtitle } from "@components/Texts";
@@ -12,10 +9,10 @@ import { Subtitle } from "@components/Texts";
 import { Memories } from "@fragments/Memories";
 import { MemoriesType } from "@models/archive";
 import { getMemories } from "@services/archive";
-
-const images = [MainImage1, MainImage2, MainImage3];
+import { mainImages } from "@data/images";
 
 export function Home() {
+  const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [memories, setMemories] = useState<MemoriesType[]>([]);
   //const [interviews, setInterviews] = useState<InterviewType[]>([]);
 
@@ -26,7 +23,7 @@ export function Home() {
   const startSlider = () => {
     intervalRef.current = setInterval(() => {
       setCurrentIndex((prevIndex) =>
-        prevIndex === images.length - 1 ? 0 : prevIndex + 1
+        prevIndex === imageUrls.length - 1 ? 0 : prevIndex + 1
       );
     }, 5000);
   };
@@ -48,14 +45,14 @@ export function Home() {
 
   const goToPrevious = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+      prevIndex === 0 ? imageUrls.length - 1 : prevIndex - 1
     );
     resetInterval();
   };
 
   const goToNext = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === images.length - 1 ? 0 : prevIndex + 1
+      prevIndex === imageUrls.length - 1 ? 0 : prevIndex + 1
     );
     resetInterval();
   };
@@ -71,6 +68,7 @@ export function Home() {
 
     fetchData();
     startSlider();
+    setImageUrls(mainImages);
 
     return () => {
       if (intervalRef.current) {
@@ -83,10 +81,10 @@ export function Home() {
     <Container>
       <ImageContainer>
         <ImageInnerContainer
-          style={{ transform: `translateX(-${currentIndex * 100}vw)` }}
+          style={{ transform: `translate3d(-${currentIndex * 100}vw, 0, 0)` }}
         >
-          {images.map((image) => (
-            <Image key={image} style={{ backgroundImage: `url(${image})` }} />
+          {imageUrls.map((url, index) => (
+            <SlideImage key={url} src={url} alt={`slide-${index}`} />
           ))}
         </ImageInnerContainer>
         <LeftButton onClick={goToPrevious} data-testid="left">
@@ -158,13 +156,16 @@ const ImageInnerContainer = styled.div`
   display: flex;
   transition: transform 0.5s ease-in-out;
   width: 300vw;
+  will-change: transform;
+  contain: paint;
 `;
 
-const Image = styled.div`
+const SlideImage = styled.img`
   width: 100vw;
   height: 50vh;
-  background-size: cover;
-  background-position: center;
+  object-fit: cover;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 `;
 
 const Button = styled.button`

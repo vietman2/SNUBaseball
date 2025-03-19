@@ -138,7 +138,7 @@ const Menu = styled.div<{ $isOpen: boolean }>`
   top: 80px;
   padding: 0 15%;
   gap: 36px;
-  z-index: 999;
+  z-index: ${({ $isOpen }) => ($isOpen ? "10" : "-1")};
 
   background-color: ${({ theme }) => theme.colors.background300};
 

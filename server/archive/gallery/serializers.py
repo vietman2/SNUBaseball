@@ -238,4 +238,4 @@ class MemorySerializer(serializers.ModelSerializer):
         fields = ['id', 'url']
 
     def get_url(self, obj):
-        return get_presigned_url(obj.file)
+        return get_presigned_url(obj.thumbnail)
