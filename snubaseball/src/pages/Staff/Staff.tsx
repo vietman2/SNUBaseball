@@ -41,10 +41,26 @@ export function Staff() {
         <Horizontal>
           <div>
             <img
-              src="https://kr.object.ncloudstorage.com/snubaseball/profiles/KakaoTalk_20240826_205002993_12.jpg"
+              src="https://kr.object.ncloudstorage.com/snubaseball/profiles/person.png"
               alt="coach"
             />
-            <span>이정호 코치님</span>
+            <span>최우혁 코치님</span>
+          </div>
+          <div>
+            <span>코치님 말씀</span>
+          </div>
+        </Horizontal>
+      </Wrapper>
+      <Divider />
+      <Wrapper>
+        <span>코치</span>
+        <Horizontal>
+          <div>
+            <img
+              src="https://kr.object.ncloudstorage.com/snubaseball/profiles/person.png"
+              alt="coach"
+            />
+            <span>이케빈 코치님</span>
           </div>
           <div>
             <span>코치님 말씀</span>
