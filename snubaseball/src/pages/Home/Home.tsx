@@ -23,6 +23,14 @@ export function Home() {
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const navigate = useNavigate();
 
+  // Preload images to ensure they're cached before animation starts
+  useEffect(() => {
+    images.forEach((src) => {
+      const img = new window.Image();
+      img.src = src;
+    });
+  }, []);
+
   const startSlider = () => {
     intervalRef.current = setInterval(() => {
       setCurrentIndex((prevIndex) =>
@@ -83,10 +91,14 @@ export function Home() {
     <Container>
       <ImageContainer>
         <ImageInnerContainer
-          style={{ transform: `translateX(-${currentIndex * 100}vw)` }}
+          style={{ transform: `translate3d(-${currentIndex * 100}vw, 0, 0)` }}
         >
           {images.map((image) => (
-            <Image key={image} style={{ backgroundImage: `url(${image})` }} />
+            <SlideImage
+              key={image}
+              src={image}
+              alt="Main"
+            />
           ))}
         </ImageInnerContainer>
         <LeftButton onClick={goToPrevious} data-testid="left">
@@ -159,14 +171,15 @@ const ImageInnerContainer = styled.div`
   transition: transform 0.5s ease-in-out;
   width: 300vw;
   will-change: transform;
+  contain: paint;
 `;
 
-const Image = styled.div`
+const SlideImage = styled.img`
   width: 100vw;
   height: 50vh;
-  background-size: cover;
-  background-position: center;
+  object-fit: cover;
   backface-visibility: hidden;
+  transform: translateZ(0);
 `;
 
 const Button = styled.button`
