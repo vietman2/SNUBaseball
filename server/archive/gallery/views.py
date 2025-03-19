@@ -10,6 +10,7 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
 from core.permissions import IsAdmin
+from core.utils import is_team_page
 from person.member.models import Member
 from .enums import MediaType
 from .models import Album, BaseMedia, Tag, Image
@@ -227,7 +228,7 @@ class AlbumViewSet(ModelViewSet):
     def list(self, request, *args, **kwargs):
         ## 로그인 되어있으면, members_only앨범도 반환
         ## 그렇지 않으면, members_only=False인 앨범만 반환
-        if request.user.is_authenticated:
+        if request.user.is_authenticated and is_team_page(request):
             queryset = self.get_queryset()
         else:
             queryset = self.get_queryset().filter(members_only=False)
@@ -239,7 +240,7 @@ class AlbumViewSet(ModelViewSet):
         media_without_album = BaseMedia.objects.filter(album__isnull=True)
         random_media = media_without_album.filter(type=MediaType.IMAGE).order_by('?')[:3]
 
-        if request.user.is_authenticated:
+        if request.user.is_authenticated and is_team_page(request):
             data.append({
                 'id': -1,
                 'title': '미분류',
