@@ -240,7 +240,7 @@ class AlbumViewSet(ModelViewSet):
         media_without_album = BaseMedia.objects.filter(album__isnull=True)
         random_media = media_without_album.filter(type=MediaType.IMAGE).order_by('?')[:3]
 
-        if request.user.is_authenticated:
+        if request.user.is_authenticated and is_team_page(request):
             data.append({
                 'id': -1,
                 'title': '미분류',
