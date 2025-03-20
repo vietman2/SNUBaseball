@@ -25,6 +25,7 @@ jest.mock("@components/Icons", () => ({
   Logo: () => <div>Logo</div>,
 }));
 jest.mock("@components/Texts", () => ({
+  Quote: ({ quote }: { quote: string }) => <div>{quote}</div>,
   Subtitle: () => <div>Subtitle</div>,
 }));
 
