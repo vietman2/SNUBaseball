@@ -1,10 +1,18 @@
-import { render } from "@testing-library/react";
-
+import { Quote } from "./Quote";
 import { Subtitle } from "./Subtitle";
+import { renderWithProviders } from "@utils/test-utils";
+
+describe("<Quote />", () => {
+  it("renders children", () => {
+    const { getByText } = renderWithProviders(<Quote quote="Quote" />);
+
+    expect(getByText("Quote")).toBeInTheDocument();
+  });
+});
 
 describe("<Subtitle />", () => {
   it("renders children and span", () => {
-    const { getByText } = render(
+    const { getByText } = renderWithProviders(
       <Subtitle>
         Subtitle
         <span>_Caption</span>

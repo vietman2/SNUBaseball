@@ -1,3 +1,4 @@
+import { Quote } from "./Quote";
 import { Subtitle } from "./Subtitle";
 
-export { Subtitle };
+export { Quote, Subtitle };

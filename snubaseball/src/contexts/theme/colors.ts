@@ -5,6 +5,7 @@ export const colors: ThemeColors = {
   secondary: "#C5A86F",
   tertiary: "#B5B6B6",
   background100: "#FFFFFF",
+  background200: "#F2F2F2",
   background300: "#E5E5E5",
   background500: "#C5C5C5",
   background700: "#D9E8F3",
