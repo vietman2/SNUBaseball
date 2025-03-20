@@ -74,7 +74,7 @@ const Container = styled.div`
   flex: 1;
   flex-direction: column;
   padding: 16px 24px;
-  gap: 36px;
+  gap: 24px;
 `;
 
 const Wrapper = styled.div`
@@ -95,6 +95,7 @@ const Horizontal = styled.div`
   gap: 48px;
 
   @media (max-width: 768px) {
+    align-items: flex-start;
     gap: 8px;
   }
 
@@ -105,14 +106,14 @@ const Horizontal = styled.div`
     gap: 8px;
 
     > img {
-      width: 180px;
-      height: 250px;
+      width: 200px;
+      height: 300px;
       object-fit: cover;
       border-radius: 8px;
 
       @media (max-width: 768px) {
         width: 120px;
-        height: 150px;
+        height: 160px;
       }
     }
 
