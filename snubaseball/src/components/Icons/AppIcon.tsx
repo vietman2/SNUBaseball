@@ -4,6 +4,8 @@ import { ReactComponent as ChevronRightIcon } from "./chevron-right.svg";
 import { ReactComponent as EventIcon } from "./event.svg";
 import { ReactComponent as GraduationIcon } from "./graduation.svg";
 import { ReactComponent as MenuIcon } from "./menu.svg";
+import { ReactComponent as QuoteEndIcon } from "./quote-end.svg";
+import { ReactComponent as QuoteStartIcon } from "./quote-start.svg";
 import { ReactComponent as ResultsIcon } from "./results.svg";
 
 interface Props {
@@ -22,6 +24,8 @@ const iconMap: Record<
   event: EventIcon,
   graduation: GraduationIcon,
   menu: MenuIcon,
+  "quote-end": QuoteEndIcon,
+  "quote-start": QuoteStartIcon,
   results: ResultsIcon,
 };
 
