@@ -53,3 +53,36 @@ vi.mock("@shared/lib/colors", async () => {
     dark: light,
   };
 });
+
+vi.mock("@shared/ui/Buttons", () => ({
+  TextButton: ({ text, onClick }: { text: string; onClick: () => void }) => (
+    <button onClick={onClick} data-testid={`text-button-${text}`}>
+      {text}
+    </button>
+  ),
+}));
+vi.mock("@shared/ui/Fallbacks", () => ({
+  LoadingSpinner: () => <div>Loading Spinner</div>,
+}));
+vi.mock("@shared/ui/Icons", () => ({
+  Logo: () => <div>Mocked Logo</div>,
+}));
+vi.mock("@shared/ui/Inputs", async () => {
+  return {
+    TextInput: ({
+      label,
+      value,
+      onChange,
+    }: {
+      label: string;
+      value: string;
+      onChange: (value: string) => void;
+    }) => (
+      <input
+        data-testid={`textinput-${label}`}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+      />
+    ),
+  };
+});

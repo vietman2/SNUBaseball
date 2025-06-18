@@ -4,6 +4,8 @@ import { fireEvent } from "@testing-library/react";
 import { TextInput } from "@shared/ui/Inputs";
 import { renderWithProviders } from "@test-utils/renderer";
 
+vi.unmock("@shared/ui/Inputs");
+
 describe("TextInput", () => {
   it("renders correctly", () => {
     const { getByTestId } = renderWithProviders(
