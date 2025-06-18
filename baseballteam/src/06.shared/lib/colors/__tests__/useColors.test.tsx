@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { describe, expect, it, vi } from "vitest";
 import { render } from "@testing-library/react";
 
@@ -12,10 +13,16 @@ const MockComponent = () => {
 };
 
 const MockProvider = ({ children }: { children: React.ReactNode }) => {
+  const value = useMemo(
+    () => ({
+      colors: light,
+      toggleTheme: vi.fn(),
+    }),
+    []
+  );
+
   return (
-    <ColorContext.Provider value={{ colors: light, toggleTheme: vi.fn() }}>
-      {children}
-    </ColorContext.Provider>
+    <ColorContext.Provider value={value}>{children}</ColorContext.Provider>
   );
 };
 
