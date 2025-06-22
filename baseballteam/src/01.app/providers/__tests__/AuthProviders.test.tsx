@@ -5,11 +5,14 @@ import MockAdapter from "axios-mock-adapter";
 
 import { AuthProvider } from "../auth/AuthProvider";
 import { AutoLoginProvider } from "../auth/AutoLoginProvider";
+import { samplePlayer, useAuth } from "@shared/lib/auth";
 import { renderWithProviders } from "@test-utils/renderer";
 
 vi.unmock("@shared/lib/auth");
 
 const MockComponent = () => {
+  const { user } = useAuth();
+
   const testRequest = async () => {
     try {
       await axios.get("/test");
@@ -21,6 +24,7 @@ const MockComponent = () => {
   return (
     <div>
       <button onClick={testRequest}>Test Request</button>
+      <div>Authenticated: {user ? "Yes" : "No"}</div>
     </div>
   );
 };
@@ -41,22 +45,27 @@ describe("AutoLoginProvider", () => {
   beforeEach(() => {
     mockAxios.reset();
     mockAxios.onPost("/api/v1/tokens/refresh/").reply(200, {
+      user: samplePlayer,
       access: "test-token",
     });
   });
 
-  it("test auto login success", () => {
+  it("test auto login success", async () => {
     const { getByText } = render();
 
-    waitFor(() => expect(getByText("Authenticated: Yes")).toBeInTheDocument());
+    await waitFor(() =>
+      expect(getByText("Authenticated: Yes")).toBeInTheDocument()
+    );
   });
 
-  it("test auto login fail", () => {
+  it("test auto login fail", async () => {
     mockAxios.onPost("/api/v1/tokens/refresh/").reply(400);
 
     const { getByText } = render();
 
-    waitFor(() => expect(getByText("Authenticated: No")).toBeInTheDocument());
+    await waitFor(() =>
+      expect(getByText("Authenticated: No")).toBeInTheDocument()
+    );
   });
 
   it("test auto refresh success", async () => {
@@ -80,8 +89,10 @@ describe("AutoLoginProvider", () => {
       .replyOnce(401, { error: "Access Token이 만료되었습니다." });
     mockAxios.onPost("/api/v1/tokens/refresh/").reply(400);
 
+    fireEvent.click(getByText("Test Request"));
+
     await waitFor(() => {
-      fireEvent.click(getByText("Test Request"));
+      expect(getByText("Authenticated: No")).toBeInTheDocument();
     });
   });
 });
