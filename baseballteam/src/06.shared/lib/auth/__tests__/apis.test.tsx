@@ -98,20 +98,6 @@ describe("login", () => {
 
     fireEvent.click(getByText("Login"));
   });
-
-  it("should show error on failure", async () => {
-    vi.spyOn(window, "alert").mockImplementation(() => {});
-    vi.spyOn(axios, "post").mockRejectedValue(new Error("Login failed"));
-    const { getByText } = renderWithProviders(<MockComponent />);
-
-    fireEvent.click(getByText("Login"));
-
-    await waitFor(() => {
-      expect(window.alert).toHaveBeenCalledWith(
-        "오류가 발생했습니다. 다시 시도해주세요."
-      );
-    });
-  });
 });
 
 describe("signup", () => {

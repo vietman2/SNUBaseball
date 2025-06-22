@@ -3,7 +3,7 @@ import axios, { AxiosError } from "axios";
 
 import type { LoginFormType } from "../models/form.types";
 import type { TokenClaimResponseType } from "../models/response.types";
-import { type APIErrorResponse, showErrorAlert } from "@shared/api";
+import { type APIErrorResponse } from "@shared/api";
 
 async function login(data: LoginFormType): Promise<TokenClaimResponseType> {
   const res = await axios.post("/api/v1/login/", data);
@@ -18,8 +18,5 @@ export function useLogin() {
     LoginFormType
   >({
     mutationFn: (data) => login(data),
-    onError: (e) => {
-      showErrorAlert(e);
-    },
   });
 }
