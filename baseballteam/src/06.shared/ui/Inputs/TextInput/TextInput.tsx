@@ -5,6 +5,7 @@ interface Props {
   onChange: (value: string) => void;
   placeholder: string;
   password?: boolean;
+  disabled?: boolean;
 }
 
 export function TextInput({
@@ -12,6 +13,7 @@ export function TextInput({
   onChange,
   placeholder,
   password,
+  disabled,
 }: Readonly<Props>) {
   return (
     <InputWrapper>
@@ -20,6 +22,7 @@ export function TextInput({
         placeholder=""
         value={value}
         onChange={(e) => onChange(e.target.value)}
+        disabled={disabled}
         data-testid={`textinput-${placeholder}`}
       />
       <label className="placeholder">{placeholder}</label>
@@ -46,11 +49,11 @@ const InputWrapper = styled.div`
 `;
 
 const Input = styled.input`
+  flex: 1;
   border: ${({ theme }) => `2px solid ${theme.colors.gray300}`};
   outline: none;
   border-radius: 6px;
   padding: 12px 8px;
-  width: 100%;
   box-sizing: border-box;
   font-size: 1rem;
 
