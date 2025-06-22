@@ -21,13 +21,12 @@ vi.mock("react-router", async () => {
 });
 
 vi.mock("@shared/lib/auth", async () => {
-  const { AuthContext, UserProfileType, refresh, sampleCaptain, samplePlayer } =
+  const { AuthContext, UserProfileType, sampleCaptain, samplePlayer } =
     await vi.importActual("@shared/lib/auth");
 
   return {
     AuthContext: AuthContext,
     UserProfileType,
-    refresh,
     sampleCaptain,
     samplePlayer,
     useAuth: vi.fn(() => ({
@@ -35,6 +34,10 @@ vi.mock("@shared/lib/auth", async () => {
       login: vi.fn(),
       logout: vi.fn(),
     })),
+    useStudentIdCheck: vi.fn(),
+    useLogin: vi.fn(),
+    useSignup: vi.fn(),
+    useTokenRefresh: vi.fn(),
   };
 });
 vi.mock("@shared/lib/colors", async () => {
