@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 
-import { refresh, useAuth } from "@shared/lib/auth";
+import { useTokenRefresh, useAuth } from "@shared/lib/auth";
 import { LoadingSpinner } from "@shared/ui/Fallbacks";
 
 export function AutoLoginProvider({
@@ -11,29 +11,32 @@ export function AutoLoginProvider({
   const [isReady, setIsReady] = useState<boolean>(false);
 
   const { login, logout } = useAuth();
+  const { mutateAsync: refresh } = useTokenRefresh();
 
   useEffect(() => {
     const refreshToken = async () => {
       try {
-        const response = await refresh();
+        const result = await refresh(null, {
+          onSuccess: (res) => {
+            login(res.user, res.access);
+          },
+          onError: () => {
+            logout();
+          },
+        });
 
-        login(response.user, response.access);
-
-        return response.access;
+        return result.access ?? null;
       } catch {
-        logout();
-
         return null;
       }
     };
 
     const initialize = async () => {
       await refreshToken();
-
-      setIsReady(true);
     };
 
     initialize();
+    setIsReady(true);
 
     const interceptor = axios.interceptors.response.use(
       (response) => response,
@@ -49,6 +52,7 @@ export function AutoLoginProvider({
           originalRequest._retry = true;
 
           const token = await refreshToken();
+
           if (token) {
             originalRequest.headers["Authorization"] = `Bearer ${token}`;
 
@@ -63,7 +67,7 @@ export function AutoLoginProvider({
     return () => {
       axios.interceptors.response.eject(interceptor);
     };
-  }, [login, logout]);
+  }, [login, logout, refresh]);
 
   if (!isReady) {
     return (
