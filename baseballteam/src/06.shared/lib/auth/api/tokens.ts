@@ -1,9 +1,21 @@
-import axios from "axios";
+import { useMutation } from "@tanstack/react-query";
+import axios, { AxiosError } from "axios";
 
-import type { TokenRefreshResponseType } from "../models/types";
+import type { TokenClaimResponseType } from "../models/response.types";
+import type { APIErrorResponse } from "@shared/api";
 
-export async function refresh(): Promise<TokenRefreshResponseType> {
+async function refresh(): Promise<TokenClaimResponseType> {
   const response = await axios.post(`/api/v1/tokens/refresh/`, {});
 
   return response.data;
+}
+
+export function useTokenRefresh() {
+  return useMutation<
+    TokenClaimResponseType,
+    AxiosError<APIErrorResponse>,
+    null
+  >({
+    mutationFn: () => refresh(),
+  });
 }

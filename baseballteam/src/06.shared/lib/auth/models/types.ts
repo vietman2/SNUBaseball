@@ -5,8 +5,3 @@ export type UserProfileType = {
   is_admin: boolean;
   person_id: number;
 };
-
-export type TokenRefreshResponseType = {
-  user: UserProfileType;
-  access: string;
-};
