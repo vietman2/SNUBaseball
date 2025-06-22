@@ -21,6 +21,9 @@ vi.mock("@widgets/layout", () => ({
     <div>{children}</div>
   ),
 }));
+vi.mock("@pages/signup", () => ({
+  SignupPage: () => <div>Not Found Page</div>,
+}));
 
 describe("App", () => {
   it("renders correctly when authenticated", () => {
