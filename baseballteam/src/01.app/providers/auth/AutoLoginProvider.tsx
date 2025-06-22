@@ -25,7 +25,7 @@ export function AutoLoginProvider({
           },
         });
 
-        return result.access ?? null;
+        return result.access;
       } catch {
         return null;
       }
