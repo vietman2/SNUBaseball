@@ -20,6 +20,15 @@ vi.mock("react-router", async () => {
   };
 });
 
+vi.mock("@widgets/auth", () => ({
+  AuthFormWrapper: ({ children }: { children: React.ReactNode }) => (
+    <>{children}</>
+  ),
+}));
+vi.mock("@widgets/layout", () => ({
+  RootLayout: () => null,
+}))
+
 vi.mock("@shared/lib/auth", async () => {
   const { AuthContext, UserProfileType, sampleCaptain, samplePlayer } =
     await vi.importActual("@shared/lib/auth");
@@ -59,7 +68,7 @@ vi.mock("@shared/lib/colors", async () => {
 
 vi.mock("@shared/ui/Buttons", () => ({
   TextButton: ({ text, onClick }: { text: string; onClick: () => void }) => (
-    <button onClick={onClick} data-testid={`text-button-${text}`}>
+    <button onClick={onClick} data-testid={`textbutton-${text}`}>
       {text}
     </button>
   ),
@@ -68,21 +77,21 @@ vi.mock("@shared/ui/Fallbacks", () => ({
   LoadingSpinner: () => <div>Loading Spinner</div>,
 }));
 vi.mock("@shared/ui/Icons", () => ({
-  Logo: () => <div>Mocked Logo</div>,
+  Logo: "url",
 }));
 vi.mock("@shared/ui/Inputs", async () => {
   return {
     TextInput: ({
-      label,
+      placeholder,
       value,
       onChange,
     }: {
-      label: string;
+      placeholder: string;
       value: string;
       onChange: (value: string) => void;
     }) => (
       <input
-        data-testid={`textinput-${label}`}
+        data-testid={`textinput-${placeholder}`}
         value={value}
         onChange={(e) => onChange(e.target.value)}
       />
