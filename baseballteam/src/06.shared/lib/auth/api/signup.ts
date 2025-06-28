@@ -5,7 +5,7 @@ import type { SignupFormType } from "../models/form.types";
 import { type APIErrorResponse, showErrorAlert } from "@shared/api";
 
 export async function signup(data: SignupFormType): Promise<void> {
-  await axios.post("/api/v1/login/", data);
+  await axios.post("/api/login/", data);
 }
 
 export function useSignup() {

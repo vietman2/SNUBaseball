@@ -8,7 +8,7 @@ import { type APIErrorResponse, showErrorAlert } from "@shared/api";
 async function checkStudentId(
   data: StudentIdCheckFormType
 ): Promise<StudentIdCheckSuccessType> {
-  const res = await axios.post(`/api/v1/student_id/`, data);
+  const res = await axios.post(`/api/student_id/`, data);
 
   return res.data;
 }

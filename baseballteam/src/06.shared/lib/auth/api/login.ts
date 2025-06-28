@@ -6,7 +6,7 @@ import type { TokenClaimResponseType } from "../models/response.types";
 import { type APIErrorResponse } from "@shared/api";
 
 async function login(data: LoginFormType): Promise<TokenClaimResponseType> {
-  const res = await axios.post("/api/v1/login/", data);
+  const res = await axios.post("/api/login/", data);
 
   return res.data;
 }
