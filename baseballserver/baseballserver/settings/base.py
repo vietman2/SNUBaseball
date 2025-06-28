@@ -91,14 +91,15 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
-    "EXCEPTION_HANDLER": "core.exceptions.custom_exception_handler",
+    "EXCEPTION_HANDLER": "core.exceptions.baseball_server_exception_handler",
 }
 
 
 # Account Settings
-ACCOUNT_LOGIN_METHODS = {"username", "email"}  ## 로그인 방법
+ACCOUNT_LOGIN_METHODS = {"username"}  ## 로그인 방법
+ACCOUNT_USER_MODEL_EMAIL_FIELD = None
 
-AUTH_USER_MODEL = "auth.User"
+AUTH_USER_MODEL = "user.User"
 PHONENUMBER_DEFAULT_REGION = "KR"
 
 AUTHENTICATION_BACKENDS = [
