@@ -24,7 +24,7 @@ REST_AUTH = {
     "JWT_AUTH_RETURN_EXPIRATION": True,
     "JWT_AUTH_COOKIE_USE_CSRF": True,
     "SESSION_LOGIN": False,
-    "USER_DETAILS_SERIALIZER": "person.user.serializers.ProfileSerializer",
+    "USER_DETAILS_SERIALIZER": "auth.user.serializers.ProfileSerializer",
 }
 
 # CORS
