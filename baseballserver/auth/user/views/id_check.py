@@ -11,13 +11,20 @@ from ..models import User
 
 
 class StudentIdCheckView(GenericAPIView):
+    """
+    학번 확인 API (회원가입이 가능한 학번인지 확인하는 API)
+        - Member object가 존재하면서 User object가 없는 경우에만 가입이 가능하다
+        - 학번이 존재하지 않는 경우에는 ValidationError를 발생시킨다
+        - 이미 가입된 학번인 경우에도 ValidationError를 발생시킨다
+    """
+
     permission_classes = [AllowAny]
     http_method_names = ["post"]
 
     @extend_schema(summary="학번 확인", tags=["회원 관리"])
     def post(self, request, *args, **kwargs):
-        student_id = request.data.get("student_id").strip()
-        if not student_id:
+        student_id = request.data.get("student_id", "").strip()
+        if not student_id or student_id == "":
             raise ValidationError("학번을 입력해주세요.")
 
         ## Member object가 있으면서, User object가 없는 경우만 가입이 가능하다
