@@ -6,5 +6,5 @@ export type TokenClaimResponseType = {
 };
 
 export type StudentIdCheckSuccessType = {
-  memberId: number;
+  member_id: number;
 };

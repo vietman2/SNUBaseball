@@ -4,7 +4,7 @@ export type LoginFormType = {
 };
 
 export type StudentIdCheckFormType = {
-  studentId: string;
+  student_id: string;
 };
 
 export type SignupFormType = {
