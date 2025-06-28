@@ -1,0 +1,39 @@
+from django.core.exceptions import ObjectDoesNotExist
+from drf_spectacular.utils import extend_schema
+from rest_framework import status
+from rest_framework.exceptions import ValidationError
+from rest_framework.generics import GenericAPIView
+from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
+
+from auth.member.models import Member
+from ..models import User
+
+
+class StudentIdCheckView(GenericAPIView):
+    permission_classes = [AllowAny]
+    http_method_names = ["post"]
+
+    @extend_schema(summary="학번 확인", tags=["회원 관리"])
+    def post(self, request, *args, **kwargs):
+        student_id = request.data.get("student_id").strip()
+        if not student_id:
+            raise ValidationError("학번을 입력해주세요.")
+
+        ## Member object가 있으면서, User object가 없는 경우만 가입이 가능하다
+        ## 즉, Member object가 있으면서 User object가 있는 경우는 이미 가입한 경우이고
+        ## Member object가 없는 경우는 가입이 불가능한 경우이다
+
+        try:
+            member = Member.objects.get(student_id=student_id)
+        except ObjectDoesNotExist as e:
+            raise ValidationError(
+                "학번이 존재하지 않습니다. 주장단에 문의해주세요."
+            ) from e
+
+        if User.objects.filter(member=member).exists():
+            raise ValidationError("이미 가입된 학번입니다.")
+
+        data = {"name": member.full_name, "id": member.id}
+
+        return Response(data, status=status.HTTP_200_OK)

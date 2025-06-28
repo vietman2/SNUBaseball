@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser
 from django.db import models
 
 from auth.member.models import Member
+from .managers import UserManager
 
 
 class User(AbstractBaseUser):
@@ -19,7 +20,7 @@ class User(AbstractBaseUser):
 
     USERNAME_FIELD = "username"
 
-    objects = models.Manager()
+    objects = UserManager()
 
     def has_perm(self, perm, obj=None):  # pylint: disable=unused-argument
         return True
