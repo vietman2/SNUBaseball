@@ -40,7 +40,7 @@ const InputWrapper = styled.div`
   label {
     position: absolute;
     background-color: transparent;
-    color: ${({ theme }) => theme.colors.gray300};
+    color: ${({ theme }) => theme.colors.gray700};
     font-size: 0.9rem;
     top: 14px;
     left: 10px;
@@ -50,7 +50,7 @@ const InputWrapper = styled.div`
 
 const Input = styled.input`
   flex: 1;
-  border: ${({ theme }) => `2px solid ${theme.colors.gray300}`};
+  border: ${({ theme }) => `2px solid ${theme.colors.gray700}`};
   outline: none;
   border-radius: 6px;
   padding: 12px 8px;
