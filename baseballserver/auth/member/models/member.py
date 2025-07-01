@@ -1,0 +1,54 @@
+from django.core.validators import MinValueValidator as Min, MaxValueValidator as Max
+from django.db import models
+from phonenumber_field.modelfields import PhoneNumberField
+
+from auth.major.models import Department
+from ..enums import HandsType
+from .role import MemberRole
+from .status import MemberStatus
+
+
+class Member(models.Model):
+    student_id = models.CharField(max_length=10, unique=True, blank=True)
+    first_name = models.CharField(max_length=150)
+    last_name = models.CharField(max_length=150)
+    birth_date = models.DateField(null=True, blank=True)
+    admission_year = models.IntegerField(validators=[Min(1900), Max(2100)])
+    major = models.ForeignKey(
+        Department, on_delete=models.SET_NULL, null=True, blank=True
+    )
+
+    role = models.ForeignKey(
+        MemberRole, on_delete=models.PROTECT, related_name="members"
+    )
+    status = models.ForeignKey(
+        MemberStatus, on_delete=models.PROTECT, related_name="members"
+    )
+
+    phone = PhoneNumberField(unique=True, null=True, blank=True)
+    email = models.EmailField(max_length=255, unique=True, null=True, blank=True)
+    address = models.TextField(default="", blank=True)
+    notes = models.TextField(default="", blank=True)
+    date_joined = models.DateField(null=True, blank=True)
+    num_semester = models.IntegerField(validators=[Min(0), Max(20)], default=0)
+
+    profile_image = models.ImageField(null=True, blank=True)
+    position = models.CharField(default="", max_length=10, blank=True)
+    hands = models.IntegerField(choices=HandsType.choices, default=HandsType.UNDEFINED)
+    back_number = models.IntegerField(validators=[Min(0), Max(99)], default=0)
+    is_elite = models.BooleanField(default=False)
+
+    objects = models.Manager()
+
+    @property
+    def full_name(self):
+        return f"{self.last_name}{self.first_name}"
+
+    def __str__(self):
+        return f"{self.full_name} ({self.admission_year})"
+
+    class Meta:
+        db_table = "member"
+        verbose_name = "부원"
+        verbose_name_plural = "부원"
+        ordering = ["admission_year"]
