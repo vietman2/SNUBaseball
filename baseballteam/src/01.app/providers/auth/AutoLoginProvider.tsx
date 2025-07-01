@@ -72,7 +72,9 @@ export function AutoLoginProvider({
   if (!isReady) {
     return (
       <Wrapper>
-        <LoadingSpinner />
+        <div>
+          <LoadingSpinner />
+        </div>
       </Wrapper>
     ); // Show a loading spinner while checking the token
   }
@@ -85,4 +87,12 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
+
+  > div {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 `;
