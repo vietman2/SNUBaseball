@@ -4,6 +4,7 @@ import type { ThemeColorType } from "../models/types";
 
 interface ColorContextType {
   colors: ThemeColorType;
+  isDarkMode: boolean;
   toggleTheme: () => void;
 }
 

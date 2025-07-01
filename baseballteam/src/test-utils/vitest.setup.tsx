@@ -57,6 +57,7 @@ vi.mock("@shared/lib/colors", async () => {
   return {
     useColors: vi.fn(() => ({
       colors: light,
+      isDarkMode: false,
       toggleTheme: vi.fn(),
     })),
     ColorContext: ColorContext,
