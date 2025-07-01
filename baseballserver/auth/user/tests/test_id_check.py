@@ -23,7 +23,7 @@ class StudentIdCheckViewTestCase(BaseAPITestCase):
         )
         self.assertEqual(response.status_code, 200)
         self.assertIn("name", response.data)
-        self.assertIn("id", response.data)
+        self.assertIn("member_id", response.data)
 
     def test_existing_user(self):
         ## 이미 가입된 학번

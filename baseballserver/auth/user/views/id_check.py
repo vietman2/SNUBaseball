@@ -41,6 +41,9 @@ class StudentIdCheckView(GenericAPIView):
         if User.objects.filter(member=member).exists():
             raise ValidationError("이미 가입된 학번입니다.")
 
-        data = {"name": member.full_name, "id": member.id}
+        data = {
+            "member_id": member.id,
+            "name": f"{member.full_name} ({member.admission_year})",
+        }
 
         return Response(data, status=status.HTTP_200_OK)
