@@ -45,11 +45,15 @@ describe("SignupPage", () => {
     });
 
     // 2차 시도: 성공
-    vi.spyOn(axios, "post").mockResolvedValueOnce({ data: { member_id: 1 } });
+    vi.spyOn(axios, "post").mockResolvedValueOnce({
+      data: { member_id: 1, name: "홍길동 (2020)" },
+    });
     fireEvent.click(getByText("확인"));
 
     await waitFor(() => {
-      expect(window.alert).toHaveBeenCalledWith("학번 확인되었습니다.");
+      expect(window.alert).toHaveBeenCalledWith(
+        "홍길동 (2020) 학번 확인되었습니다."
+      );
     });
 
     // Form 채우고, 회원가입 시도
