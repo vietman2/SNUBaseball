@@ -27,7 +27,7 @@ vi.mock("@widgets/auth", () => ({
 }));
 vi.mock("@widgets/layout", () => ({
   RootLayout: () => null,
-}))
+}));
 
 vi.mock("@shared/lib/auth", async () => {
   const { AuthContext, UserProfileType, sampleCaptain, samplePlayer } =
@@ -73,11 +73,18 @@ vi.mock("@shared/ui/Buttons", () => ({
     </button>
   ),
 }));
+vi.mock("@shared/ui/Dividers", () => ({
+  VerticalDivider: () => <div>VerticalDivider</div>,
+}));
 vi.mock("@shared/ui/Fallbacks", () => ({
   LoadingSpinner: () => <div>Loading Spinner</div>,
 }));
 vi.mock("@shared/ui/Icons", () => ({
+  AppIcon: () => null,
+}));
+vi.mock("@shared/ui/Images", () => ({
   Logo: "url",
+  MainLogo: () => <div>Main Logo</div>,
 }));
 vi.mock("@shared/ui/Inputs", async () => {
   return {
