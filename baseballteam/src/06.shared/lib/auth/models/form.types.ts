@@ -8,9 +8,9 @@ export type StudentIdCheckFormType = {
 };
 
 export type SignupFormType = {
-  memberId: number;
-  studentId: string;
+  member: number;
+  student_id: string;
   username: string;
   password: string;
-  passwordConfirm: string;
+  password2: string;
 };
