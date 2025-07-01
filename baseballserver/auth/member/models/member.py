@@ -9,7 +9,7 @@ from .status import MemberStatus
 
 
 class Member(models.Model):
-    student_id = models.CharField(max_length=10, unique=True, null=True, blank=True)
+    student_id = models.CharField(max_length=10, unique=True, blank=True)
     first_name = models.CharField(max_length=150)
     last_name = models.CharField(max_length=150)
     birth_date = models.DateField(null=True, blank=True)
@@ -27,13 +27,13 @@ class Member(models.Model):
 
     phone = PhoneNumberField(unique=True, null=True, blank=True)
     email = models.EmailField(max_length=255, unique=True, null=True, blank=True)
-    address = models.TextField(default="", null=True, blank=True)
-    notes = models.TextField(default="", null=True, blank=True)
+    address = models.TextField(default="", blank=True)
+    notes = models.TextField(default="", blank=True)
     date_joined = models.DateField(null=True, blank=True)
     num_semester = models.IntegerField(validators=[Min(0), Max(20)], default=0)
 
     profile_image = models.ImageField(null=True, blank=True)
-    position = models.CharField(default="", max_length=10)
+    position = models.CharField(default="", max_length=10, blank=True)
     hands = models.IntegerField(choices=HandsType.choices, default=HandsType.UNDEFINED)
     back_number = models.IntegerField(validators=[Min(0), Max(99)], default=0)
     is_elite = models.BooleanField(default=False)
