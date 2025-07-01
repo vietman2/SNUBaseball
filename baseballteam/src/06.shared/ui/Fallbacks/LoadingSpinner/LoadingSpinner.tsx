@@ -1,11 +1,11 @@
 import styled, { keyframes } from "styled-components";
 
-export function LoadingSpinner() {
-  return (
-    <Container>
-      <Spinner />
-    </Container>
-  );
+interface Props {
+  size?: number;
+}
+
+export function LoadingSpinner({ size = 60 }: Readonly<Props>) {
+  return <Spinner $size={size} />;
 }
 
 const rotate = keyframes`
@@ -17,19 +17,13 @@ const rotate = keyframes`
   }
 `;
 
-const Container = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Spinner = styled.div`
-  width: 60px;
-  height: 60px;
-  border: 8px solid ${({ theme }) => theme.colors.background100};
-  border-top: 8px solid ${({ theme }) => theme.colors.primary};
+const Spinner = styled.div<{ $size: number }>`
+  width: ${({ $size }) => `${$size}px`};
+  height: ${({ $size }) => `${$size}px`};
+  border: ${({ $size, theme }) =>
+    `${$size / 6}px solid ${theme.colors.background100}`};
+  border-top: ${({ $size, theme }) =>
+    `${$size / 6}px solid ${theme.colors.primary}`};
   border-radius: 50%;
   animation: ${rotate} 1s linear infinite;
 `;
