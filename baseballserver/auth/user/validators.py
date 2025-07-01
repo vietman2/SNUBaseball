@@ -46,7 +46,7 @@ class PasswordValidator:
         if not value:
             raise ValidationError("비밀번호를 입력해주세요.")
 
-        if not (8 <= len(value) <= 128):
+        if not 8 <= len(value) <= 128:
             raise ValidationError("비밀번호는 8자 이상 128자 이하여야 합니다.")
 
         if not re.search(r"[A-Z]", value):

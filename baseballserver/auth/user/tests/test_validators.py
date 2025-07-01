@@ -1,6 +1,6 @@
+from unittest.mock import patch
 from django.test import TestCase
 from rest_framework.exceptions import ValidationError
-from unittest.mock import patch
 
 from auth.user.models import User
 from ..validators import PasswordValidator, UsernameValidator
