@@ -24,8 +24,7 @@ export function SignupFormProvider({
       {
         onSuccess: (res) => {
           setMemberId(res.member_id);
-          // TODO: 이부분 메시지 변경하기
-          window.alert("학번 확인되었습니다.");
+          window.alert(`${res.name} 학번 확인되었습니다.`);
         },
       }
     );
@@ -41,11 +40,11 @@ export function SignupFormProvider({
 
     signupRequest(
       {
-        memberId,
-        studentId,
+        member: memberId,
+        student_id: studentId,
         username,
         password,
-        passwordConfirm,
+        password2: passwordConfirm,
       },
       {
         onSuccess: () => {
