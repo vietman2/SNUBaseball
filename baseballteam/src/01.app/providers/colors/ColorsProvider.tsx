@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { ThemeProvider } from "styled-components";
 
 import { ColorContext, dark, light } from "@shared/lib/colors";
@@ -8,15 +8,18 @@ export function ColorsProvider({
 }: Readonly<{ children: React.ReactNode }>) {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
 
-  const toggleTheme = () => {
+  const toggleTheme = useCallback(() => {
     setIsDarkMode((prevMode) => !prevMode);
-  };
+  }, []);
 
   const colors = useMemo(() => {
     return isDarkMode ? dark : light;
   }, [isDarkMode]);
 
-  const value = useMemo(() => ({ colors, toggleTheme }), [colors]);
+  const value = useMemo(
+    () => ({ colors, isDarkMode, toggleTheme }),
+    [colors, isDarkMode, toggleTheme]
+  );
 
   return (
     <ThemeProvider theme={{ colors }}>
