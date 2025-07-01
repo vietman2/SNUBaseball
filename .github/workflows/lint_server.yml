@@ -39,4 +39,4 @@ jobs:
     - name: Analysing the code with pylint
       run: |
         cd baseballserver
-        pipenv run sh -c 'DJANGO_SETTINGS_MODULE=baseballserver.settings.local pylint --load-plugins pylint_django --rcfile=.pylintrc .'
+        pipenv run sh -c 'DJANGO_SETTINGS_MODULE=baseballserver.settings.dev pylint --load-plugins pylint_django --rcfile=.pylintrc .'
