@@ -66,6 +66,28 @@ vi.mock("@shared/lib/colors", async () => {
     dark: light,
   };
 });
+vi.mock("@shared/lib/navigation", async () => {
+  const { TabsContext, useTabs } = await vi.importActual(
+    "@shared/lib/navigation"
+  );
+
+  return {
+    TabsContext: TabsContext,
+    useTabs: useTabs,
+    useTabGroups: vi.fn(() => ({
+      tabGroups: [],
+      activeTab: {
+        title: "Test Tab",
+        subtabs: [],
+        icon: "test-icon",
+        path: "/",
+      },
+      activeSubTab: null,
+      setActiveTab: vi.fn(),
+      setActiveSubTab: vi.fn(),
+    })),
+  };
+});
 
 vi.mock("@shared/ui/Buttons", () => ({
   TextButton: ({ text, onClick }: { text: string; onClick: () => void }) => (
