@@ -103,6 +103,7 @@ AUTH_USER_MODEL = "user.User"
 PHONENUMBER_DEFAULT_REGION = "KR"
 
 AUTHENTICATION_BACKENDS = [
+    "auth.backends.AuthBackend",
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
