@@ -1,5 +1,4 @@
 from typing import cast
-from unittest.mock import patch
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
 
