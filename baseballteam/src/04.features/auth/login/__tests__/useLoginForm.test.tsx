@@ -4,11 +4,11 @@ import { render } from "@testing-library/react";
 import { useLoginForm } from "@features/auth/login";
 
 const MockComponent = () => {
-  const { isLoading } = useLoginForm();
+  const { username } = useLoginForm();
 
   return (
     <div>
-      <p>isLoading: {isLoading ? "true" : "false"}</p>
+      <p>{username}</p>
     </div>
   );
 };
