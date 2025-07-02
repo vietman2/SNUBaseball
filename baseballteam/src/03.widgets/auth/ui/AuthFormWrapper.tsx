@@ -1,12 +1,24 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router";
 import styled from "styled-components";
 
-import { Logo } from "@shared/ui/Icons";
+import { useAuth } from "@shared/lib/auth";
+import { Logo } from "@shared/ui/Images";
 
 interface Props {
   children: React.ReactNode;
 }
 
 export function AuthFormWrapper({ children }: Readonly<Props>) {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate("/home");
+    }
+  }, [user, navigate]);
+
   return (
     <Container>
       <Box>
