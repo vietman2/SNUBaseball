@@ -15,7 +15,13 @@ vi.mock("react-router", async () => {
     ...actual,
     Outlet: () => <div>Mocked Outlet</div>,
     useNavigate: () => vi.fn(),
-    useLocation: vi.fn(),
+    useLocation: vi.fn().mockReturnValue({
+      pathname: "/",
+      search: "",
+      hash: "",
+      state: null,
+      key: "default",
+    }),
     useParams: vi.fn(),
   };
 });
