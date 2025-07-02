@@ -16,6 +16,7 @@ const MockProvider = ({ children }: { children: React.ReactNode }) => {
   const value = useMemo(
     () => ({
       colors: light,
+      isDarkMode: false,
       toggleTheme: vi.fn(),
     }),
     []

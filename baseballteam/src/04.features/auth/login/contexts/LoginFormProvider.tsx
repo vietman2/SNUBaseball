@@ -11,7 +11,7 @@ export function LoginFormProvider({
   const [password, setPassword] = useState<string>("");
 
   const navigate = useNavigate();
-  const { user, login } = useAuth();
+  const { login } = useAuth();
   const { mutate: loginRequest } = useLogin();
 
   const submit = useCallback(async () => {
@@ -35,12 +35,6 @@ export function LoginFormProvider({
   const navigateToSignup = useCallback(() => {
     navigate("/signup");
   }, [navigate]);
-
-  useEffect(() => {
-    if (user) {
-      navigate("/home");
-    }
-  }, [user, navigate]);
 
   useEffect(() => {
     const handleEnterKey = (event: KeyboardEvent) => {

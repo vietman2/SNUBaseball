@@ -2,8 +2,8 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 
 import { LoginPage } from "@pages/login";
 import { NotFoundPage } from "@pages/notfound";
-import { RootLayout } from "@widgets/layout";
 import { SignupPage } from "@pages/signup";
+import { RootLayout } from "@widgets/layout";
 
 export function AppRouter() {
   return (
