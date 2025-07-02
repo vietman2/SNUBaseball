@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Navigate } from "react-router";
 
 import { TabsProvider } from "../contexts/TabsProvider";
-import { MobileLayout } from "./_mobile";
+import { MobileLayout } from "./_mobile/MobileLayout";
 import { WideLayout } from "./_wide/WideLayout";
 import { useAuth } from "@shared/lib/auth";
 

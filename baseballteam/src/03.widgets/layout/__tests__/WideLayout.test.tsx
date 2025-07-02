@@ -9,16 +9,9 @@ import { renderWithProviders } from "@test-utils/renderer";
 
 vi.unmock("@widgets/layout");
 
-describe("RootLayout", () => {
+describe("WideLayout", () => {
   beforeEach(() => {
     window.innerWidth = 1024;
-    vi.spyOn(Router, "useLocation").mockReturnValue({
-      pathname: "/",
-      search: "",
-      hash: "",
-      state: null,
-      key: "default",
-    });
     vi.spyOn(Router, "useNavigate").mockReturnValue(vi.fn());
   });
 
