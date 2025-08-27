@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import styled from "styled-components";
 
 import { useAuth } from "@shared/lib/auth";
-import { useColors } from "@shared/lib/colors";
+import { useColors } from "@shared/lib/styles";
 import { useTabs, type SubTabType } from "@shared/lib/navigation";
 import { VerticalDivider } from "@shared/ui/Dividers";
 import { AppIcon } from "@shared/ui/Icons";

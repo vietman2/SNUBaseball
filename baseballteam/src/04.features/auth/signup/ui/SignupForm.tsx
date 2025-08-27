@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useSignupForm } from "../contexts/useSignupForm";
 import { TextButton } from "@shared/ui/Buttons";
 import { TextInput } from "@shared/ui/Inputs";
-import { useColors } from "@shared/lib/colors";
+import { useColors } from "@shared/lib/styles";
 
 export function SignupForm() {
   const {

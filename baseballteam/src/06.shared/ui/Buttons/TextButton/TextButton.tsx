@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { useColors } from "@shared/lib/colors";
+import { useColors } from "@shared/lib/styles";
 
 interface Props {
   text: string;

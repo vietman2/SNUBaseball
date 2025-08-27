@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import styled from "styled-components";
 
-import { useColors } from "@shared/lib/colors";
+import { useColors } from "@shared/lib/styles";
 import { useTabs, type TabType } from "@shared/lib/navigation";
 import { AppIcon } from "@shared/ui/Icons";
 import { MainLogo } from "@shared/ui/Images";
