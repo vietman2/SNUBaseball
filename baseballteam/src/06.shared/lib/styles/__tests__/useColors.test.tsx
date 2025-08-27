@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { describe, expect, it, vi } from "vitest";
 import { render } from "@testing-library/react";
 
-import { ColorContext, light, useColors } from "@shared/lib/colors";
+import { ColorContext, light, useColors } from "@shared/lib/styles";
 
 vi.unmock("@shared/lib/colors");
 
