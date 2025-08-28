@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useState } from "react";
 import { ThemeProvider } from "styled-components";
 
-import { ColorContext, dark, light } from "@shared/lib/colors";
+import { ColorContext, GlobalStyles, dark, light } from "@shared/lib/styles";
 
 export function ColorsProvider({
   children,
@@ -23,7 +23,10 @@ export function ColorsProvider({
 
   return (
     <ThemeProvider theme={{ colors }}>
-      <ColorContext.Provider value={value}>{children}</ColorContext.Provider>
+      <ColorContext.Provider value={value}>
+        <GlobalStyles />
+        {children}
+      </ColorContext.Provider>
     </ThemeProvider>
   );
 }

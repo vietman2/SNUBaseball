@@ -2,9 +2,9 @@ import { describe, expect, it, vi } from "vitest";
 import { fireEvent, render, waitFor } from "@testing-library/react";
 
 import { ColorsProvider } from "../colors/ColorsProvider";
-import { useColors } from "@shared/lib/colors";
+import { useColors } from "@shared/lib/styles";
 
-vi.unmock("@shared/lib/colors");
+vi.unmock("@shared/lib/styles");
 
 const MockComponent = () => {
   const { colors, toggleTheme } = useColors();
