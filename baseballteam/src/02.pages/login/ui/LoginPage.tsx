@@ -1,15 +1,12 @@
 import styled from "styled-components";
 
-import { AuthFormWrapper } from "@widgets/auth";
 import { LoginForm, LoginFormProvider } from "@features/auth/login";
 
 export function LoginPage() {
   return (
     <LoginFormProvider>
       <Container>
-        <AuthFormWrapper>
-          <LoginForm />
-        </AuthFormWrapper>
+        <LoginForm />
       </Container>
     </LoginFormProvider>
   );

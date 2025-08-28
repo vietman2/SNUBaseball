@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-import { AuthFormWrapper } from "@widgets/auth";
 import {
   SignupForm,
   SignupFormProvider,
@@ -11,10 +10,8 @@ export function SignupPage() {
   return (
     <SignupFormProvider>
       <Container>
-        <AuthFormWrapper>
-          <StudentIdCheck />
-          <SignupForm />
-        </AuthFormWrapper>
+        <StudentIdCheck />
+        <SignupForm />
       </Container>
     </SignupFormProvider>
   );
