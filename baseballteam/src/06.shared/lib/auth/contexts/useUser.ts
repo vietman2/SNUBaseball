@@ -1,19 +1,19 @@
 import { createContext, useContext } from "react";
 
-import type { UserProfileType } from "../models/types";
-
-export interface UserContextType {
-  user: UserProfileType | null;
+export interface UserContextType<T> {
+  user: T | null;
 }
 
-export const UserContext = createContext<UserContextType | undefined>(
-  undefined
-);
+export function createUserContext<T>() {
+  const UserContext = createContext<UserContextType<T> | undefined>(undefined);
 
-export const useUser = () => {
-  const context = useContext(UserContext);
-  if (context === undefined) {
-    throw new Error("useUser must be used within an UserProvider");
+  function useUser() {
+    const context = useContext(UserContext);
+    if (!context) {
+      throw new Error("useUser must be used within a UserProvider");
+    }
+    return context;
   }
-  return context;
-};
+
+  return { UserContext, useUser };
+}
