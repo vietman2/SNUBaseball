@@ -1,19 +1,6 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
 
-const STALE_TIME_MS = 5 * 60 * 1000; // 5 minutes
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: STALE_TIME_MS,
-      refetchOnWindowFocus: false,
-      retry: 1,
-    },
-    mutations: {
-      retry: false,
-    },
-  },
-});
+import { queryClient } from "@shared/lib/query";
 
 export function QueryProvider({
   children,
