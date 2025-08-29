@@ -33,27 +33,21 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     ## Third Party Apps
-    "corsheaders",
-    "allauth",
-    "allauth.account",
-    "phonenumber_field",
     "rest_framework",
-    "rest_framework.authtoken",
+    "corsheaders",
     "rest_framework_simplejwt",
     "rest_framework_simplejwt.token_blacklist",
-    "dj_rest_auth",
     "drf_spectacular",
-    "django_extensions",
-    "storages",
     ## Custom Apps
-    "auth.major.apps.MajorConfig",
-    "auth.member.apps.MemberConfig",
     "auth.user.apps.UserConfig",
+    "member.major.apps.MajorConfig",
+    "member.person.apps.PersonConfig",
+    "member.role.apps.RoleConfig",
+    "member.status.apps.StatusConfig",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -61,7 +55,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = "baseballserver.urls"
@@ -91,22 +84,10 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
-    "EXCEPTION_HANDLER": "core.exceptions.baseball_server_exception_handler",
+    "EXCEPTION_HANDLER": "core.exceptions.handler.baseball_server_exception_handler",
 }
 
-
-# Account Settings
-ACCOUNT_LOGIN_METHODS = {"username"}  ## 로그인 방법
-ACCOUNT_USER_MODEL_EMAIL_FIELD = None
-
 AUTH_USER_MODEL = "user.User"
-PHONENUMBER_DEFAULT_REGION = "KR"
-
-AUTHENTICATION_BACKENDS = [
-    "auth.backends.AuthBackend",
-    "django.contrib.auth.backends.ModelBackend",
-    "allauth.account.auth_backends.AuthenticationBackend",
-]
 
 SIMPLE_JWT = {
     ## 토큰 만료 시간 설정
@@ -132,7 +113,6 @@ SIMPLE_JWT = {
     "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
     "TOKEN_TYPE_CLAIM": "token_type",
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -166,7 +146,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = "static/"
-STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
