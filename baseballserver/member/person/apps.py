@@ -1,7 +1,7 @@
 from django.apps import AppConfig
 
 
-class MemberConfig(AppConfig):
+class PersonConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "auth.member"
+    name = "member.person"
     label = "member"
