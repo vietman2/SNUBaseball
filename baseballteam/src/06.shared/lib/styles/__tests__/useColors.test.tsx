@@ -4,7 +4,7 @@ import { render } from "@testing-library/react";
 
 import { ColorContext, light, useColors } from "@shared/lib/styles";
 
-vi.unmock("@shared/lib/colors");
+vi.unmock("@shared/lib/styles");
 
 const MockComponent = () => {
   const { colors } = useColors();
