@@ -26,80 +26,94 @@ vi.mock("react-router", async () => {
   };
 });
 
-vi.mock("@widgets/auth", () => ({
-  AuthFormWrapper: ({ children }: { children: React.ReactNode }) => (
-    <>{children}</>
-  ),
-}));
-vi.mock("@widgets/layout", () => ({
-  RootLayout: () => null,
-}));
-
 vi.mock("@shared/lib/auth", async () => {
-  const { AuthContext, UserProfileType, sampleCaptain, samplePlayer } =
-    await vi.importActual("@shared/lib/auth");
-
-  return {
-    AuthContext: AuthContext,
-    UserProfileType,
-    sampleCaptain,
-    samplePlayer,
-    useAuth: vi.fn(() => ({
-      user: null,
-      login: vi.fn(),
-      logout: vi.fn(),
-    })),
-    useStudentIdCheck: vi.fn(),
-    useLogin: vi.fn(),
-    useSignup: vi.fn(),
-    useTokenRefresh: vi.fn(),
-  };
-});
-vi.mock("@shared/lib/colors", async () => {
-  const { ColorContext, ThemeColorType, light } = await vi.importActual(
-    "@shared/lib/colors"
+  const { AuthContext, TokensContext } = await vi.importActual(
+    "@shared/lib/auth"
   );
 
   return {
+    AuthContext: AuthContext,
+    TokensContext: TokensContext,
+    createUserContext: vi.fn().mockReturnValue({
+      UserContext: AuthContext,
+      useUser: vi.fn().mockReturnValue({
+        user: null,
+        isAuthenticated: false,
+      }),
+    }),
+    useTokens: vi.fn().mockReturnValue({
+      setToken: vi.fn(),
+      clearToken: vi.fn(),
+    }),
+    isTokenValid: vi.fn().mockReturnValue(true),
+  };
+});
+vi.mock("@shared/lib/axios", async () => ({
+  axiosInstance: {
+    get: vi.fn(),
+    post: vi.fn(),
+    put: vi.fn(),
+    delete: vi.fn(),
+  },
+}));
+vi.mock("@shared/lib/router", async () => {
+  const { TabsContext } = await vi.importActual("@shared/lib/router");
+
+  return {
+    TabsContext: TabsContext,
+    useTabs: vi.fn().mockReturnValue({
+      tabGroups: [],
+      activeTab: null,
+      activeSubTab: null,
+    }),
+    getAllTabs: vi.fn().mockReturnValue([]),
+    parseCurrentPath: vi.fn().mockReturnValue({
+      tab: null,
+      subTab: null,
+    }),
+  };
+});
+vi.mock("@shared/lib/styles", async () => {
+  const { ColorContext, ThemeColorType, light } = await vi.importActual(
+    "@shared/lib/styles"
+  );
+
+  return {
+    ColorContext: ColorContext,
     useColors: vi.fn(() => ({
       colors: light,
       isDarkMode: false,
       toggleTheme: vi.fn(),
     })),
-    ColorContext: ColorContext,
     ThemeColorType: ThemeColorType,
     light: light,
     dark: light,
-  };
-});
-vi.mock("@shared/lib/navigation", async () => {
-  const { TabsContext, useTabs } = await vi.importActual(
-    "@shared/lib/navigation"
-  );
-
-  return {
-    TabsContext: TabsContext,
-    useTabs: useTabs,
-    useTabGroups: vi.fn(() => ({
-      tabGroups: [],
-      activeTab: {
-        title: "Test Tab",
-        subtabs: [],
-        icon: "test-icon",
-        path: "/",
-      },
-      activeSubTab: null,
-      setActiveTab: vi.fn(),
-      setActiveSubTab: vi.fn(),
-    })),
+    GlobalStyles: () => null,
   };
 });
 
 vi.mock("@shared/ui/Buttons", () => ({
-  TextButton: ({ text, onClick }: { text: string; onClick: () => void }) => (
-    <button onClick={onClick} data-testid={`textbutton-${text}`}>
-      {text}
+  ElevatedTextButton: ({
+    children,
+    onClick,
+  }: {
+    children: React.ReactNode;
+    onClick: () => void;
+  }) => (
+    <button onClick={onClick} className="elevated">
+      {children}
     </button>
+  ),
+  ElevatedLink: ({
+    children,
+    href,
+  }: {
+    children: React.ReactNode;
+    href: string;
+  }) => (
+    <a href={href} className="elevated">
+      {children}
+    </a>
   ),
 }));
 vi.mock("@shared/ui/Dividers", () => ({
@@ -115,22 +129,3 @@ vi.mock("@shared/ui/Images", () => ({
   Logo: "url",
   MainLogo: () => <div>Main Logo</div>,
 }));
-vi.mock("@shared/ui/Inputs", async () => {
-  return {
-    TextInput: ({
-      placeholder,
-      value,
-      onChange,
-    }: {
-      placeholder: string;
-      value: string;
-      onChange: (value: string) => void;
-    }) => (
-      <input
-        data-testid={`textinput-${placeholder}`}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-      />
-    ),
-  };
-});
