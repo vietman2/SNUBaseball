@@ -3,4 +3,9 @@ export {
   type TokensContextType,
   useTokens,
 } from "./contexts/useTokens";
-export { type UserContextType, createUserContext } from "./contexts/useUser";
+export {
+  type UserContextType,
+  createUserContext,
+} from "./contexts/createUserContext";
+
+export { isTokenValid } from "./utils/isTokenValid";

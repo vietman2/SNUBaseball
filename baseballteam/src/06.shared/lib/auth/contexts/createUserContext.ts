@@ -1,8 +1,18 @@
 import { createContext, useContext } from "react";
 
-export interface UserContextType<T> {
-  user: T | null;
+interface AuthenticatedStateType<T> {
+  user: T;
+  isAuthenticated: true;
 }
+
+interface UnauthenticatedStateType {
+  user: null;
+  isAuthenticated: false;
+}
+
+export type UserContextType<T> =
+  | AuthenticatedStateType<T>
+  | UnauthenticatedStateType;
 
 export function createUserContext<T>() {
   const UserContext = createContext<UserContextType<T> | undefined>(undefined);
