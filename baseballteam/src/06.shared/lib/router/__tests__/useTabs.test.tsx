@@ -2,16 +2,16 @@ import { useMemo } from "react";
 import { describe, expect, it, vi } from "vitest";
 import { render } from "@testing-library/react";
 
-import { TabsContext, useTabs } from "@shared/lib/navigation";
+import { TabsContext, useTabs } from "@shared/lib/router";
 
-vi.unmock("@shared/lib/navigation");
+vi.unmock("@shared/lib/router");
 
 const MockComponent = () => {
   const { activeTab, activeSubTab } = useTabs();
 
   return (
     <div>
-      <h1>{activeTab.title}</h1>
+      <h1>{activeTab?.title}</h1>
       <p>{activeSubTab?.title}</p>
     </div>
   );
@@ -25,11 +25,9 @@ const MockProvider = ({ children }: { children: React.ReactNode }) => {
         title: "Test Tab",
         subtabs: [],
         icon: "test-icon",
-        path: "/test",
+        href: "/test",
       },
-      activeSubTab: { title: "Test SubTab", path: "/test/subtab" },
-      setActiveTab: vi.fn(),
-      setActiveSubTab: vi.fn(),
+      activeSubTab: { title: "Test SubTab", href: "/test/subtab" },
     }),
     []
   );
