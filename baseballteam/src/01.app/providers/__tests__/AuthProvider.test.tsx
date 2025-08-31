@@ -164,11 +164,15 @@ describe("AuthProvider", () => {
       const originalBC = (globalThis as any).BroadcastChannel;
       delete (globalThis as any).BroadcastChannel;
       try {
-        renderWithProviders(
+        const { getByText } = renderWithProviders(
           <AuthProvider>
             <MockComponent />
           </AuthProvider>
         );
+
+        await waitFor(() => {
+          expect(getByText("테스트 유저")).toBeInTheDocument();
+        });
       } finally {
         // 2) 원복
         (globalThis as any).BroadcastChannel = originalBC;
