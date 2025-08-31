@@ -8,6 +8,7 @@ import { useTokens } from "@shared/lib/auth";
 import { axiosInstance, axiosInstanceWithAuth } from "@shared/lib/axios";
 import { renderWithProviders } from "@test-utils/renderer";
 
+vi.unmock("@entities/user");
 vi.unmock("@shared/lib/auth");
 
 const MockComponent = () => {

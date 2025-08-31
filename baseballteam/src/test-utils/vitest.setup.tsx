@@ -1,6 +1,30 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import "@testing-library/jest-dom";
 import { vi } from "vitest";
 
+const __bcListeners = new Set<(e: MessageEvent) => void>();
+vi.stubGlobal(
+  "BroadcastChannel",
+  class {
+    name: string;
+    constructor(name: string) {
+      this.name = name;
+    }
+    addEventListener(type: string, cb: (e: MessageEvent) => void) {
+      if (type === "message") __bcListeners.add(cb);
+    }
+    removeEventListener(type: string, cb: (e: MessageEvent) => void) {
+      if (type === "message") __bcListeners.delete(cb);
+    }
+    postMessage(data: any) {
+      const evt = { data } as MessageEvent;
+      __bcListeners.forEach((cb) => cb(evt));
+    }
+    close() {
+      /* no-op for test purposes */
+    }
+  } as any
+);
 vi.mock("axios", async () => {
   const actual = await vi.importActual("axios");
   return {
@@ -14,38 +38,29 @@ vi.mock("react-router", async () => {
   return {
     ...actual,
     Outlet: () => <div>Mocked Outlet</div>,
-    useNavigate: () => vi.fn(),
-    useLocation: vi.fn().mockReturnValue({
-      pathname: "/",
-      search: "",
-      hash: "",
-      state: null,
-      key: "default",
-    }),
-    useParams: vi.fn(),
+  };
+});
+
+vi.mock("@entities/user", async () => {
+  const actual = await vi.importActual("@entities/user");
+  return {
+    ...actual,
+    useUser: vi.fn().mockReturnValue({ user: null, isAuthenticated: false }),
   };
 });
 
 vi.mock("@shared/lib/auth", async () => {
-  const { AuthContext, TokensContext } = await vi.importActual(
+  const { TokensContext, createUserContext } = await vi.importActual(
     "@shared/lib/auth"
   );
 
   return {
-    AuthContext: AuthContext,
     TokensContext: TokensContext,
-    createUserContext: vi.fn().mockReturnValue({
-      UserContext: AuthContext,
-      useUser: vi.fn().mockReturnValue({
-        user: null,
-        isAuthenticated: false,
-      }),
-    }),
+    createUserContext: createUserContext,
     useTokens: vi.fn().mockReturnValue({
       setToken: vi.fn(),
       clearToken: vi.fn(),
     }),
-    isTokenValid: vi.fn().mockReturnValue(true),
   };
 });
 vi.mock("@shared/lib/axios", async () => ({
@@ -55,6 +70,15 @@ vi.mock("@shared/lib/axios", async () => ({
     put: vi.fn(),
     delete: vi.fn(),
   },
+  axiosInstanceWithAuth: {
+    get: vi.fn(),
+    post: vi.fn(),
+    put: vi.fn(),
+    delete: vi.fn(),
+  },
+  setAuthToken: vi.fn(),
+  clearAuthToken: vi.fn(),
+  setAutoRetryAfterTokenRefresh: vi.fn(),
 }));
 vi.mock("@shared/lib/router", async () => {
   const { TabsContext } = await vi.importActual("@shared/lib/router");
@@ -92,30 +116,14 @@ vi.mock("@shared/lib/styles", async () => {
   };
 });
 
-vi.mock("@shared/ui/Buttons", () => ({
-  ElevatedTextButton: ({
-    children,
-    onClick,
-  }: {
-    children: React.ReactNode;
-    onClick: () => void;
-  }) => (
-    <button onClick={onClick} className="elevated">
-      {children}
-    </button>
-  ),
-  ElevatedLink: ({
-    children,
-    href,
-  }: {
-    children: React.ReactNode;
-    href: string;
-  }) => (
-    <a href={href} className="elevated">
-      {children}
-    </a>
-  ),
-}));
+vi.mock("@shared/ui/Buttons", async () => {
+  const { Link } = await vi.importActual("react-router");
+
+  return {
+    ElevatedTextButton: (props: any) => <button {...props} />,
+    ElevatedLink: Link,
+  };
+});
 vi.mock("@shared/ui/Dividers", () => ({
   VerticalDivider: () => <div>VerticalDivider</div>,
 }));
