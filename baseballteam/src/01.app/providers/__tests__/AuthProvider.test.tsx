@@ -3,15 +3,15 @@ import { act, fireEvent, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { AuthProvider } from "../auth/AuthProvider";
-import * as AuthAPI from "@entities/user";
+import { sampleUser, useUser } from "@entities/user";
 import { useTokens } from "@shared/lib/auth";
-import { axiosInstance } from "@shared/lib/axios";
+import { axiosInstance, axiosInstanceWithAuth } from "@shared/lib/axios";
 import { renderWithProviders } from "@test-utils/renderer";
 
 vi.unmock("@shared/lib/auth");
 
 const MockComponent = () => {
-  const { isAuthenticated, user } = AuthAPI.useUser();
+  const { isAuthenticated, user } = useUser();
   const { setToken, clearToken } = useTokens();
 
   return (
@@ -28,9 +28,9 @@ const MockComponent = () => {
 
 describe("AuthProvider", () => {
   beforeEach(() => {
-    vi.spyOn(AuthAPI, "useMe").mockReturnValue({
-      data: AuthAPI.sampleUser,
-    } as any);
+    vi.spyOn(axiosInstanceWithAuth, "get").mockResolvedValue({
+      data: sampleUser,
+    });
   });
 
   describe("초기 진입", () => {
@@ -48,13 +48,16 @@ describe("AuthProvider", () => {
       });
     });
 
-    it("앱을 열면 곧바로 토큰 refresh를 시도한다 (성공)", async () => {
+    it("앱을 열면 곧바로 토큰 refresh를 시도한다 (성공 + me fetch 실패)", async () => {
       vi.spyOn(axiosInstance, "post").mockResolvedValue({
         data: {
           access: "mock-access-token",
         },
         status: "SUCCESS",
       });
+      vi.spyOn(axiosInstanceWithAuth, "get").mockRejectedValue(
+        new Error("Failed to fetch user profile")
+      );
 
       const { getByText } = renderWithProviders(
         <AuthProvider>
@@ -63,7 +66,7 @@ describe("AuthProvider", () => {
       );
 
       await waitFor(() => {
-        expect(getByText(AuthAPI.sampleUser.name)).toBeInTheDocument();
+        expect(getByText("Not Authenticated")).toBeInTheDocument();
       });
     });
   });
