@@ -2,7 +2,7 @@ import { createContext, useContext } from "react";
 
 export interface TokensContextType {
   setToken: (accessToken: string) => void;
-  clearToken: () => void;
+  clearToken: () => Promise<void>;
 }
 
 export const TokensContext = createContext<TokensContextType | undefined>(

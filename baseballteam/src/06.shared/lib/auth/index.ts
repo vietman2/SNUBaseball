@@ -7,5 +7,3 @@ export {
   type UserContextType,
   createUserContext,
 } from "./contexts/createUserContext";
-
-export { isTokenValid } from "./utils/isTokenValid";
