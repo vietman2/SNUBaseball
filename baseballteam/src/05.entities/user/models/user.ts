@@ -1,5 +1,5 @@
 export type UserProfileType = {
-  uuid: number;
+  uuid: string;
   username: string;
   name: string;
   profile_image: string | null;
