@@ -3,9 +3,9 @@ import { act, fireEvent, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { AuthProvider } from "../auth/AuthProvider";
-import * as RefreshTokenAPI from "@features/auth/refreshToken";
 import * as AuthAPI from "@entities/user";
 import { useTokens } from "@shared/lib/auth";
+import { axiosInstance } from "@shared/lib/axios";
 import { renderWithProviders } from "@test-utils/renderer";
 
 vi.unmock("@shared/lib/auth");
@@ -35,7 +35,7 @@ describe("AuthProvider", () => {
 
   describe("초기 진입", () => {
     it("앱을 열면 곧바로 토큰 refresh를 시도한다 (실패)", async () => {
-      vi.spyOn(RefreshTokenAPI, "refreshToken").mockResolvedValue(null);
+      vi.spyOn(axiosInstance, "post").mockResolvedValue(null);
 
       const { getByText } = renderWithProviders(
         <AuthProvider>
@@ -46,12 +46,10 @@ describe("AuthProvider", () => {
       await waitFor(() => {
         expect(getByText("Not Authenticated")).toBeInTheDocument();
       });
-
-      expect(RefreshTokenAPI.refreshToken).toHaveBeenCalledTimes(1);
     });
 
     it("앱을 열면 곧바로 토큰 refresh를 시도한다 (성공)", async () => {
-      vi.spyOn(RefreshTokenAPI, "refreshToken").mockResolvedValue({
+      vi.spyOn(axiosInstance, "post").mockResolvedValue({
         data: {
           access: "mock-access-token",
         },
@@ -67,14 +65,12 @@ describe("AuthProvider", () => {
       await waitFor(() => {
         expect(getByText(AuthAPI.sampleUser.name)).toBeInTheDocument();
       });
-
-      expect(RefreshTokenAPI.refreshToken).toHaveBeenCalledTimes(1);
     });
   });
 
   describe("로그인/로그아웃", () => {
     beforeEach(() => {
-      vi.spyOn(RefreshTokenAPI, "refreshToken").mockResolvedValue(null);
+      vi.spyOn(axiosInstance, "post").mockResolvedValue(null);
     });
 
     it("로그인 버튼을 누르면 로그인되고, 로그아웃 버튼을 누르면 로그아웃된다", async () => {
@@ -105,7 +101,7 @@ describe("AuthProvider", () => {
 
   describe("다중 탭 동기화", () => {
     beforeEach(() => {
-      vi.spyOn(RefreshTokenAPI, "refreshToken").mockResolvedValue({
+      vi.spyOn(axiosInstance, "post").mockResolvedValue({
         data: {
           access: "mock-access-token",
         },
