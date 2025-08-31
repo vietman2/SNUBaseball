@@ -1,8 +1,9 @@
-import { BrowserRouter, Route, Routes } from "react-router";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 
 import { AuthLayout } from "./layouts/auth/AuthLayout";
-import { LoginPage } from "@pages/login";
-import { SignupPage } from "@pages/signup";
+import { RootLayout } from "./layouts/root/RootLayout";
+import { LoginPage } from "@pages/auth/login";
+import { NotFoundWidget } from "@widgets/not-found";
 
 export function AppRouter() {
   return (
@@ -10,13 +11,11 @@ export function AppRouter() {
       <Routes>
         <Route element={<AuthLayout />}>
           <Route path="login" element={<LoginPage />} />
-          <Route path="signup" element={<SignupPage />} />
         </Route>
-        {/**
         <Route element={<RootLayout />}>
           <Route index element={<Navigate to="home" replace />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Route> */}
+          <Route path="*" element={<NotFoundWidget />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
