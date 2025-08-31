@@ -20,12 +20,4 @@ class SNUTokenObtainPairSerializer(TokenObtainPairSerializer):
                 status_code=401,
             )
 
-        if not user.is_active:
-            raise ForbiddenException(
-                detail="비활성화된 계정입니다. 관리자에게 문의하세요.",
-                code="USER_INACTIVE",
-                status="FORBIDDEN",
-                status_code=403,
-            )
-
         return super().validate(attrs)

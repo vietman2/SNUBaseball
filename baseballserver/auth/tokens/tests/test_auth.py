@@ -41,6 +41,23 @@ class AuthTest(SNUBaseballTestCase):
 
         self.assertEqual(logout_res.status_code, 200)
 
+    def test_login_invalid(self):
+        login_res = self.client.post(
+            "/api/v1/login/", {"username": "testuser", "password": "wrongpassword"}
+        )
+
+        self.assertEqual(login_res.status_code, 401)
+
+    def test_login_inactive(self):
+        self.user.is_active = False
+        self.user.save()
+
+        login_res = self.client.post(
+            "/api/v1/login/", {"username": "testuser", "password": "testpassword"}
+        )
+
+        self.assertEqual(login_res.status_code, 401)
+
     def test_logout_no_cookie(self):
         logout_res = self.client.post("/api/v1/logout/")
 
