@@ -62,4 +62,6 @@ class PasswordValidator:
             raise ValidationError("비밀번호에 아이디를 포함할 수 없습니다.")
 
         if user and user.check_password(value):
-            raise ValidationError("이전 비밀번호와 같을 수 없습니다.")
+            raise ValidationError(
+                "이전 비밀번호와 동일한 비밀번호는 사용할 수 없습니다."
+            )
