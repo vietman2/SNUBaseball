@@ -21,6 +21,13 @@ class UnauthorizedException(SNUBaseballException):
     default_status_code = 401
 
 
+class InvalidRefreshTokenException(UnauthorizedException):
+    status = "UNAUTHORIZED"
+    code = "INVALID_REFRESH_TOKEN"
+    default_detail = "리프레시 토큰이 유효하지 않습니다."
+    default_status_code = 401
+
+
 class ForbiddenException(SNUBaseballException):
     status = "FORBIDDEN"
     code = "FORBIDDEN"

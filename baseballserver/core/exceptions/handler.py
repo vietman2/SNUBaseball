@@ -6,8 +6,10 @@ from rest_framework.exceptions import (
     ValidationError,
 )
 from rest_framework.views import exception_handler
+from rest_framework_simplejwt.exceptions import InvalidToken
 
-from .error import SNUBaseballException
+from auth.tokens.utils import delete_refresh_cookie
+from .error import SNUBaseballException, InvalidRefreshTokenException
 
 
 def baseball_server_exception_handler(exc, context):
@@ -21,6 +23,19 @@ def baseball_server_exception_handler(exc, context):
             "status": exc.status,
             "code": exc.code,
             "message": exc.detail,
+        }
+        response.status_code = exc.status_code
+
+        if isinstance(exc, InvalidRefreshTokenException):
+            response = delete_refresh_cookie(response)
+
+        return response
+
+    if isinstance(exc, InvalidToken):
+        response.data = {
+            "status": "UNAUTHORIZED",
+            "code": "INVALID_TOKEN",
+            "message": "토큰이 유효하지 않습니다.",
         }
 
         return response
