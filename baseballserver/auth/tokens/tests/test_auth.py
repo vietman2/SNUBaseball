@@ -1,17 +1,7 @@
-from auth.user.models import User
 from core.test import SNUBaseballTestCase
-from member.person.models import Member
 
 
 class AuthTest(SNUBaseballTestCase):
-    def setUp(self):
-        member = Member.objects.get(name="홍길동")
-        self.user = User.objects.create_user(
-            username="testuser",
-            password="testpassword",
-            member=member,
-        )
-
     def test_login_logout(self):
         login_res = self.client.post(
             "/api/v1/login/", {"username": "testuser", "password": "testpassword"}
