@@ -4,38 +4,20 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "==5.2.3"
-djangorestframework = "*"
-django-extensions = "*"
+django = "*"
 drf-spectacular = "*"
 python-decouple = "*"
-dj-rest-auth = "*"
+djangorestframework = "*"
 djangorestframework-simplejwt = "*"
-pillow = "*"
-django-phonenumber-field = {extras = ["phonenumbers"], version = "*"}
-django-allauth = "*"
 django-cors-headers = "*"
-django-storages = "*"
-gunicorn = "*"
-psycopg2-binary = "*"
-whitenoise = "*"
-moviepy = "*"
-requests = "*"
-beautifulsoup4 = "*"
-instaloader = "*"
-boto3 = "==1.35.83"
-botocore = "==1.35.83"
+pillow = "*"
 
 [dev-packages]
 coverage = "*"
 pylint = "*"
 pylint-django = "*"
 black = "*"
-django-stubs = "*"
 mypy = "*"
-djangorestframework-stubs = "*"
-requests-mock = "*"
 
 [requires]
 python_version = "3.13"
-python_full_version = "3.13.3"
