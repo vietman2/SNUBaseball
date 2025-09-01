@@ -17,8 +17,8 @@ DATABASES = {
 
 # CORS
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    f"http://{config('TAILSCALE_IP')}:3000",
+    "http://localhost:5173",
+    f"http://{config('TAILSCALE_IP')}:5173",
 ]
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = [
