@@ -4,7 +4,7 @@ from core.test import SNUBaseballTestCase
 class AuthTest(SNUBaseballTestCase):
     def test_login_logout(self):
         login_res = self.client.post(
-            "/api/v1/login/", {"username": "testuser", "password": "testpassword"}
+            "/api/v1/login/", {"username": "testuser", "password": "Testpassword123@"}
         )
 
         refresh = login_res.cookies["x_snubaseball_ref_tok"].value
@@ -43,7 +43,7 @@ class AuthTest(SNUBaseballTestCase):
         self.user.save()
 
         login_res = self.client.post(
-            "/api/v1/login/", {"username": "testuser", "password": "testpassword"}
+            "/api/v1/login/", {"username": "testuser", "password": "Testpassword123@"}
         )
 
         self.assertEqual(login_res.status_code, 401)

@@ -15,6 +15,6 @@ class SNUBaseballTestCase(APITestCase):
         member = Member.objects.get(name="홍길동")
         self.user = User.objects.create_user(
             username="testuser",
-            password="testpassword",
+            password="Testpassword123@",
             member=member,
         )
