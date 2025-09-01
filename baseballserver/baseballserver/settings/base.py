@@ -84,14 +84,14 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
-    "EXCEPTION_HANDLER": "core.exceptions.handler.baseball_server_exception_handler",
+    "EXCEPTION_HANDLER": "core.exceptions.baseball_server_exception_handler",
 }
 
 AUTH_USER_MODEL = "user.User"
 
 SIMPLE_JWT = {
     ## 토큰 만료 시간 설정
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=15),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
     "SLIDING_TOKEN_LIFETIME": timedelta(minutes=120),
     "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
