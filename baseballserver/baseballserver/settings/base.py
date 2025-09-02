@@ -89,6 +89,10 @@ REST_FRAMEWORK = {
 
 AUTH_USER_MODEL = "user.User"
 
+AUTHENTICATION_BACKENDS = [
+    "auth.backends.AuthBackend",
+]
+
 SIMPLE_JWT = {
     ## 토큰 만료 시간 설정
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=15),
