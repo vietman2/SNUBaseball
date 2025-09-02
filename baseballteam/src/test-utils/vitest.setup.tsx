@@ -38,6 +38,8 @@ vi.mock("react-router", async () => {
   return {
     ...actual,
     Outlet: () => <div>Mocked Outlet</div>,
+    useNavigate: vi.fn().mockReturnValue(vi.fn()),
+    useLocation: vi.fn().mockReturnValue({ pathname: "/home" }),
   };
 });
 
@@ -120,8 +122,26 @@ vi.mock("@shared/ui/Buttons", async () => {
   const { Link } = await vi.importActual("react-router");
 
   return {
-    ElevatedTextButton: (props: any) => <button {...props} />,
-    ElevatedLink: Link,
+    ElevatedTextButton: ({
+      $backgroundColor,
+      $color,
+      ...props
+    }: {
+      $backgroundColor: string;
+      $color: string;
+    }) => (
+      <button
+        {...props}
+        style={{ backgroundColor: $backgroundColor, color: $color }}
+      />
+    ),
+    ElevatedLink: ({
+      to,
+      children,
+    }: {
+      to: string;
+      children: React.ReactNode;
+    }) => <Link to={to}>{children}</Link>,
   };
 });
 vi.mock("@shared/ui/Dividers", () => ({
