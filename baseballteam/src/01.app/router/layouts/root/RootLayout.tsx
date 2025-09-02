@@ -4,7 +4,7 @@ import { RootHeader } from "@widgets/header";
 import { useUser } from "@entities/user";
 
 export function RootLayout() {
-  const { isAuthenticated } = useUser();
+  const { isAuthenticated, user } = useUser();
 
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
@@ -12,7 +12,7 @@ export function RootLayout() {
 
   return (
     <div>
-      <RootHeader />
+      <RootHeader user={user} />
       <Outlet />
     </div>
   );
