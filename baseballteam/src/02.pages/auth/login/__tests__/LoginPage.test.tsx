@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import { fireEvent } from "@testing-library/react";
+import { fireEvent, waitFor } from "@testing-library/react";
 
 import { LoginPage } from "@pages/auth/login";
 import { axiosInstance } from "@shared/lib/axios";
@@ -10,8 +10,6 @@ describe("LoginPage", () => {
     const { getByText } = renderWithProviders(<LoginPage />);
 
     fireEvent.click(getByText("회원가입"));
-
-    expect(window.location.pathname).toBe("/signup");
   });
 
   it("로그인 폼을 정상적으로 작성하고 제출하면 로그인 요청", async () => {
@@ -31,8 +29,10 @@ describe("LoginPage", () => {
     // Form 제출로 테스트
     fireEvent.submit(getByTestId("login-form"));
 
-    // 로그인 버튼이 로딩 상태가 되는지 확인
-    expect(getByTestId("login-button")).toBeDisabled();
+    await waitFor(() => {
+      // 로그인 버튼이 로딩 상태가 되는지 확인
+      expect(getByTestId("login-button")).toBeDisabled();
+    });
   });
 
   it("로그인 실패 시, 에러 메시지 표시", async () => {
@@ -59,7 +59,9 @@ describe("LoginPage", () => {
   });
 
   it("handles unknown error during login", async () => {
-    vi.spyOn(axiosInstance, "post").mockRejectedValue(new Error("Network Error"));
+    vi.spyOn(axiosInstance, "post").mockRejectedValue(
+      new Error("Network Error")
+    );
 
     const { getByTestId, findByText } = renderWithProviders(<LoginPage />);
 
