@@ -6,8 +6,8 @@ import { renderWithProviders } from "@test-utils/renderer";
 
 describe("AuthLayout", () => {
   it("should render AuthLayout component", () => {
-    const { getByAltText } = renderWithProviders(<AuthLayout />);
-    expect(getByAltText("Logo")).toBeInTheDocument();
+    const { getByText } = renderWithProviders(<AuthLayout />);
+    expect(getByText("Logo")).toBeInTheDocument();
   });
 
   it("should automatically navigate to /home if user is logged in", () => {
