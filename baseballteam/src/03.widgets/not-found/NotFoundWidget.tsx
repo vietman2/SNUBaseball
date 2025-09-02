@@ -31,13 +31,17 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  min-height: 80vh;
+  gap: 32px;
 
   text-align: center;
   font-size: 36px;
   font-weight: 600;
   color: ${({ theme }) => theme.colors.textPrimary};
 
-  z-index: 1000;
+  > h6 {
+    margin: 0;
+  }
 `;
 
 const BackButton = styled.button`
@@ -49,7 +53,7 @@ const BackButton = styled.button`
 
   border: none;
   border-radius: 8px;
-  background-color: ${({ theme }) => theme.colors.backgroundPaper};
+  background-color: ${({ theme }) => theme.colors.gray300};
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.gray500};
