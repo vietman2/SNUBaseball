@@ -47,18 +47,9 @@ function RoutesWrapper() {
         <Routes>
           <Route element={<ModalLayout />}>
             <Route path="profile" element={<MyProfileModal />}>
-              <Route
-                index
-                element={
-                  <Navigate
-                    to="account"
-                    state={{ backgroundLocation: location }}
-                    replace
-                  />
-                }
-              />
               <Route path="account" element={<AccountPage />} />
             </Route>
+            <Route path="*" element={<Navigate to="home" replace />} />
           </Route>
         </Routes>
       )}

@@ -33,7 +33,7 @@ vi.mock("@widgets/not-found", () => ({
 describe("AppRouter", () => {
   it("should render without crashing", () => {
     vi.spyOn(Router, "useLocation").mockReturnValue({
-      pathname: "/",
+      pathname: "/login",
       search: "",
       hash: "",
       state: null,
@@ -46,12 +46,12 @@ describe("AppRouter", () => {
 
   it("should render modal layout when backgroundLocation is set", () => {
     vi.spyOn(Router, "useLocation").mockReturnValue({
-      pathname: "/",
+      pathname: "/profile/account",
       search: "",
       hash: "",
       state: {
         backgroundLocation: {
-          pathname: "/home",
+          pathname: "/login",
           search: "",
           hash: "",
           state: null,
