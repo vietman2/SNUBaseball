@@ -8,10 +8,12 @@ import Close from "./files/close.svg?react";
 import Diary from "./files/diary.svg?react";
 import Forum from "./files/forum.svg?react";
 import Home from "./files/home.svg?react";
+import Logout from "./files/logout.svg?react";
 import Management from "./files/management.svg?react";
 import Menu from "./files/menu.svg?react";
 import Money from "./files/money.svg?react";
 import Moon from "./files/moon.svg?react";
+import Pencil from "./files/pencil.svg?react";
 import Person from "./files/person.svg?react";
 import Record from "./files/record.svg?react";
 import Sun from "./files/sun.svg?react";
@@ -36,10 +38,12 @@ const iconMap: Record<
   diary: Diary,
   forum: Forum,
   home: Home,
+  logout: Logout,
   management: Management,
   menu: Menu,
   money: Money,
   moon: Moon,
+  pencil: Pencil,
   person: Person,
   record: Record,
   sun: Sun,
