@@ -125,15 +125,14 @@ vi.mock("@shared/ui/Buttons", async () => {
   };
 });
 vi.mock("@shared/ui/Dividers", () => ({
+  Divider: () => <div>Divider</div>,
   VerticalDivider: () => <div>VerticalDivider</div>,
-}));
-vi.mock("@shared/ui/Fallbacks", () => ({
-  LoadingSpinner: () => <div>Loading Spinner</div>,
 }));
 vi.mock("@shared/ui/Icons", () => ({
   AppIcon: () => null,
+  Logo: () => <div>Logo</div>,
+  LogoHorizontal: () => <div>LogoHorizontal</div>,
 }));
-vi.mock("@shared/ui/Images", () => ({
-  Logo: "url",
-  MainLogo: () => <div>Main Logo</div>,
+vi.mock("@shared/ui/Loading", () => ({
+  Spinner: () => <div>Loading Spinner</div>,
 }));
