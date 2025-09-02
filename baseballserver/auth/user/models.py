@@ -1,6 +1,7 @@
 import uuid
 from django.contrib.auth.models import AbstractBaseUser
 from django.db import models
+from django.db.models.functions import Lower
 
 from member.person.models import Member
 from .managers import UserManager
@@ -34,3 +35,6 @@ class User(AbstractBaseUser):
         db_table = "user"
         verbose_name = "유저"
         verbose_name_plural = "유저"
+        constraints = [
+            models.UniqueConstraint(Lower("username"), name="unique_lower_username")
+        ]
