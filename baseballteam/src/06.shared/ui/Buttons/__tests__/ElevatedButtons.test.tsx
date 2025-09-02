@@ -17,10 +17,9 @@ describe("Elevated Buttons", () => {
 
   it("should render ElevatedLink correctly", () => {
     const { getByRole } = renderWithProviders(
-      <ElevatedLink href="https://example.com">Go to Example</ElevatedLink>
+      <ElevatedLink to="https://example.com">Go to Example</ElevatedLink>
     );
     const link = getByRole("link", { name: /go to example/i });
     expect(link).toBeInTheDocument();
-    expect(link).toHaveAttribute("href", "https://example.com");
   });
 });

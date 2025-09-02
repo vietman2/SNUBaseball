@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import styled from "styled-components";
 
 interface Props {
@@ -30,7 +31,7 @@ export const ElevatedTextButton = styled.button<Props>`
   }
 `;
 
-export const ElevatedLink = styled.a<Props>`
+export const ElevatedLink = styled(Link)<Props>`
   display: flex;
   flex-direction: row;
   align-items: center;
