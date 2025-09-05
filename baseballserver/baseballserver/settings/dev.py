@@ -30,3 +30,13 @@ CORS_ALLOW_HEADERS = [
     "x-requested-with",
     "x-snubaseball-client",
 ]
+
+MEDIA_CDN_BASE_URL = config("MEDIA_CDN_BASE_URL")
+MEDIA_KEY_PREFIX_WHITELIST = [
+    "profiles/",
+]
+
+AWS_REGION = "ap-northeast-2"
+AWS_S3_BUCKET_NAME = config("AWS_S3_BUCKET_NAME")
+AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY")

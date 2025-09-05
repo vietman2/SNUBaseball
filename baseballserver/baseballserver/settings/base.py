@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "drf_spectacular",
     ## Custom Apps
     "auth.user.apps.UserConfig",
+    "media.image.apps.ImageConfig",
     "member.major.apps.MajorConfig",
     "member.person.apps.PersonConfig",
     "member.role.apps.RoleConfig",
