@@ -10,7 +10,7 @@ class MeAPITest(SNUBaseballTestCase):
 
         me_res = self.client.get("/api/v1/me/")
         self.assertEqual(me_res.status_code, 200)
-        self.assertEqual(me_res.data["username"], "admin")
+        self.assertEqual(me_res.data["username"], "adm****")
 
     def test_me_unauthenticated(self):
         me_res = self.client.get("/api/v1/me/")
