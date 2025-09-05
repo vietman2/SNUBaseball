@@ -4,6 +4,8 @@ import { fireEvent } from "@testing-library/react";
 import { SingleFileInput } from "@shared/ui/Inputs";
 import { renderWithProviders } from "@test-utils/renderer";
 
+vi.unmock("@shared/ui/Inputs");
+
 describe("SingleFileInput", () => {
   const file = new File(["dummy content"], "example.png", {
     type: "image/png",

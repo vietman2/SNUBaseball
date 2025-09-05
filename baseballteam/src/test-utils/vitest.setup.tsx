@@ -153,6 +153,12 @@ vi.mock("@shared/ui/Icons", () => ({
   Logo: () => <div>Logo</div>,
   LogoHorizontal: () => <div>LogoHorizontal</div>,
 }));
+vi.mock("@shared/ui/Inputs", () => ({
+  SingleFileInput: (props: any) => <input type="file" data-testid="file-input" {...props} />,
+}));
 vi.mock("@shared/ui/Loading", () => ({
   Spinner: () => <div>Loading Spinner</div>,
+}));
+vi.mock("@shared/ui/Tooltips", () => ({
+  SimpleTooltip: (props: any) => <div>{props.text}</div>,
 }));
