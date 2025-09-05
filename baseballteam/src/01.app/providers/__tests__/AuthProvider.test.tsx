@@ -17,7 +17,7 @@ const MockComponent = () => {
 
   return (
     <div>
-      <p>{isAuthenticated ? user.name : "Not Authenticated"}</p>
+      <p>{isAuthenticated ? user.username : "Not Authenticated"}</p>
       {isAuthenticated ? (
         <button onClick={clearToken}>Logout</button>
       ) : (
@@ -92,7 +92,7 @@ describe("AuthProvider", () => {
       fireEvent.click(getByText("Login"));
 
       await waitFor(() => {
-        expect(getByText("테스트 유저")).toBeInTheDocument();
+        expect(getByText("testuser")).toBeInTheDocument();
       });
 
       fireEvent.click(getByText("Logout"));
@@ -121,7 +121,7 @@ describe("AuthProvider", () => {
       );
 
       await waitFor(() => {
-        expect(getByText("테스트 유저")).toBeInTheDocument();
+        expect(getByText("testuser")).toBeInTheDocument();
       });
 
       // Simulate logout from another tab
@@ -145,7 +145,7 @@ describe("AuthProvider", () => {
       );
 
       await waitFor(() => {
-        expect(getByText("테스트 유저")).toBeInTheDocument();
+        expect(getByText("testuser")).toBeInTheDocument();
       });
 
       // Simulate irrelevant message from another tab
@@ -157,7 +157,7 @@ describe("AuthProvider", () => {
       });
 
       // Still authenticated
-      expect(getByText("테스트 유저")).toBeInTheDocument();
+      expect(getByText("testuser")).toBeInTheDocument();
     });
 
     it("fails to set up BroadcastChannel", async () => {
@@ -171,7 +171,7 @@ describe("AuthProvider", () => {
         );
 
         await waitFor(() => {
-          expect(getByText("테스트 유저")).toBeInTheDocument();
+          expect(getByText("testuser")).toBeInTheDocument();
         });
       } finally {
         // 2) 원복
