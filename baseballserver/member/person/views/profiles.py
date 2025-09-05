@@ -70,7 +70,6 @@ class ProfileViewSet(ModelViewSet):
             raise SNUBaseballException("키가 필요합니다.")
 
         expected_prefix = f"profiles/{member.id}/"
-        print(expected_prefix, key)
         if not key.startswith(expected_prefix):
             raise SNUBaseballException("유효하지 않은 키입니다.")
 
