@@ -1,6 +1,7 @@
 from django.core.validators import MinValueValidator as Min, MaxValueValidator as Max
 from django.db import models
 
+from media.image.models import SNUBaseballImage
 from member.major.models import Department
 from member.role.models import MemberRole
 from member.status.models import MemberStatus
@@ -18,7 +19,13 @@ class Member(models.Model):
     phone = models.CharField(max_length=15, unique=True, null=True, blank=True)
     email = models.EmailField(max_length=255, unique=True, null=True, blank=True)
     address = models.TextField(default="", blank=True)
-    profile_image = models.ImageField(null=True, blank=True)
+    profile_image = models.ForeignKey(
+        SNUBaseballImage,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="members",
+    )
     notes = models.TextField(default="", blank=True)
     extras = models.JSONField(default=dict, blank=True)
 
