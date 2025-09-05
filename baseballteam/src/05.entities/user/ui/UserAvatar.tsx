@@ -7,24 +7,23 @@ interface Props {
   size?: number;
 }
 
-export function UserAvatar({ user, size = 36 }: Readonly<Props>) {
+export function UserAvatar({ user, size = 32 }: Readonly<Props>) {
   return (
     <Avatar
       src={
-        user.profile_image ??
-        "https://cdn.snubaseball.co.kr/images/default_profile.png"
+        user.member.profile_image
+          ? user.member.profile_image.url
+          : "https://cdn.snubaseball.co.kr/images/default_profile.png"
       }
-      alt={user.name}
+      alt={user.member.name}
       size={size}
     />
   );
 }
 
 const Avatar = styled.img<{ size: number }>`
-  padding: 2px;
   width: ${({ size }) => size}px;
   height: ${({ size }) => size}px;
   border-radius: 50%;
   object-fit: cover;
-  background-color: ${({ theme }) => theme.colors.gray200};
 `;
