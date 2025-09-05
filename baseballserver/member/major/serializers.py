@@ -1,12 +1,15 @@
+from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
 from .models import College, Department
 
 
 class DepartmentSerializer(ModelSerializer):
+    college = serializers.CharField(source="college.name", read_only=True)
+
     class Meta:
         model = Department
-        fields = ["id", "name", "short_name"]
+        fields = ["id", "name", "short_name", "college"]
 
 
 class CollegeSerializer(ModelSerializer):
