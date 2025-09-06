@@ -9,6 +9,7 @@ import Diary from "./files/diary.svg?react";
 import Forum from "./files/forum.svg?react";
 import Home from "./files/home.svg?react";
 import InfoCircle from "./files/info-circle.svg?react";
+import Lock from "./files/lock.svg?react";
 import Logout from "./files/logout.svg?react";
 import Management from "./files/management.svg?react";
 import Menu from "./files/menu.svg?react";
@@ -41,6 +42,7 @@ const iconMap: Record<
   forum: Forum,
   home: Home,
   "info-circle": InfoCircle,
+  lock: Lock,
   logout: Logout,
   management: Management,
   menu: Menu,
