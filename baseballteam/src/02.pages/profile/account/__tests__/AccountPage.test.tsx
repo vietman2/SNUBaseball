@@ -21,6 +21,15 @@ describe("AccountPage", () => {
     });
   });
 
+  it("doesn't render when user is null", () => {
+    vi.spyOn(UserEntity, "useUser").mockReturnValue({
+      user: null,
+      isAuthenticated: false,
+    });
+    const { container } = renderWithProviders(<AccountPage />);
+    expect(container).toBeEmptyDOMElement();
+  });
+
   describe("UploadImageModal", () => {
     beforeEach(() => {
       // 가장 먼저 getPresignedUrl이 성공한다
