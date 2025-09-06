@@ -6,6 +6,7 @@ import { login } from "../api/login";
 import { useTokens } from "@shared/lib/auth";
 import { useColors } from "@shared/lib/styles";
 import { ElevatedTextButton } from "@shared/ui/Buttons";
+import { Spinner } from "@shared/ui/Loading";
 
 export function LoginForm() {
   const [username, setUsername] = useState<string>("");
@@ -66,7 +67,7 @@ export function LoginForm() {
         $color={colors.onPrimary}
         data-testid="login-button"
       >
-        로그인
+        {loading ? <Spinner size={18} color={colors.onPrimary} /> : "로그인"}
       </ElevatedTextButton>
     </Form>
   );
