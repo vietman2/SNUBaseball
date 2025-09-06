@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Outlet, useNavigate } from "react-router";
-import styled, { keyframes, css } from "styled-components";
+
+import { ModalDialog, ModalOverlay } from "@widgets/modal";
 
 const FADE_MS = 180; // 애니메이션 총 시간 (ms)
 
@@ -45,62 +46,21 @@ export function ModalLayout() {
   }, []);
 
   return (
-    <Overlay
+    <ModalOverlay
       $exiting={isExiting}
+      $animationLength={FADE_MS}
       onMouseDown={closeModal}
       data-testid="modal-overlay"
     >
-      <Dialog
+      <ModalDialog
         $exiting={isExiting}
+        $animationLength={FADE_MS}
         onMouseDown={(e) => e.stopPropagation()}
         aria-modal="true"
         data-testid="modal-dialog"
       >
         <Outlet />
-      </Dialog>
-    </Overlay>
+      </ModalDialog>
+    </ModalOverlay>
   );
 }
-
-const fadeIn = keyframes`
-  from { opacity: 0 }
-  to   { opacity: 1 }
-`;
-const fadeOut = keyframes`
-  from { opacity: 1 }
-  to   { opacity: 0 }
-`;
-
-const popIn = keyframes`
-  from { transform: translateY(8px) scale(.98); opacity: 0 }
-  to   { transform: translateY(0)    scale(1);   opacity: 1 }
-`;
-const popOut = keyframes`
-  from { transform: translateY(0)    scale(1);   opacity: 1 }
-  to   { transform: translateY(8px)  scale(.98); opacity: 0 }
-`;
-
-interface Props {
-  $exiting: boolean;
-}
-
-const Overlay = styled.div<Props>`
-  display: grid;
-  place-items: center;
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-
-  ${({ $exiting }) => css`
-    animation: ${$exiting ? fadeOut : fadeIn} ${FADE_MS}ms ease-out forwards;
-  `}
-
-  z-index: 1000;
-`;
-
-const Dialog = styled.div<Props>`
-  ${({ $exiting }) => css`
-    animation: ${$exiting ? popOut : popIn} ${FADE_MS}ms
-      cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-  `}
-`;
