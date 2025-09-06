@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
-import type { MemberProfileType } from "@entities/user";
+import type { MemberProfileType, UserProfileType } from "@entities/user";
 import {
   axiosInstanceWithAuth,
   type APIErrorType,
@@ -12,9 +12,15 @@ type UpdateMajorDataType = {
   major_id: number;
 };
 
-async function updateMajor(
+type UpdateContactDataType = {
+  phone: string;
+  email: string;
+  address: string;
+};
+
+async function updateProfile(
   id: number,
-  data: UpdateMajorDataType
+  data: UpdateMajorDataType | UpdateContactDataType
 ): Promise<APIResponseType<MemberProfileType> | APIErrorType> {
   try {
     const res = await axiosInstanceWithAuth.patch<MemberProfileType>(
@@ -36,23 +42,23 @@ async function updateMajor(
 
     return {
       status: "ERROR",
-      message: "전공 변경에 실패했습니다. 잠시 후 다시 시도해주세요.",
+      message: "프로필 업데이트에 실패했습니다. 잠시 후 다시 시도해주세요.",
     };
   }
 }
 
-export function useUpdateMajorMutation(id: number) {
+export function useUpdateProfileMutation(id: number) {
   const queryClient = useQueryClient();
 
   return useMutation<
     APIResponseType<MemberProfileType> | APIErrorType,
     unknown,
-    UpdateMajorDataType
+    UpdateMajorDataType | UpdateContactDataType
   >({
-    mutationFn: (data) => updateMajor(id, data),
+    mutationFn: (data) => updateProfile(id, data),
     onSuccess: (result) => {
       if (result.status === "SUCCESS") {
-        queryClient.setQueryData<MemberProfileType>(["me"], (oldData) => {
+        queryClient.setQueryData<UserProfileType>(["me"], (oldData) => {
           if (!oldData) return oldData;
           return {
             ...oldData,

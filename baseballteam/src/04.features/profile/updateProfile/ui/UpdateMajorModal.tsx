@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 
-import { useUpdateMajorMutation } from "../api/updateMajor";
+import { useUpdateProfileMutation } from "../api/updateProfile";
 import { useAllMajors, type MajorType } from "@entities/majors";
 import { useColors } from "@shared/lib/styles";
 import { ElevatedTextButton } from "@shared/ui/Buttons";
@@ -25,7 +25,7 @@ export function UpdateMajorModal({
   const [error, setError] = useState<string | null>(null);
 
   const { data: colleges, isError, isLoading } = useAllMajors();
-  const { mutate: updateMajor } = useUpdateMajorMutation(memberId);
+  const { mutate: updateMajor } = useUpdateProfileMutation(memberId);
   const { colors } = useColors();
 
   const selectDepartment = (event: React.ChangeEvent<HTMLSelectElement>) => {
