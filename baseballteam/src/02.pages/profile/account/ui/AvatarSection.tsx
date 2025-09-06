@@ -1,13 +1,13 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 import { Section } from "./styles";
+import { ModalDialog, ModalOverlay } from "@widgets/modal";
+import { UpdateImageModal } from "@features/profile/updateImage";
 import { UserAvatar, type UserProfileType } from "@entities/user";
 import { useColors } from "@shared/lib/styles";
 import { AppIcon } from "@shared/ui/Icons";
 import { SimpleTooltip } from "@shared/ui/Tooltips";
-import { UpdateImageModal } from "@features/profile/updateImage";
-import { useState } from "react";
-import { ModalDialog, ModalOverlay } from "@widgets/modal";
 
 interface Props {
   user: UserProfileType;
@@ -34,7 +34,11 @@ export function AvatarSection({ user }: Readonly<Props>) {
         </div>
         <div className="section-middle">
           <ProfileAvatar>
-            <button className="update-profile-button" onClick={openModal} data-testid="open-modal-button">
+            <button
+              className="update-profile-button"
+              onClick={openModal}
+              data-testid="open-modal-button"
+            >
               <UserAvatar user={user} size={40} />
               <span className="update-profile-icon">
                 <AppIcon icon="pencil" size={16} color={colors.primaryDark} />
