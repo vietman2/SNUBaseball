@@ -103,26 +103,6 @@ const Container = styled.div`
 
   background-color: ${({ theme }) => theme.colors.backgroundDefault};
   border-radius: 16px;
-
-  > h2 {
-    margin: 0;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: ${({ theme }) => theme.colors.textPrimary};
-  }
-
-  > button {
-    padding: 8px 16px;
-    border-radius: 8px;
-    background-color: ${({ theme }) => theme.colors.primary};
-    color: ${({ theme }) => theme.colors.onPrimary};
-  }
-
-  .update-profile-error-message {
-    font-size: 0.875rem;
-    text-align: right;
-    color: ${({ theme }) => theme.colors.error};
-  }
 `;
 
 const HeaderRow = styled.div`
@@ -135,7 +115,6 @@ const HeaderRow = styled.div`
     font-size: 1.25rem;
     font-weight: 600;
     color: ${({ theme }) => theme.colors.textPrimary};
-    flex: 1;
   }
 `;
 
