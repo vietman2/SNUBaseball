@@ -1,16 +1,32 @@
 import styled from "styled-components";
 
+import { AcademicsSection } from "./ui/AcademicsSection";
+import { AvatarSection } from "./ui/AvatarSection";
+import { ContactsSection } from "./ui/ContactsSection";
+import { useUser } from "@entities/user";
 import { useColors } from "@shared/lib/styles";
 import { Divider } from "@shared/ui/Dividers";
 
 export function AccountPage() {
+  const { user } = useUser();
   const { colors } = useColors();
+
+  if (!user) return null;
 
   return (
     <Container>
-      <h3>계정</h3>
+      <h3>계정 상세</h3>
       <Divider color={colors.divider} />
-      <div />
+      <AvatarSection user={user} />
+      <Divider color={colors.divider} />
+      <AcademicsSection memberId={user.member.id} major={user.member.major} />
+      <Divider color={colors.divider} />
+      <ContactsSection
+        memberId={user.member.id}
+        phone={user.member.phone}
+        email={user.member.email}
+        address={user.member.address}
+      />
     </Container>
   );
 }

@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { Section } from "./styles";
 import { ModalDialog, ModalOverlay } from "@widgets/modal";
-import { UpdateMajorModal } from "@features/profile/updateMajor";
+import { UpdateMajorModal } from "@features/profile/updateProfile";
 import type { MajorType } from "@entities/majors";
 import { AppIcon } from "@shared/ui/Icons";
 
