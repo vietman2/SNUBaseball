@@ -55,7 +55,7 @@ jobs:
 
       - name: Run tests and collect coverage
         run: |
-          yarn test --coverage --watchAll=false
+          yarn coverage
           cp coverage/lcov.info coverage.lcov
 
       - name: Upload coverage artifact
