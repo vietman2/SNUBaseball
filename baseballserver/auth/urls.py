@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .register.views import StudentIdCheckView
+from .register.views import RegisterView, StudentIdCheckView
 from .tokens.views import (
     SNUTokenObtainPairView,
     SNUTokenBlacklistView,
@@ -9,6 +9,7 @@ from .tokens.views import (
 from .user.views import MeAPIView
 
 urlpatterns = [
+    path("v1/register/", RegisterView.as_view(), name="register"),
     path("v1/register/sid/", StudentIdCheckView.as_view(), name="student_id_check"),
     path("v1/login/", SNUTokenObtainPairView.as_view(), name="login"),
     path("v1/logout/", SNUTokenBlacklistView.as_view(), name="logout"),
