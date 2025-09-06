@@ -1,6 +1,6 @@
-import type { MajorType } from "./major";
+import type { MajorType } from "@entities/majors/@x/user";
 
-type MemberProfileType = {
+export type MemberProfileType = {
   id: number;
   name: string;
   profile_image: { url: string } | null;
