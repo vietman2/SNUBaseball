@@ -1,9 +1,9 @@
 import { useMemo, useState } from "react";
 import styled from "styled-components";
 
-import { Spinner } from "@shared/ui/Loading";
 import { useUpdateProfileMutation } from "../api/updateProfile";
 import { PhoneInput } from "@shared/ui/Inputs";
+import { Spinner } from "@shared/ui/Loading";
 
 interface Props {
   memberId: number;
