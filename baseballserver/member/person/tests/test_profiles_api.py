@@ -114,6 +114,28 @@ class UpdateProfileAPITestCase(SNUBaseballTestCase):
         self.assertEqual(res.status_code, 400)
         self.assertIn("유효하지 않은 데이터입니다.", res.data["message"])
 
+    def test_update_phone_email_address(self):
+        self.client.force_login(user=self.admin)
+
+        data = {
+            "phone": "010-1234-5678",
+            "email": "test@example.com",
+            "address": "서울특별시 강남구"
+        }
+        res = self.client.patch("/api/v1/profiles/1/", data=data)
+        self.assertEqual(res.status_code, 200)
+
+    def test_update_phone_email_empty_string(self):
+        self.client.force_login(user=self.admin)
+
+        data = {
+            "phone": "",
+            "email": "",
+            "address": "서울특별시 강남구"
+        }
+        res = self.client.patch("/api/v1/profiles/1/", data=data)
+        self.assertEqual(res.status_code, 200)
+
 
 class ProfileAPITestCase(SNUBaseballTestCase):
     def setUp(self):

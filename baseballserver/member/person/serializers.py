@@ -13,6 +13,9 @@ class ProfileSerializer(serializers.ModelSerializer):
         write_only=True,
         required=False,
     )
+    phone = serializers.CharField(allow_blank=True, allow_null=True, required=False)
+    email = serializers.EmailField(allow_blank=True, allow_null=True, required=False)
+
     major = DepartmentSerializer(read_only=True)
     profile_image = ThumbnailSerializer(read_only=True)
 
@@ -36,3 +39,9 @@ class ProfileSerializer(serializers.ModelSerializer):
             "student_id",
             "admission_year",
         ]
+
+    def validate(self, attrs):
+        for f in ("phone", "email"):
+            if f in attrs and attrs[f] == "":
+                attrs[f] = None
+        return attrs
