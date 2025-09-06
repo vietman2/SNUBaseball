@@ -21,7 +21,9 @@ export function RootHeader({ user }: Readonly<Props>) {
         state={{ backgroundLocation: location }}
         data-testid="user-button"
       >
-        <UserAvatar user={user} />
+        <span className="header-user-avatar">
+          <UserAvatar user={user} />
+        </span>
       </Button>
     </Container>
   );
@@ -31,7 +33,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 4px 16px;
+  padding: 8px 24px;
 
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
 `;
@@ -39,13 +41,14 @@ const Container = styled.div`
 const Button = styled(Link)`
   display: flex;
   align-items: center;
-  justify-content: center;
   margin: 0 8px;
-  gap: 4px;
 
-  border-radius: 8px;
-
-  font-size: 1rem;
-  font-weight: 600;
-  color: ${({ theme }) => theme.colors.gray900};
+  .header-user-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    border-radius: 50%;
+    background-color: ${({ theme }) => theme.colors.gray200};
+  }
 `;
