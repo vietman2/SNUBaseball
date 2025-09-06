@@ -1,9 +1,9 @@
 from rest_framework import serializers
 
-from .models import Member
 from media.image.serializers import ThumbnailSerializer
 from member.major.models import Department
 from member.major.serializers import DepartmentSerializer
+from .models import Member
 
 
 class ProfileSerializer(serializers.ModelSerializer):

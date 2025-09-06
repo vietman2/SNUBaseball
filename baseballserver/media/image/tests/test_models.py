@@ -1,6 +1,7 @@
-from django.test import TestCase    
+from django.test import TestCase
 
 from ..models import SNUBaseballImage
+
 
 class SNUBaseballImageModelTest(TestCase):
     def test_str_method(self):

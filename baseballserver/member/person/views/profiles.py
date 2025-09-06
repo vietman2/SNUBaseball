@@ -7,12 +7,12 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
-from ..models import Member
-from ..permissions import IsAdminOrSelf
-from ..serializers import ProfileSerializer
 from core.exceptions import SNUBaseballException
 from media.image.models import SNUBaseballImage
 from media.image.utils import get_presigned_post, get_image_url
+from ..models import Member
+from ..permissions import IsAdminOrSelf
+from ..serializers import ProfileSerializer
 
 
 class ProfileViewSet(ModelViewSet):
@@ -52,7 +52,7 @@ class ProfileViewSet(ModelViewSet):
 
     @extend_schema(summary="프로필 사진 업데이트 링크 생성", tags=["프로필"])
     @action(detail=True, methods=["post"], url_path="avatar/presign")
-    def avatar_presign(self, request, pk=None):
+    def avatar_presign(self, request, pk=None):  ## pylint: disable=unused-argument
         member = self.get_object()
 
         filename = request.data.get("filename")
@@ -76,7 +76,7 @@ class ProfileViewSet(ModelViewSet):
 
     @extend_schema(summary="프로필 사진 업데이트 완료", tags=["프로필"])
     @action(detail=True, methods=["put"], url_path="avatar/complete")
-    def avatar_complete(self, request, pk=None):
+    def avatar_complete(self, request, pk=None):  ## pylint: disable=unused-argument
         member = self.get_object()
 
         key = request.data.get("key")

@@ -31,4 +31,4 @@ class SNUBaseballImage(models.Model):
         ]
 
     def __str__(self):
-        return self.key
+        return f"{self.key}"

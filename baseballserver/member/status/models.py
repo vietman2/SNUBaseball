@@ -14,4 +14,4 @@ class MemberStatus(Chip):
         verbose_name_plural = "부원 활동 상태"
 
     def __str__(self):
-        return self.name
+        return f"{self.name}"

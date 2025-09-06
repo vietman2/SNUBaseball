@@ -8,7 +8,7 @@ class College(models.Model):
     objects = models.Manager()
 
     def __str__(self):
-        return self.name
+        return f"{self.name}"
 
     class Meta:
         db_table = "college"
@@ -24,7 +24,7 @@ class Department(models.Model):
     objects = models.Manager()
 
     def __str__(self):
-        return self.name
+        return f"{self.name}"
 
     class Meta:
         db_table = "department"

@@ -15,4 +15,4 @@ class MemberRole(models.Model):
         verbose_name_plural = "역할"
 
     def __str__(self):
-        return self.name
+        return f"{self.name}"

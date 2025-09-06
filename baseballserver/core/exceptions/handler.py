@@ -76,6 +76,4 @@ def baseball_server_exception_handler(exc, context):
             ),
         }
 
-        return response
-
     return response
