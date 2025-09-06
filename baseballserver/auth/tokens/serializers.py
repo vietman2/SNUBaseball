@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
-from core.exceptions import UnauthorizedException, ForbiddenException
+from core.exceptions import UnauthorizedException
 
 
 class SNUTokenObtainPairSerializer(TokenObtainPairSerializer):

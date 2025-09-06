@@ -1,7 +1,7 @@
 import re
 
-from .models import User
 from core.exceptions import SNUBaseballException
+from .models import User
 
 
 class UsernameValidator:

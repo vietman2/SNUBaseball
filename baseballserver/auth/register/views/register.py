@@ -15,14 +15,14 @@ class RegisterView(GenericAPIView):
     http_method_names = ["post"]
 
     @extend_schema(summary="회원가입", tags=["회원 관리"])
-    def post(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):  ## pylint: disable=unused-argument
         serializer = self.get_serializer(data=request.data)
 
         try:
             serializer.is_valid(raise_exception=True)
             serializer.save()
         except ValidationError as e:
-            raise SNUBaseballException(detail=e.detail.__str__())
+            raise SNUBaseballException(detail=str(e.detail)) from e
 
         return Response(
             {"message": "회원가입이 완료되었습니다."},

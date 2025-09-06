@@ -22,7 +22,7 @@ class StudentIdCheckView(GenericAPIView):
     http_method_names = ["post"]
 
     @extend_schema(summary="학번 확인", tags=["회원 관리"])
-    def post(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):  ## pylint: disable=unused-argument
         student_id = request.data.get("student_id", "").strip()
         if not student_id or student_id == "":
             raise SNUBaseballException("학번을 입력해주세요.")

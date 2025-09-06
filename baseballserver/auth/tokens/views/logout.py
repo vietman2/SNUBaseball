@@ -20,8 +20,8 @@ class SNUTokenBlacklistView(TokenBlacklistView):
 
         try:
             serializer.is_valid(raise_exception=True)
-        except Exception:
-            raise InvalidRefreshTokenException()
+        except Exception as e:
+            raise InvalidRefreshTokenException() from e
 
         response = Response(
             {"detail": "로그아웃 되었습니다."}, status=status.HTTP_200_OK

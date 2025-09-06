@@ -1,12 +1,10 @@
 # tests/test_auth_backend.py
 from unittest.mock import patch
-from django.test import TestCase
 from django.contrib.auth import authenticate
 
 from auth.backends import AuthBackend
 from auth.user.models import User
 from core.test import SNUBaseballTestCase
-from member.person.models import Member
 
 
 class AuthBackendSmokeTests(SNUBaseballTestCase):

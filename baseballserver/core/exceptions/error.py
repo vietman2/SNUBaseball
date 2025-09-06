@@ -8,6 +8,7 @@ class SNUBaseballException(APIException):
     default_status_code = 400
 
     def __init__(self, detail=None, status=None, code=None, status_code=None):
+        super().__init__(detail)
         self.detail = detail or self.default_detail
         self.status = status or self.status
         self.code = code or self.code

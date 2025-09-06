@@ -19,8 +19,8 @@ class SNUTokenRefreshView(TokenRefreshView):
         serializer = TokenRefreshSerializer(data={"refresh": refresh_token})
         try:
             serializer.is_valid(raise_exception=True)
-        except Exception:
-            raise InvalidRefreshTokenException()
+        except Exception as e:
+            raise InvalidRefreshTokenException() from e
 
         res = Response(serializer.validated_data, status=status.HTTP_200_OK)
 

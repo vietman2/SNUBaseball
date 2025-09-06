@@ -25,10 +25,10 @@ class User(AbstractBaseUser):
     def is_staff(self):
         return self.is_superuser
 
-    def has_perm(self, perm, obj=None):
+    def has_perm(self, perm, obj=None):  ## pylint: disable=unused-argument
         return self.is_superuser
 
-    def has_module_perms(self, app_label):
+    def has_module_perms(self, app_label):  ## pylint: disable=unused-argument
         return self.is_superuser
 
     class Meta:
