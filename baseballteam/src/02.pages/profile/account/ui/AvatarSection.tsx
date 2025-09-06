@@ -37,7 +37,7 @@ export function AvatarSection({ user }: Readonly<Props>) {
             <button
               className="update-profile-button"
               onClick={openModal}
-              data-testid="open-modal-button"
+              data-testid="open-avatar-modal-button"
             >
               <UserAvatar user={user} size={40} />
               <span className="update-profile-icon">
