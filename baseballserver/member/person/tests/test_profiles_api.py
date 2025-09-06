@@ -4,7 +4,7 @@ from auth.user.models import User
 from core.test import SNUBaseballTestCase
 
 
-class UpdateProfileAPITestCase(SNUBaseballTestCase):
+class UpdateAvatarAPITestCase(SNUBaseballTestCase):
     def setUp(self):
         self.admin = User.objects.get(username="admin")
         self.presign_data = {
@@ -32,7 +32,9 @@ class UpdateProfileAPITestCase(SNUBaseballTestCase):
         mock_get_presigned_post.side_effect = Exception("S3 error")
         self.client.force_login(user=self.admin)
 
-        res = self.client.post("/api/v1/profiles/1/avatar/presign/", data=self.presign_data)
+        res = self.client.post(
+            "/api/v1/profiles/1/avatar/presign/", data=self.presign_data
+        )
         self.assertEqual(res.status_code, 400)
         self.assertIn("Presign URL 생성에 실패했습니다.", res.data["message"])
 
@@ -41,7 +43,9 @@ class UpdateProfileAPITestCase(SNUBaseballTestCase):
         mock_get_presigned_post.return_value = None
         self.client.force_login(user=self.admin)
 
-        res = self.client.post("/api/v1/profiles/1/avatar/presign/", data=self.presign_data)
+        res = self.client.post(
+            "/api/v1/profiles/1/avatar/presign/", data=self.presign_data
+        )
         self.assertEqual(res.status_code, 400)
         self.assertIn("Presign URL 생성에 실패했습니다.", res.data["message"])
 
@@ -91,6 +95,25 @@ class UpdateProfileAPITestCase(SNUBaseballTestCase):
         res = self.client.put("/api/v1/profiles/1/avatar/complete/", data=data)
         self.assertEqual(res.status_code, 200)
         self.assertIn("url", res.data)
+
+
+class UpdateProfileAPITestCase(SNUBaseballTestCase):
+    def setUp(self):
+        self.admin = User.objects.get(username="admin")
+
+    def test_update_major_success(self):
+        self.client.force_login(user=self.admin)
+
+        res = self.client.patch("/api/v1/profiles/1/", data={"major_id": 2})
+        self.assertEqual(res.status_code, 200)
+
+    def test_update_major_fail_invalid_data(self):
+        self.client.force_login(user=self.admin)
+
+        res = self.client.patch("/api/v1/profiles/1/", data={"major_id": 999})
+        self.assertEqual(res.status_code, 400)
+        self.assertIn("유효하지 않은 데이터입니다.", res.data["message"])
+
 
 class ProfileAPITestCase(SNUBaseballTestCase):
     def setUp(self):

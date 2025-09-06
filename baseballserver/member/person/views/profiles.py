@@ -3,11 +3,13 @@ from django.utils import timezone
 from drf_spectacular.utils import extend_schema
 from rest_framework import status
 from rest_framework.decorators import action
+from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
 from ..models import Member
-from auth.permissions import IsAdminOrSelf
+from ..permissions import IsAdminOrSelf
+from ..serializers import ProfileSerializer
 from core.exceptions import SNUBaseballException
 from media.image.models import SNUBaseballImage
 from media.image.utils import get_presigned_post, get_image_url
@@ -15,14 +17,9 @@ from media.image.utils import get_presigned_post, get_image_url
 
 class ProfileViewSet(ModelViewSet):
     queryset = Member.objects.all()
-    http_method_names = ["post", "put"]
-
-    def get_permissions(self):
-        if self.action in ["avatar_presign", "avatar_complete"]:
-            permission_classes = [IsAdminOrSelf]
-        else:
-            permission_classes = []
-        return [permission() for permission in permission_classes]
+    permission_classes = [IsAdminOrSelf]
+    serializer_class = ProfileSerializer
+    http_method_names = ["post", "put", "patch"]
 
     ## TODO: Exclude for now
     @extend_schema(exclude=True)
@@ -37,6 +34,23 @@ class ProfileViewSet(ModelViewSet):
     def update(self, request, *args, **kwargs):
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
+    @extend_schema(summary="프로필 업데이트", tags=["프로필"])
+    def partial_update(self, request, *args, **kwargs):
+        member = self.get_object()
+        data = request.data
+
+        serializer = self.get_serializer(member, data=data, partial=True)
+
+        try:
+            serializer.is_valid(raise_exception=True)
+        except ValidationError as e:
+            raise SNUBaseballException("유효하지 않은 데이터입니다.") from e
+
+        self.perform_update(serializer)
+
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+    @extend_schema(summary="프로필 사진 업데이트 링크 생성", tags=["프로필"])
     @action(detail=True, methods=["post"], url_path="avatar/presign")
     def avatar_presign(self, request, pk=None):
         member = self.get_object()
@@ -60,6 +74,7 @@ class ProfileViewSet(ModelViewSet):
 
         return Response(data=result, status=status.HTTP_200_OK)
 
+    @extend_schema(summary="프로필 사진 업데이트 완료", tags=["프로필"])
     @action(detail=True, methods=["put"], url_path="avatar/complete")
     def avatar_complete(self, request, pk=None):
         member = self.get_object()
