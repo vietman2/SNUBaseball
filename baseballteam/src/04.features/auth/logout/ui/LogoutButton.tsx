@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 import { logout } from "../api/logout";
+import { useTokens } from "@shared/lib/auth";
 import { useColors } from "@shared/lib/styles";
 import { AppIcon } from "@shared/ui/Icons";
-import { useTokens } from "@shared/lib/auth";
 
 export function LogoutButton() {
   const { colors } = useColors();
@@ -40,12 +40,16 @@ const Button = styled.button`
   font-weight: 600;
   color: ${({ theme }) => theme.colors.error};
 
-  background-color: ${({ theme }) => theme.colors.gray400};
   border-radius: 8px;
 
   > span:first-child {
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.gray400};
+    cursor: pointer;
   }
 `;
