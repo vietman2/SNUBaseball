@@ -37,7 +37,10 @@ jobs:
     defaults:
       run:
         working-directory: baseballteam
-    
+    env:
+      VITE_API_URL: "test"
+      VITE_ACCESS_TOKEN_KEY: "test"
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
