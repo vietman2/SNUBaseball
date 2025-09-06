@@ -70,17 +70,22 @@ vi.mock("@shared/lib/axios", async () => ({
     get: vi.fn(),
     post: vi.fn(),
     put: vi.fn(),
+    patch: vi.fn(),
     delete: vi.fn(),
   },
   axiosInstanceWithAuth: {
     get: vi.fn(),
     post: vi.fn(),
     put: vi.fn(),
+    patch: vi.fn(),
     delete: vi.fn(),
   },
   setAuthToken: vi.fn(),
   clearAuthToken: vi.fn(),
   setAutoRetryAfterTokenRefresh: vi.fn(),
+}));
+vi.mock("@shared/lib/formatters", async () => ({
+  formatPhoneKR: (phone: string) => phone,
 }));
 vi.mock("@shared/lib/router", async () => {
   const { TabsContext } = await vi.importActual("@shared/lib/router");
@@ -159,6 +164,7 @@ vi.mock("@shared/ui/Inputs", () => {
   });
 
   return {
+    PhoneInput: (props: any) => <input data-testid="phone-input" {...props} />,
     SingleFileInput: ({
       onChange,
     }: {
@@ -170,6 +176,11 @@ vi.mock("@shared/ui/Inputs", () => {
 });
 vi.mock("@shared/ui/Loading", () => ({
   Spinner: () => <div>Loading Spinner</div>,
+}));
+vi.mock("@shared/ui/Selects", () => ({
+  SimpleSelect: (props: any) => (
+    <select data-testid="simple-select" {...props} />
+  ),
 }));
 vi.mock("@shared/ui/Tooltips", () => ({
   SimpleTooltip: (props: any) => <div>{props.text}</div>,
