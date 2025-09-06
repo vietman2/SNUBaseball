@@ -6,10 +6,11 @@ from .models import College, Department
 
 class DepartmentSerializer(ModelSerializer):
     college = serializers.CharField(source="college.name", read_only=True)
+    college_id = serializers.IntegerField(source="college.id", read_only=True)
 
     class Meta:
         model = Department
-        fields = ["id", "name", "short_name", "college"]
+        fields = ["id", "name", "short_name", "college", "college_id"]
 
 
 class CollegeSerializer(ModelSerializer):
