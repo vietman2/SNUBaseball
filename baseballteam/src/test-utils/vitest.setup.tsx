@@ -153,9 +153,21 @@ vi.mock("@shared/ui/Icons", () => ({
   Logo: () => <div>Logo</div>,
   LogoHorizontal: () => <div>LogoHorizontal</div>,
 }));
-vi.mock("@shared/ui/Inputs", () => ({
-  SingleFileInput: (props: any) => <input type="file" data-testid="file-input" {...props} />,
-}));
+vi.mock("@shared/ui/Inputs", () => {
+  const mockFile = new File(["dummy content"], "example.png", {
+    type: "image/png",
+  });
+
+  return {
+    SingleFileInput: ({
+      onChange,
+    }: {
+      onChange: (file: File | null) => void;
+    }) => (
+      <button data-testid="file-input" onClick={() => onChange(mockFile)} />
+    ),
+  };
+});
 vi.mock("@shared/ui/Loading", () => ({
   Spinner: () => <div>Loading Spinner</div>,
 }));
