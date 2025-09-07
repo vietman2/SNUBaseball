@@ -1,1 +1,4 @@
-export { TextButton } from "./TextButton/TextButton";
+export {
+  ElevatedTextButton,
+  ElevatedLink,
+} from "./ElevatedButtons/ElevatedButtons";

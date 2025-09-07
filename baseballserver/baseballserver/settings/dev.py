@@ -3,7 +3,7 @@ from .base import *  # pylint: disable=W0401,W0614
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost"]
+ALLOWED_HOSTS = ["localhost", "100.115.156.7"]
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -15,23 +15,28 @@ DATABASES = {
     }
 }
 
-REST_AUTH = {
-    "USE_JWT": True,
-    "JWT_AUTH_COOKIE": "access",
-    "JWT_AUTH_REFRESH_COOKIE": "refresh",
-    "JWT_AUTH_SECURE": False,
-    "JWT_AUTH_HTTPONLY": True,
-    "JWT_AUTH_RETURN_EXPIRATION": True,
-    "JWT_AUTH_COOKIE_USE_CSRF": True,
-    "SESSION_LOGIN": False,
-    "USER_DETAILS_SERIALIZER": "auth.user.serializers.ProfileSerializer",
-}
-
 # CORS
-CORS_ALLOWED_ALL_ORIGINS = True
-CORS_ALLOW_CREDENTIALS = True
-CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
+    "http://localhost:5173",
+    f"http://{config('TAILSCALE_IP')}:5173",
 ]
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "authorization",
+    "content-type",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+    "x-snubaseball-client",
+]
+
+MEDIA_CDN_BASE_URL = config("MEDIA_CDN_BASE_URL")
+MEDIA_KEY_PREFIX_WHITELIST = [
+    "profiles/",
+]
+
+AWS_REGION = "ap-northeast-2"
+AWS_S3_BUCKET_NAME = config("AWS_S3_BUCKET_NAME")
+AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY")

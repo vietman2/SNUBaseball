@@ -1,22 +1,25 @@
 from django.contrib.auth.backends import ModelBackend
-from django.utils import timezone
+from django.core.exceptions import ObjectDoesNotExist
+
+from auth.user.models import User
 
 
 class AuthBackend(ModelBackend):
-    """
-    last login을 기록하고, 차단되거나, 활성화되지 않은 유저를 제외하는 커스텀 인증 백엔드.
-    """
-
-    def user_can_authenticate(self, user):
-        can_auth = super().user_can_authenticate(user)
-
-        return can_auth and not getattr(user, "is_blocked", False)
-
     def authenticate(self, request, username=None, password=None, **kwargs):
-        user = super().authenticate(
-            request, username=username, password=password, **kwargs
-        )
-        if user is not None:
-            user.last_login = timezone.now()
-            user.save(update_fields=["last_login"])
-        return user
+        if username is None:
+            username = kwargs.get(User.USERNAME_FIELD)
+        if username is None or password is None:
+            return None
+
+        try:
+            user = User._default_manager.get(  ## pylint: disable=protected-access
+                **{f"{User.USERNAME_FIELD}__iexact": username}
+            )
+        except ObjectDoesNotExist:
+            User().set_password(password)  # timing attack 방지 관용구
+            return None
+
+        if user.check_password(password) and self.user_can_authenticate(user):
+            return user
+
+        return None

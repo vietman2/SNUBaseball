@@ -4,7 +4,7 @@ import { render } from "@testing-library/react";
 import { QueryProvider } from "../query/QueryProvider";
 
 describe("QueryProvider", () => {
-  it("renders children correctly", () => {
+  it("should render children", () => {
     const { getByText } = render(
       <QueryProvider>
         <div>Test Child</div>

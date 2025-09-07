@@ -1,6 +1,30 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import "@testing-library/jest-dom";
 import { vi } from "vitest";
 
+const __bcListeners = new Set<(e: MessageEvent) => void>();
+vi.stubGlobal(
+  "BroadcastChannel",
+  class {
+    name: string;
+    constructor(name: string) {
+      this.name = name;
+    }
+    addEventListener(type: string, cb: (e: MessageEvent) => void) {
+      if (type === "message") __bcListeners.add(cb);
+    }
+    removeEventListener(type: string, cb: (e: MessageEvent) => void) {
+      if (type === "message") __bcListeners.delete(cb);
+    }
+    postMessage(data: any) {
+      const evt = { data } as MessageEvent;
+      __bcListeners.forEach((cb) => cb(evt));
+    }
+    close() {
+      /* no-op for test purposes */
+    }
+  } as any
+);
 vi.mock("axios", async () => {
   const actual = await vi.importActual("axios");
   return {
@@ -14,123 +38,150 @@ vi.mock("react-router", async () => {
   return {
     ...actual,
     Outlet: () => <div>Mocked Outlet</div>,
-    useNavigate: () => vi.fn(),
-    useLocation: vi.fn().mockReturnValue({
-      pathname: "/",
-      search: "",
-      hash: "",
-      state: null,
-      key: "default",
-    }),
-    useParams: vi.fn(),
+    useNavigate: vi.fn().mockReturnValue(vi.fn()),
+    useLocation: vi.fn().mockReturnValue({ pathname: "/home" }),
   };
 });
 
-vi.mock("@widgets/auth", () => ({
-  AuthFormWrapper: ({ children }: { children: React.ReactNode }) => (
-    <>{children}</>
-  ),
-}));
-vi.mock("@widgets/layout", () => ({
-  RootLayout: () => null,
-}));
+vi.mock("@entities/user", async () => {
+  const actual = await vi.importActual("@entities/user");
+  return {
+    ...actual,
+    useUser: vi.fn().mockReturnValue({ user: null, isAuthenticated: false }),
+  };
+});
 
 vi.mock("@shared/lib/auth", async () => {
-  const { AuthContext, UserProfileType, sampleCaptain, samplePlayer } =
-    await vi.importActual("@shared/lib/auth");
-
-  return {
-    AuthContext: AuthContext,
-    UserProfileType,
-    sampleCaptain,
-    samplePlayer,
-    useAuth: vi.fn(() => ({
-      user: null,
-      login: vi.fn(),
-      logout: vi.fn(),
-    })),
-    useStudentIdCheck: vi.fn(),
-    useLogin: vi.fn(),
-    useSignup: vi.fn(),
-    useTokenRefresh: vi.fn(),
-  };
-});
-vi.mock("@shared/lib/colors", async () => {
-  const { ColorContext, ThemeColorType, light } = await vi.importActual(
-    "@shared/lib/colors"
+  const { TokensContext, createUserContext } = await vi.importActual(
+    "@shared/lib/auth"
   );
 
   return {
+    TokensContext: TokensContext,
+    createUserContext: createUserContext,
+    useTokens: vi.fn().mockReturnValue({
+      setToken: vi.fn(),
+      clearToken: vi.fn(),
+    }),
+  };
+});
+vi.mock("@shared/lib/axios", async () => ({
+  axiosInstance: {
+    get: vi.fn(),
+    post: vi.fn(),
+    put: vi.fn(),
+    patch: vi.fn(),
+    delete: vi.fn(),
+  },
+  axiosInstanceWithAuth: {
+    get: vi.fn(),
+    post: vi.fn(),
+    put: vi.fn(),
+    patch: vi.fn(),
+    delete: vi.fn(),
+  },
+  setAuthToken: vi.fn(),
+  clearAuthToken: vi.fn(),
+  setAutoRetryAfterTokenRefresh: vi.fn(),
+}));
+vi.mock("@shared/lib/formatters", async () => ({
+  formatPhoneKR: (phone: string) => phone,
+}));
+vi.mock("@shared/lib/router", async () => {
+  const { TabsContext } = await vi.importActual("@shared/lib/router");
+
+  return {
+    TabsContext: TabsContext,
+    useTabs: vi.fn().mockReturnValue({
+      tabGroups: [],
+      activeTab: null,
+      activeSubTab: null,
+    }),
+    getAllTabs: vi.fn().mockReturnValue([]),
+    parseCurrentPath: vi.fn().mockReturnValue({
+      tab: null,
+      subTab: null,
+    }),
+  };
+});
+vi.mock("@shared/lib/styles", async () => {
+  const { ColorContext, ThemeColorType, light } = await vi.importActual(
+    "@shared/lib/styles"
+  );
+
+  return {
+    ColorContext: ColorContext,
     useColors: vi.fn(() => ({
       colors: light,
       isDarkMode: false,
       toggleTheme: vi.fn(),
     })),
-    ColorContext: ColorContext,
     ThemeColorType: ThemeColorType,
     light: light,
     dark: light,
+    GlobalStyles: () => null,
   };
 });
-vi.mock("@shared/lib/navigation", async () => {
-  const { TabsContext, useTabs } = await vi.importActual(
-    "@shared/lib/navigation"
-  );
+
+vi.mock("@shared/ui/Buttons", async () => {
+  const { Link } = await vi.importActual("react-router");
 
   return {
-    TabsContext: TabsContext,
-    useTabs: useTabs,
-    useTabGroups: vi.fn(() => ({
-      tabGroups: [],
-      activeTab: {
-        title: "Test Tab",
-        subtabs: [],
-        icon: "test-icon",
-        path: "/",
-      },
-      activeSubTab: null,
-      setActiveTab: vi.fn(),
-      setActiveSubTab: vi.fn(),
-    })),
+    ElevatedTextButton: ({
+      $backgroundColor,
+      $color,
+      ...props
+    }: {
+      $backgroundColor: string;
+      $color: string;
+    }) => (
+      <button
+        {...props}
+        style={{ backgroundColor: $backgroundColor, color: $color }}
+      />
+    ),
+    ElevatedLink: ({
+      to,
+      children,
+    }: {
+      to: string;
+      children: React.ReactNode;
+    }) => <Link to={to}>{children}</Link>,
   };
 });
-
-vi.mock("@shared/ui/Buttons", () => ({
-  TextButton: ({ text, onClick }: { text: string; onClick: () => void }) => (
-    <button onClick={onClick} data-testid={`textbutton-${text}`}>
-      {text}
-    </button>
-  ),
-}));
 vi.mock("@shared/ui/Dividers", () => ({
+  Divider: () => <div>Divider</div>,
   VerticalDivider: () => <div>VerticalDivider</div>,
-}));
-vi.mock("@shared/ui/Fallbacks", () => ({
-  LoadingSpinner: () => <div>Loading Spinner</div>,
 }));
 vi.mock("@shared/ui/Icons", () => ({
   AppIcon: () => null,
+  Logo: () => <div>Logo</div>,
+  LogoHorizontal: () => <div>LogoHorizontal</div>,
 }));
-vi.mock("@shared/ui/Images", () => ({
-  Logo: "url",
-  MainLogo: () => <div>Main Logo</div>,
-}));
-vi.mock("@shared/ui/Inputs", async () => {
+vi.mock("@shared/ui/Inputs", () => {
+  const mockFile = new File(["dummy content"], "example.png", {
+    type: "image/png",
+  });
+
   return {
-    TextInput: ({
-      placeholder,
-      value,
+    PhoneInput: (props: any) => <input data-testid="phone-input" {...props} />,
+    SingleFileInput: ({
       onChange,
     }: {
-      placeholder: string;
-      value: string;
-      onChange: (value: string) => void;
+      onChange: (file: File | null) => void;
     }) => (
-      <input
-        data-testid={`textinput-${placeholder}`}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-      />
+      <button data-testid="file-input" onClick={() => onChange(mockFile)} />
     ),
   };
 });
+vi.mock("@shared/ui/Loading", () => ({
+  Spinner: () => <div>Loading Spinner</div>,
+}));
+vi.mock("@shared/ui/Selects", () => ({
+  SimpleSelect: (props: any) => (
+    <select data-testid="simple-select" {...props} />
+  ),
+}));
+vi.mock("@shared/ui/Tooltips", () => ({
+  SimpleTooltip: (props: any) => <div>{props.text}</div>,
+}));

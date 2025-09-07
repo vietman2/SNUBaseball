@@ -1,25 +1,14 @@
-import {
-  AuthProvider,
-  AutoLoginProvider,
-  ColorsProvider,
-  QueryProvider,
-} from "./providers";
-import { AppRouter } from "./routers";
-import { GlobalStyles } from "./styles";
+import { AuthProvider, QueryProvider, StylesProvider } from "./providers";
+import { AppRouter } from "./router";
 
 export default function App() {
   return (
-    <>
-      <GlobalStyles />
-      <ColorsProvider>
+    <QueryProvider>
+      <StylesProvider>
         <AuthProvider>
-          <QueryProvider>
-            <AutoLoginProvider>
-              <AppRouter />
-            </AutoLoginProvider>
-          </QueryProvider>
+          <AppRouter />
         </AuthProvider>
-      </ColorsProvider>
-    </>
+      </StylesProvider>
+    </QueryProvider>
   );
 }

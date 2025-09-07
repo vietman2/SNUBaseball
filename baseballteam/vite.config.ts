@@ -19,17 +19,19 @@ export default defineConfig({
   },
   test: {
     globals: true,
+    includeSource: ["./src/**/*.{ts,tsx}"],
     environment: "jsdom",
     setupFiles: "./src/test-utils/vitest.setup.tsx",
     coverage: {
+      provider: "istanbul",
       reporter: ["lcov", "text", "html"],
       exclude: [
         "**/index.ts",
         "**/styles.ts",
-        "**/types.ts",
         "**/*.types.ts",
-        "**/*.config.*",
+        "**/config/*",
         "**/*.d.ts",
+        "**/models/*",
         "**/main.tsx",
       ],
     },

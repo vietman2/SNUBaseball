@@ -6,7 +6,11 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'baseballserver.settings.dev')
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "baseballserver.settings.dev")
+
+    if "test" in sys.argv:
+        os.environ["DJANGO_SETTINGS_MODULE"] = "baseballserver.settings.tests"
+
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
@@ -18,5 +22,5 @@ def main():
     execute_from_command_line(sys.argv)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

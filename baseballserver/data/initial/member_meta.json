@@ -1,0 +1,72 @@
+[
+  {
+    "model": "member_status.memberstatus",
+    "pk": 1,
+    "fields": { "label": "활동중", "color": "#28A745", "name": "ACTIVE" }
+  },
+  {
+    "model": "member_status.memberstatus",
+    "pk": 2,
+    "fields": { "label": "비활동", "color": "#FD7E14", "name": "INACTIVE" }
+  },
+  {
+    "model": "member_status.memberstatus",
+    "pk": 3,
+    "fields": { "label": "군입대", "color": "#DC3545", "name": "MILITARY" }
+  },
+  {
+    "model": "member_status.memberstatus",
+    "pk": 11,
+    "fields": { "label": "졸업", "color": "#FFC107", "name": "GRADUATED" }
+  },
+  {
+    "model": "member_status.memberstatus",
+    "pk": 21,
+    "fields": { "label": "미분류", "color": "#17A2B8", "name": "UNDEFINED" }
+  },
+  {
+    "model": "role.memberrole",
+    "pk": 1,
+    "fields": { "name": "주장", "is_leadership": true, "is_staff": false }
+  },
+  {
+    "model": "role.memberrole",
+    "pk": 2,
+    "fields": { "name": "부주장", "is_leadership": true, "is_staff": false }
+  },
+  {
+    "model": "role.memberrole",
+    "pk": 3,
+    "fields": { "name": "수석매니저", "is_leadership": true, "is_staff": false }
+  },
+  {
+    "model": "role.memberrole",
+    "pk": 4,
+    "fields": { "name": "매니저", "is_leadership": false, "is_staff": false }
+  },
+  {
+    "model": "role.memberrole",
+    "pk": 5,
+    "fields": { "name": "선수", "is_leadership": false, "is_staff": false }
+  },
+  {
+    "model": "role.memberrole",
+    "pk": 6,
+    "fields": { "name": "지도교수", "is_leadership": false, "is_staff": true }
+  },
+  {
+    "model": "role.memberrole",
+    "pk": 7,
+    "fields": { "name": "감독", "is_leadership": false, "is_staff": true }
+  },
+  {
+    "model": "role.memberrole",
+    "pk": 8,
+    "fields": { "name": "코치", "is_leadership": false, "is_staff": true }
+  },
+  {
+    "model": "role.memberrole",
+    "pk": 11,
+    "fields": { "name": "미분류", "is_leadership": false, "is_staff": false }
+  }
+]

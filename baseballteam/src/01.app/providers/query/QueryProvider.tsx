@@ -1,23 +1,13 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import type { ReactNode } from "react";
+import { QueryClientProvider } from "@tanstack/react-query";
 
-const STALE_TIME_MS = 5 * 60 * 1000; // 5 minutes
+import { queryClient } from "@shared/config/query";
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: STALE_TIME_MS,
-      refetchOnWindowFocus: false,
-      retry: 1,
-    },
-    mutations: {
-      retry: false,
-    },
-  },
-});
+interface Props {
+  children: ReactNode;
+}
 
-export function QueryProvider({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+export function QueryProvider({ children }: Readonly<Props>) {
   return (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );

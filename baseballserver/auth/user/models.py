@@ -1,8 +1,9 @@
 import uuid
 from django.contrib.auth.models import AbstractBaseUser
 from django.db import models
+from django.db.models.functions import Lower
 
-from auth.member.models import Member
+from member.person.models import Member
 from .managers import UserManager
 
 
@@ -14,21 +15,26 @@ class User(AbstractBaseUser):
     joined_at = models.DateTimeField(auto_now_add=True)
 
     is_superuser = models.BooleanField(default=False)
-    is_staff = models.BooleanField(default=False)
-    is_blocked = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
 
     USERNAME_FIELD = "username"
 
     objects = UserManager()
 
-    def has_perm(self, perm, obj=None):  # pylint: disable=unused-argument
-        return True
+    @property
+    def is_staff(self):
+        return self.is_superuser
 
-    def has_module_perms(self, app_label):  # pylint: disable=unused-argument
-        return True
+    def has_perm(self, perm, obj=None):  ## pylint: disable=unused-argument
+        return self.is_superuser
+
+    def has_module_perms(self, app_label):  ## pylint: disable=unused-argument
+        return self.is_superuser
 
     class Meta:
         db_table = "user"
         verbose_name = "유저"
         verbose_name_plural = "유저"
+        constraints = [
+            models.UniqueConstraint(Lower("username"), name="unique_lower_username")
+        ]

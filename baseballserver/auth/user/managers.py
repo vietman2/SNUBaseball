@@ -1,6 +1,6 @@
 from django.contrib.auth.base_user import BaseUserManager
 
-from auth.member.models import Member
+from member.person.models import Member
 
 
 class UserManager(BaseUserManager):
@@ -15,7 +15,6 @@ class UserManager(BaseUserManager):
         """
         Create a superuser with the given password and extra fields.
         """
-        extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
 
         member = Member.objects.get(student_id="2017-19331")

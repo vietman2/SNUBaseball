@@ -1,24 +1,39 @@
 from django.test import TestCase
 
-from ..models import User
+from auth.user.models import User
+from member.person.models import Member
 
 
-class UserModelTestCase(TestCase):
+class UserModelTest(TestCase):
     fixtures = [
         "data/initial/majors.json",
-        "data/initial/member_roles.json",
-        "data/initial/member_status.json",
+        "data/initial/member_meta.json",
         "data/test/auth.json",
     ]
 
     def setUp(self):
-        self.user = User.objects.get(username="admin")
+        self.member = Member.objects.get(name="홍길동")
+        self.admin = Member.objects.create(
+            student_id="2017-19331", admission_year=2017, role_id=1, status_id=1
+        )
 
-    def test_user_str(self):
-        self.assertEqual(str(self.user), self.user.username)
+    def test_create_user(self):
+        user = User.objects.create_user(
+            username="testuser",
+            password="testpassword",
+            member=self.member,
+        )
+        self.assertEqual(user.username, "testuser")
+        self.assertTrue(user.check_password("testpassword"))
+        self.assertFalse(user.is_superuser)
+        self.assertTrue(user.is_active)
 
-    def test_has_perm(self):
-        self.assertTrue(self.user.has_perm("auth.change_user"))
+    def test_create_superuser(self):
+        superuser = User.objects.create_superuser(password="superpassword")
+        self.assertTrue(superuser.is_superuser)
+        self.assertTrue(superuser.is_active)
+        self.assertTrue(superuser.check_password("superpassword"))
 
-    def test_has_module_perms(self):
-        self.assertTrue(self.user.has_module_perms("auth"))
+        self.assertTrue(superuser.is_staff)
+        self.assertTrue(superuser.has_perm("any_permission"))
+        self.assertTrue(superuser.has_module_perms("any_app"))

@@ -2,8 +2,6 @@ from django.contrib import admin
 
 ## Models to unregister
 from django.contrib.auth.models import Group
-from allauth.account.models import EmailAddress
-from rest_framework.authtoken.models import TokenProxy
 from rest_framework_simplejwt.token_blacklist.models import (
     OutstandingToken,
     BlacklistedToken,
@@ -11,8 +9,6 @@ from rest_framework_simplejwt.token_blacklist.models import (
 
 unnecessary_models = [
     Group,
-    EmailAddress,
-    TokenProxy,
     OutstandingToken,
     BlacklistedToken,
 ]
