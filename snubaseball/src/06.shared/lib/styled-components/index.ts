@@ -1,3 +1,9 @@
+export {
+  ColorContext,
+  type ColorContextType,
+  useColors,
+} from "./hooks/useColors";
+
 export { type BreakPointsType, breakpoints } from "./models/breakpoints";
 export { type ThemeColorType, light, dark } from "./models/colors";
 

@@ -41,18 +41,6 @@ export const GlobalStyles = createGlobalStyle`
     cursor: pointer;
   }
 
-  select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-
-    background: url('/assets/icons/chevron-down.svg') no-repeat 90% 48%;
-  }
-
-  select::-ms-expand {
-    display: none;
-  }
-
   a {
     color: inherit;
     text-decoration: none;

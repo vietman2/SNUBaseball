@@ -7,13 +7,9 @@ export type ThemeColorType = {
   onSecondary: string;
 
   gray100: string;
-  gray200: string;
   gray300: string;
-  gray400: string;
   gray500: string;
-  gray600: string;
   gray700: string;
-  gray800: string;
   gray900: string;
 
   background: string;
@@ -36,18 +32,14 @@ export const light: ThemeColorType = {
   onSecondary: "#FFFFFF", // 금색 위의 텍스트는 흰색
 
   gray100: "#F3F4F6",
-  gray200: "#ECEEF0",
   gray300: "#E5E7EB",
-  gray400: "#D1D5DB",
   gray500: "#9CA3AF",
-  gray600: "#6B7280",
   gray700: "#4B5563",
-  gray800: "#374151",
-  gray900: "#1F2937",
+  gray900: "#111827",
 
   background: "#FFFFFF", // 순백
 
-  textPrimary: "#0F0F70", // 브랜드 딥 블루
+  textPrimary: "#111827",
   textSecondary: "#4B5563", // gray700
   textDisabled: "#9CA3AF", // gray500
 
@@ -56,28 +48,24 @@ export const light: ThemeColorType = {
 };
 
 export const dark: ThemeColorType = {
-  primary: "#FFFFFF", // 다크에서는 흰색을 브랜드 포인트로
-  onPrimary: "#0F0F70", // 블루 위의 텍스트 (배경에서 쓰일 경우 대비 색상)
+  primary: "#C5A86F", // 다크에서는 흰색을 브랜드 포인트로
+  onPrimary: "#1A1A1A", // 블루 위의 텍스트 (배경에서 쓰일 경우 대비 색상)
 
-  secondary: "#C5A86F", // 골드 (강조용)
-  onSecondary: "#0F0F70", // 골드 위에 블루/네이비
+  secondary: "#4F46E5", // 골드 (강조용)
+  onSecondary: "#ffffff", // 골드 위에 블루/네이비
 
-  gray100: "#E5E7EB",
-  gray200: "#D1D5DB",
-  gray300: "#9CA3AF",
-  gray400: "#6B7280",
-  gray500: "#4B5563",
-  gray600: "#374151",
-  gray700: "#1F2937",
-  gray800: "#111827",
-  gray900: "#0A0A0A",
+  gray100: "#1F2937",
+  gray300: "#374151",
+  gray500: "#6B7280",
+  gray700: "#9CA3AF",
+  gray900: "#D1D5DB",
 
-  background: "#0A0A0A", // 거의 블랙
+  background: "#1A1A1A",
 
-  textPrimary: "#FFFFFF", // 기본 텍스트는 흰색
-  textSecondary: "#B5B6B6", // 실버 톤 (보조 텍스트)
-  textDisabled: "#6B7280", // 중간 회색 (gray400)
+  textPrimary: "#F9FAFB",
+  textSecondary: "#D1D5DB",
+  textDisabled: "#6B7280",
 
-  focusOutline: "#C5A86F", // 골드 포커스 아웃라인 (강조용)
-  divider: "#374151", // 진한 회색
+  focusOutline: "#C5A86F",
+  divider: "#374151",
 };
