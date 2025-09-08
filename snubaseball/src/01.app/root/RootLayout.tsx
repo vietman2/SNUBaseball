@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { cookies } from "next/headers";
 
 import { StylesProvider } from "./providers";
 import { RootHeader } from "@widgets/header";
@@ -19,15 +20,19 @@ export const metadata: Metadata = {
   description: "서울대학교 야구부 공식 홈페이지",
 };
 
-export function RootLayout({
+export async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const theme = cookieStore.get("theme")?.value;
+  const initialDark = theme === "dark";
+
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <StylesProvider>
+        <StylesProvider initialDark={initialDark}>
           <RootHeader />
           {children}
         </StylesProvider>
