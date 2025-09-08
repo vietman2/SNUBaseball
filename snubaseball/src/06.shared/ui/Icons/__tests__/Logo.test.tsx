@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 
-import * as StylesAPI from "@shared/lib/styled-components";
+import * as StylesAPI from "@shared/lib/styles";
 import { Logo } from "@shared/ui/Icons";
 
 jest.unmock("@shared/ui/Icons");

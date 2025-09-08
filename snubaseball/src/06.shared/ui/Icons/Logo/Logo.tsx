@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { useColors } from "@shared/lib/styled-components";
+import { useColors } from "@shared/lib/styles";
 
 interface Props {
   size?: number;
