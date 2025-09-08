@@ -27,8 +27,12 @@ const Container = styled.div`
   height: 64px;
   padding: 0 12.5%;
 
+  position: relative;
+
   z-index: 10;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+
+  background-color: ${({ theme }) => theme.colors.background};
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     padding: 8px 7.5%;
@@ -55,6 +59,10 @@ const WideLayoutWrapper = styled.div`
   display: flex;
   flex: 2;
   justify-content: flex-end;
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    flex: 2.5;
+  }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     display: none;

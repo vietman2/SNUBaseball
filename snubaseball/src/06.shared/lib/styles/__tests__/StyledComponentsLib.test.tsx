@@ -6,10 +6,10 @@ import {
   StyledComponentsRegistry,
   light,
   useColors,
-} from "@shared/lib/styled-components";
+} from "@shared/lib/styles";
 import { useMemo } from "react";
 
-jest.unmock("@shared/lib/styled-components");
+jest.unmock("@shared/lib/styles");
 
 const MockComponent = () => {
   const { isDarkMode } = useColors();

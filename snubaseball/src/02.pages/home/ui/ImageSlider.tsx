@@ -15,7 +15,7 @@ export function ImageSlider({ images }: Readonly<Props>) {
 
   const startSlider = useCallback(() => {
     intervalRef.current = setInterval(() => {
-      setCurrentIndex((prevIndex) => 
+      setCurrentIndex((prevIndex) =>
         prevIndex === images.length - 1 ? 0 : prevIndex + 1
       );
     }, 5000);
@@ -129,7 +129,7 @@ const Texts = styled.div`
   position: absolute;
   top: 35%;
   left: 10%;
-  color: ${({ theme }) => theme.colors.gray100};
+  color: white;
 
   > span:first-child {
     font-size: 1.75rem;

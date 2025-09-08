@@ -10,12 +10,13 @@ jest.mock("next/navigation", () => ({
   },
 }));
 
-jest.mock("@shared/lib/styled-components", () => ({
-  ...jest.requireActual("@shared/lib/styled-components"),
+jest.mock("@shared/lib/styles", () => ({
+  ...jest.requireActual("@shared/lib/styles"),
   GlobalStyles: () => <div data-testid="global-styles" />,
   StyledComponentsRegistry: ({ children }: { children: React.ReactNode }) => (
     <div className="styled-components-registry">{children}</div>
   ),
+  useColors: jest.fn().mockReturnValue({ isDarkMode: false, colors: {} }),
 }));
 
 jest.mock("@shared/ui/Icons", () => ({

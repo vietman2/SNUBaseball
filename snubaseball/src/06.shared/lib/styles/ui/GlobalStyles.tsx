@@ -25,6 +25,8 @@ export const GlobalStyles = createGlobalStyle`
       border-radius: 3px;
       border: 1.5px solid #B1BDCD;
     }
+
+    transition: background-color 0.3s, color 0.3s;
   }
 
   code {

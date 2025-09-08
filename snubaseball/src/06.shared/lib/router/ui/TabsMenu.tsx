@@ -77,6 +77,7 @@ const Tab = styled.div`
   flex: 1;
   align-items: center;
   justify-content: center;
+  color: ${({ theme }) => theme.colors.textPrimary};
   font-size: 1rem;
   font-weight: 600;
 `;
@@ -84,15 +85,15 @@ const Tab = styled.div`
 const Menu = styled.div<{ $isOpen: boolean }>`
   display: flex;
   padding: 16px 12.5%;
-  position: fixed;
-  top: 64px;
+  position: absolute;
+  top: 100%;
   left: 0;
   right: 0;
 
-  border-top: 0.5px solid ${({ theme }) => theme.colors.gray200};
+  border-top: 0.5px solid ${({ theme }) => theme.colors.gray300};
   background-color: ${({ theme }) => theme.colors.gray100};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
-  z-index: 10;
+  z-index: 100;
 
   transform: translateY(${({ $isOpen }) => ($isOpen ? "0" : "-8px")});
   opacity: ${({ $isOpen }) => ($isOpen ? 1 : 0)};
@@ -118,12 +119,17 @@ const SubTabs = styled.div`
   display: flex;
   flex: 2;
 
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    flex: 2.5;
+  }
+
   .root-header-subtab {
     display: flex;
     flex: 1;
     flex-direction: column;
     align-items: center;
     gap: 24px;
+    color: ${({ theme }) => theme.colors.textSecondary};
     font-size: 0.925rem;
     font-weight: 400;
   }
