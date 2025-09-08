@@ -54,11 +54,11 @@ export const dark: ThemeColorType = {
   secondary: "#4F46E5", // 골드 (강조용)
   onSecondary: "#ffffff", // 골드 위에 블루/네이비
 
-  gray100: "#1F2937",
-  gray300: "#374151",
-  gray500: "#6B7280",
-  gray700: "#9CA3AF",
-  gray900: "#D1D5DB",
+  gray100: "#2A2A2A",
+  gray300: "#3A3A3A",
+  gray500: "#5C5C5C",
+  gray700: "#8A8A8A",
+  gray900: "#E0E0E0",
 
   background: "#1A1A1A",
 
