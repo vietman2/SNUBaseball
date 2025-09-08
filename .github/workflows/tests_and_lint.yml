@@ -128,9 +128,51 @@ jobs:
       - name: Run linters
         run: pipenv run sh -c 'DJANGO_SETTINGS_MODULE=baseballserver.settings.tests pylint --load-plugins pylint_django --rcfile=.pylintrc .'
 
+  nextjs-tests-and-lint:
+    runs-on: ubuntu-latest
+    needs: prep
+    defaults:
+      run:
+        working-directory: snubaseball
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+
+      - name: Set up Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'yarn'
+          cache-dependency-path: "snubaseball/yarn.lock"
+
+      - name: Install dependencies
+        run: yarn install --dev
+
+      - name: Run tests and collect coverage
+        run: |
+          yarn test --coverage --watchAll=false
+          cp coverage/lcov.info coverage.lcov
+
+      - name: Upload coverage artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report-nextjs
+          path: snubaseball/coverage.lcov
+
+      - name: Run linter
+        run: yarn lint --format @microsoft/eslint-formatter-sarif --output-file eslint-results.sarif
+
+      - name: Upload linter results
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: snubaseball/eslint-results.sarif
+          wait-for-processing: true
+
   quality:
     runs-on: ubuntu-latest
-    needs: [django-tests-and-lint, vite-tests-and-lint]
+    needs: [django-tests-and-lint, vite-tests-and-lint, nextjs-tests-and-lint]
 
     steps:
       - name: Checkout code
@@ -159,6 +201,12 @@ jobs:
         with:
           name: coverage-report-django-xml
           path: ./baseballserver
+
+      - name: Download coverage artifact (Next.js)
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-report-nextjs
+          path: ./snubaseball
 
       - name: Merge coverage reports
         run: |
