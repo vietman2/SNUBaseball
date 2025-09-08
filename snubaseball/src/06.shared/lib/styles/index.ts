@@ -10,3 +10,5 @@ export { type ThemeColorType, light, dark } from "./models/colors";
 export { StyledComponentsRegistry } from "./registry/StyledComponentsRegistry";
 
 export { GlobalStyles } from "./ui/GlobalStyles";
+
+export { hexToRgb, hexToRgba } from "./utils/converters";

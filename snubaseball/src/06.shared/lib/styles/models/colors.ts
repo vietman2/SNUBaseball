@@ -13,6 +13,7 @@ export type ThemeColorType = {
   gray900: string;
 
   background: string;
+  surface: string;
 
   // Text
   textPrimary: string;
@@ -38,6 +39,7 @@ export const light: ThemeColorType = {
   gray900: "#111827",
 
   background: "#FFFFFF", // 순백
+  surface: "#F9FAFB", // 카드, 모달 등의 표면
 
   textPrimary: "#111827",
   textSecondary: "#4B5563", // gray700
@@ -61,6 +63,7 @@ export const dark: ThemeColorType = {
   gray900: "#E0E0E0",
 
   background: "#1A1A1A",
+  surface: "#1F2937",
 
   textPrimary: "#F9FAFB",
   textSecondary: "#D1D5DB",
