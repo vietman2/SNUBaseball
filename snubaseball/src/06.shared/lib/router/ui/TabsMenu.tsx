@@ -1,10 +1,12 @@
 "use client";
 
+import "client-only";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import styled from "styled-components";
 
 import { RouterTabs } from "../models/tabs";
+import { hexToRgba } from "@shared/lib/styles";
 
 export function TabsMenu() {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
@@ -29,7 +31,11 @@ export function TabsMenu() {
   }, []);
 
   return (
-    <HoverZone onMouseEnter={openMenu} onMouseLeave={closeMenu} data-testid="tabs-menu-hoverzone">
+    <HoverZone
+      onMouseEnter={openMenu}
+      onMouseLeave={closeMenu}
+      data-testid="tabs-menu-hoverzone"
+    >
       <Container>
         {RouterTabs.map((tab) => (
           <Tab key={tab.label}>
@@ -39,7 +45,12 @@ export function TabsMenu() {
           </Tab>
         ))}
       </Container>
-      <Menu $isOpen={menuOpen} onMouseEnter={openMenu} onMouseLeave={closeMenu} data-testid="tabs-menu">
+      <Menu
+        $isOpen={menuOpen}
+        onMouseEnter={openMenu}
+        onMouseLeave={closeMenu}
+        data-testid="tabs-menu"
+      >
         <div className="root-header-menu-void" />
         <SubTabs>
           <div className="root-header-subtab">
@@ -92,7 +103,8 @@ const Menu = styled.div<{ $isOpen: boolean }>`
 
   border-top: 0.5px solid ${({ theme }) => theme.colors.gray300};
   background-color: ${({ theme }) => theme.colors.gray100};
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 4px
+    ${({ theme }) => hexToRgba(theme.colors.textPrimary, 0.1)};
   z-index: 100;
 
   transform: translateY(${({ $isOpen }) => ($isOpen ? "0" : "-8px")});
