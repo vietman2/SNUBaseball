@@ -8,12 +8,14 @@ on:
     paths:
       - 'baseballserver/**'
       - 'baseballteam/**'
+      - 'snubaseball/**'
   push:
     branches:
       - dev
     paths:
       - 'baseballserver/**'
       - 'baseballteam/**'
+      - 'snubaseball/**'
 
 permissions:
   contents: read
