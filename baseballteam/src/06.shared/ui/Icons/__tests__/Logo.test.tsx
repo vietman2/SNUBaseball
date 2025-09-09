@@ -18,7 +18,7 @@ describe("LogoHorizontal", () => {
   it("renders correctly with default size", () => {
     const { getByAltText, getByText } = renderWithProviders(<LogoHorizontal />);
     const imgElement = getByAltText("Logo") as HTMLImageElement;
-    expect(imgElement.style.width).toBe("48px");
+    expect(imgElement.style.width).toBe("36px");
     expect(getByText("서울대 야구부")).toBeInTheDocument();
   });
 });
