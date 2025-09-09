@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { Section } from "./styles";
 import { ModalDialog, ModalOverlay } from "@widgets/modal";
-import { UpdateImageModal } from "@features/profile/updateImage";
+import { UpdateImageModal } from "@features/account/updateImage";
 import { UserAvatar, type UserProfileType } from "@entities/user";
 import { useColors } from "@shared/lib/styles";
 import { AppIcon } from "@shared/ui/Icons";

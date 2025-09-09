@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { Section } from "./styles";
 import { ModalDialog, ModalOverlay } from "@widgets/modal";
-import { UpdateContactModal } from "@features/profile/updateAccount";
+import { UpdateContactModal } from "@features/account/updateAccount";
 import { formatPhoneKR } from "@shared/lib/formatters";
 import { AppIcon } from "@shared/ui/Icons";
 
