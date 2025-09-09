@@ -164,6 +164,7 @@ vi.mock("@shared/ui/Inputs", () => {
   });
 
   return {
+    DateInput: (props: any) => <input data-testid="date-input" {...props} />,
     PhoneInput: (props: any) => <input data-testid="phone-input" {...props} />,
     SingleFileInput: ({
       onChange,
@@ -175,6 +176,7 @@ vi.mock("@shared/ui/Inputs", () => {
   };
 });
 vi.mock("@shared/ui/Loading", () => ({
+  Skeleton: () => <div>Loading Skeleton</div>,
   Spinner: () => <div>Loading Spinner</div>,
 }));
 vi.mock("@shared/ui/Selects", () => ({
