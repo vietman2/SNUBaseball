@@ -7,18 +7,22 @@ import { Divider } from "@shared/ui/Dividers";
 
 const innerTabs = [
   { label: "계정", href: "account", icon: "person" },
-  { label: "선수 정보", href: "playerinfo", icon: "player" },
-  { label: "비밀번호 변경", href: "change-password", icon: "lock" },
+  { label: "정보", href: "info", icon: "player" },
+  //{ label: "비밀번호 변경", href: "change-password", icon: "lock" },
 ];
 
-export function MyProfileModal() {
+interface Props {
+  backgroundLocation: Location;
+}
+
+export function MyProfileModal({ backgroundLocation }: Readonly<Props>) {
   return (
     <Container>
       <Left>
         <h2 className="profile-modal-title">내 프로필</h2>
         <div className="profile-modal-sidebar">
           {innerTabs.map((tab) => (
-            <Link to={tab.href} key={tab.href}>
+            <Link to={tab.href} key={tab.href} state={{ backgroundLocation }}>
               <ModalSidebarItem
                 icon={tab.icon}
                 label={tab.label}
