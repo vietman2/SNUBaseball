@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { fireEvent } from "@testing-library/react";
+import * as Router from "react-router";
 
 import { ModalLayout } from "../ModalLayout";
 import { renderWithProviders } from "@test-utils/renderer";
@@ -27,7 +28,13 @@ describe("ModalLayout", () => {
     vi.advanceTimersByTime(90);
   });
 
-  it("should handle Escape key press with history", () => {
+  it("should handle Escape key press with history and background location", () => {
+    vi.spyOn(Router, "useLocation").mockReturnValue({
+      pathname: "/somepath",
+      search: "",
+      hash: "",
+      state: { backgroundLocation: { pathname: "/background", search: "", hash: "" } },
+    } as unknown as Router.Location);
     vi.spyOn(window.history, "length", "get").mockReturnValue(3);
 
     const { getByTestId } = renderWithProviders(<ModalLayout />);

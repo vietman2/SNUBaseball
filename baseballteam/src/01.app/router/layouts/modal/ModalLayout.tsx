@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Outlet, useNavigate } from "react-router";
+import { Outlet, useLocation, useNavigate } from "react-router";
 
 import { ModalDialog, ModalOverlay } from "@widgets/modal";
 
@@ -10,19 +10,23 @@ export function ModalLayout() {
   const timerRef = useRef<number | null>(null);
   const navigate = useNavigate();
 
+  // 모달 띄울 때 저장한 백그라운드 location
+  const location = useLocation();
+  const state = location.state as { backgroundLocation?: Location } | undefined;
+  const backgroundLocation = state?.backgroundLocation;
+
+  const closeTarget = backgroundLocation
+    ? `${backgroundLocation.pathname}${backgroundLocation.search}${backgroundLocation.hash}`
+    : "/home";
+
   const closeModal = useCallback(() => {
     if (isExiting) return;
     setIsExiting(true);
 
-    // fadeOut 끝난 후 뒤로가기
     timerRef.current = window.setTimeout(() => {
-      if (window.history.length <= 2) {
-        navigate("/home", { replace: true });
-      } else {
-        navigate(-1);
-      }
+      navigate(closeTarget, { replace: true });
     }, FADE_MS);
-  }, [navigate, isExiting]);
+  }, [isExiting, navigate, closeTarget]);
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
