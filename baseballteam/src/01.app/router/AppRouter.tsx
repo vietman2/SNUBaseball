@@ -14,6 +14,7 @@ import { RootLayout } from "./layouts/root/RootLayout";
 import { LoginPage } from "@pages/auth/login";
 import { SignupPage } from "@pages/auth/signup";
 import { AccountPage } from "@pages/profile/account";
+import { MemberProfilePage } from "@pages/profile/member";
 import { NotFoundWidget } from "@widgets/not-found";
 
 export function AppRouter() {
@@ -46,8 +47,14 @@ function RoutesWrapper() {
       {state?.backgroundLocation && (
         <Routes>
           <Route element={<ModalLayout />}>
-            <Route path="profile" element={<MyProfileModal />}>
+            <Route
+              path="profile"
+              element={
+                <MyProfileModal backgroundLocation={state.backgroundLocation} />
+              }
+            >
               <Route path="account" element={<AccountPage />} />
+              <Route path="info" element={<MemberProfilePage />} />
             </Route>
             <Route path="*" element={<Navigate to="home" replace />} />
           </Route>
