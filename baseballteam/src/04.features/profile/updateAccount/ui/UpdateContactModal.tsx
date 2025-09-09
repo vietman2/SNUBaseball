@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import styled from "styled-components";
 
-import { useUpdateProfileMutation } from "../api/updateProfile";
+import { useUpdateAccountMutation } from "../api/updateAccount";
 import { PhoneInput } from "@shared/ui/Inputs";
 import { Spinner } from "@shared/ui/Loading";
 
@@ -27,7 +27,7 @@ export function UpdateContactModal({
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const { mutate: updateContacts } = useUpdateProfileMutation(memberId);
+  const { mutate: updateContacts } = useUpdateAccountMutation(memberId);
 
   const buttonDisabled = useMemo(() => {
     return (

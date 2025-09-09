@@ -18,7 +18,7 @@ type UpdateContactDataType = {
   address: string;
 };
 
-async function updateProfile(
+async function updateAccount(
   id: number,
   data: UpdateMajorDataType | UpdateContactDataType
 ): Promise<APIResponseType<MemberProfileType> | APIErrorType> {
@@ -47,7 +47,7 @@ async function updateProfile(
   }
 }
 
-export function useUpdateProfileMutation(id: number) {
+export function useUpdateAccountMutation(id: number) {
   const queryClient = useQueryClient();
 
   return useMutation<
@@ -55,7 +55,7 @@ export function useUpdateProfileMutation(id: number) {
     unknown,
     UpdateMajorDataType | UpdateContactDataType
   >({
-    mutationFn: (data) => updateProfile(id, data),
+    mutationFn: (data) => updateAccount(id, data),
     onSuccess: (result) => {
       if (result.status === "SUCCESS") {
         queryClient.setQueryData<UserProfileType>(["me"], (oldData) => {
