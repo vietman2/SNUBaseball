@@ -1,7 +1,7 @@
 import { LoadingMemberProfileSection } from "./ui/_loading";
 import { Container, Section } from "./ui/styles";
 import { ErrorWidget } from "@widgets/error";
-import { BasicProfileForm } from "@features/profile/updateBasicProfile";
+import { BasicProfileForm } from "@features/profile/updateProfile";
 import { useMemberDetails } from "@entities/members";
 import { useUser } from "@entities/user";
 import { useColors } from "@shared/lib/styles";
