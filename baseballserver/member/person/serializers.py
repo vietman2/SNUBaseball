@@ -49,30 +49,53 @@ class ProfileSerializer(serializers.ModelSerializer):
 
 
 class MemberSimpleSerializer(serializers.ModelSerializer):
+    type = serializers.SerializerMethodField()
+    birth_date = serializers.DateField(
+        format="%Y-%m-%d", input_formats=["%Y-%m-%d"], allow_null=True
+    )
+    date_joined = serializers.DateField(
+        format="%Y-%m-%d", input_formats=["%Y-%m-%d"], allow_null=True
+    )
+
     major = serializers.CharField(source="major.name", read_only=True)
     profile_image = serializers.SerializerMethodField()
-    back_number = serializers.SerializerMethodField()
-    position = serializers.SerializerMethodField()
 
     class Meta:
         model = Member
-        fields = [
+        read_only_fields = [
+            "type",
             "id",
             "name",
             "admission_year",
+        ]
+        fields = [
+            "type",
+            "id",
+            "name",
+            "back_number",
+            "birth_date",
+            "date_joined",
+            "num_semester",
+            "admission_year",
             "major",
             "profile_image",
-            "back_number",
-            "position",
         ]
+
+    def get_type(self, obj):
+        ## Role이 1, 2, 5면 PLAYER
+        ## Role이 3, 4면 MANAGER
+        ## Role이 6, 7, 8이면 STAFF
+        ## 나머지는 OTHER
+        if obj.role_id in [1, 2, 5]:
+            return "PLAYER"
+        elif obj.role_id in [3, 4]:
+            return "MANAGER"
+        elif obj.role_id in [6, 7, 8]:
+            return "STAFF"
+
+        return "OTHER"
 
     def get_profile_image(self, obj):
         if obj.profile_image:
             return get_image_url(obj.profile_image.key)
         return None
-
-    def get_back_number(self, obj):
-        return obj.extras.get("back_number", None)
-
-    def get_position(self, obj):
-        return obj.extras.get("position", None)
