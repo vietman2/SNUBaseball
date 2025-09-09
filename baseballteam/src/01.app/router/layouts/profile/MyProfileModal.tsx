@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router";
+import { Link, Outlet, useLocation } from "react-router";
 import styled from "styled-components";
 
 import { ModalSidebarItem } from "@widgets/sidebar/ModalSidebar";
@@ -16,6 +16,12 @@ interface Props {
 }
 
 export function MyProfileModal({ backgroundLocation }: Readonly<Props>) {
+  const { pathname } = useLocation();
+
+  console.log(pathname, pathname.endsWith("account"));
+
+  console.log(pathname.endsWith("info"));
+
   return (
     <Container>
       <Left>
@@ -26,7 +32,7 @@ export function MyProfileModal({ backgroundLocation }: Readonly<Props>) {
               <ModalSidebarItem
                 icon={tab.icon}
                 label={tab.label}
-                isActive={window.location.pathname.endsWith(tab.href)}
+                isActive={pathname.endsWith(tab.href)}
               />
             </Link>
           ))}

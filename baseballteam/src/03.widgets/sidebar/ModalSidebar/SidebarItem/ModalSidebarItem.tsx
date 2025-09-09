@@ -6,13 +6,13 @@ import { AppIcon } from "@shared/ui/Icons";
 interface Props {
   icon: string;
   label: string;
-  isActive?: boolean;
+  isActive: boolean;
 }
 
 export function ModalSidebarItem({
   icon,
   label,
-  isActive = false,
+  isActive,
 }: Readonly<Props>) {
     const { colors } = useColors();
 
