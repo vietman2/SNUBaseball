@@ -28,6 +28,7 @@ class Member(models.Model):
         related_name="members",
     )
     notes = models.TextField(default="", blank=True)
+    back_number = models.IntegerField(default=None, null=True, blank=True)
     extras = models.JSONField(default=dict, blank=True)
 
     role = models.ForeignKey(
