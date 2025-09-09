@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from media.image.serializers import ThumbnailSerializer
+from media.image.utils import get_image_url
 from member.major.models import Department
 from member.major.serializers import DepartmentSerializer
 from .models import Member
@@ -45,3 +46,33 @@ class ProfileSerializer(serializers.ModelSerializer):
             if f in attrs and attrs[f] == "":
                 attrs[f] = None
         return attrs
+
+
+class MemberSimpleSerializer(serializers.ModelSerializer):
+    major = serializers.CharField(source="major.name", read_only=True)
+    profile_image = serializers.SerializerMethodField()
+    back_number = serializers.SerializerMethodField()
+    position = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Member
+        fields = [
+            "id",
+            "name",
+            "admission_year",
+            "major",
+            "profile_image",
+            "back_number",
+            "position",
+        ]
+
+    def get_profile_image(self, obj):
+        if obj.profile_image:
+            return get_image_url(obj.profile_image.key)
+        return None
+
+    def get_back_number(self, obj):
+        return obj.extras.get("back_number", None)
+
+    def get_position(self, obj):
+        return obj.extras.get("position", None)

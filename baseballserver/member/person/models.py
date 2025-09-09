@@ -5,6 +5,7 @@ from media.image.models import SNUBaseballImage
 from member.major.models import Department
 from member.role.models import MemberRole
 from member.status.models import MemberStatus
+from .managers import MemberManager
 
 
 class Member(models.Model):
@@ -39,7 +40,7 @@ class Member(models.Model):
     date_joined = models.DateField(null=True, blank=True)
     num_semester = models.IntegerField(validators=[Min(0), Max(20)], default=0)
 
-    objects = models.Manager()
+    objects = MemberManager()
 
     def __str__(self):
         return f"{self.name} ({self.admission_year})"
