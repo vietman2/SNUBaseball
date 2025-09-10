@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Link from "next/link";
 
 import { Container, MembersList } from "./ui/styles";
 import { ContentWrapper } from "@widgets/layouts";
@@ -33,7 +34,9 @@ export async function MembersPage() {
           <h3>매니저</h3>
           <div className="member-page-list">
             {members.managers.map((manager) => (
-              <MemberCard key={manager.id} member={manager} />
+              <Link href={`/members/${manager.id}`} key={manager.id}>
+                <MemberCard member={manager} />
+              </Link>
             ))}
           </div>
         </MembersList>
@@ -41,7 +44,9 @@ export async function MembersPage() {
           <h3>선수</h3>
           <div className="member-page-list">
             {members.players.map((player) => (
-              <MemberCard key={player.id} member={player} isPlayer />
+              <Link href={`/members/${player.id}`} key={player.id}>
+                <MemberCard member={player} isPlayer />
+              </Link>
             ))}
           </div>
         </MembersList>

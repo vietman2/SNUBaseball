@@ -2,6 +2,8 @@
 
 import styled from "styled-components";
 
+import { hexToRgba } from "@shared/lib/styles";
+
 export const Container = styled.div`
   display: flex;
   flex: 1;
@@ -30,5 +32,13 @@ export const MembersList = styled.div`
     display: grid;
     grid-template-columns: repeat(auto-fill, 180px);
     gap: 24px;
+  }
+
+  a:hover {
+    opacity: 0.8;
+    border-radius: 8px;
+    box-shadow: 2px 3px 6px
+      ${({ theme }) => hexToRgba(theme.colors.focusOutline, 0.48)};
+    transition: opacity 0.3s ease, box-shadow 0.3s ease;
   }
 `;
