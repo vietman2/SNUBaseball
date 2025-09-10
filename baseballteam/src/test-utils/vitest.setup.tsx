@@ -164,7 +164,7 @@ vi.mock("@shared/ui/Inputs", () => {
   });
 
   return {
-    DateInput: (props: any) => <input data-testid="date-input" {...props} />,
+    DateInput: (props: any) => <input value={props.value === null ? "" : props.value} data-testid="date-input" {...props} />,
     PhoneInput: (props: any) => <input data-testid="phone-input" {...props} />,
     SingleFileInput: ({
       onChange,
