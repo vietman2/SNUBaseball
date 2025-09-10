@@ -14,6 +14,11 @@ jest.mock("@app/root/providers", () => ({
     <div>{children}</div>
   ),
 }));
+jest.mock("@app/root/ui/styles", () => ({
+  ContentWrapper: ({ children }: { children: React.ReactNode }) => (
+    <div>{children}</div>
+  ),
+}));
 jest.mock("@widgets/header", () => ({
   RootHeader: () => <div>Root Header</div>,
 }));

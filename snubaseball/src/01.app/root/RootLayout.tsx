@@ -3,6 +3,7 @@ import { Geist, Noto_Sans_KR } from "next/font/google";
 import { cookies } from "next/headers";
 
 import { StylesProvider } from "./providers";
+import { ContentWrapper } from "./ui/styles";
 import { RootHeader } from "@widgets/header";
 
 const geistSans = Geist({
@@ -36,7 +37,7 @@ export async function RootLayout({
       <body className={`${geistSans.variable} ${notoSansKr.variable}`}>
         <StylesProvider initialDark={initialDark}>
           <RootHeader />
-          {children}
+          <ContentWrapper>{children}</ContentWrapper>
         </StylesProvider>
       </body>
     </html>
