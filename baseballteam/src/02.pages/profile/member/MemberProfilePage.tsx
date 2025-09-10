@@ -1,7 +1,10 @@
 import { LoadingMemberProfileSection } from "./ui/_loading";
 import { Container, Section } from "./ui/styles";
 import { ErrorWidget } from "@widgets/error";
-import { BasicProfileForm } from "@features/profile/updateProfile";
+import {
+  BasicProfileForm,
+  PlayerProfileForm,
+} from "@features/profile/updateProfile";
 import { useMemberDetails } from "@entities/members";
 import { useUser } from "@entities/user";
 import { useColors } from "@shared/lib/styles";
@@ -45,6 +48,13 @@ function InnerComponent({ memberId }: Readonly<Props>) {
         <h4>기본 프로필</h4>
         <BasicProfileForm member={member} />
       </Section>
+      <Divider color={colors.divider} />
+      {member.type === "PLAYER" && (
+        <Section>
+          <h4>선수 프로필</h4>
+          <PlayerProfileForm player={member} />
+        </Section>
+      )}
       <Divider color={colors.divider} />
     </Container>
   );

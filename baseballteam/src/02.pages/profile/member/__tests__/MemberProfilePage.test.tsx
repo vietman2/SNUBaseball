@@ -147,4 +147,117 @@ describe("MemberProfilePage", () => {
       });
     });
   });
+
+  describe("Update Player Profile", () => {
+    it("handles update player profile correctly", async () => {
+      vi.spyOn(AxiosAPI.axiosInstanceWithAuth, "patch").mockResolvedValue({
+        data: {
+          ...samplePlayerDetails,
+          extras: {
+            position: "포수",
+            bat_throw_hands: "우투좌타",
+            height: 185,
+            weight: 80,
+          },
+        },
+      });
+      const { getByTestId, getByText, queryByTestId } = renderWithProviders(
+        <MemberProfilePage />
+      );
+
+      await waitFor(() => {
+        expect(getByText("김선수")).toBeInTheDocument();
+      });
+
+      // does nothing when no changes
+      fireEvent.submit(getByTestId("player-profile-form"));
+
+      // changes all fields
+      fireEvent.change(getByTestId("position-input"), {
+        target: { value: "포수" },
+      });
+      fireEvent.change(getByTestId("hands-select"), {
+        target: { value: "우투좌타" },
+      });
+      fireEvent.change(getByTestId("height-input"), {
+        target: { value: "185" },
+      });
+      fireEvent.change(getByTestId("weight-input"), {
+        target: { value: "80" },
+      });
+      await waitFor(() => {
+        expect(getByTestId("player-profile-submit-button")).toBeInTheDocument();
+      });
+
+      fireEvent.submit(getByTestId("player-profile-form"));
+
+      await waitFor(() => {
+        expect(
+          queryByTestId("player-profile-submit-button")
+        ).not.toBeInTheDocument();
+      });
+    });
+
+    it("handles update error correctly", async () => {
+      // initially load with no values
+      vi.spyOn(AxiosAPI.axiosInstance, "get").mockResolvedValueOnce({
+        data: {
+          ...samplePlayerDetails,
+          extras: {
+            position: null,
+            bat_throw_hands: null,
+            height: null,
+            weight: null,
+          },
+        },
+      });
+
+      const { getByTestId, getByText } = renderWithProviders(
+        <MemberProfilePage />
+      );
+
+      await waitFor(() => {
+        expect(getByText("김선수")).toBeInTheDocument();
+      });
+
+      // unknown error
+      vi.spyOn(AxiosAPI.axiosInstanceWithAuth, "patch").mockRejectedValueOnce(
+        new Error("Network Error")
+      );
+      // changes position to activate submit button
+      await waitFor(() => {
+        fireEvent.change(getByTestId("position-input"), {
+          target: { value: "포수" },
+        });
+      });
+      fireEvent.submit(getByTestId("player-profile-form"));
+
+      await waitFor(() => {
+        expect(
+          getByText(
+            "프로필 업데이트에 실패했습니다. 잠시 후 다시 시도해주세요."
+          )
+        ).toBeInTheDocument();
+      });
+
+      // known error
+      vi.spyOn(AxiosAPI.axiosInstanceWithAuth, "patch").mockRejectedValueOnce({
+        response: { data: { message: "Known Error", status: "ERROR" } },
+      });
+
+      // change another field to activate submit button
+      await waitFor(() => {
+        fireEvent.change(getByTestId("position-input"), {
+          target: { value: "" },
+        });
+        fireEvent.change(getByTestId("height-input"), {
+          target: { value: "180" },
+        });
+      });
+      fireEvent.submit(getByTestId("player-profile-form"));
+      await waitFor(() => {
+        expect(getByText("Known Error")).toBeInTheDocument();
+      });
+    });
+  });
 });

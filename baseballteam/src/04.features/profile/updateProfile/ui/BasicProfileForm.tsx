@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
-import styled from "styled-components";
 
+import { Form, Wrapper } from "./styles";
 import { useUpdateProfileMutation } from "../api/updateProfile";
 import type { MemberDetailType } from "@entities/members";
 import { DateInput } from "@shared/ui/Inputs";
@@ -67,14 +67,14 @@ export function BasicProfileForm({ member }: Readonly<Props>) {
   return (
     <Form onSubmit={submit} data-testid="basic-profile-form">
       <Wrapper>
-        <span className="basic-profile-form-label">이름</span>
-        <span className="basic-profile-form-value padding-left">
+        <span className="profile-form-label">이름</span>
+        <span className="profile-form-value padding-left">
           {member.name}
         </span>
       </Wrapper>
       <Wrapper>
-        <span className="basic-profile-form-label">등번호</span>
-        <div className="basic-profile-form-value">
+        <span className="profile-form-label">등번호</span>
+        <div className="profile-form-value">
           <input
             value={backNumber ?? ""}
             onChange={(e) => setBackNumber(Number(e.target.value))}
@@ -84,8 +84,8 @@ export function BasicProfileForm({ member }: Readonly<Props>) {
         </div>
       </Wrapper>
       <Wrapper>
-        <span className="basic-profile-form-label">생년월일</span>
-        <div className="basic-profile-form-value">
+        <span className="profile-form-label">생년월일</span>
+        <div className="profile-form-value">
           <DateInput
             value={birthDate}
             onChange={setBirthDate}
@@ -94,14 +94,14 @@ export function BasicProfileForm({ member }: Readonly<Props>) {
         </div>
       </Wrapper>
       <Wrapper>
-        <span className="basic-profile-form-label">야구부 입부일</span>
-        <div className="basic-profile-form-value">
+        <span className="profile-form-label">야구부 입부일</span>
+        <div className="profile-form-value">
           <DateInput value={dateJoined} onChange={setDateJoined} />
         </div>
       </Wrapper>
       <Wrapper>
-        <span className="basic-profile-form-label">활동기간</span>
-        <span className="basic-profile-form-value padding-left">
+        <span className="profile-form-label">활동기간</span>
+        <span className="profile-form-value padding-left">
           {member.num_semester ? `${member.num_semester}학기` : "-"}
           <SimpleTooltip text="활동 기간 수정은 주장단에 문의해주세요." />
         </span>
@@ -115,68 +115,3 @@ export function BasicProfileForm({ member }: Readonly<Props>) {
     </Form>
   );
 }
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-
-  button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 8px;
-    padding: 8px 0;
-
-    color: ${({ theme }) => theme.colors.onPrimary};
-    font-weight: 600;
-    background-color: ${({ theme }) => theme.colors.primary};
-    border-radius: 8px;
-  }
-
-  .update-error-text {
-    margin: 0;
-    padding: 0 16px;
-    font-size: 0.875rem;
-    text-align: right;
-    color: ${({ theme }) => theme.colors.error};
-  }
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 4px 24px;
-  gap: 16px;
-
-  .basic-profile-form-label {
-    flex: 1;
-    text-align: right;
-    font-weight: 500;
-  }
-
-  .basic-profile-form-value {
-    display: flex;
-    flex: 4;
-    align-items: center;
-    justify-content: space-between;
-    text-align: left;
-    font-weight: 500;
-
-    > input {
-      padding: 8px 12px;
-      min-width: 140px;
-      max-width: 140px;
-      border: none;
-      background-color: ${({ theme }) => theme.colors.gray100};
-      border-radius: 8px;
-      font-size: 0.875rem;
-      font-family: inherit;
-      color: ${({ theme }) => theme.colors.gray900};
-    }
-  }
-
-  .padding-left {
-    padding-left: 8px;
-  }
-`;

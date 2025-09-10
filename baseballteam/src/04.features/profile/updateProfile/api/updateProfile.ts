@@ -16,8 +16,12 @@ type UpdateBasicProfileDataType = {
 };
 
 type UpdateExtrasDataType = {
-  position: string | null;
-  team: string | null;
+  extras: {
+    position: string | null;
+    bat_throw_hands: string | null;
+    height: number | null;
+    weight: number | null;
+  };
 };
 
 async function updateProfile(
