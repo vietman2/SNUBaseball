@@ -18,10 +18,6 @@ interface Props {
 export function MyProfileModal({ backgroundLocation }: Readonly<Props>) {
   const { pathname } = useLocation();
 
-  console.log(pathname, pathname.endsWith("account"));
-
-  console.log(pathname.endsWith("info"));
-
   return (
     <Container>
       <Left>
