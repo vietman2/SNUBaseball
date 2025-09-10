@@ -1,3 +1,3 @@
-import { MembersPageLoading } from "@pages/about/members-list";
+import { MembersPageLoading } from "@pages/members-list";
 
 export default MembersPageLoading;
