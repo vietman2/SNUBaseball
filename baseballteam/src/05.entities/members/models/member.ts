@@ -7,13 +7,13 @@ type CommonFields = {
   num_semester: number;
 };
 
-type PlayerDetailType = {
+export type PlayerDetailType = {
   type: "PLAYER";
   extras: {
-    position: string | null;
-    bat_throw_hands: string | null;
-    height: number | null;
-    weight: number | null;
+    position?: string;
+    bat_throw_hands?: string;
+    height?: number;
+    weight?: number;
   };
 } & CommonFields;
 

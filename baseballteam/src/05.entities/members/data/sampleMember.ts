@@ -1,6 +1,6 @@
-import { type MemberDetailType } from "../models/member";
+import type { PlayerDetailType, MemberDetailType } from "../models/member";
 
-export const samplePlayerDetails: MemberDetailType = {
+export const samplePlayerDetails: PlayerDetailType = {
   type: "PLAYER",
   id: 1,
   name: "김선수",
