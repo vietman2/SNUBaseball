@@ -1,4 +1,4 @@
-import { MembersPage, generateMetadata } from "@pages/about/members-list";
+import { MembersPage, generateMetadata } from "@pages/members-list";
 import { sampleMembers } from "@entities/members";
 import {
   getElementFromAsyncServerComponent,

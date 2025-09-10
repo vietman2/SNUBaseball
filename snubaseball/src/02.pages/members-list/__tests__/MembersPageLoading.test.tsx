@@ -1,4 +1,4 @@
-import { MembersPageLoading } from "@pages/about/members-list";
+import { MembersPageLoading } from "@pages/members-list";
 import { renderWithProviders } from "@test-utils/renderer";
 
 describe("MembersPageLoading", () => {
