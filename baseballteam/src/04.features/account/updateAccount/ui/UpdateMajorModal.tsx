@@ -113,7 +113,7 @@ export function UpdateMajorModal({
     <Container>
       <h2>전공 변경</h2>
       <InputsWrapper>
-        <SimpleSelect
+        <Select
           value={selectedCollegeId}
           onChange={selectCollege}
           data-testid="college-select"
@@ -126,8 +126,8 @@ export function UpdateMajorModal({
               {college.name}
             </option>
           ))}
-        </SimpleSelect>
-        <SimpleSelect
+        </Select>
+        <Select
           value={selectedMajorId}
           onChange={selectDepartment}
           disabled={selectedCollegeId === -1}
@@ -144,7 +144,7 @@ export function UpdateMajorModal({
                   {major.name}
                 </option>
               ))}
-        </SimpleSelect>
+        </Select>
       </InputsWrapper>
       {error && <p className="update-modal-error-text">{error}</p>}
       <Button
@@ -196,6 +196,21 @@ const InputsWrapper = styled.div`
   display: flex;
   flex-direction: row;
   gap: 12px;
+`;
+
+const Select = styled(SimpleSelect)`
+  padding: 8px 12px;
+  width: 100%;
+  border: 1px solid ${({ theme }) => theme.colors.gray300};
+  border-radius: 8px;
+  background-color: ${({ theme }) => theme.colors.gray200};
+  color: ${({ theme }) => theme.colors.gray900};
+
+  &:focus-within {
+    outline: none;
+    border-color: ${({ theme }) => theme.colors.primary};
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+  }
 `;
 
 const Button = styled(ElevatedTextButton)`
