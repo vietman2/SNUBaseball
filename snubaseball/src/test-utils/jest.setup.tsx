@@ -23,3 +23,6 @@ jest.mock("@shared/ui/Icons", () => ({
   AppIcon: ({ icon }: { icon: string }) => <span>{icon}-icon</span>,
   Logo: ({ size }: { size: number }) => <span>logo-{size}</span>,
 }));
+jest.mock("@shared/ui/Loading", () => ({
+  Skeleton: () => <div data-testid="skeleton" />,
+}));
