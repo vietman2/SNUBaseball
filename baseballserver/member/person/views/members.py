@@ -52,7 +52,13 @@ class MembersViewSet(ModelViewSet):
         member = self.get_object()
         data = request.data
 
-        allowed_fields = ["back_number", "birth_date", "date_joined", "num_semester"]
+        allowed_fields = [
+            "back_number",
+            "birth_date",
+            "date_joined",
+            "num_semester",
+            "extras",
+        ]
         for field in data.keys():
             if field not in allowed_fields:
                 raise SNUBaseballException(

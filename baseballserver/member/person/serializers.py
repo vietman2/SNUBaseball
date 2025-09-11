@@ -79,6 +79,7 @@ class MemberSimpleSerializer(serializers.ModelSerializer):
             "admission_year",
             "major",
             "profile_image",
+            "extras",
         ]
 
     def get_type(self, obj):
