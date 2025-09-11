@@ -7,7 +7,7 @@ export const GlobalStyles = createGlobalStyle`
     
   body {
     margin: 0;
-    font-family: var(--font-noto-sans-kr), var(--font-geist-sans), -apple-system, sans-serif;
+    font-family: var(--font-noto-sans-kr), var(--font-geist-sans), var(--font-nanum-myeongjo), -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 

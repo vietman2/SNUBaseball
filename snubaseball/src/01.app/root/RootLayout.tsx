@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Noto_Sans_KR } from "next/font/google";
+import { Geist, Noto_Sans_KR, Nanum_Myeongjo } from "next/font/google";
 import { cookies } from "next/headers";
 
 import { StylesProvider } from "./providers";
 import { ContentWrapper } from "./ui/styles";
+import { RootFooter } from "@widgets/footer";
 import { RootHeader } from "@widgets/header";
 
 const geistSans = Geist({
@@ -14,6 +15,13 @@ const geistSans = Geist({
 const notoSansKr = Noto_Sans_KR({
   variable: "--font-noto-sans-kr",
   weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const nanumMyeongjo = Nanum_Myeongjo({
+  variable: "--font-nanum-myeongjo",
+  weight: ["400", "800"],
   subsets: ["latin"],
   display: "swap",
 });
@@ -34,10 +42,13 @@ export async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${notoSansKr.variable}`}>
+      <body
+        className={`${geistSans.variable} ${notoSansKr.variable} ${nanumMyeongjo.variable}`}
+      >
         <StylesProvider initialDark={initialDark}>
           <RootHeader />
           <ContentWrapper>{children}</ContentWrapper>
+          <RootFooter />
         </StylesProvider>
       </body>
     </html>
