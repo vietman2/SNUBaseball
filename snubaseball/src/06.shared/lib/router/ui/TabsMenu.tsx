@@ -53,18 +53,19 @@ export function TabsMenu() {
       >
         <div className="root-header-menu-void" />
         <SubTabs>
-          <div className="root-header-subtab">
-            <Link href="/about">팀 소개</Link>
-            <Link href="/history">팀 연혁</Link>
-            <Link href="/members">선수 • 매니저</Link>
-            <Link href="/staff">지도자</Link>
-          </div>
-          <div className="root-header-subtab" />
-          <div className="root-header-subtab" />
-          <div className="root-header-subtab">
-            <Link href="/contact">문의하기</Link>
-            <Link href="/support">후원 안내</Link>
-          </div>
+          {RouterTabs.map((tab) =>
+            tab.type === "SUBMENU" ? (
+              <div className="root-header-subtab" key={tab.label}>
+                {tab.submenu.map((sub) => (
+                  <div key={sub.href}>
+                    <Link href={sub.href}>{sub.label}</Link>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="root-header-subtab" key={tab.label} />
+            )
+          )}
         </SubTabs>
       </Menu>
     </HoverZone>
