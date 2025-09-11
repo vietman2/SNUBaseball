@@ -1,4 +1,4 @@
-import { MembersPage, generateMetadata } from "@pages/members-list";
+import { MembersPage, metadata } from "@pages/members-list";
 import { sampleMembers } from "@entities/members";
 import {
   getElementFromAsyncServerComponent,
@@ -27,7 +27,16 @@ describe("MembersPage", () => {
       const { getByText } = await render();
 
       expect(getByText("매니저")).toBeInTheDocument();
+      expect(getByText("2025년 1학기 서울대 야구부"))
     });
+
+    it("handles 2nd semester", async () => {
+      jest.useFakeTimers().setSystemTime(new Date("2025-09-01"));
+
+      const { getByText } = await render();
+
+      expect(getByText("2025년 2학기 서울대 야구부"));
+    })
 
     it("handles fetch error", async () => {
       (global.fetch as jest.Mock).mockResolvedValueOnce({
@@ -41,29 +50,7 @@ describe("MembersPage", () => {
 
   describe("metadata", () => {
     it("returns correct metadata", async () => {
-      const metadata = await generateMetadata();
-      expect(metadata.title).toBe("2025년 1학기 | 서울대 야구부");
-    });
-  });
-
-  describe("corner case: 2nd semester", () => {
-    beforeAll(() => {
-      // mock date to 2025-09-01
-      jest.useFakeTimers().setSystemTime(new Date("2025-09-01"));
-    });
-
-    it("UI", async () => {
-      const { getByText } = await render();
-
-      expect(getByText("2025년 2학기 서울대 야구부")).toBeInTheDocument();
-    });
-
-    it("metadata", async () => {
-      // mock date to 2025-09-01
-      jest.useFakeTimers().setSystemTime(new Date("2025-09-01"));
-
-      const metadata = await generateMetadata();
-      expect(metadata.title).toBe("2025년 2학기 | 서울대 야구부");
+      expect(metadata.title).toBe("선수 • 매니저 | 서울대 야구부");
     });
   });
 });

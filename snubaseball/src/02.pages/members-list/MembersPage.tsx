@@ -5,17 +5,10 @@ import { Container, MembersList } from "./ui/styles";
 import { MemberCard } from "@entities/members";
 import { getActiveMembers } from "@entities/members/server";
 
-export async function generateMetadata(): Promise<Metadata> {
-  // get year from date
-  const currentYear = new Date().getFullYear();
-  // 9월 이전이면 1학기, 9월 이후면 2학기
-  const semester = new Date().getMonth() < 8 ? "1학기" : "2학기";
-
-  return {
-    title: `${currentYear}년 ${semester} | 서울대 야구부`,
-    description: `${currentYear}년 ${semester} 서울대 야구부`,
-  };
-}
+export const metadata: Metadata = {
+  title: "선수 • 매니저 | 서울대 야구부",
+  description: "서울대 야구부",
+};
 
 export async function MembersPage() {
   const members = await getActiveMembers();

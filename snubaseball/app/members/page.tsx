@@ -1,5 +1,5 @@
-import { MembersPage, generateMetadata } from "@pages/members-list";
+import { MembersPage, metadata } from "@pages/members-list";
 
-export { generateMetadata };
+export { metadata };
 
 export default MembersPage;
