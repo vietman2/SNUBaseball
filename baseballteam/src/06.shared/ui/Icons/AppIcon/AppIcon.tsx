@@ -19,6 +19,8 @@ import Pencil from "./files/pencil.svg?react";
 import Person from "./files/person.svg?react";
 import Player from "./files/player.svg?react";
 import Record from "./files/record.svg?react";
+import SidebarClose from "./files/sidebar-close.svg?react";
+import SidebarOpen from "./files/sidebar-open.svg?react";
 import Sun from "./files/sun.svg?react";
 
 interface Props {
@@ -52,6 +54,8 @@ const iconMap: Record<
   person: Person,
   player: Player,
   record: Record,
+  "sidebar-close": SidebarClose,
+  "sidebar-open": SidebarOpen,
   sun: Sun,
 };
 
