@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { ModalSidebarItem } from "@widgets/sidebar/ModalSidebar";
 import { LogoutButton } from "@features/auth/logout";
 import { Divider } from "@shared/ui/Dividers";
+import { useRouter } from "@shared/lib/router";
 
 const innerTabs = [
   { label: "계정", href: "account", icon: "person" },
@@ -11,12 +12,9 @@ const innerTabs = [
   //{ label: "비밀번호 변경", href: "change-password", icon: "lock" },
 ];
 
-interface Props {
-  backgroundLocation: Location;
-}
-
-export function MyProfileModal({ backgroundLocation }: Readonly<Props>) {
+export function ProfileLayout() {
   const { pathname } = useLocation();
+  const { backgroundLocation } = useRouter();
 
   return (
     <Container>
@@ -78,7 +76,7 @@ const Left = styled.div`
 const Right = styled.div`
   flex: 3;
   padding: 16px;
-  background-color: ${({ theme }) => theme.colors.backgroundPaper};
+  background-color: ${({ theme }) => theme.colors.surfaceElevated};
   border-radius: 12px;
   // shadow to left
   box-shadow: -4px 0 8px rgba(0, 0, 0, 0.1);
