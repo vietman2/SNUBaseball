@@ -13,5 +13,5 @@ export type {
   TabGroup,
 } from "./models/types";
 
-export { isModal } from "./utils/isModal";
+export { isEqual } from "./utils/isEqual";
 export { getAllTabs, parseCurrentPath } from "./utils/url";

@@ -92,7 +92,7 @@ vi.mock("@shared/lib/router", async () => {
 
   return {
     RouterContext: RouterContext,
-    isModal: vi.fn().mockReturnValue(false),
+    isEqual: vi.fn().mockReturnValue(true),
     useRouter: vi.fn().mockReturnValue({
       backgroundLocation: {
         pathname: "/home",

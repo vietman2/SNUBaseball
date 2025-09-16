@@ -3,7 +3,7 @@ import { useLocation } from "react-router";
 
 import {
   type BackgroundState,
-  isModal,
+  isEqual,
   RouterContext,
   type RouterContextType,
 } from "@shared/lib/router";
@@ -23,7 +23,7 @@ export function RouterProvider({ children }: Readonly<Props>) {
     return {
       backgroundLocation: backgroundLocation,
       displayLocation: displayLocation,
-      isModal: isModal(backgroundLocation, displayLocation),
+      isModal: !isEqual(backgroundLocation, displayLocation),
     };
   }, [displayLocation, backgroundLocation]);
 
