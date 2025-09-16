@@ -1,14 +1,25 @@
-import { AuthProvider, QueryProvider, StylesProvider } from "./providers";
-import { AppRouter } from "./router";
+import { BrowserRouter } from "react-router";
+
+import {
+  AuthProvider,
+  QueryProvider,
+  RouterProvider,
+  StylesProvider,
+} from "./providers";
+import { AppRouter } from "./router/AppRouter";
 
 export default function App() {
   return (
-    <QueryProvider>
-      <StylesProvider>
-        <AuthProvider>
-          <AppRouter />
-        </AuthProvider>
-      </StylesProvider>
-    </QueryProvider>
+    <BrowserRouter>
+      <RouterProvider>
+        <QueryProvider>
+          <StylesProvider>
+            <AuthProvider>
+              <AppRouter />
+            </AuthProvider>
+          </StylesProvider>
+        </QueryProvider>
+      </RouterProvider>
+    </BrowserRouter>
   );
 }
