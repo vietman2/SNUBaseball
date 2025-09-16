@@ -2,19 +2,21 @@ import { Link, useLocation } from "react-router";
 import styled from "styled-components";
 
 import { UserAvatar, type UserProfileType } from "@entities/user";
-import { LogoHorizontal } from "@shared/ui/Icons";
+import { useColors } from "@shared/lib/styles";
+import { Logo } from "@shared/ui/Icons";
 
 interface Props {
   user: UserProfileType;
 }
 
 export function RootHeader({ user }: Readonly<Props>) {
+  const { isDarkMode } = useColors();
   const location = useLocation();
 
   return (
     <Container>
       <Link to="/">
-        <LogoHorizontal />
+        <Logo size={36} type={isDarkMode ? "SILVER" : "BLUE"} horizontal />
       </Link>
       <Button
         to="/profile/account"
@@ -33,9 +35,13 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  min-height: 60px;
+  max-height: 60px;
   padding: 8px 24px;
 
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+  background-color: ${({ theme }) => theme.colors.backgroundDefault};
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.05);
+  border-bottom: 0.25px solid ${({ theme }) => theme.colors.divider};
 `;
 
 const Button = styled(Link)`

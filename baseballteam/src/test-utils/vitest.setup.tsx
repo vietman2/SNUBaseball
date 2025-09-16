@@ -123,32 +123,28 @@ vi.mock("@shared/lib/styles", async () => {
   };
 });
 
-vi.mock("@shared/ui/Buttons", async () => {
-  const { Link } = await vi.importActual("react-router");
-
-  return {
-    ElevatedTextButton: ({
-      $backgroundColor,
-      $color,
-      ...props
-    }: {
-      $backgroundColor: string;
-      $color: string;
-    }) => (
-      <button
-        {...props}
-        style={{ backgroundColor: $backgroundColor, color: $color }}
-      />
-    ),
-    ElevatedLink: ({
-      to,
-      children,
-    }: {
-      to: string;
-      children: React.ReactNode;
-    }) => <Link to={to}>{children}</Link>,
-  };
-});
+vi.mock("@shared/ui/Buttons", () => ({
+  ElevatedTextButton: ({
+    $backgroundColor,
+    $color,
+    ...props
+  }: {
+    $backgroundColor: string;
+    $color: string;
+  }) => (
+    <button
+      {...props}
+      style={{ backgroundColor: $backgroundColor, color: $color }}
+    />
+  ),
+  ElevatedLink: ({
+    to,
+    children,
+  }: {
+    to: string;
+    children: React.ReactNode;
+  }) => <a href={to}>{children}</a>,
+}));
 vi.mock("@shared/ui/Dividers", () => ({
   Divider: () => <div>Divider</div>,
   VerticalDivider: () => <div>VerticalDivider</div>,
@@ -156,7 +152,6 @@ vi.mock("@shared/ui/Dividers", () => ({
 vi.mock("@shared/ui/Icons", () => ({
   AppIcon: () => null,
   Logo: () => <div>Logo</div>,
-  LogoHorizontal: () => <div>LogoHorizontal</div>,
 }));
 vi.mock("@shared/ui/Inputs", () => {
   const mockFile = new File(["dummy content"], "example.png", {
@@ -164,7 +159,13 @@ vi.mock("@shared/ui/Inputs", () => {
   });
 
   return {
-    DateInput: (props: any) => <input value={props.value === null ? "" : props.value} data-testid="date-input" {...props} />,
+    DateInput: (props: any) => (
+      <input
+        value={props.value === null ? "" : props.value}
+        data-testid="date-input"
+        {...props}
+      />
+    ),
     PhoneInput: (props: any) => <input data-testid="phone-input" {...props} />,
     SingleFileInput: ({
       onChange,
