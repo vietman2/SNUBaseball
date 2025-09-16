@@ -1,17 +1,18 @@
 import { describe, expect, it, vi } from "vitest";
+import { Route } from "react-router";
 
 import { AppRouter } from "../AppRouter";
 import * as RouterAPI from "@shared/lib/router";
 import { renderWithProviders } from "@test-utils/renderer";
 
 vi.mock("../auth/routes", () => ({
-  AuthRoutes: () => <div>Auth Routes</div>,
+  AuthRoutes: <Route path="" element={<div>Auth Layout</div>} />,
 }));
 vi.mock("../main/routes", () => ({
-  MainRoutes: () => <div>Modal Layout</div>,
+  MainRoutes: <Route path="home" element={<div>Main Layout</div>} />,
 }));
 vi.mock("../modals/routes", () => ({
-  ModalRoutes: () => <div>My Profile Modal</div>,
+  ModalRoutes: <Route path="" element={<div>Modal Content</div>} />,
 }));
 
 describe("AppRouter", () => {
@@ -23,7 +24,7 @@ describe("AppRouter", () => {
   it("should render with modal", () => {
     vi.spyOn(RouterAPI, "useRouter").mockReturnValue({
       backgroundLocation: {
-        pathname: "/home",
+        pathname: "/",
         search: "",
         hash: "",
         state: null,
