@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Outlet, useLocation, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 
 import { ModalDialog, ModalOverlay } from "@widgets/modal";
+import { useRouter } from "@shared/lib/router";
 
 const FADE_MS = 180; // 애니메이션 총 시간 (ms)
 
@@ -10,20 +11,18 @@ export function ModalLayout() {
   const timerRef = useRef<number | null>(null);
   const navigate = useNavigate();
 
-  // 모달 띄울 때 저장한 백그라운드 location
-  const location = useLocation();
-  const state = location.state as { backgroundLocation?: Location } | undefined;
-  const backgroundLocation = state?.backgroundLocation;
+  const { backgroundLocation, isModal } = useRouter();
 
-  const closeTarget = backgroundLocation
+  // 모달이 아닐 일이 거의 없지만, 방어적으로 fallback
+  const closeTarget = isModal
     ? `${backgroundLocation.pathname}${backgroundLocation.search}${backgroundLocation.hash}`
     : "/home";
 
   const closeModal = useCallback(() => {
     if (isExiting) return;
     setIsExiting(true);
-
     timerRef.current = window.setTimeout(() => {
+      // background로 복귀. replace로 히스토리 정리
       navigate(closeTarget, { replace: true });
     }, FADE_MS);
   }, [isExiting, navigate, closeTarget]);
@@ -39,13 +38,12 @@ export function ModalLayout() {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [closeModal]);
 
-  // 새로 열릴 때는 스크롤 락 + 타이머 정리
   useEffect(() => {
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = prev;
-      if (timerRef.current) clearTimeout(timerRef.current); // ✅ 타이머 정리
+      if (timerRef.current) clearTimeout(timerRef.current);
     };
   }, []);
 
@@ -63,7 +61,8 @@ export function ModalLayout() {
         aria-modal="true"
         data-testid="modal-dialog"
       >
-        <Outlet />
+        {/* 여기 아래로는 <Outlet/> 유지 */}
+        {/* <Outlet /> */}
       </ModalDialog>
     </ModalOverlay>
   );

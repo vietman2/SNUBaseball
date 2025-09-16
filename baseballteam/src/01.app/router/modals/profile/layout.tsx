@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 import { ModalSidebarItem } from "@widgets/sidebar/ModalSidebar";
 import { LogoutButton } from "@features/auth/logout";
-import { Divider } from "@shared/ui/Dividers";
 import { useRouter } from "@shared/lib/router";
+import { Divider } from "@shared/ui/Dividers";
 
 const innerTabs = [
   { label: "계정", href: "account", icon: "person" },
