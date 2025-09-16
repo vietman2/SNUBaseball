@@ -2,17 +2,16 @@ import { useMemo } from "react";
 import { describe, expect, it, vi } from "vitest";
 import { render } from "@testing-library/react";
 
-import { TabsContext, useTabs } from "@shared/lib/router";
+import { RouterContext, useRouter } from "@shared/lib/router";
 
 vi.unmock("@shared/lib/router");
 
 const MockComponent = () => {
-  const { activeTab, activeSubTab } = useTabs();
+  const { isModal } = useRouter();
 
   return (
     <div>
-      <h1>{activeTab?.title}</h1>
-      <p>{activeSubTab?.title}</p>
+      <h1>{isModal ? "Modal is open" : "Modal is closed"}</h1>
     </div>
   );
 };
@@ -20,19 +19,28 @@ const MockComponent = () => {
 const MockProvider = ({ children }: { children: React.ReactNode }) => {
   const value = useMemo(
     () => ({
-      tabGroups: [],
-      activeTab: {
-        title: "Test Tab",
-        subtabs: [],
-        icon: "test-icon",
-        href: "/test",
+      backgroundLocation: {
+        pathname: "/home",
+        search: "",
+        hash: "",
+        state: null,
+        key: "",
       },
-      activeSubTab: { title: "Test SubTab", href: "/test/subtab" },
+      displayLocation: {
+        pathname: "/home",
+        search: "",
+        hash: "",
+        state: null,
+        key: "",
+      },
+      isModal: false,
     }),
     []
   );
 
-  return <TabsContext.Provider value={value}>{children}</TabsContext.Provider>;
+  return (
+    <RouterContext.Provider value={value}>{children}</RouterContext.Provider>
+  );
 };
 
 describe("useTabs", () => {
@@ -47,7 +55,6 @@ describe("useTabs", () => {
       </MockProvider>
     );
 
-    expect(getByText("Test Tab")).toBeInTheDocument();
-    expect(getByText("Test SubTab")).toBeInTheDocument();
+    expect(getByText("Modal is closed")).toBeInTheDocument();
   });
 });

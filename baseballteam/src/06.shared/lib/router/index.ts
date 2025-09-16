@@ -1,5 +1,16 @@
-export { TabsContext, type TabsContextType, useTabs } from "./contexts/useTabs";
+export {
+  RouterContext,
+  type RouterContextType,
+  useRouter,
+} from "./contexts/useRouter";
 
-export type { TabType, SubTabType, TabGroup } from "./models/types";
+export type {
+  BackgroundState,
+  RouterLocation,
+  RouteSlice,
+  TabType,
+  SubTabType,
+  TabGroup,
+} from "./models/types";
 
 export { getAllTabs, parseCurrentPath } from "./utils/url";

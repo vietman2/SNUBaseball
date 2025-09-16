@@ -88,14 +88,23 @@ vi.mock("@shared/lib/formatters", async () => ({
   formatPhoneKR: (phone: string) => phone,
 }));
 vi.mock("@shared/lib/router", async () => {
-  const { TabsContext } = await vi.importActual("@shared/lib/router");
-
   return {
-    TabsContext: TabsContext,
-    useTabs: vi.fn().mockReturnValue({
-      tabGroups: [],
-      activeTab: null,
-      activeSubTab: null,
+    useRouter: vi.fn().mockReturnValue({
+      backgroundLocation: {
+        pathname: "/home",
+        search: "",
+        hash: "",
+        state: null,
+        key: "",
+      },
+      displayLocation: {
+        pathname: "/home",
+        search: "",
+        hash: "",
+        state: null,
+        key: "",
+      },
+      isModal: false,
     }),
     getAllTabs: vi.fn().mockReturnValue([]),
     parseCurrentPath: vi.fn().mockReturnValue({

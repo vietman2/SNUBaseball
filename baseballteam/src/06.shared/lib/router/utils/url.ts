@@ -22,21 +22,6 @@ export function getAllTabs(isAdminMode: boolean): TabGroup[] {
   return [MainTabs, TrainingTabs, ManagementTabs];
 }
 
-export function parseCurrentPath(
-  currentPath: string,
-  isAdminMode: boolean
-): ParsedPathType {
-  const segments = currentPath.split("/").filter(Boolean);
-
-  const tabSlug = segments[0] ? `/${segments[0]}` : undefined;
-  const subTabSlug = segments[1] ? `/${segments[0]}/${segments[1]}` : undefined;
-
-  const activeTab = findActiveTab(isAdminMode, tabSlug);
-  const activeSubTab = findActiveSubTab(activeTab, subTabSlug);
-
-  return { tab: activeTab, subTab: activeSubTab };
-}
-
 function findActiveTab(isAdminMode: boolean, slug?: string): TabType | null {
   if (!slug) return null;
 
@@ -52,4 +37,19 @@ function findActiveSubTab(
   if (!activeTab || !slug) return null;
 
   return activeTab.subtabs.find((subtab) => subtab.href === slug) || null;
+}
+
+export function parseCurrentPath(
+  currentPath: string,
+  isAdminMode: boolean
+): ParsedPathType {
+  const segments = currentPath.split("/").filter(Boolean);
+
+  const tabSlug = segments[0] ? `/${segments[0]}` : undefined;
+  const subTabSlug = segments[1] ? `/${segments[0]}/${segments[1]}` : undefined;
+
+  const activeTab = findActiveTab(isAdminMode, tabSlug);
+  const activeSubTab = findActiveSubTab(activeTab, subTabSlug);
+
+  return { tab: activeTab, subTab: activeSubTab };
 }
