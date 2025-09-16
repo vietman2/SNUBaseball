@@ -28,7 +28,7 @@ export const ModalOverlay = styled.div<Props>`
   place-items: center;
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background-color: ${({ theme }) => theme.colors.overlay}80; // 50% opacity
 
   ${({ $exiting, $animationLength }) => css`
     animation: ${$exiting ? fadeOut : fadeIn} ${$animationLength}ms ease-out

@@ -146,7 +146,7 @@ const CurrentImageBox = styled.div`
   min-height: 180px;
   border: 1px solid ${({ theme }) => theme.colors.gray200};
   border-radius: 12px;
-  background: ${({ theme }) => theme.colors.backgroundPaper};
+  background: ${({ theme }) => theme.colors.surfaceElevated};
   display: grid;
   place-items: center;
   overflow: hidden;

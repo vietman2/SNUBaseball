@@ -5,6 +5,7 @@ import { Section } from "./styles";
 import { ModalDialog, ModalOverlay } from "@widgets/modal";
 import { UpdateMajorModal } from "@features/account/updateAccount";
 import type { MajorType } from "@entities/majors";
+import { useColors } from "@shared/lib/styles";
 import { AppIcon } from "@shared/ui/Icons";
 
 interface Props {
@@ -14,6 +15,7 @@ interface Props {
 
 export function AcademicsSection({ major, memberId }: Readonly<Props>) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const { colors } = useColors();
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -34,7 +36,7 @@ export function AcademicsSection({ major, memberId }: Readonly<Props>) {
         </div>
         <div className="section-right">
           <Button onClick={openModal} data-testid="open-major-modal-button">
-            <AppIcon icon="pencil" size={16} />
+            <AppIcon icon="pencil" size={16} color={colors.primaryDark} />
             <span>변경하기</span>
           </Button>
         </div>
@@ -69,7 +71,7 @@ const Button = styled.button`
   align-items: center;
   gap: 4px;
 
-  color: ${({ theme }) => theme.colors.gray700};
+  color: ${({ theme }) => theme.colors.primaryDark};
   font-weight: 500;
   font-size: 0.875rem;
 `;

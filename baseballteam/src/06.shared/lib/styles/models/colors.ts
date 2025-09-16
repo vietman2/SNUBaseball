@@ -29,52 +29,54 @@ export const light: ThemeColorType = {
   gray800: "#374151",
   gray900: "#1F2937",
 
-  backgroundDefault: "#FFFFFF", // 순백
-  backgroundPaper: "#FDFDFB", // 약간의 베이지 톤
-  surfaceElevated: "#FFFFFF", // 카드류 배경
+  backgroundDefault: "#FFFFFF",
+  backgroundPaper: "#E8E6F2",
+  surfaceElevated: "#FDFDFB",
+  overlay: "#000000",
 
-  textPrimary: "#0F0F70", // 브랜드 딥 블루
-  textSecondary: "#4B5563", // gray700
-  textDisabled: "#9CA3AF", // gray500
+  textPrimary: "#0F0F70",
+  textSecondary: "#4B5563",
+  textDisabled: "#9CA3AF",
 
-  focusOutline: "#0F0F70", // 브랜드 블루 아웃라인
-  divider: "#E5E7EB", // gray300
+  focusOutline: "#0F0F70",
+  divider: "#E5E7EB",
 };
 
 export const dark: ThemeColorType = {
-  primary: "#FFFFFF", // 다크에서는 흰색을 브랜드 포인트로
-  primaryLight: "#E5E5E5", // 살짝 부드러운 흰색 톤
-  primaryDark: "#B5B6B6", // 실버 느낌의 톤 다운
-  onPrimary: "#0F0F70", // 블루 위의 텍스트 (배경에서 쓰일 경우 대비 색상)
-  onPrimaryDisabled: "#888888", // Gray tone
+  primary: "#B5B6B6",
+  primaryLight: "#D1D5DB",
+  primaryDark: "#9CA3AF",
+  onPrimary: "#0F0F70",
+  onPrimaryDisabled: "#6B7280",
 
-  secondary: "#C5A86F", // 골드 (강조용)
-  onSecondary: "#0F0F70", // 골드 위에 블루/네이비
+  secondary: "#C5A86F",
+  onSecondary: "#111827",
 
   success: "#81C784", // 밝은 그린 (다크에서도 선명)
-  onSuccess: "#0D0D0D",
+  onSuccess: "#0A0A0A",
 
   warning: "#FFB74D", // 따뜻한 오렌지
-  onWarning: "#0D0D0D",
+  onWarning: "#0A0A0A",
 
   error: "#E57373", // 밝은 레드
-  onError: "#0D0D0D",
+  onError: "#0A0A0A",
 
-  gray100: "#E5E7EB",
-  gray200: "#D1D5DB",
-  gray300: "#9CA3AF",
-  gray400: "#6B7280",
-  gray500: "#4B5563",
-  gray600: "#374151",
-  gray700: "#1F2937",
-  gray800: "#111827",
-  gray900: "#0A0A0A",
+  gray100: "#F3F4F6",
+  gray200: "#E5E7EB",
+  gray300: "#D1D5DB",
+  gray400: "#9CA3AF",
+  gray500: "#6B7280",
+  gray600: "#4B5563",
+  gray700: "#374151",
+  gray800: "#1F2937",
+  gray900: "#111827",
 
-  backgroundDefault: "#0A0A0A", // 거의 블랙
-  backgroundPaper: "#111827", // 다크 네이비 느낌
-  surfaceElevated: "#1F2937", // 카드나 모달 배경
+  backgroundDefault: "#0A0A0A",
+  backgroundPaper: "#1F2937",
+  surfaceElevated: "#161B22",
+  overlay: "#000000",
 
-  textPrimary: "#FFFFFF", // 기본 텍스트는 흰색
+  textPrimary: "#E5E7EB", // 기본 텍스트는 흰색
   textSecondary: "#B5B6B6", // 실버 톤 (보조 텍스트)
   textDisabled: "#6B7280", // 중간 회색 (gray400)
 
