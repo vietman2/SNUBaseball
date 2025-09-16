@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter } from "react-router";
 import { render } from "@testing-library/react";
 
-import { StylesProvider } from "../01.app/providers";
+import { RouterProvider, StylesProvider } from "../01.app/providers";
 
 export function createTestQueryClient() {
   return new QueryClient({
@@ -19,11 +19,13 @@ export function renderWithProviders(
 ) {
   function Wrapper({ children }: Readonly<PropsWithChildren>): JSX.Element {
     return (
-      <QueryClientProvider client={client}>
-        <StylesProvider>
-          <BrowserRouter>{children}</BrowserRouter>
-        </StylesProvider>
-      </QueryClientProvider>
+      <BrowserRouter>
+        <QueryClientProvider client={client}>
+          <RouterProvider>
+            <StylesProvider>{children}</StylesProvider>
+          </RouterProvider>
+        </QueryClientProvider>
+      </BrowserRouter>
     );
   }
 

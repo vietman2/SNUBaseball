@@ -88,7 +88,11 @@ vi.mock("@shared/lib/formatters", async () => ({
   formatPhoneKR: (phone: string) => phone,
 }));
 vi.mock("@shared/lib/router", async () => {
+  const { RouterContext } = await vi.importActual("@shared/lib/router");
+
   return {
+    RouterContext: RouterContext,
+    isModal: vi.fn().mockReturnValue(false),
     useRouter: vi.fn().mockReturnValue({
       backgroundLocation: {
         pathname: "/home",
@@ -160,7 +164,7 @@ vi.mock("@shared/ui/Dividers", () => ({
 }));
 vi.mock("@shared/ui/Icons", () => ({
   AppIcon: () => null,
-  Logo: () => <div>Logo</div>,
+  Logo: ({ type }: { type: "SILVER" | "BLUE" }) => <div>{type} Logo</div>,
 }));
 vi.mock("@shared/ui/Inputs", () => {
   const mockFile = new File(["dummy content"], "example.png", {
