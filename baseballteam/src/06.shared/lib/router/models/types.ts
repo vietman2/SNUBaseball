@@ -12,29 +12,8 @@ type RouteSlice = {
   routes: RouteObject[];
 };
 
-type TabType = {
-  title: string;
-  icon: string;
-  href: string;
-  subtabs: SubTabType[];
-};
-
-type SubTabType = {
-  title: string;
-  href: string;
-};
-
-type TabGroup = {
-  title: string;
-  tabs: TabType[];
-  adminOnly: boolean;
-};
-
 export type {
   BackgroundState,
   RouterLocation,
   RouteSlice,
-  TabType,
-  SubTabType,
-  TabGroup,
 };

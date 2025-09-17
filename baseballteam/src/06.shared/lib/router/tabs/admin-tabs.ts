@@ -1,6 +1,6 @@
-import type { TabGroup } from "@shared/lib/navigation";
+import type { TabGroupType } from "@shared/lib/router";
 
-export const AdminTabs: TabGroup = {
+export const AdminTabs: TabGroupType = {
   title: "Admin",
   tabs: [
     {

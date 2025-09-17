@@ -1,6 +1,6 @@
-import type { TabGroup } from "@shared/lib/navigation";
+import type { TabGroupType } from "@shared/lib/router";
 
-export const TrainingTabs: TabGroup = {
+export const TrainingTabs: TabGroupType = {
   title: "Training",
   tabs: [
     /*
@@ -24,19 +24,22 @@ export const TrainingTabs: TabGroup = {
       ],
     },*/
     {
-      title: "훈련",
+      title: "피드백",
+      href: "/feedback",
+      icon: "feedback",
+      subtabs: undefined,
+    },
+    {
+      title: "훈련 가이드",
+      href: "/guidelines",
       icon: "diary",
-      href: "/training",
-      subtabs: [
-        {
-          title: "피드백",
-          href: "/training/feedback",
-        },
-        {
-          title: "훈련 가이드",
-          href: "/training/guidelines",
-        },
-      ],
+      subtabs: undefined,
+    },
+    {
+      title: "장비 현황",
+      icon: "equipment",
+      href: "/equipment",
+      subtabs: undefined,
     },
   ],
   adminOnly: false,
