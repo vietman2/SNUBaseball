@@ -59,7 +59,11 @@ export function TabItem({
           <IconWrapper
             className={isMenuOpen ? "open" : ""}
             onClick={toggleMenu}
-            data-testid={isMenuOpen ? `${tab.title}-submenu-collapse` : `${tab.title}-submenu-expand`}
+            data-testid={
+              isMenuOpen
+                ? `${tab.title}-submenu-collapse`
+                : `${tab.title}-submenu-expand`
+            }
           >
             <AppIcon
               icon="chevron-down"
