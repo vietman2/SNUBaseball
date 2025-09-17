@@ -1,4 +1,4 @@
-import { Link, Outlet, useLocation } from "react-router";
+import { Link, Outlet } from "react-router";
 import styled from "styled-components";
 
 import { LogoutButton } from "@features/auth/logout";
@@ -15,8 +15,11 @@ const innerTabs = [
 
 export function ProfileLayout() {
   const { colors } = useColors();
-  const { pathname } = useLocation();
-  const { backgroundLocation } = useRouter();
+  const { backgroundLocation, displayLocation } = useRouter();
+
+  const isActiveTab = (href: string) => {
+    return displayLocation.pathname.endsWith(href);
+  };
 
   return (
     <Container>
@@ -28,13 +31,13 @@ export function ProfileLayout() {
               to={tab.href}
               key={tab.href}
               state={{ backgroundLocation }}
-              className={pathname.endsWith(tab.href) ? "active" : ""}
+              className={isActiveTab(tab.href) ? "active" : ""}
             >
               <AppIcon
                 icon={tab.icon}
                 size={20}
                 color={
-                  pathname.endsWith(tab.href)
+                  isActiveTab(tab.href)
                     ? colors.textPrimary
                     : colors.textSecondary
                 }
