@@ -1,10 +1,11 @@
 import { Link, Outlet, useLocation } from "react-router";
 import styled from "styled-components";
 
-import { ModalSidebarItem } from "@widgets/sidebar/ModalSidebar";
 import { LogoutButton } from "@features/auth/logout";
 import { useRouter } from "@shared/lib/router";
+import { useColors } from "@shared/lib/styles";
 import { Divider } from "@shared/ui/Dividers";
+import { AppIcon } from "@shared/ui/Icons";
 
 const innerTabs = [
   { label: "계정", href: "account", icon: "person" },
@@ -13,6 +14,7 @@ const innerTabs = [
 ];
 
 export function ProfileLayout() {
+  const { colors } = useColors();
   const { pathname } = useLocation();
   const { backgroundLocation } = useRouter();
 
@@ -22,13 +24,23 @@ export function ProfileLayout() {
         <h2 className="profile-modal-title">내 프로필</h2>
         <div className="profile-modal-sidebar">
           {innerTabs.map((tab) => (
-            <Link to={tab.href} key={tab.href} state={{ backgroundLocation }}>
-              <ModalSidebarItem
+            <SidebarLink
+              to={tab.href}
+              key={tab.href}
+              state={{ backgroundLocation }}
+              className={pathname.endsWith(tab.href) ? "active" : ""}
+            >
+              <AppIcon
                 icon={tab.icon}
-                label={tab.label}
-                isActive={pathname.endsWith(tab.href)}
+                size={20}
+                color={
+                  pathname.endsWith(tab.href)
+                    ? colors.textPrimary
+                    : colors.textSecondary
+                }
               />
-            </Link>
+              <span>{tab.label}</span>
+            </SidebarLink>
           ))}
         </div>
         <Divider />
@@ -70,6 +82,30 @@ const Left = styled.div`
     flex-direction: column;
     margin-top: 16px;
     gap: 4px;
+  }
+`;
+
+const SidebarLink = styled(Link)`
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 12px;
+
+  color: ${({ theme }) => theme.colors.textSecondary};
+  font-weight: 500;
+
+  border-radius: 8px;
+  transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+
+  &.active {
+    color: ${({ theme }) => theme.colors.textPrimary};
+    font-weight: 600;
+    background-color: ${({ theme }) => theme.colors.backgroundPaper};
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  }
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.gray300};
   }
 `;
 
