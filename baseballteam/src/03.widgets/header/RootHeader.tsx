@@ -1,7 +1,8 @@
-import { Link, useLocation } from "react-router";
+import { Link } from "react-router";
 import styled from "styled-components";
 
 import { UserAvatar, type UserProfileType } from "@entities/user";
+import { useRouter } from "@shared/lib/router";
 import { useColors } from "@shared/lib/styles";
 import { Logo } from "@shared/ui/Icons";
 
@@ -11,7 +12,7 @@ interface Props {
 
 export function RootHeader({ user }: Readonly<Props>) {
   const { isDarkMode } = useColors();
-  const location = useLocation();
+  const { backgroundLocation } = useRouter();
 
   return (
     <Container>
@@ -20,7 +21,7 @@ export function RootHeader({ user }: Readonly<Props>) {
       </Link>
       <Button
         to="/profile/account"
-        state={{ backgroundLocation: location }}
+        state={{ backgroundLocation }}
         data-testid="user-button"
       >
         <span className="header-user-avatar">
