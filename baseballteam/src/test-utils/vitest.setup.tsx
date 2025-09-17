@@ -156,7 +156,11 @@ vi.mock("@shared/ui/Buttons", () => ({
   }: {
     to: string;
     children: React.ReactNode;
-  }) => <a href={to}>{children}</a>,
+  }) => (
+    <a href={to} onClick={(e) => e.preventDefault()}>
+      {children}
+    </a>
+  ),
 }));
 vi.mock("@shared/ui/Dividers", () => ({
   Divider: () => <div>Divider</div>,
