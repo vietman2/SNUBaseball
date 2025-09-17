@@ -27,6 +27,7 @@ export default defineConfig({
       reporter: ["lcov", "text", "html"],
       exclude: [
         "**/index.ts",
+        "**/routes.tsx",
         "**/styles.ts",
         "**/*.types.ts",
         "**/config/*",
