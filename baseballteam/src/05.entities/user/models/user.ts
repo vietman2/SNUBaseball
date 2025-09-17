@@ -15,5 +15,6 @@ export type MemberProfileType = {
 export type UserProfileType = {
   uuid: string;
   username: string;
+  role: "ADMIN" | "LEADER" | "MEMBER";
   member: MemberProfileType;
 };
