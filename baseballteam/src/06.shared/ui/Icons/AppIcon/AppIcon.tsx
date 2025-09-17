@@ -1,13 +1,15 @@
-import Archive from "./files/archive.svg?react";
-import Checklist from "./files/checklist.svg?react";
 import ChevronDown from "./files/chevron-down.svg?react";
 import ChevronLeft from "./files/chevron-left.svg?react";
 import ChevronRight from "./files/chevron-right.svg?react";
 import ChevronUp from "./files/chevron-up.svg?react";
 import Close from "./files/close.svg?react";
 import Diary from "./files/diary.svg?react";
+import Equipment from "./files/equipment.svg?react";
+import Feedback from "./files/feedback.svg?react";
 import Forum from "./files/forum.svg?react";
+import Gallery from "./files/gallery.svg?react";
 import Home from "./files/home.svg?react";
+import Image from "./files/image.svg?react";
 import InfoCircle from "./files/info-circle.svg?react";
 import Lock from "./files/lock.svg?react";
 import Logout from "./files/logout.svg?react";
@@ -33,16 +35,18 @@ const iconMap: Record<
   string,
   React.FunctionComponent<React.SVGProps<SVGSVGElement>>
 > = {
-  archive: Archive,
-  checklist: Checklist,
   "chevron-down": ChevronDown,
   "chevron-left": ChevronLeft,
   "chevron-right": ChevronRight,
   "chevron-up": ChevronUp,
   close: Close,
   diary: Diary,
+  equipment: Equipment,
+  feedback: Feedback,
   forum: Forum,
+  gallery: Gallery,
   home: Home,
+  image: Image,
   "info-circle": InfoCircle,
   lock: Lock,
   logout: Logout,
