@@ -58,7 +58,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "baseballserver.urls"
+ROOT_URLCONF = "config.urls"
 
 TEMPLATES = [
     {
@@ -75,7 +75,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "baseballserver.wsgi.application"
+WSGI_APPLICATION = "config.wsgi.application"
 
 ## DRF Settings
 
