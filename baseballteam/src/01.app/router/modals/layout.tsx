@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router";
+import { Outlet, useNavigate } from "react-router";
 
 import { ModalDialog, ModalOverlay } from "@widgets/modal";
 import { useRouter } from "@shared/lib/router";
@@ -61,8 +61,7 @@ export function ModalLayout() {
         aria-modal="true"
         data-testid="modal-dialog"
       >
-        {/* 여기 아래로는 <Outlet/> 유지 */}
-        {/* <Outlet /> */}
+        <Outlet />
       </ModalDialog>
     </ModalOverlay>
   );
