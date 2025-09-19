@@ -110,7 +110,7 @@ jobs:
 
       - name: Run tests and collect coverage
         run: |
-          pipenv run coverage run manage.py test
+          pipenv run pytest .
           pipenv run coverage lcov
           pipenv run coverage xml
           sed -i "s|<source></source>|<source>baseballserver</source>|g" coverage.xml
@@ -128,7 +128,7 @@ jobs:
           path: baseballserver/coverage.xml
 
       - name: Run linters
-        run: pipenv run sh -c 'DJANGO_SETTINGS_MODULE=baseballserver.settings.tests pylint --load-plugins pylint_django --rcfile=.pylintrc .'
+        run: pipenv run sh -c 'DJANGO_SETTINGS_MODULE=config.settings.tests pylint --load-plugins pylint_django --rcfile=.pylintrc .'
 
   nextjs-tests-and-lint:
     runs-on: ubuntu-latest
