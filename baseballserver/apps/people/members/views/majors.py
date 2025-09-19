@@ -15,4 +15,4 @@ class MajorListAPIView(GenericAPIView, ListModelMixin):
 
     @extend_schema(summary="전공 목록 조회", tags=["전공 목록"])
     def get(self, request, *args, **kwargs):
-        return super().get(request, *args, **kwargs)
+        return self.list(request, *args, **kwargs)
