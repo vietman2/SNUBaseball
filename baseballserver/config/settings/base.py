@@ -39,12 +39,9 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt.token_blacklist",
     "drf_spectacular",
     ## Custom Apps
-    "auth.user.apps.UserConfig",
-    "media.image.apps.ImageConfig",
-    "member.major.apps.MajorConfig",
-    "member.person.apps.PersonConfig",
-    "member.role.apps.RoleConfig",
-    "member.status.apps.StatusConfig",
+    "apps.media.assets.apps.AssetsConfig",
+    "apps.people.members.apps.MembersConfig",
+    "apps.people.users.apps.UsersConfig",
 ]
 
 MIDDLEWARE = [
@@ -85,13 +82,13 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
-    "EXCEPTION_HANDLER": "core.exceptions.baseball_server_exception_handler",
+    "EXCEPTION_HANDLER": "core.error_handling.baseball_server_exception_handler",
 }
 
-AUTH_USER_MODEL = "user.User"
+AUTH_USER_MODEL = "users.User"
 
 AUTHENTICATION_BACKENDS = [
-    "auth.backends.AuthBackend",
+    "core.auth.AuthBackend",
 ]
 
 SIMPLE_JWT = {
@@ -130,7 +127,7 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        "NAME": "auth.user.validators.PasswordValidator",
+        "NAME": "core.auth.PasswordValidator",
     },
 ]
 

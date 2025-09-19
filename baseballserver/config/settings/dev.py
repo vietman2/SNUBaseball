@@ -35,6 +35,29 @@ MEDIA_CDN_BASE_URL = config("MEDIA_CDN_BASE_URL")
 MEDIA_KEY_PREFIX_WHITELIST = [
     "profiles/",
 ]
+MEDIA_ALLOWED_MIME_PREFIXES = [
+    "image/",
+    "video/",
+]
+MEDIA_ALLOWED_MIME_TYPES = [
+    "application/pdf",
+    "application/msword",  # .doc
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",  # .docx
+    "application/vnd.ms-excel",  # .xls
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",  # .xlsx
+    "application/vnd.ms-powerpoint",  # .ppt
+    "application/vnd.openxmlformats-officedocument.presentationml.presentation",  # .pptx
+    "application/x-hwp",  # .hwp (old)
+    "application/vnd.hancom.hwp",  # .hwp
+    "application/vnd.hancom.hwpx",  # .hwpx
+    "application/x-hwpml",  # .hwpml (old)
+    "application/vnd.hancom.hwpml",  # .hwpml (new)
+    "application/zip",
+    "application/x-7z-compressed",
+    "application/x-rar-compressed",
+    "application/gzip",
+]
+MEDIA_UPLOAD_MAX_SIZE = 10 * 1024 * 1024
 
 AWS_REGION = "ap-northeast-2"
 AWS_S3_BUCKET_NAME = config("AWS_S3_BUCKET_NAME")
