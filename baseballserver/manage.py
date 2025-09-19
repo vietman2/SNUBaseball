@@ -6,10 +6,7 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "baseballserver.settings.dev")
-
-    if "test" in sys.argv:
-        os.environ["DJANGO_SETTINGS_MODULE"] = "baseballserver.settings.tests"
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.dev")
 
     try:
         from django.core.management import execute_from_command_line
