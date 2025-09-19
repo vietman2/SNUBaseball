@@ -1,11 +1,11 @@
-from .error import (
+from .exceptions import (
     SNUBaseballException,
     UnauthorizedException,
     InvalidRefreshTokenException,
     NotFoundException,
     ForbiddenException,
 )
-from .handler import baseball_server_exception_handler
+from .exception_handler import baseball_server_exception_handler
 
 __all__ = [
     "SNUBaseballException",

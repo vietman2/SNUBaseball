@@ -8,8 +8,8 @@ from rest_framework.exceptions import (
 from rest_framework.views import exception_handler
 from rest_framework_simplejwt.exceptions import InvalidToken
 
-from auth.tokens.utils import delete_refresh_cookie
-from .error import SNUBaseballException, InvalidRefreshTokenException
+from core.auth import delete_refresh_cookie
+from .exceptions import SNUBaseballException, InvalidRefreshTokenException
 
 
 def baseball_server_exception_handler(exc, context):
