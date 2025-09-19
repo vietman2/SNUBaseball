@@ -1,3 +1,4 @@
+from drf_spectacular.utils import extend_schema
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework_simplejwt.serializers import TokenBlacklistSerializer
@@ -10,6 +11,7 @@ from core.error_handling import UnauthorizedException, InvalidRefreshTokenExcept
 class SNUTokenBlacklistView(TokenBlacklistView):
     serializer_class = TokenBlacklistSerializer
 
+    @extend_schema(summary="로그아웃", tags=["Auth"])
     def post(self, request, *args, **kwargs):
         refresh_token = request.COOKIES.get("x_snubaseball_ref_tok")
 
