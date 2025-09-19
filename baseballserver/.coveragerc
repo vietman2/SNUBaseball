@@ -1,14 +1,20 @@
 [run]
 relative_files = True
-source = .
+source = 
+    apps
+    core
 branch = True
 omit = 
-    */migrations/*
+    */__init__.py
     manage.py
+    */config/*
+    */migrations/*
+    */fixtures/*
+    */tests/*
     */admin.py
-    */settings.py
-    */wsgi.py
-    */asgi.py
+    */api.py
+    */urls.py
 
 [report]
 show_missing=True
+skip_covered=True

@@ -20,6 +20,10 @@ pylint = "*"
 pylint-django = "*"
 black = "*"
 mypy = "*"
+factory-boy = "*"
+faker = "*"
+pytest-django = "*"
+pytest-cov = "*"
 
 [requires]
 python_version = "3.13"
