@@ -5,7 +5,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
-from core.exceptions import SNUBaseballException
+from baseballserver.core.error_handling import SNUBaseballException
 from ..models import Member
 from ..permissions import IsAdminOrSelf
 from ..serializers import MemberSimpleSerializer
