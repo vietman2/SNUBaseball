@@ -1,0 +1,90 @@
+[
+  {
+    "model": "members.memberrole",
+    "pk": 1,
+    "fields": {
+      "name": "주장",
+      "is_leadership": true,
+      "is_staff": false,
+      "is_player": true,
+      "is_manager": false
+    }
+  },
+  {
+    "model": "members.memberrole",
+    "pk": 2,
+    "fields": {
+      "name": "부주장",
+      "is_leadership": true,
+      "is_staff": false,
+      "is_player": true,
+      "is_manager": false
+    }
+  },
+  {
+    "model": "members.memberrole",
+    "pk": 3,
+    "fields": {
+      "name": "수석매니저",
+      "is_leadership": true,
+      "is_staff": false,
+      "is_player": false,
+      "is_manager": true
+    }
+  },
+  {
+    "model": "members.memberrole",
+    "pk": 4,
+    "fields": {
+      "name": "매니저",
+      "is_leadership": false,
+      "is_staff": false,
+      "is_player": false,
+      "is_manager": true
+    }
+  },
+  {
+    "model": "members.memberrole",
+    "pk": 5,
+    "fields": {
+      "name": "선수",
+      "is_leadership": false,
+      "is_staff": false,
+      "is_player": true,
+      "is_manager": false
+    }
+  },
+  {
+    "model": "members.memberrole",
+    "pk": 6,
+    "fields": {
+      "name": "지도교수",
+      "is_leadership": false,
+      "is_staff": true,
+      "is_player": false,
+      "is_manager": false
+    }
+  },
+  {
+    "model": "members.memberrole",
+    "pk": 7,
+    "fields": {
+      "name": "감독",
+      "is_leadership": false,
+      "is_staff": true,
+      "is_player": false,
+      "is_manager": false
+    }
+  },
+  {
+    "model": "members.memberrole",
+    "pk": 8,
+    "fields": {
+      "name": "코치",
+      "is_leadership": false,
+      "is_staff": true,
+      "is_player": false,
+      "is_manager": false
+    }
+  }
+]

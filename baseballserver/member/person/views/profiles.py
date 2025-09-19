@@ -7,7 +7,7 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
-from core.exceptions import SNUBaseballException
+from core.error_handling import SNUBaseballException
 from media.image.models import SNUBaseballImage
 from media.image.utils import get_presigned_post, get_image_url
 from ..models import Member
