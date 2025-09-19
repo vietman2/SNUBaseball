@@ -1,5 +1,6 @@
 from django.urls import path
 
+from .members.api import MajorListAPIView
 from .tokens.api import (
     SNUTokenObtainPairView,
     SNUTokenRefreshView,
@@ -14,4 +15,5 @@ urlpatterns = [
     path("v1/register/", RegisterView.as_view(), name="register"),
     path("v1/register/sid/", StudentIdCheckView.as_view(), name="student_id_check"),
     path("v1/me/", MeAPIView.as_view(), name="me"),
+    path("v1/majors/", MajorListAPIView.as_view(), name="majors_list"),
 ]
