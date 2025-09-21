@@ -1,24 +1,15 @@
-type CommonFields = {
+import type { DepartmentType } from "@entities/majors/@x/member";
+
+export type MemberDetailsType = {
   id: number;
   name: string;
-  back_number: number | null;
+  student_id: string;
+  admission_year: number;
+  major: DepartmentType;
+  profile_image: string | null;
+  phone: string | null;
+  email: string | null;
+  address: string | null;
   birth_date: string | null;
   date_joined: string | null;
-  num_semester: number;
 };
-
-export type PlayerDetailType = {
-  type: "PLAYER";
-  extras: {
-    position?: string;
-    bat_throw_hands?: string;
-    height?: number;
-    weight?: number;
-  };
-} & CommonFields;
-
-type ManagerDetailType = {
-  type: "MANAGER";
-} & CommonFields;
-
-export type MemberDetailType = PlayerDetailType | ManagerDetailType;
