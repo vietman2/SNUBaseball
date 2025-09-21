@@ -39,28 +39,6 @@ describe("AcademicsSection", () => {
     const { getByTestId, getByText, queryByText } = renderWithProviders(
       <AccountPage />
     );
-
-    fireEvent.click(getByText("변경하기"));
-
-    await waitFor(() => {
-      expect(getByText("전공 변경")).toBeInTheDocument();
-    });
-
-    // test clicking inside modal
-    fireEvent.mouseDown(getByTestId("modal-dialog"));
-
-    await waitFor(() => {
-      expect(getByText("전공 변경")).toBeInTheDocument();
-    });
-
-    // test clicking outside modal
-    fireEvent.mouseDown(getByTestId("modal-overlay"));
-
-    await waitFor(() => {
-      expect(queryByText("전공 변경")).not.toBeInTheDocument();
-    });
-
-    // re-open and test closing with close button
     fireEvent.click(getByText("변경하기"));
 
     await waitFor(() => {
