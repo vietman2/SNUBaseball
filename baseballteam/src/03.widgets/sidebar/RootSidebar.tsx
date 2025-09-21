@@ -78,6 +78,7 @@ const SidebarContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   min-height: calc(100vh - 60px);
+  max-height: calc(100vh - 60px);
 
   background-color: ${({ theme }) => theme.colors.backgroundDefault};
   border-right: 0.25px solid ${({ theme }) => theme.colors.divider};
@@ -92,6 +93,8 @@ const Tabs = styled.div`
   flex-direction: column;
   padding: 8px 0;
   gap: 8px;
+
+  overflow-y: auto;
 `;
 
 const TabGroup = styled.div`
