@@ -2,9 +2,13 @@
 import { vi } from "vitest";
 
 vi.mock("@shared/ui/Buttons", () => ({
-  EditButton: ({ onClick, label = "변경하기" }: { onClick: () => void; label: string }) => (
-    <button onClick={onClick}>{label}</button>
-  ),
+  EditButton: ({
+    onClick,
+    label = "변경하기",
+  }: {
+    onClick: () => void;
+    label: string;
+  }) => <button onClick={onClick}>{label}</button>,
   ElevatedTextButton: ({
     $backgroundColor,
     $color,
@@ -38,19 +42,15 @@ vi.mock("@shared/ui/Icons", () => ({
   AppIcon: () => null,
   Logo: ({ type }: { type: "SILVER" | "BLUE" }) => <div>{type} Logo</div>,
 }));
-vi.mock("@shared/ui/Inputs", () => {
+vi.mock("@shared/ui/Inputs", async () => {
+  const { DateInput } = await vi.importActual("@shared/ui/Inputs");
+
   const mockFile = new File(["dummy content"], "example.png", {
     type: "image/png",
   });
 
   return {
-    DateInput: (props: any) => (
-      <input
-        value={props.value === null ? "" : props.value}
-        data-testid="date-input"
-        {...props}
-      />
-    ),
+    DateInput,
     PhoneInput: (props: any) => <input data-testid="phone-input" {...props} />,
     SingleFileInput: ({
       onChange,
