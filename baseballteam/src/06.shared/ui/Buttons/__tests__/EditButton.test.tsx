@@ -10,16 +10,11 @@ describe("EditButton", () => {
   it("should render EditButton correctly", () => {
     const onClickMock = vi.fn();
 
-    const { getByTestId } = renderWithProviders(
-      <EditButton
-        onClick={onClickMock}
-        label="Edit"
-        color="blue"
-        testID="test-button"
-      />
+    const { getByText } = renderWithProviders(
+      <EditButton onClick={onClickMock} label="Edit" color="blue" />
     );
 
-    fireEvent.click(getByTestId("test-button"));
+    fireEvent.click(getByText("Edit"));
 
     expect(onClickMock).toHaveBeenCalled();
   });

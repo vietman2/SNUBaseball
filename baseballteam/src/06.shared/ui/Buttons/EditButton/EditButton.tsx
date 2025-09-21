@@ -14,14 +14,13 @@ export function EditButton({
   onClick,
   label = "변경하기",
   color,
-  testID,
 }: Readonly<Props>) {
   const { colors } = useColors();
 
   const displayColor = color || colors.primaryDark;
 
   return (
-    <Button onClick={onClick} data-testid={testID}>
+    <Button onClick={onClick}>
       <AppIcon icon="pencil" size={16} color={displayColor} />
       <span style={{ color: displayColor }}>{label}</span>
     </Button>
