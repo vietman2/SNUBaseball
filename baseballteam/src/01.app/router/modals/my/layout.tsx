@@ -2,18 +2,12 @@ import { Link, Outlet } from "react-router";
 import styled from "styled-components";
 
 import { LogoutButton } from "@features/auth/logout";
-import { useRouter } from "@shared/lib/router";
+import { MyModalTabs, useRouter } from "@shared/lib/router";
 import { useColors } from "@shared/lib/styles";
 import { Divider } from "@shared/ui/Dividers";
 import { AppIcon } from "@shared/ui/Icons";
 
-const innerTabs = [
-  { label: "계정", href: "account", icon: "person" },
-  { label: "정보", href: "info", icon: "player" },
-  //{ label: "비밀번호 변경", href: "change-password", icon: "lock" },
-];
-
-export function ProfileLayout() {
+export function MyLayout() {
   const { colors } = useColors();
   const { backgroundLocation, displayLocation } = useRouter();
 
@@ -26,7 +20,7 @@ export function ProfileLayout() {
       <Left>
         <h2 className="profile-modal-title">내 프로필</h2>
         <div className="profile-modal-sidebar">
-          {innerTabs.map((tab) => (
+          {MyModalTabs.tabs.map((tab) => (
             <SidebarLink
               to={tab.href}
               key={tab.href}

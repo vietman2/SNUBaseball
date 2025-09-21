@@ -1,14 +1,14 @@
 import { beforeAll, describe, expect, it, vi } from "vitest";
 import { fireEvent, waitFor } from "@testing-library/react";
 
-import { ProfileLayout } from "../layout";
+import { MyLayout } from "../layout";
 import * as AxiosAPI from "@shared/lib/axios";
 import * as RouterAPI from "@shared/lib/router";
 import { renderWithProviders } from "@test-utils/renderer";
 
 describe("ProfileLayout", () => {
   const sampleLocation = {
-    pathname: "/profile/account",
+    pathname: "/my/account",
     search: "",
     hash: "",
     key: "",
@@ -25,7 +25,7 @@ describe("ProfileLayout", () => {
   });
 
   it("should render correctly and handle logout", async () => {
-    const { getByText } = renderWithProviders(<ProfileLayout />);
+    const { getByText } = renderWithProviders(<MyLayout />);
 
     expect(getByText("내 프로필")).toBeInTheDocument();
     expect(getByText("계정")).toBeInTheDocument();
