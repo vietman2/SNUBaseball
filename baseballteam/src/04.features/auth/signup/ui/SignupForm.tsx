@@ -6,6 +6,7 @@ import { signup } from "../api/register";
 import { useStudentIdCheck } from "../contexts/useStudentIdCheck";
 import { useColors } from "@shared/lib/styles";
 import { ElevatedTextButton } from "@shared/ui/Buttons";
+import { ErrorText } from "@shared/ui/Texts";
 
 export function SignupForm() {
   const [username, setUsername] = useState<string>("");
@@ -70,7 +71,7 @@ export function SignupForm() {
         required
         data-testid="password-confirm-input"
       />
-      {error && <p className="signup-error">{error}</p>}
+      {error && <ErrorText>{error}</ErrorText>}
       <ElevatedTextButton
         type="submit"
         disabled={loading}
@@ -100,13 +101,6 @@ const Form = styled.form`
     &::placeholder {
       color: ${({ theme }) => theme.colors.gray500};
     }
-  }
-
-  p.signup-error {
-    margin: 0;
-    font-size: 0.875rem;
-    text-align: right;
-    color: ${({ theme }) => theme.colors.error};
   }
 
   > button {

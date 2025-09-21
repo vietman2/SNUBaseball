@@ -7,6 +7,7 @@ import { useTokens } from "@shared/lib/auth";
 import { useColors } from "@shared/lib/styles";
 import { ElevatedTextButton } from "@shared/ui/Buttons";
 import { Spinner } from "@shared/ui/Loading";
+import { ErrorText } from "@shared/ui/Texts";
 
 export function LoginForm() {
   const [username, setUsername] = useState<string>("");
@@ -59,7 +60,7 @@ export function LoginForm() {
           data-testid="password-input"
         />
       </InputWrapper>
-      {error && <p className="login-error">{error}</p>}
+      {error && <ErrorText>{error}</ErrorText>}
       <ElevatedTextButton
         type="submit"
         disabled={loading}
@@ -78,13 +79,6 @@ const Form = styled.form`
   flex: 1;
   flex-direction: column;
   gap: 4px;
-
-  p.login-error {
-    margin: 0;
-    font-size: 0.875rem;
-    text-align: right;
-    color: ${({ theme }) => theme.colors.error};
-  }
 
   > button {
     margin-top: 12px;
