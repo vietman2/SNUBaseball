@@ -2,6 +2,9 @@
 import { vi } from "vitest";
 
 vi.mock("@shared/ui/Buttons", () => ({
+  EditButton: ({ onClick, label }: { onClick: () => void; label: string }) => (
+    <button onClick={onClick}>{label}</button>
+  ),
   ElevatedTextButton: ({
     $backgroundColor,
     $color,
