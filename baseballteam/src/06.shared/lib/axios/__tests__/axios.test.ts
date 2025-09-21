@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, expect, it, vi } from "vitest";
 
+import { serverErrorMessageParser } from "../error";
 import { axiosInstance, axiosInstanceWithAuth } from "../instance";
 import {
   setAuthToken,
@@ -260,6 +261,53 @@ describe("axiosInstance", () => {
       expect(refreshFn).not.toHaveBeenCalled();
 
       eject?.();
+    });
+  });
+
+  describe("serverErrorMessageParser", () => {
+    it("should parse known axios error with message", () => {
+      const mockError: any = new Error("Request failed");
+      mockError.isAxiosError = true;
+      mockError.response = {
+        data: { message: "Detailed server error", status: "FAIL" },
+      };
+
+      const result = serverErrorMessageParser(
+        mockError,
+        "Fallback error message"
+      );
+      expect(result).toEqual({
+        status: "FAIL",
+        message: "Detailed server error",
+      });
+    });
+
+    it("should return fallback for axios error without message", () => {
+      const mockError: any = new Error("Request failed");
+      mockError.isAxiosError = true;
+      mockError.response = { data: {} };
+
+      const result = serverErrorMessageParser(
+        mockError,
+        "Fallback error message"
+      );
+      expect(result).toEqual({
+        status: "ERROR",
+        message: "Fallback error message",
+      });
+    });
+
+    it("should return fallback for non-axios error", () => {
+      const genericError = new Error("Some other error");
+
+      const result = serverErrorMessageParser(
+        genericError,
+        "Fallback error message"
+      );
+      expect(result).toEqual({
+        status: "ERROR",
+        message: "Fallback error message",
+      });
     });
   });
 });

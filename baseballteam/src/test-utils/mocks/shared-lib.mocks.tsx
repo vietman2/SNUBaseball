@@ -40,12 +40,18 @@ vi.mock("@shared/lib/axios", async () => ({
   setAuthToken: vi.fn(),
   clearAuthToken: vi.fn(),
   setAutoRetryAfterTokenRefresh: vi.fn(),
+  serverErrorMessageParser: vi.fn().mockReturnValue({
+    status: "ERROR",
+    message: "Sample Error Message",
+  }),
 }));
 vi.mock("@shared/lib/formatters", async () => ({
   formatPhoneKR: (phone: string) => phone,
 }));
 vi.mock("@shared/lib/router", async () => {
-  const { RouterContext, MyModalTabs } = await vi.importActual("@shared/lib/router");
+  const { RouterContext, MyModalTabs } = await vi.importActual(
+    "@shared/lib/router"
+  );
 
   return {
     RouterContext: RouterContext,

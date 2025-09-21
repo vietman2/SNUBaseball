@@ -2,7 +2,7 @@
 import { vi } from "vitest";
 
 vi.mock("@shared/ui/Buttons", () => ({
-  EditButton: ({ onClick, label }: { onClick: () => void; label: string }) => (
+  EditButton: ({ onClick, label = "변경하기" }: { onClick: () => void; label: string }) => (
     <button onClick={onClick}>{label}</button>
   ),
   ElevatedTextButton: ({
