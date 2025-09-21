@@ -14,6 +14,7 @@ import Management from "./files/management.svg?react";
 import Money from "./files/money.svg?react";
 import Moon from "./files/moon.svg?react";
 import Pencil from "./files/pencil.svg?react";
+import People from "./files/people.svg?react";
 import Person from "./files/person.svg?react";
 import Player from "./files/player.svg?react";
 import Record from "./files/record.svg?react";
@@ -47,6 +48,7 @@ const iconMap: Record<
   money: Money,
   moon: Moon,
   pencil: Pencil,
+  people: People,
   person: Person,
   player: Player,
   record: Record,
