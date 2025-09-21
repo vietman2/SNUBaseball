@@ -6,6 +6,17 @@ import * as UserEntity from "@entities/user";
 import * as AxiosAPI from "@shared/lib/axios";
 import { renderWithProviders } from "@test-utils/renderer";
 
+// 나머지 컴포넌트들은 mocking
+vi.mock("../ui/AcademicsSection", () => ({
+  AcademicsSection: () => <div>AcademicsSection</div>,
+}));
+vi.mock("../ui/AvatarSection", () => ({
+  AvatarSection: () => <div>AvatarSection</div>,
+}));
+vi.mock("../ui/DatesSection", () => ({
+  DatesSection: () => <div>DatesSection</div>,
+}));
+
 describe("ContactsSection", () => {
   beforeEach(() => {
     vi.spyOn(UserEntity, "useUser").mockReturnValue({
@@ -14,11 +25,12 @@ describe("ContactsSection", () => {
     });
   });
 
-  it("handles update contacts success", async () => {
-    const { getByTestId, getByText, queryByText, getByLabelText } =
-      renderWithProviders(<AccountPage />);
+  it("handles modal open/close", async () => {
+    const { getByTestId, getByText, queryByText } = renderWithProviders(
+      <AccountPage />
+    );
 
-    fireEvent.click(getByTestId("open-contacts-modal-button"));
+    fireEvent.click(getByText("변경하기"));
 
     await waitFor(() => {
       expect(getByText("연락처 변경")).toBeInTheDocument();
@@ -37,9 +49,14 @@ describe("ContactsSection", () => {
     await waitFor(() => {
       expect(queryByText("연락처 변경")).not.toBeInTheDocument();
     });
+  });
+
+  it("handles update contacts success", async () => {
+    const { getByTestId, getByText, queryByText, getByLabelText } =
+      renderWithProviders(<AccountPage />);
 
     // re-open and test closing with close button
-    fireEvent.click(getByTestId("open-contacts-modal-button"));
+    fireEvent.click(getByText("변경하기"));
 
     await waitFor(() => {
       expect(getByText("연락처 변경")).toBeInTheDocument();
@@ -93,7 +110,7 @@ describe("ContactsSection", () => {
       <AccountPage />
     );
 
-    fireEvent.click(getByTestId("open-contacts-modal-button"));
+    fireEvent.click(getByText("변경하기"));
 
     await waitFor(() => {
       expect(getByText("연락처 변경")).toBeInTheDocument();
@@ -110,9 +127,7 @@ describe("ContactsSection", () => {
     fireEvent.click(getByTestId("submit-contacts-update-button"));
 
     await waitFor(() => {
-      expect(
-        getByText("프로필 업데이트에 실패했습니다. 잠시 후 다시 시도해주세요.")
-      ).toBeInTheDocument();
+      expect(getByText("Sample Error Message")).toBeInTheDocument();
     });
   });
 });
