@@ -10,6 +10,17 @@ import {
   renderWithProviders,
 } from "@test-utils/renderer";
 
+// 나머지 컴포넌트들은 mocking
+vi.mock("../ui/AcademicsSection", () => ({
+  AcademicsSection: () => <div>AcademicsSection</div>,
+}));
+vi.mock("../ui/ContactsSection", () => ({
+  ContactsSection: () => <div>ContactsSection</div>,
+}));
+vi.mock("../ui/DatesSection", () => ({
+  DatesSection: () => <div>DatesSection</div>,
+}));
+
 describe("AvatarSection", () => {
   beforeEach(() => {
     // 가장 먼저 getPresignedUrl이 성공한다
@@ -27,7 +38,7 @@ describe("AvatarSection", () => {
       status: 204,
     });
     // 마지막으로 postUpload가 성공한다
-    vi.spyOn(AxiosAPI.axiosInstanceWithAuth, "put").mockResolvedValue({
+    vi.spyOn(AxiosAPI.axiosInstanceWithAuth, "patch").mockResolvedValue({
       data: {
         url: "https://cdn.mocked-url.com/mocked-key",
       },
@@ -44,7 +55,7 @@ describe("AvatarSection", () => {
     );
     expect(getByText("프로필")).toBeInTheDocument();
 
-    fireEvent.click(getByTestId("open-avatar-modal-button"));
+    fireEvent.click(getByTestId("avatar-edit-button"));
 
     await waitFor(() => {
       expect(getByText("프로필 이미지 변경")).toBeInTheDocument();
@@ -65,7 +76,7 @@ describe("AvatarSection", () => {
     });
 
     // re-open and test file upload
-    fireEvent.click(getByTestId("open-avatar-modal-button"));
+    fireEvent.click(getByTestId("avatar-edit-button"));
     fireEvent.click(getByTestId("file-input"));
     fireEvent.click(getByText("업로드"));
 
@@ -83,7 +94,7 @@ describe("AvatarSection", () => {
       { client: sampleClient }
     );
 
-    fireEvent.click(getByTestId("open-avatar-modal-button"));
+    fireEvent.click(getByTestId("avatar-edit-button"));
     fireEvent.click(getByTestId("file-input"));
     fireEvent.click(getByText("업로드"));
 
@@ -107,7 +118,7 @@ describe("AvatarSection", () => {
     const { getByTestId, getByText } = renderWithProviders(<AccountPage />);
     expect(getByText("프로필")).toBeInTheDocument();
 
-    fireEvent.click(getByTestId("open-avatar-modal-button"));
+    fireEvent.click(getByTestId("avatar-edit-button"));
 
     fireEvent.click(getByText("업로드"));
 
@@ -124,7 +135,7 @@ describe("AvatarSection", () => {
     const { getByTestId, getByText } = renderWithProviders(<AccountPage />);
 
     // 첫 시도때는 Presigned URL을 가져오는데 실패
-    fireEvent.click(getByTestId("open-avatar-modal-button"));
+    fireEvent.click(getByTestId("avatar-edit-button"));
     fireEvent.click(getByTestId("file-input"));
     fireEvent.click(getByText("업로드"));
 
@@ -145,7 +156,7 @@ describe("AvatarSection", () => {
     });
 
     // 세번째 시도때는 업로드 완료 처리에 실패
-    vi.spyOn(AxiosAPI.axiosInstanceWithAuth, "put").mockRejectedValueOnce(
+    vi.spyOn(AxiosAPI.axiosInstanceWithAuth, "patch").mockRejectedValueOnce(
       new Error("Post Upload Error")
     );
     fireEvent.click(getByText("업로드"));
