@@ -19,7 +19,7 @@ async function getPresignedUrl(
 ): Promise<APIResponseType<PresignResponseType> | null> {
   try {
     const response = await axiosInstanceWithAuth.post(
-      `/api/v1/profiles/${id}/avatar/presign/`,
+      `/api/v1/members/${id}/avatar/presign/`,
       {
         filename: file.name,
         content_type: file.type,
@@ -60,12 +60,14 @@ type UploadResponseType = {
 
 async function postUpload(
   id: number,
-  key: string
+  key: string,
+  originalFilename: string
 ): Promise<APIResponseType<UploadResponseType>> {
-  const response = await axiosInstanceWithAuth.put(
-    `/api/v1/profiles/${id}/avatar/complete/`,
+  const response = await axiosInstanceWithAuth.patch(
+    `/api/v1/members/${id}/avatar/complete/`,
     {
       key,
+      original_filename: originalFilename,
     }
   );
 
@@ -98,7 +100,7 @@ async function updateProfileImage(
   }
 
   try {
-    const done = await postUpload(id, pre.data.fields.key);
+    const done = await postUpload(id, pre.data.fields.key, file.name);
 
     return {
       data: done.data,
@@ -131,7 +133,7 @@ export function useProfileImageMutation(id: number) {
           ...oldData,
           member: {
             ...oldData.member,
-            profile_image: { url: result.data.url },
+            profile_image: result.data.url,
           },
         };
       });

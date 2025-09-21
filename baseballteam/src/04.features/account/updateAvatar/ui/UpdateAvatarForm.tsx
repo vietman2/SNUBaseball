@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
 import styled from "styled-components";
 
-import { useProfileImageMutation } from "../api/updateImage";
+import { useAvatarForm } from "../hooks/useAvatarForm";
 import { SingleFileInput } from "@shared/ui/Inputs";
 import { Spinner } from "@shared/ui/Loading";
+import { ErrorText } from "@shared/ui/Texts";
 
 interface Props {
   memberId: number;
@@ -11,53 +11,16 @@ interface Props {
   postUpload: () => void;
 }
 
-export function UpdateImageModal({
+export function UpdateAvatarForm({
   memberId,
   originalImageUrl,
   postUpload,
 }: Readonly<Props>) {
-  const [file, setFile] = useState<File | null>(null);
-  const [submitting, setSubmitting] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
-
-  const { mutateAsync: uploadFile } = useProfileImageMutation(memberId);
-
-  const MAX_SIZE_MB = 10;
-
-  const handleError = (msg: string) => setError(msg);
-
-  const handleUpload = async () => {
-    if (!file) {
-      setError("업로드할 파일을 선택해주세요.");
-      return;
-    }
-
-    setSubmitting(true);
-    setError(null);
-
-    uploadFile(file, {
-      onSuccess: (result) => {
-        if (result.status !== "SUCCESS") {
-          setError(
-            result.message
-          );
-          setSubmitting(false);
-          return;
-        }
-
-        setSubmitting(false);
-        postUpload();
-      },
-    });
-  };
-
-  useEffect(() => {
-    // 새 파일이 선택되면 에러 메시지 정리
-    if (file) setError(null);
-  }, [file]);
+  const { file, setFile, submitting, errorMsg, setErrorMsg, submit } =
+    useAvatarForm({ memberId, postUpload });
 
   return (
-    <Container>
+    <Container onSubmit={submit}>
       <HeaderRow>
         <h2>프로필 이미지 변경</h2>
       </HeaderRow>
@@ -79,23 +42,21 @@ export function UpdateImageModal({
           <SingleFileInput
             value={file}
             onChange={setFile}
-            onError={handleError}
+            onError={setErrorMsg}
             defaultPreviewUrl={null} // 새 이미지는 업로드 영역에서만 표시
-            maxSizeMB={MAX_SIZE_MB}
             disabled={submitting}
           />
-          <Hint>최대 {MAX_SIZE_MB}MB</Hint>
         </Panel>
       </Grid>
-      {error && <ErrorText>{error}</ErrorText>}
-      <PrimaryButton type="button" onClick={handleUpload} disabled={submitting}>
+      {errorMsg && <ErrorText>{errorMsg}</ErrorText>}
+      <SubmitButton type="submit" disabled={submitting}>
         {submitting ? <Spinner /> : "업로드"}
-      </PrimaryButton>
+      </SubmitButton>
     </Container>
   );
 }
 
-const Container = styled.div`
+const Container = styled.form`
   display: flex;
   flex-direction: column;
   padding: 24px;
@@ -158,21 +119,7 @@ const CurrentImageBox = styled.div`
   }
 `;
 
-const Hint = styled.p`
-  margin: 0;
-  font-size: 0.85rem;
-  text-align: right;
-  color: ${({ theme }) => theme.colors.textSecondary};
-`;
-
-const ErrorText = styled.p`
-  margin: 0;
-  font-size: 0.875rem;
-  text-align: right;
-  color: ${({ theme }) => theme.colors.error};
-`;
-
-const PrimaryButton = styled.button`
+const SubmitButton = styled.button`
   display: inline-flex;
   align-items: center;
   justify-content: center;
