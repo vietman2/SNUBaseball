@@ -1,11 +1,11 @@
 import { Navigate, Route } from "react-router";
 
 import { ModalLayout } from "./layout";
-import { ProfileRoutes } from "./profile/routes";
+import { MyRoutes } from "./my/routes";
 
 export const ModalRoutes = (
   <Route element={<ModalLayout />}>
-    {ProfileRoutes}
+    {MyRoutes}
     <Route path="*" element={<Navigate to="home" replace />} />
   </Route>
 );
