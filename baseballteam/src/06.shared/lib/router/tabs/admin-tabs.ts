@@ -4,6 +4,12 @@ export const AdminTabs: TabGroupType = {
   title: "Admin",
   tabs: [
     {
+      title: "부원 관리",
+      icon: "people",
+      href: "/members",
+      subtabs: undefined,
+    },
+    {
       title: "팀 관리",
       icon: "management",
       href: "/team",

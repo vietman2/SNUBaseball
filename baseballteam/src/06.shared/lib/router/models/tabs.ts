@@ -24,3 +24,12 @@ export type TabGroupType = {
   tabs: TabType[];
   adminOnly: boolean;
 };
+
+export type ModalTabType = {
+  baseURL: string;
+  tabs: {
+    label: string;
+    href: string;
+    icon: string;
+  }[];
+};
