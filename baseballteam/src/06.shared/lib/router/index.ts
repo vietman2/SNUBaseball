@@ -11,7 +11,7 @@ export type {
 } from "./models/types";
 export type { TabType, SubTabType, TabGroupType } from "./models/tabs";
 
-export { ProfileModalTabs } from "./tabs/modal-tabs";
+export { MyModalTabs } from "./tabs/modal-tabs";
 
 export { isEqual } from "./utils/isEqual";
 export { getAllTabs, parseCurrentPath } from "./utils/url";

@@ -45,10 +45,11 @@ vi.mock("@shared/lib/formatters", async () => ({
   formatPhoneKR: (phone: string) => phone,
 }));
 vi.mock("@shared/lib/router", async () => {
-  const { RouterContext } = await vi.importActual("@shared/lib/router");
+  const { RouterContext, MyModalTabs } = await vi.importActual("@shared/lib/router");
 
   return {
     RouterContext: RouterContext,
+    MyModalTabs: MyModalTabs,
     isEqual: vi.fn().mockReturnValue(true),
     useRouter: vi.fn().mockReturnValue({
       backgroundLocation: {
