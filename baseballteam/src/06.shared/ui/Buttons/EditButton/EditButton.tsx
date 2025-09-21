@@ -7,7 +7,6 @@ interface Props {
   onClick: () => void;
   label?: string;
   color?: string;
-  testID?: string;
 }
 
 export function EditButton({
