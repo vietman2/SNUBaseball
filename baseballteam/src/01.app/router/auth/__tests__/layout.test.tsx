@@ -1,12 +1,21 @@
 import { describe, expect, it, vi } from "vitest";
 
-import { AuthLayout } from "../layout";
+import { AuthRoutesGuard, AuthLayout } from "../layout";
 import * as AuthAPI from "@entities/user";
 import { renderWithProviders } from "@test-utils/renderer";
 
 describe("AuthLayout", () => {
   it("should render the logo and outlet when not authenticated", () => {
-    const { getByText } = renderWithProviders(<AuthLayout />);
+    vi.spyOn(AuthAPI, "useUser").mockReturnValue({
+      isAuthenticated: false,
+      user: null,
+    });
+
+    const { getByText } = renderWithProviders(
+      <AuthRoutesGuard>
+        <AuthLayout />
+      </AuthRoutesGuard>
+    );
 
     expect(getByText("Logo")).toBeInTheDocument();
     expect(getByText("Mocked Outlet")).toBeInTheDocument();
@@ -18,7 +27,11 @@ describe("AuthLayout", () => {
       user: AuthAPI.sampleUser,
     });
 
-    const { container } = renderWithProviders(<AuthLayout />);
+    const { container } = renderWithProviders(
+      <AuthRoutesGuard>
+        <AuthLayout />
+      </AuthRoutesGuard>
+    );
 
     expect(container.innerHTML).toBe("");
 

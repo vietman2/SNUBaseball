@@ -28,7 +28,6 @@ export function AuthProvider({ children }: Readonly<Props>) {
   const [access, setAccess] = useState<string | null>(null);
   const [isInitialized, setIsInitialized] = useState<boolean>(false);
 
-  const { data: user } = useMe(Boolean(access));
   const queryClient = useQueryClient();
 
   const instanceId = useMemo(() => Math.random().toString(36).slice(2), []);
@@ -112,6 +111,28 @@ export function AuthProvider({ children }: Readonly<Props>) {
     [setToken, clearToken]
   );
 
+  if (!isInitialized) {
+    return null;
+  }
+
+  return (
+    <TokensContext.Provider value={tokensValue}>
+      <UserProvider access={access}>{children}</UserProvider>
+    </TokensContext.Provider>
+  );
+}
+
+interface UserProviderProps {
+  children: ReactNode;
+  access: string | null;
+}
+
+export function UserProvider({
+  children,
+  access,
+}: Readonly<UserProviderProps>) {
+  const { data: user, isLoading, isFetching } = useMe(Boolean(access));
+
   const userValue = useMemo<UserContextType<UserProfileType>>(() => {
     if (Boolean(access) && user) {
       return {
@@ -126,13 +147,9 @@ export function AuthProvider({ children }: Readonly<Props>) {
     }
   }, [access, user]);
 
-  if (!isInitialized) {
-    return null;
-  }
+  if (access !== null && (isLoading || isFetching)) return null;
 
   return (
-    <TokensContext.Provider value={tokensValue}>
-      <UserContext.Provider value={userValue}>{children}</UserContext.Provider>
-    </TokensContext.Provider>
+    <UserContext.Provider value={userValue}>{children}</UserContext.Provider>
   );
 }

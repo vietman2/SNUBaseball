@@ -1,16 +1,17 @@
+import type { ReactNode } from "react";
 import { Navigate, Outlet } from "react-router";
 import styled from "styled-components";
 
 import { useUser } from "@entities/user";
 import { Logo } from "@shared/ui/Icons";
 
-export function AuthLayout() {
+export function AuthRoutesGuard({ children }: { children: ReactNode }) {
   const { isAuthenticated } = useUser();
 
-  if (isAuthenticated) {
-    return <Navigate to="/home" replace />;
-  }
+  return isAuthenticated ? <Navigate to="/home" replace /> : children;
+}
 
+export function AuthLayout() {
   return (
     <Container>
       <Box>
