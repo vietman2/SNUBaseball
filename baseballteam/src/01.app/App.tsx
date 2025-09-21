@@ -11,15 +11,15 @@ import { AppRouter } from "./router/AppRouter";
 export default function App() {
   return (
     <BrowserRouter>
-      <RouterProvider>
-        <QueryProvider>
-          <StylesProvider>
-            <AuthProvider>
+      <QueryProvider>
+        <AuthProvider>
+          <RouterProvider>
+            <StylesProvider>
               <AppRouter />
-            </AuthProvider>
-          </StylesProvider>
-        </QueryProvider>
-      </RouterProvider>
+            </StylesProvider>
+          </RouterProvider>
+        </AuthProvider>
+      </QueryProvider>
     </BrowserRouter>
   );
 }
