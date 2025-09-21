@@ -21,7 +21,12 @@ export default defineConfig({
     globals: true,
     includeSource: ["./src/**/*.{ts,tsx}"],
     environment: "jsdom",
-    setupFiles: "./src/test-utils/vitest.setup.tsx",
+    setupFiles: [
+      "./src/test-utils/vitest.setup.tsx",
+      "./src/test-utils/mocks/modules.mocks.tsx",
+      "./src/test-utils/mocks/shared-lib.mocks.tsx",
+      "./src/test-utils/mocks/shared-ui.mocks.tsx",
+    ],
     coverage: {
       provider: "istanbul",
       reporter: ["lcov", "text", "html"],
