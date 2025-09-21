@@ -59,24 +59,13 @@ export function UpdateAvatarForm({
 const Container = styled.form`
   display: flex;
   flex-direction: column;
-  padding: 24px;
   gap: 16px;
-
-  background-color: ${({ theme }) => theme.colors.backgroundDefault};
-  border-radius: 16px;
 `;
 
 const HeaderRow = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-
-  > h2 {
-    margin: 0;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: ${({ theme }) => theme.colors.textPrimary};
-  }
 `;
 
 const Grid = styled.div`

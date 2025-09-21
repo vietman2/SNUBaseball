@@ -24,14 +24,14 @@ export function SimpleModal({ isOpen, onClose, children }: Readonly<Props>) {
       onMouseDown={onClose}
       data-testid="modal-overlay"
     >
-      <ModalDialog
+      <ModalContentWrapper
         $exiting={false}
         $animationLength={200}
         onMouseDown={(e) => e.stopPropagation()}
         data-testid="modal-dialog"
       >
         {children}
-      </ModalDialog>
+      </ModalContentWrapper>
     </ModalWrapper>
   );
 }
@@ -39,4 +39,20 @@ export function SimpleModal({ isOpen, onClose, children }: Readonly<Props>) {
 const ModalWrapper = styled(ModalOverlay)`
   background-color: ${({ theme }) => theme.colors.overlay}50;
   border-radius: 12px;
+`;
+
+const ModalContentWrapper = styled(ModalDialog)`
+  padding: 24px;
+  min-width: 400px;
+  max-width: 90vw;
+
+  background-color: ${({ theme }) => theme.colors.backgroundDefault};
+  border-radius: 16px;
+
+  h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: ${({ theme }) => theme.colors.textPrimary};
+  }
 `;

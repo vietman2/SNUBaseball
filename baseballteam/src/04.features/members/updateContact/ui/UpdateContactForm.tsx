@@ -68,20 +68,7 @@ export function UpdateContactForm({ memberId, closeModal }: Readonly<Props>) {
 const Container = styled.form`
   display: flex;
   flex-direction: column;
-  padding: 24px;
   gap: 16px;
-  width: 400px;
-  max-width: 90vw;
-
-  background-color: ${({ theme }) => theme.colors.backgroundDefault};
-  border-radius: 16px;
-
-  h2 {
-    margin: 0;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: ${({ theme }) => theme.colors.textPrimary};
-  }
 `;
 
 const InputsWrapper = styled.div`
