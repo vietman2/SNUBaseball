@@ -1,77 +1,49 @@
-import { useState } from "react";
 import styled from "styled-components";
 
-import { Section } from "./styles";
-import { ModalDialog, ModalOverlay } from "@widgets/modal";
-import { UpdateMajorModal } from "@features/account/updateAccount";
-import type { MajorType } from "@entities/majors";
-import { useColors } from "@shared/lib/styles";
-import { AppIcon } from "@shared/ui/Icons";
+import { Section, SectionSubtitle } from "./styles";
+import { SimpleModal, useSimpleModal } from "@widgets/modal";
+import { UpdateMajorForm } from "@features/members/updateMajor";
+import { MajorSelectsProvider, type DepartmentType } from "@entities/majors";
+import { EditButton } from "@shared/ui/Buttons";
 
 interface Props {
   memberId: number;
-  major: MajorType;
+  major: DepartmentType;
 }
 
 export function AcademicsSection({ major, memberId }: Readonly<Props>) {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const { colors } = useColors();
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  const { isOpen, open, close } = useSimpleModal();
 
   return (
     <>
       <Section>
-        <div className="section-left">
-          <h4>전공</h4>
-        </div>
-        <div className="section-middle">
-          <span className="section-text-secondary">{major.name}</span>
-        </div>
-        <div className="section-right">
-          <Button onClick={openModal} data-testid="open-major-modal-button">
-            <AppIcon icon="pencil" size={16} color={colors.primaryDark} />
-            <span>변경하기</span>
-          </Button>
-        </div>
+        <SectionSubtitle>전공</SectionSubtitle>
+        <Label>{major.name}</Label>
+        <EditButtonWrapper>
+          <EditButton onClick={open} />
+        </EditButtonWrapper>
       </Section>
-      {isModalOpen && (
-        <ModalOverlay
-          $exiting={!isModalOpen}
-          $animationLength={200}
-          onMouseDown={closeModal}
-          data-testid="modal-overlay"
-        >
-          <ModalDialog
-            $exiting={!isModalOpen}
-            $animationLength={200}
-            onMouseDown={(e) => e.stopPropagation()}
-            data-testid="modal-dialog"
-          >
-            <UpdateMajorModal
-              memberId={memberId}
-              originalMajor={major}
-              closeModal={closeModal}
-            />
-          </ModalDialog>
-        </ModalOverlay>
+      {isOpen && (
+        <SimpleModal isOpen={isOpen} onClose={close}>
+          <MajorSelectsProvider originalMajor={major}>
+            <UpdateMajorForm memberId={memberId} closeModal={close} />
+          </MajorSelectsProvider>
+        </SimpleModal>
       )}
     </>
   );
 }
 
-const Button = styled.button`
-  display: flex;
-  align-items: center;
-  gap: 4px;
+const Label = styled.div`
+  flex: 2;
 
-  color: ${({ theme }) => theme.colors.primaryDark};
-  font-weight: 500;
-  font-size: 0.875rem;
+  color: ${({ theme }) => theme.colors.textSecondary};
+  font-weight: 600;
+  font-size: 1rem;
+`;
+
+const EditButtonWrapper = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
 `;

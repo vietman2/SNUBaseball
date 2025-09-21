@@ -3,13 +3,24 @@ import { fireEvent, waitFor } from "@testing-library/react";
 import BareAxios from "axios";
 
 import { AccountPage } from "@pages/profile/account";
-import * as UserEntity from "@entities/user";
 import { sampleColleges } from "@entities/majors";
+import * as UserEntity from "@entities/user";
 import * as AxiosAPI from "@shared/lib/axios";
 import {
   createTestQueryClient,
   renderWithProviders,
 } from "@test-utils/renderer";
+
+// 나머지 컴포넌트들은 mocking
+vi.mock("../ui/AvatarSection", () => ({
+  AvatarSection: () => <div>AvatarSection</div>,
+}));
+vi.mock("../ui/ContactsSection", () => ({
+  ContactsSection: () => <div>ContactsSection</div>,
+}));
+vi.mock("../ui/DatesSection", () => ({
+  DatesSection: () => <div>DatesSection</div>,
+}));
 
 describe("AcademicsSection", () => {
   beforeEach(() => {
@@ -29,7 +40,7 @@ describe("AcademicsSection", () => {
       <AccountPage />
     );
 
-    fireEvent.click(getByTestId("open-major-modal-button"));
+    fireEvent.click(getByText("변경하기"));
 
     await waitFor(() => {
       expect(getByText("전공 변경")).toBeInTheDocument();
@@ -50,7 +61,7 @@ describe("AcademicsSection", () => {
     });
 
     // re-open and test closing with close button
-    fireEvent.click(getByTestId("open-major-modal-button"));
+    fireEvent.click(getByText("변경하기"));
 
     await waitFor(() => {
       expect(getByText("전공 변경")).toBeInTheDocument();
@@ -59,7 +70,7 @@ describe("AcademicsSection", () => {
     fireEvent.change(getByTestId("college-select"), {
       target: { value: "2" },
     });
-    fireEvent.change(getByTestId("major-select"), {
+    fireEvent.change(getByTestId("department-select"), {
       target: { value: "3" },
     });
 
@@ -70,7 +81,7 @@ describe("AcademicsSection", () => {
         major: sampleColleges[1].departments[0],
       },
     });
-    fireEvent.click(getByTestId("submit-major-update-button"));
+    fireEvent.submit(getByTestId("update-major-form"));
 
     await waitFor(() => {
       expect(queryByText("전공 변경")).not.toBeInTheDocument();
@@ -103,7 +114,7 @@ describe("AcademicsSection", () => {
       { client: sampleClient }
     );
 
-    fireEvent.click(getByTestId("open-major-modal-button"));
+    fireEvent.click(getByText("변경하기"));
 
     await waitFor(() => {
       expect(getByText("전공 변경")).toBeInTheDocument();
@@ -112,7 +123,7 @@ describe("AcademicsSection", () => {
     fireEvent.change(getByTestId("college-select"), {
       target: { value: "2" },
     });
-    fireEvent.change(getByTestId("major-select"), {
+    fireEvent.change(getByTestId("department-select"), {
       target: { value: "3" },
     });
 
@@ -123,7 +134,7 @@ describe("AcademicsSection", () => {
         major: sampleColleges[1].departments[0],
       },
     });
-    fireEvent.click(getByTestId("submit-major-update-button"));
+    fireEvent.submit(getByTestId("update-major-form"));
 
     await waitFor(() => {
       expect(queryByText("전공 변경")).not.toBeInTheDocument();
@@ -144,9 +155,9 @@ describe("AcademicsSection", () => {
       new Error("API Error")
     );
 
-    const { getByTestId } = renderWithProviders(<AccountPage />);
+    const { getByText } = renderWithProviders(<AccountPage />);
 
-    fireEvent.click(getByTestId("open-major-modal-button"));
+    fireEvent.click(getByText("변경하기"));
 
     await waitFor(() => {
       expect(window.alert).toHaveBeenCalledWith(
@@ -176,7 +187,7 @@ describe("AcademicsSection", () => {
 
     const { getByTestId, getByText } = renderWithProviders(<AccountPage />);
 
-    fireEvent.click(getByTestId("open-major-modal-button"));
+    fireEvent.click(getByText("변경하기"));
 
     await waitFor(() => {
       expect(getByText("전공 변경")).toBeInTheDocument();
@@ -186,23 +197,16 @@ describe("AcademicsSection", () => {
     fireEvent.change(getByTestId("college-select"), {
       target: { value: "3" },
     });
-    fireEvent.change(getByTestId("major-select"), {
+    fireEvent.change(getByTestId("department-select"), {
       target: { value: "6" },
     });
 
     // known error
-    vi.spyOn(AxiosAPI.axiosInstanceWithAuth, "patch").mockRejectedValueOnce({
-      response: {
-        data: {
-          message: "이미 사용 중인 전공입니다.",
-          status: "ERROR",
-        },
-      },
-    });
-    fireEvent.click(getByTestId("submit-major-update-button"));
+    vi.spyOn(AxiosAPI.axiosInstanceWithAuth, "patch").mockRejectedValueOnce({});
+    fireEvent.submit(getByTestId("update-major-form"));
 
     await waitFor(() => {
-      expect(getByText("이미 사용 중인 전공입니다.")).toBeInTheDocument();
+      expect(getByText("Sample Error Message")).toBeInTheDocument();
     });
   });
 });
