@@ -20,7 +20,7 @@ export function RootHeader({ user }: Readonly<Props>) {
         <Logo size={36} type={isDarkMode ? "SILVER" : "BLUE"} horizontal />
       </Link>
       <Button
-        to="/profile/account"
+        to="/my/account"
         state={{ backgroundLocation }}
         data-testid="user-button"
       >
@@ -39,6 +39,10 @@ const Container = styled.div`
   min-height: 60px;
   max-height: 60px;
   padding: 8px 24px;
+
+  position: sticky;
+  top: 0;
+  z-index: 10;
 
   background-color: ${({ theme }) => theme.colors.backgroundDefault};
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.05);
