@@ -59,9 +59,7 @@ def presign_upload(
         if old_kind != new_kind:
             raise SNUBaseballException("파일 유형이 일치하지 않습니다.")
 
-    post = presign_post(key, ct, size)
-
-    return {"key": key, "post": post}
+    return presign_post(key, ct, size)
 
 
 def complete_upload(key: str, original_filename: str | None, uploaded_by):

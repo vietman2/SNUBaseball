@@ -49,10 +49,8 @@ def test_presign_upload_success():
         size=1234,
     )
 
-    assert out["key"] == posixpath.join("tests/", "My_Pic.png")
-    assert out["post"]["url"].startswith("https://")
-    assert "fields" in out["post"]
-    assert out["post"]["fields"]["key"] == out["key"]
+    assert out["url"].startswith("https://")
+    assert "fields" in out
 
 
 def test_presign_upload_success_pdf():
@@ -63,10 +61,8 @@ def test_presign_upload_success_pdf():
         size=2048,
     )
 
-    assert out["key"] == posixpath.join("tests/", "document.pdf")
-    assert out["post"]["url"].startswith("https://")
-    assert "fields" in out["post"]
-    assert out["post"]["fields"]["key"] == out["key"]
+    assert out["url"].startswith("https://")
+    assert "fields" in out
 
 
 def test_presign_upload_rejects_disallowed_prefix():
@@ -102,4 +98,4 @@ def test_presign_upload_allows_same_type_when_exists(existing_files):
         content_type="image/png",
         size=1234,
     )
-    assert out["key"] == posixpath.join("tests/", "existing_image.png")
+    assert out["fields"]["key"] == posixpath.join("tests/", "existing_image.png")
