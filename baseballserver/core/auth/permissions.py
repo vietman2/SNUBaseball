@@ -6,6 +6,18 @@ class IsAuthenticated(BasePermission):
         return request.user and request.user.is_authenticated and request.user.is_active
 
 
-class IsAdmin(IsAuthenticated):
+class IsOps(IsAuthenticated):
+    """
+    운영진: 주장/부주장/매니저
+    + Superuser는 모든 권한이 있기 때문에 포함
+    """
+
     def has_permission(self, request, view):
-        return super().has_permission(request, view) and request.user.is_superuser
+        if not super().has_permission(request, view):
+            return False
+
+        return (
+            request.user.member.role.is_leadership
+            or request.user.member.role.is_manager
+            or request.user.is_superuser
+        )
