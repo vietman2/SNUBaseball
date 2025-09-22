@@ -4,6 +4,7 @@ __all__ = [
     "Member",
     "MajorListAPIView",
     "MemberDetailsSerializer",
+    "MembersViewSet",
 ]
 
 if TYPE_CHECKING:
@@ -11,7 +12,7 @@ if TYPE_CHECKING:
     ## 타입 체크용. 런타임 시점에는 import 하지 않음
     from .models import Member
     from .serializers import MemberDetailsSerializer
-    from .views import MajorListAPIView
+    from .views import MajorListAPIView, MembersViewSet
 
 
 def __getattr__(name):
@@ -27,4 +28,8 @@ def __getattr__(name):
         from .serializers import MemberDetailsSerializer
 
         return MemberDetailsSerializer
+    if name == "MembersViewSet":
+        from .views import MembersViewSet
+
+        return MembersViewSet
     raise AttributeError(name)
