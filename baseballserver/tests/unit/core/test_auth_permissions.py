@@ -2,7 +2,7 @@ import types
 import pytest
 from django.contrib.auth.models import AnonymousUser
 
-from core.auth import IsAuthenticated, IsAdmin
+from core.auth import IsAuthenticated, IsOps
 from tests.factories import UserFactory
 
 pytestmark = pytest.mark.django_db
@@ -31,17 +31,17 @@ def test_is_authenticated_false_for_inactive_user():
 
 def test_is_admin_true_for_superuser():
     user = UserFactory(is_superuser=True)
-    perm = IsAdmin()
+    perm = IsOps()
     assert perm.has_permission(_req(user), view=None) is True
 
 
 def test_is_admin_false_for_non_superuser():
     user = UserFactory(is_superuser=False)
-    perm = IsAdmin()
+    perm = IsOps()
     assert perm.has_permission(_req(user), view=None) is False
 
 
 def test_is_admin_false_when_inactive_superuser():
     user = UserFactory(is_superuser=True, is_active=False)
-    perm = IsAdmin()
+    perm = IsOps()
     assert perm.has_permission(_req(user), view=None) is False
