@@ -1,0 +1,14 @@
+export {
+  ColorContext,
+  type ColorContextType,
+  useColors,
+} from "./hooks/useColors";
+
+export { type BreakPointsType, breakpoints } from "./models/breakpoints";
+export { type ThemeColorType, light, dark } from "./models/colors";
+
+export { StyledComponentsRegistry } from "./registry/StyledComponentsRegistry";
+
+export { GlobalStyles } from "./ui/GlobalStyles";
+
+export { hexToRgb, hexToRgba } from "./utils/converters";

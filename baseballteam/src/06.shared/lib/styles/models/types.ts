@@ -30,6 +30,7 @@ export type ThemeColorType = {
   backgroundDefault: string;
   backgroundPaper: string;
   surfaceElevated: string;
+  overlay: string;
 
   // Text
   textPrimary: string;

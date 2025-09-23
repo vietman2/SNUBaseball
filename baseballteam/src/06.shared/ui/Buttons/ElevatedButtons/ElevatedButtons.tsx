@@ -23,7 +23,7 @@ export const ElevatedTextButton = styled.button<Props>`
   background-color: ${({ theme, $backgroundColor }) =>
     $backgroundColor ?? theme.colors.gray100};
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15);
-  transition: box-shadow 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
   cursor: pointer;
 
   &:hover {
@@ -50,7 +50,7 @@ export const ElevatedLink = styled(Link)<Props>`
   background-color: ${({ theme, $backgroundColor }) =>
     $backgroundColor ?? theme.colors.gray100};
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15);
-  transition: box-shadow 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
   cursor: pointer;
 
   &:hover {

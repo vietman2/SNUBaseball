@@ -1,18 +1,13 @@
-import type { TabGroup } from "@shared/lib/navigation";
+import type { TabGroupType } from "@shared/lib/router";
 
-export const MainTabs: TabGroup = {
+export const MainTabs: TabGroupType = {
   title: "Main",
   tabs: [
     {
       title: "Home",
       icon: "home",
       href: "/home",
-      subtabs: [
-        {
-          title: "홈",
-          href: "/home",
-        },
-      ],
+      subtabs: undefined,
     },
     {
       title: "기록실",
@@ -51,6 +46,12 @@ export const MainTabs: TabGroup = {
           href: "/forum/discussions",
         },
       ],
+    },
+    {
+      title: "갤러리",
+      icon: "gallery",
+      href: "/gallery",
+      subtabs: undefined,
     },
   ],
   adminOnly: false,

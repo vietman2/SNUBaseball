@@ -21,7 +21,6 @@ export const RouterTabs: TabType[] = [
     label: "소개",
     submenu: [
       { label: "팀 소개", href: "/about" },
-      { label: "팀 연혁", href: "/history" },
       { label: "선수 • 매니저", href: "/members" },
       { label: "지도자", href: "/staff" },
     ],

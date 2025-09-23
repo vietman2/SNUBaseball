@@ -1,0 +1,27 @@
+[
+  {
+    "model": "members.memberstatus",
+    "pk": 1,
+    "fields": { "label": "활동중", "color": "#28A745", "name": "ACTIVE" }
+  },
+  {
+    "model": "members.memberstatus",
+    "pk": 2,
+    "fields": { "label": "비활동", "color": "#FD7E14", "name": "INACTIVE" }
+  },
+  {
+    "model": "members.memberstatus",
+    "pk": 3,
+    "fields": { "label": "군입대", "color": "#DC3545", "name": "MILITARY" }
+  },
+  {
+    "model": "members.memberstatus",
+    "pk": 11,
+    "fields": { "label": "졸업", "color": "#FFC107", "name": "GRADUATED" }
+  },
+  {
+    "model": "members.memberstatus",
+    "pk": 21,
+    "fields": { "label": "미분류", "color": "#17A2B8", "name": "UNDEFINED" }
+  }
+]

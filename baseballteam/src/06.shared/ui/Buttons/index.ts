@@ -1,3 +1,4 @@
+export { EditButton } from "./EditButton/EditButton";
 export {
   ElevatedTextButton,
   ElevatedLink,

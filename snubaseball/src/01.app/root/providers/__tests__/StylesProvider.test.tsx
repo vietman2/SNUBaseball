@@ -13,7 +13,7 @@ describe("StylesProvider", () => {
     });
 
     const { container } = render(
-      <StylesProvider>
+      <StylesProvider initialDark>
         <div>Test</div>
       </StylesProvider>
     );
@@ -31,7 +31,7 @@ describe("StylesProvider", () => {
     });
 
     const { container } = render(
-      <StylesProvider>
+      <StylesProvider initialDark={false}>
         <div>Test</div>
       </StylesProvider>
     );
@@ -43,7 +43,7 @@ describe("StylesProvider", () => {
     delete (window as Partial<Window>).matchMedia;
 
     const { container } = render(
-      <StylesProvider>
+      <StylesProvider initialDark={false}>
         <div>Test</div>
       </StylesProvider>
     );

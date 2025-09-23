@@ -4,6 +4,6 @@ export { sampleAdmin, sampleUser } from "./data/sampleUsers";
 
 export { useMe } from "./hooks/useMe";
 
-export type { MemberProfileType, UserProfileType } from "./models/user";
+export type { UserProfileType } from "./models/user";
 
-export { UserAvatar } from "./ui/UserAvatar";
+export { UserAvatar, UserAvatarWithEdit } from "./ui/UserAvatar";

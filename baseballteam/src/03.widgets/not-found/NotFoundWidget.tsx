@@ -46,14 +46,14 @@ const Container = styled.div`
 
 const BackButton = styled.button`
   padding: 8px 16px;
-  color: ${({ theme }) => theme.colors.textSecondary};
+  color: ${({ theme }) => theme.colors.textPrimary};
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
 
   border: none;
   border-radius: 8px;
-  background-color: ${({ theme }) => theme.colors.gray300};
+  background-color: ${({ theme }) => theme.colors.backgroundPaper};
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.gray500};

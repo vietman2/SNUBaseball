@@ -2,7 +2,7 @@ import { JSX, ReactElement, PropsWithChildren } from "react";
 import { render } from "@testing-library/react";
 import { ThemeProvider } from "styled-components";
 
-import { breakpoints, light } from "@shared/lib/styled-components";
+import { breakpoints, light } from "@shared/lib/styles";
 
 export function renderWithProviders(ui: ReactElement) {
   function Wrapper({ children }: Readonly<PropsWithChildren>): JSX.Element {

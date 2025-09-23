@@ -44,3 +44,5 @@ export const sampleColleges: CollegeType[] = [
     ],
   },
 ];
+
+export const sampleDepartment = sampleColleges[0].departments[0];

@@ -105,7 +105,11 @@ export function SingleFileInput({
         )}
       </DropArea>
       {value && !disabled && (
-        <ResetButton type="button" onClick={() => onChange(null)} data-testid="reset-button">
+        <ResetButton
+          type="button"
+          onClick={() => onChange(null)}
+          data-testid="reset-button"
+        >
           초기화
         </ResetButton>
       )}
@@ -131,7 +135,7 @@ const DropArea = styled.div<{ $dragOver: boolean; $disabled: boolean }>`
     ${({ theme, $dragOver }) =>
       $dragOver ? theme.colors.primary : theme.colors.gray400};
   border-radius: 12px;
-  background: ${({ theme }) => theme.colors.backgroundPaper};
+  background: ${({ theme }) => theme.colors.surfaceElevated};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -140,7 +144,7 @@ const DropArea = styled.div<{ $dragOver: boolean; $disabled: boolean }>`
 
   &:hover {
     background-color: ${({ theme, $disabled }) =>
-      $disabled ? theme.colors.backgroundPaper : theme.colors.gray100};
+      $disabled ? theme.colors.surfaceElevated : theme.colors.gray100};
   }
 `;
 
@@ -162,7 +166,7 @@ const ResetButton = styled.button`
   padding: 6px 12px;
   border-radius: 8px;
   border: 1px solid ${({ theme }) => theme.colors.gray300};
-  background: ${({ theme }) => theme.colors.backgroundPaper};
+  background: ${({ theme }) => theme.colors.surfaceElevated};
   font-size: 0.85rem;
   cursor: pointer;
 

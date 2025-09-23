@@ -51,6 +51,7 @@ const TabLink = styled(Link)`
   align-items: center;
   justify-content: center;
   padding: 16px 0;
+  color: ${({ theme }) => theme.colors.textPrimary};
   font-weight: 600;
   border-bottom: 1px solid ${({ theme }) => theme.colors.primary};
 `;
@@ -66,6 +67,7 @@ const TabButton = styled.button<{ $isOpen: boolean }>`
   align-items: center;
   justify-content: center;
   padding: 16px 0;
+  color: ${({ theme }) => theme.colors.textPrimary};
   font-weight: 600;
 `;
 
@@ -76,7 +78,7 @@ const SidebarSubmenu = styled.div<{ $isOpen?: boolean }>`
   overflow: hidden;
 
   /* 시각적 보강 */
-  background-color: ${({ theme }) => theme.colors.gray200};
+  background-color: ${({ theme }) => theme.colors.gray300};
   opacity: ${({ $isOpen }) => ($isOpen ? 1 : 0)};
   transition: grid-template-rows 0.28s ease-in-out, opacity 0.28s ease-in-out;
   will-change: grid-template-rows, opacity;
@@ -93,6 +95,7 @@ const SidebarSubmenu = styled.div<{ $isOpen?: boolean }>`
     justify-content: center;
     padding: 12px 0;
     border-top: 1px solid ${({ theme }) => theme.colors.gray100};
+    color: ${({ theme }) => theme.colors.textSecondary};
     font-weight: 400;
 
     /* 살짝 페이드/슬라이드 업 효과 추가 */

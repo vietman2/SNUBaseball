@@ -2,10 +2,10 @@ export type CollegeType = {
   id: number;
   name: string;
   short_name: string;
-  departments: MajorType[];
+  departments: DepartmentType[];
 };
 
-export type MajorType = {
+export type DepartmentType = {
   id: number;
   name: string;
   short_name: string;

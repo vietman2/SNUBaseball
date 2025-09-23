@@ -1,17 +1,19 @@
-export type TabType = {
-  title: string;
-  icon: string;
-  href: string;
-  subtabs: SubTabType[];
+import {
+  type Location as RouterLocation,
+  type RouteObject,
+} from "react-router";
+
+type BackgroundState = {
+  backgroundLocation: RouterLocation;
 };
 
-export type SubTabType = {
-  title: string;
-  href: string;
+type RouteSlice = {
+  base: string;
+  routes: RouteObject[];
 };
 
-export type TabGroup = {
-  title: string;
-  tabs: TabType[];
-  adminOnly: boolean;
+export type {
+  BackgroundState,
+  RouterLocation,
+  RouteSlice,
 };
