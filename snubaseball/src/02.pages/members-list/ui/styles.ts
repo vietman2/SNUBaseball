@@ -20,7 +20,7 @@ export const Container = styled.div`
 export const MembersList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 24px;
 
   h3 {
     margin: 0;
@@ -29,8 +29,9 @@ export const MembersList = styled.div`
   }
 
   .member-page-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 180px);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 24px;
   }
 

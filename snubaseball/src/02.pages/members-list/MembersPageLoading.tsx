@@ -1,5 +1,5 @@
 import { Container, MembersList } from "./ui/styles";
-import { MemberCardSkeleton } from "@entities/members";
+import { MemberCardSkeleton } from "@entities/rosters";
 
 export function MembersPageLoading() {
   return (

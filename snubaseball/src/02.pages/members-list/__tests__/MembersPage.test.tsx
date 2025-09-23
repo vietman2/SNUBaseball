@@ -1,5 +1,5 @@
 import { MembersPage, metadata } from "@pages/members-list";
-import { sampleMembers } from "@entities/members";
+import { sampleRoster } from "@entities/rosters";
 import {
   getElementFromAsyncServerComponent,
   renderWithProviders,
@@ -16,7 +16,7 @@ describe("MembersPage", () => {
     global.fetch = jest.fn();
     (global.fetch as jest.Mock).mockResolvedValue({
       ok: true,
-      json: jest.fn().mockResolvedValue(sampleMembers),
+      json: jest.fn().mockResolvedValue(sampleRoster),
     });
     // mock date to 2025-01-01
     jest.useFakeTimers().setSystemTime(new Date("2025-01-01"));
@@ -27,7 +27,7 @@ describe("MembersPage", () => {
       const { getByText } = await render();
 
       expect(getByText("매니저")).toBeInTheDocument();
-      expect(getByText("2025년 1학기 서울대 야구부"))
+      expect(getByText("2025년 1학기 서울대 야구부"));
     });
 
     it("handles 2nd semester", async () => {
@@ -36,15 +36,17 @@ describe("MembersPage", () => {
       const { getByText } = await render();
 
       expect(getByText("2025년 2학기 서울대 야구부"));
-    })
+    });
 
     it("handles fetch error", async () => {
       (global.fetch as jest.Mock).mockResolvedValueOnce({
         ok: false,
         json: jest.fn().mockResolvedValue({ message: "Error" }),
       });
-      
-      expect(render()).rejects.toThrow("데이터를 불러오는 중에 오류가 발생했습니다: Error");
+
+      expect(render()).rejects.toThrow(
+        "데이터를 불러오는 중에 오류가 발생했습니다: Error"
+      );
     });
   });
 
