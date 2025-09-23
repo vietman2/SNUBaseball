@@ -1,19 +1,17 @@
 import "server-only";
 
-import { MemberType } from "../models/members";
+import { RosterType } from "../models/roster";
 import { BACKEND_API_URL } from "@shared/configs/backend";
 import { SNUBaseballAPIError } from "@shared/configs/error";
 
-type ResponseType = {
-  players: MemberType[];
-  managers: MemberType[];
-};
-
-export async function getActiveMembers(): Promise<ResponseType> {
-  const response = await fetch(`${BACKEND_API_URL}/v1/members/`, {
-    cache: "force-cache",
-    next: { revalidate: 60, tags: ["members"] },
-  });
+export async function getRoster(semester_code: string): Promise<RosterType> {
+  const response = await fetch(
+    `${BACKEND_API_URL}/v1/teams/?semester=${semester_code}`,
+    {
+      cache: "force-cache",
+      next: { revalidate: 60, tags: [`roster-${semester_code}`] },
+    }
+  );
 
   if (!response.ok) {
     const result = await response.json();
