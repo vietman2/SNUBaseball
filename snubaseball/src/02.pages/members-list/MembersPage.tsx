@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 import { Container, MembersList } from "./ui/styles";
+import { Breadcrumb, BreadcrumbItemType } from "@widgets/breadcrumb";
 import { MemberCard } from "@entities/rosters";
 import { getRoster } from "@entities/rosters/server";
 
@@ -17,11 +18,13 @@ export async function MembersPage() {
 
   const members = await getRoster(semester_code);
 
+  const breadcrumbItems: BreadcrumbItemType[] = [
+    { label: "선수 • 매니저", href: null, isLastItem: true },
+  ];
+
   return (
     <Container>
-      <h1>
-        {currentYear}년 {semester} 서울대 야구부
-      </h1>
+      <Breadcrumb items={breadcrumbItems} />
       <MembersList>
         <h3>매니저</h3>
         <div className="member-page-list">

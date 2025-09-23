@@ -8,13 +8,8 @@ export const Container = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
-  padding: 32px 0;
+  padding: 12px 0px;
   gap: 24px;
-
-  h1 {
-    font-size: 1.25rem;
-    font-weight: 700;
-  }
 `;
 
 export const MembersList = styled.div`

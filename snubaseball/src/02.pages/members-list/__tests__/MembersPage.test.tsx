@@ -27,7 +27,6 @@ describe("MembersPage", () => {
       const { getByText } = await render();
 
       expect(getByText("매니저")).toBeInTheDocument();
-      expect(getByText("2025년 1학기 서울대 야구부"));
     });
 
     it("handles 2nd semester", async () => {
@@ -35,7 +34,7 @@ describe("MembersPage", () => {
 
       const { getByText } = await render();
 
-      expect(getByText("2025년 2학기 서울대 야구부"));
+      expect(getByText("매니저")).toBeInTheDocument();
     });
 
     it("handles fetch error", async () => {
