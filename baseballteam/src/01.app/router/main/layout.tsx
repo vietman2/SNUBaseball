@@ -28,5 +28,6 @@ const Container = styled.div`
 
   .root-contents {
     display: flex;
+    max-width: 100vw;
   }
 `;
