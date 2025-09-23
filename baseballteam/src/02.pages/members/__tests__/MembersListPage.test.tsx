@@ -31,7 +31,7 @@ describe("MembersListPage", () => {
       data: [sampleMemberDetails],
     });
     vi.spyOn(AxiosAPI.axiosInstanceWithAuth, "post").mockResolvedValue({
-      data: { ...sampleMemberDetails, name: "김신규", studentId: "20250001" },
+      data: { ...sampleMemberDetails, id: 2, name: "김신규", studentId: "20250001" },
     });
   });
 
