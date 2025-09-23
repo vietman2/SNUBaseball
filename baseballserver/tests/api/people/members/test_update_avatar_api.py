@@ -90,3 +90,89 @@ def test_members_update_avatar_success(api_client, monkeypatch):
     user.member.refresh_from_db()
     assert user.member.profile_image is not None
     assert user.member.profile_image.key == expected_key
+
+
+def test_members_update_avatar_presign_invalid_data(api_client):
+    # 본인(member)로 로그인
+    user = UserFactory.create_normal_account()
+    member_id = user.member.id
+    api_client.force_authenticate(user=user)
+
+    # presign 요청: filename 누락
+    resp = api_client.post(
+        f"/api/v1/members/{member_id}/avatar/presign/",
+        {
+            "content_type": "image/png",
+            "size": 1024,
+        },
+        format="json",
+    )
+    assert resp.status_code == 400
+    assert resp.data["message"] == "유효하지 않은 데이터입니다."
+
+
+def test_members_update_avatar_complete_invalid_data(api_client):
+    # 본인(member)로 로그인
+    user = UserFactory.create_normal_account()
+    member_id = user.member.id
+    api_client.force_authenticate(user=user)
+
+    # complete 요청: key 누락
+    resp = api_client.patch(
+        f"/api/v1/members/{member_id}/avatar/complete/",
+        {
+            "original_filename": "avatar.png",
+        },
+        format="json",
+    )
+    assert resp.status_code == 400
+    assert resp.data["message"] == "유효하지 않은 데이터입니다."
+
+
+def test_members_update_avatar_complete_invalid_key(api_client):
+    # 본인(member)로 로그인
+    user = UserFactory.create_normal_account()
+    member_id = user.member.id
+    api_client.force_authenticate(user=user)
+
+    # complete 요청: key가 다른 멤버의 prefix로 시작함
+    resp = api_client.patch(
+        f"/api/v1/members/{member_id}/avatar/complete/",
+        {
+            "key": f"invalid/{member_id + 1}/avatar.png",  # 잘못된 key
+            "original_filename": "avatar.png",
+        },
+        format="json",
+    )
+    assert resp.status_code == 400
+    assert resp.data["message"] == "유효하지 않은 키입니다."
+
+
+def test_members_update_avatar_complete_not_image(api_client, monkeypatch):
+    # 본인(member)로 로그인
+    user = UserFactory.create_normal_account()
+    member_id = user.member.id
+    api_client.force_authenticate(user=user)
+
+    # services 패치 (complete_upload가 이미지를 반환하지 않도록)
+    def fake_complete_upload(*, key, original_filename=None, uploaded_by=None):
+        class NotAnImage:
+            url = "https://cdn.test/not-an-image.png"
+
+        return NotAnImage()
+
+    monkeypatch.setattr(
+        "apps.people.members.views.members.complete_upload", fake_complete_upload
+    )
+
+    # complete 요청
+    resp = api_client.patch(
+        f"/api/v1/members/{member_id}/avatar/complete/",
+        {
+            "key": f"profiles/{member_id}/avatar.png",
+            "original_filename": "avatar.png",
+        },
+        format="json",
+    )
+    assert resp.status_code == 400
+    assert resp.data["message"] == "이미지 파일만 업로드할 수 있습니다."
