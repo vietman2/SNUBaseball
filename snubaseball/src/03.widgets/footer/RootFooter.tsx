@@ -1,4 +1,6 @@
+import { FooterContainer } from "./ui/styles";
+
 export function RootFooter() {
   // TODO: Implement Footer
-  return <div style={{ height: "200px" }} />;
+  return <FooterContainer />;
 }
