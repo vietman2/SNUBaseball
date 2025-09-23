@@ -17,10 +17,10 @@ export function NameIdSegment() {
   return (
     <Segment>
       <ToggleContainer>
-        <ToggleButton onClick={selectPlayer} isActive={isPlayer}>
+        <ToggleButton onClick={selectPlayer} $isActive={isPlayer}>
           선수
         </ToggleButton>
-        <ToggleButton onClick={selectManager} isActive={!isPlayer}>
+        <ToggleButton onClick={selectManager} $isActive={!isPlayer}>
           매니저
         </ToggleButton>
       </ToggleContainer>
@@ -53,20 +53,20 @@ const ToggleContainer = styled.div`
   margin-bottom: 8px;
 `;
 
-const ToggleButton = styled.button<{ isActive: boolean }>`
+const ToggleButton = styled.button<{ $isActive: boolean }>`
   flex: 1;
   padding: 4px 8px;
 
   text-align: center;
   color: ${({ theme }) => theme.colors.primary};
-  font-weight: ${({ isActive }) => (isActive ? 600 : 500)};
+  font-weight: ${({ $isActive }) => ($isActive ? 600 : 500)};
   font-size: 1rem;
 
   outline: none;
   cursor: pointer;
   border-radius: 4px;
-  background-color: ${({ theme, isActive }) =>
-    isActive ? theme.colors.primary : "transparent"}30;
+  background-color: ${({ theme, $isActive }) =>
+    $isActive ? theme.colors.primary : "transparent"}30;
 
   transition: background-color 0.2s;
 `;
