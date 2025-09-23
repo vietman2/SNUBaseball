@@ -53,7 +53,6 @@ export function useContactForm({ memberId, postUpdate }: Readonly<Options>) {
   };
 
   return {
-    submitting,
     errorMsg,
     buttonDisabled,
     submit,

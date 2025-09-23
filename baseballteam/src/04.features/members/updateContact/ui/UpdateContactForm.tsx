@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 import { PhoneInput } from "@shared/ui/Inputs";
-import { Spinner } from "@shared/ui/Loading";
 import { ErrorText } from "@shared/ui/Texts";
 import { useContactForm } from "../hooks/useContactForm";
 import { useContactInputs } from "@entities/members";
@@ -12,7 +11,7 @@ interface Props {
 }
 
 export function UpdateContactForm({ memberId, closeModal }: Readonly<Props>) {
-  const { submit, errorMsg, buttonDisabled, submitting } = useContactForm({
+  const { submit, errorMsg, buttonDisabled } = useContactForm({
     memberId,
     postUpdate: closeModal,
   });
@@ -59,7 +58,7 @@ export function UpdateContactForm({ memberId, closeModal }: Readonly<Props>) {
         disabled={buttonDisabled}
         data-testid="submit-contacts-update-button"
       >
-        {submitting ? <Spinner /> : "변경하기"}
+        변경하기
       </Button>
     </Container>
   );
