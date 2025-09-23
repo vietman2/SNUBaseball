@@ -46,6 +46,13 @@ class MemberFactory(DjangoModelFactory):
         주장 생성
         """
         return cls.create(role=_role("주장"), **kwargs)
+    
+    @classmethod
+    def create_vice_captain(cls, **kwargs) -> Member:
+        """
+        부주장 생성
+        """
+        return cls.create(role=_role("부주장"), **kwargs)
 
     @classmethod
     def create_head_manager(cls, **kwargs) -> Member:
