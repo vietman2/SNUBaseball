@@ -86,12 +86,11 @@ class MemberDetailsSerializer(serializers.ModelSerializer):
         default_role = MemberRole.objects.get(name="선수")
         default_status = MemberStatus.objects.get(label="활동중")
 
-        if "is_player" in data:
-            is_player = data.pop("is_player")
-            if is_player:
-                data["role"] = default_role
-            else:
-                data["role"] = MemberRole.objects.get(name="매니저")
+        is_player = data.pop("is_player", True)
+        if is_player:
+            data["role"] = default_role
+        else:
+            data["role"] = MemberRole.objects.get(name="매니저")
 
         member = Member.objects.create(**data, status=default_status)
 
