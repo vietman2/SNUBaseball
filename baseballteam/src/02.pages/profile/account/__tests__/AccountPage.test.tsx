@@ -85,4 +85,49 @@ describe("AccountPage", () => {
       expect(queryByText("전공 변경")).not.toBeInTheDocument();
     });
   });
+
+  it("handles update dates successfully (with empty initial dates)", async () => {
+    vi.spyOn(UserEntity, "useUser").mockReturnValue({
+      user: {
+        ...UserEntity.sampleUser,
+        member: {
+          ...UserEntity.sampleUser.member,
+          birth_date: null,
+          date_joined: null,
+        },
+      },
+      isAuthenticated: true,
+    });
+
+    const { getAllByText, getByTestId, queryByText } = renderWithProviders(
+      <AccountPage />
+    );
+
+    fireEvent.click(getAllByText("변경하기")[2]); // 세번째가 날짜 변경 버튼
+
+    await waitFor(() => {
+      expect(queryByText("기타 정보 변경")).toBeInTheDocument();
+    });
+
+    // 날짜 변경하기
+    fireEvent.change(getByTestId("birth-date-input"), {
+      target: { value: "1999-09-09" },
+    });
+    fireEvent.change(getByTestId("join-date-input"), {
+      target: { value: "2020-03-02" },
+    });
+
+    vi.spyOn(AxiosAPI.axiosInstanceWithAuth, "patch").mockResolvedValueOnce({
+      data: {
+        ...UserEntity.sampleUser.member,
+        birth_date: "1999-09-09",
+        date_joined: "2020-03-02",
+      },
+    });
+    fireEvent.submit(getByTestId("update-dates-form"));
+
+    await waitFor(() => {
+      expect(queryByText("기타 정보 변경")).not.toBeInTheDocument();
+    });
+  });
 });

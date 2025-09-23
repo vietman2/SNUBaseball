@@ -50,7 +50,6 @@ export function useDatesForm({ memberId, postUpdate }: Readonly<Options>) {
   return {
     errorMsg,
     buttonDisabled,
-    isPending,
     submit,
   };
 }

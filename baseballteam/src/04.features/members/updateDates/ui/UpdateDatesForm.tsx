@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { useDatesForm } from "../form/useDatesForm";
 import { useDateInputs } from "@entities/members";
 import { DateInput } from "@shared/ui/Inputs";
-import { Spinner } from "@shared/ui/Loading";
 import { ErrorText } from "@shared/ui/Texts";
 
 interface Props {
@@ -14,7 +13,7 @@ interface Props {
 export function UpdateDatesForm({ memberId, closeModal }: Readonly<Props>) {
   const { birthDate, setBirthDate, dateJoined, setDateJoined } =
     useDateInputs();
-  const { submit, buttonDisabled, errorMsg, isPending } = useDatesForm({
+  const { submit, buttonDisabled, errorMsg } = useDatesForm({
     memberId,
     postUpdate: closeModal,
   });
@@ -50,7 +49,7 @@ export function UpdateDatesForm({ memberId, closeModal }: Readonly<Props>) {
         disabled={buttonDisabled}
         data-testid="submit-contacts-update-button"
       >
-        {isPending ? <Spinner /> : "변경하기"}
+        변경하기
       </Button>
     </Container>
   );
