@@ -19,9 +19,15 @@ jest.mock("@shared/lib/styles", () => ({
   useColors: jest.fn().mockReturnValue({ isDarkMode: false, colors: {} }),
 }));
 
+jest.mock("@shared/ui/Badge", () => ({
+  Badge: ({ label }: { label: string }) => <span>{label}</span>,
+}));
 jest.mock("@shared/ui/Icons", () => ({
   AppIcon: ({ icon }: { icon: string }) => <span>{icon}-icon</span>,
   Logo: ({ size }: { size: number }) => <span>logo-{size}</span>,
+}));
+jest.mock("@shared/ui/Images", () => ({
+  ImagePlaceholder: () => <div>image-placeholder</div>,
 }));
 jest.mock("@shared/ui/Loading", () => ({
   Skeleton: () => <div data-testid="skeleton" />,
