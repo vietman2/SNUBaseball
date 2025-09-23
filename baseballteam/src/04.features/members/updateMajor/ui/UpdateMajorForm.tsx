@@ -18,7 +18,7 @@ interface Props {
 
 export function UpdateMajorForm({ memberId, closeModal }: Readonly<Props>) {
   const { loading, error } = useMajorSelects();
-  const { submitting, errorMsg, isButtonDisabled, submit } = useMajorForm({
+  const { errorMsg, isButtonDisabled, submit } = useMajorForm({
     memberId,
     postUpdate: closeModal,
   });
@@ -55,7 +55,7 @@ export function UpdateMajorForm({ memberId, closeModal }: Readonly<Props>) {
         $color={colors.onPrimary}
         data-testid="submit-major-form-button"
       >
-        {submitting ? <Spinner /> : "변경하기"}
+        변경하기
       </Button>
     </Container>
   );

@@ -50,7 +50,6 @@ export function useMajorForm({ memberId, postUpdate }: Readonly<Options>) {
   );
 
   return {
-    submitting: isPending,
     errorMsg,
     isButtonDisabled,
     submit,
