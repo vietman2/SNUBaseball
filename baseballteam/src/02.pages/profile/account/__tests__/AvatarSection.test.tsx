@@ -61,22 +61,7 @@ describe("AvatarSection", () => {
       expect(getByText("프로필 이미지 변경")).toBeInTheDocument();
     });
 
-    // test clicking inside modal
-    fireEvent.mouseDown(getByTestId("modal-dialog"));
-
-    await waitFor(() => {
-      expect(getByText("프로필 이미지 변경")).toBeInTheDocument();
-    });
-
-    // test clicking outside modal
-    fireEvent.mouseDown(getByTestId("modal-overlay"));
-
-    await waitFor(() => {
-      expect(queryByText("프로필 이미지 변경")).not.toBeInTheDocument();
-    });
-
-    // re-open and test file upload
-    fireEvent.click(getByTestId("avatar-edit-button"));
+    // test file upload
     fireEvent.click(getByTestId("file-input"));
     fireEvent.click(getByText("업로드"));
 

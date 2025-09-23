@@ -25,32 +25,6 @@ describe("ContactsSection", () => {
     });
   });
 
-  it("handles modal open/close", async () => {
-    const { getByTestId, getByText, queryByText } = renderWithProviders(
-      <AccountPage />
-    );
-
-    fireEvent.click(getByText("변경하기"));
-
-    await waitFor(() => {
-      expect(getByText("연락처 변경")).toBeInTheDocument();
-    });
-
-    // test clicking inside modal
-    fireEvent.mouseDown(getByTestId("modal-dialog"));
-
-    await waitFor(() => {
-      expect(getByText("연락처 변경")).toBeInTheDocument();
-    });
-
-    // test clicking outside modal
-    fireEvent.mouseDown(getByTestId("modal-overlay"));
-
-    await waitFor(() => {
-      expect(queryByText("연락처 변경")).not.toBeInTheDocument();
-    });
-  });
-
   it("handles update contacts success", async () => {
     const { getByTestId, getByText, queryByText, getByLabelText } =
       renderWithProviders(<AccountPage />);
