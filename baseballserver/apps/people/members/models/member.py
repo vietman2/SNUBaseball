@@ -10,7 +10,7 @@ from .status import MemberStatus
 
 class Member(models.Model):
     ## 기본 정보
-    student_id = models.CharField(max_length=15, unique=True, blank=True)
+    student_id = models.CharField(max_length=15, unique=True, blank=True, null=True)
     name = models.CharField(max_length=150)
     admission_year = models.IntegerField(validators=[Min(1900), Max(2100)])
     major = models.ForeignKey(
