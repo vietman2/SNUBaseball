@@ -1,6 +1,6 @@
-import { PhoneInput } from "@shared/ui/Inputs";
 import { Segment, Vertical } from "../styles";
 import { useContactInputs } from "@entities/members";
+import { PhoneInput } from "@shared/ui/Inputs";
 
 export function ContactsSegment() {
   const { phone, setPhone, email, setEmail, address, setAddress } =
