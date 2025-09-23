@@ -17,6 +17,7 @@ import Pencil from "./files/pencil.svg?react";
 import People from "./files/people.svg?react";
 import Person from "./files/person.svg?react";
 import Player from "./files/player.svg?react";
+import Plus from "./files/plus.svg?react";
 import Record from "./files/record.svg?react";
 import SidebarClose from "./files/sidebar-close.svg?react";
 import SidebarOpen from "./files/sidebar-open.svg?react";
@@ -51,6 +52,7 @@ const iconMap: Record<
   people: People,
   person: Person,
   player: Player,
+  plus: Plus,
   record: Record,
   "sidebar-close": SidebarClose,
   "sidebar-open": SidebarOpen,
