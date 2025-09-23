@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "apps.media.assets.apps.AssetsConfig",
     "apps.people.members.apps.MembersConfig",
     "apps.people.users.apps.UsersConfig",
+    "apps.teams.teams.apps.TeamsConfig",
 ]
 
 MIDDLEWARE = [
