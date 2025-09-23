@@ -1,7 +1,10 @@
-import { describe, it, expect, beforeEach, vi } from "vitest";
+import { beforeEach, describe, it, expect, vi } from "vitest";
+import { fireEvent, waitFor } from "@testing-library/react";
 
 import { AccountPage } from "@pages/profile/account";
+import { sampleColleges } from "@entities/majors";
 import * as UserEntity from "@entities/user";
+import * as AxiosAPI from "@shared/lib/axios";
 import { renderWithProviders } from "@test-utils/renderer";
 
 /**
@@ -11,9 +14,13 @@ import { renderWithProviders } from "@test-utils/renderer";
 
 describe("AccountPage", () => {
   beforeEach(() => {
+    vi.spyOn(window, "alert").mockImplementation(() => {});
     vi.spyOn(UserEntity, "useUser").mockReturnValue({
       user: UserEntity.sampleUser,
       isAuthenticated: true,
+    });
+    vi.spyOn(AxiosAPI.axiosInstanceWithAuth, "get").mockResolvedValue({
+      data: sampleColleges,
     });
   });
 
@@ -45,5 +52,37 @@ describe("AccountPage", () => {
     expect(getByText("2003-05-15")).toBeInTheDocument();
     expect(getByText("야구부 입부일")).toBeInTheDocument();
     expect(getByText("2023-03-01")).toBeInTheDocument();
+  });
+
+  it("handles update major success", async () => {
+    const { getAllByText, getByTestId, queryByText } = renderWithProviders(
+      <AccountPage />
+    );
+
+    fireEvent.click(getAllByText("변경하기")[0]); // 첫번째가 전공 변경 버튼
+
+    await waitFor(() => {
+      expect(getByTestId("update-major-form")).toBeInTheDocument();
+    });
+
+    fireEvent.change(getByTestId("college-select"), {
+      target: { value: "2" },
+    });
+    fireEvent.change(getByTestId("department-select"), {
+      target: { value: "3" },
+    });
+
+    // mock successful PUT request
+    vi.spyOn(AxiosAPI.axiosInstanceWithAuth, "patch").mockResolvedValueOnce({
+      data: {
+        ...UserEntity.sampleUser.member,
+        major: sampleColleges[1].departments[0],
+      },
+    });
+    fireEvent.submit(getByTestId("update-major-form"));
+
+    await waitFor(() => {
+      expect(queryByText("전공 변경")).not.toBeInTheDocument();
+    });
   });
 });

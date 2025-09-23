@@ -26,6 +26,11 @@ export function useMajorForm({ memberId, postUpdate }: Readonly<Options>) {
   const submit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
+
+      if (isButtonDisabled || selectedMajorId === null) {
+        return;
+      }
+
       setErrorMsg(null);
 
       mutate(
@@ -41,7 +46,7 @@ export function useMajorForm({ memberId, postUpdate }: Readonly<Options>) {
         }
       );
     },
-    [mutate, postUpdate, selectedMajorId]
+    [mutate, postUpdate, selectedMajorId, isButtonDisabled]
   );
 
   return {
