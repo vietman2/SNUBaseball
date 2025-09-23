@@ -12,7 +12,7 @@ describe("StudentIDInput", () => {
       </NameIDInputProvider>
     );
 
-  it("toggles input mode when button is clicked", async () => {
+  it("toggles input mode when button is clicked and handles inputs", async () => {
     const { getByTestId, getByText, queryByTestId } = render();
 
     const toggleButton = getByTestId("toggle-button");
@@ -30,5 +30,18 @@ describe("StudentIDInput", () => {
       expect(queryByTestId("student-id-input")).not.toBeInTheDocument();
       expect(getByText("전체 학번 입력")).toBeInTheDocument();
     });
+
+    // 다시 토글을 클릭하면, full student ID input이 보여야 함
+    fireEvent.click(toggleButton);
+
+    await waitFor(() => {
+      expect(getByTestId("student-id-input")).toBeInTheDocument();
+      expect(queryByTestId("admission-year-input")).not.toBeInTheDocument();
+      expect(getByText("입학년도만 입력")).toBeInTheDocument();
+    });
+
+    fireEvent.change(getByTestId("student-id-input"), { target: { value: "2025-12345" } });
+    fireEvent.click(toggleButton);
+    fireEvent.change(getByTestId("admission-year-input"), { target: { value: "2023" } });
   });
 });
