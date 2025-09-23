@@ -19,6 +19,9 @@ jest.mock("@app/root/ui/styles", () => ({
     <div>{children}</div>
   ),
 }));
+jest.mock("@widgets/footer", () => ({
+  RootFooter: () => <div>Root Footer</div>,
+}));
 jest.mock("@widgets/header", () => ({
   RootHeader: () => <div>Root Header</div>,
 }));
