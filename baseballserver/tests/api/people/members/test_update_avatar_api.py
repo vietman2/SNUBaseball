@@ -155,7 +155,9 @@ def test_members_update_avatar_complete_not_image(api_client, monkeypatch):
     api_client.force_authenticate(user=user)
 
     # services 패치 (complete_upload가 이미지를 반환하지 않도록)
-    def fake_complete_upload(*, key, original_filename=None, uploaded_by=None):
+    def fake_complete_upload(
+        *, key, original_filename=None, uploaded_by=None
+    ):  ## pylint: disable=unused-argument
         class NotAnImage:
             url = "https://cdn.test/not-an-image.png"
 

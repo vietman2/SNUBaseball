@@ -1,5 +1,5 @@
-import pytest
 from datetime import datetime
+import pytest
 from django.utils import timezone
 
 from tests.factories import TeamRosterFactory
