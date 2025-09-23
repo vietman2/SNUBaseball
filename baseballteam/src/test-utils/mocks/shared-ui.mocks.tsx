@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { vi } from "vitest";
 
 vi.mock("@shared/ui/Buttons", () => ({
@@ -51,7 +50,12 @@ vi.mock("@shared/ui/Inputs", async () => {
 
   return {
     DateInput,
-    PhoneInput: (props: any) => <input data-testid="phone-input" {...props} />,
+    PhoneInput: (props: unknown) => (
+      <input
+        data-testid="phone-input"
+        {...(props as React.InputHTMLAttributes<HTMLInputElement>)}
+      />
+    ),
     SingleFileInput: ({
       onChange,
     }: {
@@ -66,15 +70,26 @@ vi.mock("@shared/ui/Loading", () => ({
   Spinner: () => <div>Loading Spinner</div>,
 }));
 vi.mock("@shared/ui/Selects", () => ({
-  SimpleSelect: (props: any) => (
-    <select data-testid="simple-select" {...props} />
+  SimpleSelect: (props: unknown) => (
+    <select
+      data-testid="simple-select"
+      {...(props as React.SelectHTMLAttributes<HTMLSelectElement>)}
+    />
   ),
 }));
 vi.mock("@shared/ui/Texts", () => ({
-  ErrorText: (props: any) => <p {...props} />,
-  PageTitle: (props: any) => <p {...props} />,
-  WarningText: (props: any) => <p {...props} />,
+  ErrorText: (props: unknown) => (
+    <p {...(props as React.HTMLAttributes<HTMLParagraphElement>)} />
+  ),
+  PageTitle: (props: unknown) => (
+    <p {...(props as React.HTMLAttributes<HTMLParagraphElement>)} />
+  ),
+  WarningText: (props: unknown) => (
+    <p {...(props as React.HTMLAttributes<HTMLParagraphElement>)} />
+  ),
 }));
 vi.mock("@shared/ui/Tooltips", () => ({
-  SimpleTooltip: (props: any) => <div>{props.text}</div>,
+  SimpleTooltip: (props: unknown) => (
+    <div>{(props as { text: string }).text}</div>
+  ),
 }));

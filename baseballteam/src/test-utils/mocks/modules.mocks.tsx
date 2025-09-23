@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { vi } from "vitest";
 
 const __bcListeners = new Set<(e: MessageEvent) => void>();
@@ -15,14 +14,14 @@ vi.stubGlobal(
     removeEventListener(type: string, cb: (e: MessageEvent) => void) {
       if (type === "message") __bcListeners.delete(cb);
     }
-    postMessage(data: any) {
+    postMessage(data: unknown) {
       const evt = { data } as MessageEvent;
       __bcListeners.forEach((cb) => cb(evt));
     }
     close() {
       /* no-op for test purposes */
     }
-  } as any
+  } as unknown as typeof BroadcastChannel
 );
 vi.mock("axios", async () => {
   const actual = await vi.importActual("axios");
