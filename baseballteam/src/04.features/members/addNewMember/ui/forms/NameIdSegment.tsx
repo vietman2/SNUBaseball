@@ -17,10 +17,18 @@ export function NameIdSegment() {
   return (
     <Segment>
       <ToggleContainer>
-        <ToggleButton onClick={selectPlayer} $isActive={isPlayer}>
+        <ToggleButton
+          onClick={selectPlayer}
+          $isActive={isPlayer}
+          data-testid="role-toggle-player"
+        >
           선수
         </ToggleButton>
-        <ToggleButton onClick={selectManager} $isActive={!isPlayer}>
+        <ToggleButton
+          onClick={selectManager}
+          $isActive={!isPlayer}
+          data-testid="role-toggle-manager"
+        >
           매니저
         </ToggleButton>
       </ToggleContainer>

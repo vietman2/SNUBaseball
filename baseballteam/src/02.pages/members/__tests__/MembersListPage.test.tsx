@@ -31,7 +31,12 @@ describe("MembersListPage", () => {
       data: [sampleMemberDetails],
     });
     vi.spyOn(AxiosAPI.axiosInstanceWithAuth, "post").mockResolvedValue({
-      data: { ...sampleMemberDetails, id: 2, name: "김신규", studentId: "20250001" },
+      data: {
+        ...sampleMemberDetails,
+        id: 2,
+        name: "김신규",
+        studentId: "20250001",
+      },
     });
   });
 
@@ -54,6 +59,9 @@ describe("MembersListPage", () => {
     });
     fireEvent.change(getByTestId("email-input"), {
       target: { value: "test@example.com" },
+    });
+    fireEvent.change(getByTestId("address-input"), {
+      target: { value: "서울시 관악구" },
     });
   };
 
@@ -91,6 +99,10 @@ describe("MembersListPage", () => {
     fireEvent.click(getByText("새 부원 추가"));
 
     fillForm(getByTestId);
+
+    // Toggle to manager then back to player (Coverage purpose)
+    fireEvent.click(getByTestId("role-toggle-manager"));
+    fireEvent.click(getByTestId("role-toggle-player"));
 
     // Submit the form
     vi.spyOn(AxiosAPI.axiosInstanceWithAuth, "post").mockRejectedValue(
