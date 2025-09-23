@@ -6,7 +6,7 @@ import type { DepartmentType } from "../models/majors";
 
 interface Props {
   children: ReactNode;
-  originalMajor: DepartmentType;
+  originalMajor: DepartmentType | null;
 }
 
 export function MajorSelectsProvider({
@@ -26,17 +26,17 @@ export function MajorSelectsProvider({
 
   // 버튼 활성화 조건
   const isUpdated = useMemo(
-    () => selectedMajorId !== -1 && selectedMajorId !== originalMajor.id,
-    [selectedMajorId, originalMajor.id]
+    () => selectedMajorId !== -1 && selectedMajorId !== originalMajor?.id,
+    [selectedMajorId, originalMajor?.id]
   );
 
   // 초기값 세팅
   useEffect(() => {
     if (!colleges) return;
-    const college = colleges.find((c) => c.id === originalMajor.college_id);
+    const college = colleges.find((c) => c.id === originalMajor?.college_id);
     setSelectedCollegeId(college ? college.id : -1);
 
-    const dept = college?.departments.find((d) => d.id === originalMajor.id);
+    const dept = college?.departments.find((d) => d.id === originalMajor?.id);
     setSelectedMajorId(dept ? dept.id : -1);
   }, [colleges, originalMajor]);
 
