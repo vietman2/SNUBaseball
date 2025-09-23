@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import styled from "styled-components";
 
 import { AppIcon } from "@shared/ui/Icons";
@@ -55,10 +56,15 @@ export function ImageSlider({ images }: Readonly<Props>) {
   return (
     <ImageContainer>
       <ImageInnerContainer
-        style={{ transform: `translate3d(-${currentIndex * 100}vw, 0, 0)` }}
+        style={{
+          width: `${images.length * 100}vw`,
+          transform: `translate3d(-${currentIndex * 100}vw, 0, 0)`,
+        }}
       >
         {images.map((url, index) => (
-          <SlideImage key={url} src={url} alt={`slide-${index}`} />
+          <Slide key={url}>
+            <SlideImage src={url} alt={`slide-${index}`} fill />
+          </Slide>
         ))}
       </ImageInnerContainer>
       <LeftButton onClick={goToPrevious} data-testid="left">
@@ -77,9 +83,9 @@ export function ImageSlider({ images }: Readonly<Props>) {
 }
 
 const ImageContainer = styled.div`
-  position: absolute;
   width: 100%;
   min-height: 50vh;
+  position: absolute;
   top: 0;
   left: 0;
   overflow: hidden;
@@ -87,15 +93,19 @@ const ImageContainer = styled.div`
 
 const ImageInnerContainer = styled.div`
   display: flex;
-  width: 300vw;
   transition: transform 0.5s ease-in-out;
   will-change: transform;
   contain: paint;
 `;
 
-const SlideImage = styled.img`
+const Slide = styled.div`
+  position: relative;
   width: 100vw;
   height: 50vh;
+  flex: 0 0 100vw; // 각 슬라이드가 컨테이너의 100% 너비를 차지하도록 설정
+`;
+
+const SlideImage = styled(Image)`
   object-fit: cover;
   backface-visibility: hidden;
   transform: translateZ(0);
