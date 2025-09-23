@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import { Section, SectionSubtitle } from "./styles";
 import { SimpleModal, useSimpleModal } from "@widgets/modal";
-import { UpdateAvatarForm } from "@features/account/updateAvatar";
+import { UpdateAvatarForm } from "@features/members/updateAvatar";
 import { UserAvatarWithEdit, type UserProfileType } from "@entities/user";
 import { SimpleTooltip } from "@shared/ui/Tooltips";
 

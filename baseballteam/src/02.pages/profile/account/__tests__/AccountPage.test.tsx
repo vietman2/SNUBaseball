@@ -33,8 +33,8 @@ describe("AccountPage", () => {
     expect(container).toBeEmptyDOMElement();
   });
 
-  it("renders correctly when user is present", () => {
-    const { getByText } = renderWithProviders(<AccountPage />);
+  it("renders correctly when user is present and open avatar edit", () => {
+    const { getByTestId, getByText } = renderWithProviders(<AccountPage />);
 
     // Avatar Section
     expect(getByText("프로필")).toBeInTheDocument();
@@ -52,6 +52,10 @@ describe("AccountPage", () => {
     expect(getByText("2003-05-15")).toBeInTheDocument();
     expect(getByText("야구부 입부일")).toBeInTheDocument();
     expect(getByText("2023-03-01")).toBeInTheDocument();
+
+    fireEvent.click(getByTestId("avatar-edit-button"));
+
+    expect(getByText("프로필 이미지 변경")).toBeInTheDocument();
   });
 
   it("handles update major success", async () => {
@@ -185,4 +189,7 @@ describe("AccountPage", () => {
       expect(queryByText("연락처 변경")).not.toBeInTheDocument();
     });
   });
+
+  // Update Form의 코너케이스와,
+  // Avatar Update의 테스트는 각 feature 디렉토리에서 처리한다.
 });
