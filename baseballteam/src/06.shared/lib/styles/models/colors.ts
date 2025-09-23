@@ -13,7 +13,7 @@ export const light: ThemeColorType = {
   success: "#4CAF50", // 그린 (표준 성공색)
   onSuccess: "#FFFFFF",
 
-  warning: "#FFB74D", // 따뜻한 오렌지
+  warning: "#FB8C00", // 따뜻한 오렌지
   onWarning: "#000000",
 
   error: "#E57373", // 밝은 레드
@@ -55,7 +55,7 @@ export const dark: ThemeColorType = {
   success: "#81C784", // 밝은 그린 (다크에서도 선명)
   onSuccess: "#0A0A0A",
 
-  warning: "#FFB74D", // 따뜻한 오렌지
+  warning: "#FB8C00", // 따뜻한 오렌지
   onWarning: "#0A0A0A",
 
   error: "#E57373", // 밝은 레드
