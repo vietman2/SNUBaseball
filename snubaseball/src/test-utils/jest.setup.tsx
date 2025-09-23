@@ -8,6 +8,7 @@ jest.mock("next/navigation", () => ({
   useServerInsertedHTML: (cb: () => React.ReactNode) => {
     return cb();
   },
+  usePathname: () => "/test-path",
 }));
 
 jest.mock("@shared/lib/styles", () => ({

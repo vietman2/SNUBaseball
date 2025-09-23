@@ -3,6 +3,7 @@
 import "client-only";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import styled from "styled-components";
 
 import { RouterTabs } from "../models/tabs";
@@ -12,6 +13,14 @@ export function TabsMenu() {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const openT = useRef<number | null>(null);
   const closeT = useRef<number | null>(null);
+  const pathname = usePathname();
+
+  const clearTimers = () => {
+    if (openT.current) window.clearTimeout(openT.current);
+    if (closeT.current) window.clearTimeout(closeT.current);
+    openT.current = null;
+    closeT.current = null;
+  };
 
   const openMenu = () => {
     if (closeT.current) window.clearTimeout(closeT.current);
@@ -23,10 +32,20 @@ export function TabsMenu() {
     closeT.current = window.setTimeout(() => setMenuOpen(false), 120);
   };
 
+  const handleLinkClick: React.MouseEventHandler<HTMLAnchorElement> = () => {
+    clearTimers();
+    setMenuOpen(false);
+  };
+
+  useEffect(() => {
+    // 페이지가 바뀌면 메뉴 닫기
+    setMenuOpen(false);
+    clearTimers();
+  }, [pathname]);
+
   useEffect(() => {
     return () => {
-      if (openT.current) window.clearTimeout(openT.current);
-      if (closeT.current) window.clearTimeout(closeT.current);
+      clearTimers();
     };
   }, []);
 
@@ -39,7 +58,11 @@ export function TabsMenu() {
       <Container>
         {RouterTabs.map((tab) => (
           <Tab key={tab.label}>
-            <Link href={tab.type === "SIMPLE" ? tab.href : tab.submenu[0].href}>
+            <Link
+              href={tab.type === "SIMPLE" ? tab.href : tab.submenu[0].href}
+              onClick={handleLinkClick}
+              data-testid={`tab-${tab.label}`}
+            >
               {tab.label}
             </Link>
           </Tab>
@@ -58,7 +81,13 @@ export function TabsMenu() {
               <div className="root-header-subtab" key={tab.label}>
                 {tab.submenu.map((sub) => (
                   <div key={sub.href}>
-                    <Link href={sub.href}>{sub.label}</Link>
+                    <Link
+                      href={sub.href}
+                      onClick={handleLinkClick}
+                      data-testid={`subtab-${sub.label}`}
+                    >
+                      {sub.label}
+                    </Link>
                   </div>
                 ))}
               </div>
