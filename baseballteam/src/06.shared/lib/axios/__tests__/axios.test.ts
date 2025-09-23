@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, expect, it, vi } from "vitest";
 
 import { serverErrorMessageParser } from "../error";
@@ -8,8 +7,21 @@ import {
   clearAuthToken,
   setAutoRetryAfterTokenRefresh,
 } from "../utils";
+import type { AxiosRequestConfig } from "axios";
 
 vi.unmock("@shared/lib/axios");
+
+type TestError = Error & {
+  isAxiosError?: boolean;
+  response?: {
+    data: { code?: string; message?: string; status?: string };
+    status?: number;
+    headers?: unknown;
+    config?: unknown;
+  };
+  config?: unknown;
+  toJSON?: () => object;
+};
 
 describe("axiosInstance", () => {
   it("axios instance should have the correct configs", () => {
@@ -50,35 +62,38 @@ describe("axiosInstance", () => {
       //    - 첫 시도: 403 INVALID_TOKEN
       //    - 인터셉터가 _retry 설정 + Authorization 교체 후 재시도: 200 OK
       const originalAdapter = axiosInstanceWithAuth.defaults.adapter!;
-      const adapterMock = vi.fn().mockImplementation(async (config: any) => {
-        const isProtected = config.url === "/some-protected-endpoint";
-        const isRetry = config._retry === true;
-        const authHeader = config.headers?.Authorization;
+      const adapterMock = vi
+        .fn()
+        .mockImplementation(async (config: unknown) => {
+          const _config = config as AxiosRequestConfig & { _retry?: boolean };
+          const isProtected = _config.url === "/some-protected-endpoint";
+          const isRetry = _config._retry === true;
+          const authHeader = _config.headers?.Authorization;
 
-        if (isProtected && !isRetry) {
-          // 첫 시도: 토큰 만료 에러
-          const error: any = new Error("INVALID_TOKEN");
-          error.config = config;
-          error.response = {
-            status: 403,
-            data: { code: "INVALID_TOKEN" },
+          if (isProtected && !isRetry) {
+            // 첫 시도: 토큰 만료 에러
+            const error: TestError = new Error("INVALID_TOKEN");
+            error.config = config;
+            error.response = {
+              status: 403,
+              data: { code: "INVALID_TOKEN" },
+              headers: {},
+              config,
+            };
+            error.isAxiosError = true;
+            error.toJSON = vi.fn();
+            throw error;
+          }
+
+          // 재시도(또는 다른 요청)는 성공 응답
+          return {
+            status: 200,
+            statusText: "OK",
             headers: {},
             config,
+            data: { ok: true, auth: authHeader },
           };
-          error.isAxiosError = true;
-          error.toJSON = vi.fn();
-          throw error;
-        }
-
-        // 재시도(또는 다른 요청)는 성공 응답
-        return {
-          status: 200,
-          statusText: "OK",
-          headers: {},
-          config,
-          data: { ok: true, auth: authHeader },
-        };
-      });
+        });
       axiosInstanceWithAuth.defaults.adapter = adapterMock;
 
       // 5) 보호 리소스에 동시 2요청 → 첫 응답에서 403 발생,
@@ -108,13 +123,14 @@ describe("axiosInstance", () => {
       let callCount = 0;
       axiosInstanceWithAuth.defaults.adapter = vi
         .fn()
-        .mockImplementation(async (config: any) => {
+        .mockImplementation(async (config: unknown) => {
+          const _config = config as AxiosRequestConfig & { _retry?: boolean };
           callCount++;
           if (callCount === 1) {
             // 첫 요청 → header 없음, 403 INVALID_TOKEN 에러
-            const err: any = new Error("INVALID_TOKEN");
+            const err: TestError = new Error("INVALID_TOKEN");
             err.isAxiosError = true;
-            err.config = { ...config, headers: undefined }; // intentionally no headers
+            err.config = { ..._config, headers: undefined }; // intentionally no headers
             err.response = {
               status: 403,
               data: { code: "INVALID_TOKEN" },
@@ -129,7 +145,7 @@ describe("axiosInstance", () => {
             statusText: "OK",
             headers: {},
             config,
-            data: { ok: true, auth: config.headers?.Authorization },
+            data: { ok: true, auth: _config.headers?.Authorization },
           };
         });
 
@@ -150,7 +166,7 @@ describe("axiosInstance", () => {
       axiosInstanceWithAuth.defaults.adapter = vi
         .fn()
         .mockImplementation(async (config) => {
-          const err: any = new Error("INVALID_TOKEN");
+          const err: TestError = new Error("INVALID_TOKEN");
           err.isAxiosError = true;
           err.config = config;
           err.response = {
@@ -175,7 +191,7 @@ describe("axiosInstance", () => {
       axiosInstanceWithAuth.defaults.adapter = vi
         .fn()
         .mockImplementation(async (config) => {
-          const err: any = new Error("INVALID_TOKEN");
+          const err: TestError = new Error("INVALID_TOKEN");
           err.isAxiosError = true;
           err.config = config;
           err.response = {
@@ -201,13 +217,13 @@ describe("axiosInstance", () => {
       axiosInstanceWithAuth.defaults.adapter = vi
         .fn()
         .mockImplementation(async () => {
-          const err: any = new Error("Network error");
+          const err: TestError = new Error("Network error");
           err.isAxiosError = true;
           // response 없음
           throw err;
         });
 
-      await expect(axiosInstanceWithAuth.get("/any")).rejects.toThrow(
+      await expect(axiosInstanceWithAuth.get("/TestError")).rejects.toThrow(
         "Network error"
       );
       expect(refreshFn).not.toHaveBeenCalled();
@@ -222,7 +238,7 @@ describe("axiosInstance", () => {
       axiosInstanceWithAuth.defaults.adapter = vi
         .fn()
         .mockImplementation(async (config) => {
-          const err: any = new Error("INVALID_TOKEN");
+          const err: TestError = new Error("INVALID_TOKEN");
           err.isAxiosError = true;
           err.config = config;
           err.response = {
@@ -248,7 +264,7 @@ describe("axiosInstance", () => {
       axiosInstanceWithAuth.defaults.adapter = vi
         .fn()
         .mockImplementation(async (config) => {
-          const err: any = new Error("Unauthorized");
+          const err: TestError = new Error("Unauthorized");
           err.isAxiosError = true;
           err.config = config;
           err.response = { status: 401, data: { code: "OTHER_ERROR" }, config };
@@ -266,7 +282,7 @@ describe("axiosInstance", () => {
 
   describe("serverErrorMessageParser", () => {
     it("should parse known axios error with message", () => {
-      const mockError: any = new Error("Request failed");
+      const mockError: TestError = new Error("Request failed");
       mockError.isAxiosError = true;
       mockError.response = {
         data: { message: "Detailed server error", status: "FAIL" },
@@ -283,7 +299,7 @@ describe("axiosInstance", () => {
     });
 
     it("should return fallback for axios error without message", () => {
-      const mockError: any = new Error("Request failed");
+      const mockError: TestError = new Error("Request failed");
       mockError.isAxiosError = true;
       mockError.response = { data: {} };
 
