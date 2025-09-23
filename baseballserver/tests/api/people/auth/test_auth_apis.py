@@ -1,30 +1,18 @@
 import pytest
-from rest_framework.test import APIClient
 
 from tests.factories import UserFactory
 
 pytestmark = pytest.mark.django_db
 
 
-@pytest.fixture
-def api_client():
-    return APIClient()
-
-
-@pytest.fixture
-def user():
+@pytest.fixture(autouse=True, name="user")
+def _user():
     return UserFactory.create_normal_account(
         username="testuser", password="Testpassword123@"
     )
 
 
-def admin():
-    return UserFactory.create_admin_account(
-        username="adminuser", password="Adminpassword123@"
-    )
-
-
-def test_login_logout(api_client, user):
+def test_login_logout(api_client):
     login_res = api_client.post(
         "/api/v1/login/", {"username": "testuser", "password": "Testpassword123@"}
     )
@@ -54,7 +42,7 @@ def test_login_logout(api_client, user):
     assert logout_res.status_code == 200
 
 
-def test_login_invalid(api_client, user):
+def test_login_invalid(api_client):
     login_res = api_client.post(
         "/api/v1/login/", {"username": "testuser", "password": "wrongpassword"}
     )

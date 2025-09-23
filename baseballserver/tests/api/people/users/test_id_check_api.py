@@ -1,28 +1,22 @@
 import pytest
-from rest_framework.test import APIClient
 
 from tests.factories import MemberFactory, UserFactory
 
 pytestmark = pytest.mark.django_db
 
 
-@pytest.fixture
-def api_client():
-    return APIClient()
-
-
-@pytest.fixture
-def member():
+@pytest.fixture(name="member")
+def _member():
     return MemberFactory(name="홍길동", admission_year=2025, student_id="2025-12345")
 
 
-@pytest.fixture
-def valid_student_id():
+@pytest.fixture(name="valid_student_id")
+def _valid_student_id():
     return "2025-12345"
 
 
-@pytest.fixture
-def already_registered_student_id():
+@pytest.fixture(name="already_registered_student_id")
+def _already_registered_student_id():
     return "2020-12345"
 
 

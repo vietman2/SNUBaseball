@@ -1,15 +1,9 @@
 import pytest
-from rest_framework.test import APIClient
 
 from apps.media.assets.api import SNUBaseballImage
 from tests.factories import UserFactory
 
 pytestmark = pytest.mark.django_db
-
-
-@pytest.fixture
-def api_client():
-    return APIClient()
 
 
 @pytest.fixture(autouse=True)
@@ -25,7 +19,9 @@ def _patch_media_services(monkeypatch, member_id):
     key = f"profiles/{member_id}/avatar.png"
 
     # presign: prefix 검사 + 정형 응답
-    def fake_presign_upload(*, prefix, filename, content_type=None, size=0):
+    def fake_presign_upload(
+        *, prefix, filename, content_type=None, size=0
+    ):  # pylint: disable=unused-argument
         assert prefix == f"profiles/{member_id}/"
         return {
             "key": key,

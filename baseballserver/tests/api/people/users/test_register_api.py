@@ -1,5 +1,4 @@
 import pytest
-from rest_framework.test import APIClient
 
 from tests.factories import MemberFactory
 
@@ -7,19 +6,14 @@ from tests.factories import MemberFactory
 pytestmark = pytest.mark.django_db
 
 
-@pytest.fixture
-def api_client():
-    return APIClient()
-
-
-@pytest.fixture
-def member():
+@pytest.fixture(name="member")
+def _member():
     # 테스트마다 독립 멤버
     return MemberFactory.create_normal()
 
 
-@pytest.fixture
-def data(member):
+@pytest.fixture(name="data")
+def _data(member):
     return {
         "username": "testuser",
         "password": "Test@1234",

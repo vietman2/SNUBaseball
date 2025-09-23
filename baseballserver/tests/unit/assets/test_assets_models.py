@@ -1,4 +1,5 @@
 import pytest
+from django.core.exceptions import ValidationError
 
 from apps.media.assets.models import (
     SNUBaseballAsset,
@@ -24,11 +25,11 @@ def test_image_clean():
     image = SNUBaseballImage(key="image_key", mime="image/png")
     try:
         image.clean()  # Should not raise
-    except Exception:
+    except ValidationError:
         pytest.fail("SNUBaseballImage.clean() raised an exception unexpectedly!")
 
     image_invalid = SNUBaseballImage(key="image_key", mime="video/mp4")
-    with pytest.raises(Exception):
+    with pytest.raises(ValidationError):
         image_invalid.clean()
 
 
@@ -36,9 +37,9 @@ def test_video_clean():
     video = SNUBaseballVideo(key="video_key", mime="video/mp4")
     try:
         video.clean()  # Should not raise
-    except Exception:
+    except ValidationError:
         pytest.fail("SNUBaseballVideo.clean() raised an exception unexpectedly!")
 
     video_invalid = SNUBaseballVideo(key="video_key", mime="image/png")
-    with pytest.raises(Exception):
+    with pytest.raises(ValidationError):
         video_invalid.clean()

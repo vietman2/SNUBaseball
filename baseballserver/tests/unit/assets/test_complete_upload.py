@@ -16,8 +16,8 @@ pytestmark = pytest.mark.django_db
 STORAGE_MODULE_PATH = "apps.media.assets.storage"
 
 
-@pytest.fixture
-def fake_client(mocker):
+@pytest.fixture(autouse=True, name="s3_client")
+def _s3_client(mocker):
     client = mocker.Mock()
     client.head_object.return_value = {
         "ContentLength": 1234,
@@ -28,7 +28,7 @@ def fake_client(mocker):
     return client
 
 
-def test_complete_upload_image(fake_client):
+def test_complete_upload_image():
     uploader = UserFactory()
     obj = complete_upload(
         "tests/p.png", original_filename="p.png", uploaded_by=uploader
@@ -42,8 +42,8 @@ def test_complete_upload_image(fake_client):
     assert obj.uploaded_by_id == uploader.pk
 
 
-def test_complete_upload_video(fake_client):
-    fake_client.head_object.return_value = {
+def test_complete_upload_video(s3_client):
+    s3_client.head_object.return_value = {
         "ContentLength": 77,
         "ContentType": "video/mp4",
         "ETag": '"etag-v"',
@@ -59,9 +59,9 @@ def test_complete_upload_video(fake_client):
     assert obj.size == 77
 
 
-def test_complete_upload_pdf_with_fallback_guess(fake_client):
+def test_complete_upload_pdf_with_fallback_guess(s3_client):
     # 헤더에 content_type 없음 → 키 확장자로 추론 (application/pdf)
-    fake_client.head_object.return_value = {
+    s3_client.head_object.return_value = {
         "ContentLength": 10,
         "ContentType": None,
         "ETag": '"etag-pdf"',
@@ -77,8 +77,8 @@ def test_complete_upload_pdf_with_fallback_guess(fake_client):
     assert obj.size == 10
 
 
-def test_complete_upload_rejects_disallowed_mime(fake_client):
-    fake_client.head_object.return_value = {
+def test_complete_upload_rejects_disallowed_mime(s3_client):
+    s3_client.head_object.return_value = {
         "ContentLength": 1,
         "ContentType": "application/x-msdownload",
         "ETag": '"etag-exe"',
@@ -90,7 +90,7 @@ def test_complete_upload_rejects_disallowed_mime(fake_client):
     assert "MIME" in str(e.value)
 
 
-def test_complete_upload_updates_existing_record(fake_client):
+def test_complete_upload_updates_existing_record(s3_client):
     uploader = UserFactory()
     key = "tests/existing.png"
 
@@ -100,7 +100,7 @@ def test_complete_upload_updates_existing_record(fake_client):
     assert obj1.size == 1234
 
     # 두 번째 업로드: HEAD 응답 사이즈 변경 -> update_or_create로 갱신되는지 확인
-    fake_client.head_object.return_value = {
+    s3_client.head_object.return_value = {
         "ContentLength": 9999,
         "ContentType": "image/png",
         "ETag": '"etag-new"',
@@ -113,9 +113,9 @@ def test_complete_upload_updates_existing_record(fake_client):
     assert obj2.original_filename == "new.png"
 
 
-def test_complete_upload_missing_key_raises(fake_client):
+def test_complete_upload_missing_key_raises(s3_client):
     # S3에서 404류 에러 → 도메인 예외 메시지 매핑
-    fake_client.head_object.side_effect = ClientError(
+    s3_client.head_object.side_effect = ClientError(
         {"Error": {"Code": "404", "Message": "Not found"}}, "HeadObject"
     )
     uploader = UserFactory()
@@ -127,8 +127,8 @@ def test_complete_upload_missing_key_raises(fake_client):
     assert "업로드된 파일을 찾을 수 없습니다." in str(e.value)
 
 
-def test_complete_upload_head_other_error_raises_generic(fake_client):
-    fake_client.head_object.side_effect = ClientError(
+def test_complete_upload_head_other_error_raises_generic(s3_client):
+    s3_client.head_object.side_effect = ClientError(
         {"Error": {"Code": "403", "Message": "Forbidden"}}, "HeadObject"
     )
     uploader = UserFactory()

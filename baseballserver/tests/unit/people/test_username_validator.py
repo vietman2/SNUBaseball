@@ -19,6 +19,7 @@ def test_username_valid_when_all_rules_met():
         ("ab", "4자 이상 150자 이하여야"),
         ("a" * 151, "4자 이상 150자 이하여야"),
         ("user!name", "영문과 숫자만 사용 가능합니다."),
+        ("existinguser", "이미 사용 중인 아이디입니다."),
     ],
 )
 def test_username_simple_rule_violations(username, msg):
@@ -27,15 +28,3 @@ def test_username_simple_rule_violations(username, msg):
     with pytest.raises(SNUBaseballException) as e:
         v(username)
     assert msg in str(e.value)
-
-
-@pytest.fixture
-def existing_user():
-    return UserFactory(username="ExistingUser")
-
-
-def test_username_must_be_unique(existing_user):
-    v = UsernameValidator()
-    with pytest.raises(SNUBaseballException) as e:
-        v("existinguser")  # 대소문자 구분 없이 중복 검사
-    assert "이미 사용 중인 아이디입니다." in str(e.value)

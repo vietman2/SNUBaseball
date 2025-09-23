@@ -1,26 +1,21 @@
 import pytest
-from rest_framework.test import APIClient
+
 
 from tests.factories import UserFactory
 
 pytestmark = pytest.mark.django_db
 
 
-@pytest.fixture
-def api_client():
-    return APIClient()
-
-
-@pytest.fixture
-def setup_data():
+@pytest.fixture(name="setup_data", scope="function")
+def _setup_data():
     user = UserFactory.create_normal_account()
     admin = UserFactory.create_head_manager_account()
 
     return user, admin
 
 
-@pytest.fixture
-def request_data():
+@pytest.fixture(name="request_data", scope="function")
+def _request_data():
     return {
         "major_id": 2,
         "phone": "010-1234-5678",

@@ -6,8 +6,8 @@ from apps.media.assets.storage import verify_head, presign_post
 MODULE_PATH = "apps.media.assets.storage"
 
 
-@pytest.fixture
-def fake_client(mocker):
+@pytest.fixture(name="fake_client")
+def _fake_client(mocker):
     """boto3 client를 대체할 간단한 스텁"""
     client = mocker.Mock()
     # 기본 성공 응답
@@ -98,7 +98,7 @@ def test_presign_post_rejects_size_zero(fake_client):
     fake_client.generate_presigned_post.assert_not_called()
 
 
-def test_presign_post_respects_custom_max_size(settings, fake_client):
+def test_presign_post_respects_custom_max_size(settings):
     from core.error_handling import SNUBaseballException
 
     settings.MEDIA_UPLOAD_MAX_SIZE = 1024  # 1KB

@@ -15,8 +15,8 @@ pytestmark = pytest.mark.django_db
 MODULE_PATH = "apps.media.assets.services"
 
 
-@pytest.fixture
-def existing_files():
+@pytest.fixture(name="existing_files", autouse=True)
+def _existing_files():
     uploader = UserFactory()
     SNUBaseballImage.objects.create(
         key="tests/existing_image.png",
@@ -77,7 +77,7 @@ def test_presign_upload_rejects_disallowed_mime():
     assert "MIME" in str(e.value)
 
 
-def test_presign_upload_prevents_type_change_type(existing_files):
+def test_presign_upload_prevents_type_change_type():
     with pytest.raises(SNUBaseballException) as e:
         presign_upload("tests/", "existing_image.png", "video/mp4", 2048)
     assert "파일 유형이 일치하지 않습니다." in str(e.value)
@@ -91,7 +91,7 @@ def test_presign_upload_prevents_type_change_type(existing_files):
     assert "파일 유형이 일치하지 않습니다." in str(e.value)
 
 
-def test_presign_upload_allows_same_type_when_exists(existing_files):
+def test_presign_upload_allows_same_type_when_exists():
     out = presign_upload(
         prefix="tests/",
         filename="existing_image.png",
