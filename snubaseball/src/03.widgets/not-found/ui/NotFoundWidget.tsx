@@ -29,10 +29,11 @@ export function NotFoundPageWidget({
 
 const Container = styled.div`
   display: flex;
+  flex: 1;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  min-height: 75vh;
+  min-height: 50vh;
   text-align: center;
 
   background-color: ${({ theme }) => theme.colors.background};
