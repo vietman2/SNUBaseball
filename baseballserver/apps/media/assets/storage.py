@@ -29,7 +29,7 @@ def verify_head(key: str) -> dict:
     except ClientError as e:
         code = e.response.get("Error", {}).get("Code")
         if code in {"404", "NoSuchKey", "NotFound"}:
-            raise SNUBaseballException("업로드된 파일을 찾을 수 없습니다.")
+            raise SNUBaseballException("업로드된 파일을 찾을 수 없습니다.") from e
         raise SNUBaseballException("파일 정보를 가져오는 데 실패했습니다.") from e
 
     return {

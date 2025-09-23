@@ -1,4 +1,5 @@
-import mimetypes, posixpath
+import mimetypes
+import posixpath
 from django.conf import settings
 
 from core.error_handling import SNUBaseballException
