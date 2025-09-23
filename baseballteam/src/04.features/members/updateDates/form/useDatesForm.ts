@@ -26,7 +26,7 @@ export function useDatesForm({ memberId, postUpdate }: Readonly<Options>) {
   const submit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (isPending || !isUpdated) return;
+    if (buttonDisabled) return;
 
     setErrorMsg(null);
 

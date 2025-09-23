@@ -27,7 +27,7 @@ export function useMajorForm({ memberId, postUpdate }: Readonly<Options>) {
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
-      if (isButtonDisabled || selectedMajorId === null) {
+      if (isButtonDisabled) {
         return;
       }
 
