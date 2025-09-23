@@ -72,6 +72,8 @@ vi.mock("@shared/ui/Selects", () => ({
 }));
 vi.mock("@shared/ui/Texts", () => ({
   ErrorText: (props: any) => <p {...props} />,
+  PageTitle: (props: any) => <p {...props} />,
+  WarningText: (props: any) => <p {...props} />,
 }));
 vi.mock("@shared/ui/Tooltips", () => ({
   SimpleTooltip: (props: any) => <div>{props.text}</div>,
