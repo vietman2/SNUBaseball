@@ -1,0 +1,248 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`AboutPage UI should render AboutPage correctly 1`] = `
+<div>
+  <div
+    class="sc-e6d2dc6a-0 dRJCCQ"
+  >
+    <h3
+      class="about-page-subtitle"
+    >
+      서울대 야구부에 대하여
+    </h3>
+    <p>
+      대학야구 내에서 서울대학교는 “공부하는 야구선수” 의 기치를 드높이며 학생 본연의 임무인 학업을 소홀히 하지 않으면서도 야구 선수로서의 자세와 능력을 함양하기 위해 최선을 다하고 있다.
+    </p>
+    <h3
+      class="about-page-subtitle"
+      id="timeline"
+    >
+      연혁
+    </h3>
+    <div
+      class="sc-e6d2dc6a-1 juJraP"
+    >
+      <div
+        class="sc-f545895a-0 EvCyO"
+      >
+        <h1
+          class="sc-f545895a-1 desYXP"
+        >
+          1977
+        </h1>
+        <div
+          class="sc-f545895a-2 bQDgzZ"
+        >
+          서울대학교 야구부 창단
+        </div>
+        <div>
+          image-placeholder
+        </div>
+      </div>
+      <div
+        class="sc-f545895a-0 EvCyO"
+      >
+        <h1
+          class="sc-f545895a-1 desYXP"
+        >
+          1982
+        </h1>
+        <div
+          class="sc-f545895a-2 bQDgzZ"
+        >
+          강릉 전지훈련 진행
+서울대학교 야구부 故 김영철 타자 최초 홈런
+        </div>
+      </div>
+      <div
+        class="sc-f545895a-0 EvCyO"
+      >
+        <h1
+          class="sc-f545895a-1 desYXP"
+        >
+          2003
+        </h1>
+        <div
+          class="sc-f545895a-2 bQDgzZ"
+        >
+          베이징대학교 친선 경기 진행
+        </div>
+        <div>
+          image-placeholder
+        </div>
+      </div>
+      <div
+        class="sc-f545895a-0 EvCyO"
+      >
+        <h1
+          class="sc-f545895a-1 desYXP"
+        >
+          2004
+        </h1>
+        <div
+          class="sc-f545895a-2 bQDgzZ"
+        >
+          서울대학교 야구부 1승 기록
+          <p>
+            2004년 전국 대학 야구 추계리그 송원대학교전 승리
+          </p>
+        </div>
+      </div>
+      <div
+        class="sc-f545895a-0 EvCyO"
+      >
+        <h1
+          class="sc-f545895a-1 desYXP"
+        >
+          2005
+        </h1>
+        <div
+          class="sc-f545895a-2 bQDgzZ"
+        >
+          도쿄대학교 격년제 정기 교류전 개최
+        </div>
+      </div>
+      <div
+        class="sc-f545895a-0 EvCyO"
+      >
+        <h1
+          class="sc-f545895a-1 desYXP"
+        >
+          2010
+        </h1>
+        <div
+          class="sc-f545895a-2 bQDgzZ"
+        >
+          이광환 감독 취임
+        </div>
+        <div
+          class="sc-f545895a-2 bQDgzZ"
+        >
+          서울대학교, 한국야구위원회 대한야구협회 베이스볼 아카데미 협약, (KBO), (KBA) MOU 체결
+        </div>
+      </div>
+      <div
+        class="sc-f545895a-0 EvCyO"
+      >
+        <h1
+          class="sc-f545895a-1 desYXP"
+        >
+          2011
+        </h1>
+        <div
+          class="sc-f545895a-2 bQDgzZ"
+        >
+          서울대학교 한국야구위원회 대한야구협회 베이스볼 아카데미 전문기록원 과정 개강
+        </div>
+        <div>
+          image-placeholder
+        </div>
+      </div>
+      <div
+        class="sc-f545895a-0 EvCyO"
+      >
+        <h1
+          class="sc-f545895a-1 desYXP"
+        >
+          2015
+        </h1>
+        <div
+          class="sc-f545895a-2 bQDgzZ"
+        >
+          여자 야구 대표팀 친선 경기 진행
+        </div>
+      </div>
+      <div
+        class="sc-f545895a-0 EvCyO"
+      >
+        <h1
+          class="sc-f545895a-1 desYXP"
+        >
+          2019
+        </h1>
+        <div
+          class="sc-f545895a-2 bQDgzZ"
+        >
+          서울대학교 야구부 이광환 감독 서울대학교 제 회 사회봉사상 수상
+        </div>
+        <div>
+          image-placeholder
+        </div>
+      </div>
+      <div
+        class="sc-f545895a-0 EvCyO"
+      >
+        <h1
+          class="sc-f545895a-1 desYXP"
+        >
+          2020
+        </h1>
+        <div
+          class="sc-f545895a-2 bQDgzZ"
+        >
+          이광환 감독 은퇴
+        </div>
+        <div
+          class="sc-f545895a-2 bQDgzZ"
+        >
+          정석 감독 취임
+        </div>
+      </div>
+      <div
+        class="sc-f545895a-0 EvCyO"
+      >
+        <h1
+          class="sc-f545895a-1 desYXP"
+        >
+          2024
+        </h1>
+        <div
+          class="sc-f545895a-2 bQDgzZ"
+        >
+          서울대학교 야구부 2승 기록
+          <p>
+            KUBF U리그 경민대학교전 승리
+          </p>
+        </div>
+        <div
+          class="sc-f545895a-2 bQDgzZ"
+        >
+          장원철 지도교수 취임
+        </div>
+        <div
+          class="sc-f545895a-2 bQDgzZ"
+        >
+          도쿄대학교 격년제 정기 교류전 재개
+        </div>
+        <div>
+          image-placeholder
+        </div>
+      </div>
+      <div
+        class="sc-f545895a-0 EvCyO"
+      >
+        <h1
+          class="sc-f545895a-1 desYXP"
+        >
+          2025
+        </h1>
+        <div
+          class="sc-f545895a-2 bQDgzZ"
+        >
+          청소년 진로탐색 프로그램 멘토링 재능기부
+        </div>
+        <div
+          class="sc-f545895a-2 bQDgzZ"
+        >
+          故 이광환 감독님 추모 경기 진행 (여자 야구 대표팀)
+        </div>
+        <div
+          class="sc-f545895a-2 bQDgzZ"
+        >
+          오자왕 감독 취임
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
