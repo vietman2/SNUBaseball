@@ -1,13 +1,44 @@
-from .backend import AuthBackend
-from .cookies import set_refresh_cookie, delete_refresh_cookie
-from .password import PasswordValidator
-from .permissions import IsAuthenticated, IsOps
+from typing import TYPE_CHECKING
 
-__all__ = [
+__all__ = (
     "AuthBackend",
     "set_refresh_cookie",
     "delete_refresh_cookie",
     "PasswordValidator",
     "IsAuthenticated",
     "IsOps",
-]
+)
+
+if TYPE_CHECKING:
+    from .backend import AuthBackend
+    from .cookies import set_refresh_cookie, delete_refresh_cookie
+    from .password import PasswordValidator
+    from .permissions import IsAuthenticated, IsOps
+
+
+def __getattr__(name):
+    if name == "AuthBackend":
+        from .backend import AuthBackend
+
+        return AuthBackend
+    if name == "set_refresh_cookie":
+        from .cookies import set_refresh_cookie
+
+        return set_refresh_cookie
+    if name == "delete_refresh_cookie":
+        from .cookies import delete_refresh_cookie
+
+        return delete_refresh_cookie
+    if name == "PasswordValidator":
+        from .password import PasswordValidator
+
+        return PasswordValidator
+    if name == "IsAuthenticated":
+        from .permissions import IsAuthenticated
+
+        return IsAuthenticated
+    if name == "IsOps":
+        from .permissions import IsOps
+
+        return IsOps
+    raise AttributeError(name)

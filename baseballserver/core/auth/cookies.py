@@ -1,5 +1,5 @@
-import jwt
 from datetime import datetime
+import jwt
 from django.conf import settings
 
 
