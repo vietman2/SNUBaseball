@@ -11,6 +11,13 @@ export type RosterMemberType = {
   id: number;
   member: MemberInfoType;
   role: string;
+  back_number: number;
+};
+
+export type RosterMemberDetailsType = {
+  id: number;
+  member: MemberInfoType;
+  role: string;
   position: string;
   hands: string;
   back_number: number;

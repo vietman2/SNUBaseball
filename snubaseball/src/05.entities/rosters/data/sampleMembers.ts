@@ -1,4 +1,8 @@
-import { RosterMemberType, RosterType } from "../models/roster";
+import {
+  RosterMemberType,
+  RosterMemberDetailsType,
+  RosterType,
+} from "../models/roster";
 
 export const samplePlayers: RosterMemberType[] = [
   {
@@ -12,12 +16,7 @@ export const samplePlayers: RosterMemberType[] = [
       major: "컴퓨터공학과",
     },
     role: "player",
-    position: "투수",
-    hands: "우투우타",
     back_number: 10,
-    height: 180,
-    weight: 75,
-    goal: "최고의 투수가 되겠다!",
   },
   {
     id: 2,
@@ -30,12 +29,7 @@ export const samplePlayers: RosterMemberType[] = [
       major: "경제학과",
     },
     role: "player",
-    position: "포수",
-    hands: "좌투좌타",
     back_number: 5,
-    height: 175,
-    weight: 70,
-    goal: "팀의 중심이 되겠다!",
   },
 ];
 
@@ -51,12 +45,7 @@ export const sampleManagers: RosterMemberType[] = [
       major: "경영학과",
     },
     role: "manager",
-    position: "매니저",
-    hands: "",
     back_number: 0,
-    height: 165,
-    weight: 55,
-    goal: "팀을 잘 지원하겠다!",
   },
 ];
 
@@ -64,4 +53,42 @@ export const sampleRoster: RosterType = {
   code: "2025-1",
   managers: sampleManagers,
   players: samplePlayers,
+};
+
+export const samplePlayerDetails: RosterMemberDetailsType = {
+  id: 1,
+  member: {
+    id: 1,
+    name: "홍길동",
+    admission_year: 2020,
+    birth_date: "2002-03-01",
+    profile_image: null,
+    major: "컴퓨터공학과",
+  },
+  role: "선수",
+  back_number: 10,
+  height: 180,
+  weight: 75,
+  hands: "우투우타",
+  position: "투수",
+  goal: "팀 우승",
+};
+
+export const sampleManagerDetails: RosterMemberDetailsType = {
+  id: 3,
+  member: {
+    id: 3,
+    name: "이영희",
+    admission_year: 2018,
+    birth_date: "2000-07-20",
+    profile_image: null,
+    major: "경영학과",
+  },
+  role: "매니저",
+  back_number: 0,
+  height: 0,
+  weight: 0,
+  hands: "",
+  position: "",
+  goal: "팀 관리 및 지원",
 };

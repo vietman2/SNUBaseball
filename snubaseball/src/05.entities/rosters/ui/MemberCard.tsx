@@ -3,10 +3,10 @@
 import Image from "next/image";
 import styled from "styled-components";
 
+import { RoleBadge } from "./RoleBadge";
 import { RosterMemberType } from "../models/roster";
 import { hexToRgba } from "@shared/lib/styles";
 import { Skeleton } from "@shared/ui/Loading";
-import { RoleBadge } from "./RoleBadge";
 
 interface Props {
   roster_member: RosterMemberType;
@@ -16,16 +16,6 @@ const IMAGE_WIDTH = 160;
 const IMAGE_HEIGHT = (IMAGE_WIDTH / 3) * 4;
 
 export function MemberCard({ roster_member }: Readonly<Props>) {
-  const isPlayer = () => {
-    const playerRoles = ["주장", "부주장", "선수"];
-
-    if (playerRoles.includes(roster_member.role)) {
-      return true;
-    }
-
-    return false;
-  };
-
   return (
     <Card>
       <Info>
@@ -37,8 +27,6 @@ export function MemberCard({ roster_member }: Readonly<Props>) {
           <Name>{roster_member.member.name}</Name>
         </div>
         <div className="member-card-moreinfo">
-          {isPlayer() ? roster_member.position : "매니저"}
-          <br />
           {`${roster_member.member.admission_year.toString().slice(2)}학번`}
           <br />
           {roster_member.member.major}

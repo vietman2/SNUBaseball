@@ -1,3 +1,5 @@
+"use client";
+
 import { useColors } from "@shared/lib/styles";
 import { Badge } from "@shared/ui/Badge";
 
@@ -12,5 +14,9 @@ export function RoleBadge({ role }: Readonly<Props>) {
     return null;
   }
 
-  return <Badge label={role} color={colors.primary} />;
+  return (
+    <div>
+      <Badge label={role} color={colors.primary} />
+    </div>
+  );
 }

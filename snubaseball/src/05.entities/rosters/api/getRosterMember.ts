@@ -1,17 +1,19 @@
 import "server-only";
 
-import { RosterType } from "../models/roster";
+import { RosterMemberDetailsType } from "../models/roster";
 import { BACKEND_API_URL } from "@shared/configs/backend";
 import { SNUBaseballAPIError } from "@shared/configs/error";
 
-export async function getRoster(semester_code: string): Promise<RosterType> {
+export async function getRosterMember(
+  member_id: number
+): Promise<RosterMemberDetailsType> {
   const response = await fetch(
-    `${BACKEND_API_URL}/v1/teams/?semester=${semester_code}`,
+    `${BACKEND_API_URL}/v1/teams/members/${member_id}/`,
     {
       cache: "force-cache",
       next: {
         revalidate: 60 * 60 * 24 * 7, // 일주일
-        tags: [`roster-${semester_code}`],
+        tags: [`roster-member-${member_id}`],
       },
     }
   );
