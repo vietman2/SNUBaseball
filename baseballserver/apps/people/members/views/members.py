@@ -37,17 +37,11 @@ class MembersViewSet(ModelViewSet):
 
     @extend_schema(summary="부원 목록 조회 (포털 부원 관리용)", tags=["부원"])
     def list(self, request, *args, **kwargs):
-        players = Member.objects.active_players().order_by("role")
-        managers = Member.objects.active_managers().order_by("role")
-
-        player_data = self.get_serializer(players, many=True).data
-        manager_data = self.get_serializer(managers, many=True).data
+        queryset = Member.objects.active_students()
+        serializer = self.get_serializer(queryset, many=True)
 
         return Response(
-            {
-                "players": player_data,
-                "managers": manager_data,
-            },
+            data=serializer.data,
             status=status.HTTP_200_OK,
         )
 
@@ -59,8 +53,16 @@ class MembersViewSet(ModelViewSet):
 
     @extend_schema(summary="부원 정보 생성", tags=["부원"])
     def create(self, request, *args, **kwargs):
-        ## 일단 아직 구현 안함
-        return Response(status=status.HTTP_501_NOT_IMPLEMENTED)
+        serializer = self.get_serializer(data=request.data)
+
+        try:
+            serializer.is_valid(raise_exception=True)
+        except ValidationError as e:
+            raise SNUBaseballException("잘못된 데이터입니다.") from e
+
+        self.perform_create(serializer)
+
+        return Response(data=serializer.data, status=status.HTTP_201_CREATED)
 
     @extend_schema(summary="부원 정보 수정", tags=["부원"])
     def partial_update(self, request, *args, **kwargs):
@@ -82,7 +84,7 @@ class MembersViewSet(ModelViewSet):
 
     @extend_schema(summary="프로필 사진 업데이트 링크 생성", tags=["부원"])
     @action(detail=True, methods=["POST"], url_path="avatar/presign")
-    def avatar_presign(self, request, pk=None):  ## pylint: disable=unused
+    def avatar_presign(self, request, pk=None):
         member = self.get_object()
         serializer = AvatarPresignSerializer(data=request.data)
 
@@ -108,7 +110,7 @@ class MembersViewSet(ModelViewSet):
 
     @extend_schema(summary="프로필 s 사진 업데이트 완료", tags=["부원"])
     @action(detail=True, methods=["PATCH"], url_path="avatar/complete")
-    def avatar_complete(self, request, pk=None):  ## pylint: disable=unused
+    def avatar_complete(self, request, pk=None):
         member = self.get_object()
         serializer = AvatarCompleteSerializer(data=request.data)
 
