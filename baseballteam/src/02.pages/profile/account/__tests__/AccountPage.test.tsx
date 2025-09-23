@@ -31,7 +31,7 @@ describe("AccountPage", () => {
 
     // Avatar Section
     expect(getByText("프로필")).toBeInTheDocument();
-    expect(getByText("테스트 유저")).toBeInTheDocument();
+    expect(getByText("김선수")).toBeInTheDocument();
 
     // Academics Section
     expect(getByText("컴퓨터공학과")).toBeInTheDocument();
@@ -42,8 +42,8 @@ describe("AccountPage", () => {
 
     // Dates Section
     expect(getByText("생년월일")).toBeInTheDocument();
-    expect(getByText("2002-05-15")).toBeInTheDocument();
+    expect(getByText("2003-05-15")).toBeInTheDocument();
     expect(getByText("야구부 입부일")).toBeInTheDocument();
-    expect(getByText("2020-03-01")).toBeInTheDocument();
+    expect(getByText("2023-03-01")).toBeInTheDocument();
   });
 });
