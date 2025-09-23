@@ -1,5 +1,18 @@
 [MASTER]
 disable=
-    C0103, C0114, R0801, R0901, R0903, C0115, C0116, W0511, W0223
+    C0103, ## invalid-name (장고에서는 pk, Meta, urlpatterns 등 때문에 비활성화)
+    C0114, ## missing-module-docstring (admin.py, apps.py 등 상단에 주석이 필요없다)
+    C0115, ## missing-class-docstring (장고의 CBV는 주석이 필요없다)
+    C0116, ## missing-function-docstring (장고의 뷰 함수는 주석이 필요없다)
+    C0415, ## import-outside-toplevel (커스텀 api.py에서 lazy import가 필요하다)
+    R0801, ## duplicate-code (장고에서는 패턴이 의도적으로 유사한 경우가 많다)
+    R0901, ## too-many-ancestors (장고의 CBV는 상속이 많다)
+    R0903, ## too-few-public-methods (속성 위조 클래스가 많다)
+    W0223, ## abstract-method (장고의 CBV는 추상 메서드가 많다)
+    W0511 ## fixme (FIXME, TODO 주석을 허용한다)
+load-plugins=pylint_django
 ignore=manage.py
 ignore-paths=.*/migrations
+
+[BASIC]
+ignored-argument-names= _.*|^request$|^args$|^kwargs$|^pk$
