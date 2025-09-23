@@ -1,27 +1,18 @@
-import type { PlayerDetailType, MemberDetailType } from "../models/member";
+import { sampleDepartment } from "@entities/majors/@x/member";
+import type { MemberDetailsType } from "../models/member";
 
-export const samplePlayerDetails: PlayerDetailType = {
-  type: "PLAYER",
+export const sampleMemberDetails: MemberDetailsType = {
   id: 1,
   name: "김선수",
-  back_number: 10,
-  birth_date: "2000-01-01",
-  date_joined: "2020-03-01",
-  num_semester: 8,
-  extras: {
-    position: "투수",
-    bat_throw_hands: "우투우타",
-    height: 180,
-    weight: 75,
-  },
-};
-
-export const sampleManagerDetails: MemberDetailType = {
-  type: "MANAGER",
-  id: 2,
-  name: "박매니저",
-  back_number: null,
-  birth_date: null,
-  date_joined: "2019-03-01",
-  num_semester: 10,
+  student_id: "2025-12345",
+  admission_year: 2025,
+  major: sampleDepartment,
+  profile_image: null,
+  phone: "010-1234-5678",
+  email: "kim@example.com",
+  address: "서울시 관악구",
+  birth_date: "2003-05-15",
+  date_joined: "2023-03-01",
+  role: "player",
+  status: "active",
 };

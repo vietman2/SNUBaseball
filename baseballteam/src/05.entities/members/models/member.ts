@@ -12,4 +12,6 @@ export type MemberDetailsType = {
   address: string | null;
   birth_date: string | null;
   date_joined: string | null;
+  role: string;
+  status: string;
 };
