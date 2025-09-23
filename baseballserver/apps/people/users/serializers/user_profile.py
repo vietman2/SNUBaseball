@@ -20,9 +20,9 @@ class UserProfileSerializer(serializers.ModelSerializer):
     def get_role(self, obj):
         if obj.is_superuser:
             return "ADMIN"
-        elif obj.member and obj.member.role.is_leadership:
+        if obj.member and obj.member.role.is_leadership:
             return "LEADER"
-        elif obj.member and obj.member.role.is_staff:
+        if obj.member and obj.member.role.is_staff:
             return "STAFF"
-        else:
-            return "MEMBER"
+
+        return "MEMBER"
