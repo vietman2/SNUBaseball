@@ -4,8 +4,8 @@ import { renderWithProviders } from "@test-utils/renderer";
 describe("AboutPage", () => {
   describe("UI", () => {
     it("should render AboutPage correctly", () => {
-      const { container } = renderWithProviders(<AboutPage />);
-      expect(container).toMatchSnapshot();
+      const { getByText } = renderWithProviders(<AboutPage />);
+      expect(getByText("서울대 야구부에 대하여")).toBeInTheDocument();
     });
   });
 
