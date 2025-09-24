@@ -29,7 +29,7 @@ export default defineConfig({
     ],
     coverage: {
       provider: "istanbul",
-      reporter: ["lcov", "text", "html"],
+      reporter: [["text", { skipFull: true }], "lcov", "html"],
       exclude: [
         "**/index.ts",
         "**/routes.tsx",
