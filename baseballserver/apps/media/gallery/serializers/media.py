@@ -10,7 +10,7 @@ class GalleryImageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = GalleryImage
-        fields = ["id", "type", "url", "uploaded_at", "uploaded_by"]
+        fields = ["id", "type", "url", "created_at", "uploaded_by"]
 
 
 class GalleryVideoSerializer(serializers.ModelSerializer):
@@ -20,4 +20,4 @@ class GalleryVideoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = GalleryVideo
-        fields = ["id", "type", "url", "uploaded_at", "uploaded_by"]
+        fields = ["id", "type", "url", "created_at", "uploaded_by"]
