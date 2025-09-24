@@ -1,6 +1,7 @@
 import { Navigate, Route } from "react-router";
 
 import { MainLayout } from "./layout";
+import { GalleryRoutes } from "./gallery/routes";
 import { MembersRoutes } from "./members/routes";
 import { NotFoundWidget } from "@widgets/not-found";
 
@@ -15,6 +16,7 @@ export const MainRoutes = (
         element={<Navigate to="/home" replace />}
       />
     ))}
+    {GalleryRoutes}
     {MembersRoutes}
     <Route index element={<Navigate to="home" replace />} />
     <Route path="*" element={<NotFoundWidget />} />
