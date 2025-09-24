@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "drf_spectacular",
     ## Custom Apps
     "apps.media.assets.apps.AssetsConfig",
+    "apps.media.gallery.apps.GalleryConfig",
     "apps.people.members.apps.MembersConfig",
     "apps.people.users.apps.UsersConfig",
     "apps.teams.teams.apps.TeamsConfig",
