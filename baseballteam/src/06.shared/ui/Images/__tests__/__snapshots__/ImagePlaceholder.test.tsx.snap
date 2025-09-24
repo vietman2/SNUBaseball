@@ -1,0 +1,16 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ImagePlaceholder > renders correctly with optional label prop 1`] = `
+<div
+  style="width: 150px; height: 150px;"
+>
+  <div
+    class="sc-bRKDuR cIjvCm"
+    style="border-radius: 12px;"
+  >
+    <span>
+      Placeholder
+    </span>
+  </div>
+</div>
+`;

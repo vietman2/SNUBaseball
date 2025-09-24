@@ -41,6 +41,9 @@ vi.mock("@shared/ui/Icons", () => ({
   AppIcon: () => null,
   Logo: ({ type }: { type: "SILVER" | "BLUE" }) => <div>{type} Logo</div>,
 }));
+vi.mock("@shared/ui/Images", () => ({
+  ImagePlaceholder: () => <div>ImagePlaceholder</div>,
+}));
 vi.mock("@shared/ui/Inputs", async () => {
   const { DateInput } = await vi.importActual("@shared/ui/Inputs");
 
