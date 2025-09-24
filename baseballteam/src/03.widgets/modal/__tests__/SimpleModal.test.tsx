@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { fireEvent, waitFor } from "@testing-library/react";
 
 import { SimpleModal, useSimpleModal } from "@widgets/modal";
@@ -97,5 +97,66 @@ describe("SimpleModal", () => {
       expect(getByTestId("modal-overlay")).toBeInTheDocument();
       expect(getByTestId("modal-dialog")).toBeInTheDocument();
     });
+  });
+
+  it("키보드로 모달 닫기", async () => {
+    const { getByTestId, queryByTestId } = renderWithProviders(
+      <ModalTestComponent />
+    );
+
+    // 모달 토글 버튼 클릭
+    fireEvent.click(getByTestId("toggle-button"));
+
+    // 모달이 열렸는지 확인
+    await waitFor(() => {
+      expect(getByTestId("modal-overlay")).toBeInTheDocument();
+      expect(getByTestId("modal-dialog")).toBeInTheDocument();
+    });
+
+    // Escape가 아닌 다른 키 눌러보기
+    fireEvent.keyDown(window, { key: "Enter", code: "Enter" });
+
+    // 모달이 여전히 열려있는지 확인
+    await waitFor(() => {
+      expect(getByTestId("modal-overlay")).toBeInTheDocument();
+      expect(getByTestId("modal-dialog")).toBeInTheDocument();
+    });
+
+    // Escape 키 눌러서 모달 닫기
+    fireEvent.keyDown(window, { key: "Escape", code: "Escape" });
+
+    // 모달이 닫혔는지 확인
+    await waitFor(() => {
+      expect(queryByTestId("modal-overlay")).toBeNull();
+      expect(queryByTestId("modal-dialog")).toBeNull();
+    });
+  });
+
+  it("closing 애니메이션 중, 다시 열기", async () => {
+    vi.useFakeTimers();
+
+    const { getByTestId } = renderWithProviders(<ModalTestComponent />);
+
+    // 모달 토글 버튼 클릭
+    fireEvent.click(getByTestId("toggle-button"));
+
+    // 모달이 열렸는지 확인
+    expect(getByTestId("modal-overlay")).toBeInTheDocument();
+    expect(getByTestId("modal-dialog")).toBeInTheDocument();
+
+    // Escape 키 눌러서 모달 닫기
+    fireEvent.keyDown(window, { key: "Escape", code: "Escape" });
+    vi.advanceTimersByTime(100);
+
+    // 모달이 닫히는 중인지 확인
+    expect(getByTestId("modal-overlay")).toBeInTheDocument();
+    expect(getByTestId("modal-dialog")).toBeInTheDocument();
+
+    // 모달 토글 버튼 클릭 (닫히는 중에 다시 열기)
+    fireEvent.click(getByTestId("toggle-button"));
+
+    // 모달이 다시 열려있는지 확인
+    expect(getByTestId("modal-overlay")).toBeInTheDocument();
+    expect(getByTestId("modal-dialog")).toBeInTheDocument();
   });
 });
