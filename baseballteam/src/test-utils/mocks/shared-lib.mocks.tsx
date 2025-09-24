@@ -4,7 +4,9 @@ vi.mock("@entities/user", async () => {
   const actual = await vi.importActual("@entities/user");
   return {
     ...actual,
-    useUser: vi.fn().mockReturnValue({ user: null, isAuthenticated: false }),
+    useUser: vi
+      .fn()
+      .mockReturnValue({ user: actual.sampleUser, isAuthenticated: true }),
   };
 });
 

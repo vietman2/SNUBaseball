@@ -10,6 +10,11 @@ vi.unmock("@shared/lib/styles");
 
 describe("MainLayout", () => {
   it("should redirect to /login when not authenticated", () => {
+    vi.spyOn(AuthAPI, "useUser").mockReturnValue({
+      isAuthenticated: false,
+      user: null,
+    });
+
     const { container } = renderWithProviders(<MainLayout />);
 
     expect(container.innerHTML).toBe("");
