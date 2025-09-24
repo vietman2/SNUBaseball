@@ -5,6 +5,7 @@ import { DatesSegment } from "./forms/DatesSegment";
 import { MajorSegment } from "./forms/MajorSegment";
 import { NameIdSegment } from "./forms/NameIdSegment";
 import { useMemberForm } from "../hooks/useMemberForm";
+import { SubmitButton } from "@shared/ui/Buttons";
 import { ErrorText } from "@shared/ui/Texts";
 
 interface Props {
@@ -43,21 +44,4 @@ const Subtitle = styled.h4`
   font-weight: 600;
   color: ${({ theme }) => theme.colors.textPrimary};
   margin-bottom: 8px;
-`;
-
-const SubmitButton = styled.button`
-  padding: 10px 16px;
-  border: none;
-  border-radius: 8px;
-  background-color: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.onPrimary};
-  font-weight: 600;
-  font-size: 0.95rem;
-  cursor: pointer;
-
-  &:disabled {
-    background-color: ${({ theme }) => theme.colors.gray100};
-    color: ${({ theme }) => theme.colors.gray500};
-    cursor: not-allowed;
-  }
 `;

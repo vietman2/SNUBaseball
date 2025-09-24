@@ -4,6 +4,7 @@ import { useAvatarForm } from "../hooks/useAvatarForm";
 import { SingleFileInput } from "@shared/ui/Inputs";
 import { Spinner } from "@shared/ui/Loading";
 import { ErrorText } from "@shared/ui/Texts";
+import { SubmitButton } from "@shared/ui/Buttons";
 
 interface Props {
   memberId: number;
@@ -105,22 +106,5 @@ const CurrentImageBox = styled.div`
     width: 100%;
     max-height: 180px;
     object-fit: cover;
-  }
-`;
-
-const SubmitButton = styled.button`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px;
-  border-radius: 8px;
-  background-color: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.onPrimary};
-  font-weight: 600;
-  border: none;
-
-  &:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
   }
 `;

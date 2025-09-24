@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
-import { PhoneInput } from "@shared/ui/Inputs";
-import { ErrorText } from "@shared/ui/Texts";
 import { useContactForm } from "../hooks/useContactForm";
 import { useContactInputs } from "@entities/members";
+import { SubmitButton } from "@shared/ui/Buttons";
+import { PhoneInput } from "@shared/ui/Inputs";
+import { ErrorText } from "@shared/ui/Texts";
 
 interface Props {
   memberId: number;
@@ -53,13 +54,13 @@ export function UpdateContactForm({ memberId, closeModal }: Readonly<Props>) {
         </div>
       </InputsWrapper>
       {errorMsg && <ErrorText>{errorMsg}</ErrorText>}
-      <Button
+      <SubmitButton
         type="submit"
         disabled={buttonDisabled}
         data-testid="submit-contacts-update-button"
       >
         변경하기
-      </Button>
+      </SubmitButton>
     </Container>
   );
 }
@@ -95,20 +96,5 @@ const InputsWrapper = styled.div`
     border: 1px solid ${({ theme }) => theme.colors.gray300};
     border-radius: 8px;
     background-color: ${({ theme }) => theme.colors.backgroundDefault};
-  }
-`;
-
-const Button = styled.button`
-  padding: 8px 16px;
-  border: none;
-  border-radius: 8px;
-  background-color: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.onPrimary};
-  font-weight: 600;
-  font-size: 0.875rem;
-
-  &:disabled {
-    background-color: ${({ theme }) => theme.colors.gray100};
-    color: ${({ theme }) => theme.colors.gray500};
   }
 `;
