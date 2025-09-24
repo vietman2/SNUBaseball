@@ -18,6 +18,7 @@ describe("MemberTableRow", () => {
         index={0}
         member={{
           ...sampleMemberDetails,
+          major: null,
           student_id: "",
           phone: "",
           birth_date: "",

@@ -42,7 +42,7 @@ export function MemberTableRow({ index, member }: Readonly<Props>) {
         {member.name} ({member.admission_year})
       </div>
       <div className="wide-row">{member.student_id || "-"}</div>
-      <div className="wide-row">{member.major.name}</div>
+      <div className="wide-row">{member.major ? member.major.name : "-"}</div>
       <div className="wide-row">
         {member.phone ? formatPhoneKR(member.phone) : "-"}
       </div>
