@@ -32,6 +32,11 @@ vi.mock("@shared/ui/Buttons", () => ({
       {children}
     </a>
   ),
+  SubmitButton: (props: unknown) => (
+    <button
+      {...(props as React.ButtonHTMLAttributes<HTMLButtonElement>)}
+    />
+  ),
 }));
 vi.mock("@shared/ui/Dividers", () => ({
   Divider: () => <div>Divider</div>,
