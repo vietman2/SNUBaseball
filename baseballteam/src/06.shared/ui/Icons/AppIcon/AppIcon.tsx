@@ -7,8 +7,10 @@ import Equipment from "./files/equipment.svg?react";
 import Feedback from "./files/feedback.svg?react";
 import Forum from "./files/forum.svg?react";
 import Gallery from "./files/gallery.svg?react";
+import Grid from "./files/grid.svg?react";
 import Home from "./files/home.svg?react";
 import InfoCircle from "./files/info-circle.svg?react";
+import List from "./files/list.svg?react";
 import Logout from "./files/logout.svg?react";
 import Management from "./files/management.svg?react";
 import Money from "./files/money.svg?react";
@@ -42,8 +44,10 @@ const iconMap: Record<
   feedback: Feedback,
   forum: Forum,
   gallery: Gallery,
+  grid: Grid,
   home: Home,
   "info-circle": InfoCircle,
+  list: List,
   logout: Logout,
   management: Management,
   money: Money,
