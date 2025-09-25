@@ -1,7 +1,9 @@
+import Album from "./files/album.svg?react";
 import ChevronDown from "./files/chevron-down.svg?react";
 import ChevronLeft from "./files/chevron-left.svg?react";
 import ChevronRight from "./files/chevron-right.svg?react";
 import ChevronUp from "./files/chevron-up.svg?react";
+import Close from "./files/close.svg?react";
 import Diary from "./files/diary.svg?react";
 import Equipment from "./files/equipment.svg?react";
 import Feedback from "./files/feedback.svg?react";
@@ -26,6 +28,7 @@ import Record from "./files/record.svg?react";
 import SidebarClose from "./files/sidebar-close.svg?react";
 import SidebarOpen from "./files/sidebar-open.svg?react";
 import Sun from "./files/sun.svg?react";
+import Tag from "./files/tag.svg?react";
 import Video from "./files/video.svg?react";
 
 interface Props {
@@ -38,10 +41,12 @@ const iconMap: Record<
   string,
   React.FunctionComponent<React.SVGProps<SVGSVGElement>>
 > = {
+  album: Album,
   "chevron-down": ChevronDown,
   "chevron-left": ChevronLeft,
   "chevron-right": ChevronRight,
   "chevron-up": ChevronUp,
+  close: Close,
   diary: Diary,
   equipment: Equipment,
   feedback: Feedback,
@@ -66,6 +71,7 @@ const iconMap: Record<
   "sidebar-close": SidebarClose,
   "sidebar-open": SidebarOpen,
   sun: Sun,
+  tag: Tag,
   video: Video,
 };
 
