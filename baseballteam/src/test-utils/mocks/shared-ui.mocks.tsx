@@ -78,6 +78,7 @@ vi.mock("@shared/ui/Loading", () => ({
   Spinner: () => <div>Loading Spinner</div>,
 }));
 vi.mock("@shared/ui/Selects", () => ({
+  SelectMenu: () => <div>SelectMenu</div>,
   SimpleSelect: (props: unknown) => (
     <select
       data-testid="simple-select"
