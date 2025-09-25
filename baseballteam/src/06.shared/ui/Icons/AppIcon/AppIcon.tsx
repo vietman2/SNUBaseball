@@ -9,8 +9,10 @@ import Forum from "./files/forum.svg?react";
 import Gallery from "./files/gallery.svg?react";
 import Grid from "./files/grid.svg?react";
 import Home from "./files/home.svg?react";
+import Image from "./files/image.svg?react";
 import InfoCircle from "./files/info-circle.svg?react";
 import List from "./files/list.svg?react";
+import Lock from "./files/lock.svg?react";
 import Logout from "./files/logout.svg?react";
 import Management from "./files/management.svg?react";
 import Money from "./files/money.svg?react";
@@ -24,6 +26,7 @@ import Record from "./files/record.svg?react";
 import SidebarClose from "./files/sidebar-close.svg?react";
 import SidebarOpen from "./files/sidebar-open.svg?react";
 import Sun from "./files/sun.svg?react";
+import Video from "./files/video.svg?react";
 
 interface Props {
   icon: string;
@@ -46,8 +49,10 @@ const iconMap: Record<
   gallery: Gallery,
   grid: Grid,
   home: Home,
+  image: Image,
   "info-circle": InfoCircle,
   list: List,
+  lock: Lock,
   logout: Logout,
   management: Management,
   money: Money,
@@ -61,6 +66,7 @@ const iconMap: Record<
   "sidebar-close": SidebarClose,
   "sidebar-open": SidebarOpen,
   sun: Sun,
+  video: Video,
 };
 
 export function AppIcon({ icon, size = 24, color = "black" }: Readonly<Props>) {
