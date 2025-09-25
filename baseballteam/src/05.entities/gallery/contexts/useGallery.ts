@@ -1,9 +1,14 @@
 import { createContext, useContext } from "react";
 
-type GalleryContextType = {
-  selectedAlbumId: number | null;
-  setSelectedAlbumId: (id: number | null) => void;
-};
+import type { MediaTagType } from "../models/tags";
+import type { AlbumType } from "../models/album";
+
+interface GalleryContextType {
+  albums: AlbumType[];
+  tags: MediaTagType[];
+  isLoading: boolean;
+  isError: boolean;
+}
 
 export const GalleryContext = createContext<GalleryContextType | null>(null);
 
