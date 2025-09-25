@@ -7,6 +7,7 @@ import Close from "./files/close.svg?react";
 import Diary from "./files/diary.svg?react";
 import Equipment from "./files/equipment.svg?react";
 import Feedback from "./files/feedback.svg?react";
+import File from "./files/file.svg?react";
 import Forum from "./files/forum.svg?react";
 import Gallery from "./files/gallery.svg?react";
 import Grid from "./files/grid.svg?react";
@@ -29,6 +30,7 @@ import SidebarClose from "./files/sidebar-close.svg?react";
 import SidebarOpen from "./files/sidebar-open.svg?react";
 import Sun from "./files/sun.svg?react";
 import Tag from "./files/tag.svg?react";
+import Upload from "./files/upload.svg?react";
 import Video from "./files/video.svg?react";
 
 interface Props {
@@ -50,6 +52,7 @@ const iconMap: Record<
   diary: Diary,
   equipment: Equipment,
   feedback: Feedback,
+  file: File,
   forum: Forum,
   gallery: Gallery,
   grid: Grid,
@@ -72,6 +75,7 @@ const iconMap: Record<
   "sidebar-open": SidebarOpen,
   sun: Sun,
   tag: Tag,
+  upload: Upload,
   video: Video,
 };
 
