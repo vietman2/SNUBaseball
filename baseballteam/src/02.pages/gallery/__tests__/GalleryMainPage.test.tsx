@@ -2,23 +2,34 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { fireEvent, waitFor } from "@testing-library/react";
 
 import { GalleryMainPage } from "@pages/gallery/main";
-import { sampleAlbums } from "@entities/gallery";
+import { GalleryProvider, sampleAlbums, sampleTags } from "@entities/gallery";
 import * as AuthAPI from "@entities/user";
 import * as AxiosAPI from "@shared/lib/axios";
+import { ViewsProvider } from "@shared/lib/views";
 import { renderWithProviders } from "@test-utils/renderer";
 
 describe("GalleryMainPage", () => {
+  const render = () => {
+    return renderWithProviders(
+      <GalleryProvider>
+        <ViewsProvider>
+          <GalleryMainPage />
+        </ViewsProvider>
+      </GalleryProvider>
+    );
+  };
+
   beforeEach(() => {
     vi.spyOn(AxiosAPI.axiosInstanceWithAuth, "get").mockResolvedValue({
-      data: sampleAlbums,
+      data: { albums: sampleAlbums, tags: sampleTags },
     });
   });
 
   it("should render correctly with albums", async () => {
-    const { getByText, queryByText } = renderWithProviders(<GalleryMainPage />);
+    const { getByText, queryByText } = render();
 
     await waitFor(() => {
-      expect(getByText("갤러리")).toBeInTheDocument();
+      expect(getByText("앨범 목록")).toBeInTheDocument();
       // 기본적으로 useUser는 일반 멤버를 반환하기 때문에, 생성 버튼이 보이지 않음
       expect(queryByText("새 앨범 추가")).not.toBeInTheDocument();
     });
@@ -29,7 +40,7 @@ describe("GalleryMainPage", () => {
       new Error("Failed to fetch albums")
     );
 
-    const { getByText } = renderWithProviders(<GalleryMainPage />);
+    const { getByText } = render();
 
     await waitFor(() => {
       expect(getByText("앨범을 불러오는 데 실패했습니다")).toBeInTheDocument();
@@ -51,7 +62,7 @@ describe("GalleryMainPage", () => {
       user: AuthAPI.sampleAdmin,
     });
 
-    const { getByTestId, getByText } = renderWithProviders(<GalleryMainPage />);
+    const { getByTestId, getByText } = render();
 
     await waitFor(() => {
       expect(getByText("새 앨범 추가")).toBeInTheDocument();

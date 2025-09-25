@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import type { AlbumType } from "@entities/gallery";
+import type { AlbumType, GalleryDataResponseType } from "@entities/gallery";
 import {
   axiosInstanceWithAuth,
   serverErrorMessageParser,
@@ -45,10 +45,20 @@ export function useCreateAlbumAPI() {
     mutationFn: (data) => createAlbum(data),
     onSuccess: (result) => {
       if (result.status === "SUCCESS") {
-        queryClient.setQueryData<AlbumType[]>(["albums"], (oldData) => {
-          if (!oldData) return [result.data];
-          return [...oldData, result.data];
-        });
+        queryClient.setQueryData<GalleryDataResponseType>(
+          ["gallery"],
+          (oldData) => {
+            if (!oldData)
+              return {
+                albums: [result.data],
+                tags: [],
+              };
+            return {
+              ...oldData,
+              albums: [result.data, ...oldData.albums],
+            };
+          }
+        );
       }
     },
   });
