@@ -1,8 +1,10 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { fireEvent } from "@testing-library/react";
 
 import { ViewsProvider, useViews } from "@shared/lib/views";
 import { renderWithProviders } from "@test-utils/renderer";
+
+vi.unmock("@shared/lib/views");
 
 const TestComponent = () => {
   const { activeView, switchToGrid, switchToList } = useViews();
