@@ -10,7 +10,11 @@ export function ViewToggle() {
 
   return (
     <Container>
-      <ToggleButton $active={activeView === "GRID"} onClick={switchToGrid}>
+      <ToggleButton
+        $active={activeView === "GRID"}
+        onClick={switchToGrid}
+        data-testid="grid-view-button"
+      >
         <AppIcon
           icon="grid"
           size={20}
@@ -19,7 +23,11 @@ export function ViewToggle() {
           }
         />
       </ToggleButton>
-      <ToggleButton $active={activeView === "LIST"} onClick={switchToList}>
+      <ToggleButton
+        $active={activeView === "LIST"}
+        onClick={switchToList}
+        data-testid="list-view-button"
+      >
         <AppIcon
           icon="list"
           size={20}
@@ -56,7 +64,7 @@ const ToggleButton = styled.button<{ $active?: boolean }>`
   padding: 8px;
 
   background-color: ${({ $active, theme }) =>
-    $active ? theme.colors.gray200 : "transparent"};
+    $active ? theme.colors.backgroundPaper : "transparent"};
 
   transition: background-color 0.2s;
 `;
