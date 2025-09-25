@@ -101,3 +101,13 @@ vi.mock("@shared/lib/styles", async () => {
     GlobalStyles: () => null,
   };
 });
+vi.mock("@shared/lib/views", () => ({
+  useViews: vi.fn().mockReturnValue({
+    activeView: "GRID",
+    switchToGrid: vi.fn(),
+    switchToList: vi.fn(),
+  }),
+  ViewsProvider: ({ children }: { children: React.ReactNode }) => (
+    <>{children}</>
+  ),
+}));

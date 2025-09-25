@@ -1,14 +1,19 @@
-import { Link } from "react-router";
 import styled from "styled-components";
 
-import { NewAlbum } from "./ui/NewAlbum";
+import { Albums } from "./ui/Albums";
 import { Breadcrumb } from "@widgets/breadcrumb";
-import { ErrorWidget } from "@widgets/error";
+import { SimpleModal, useSimpleModal } from "@widgets/modal";
 import { ViewToggle } from "@widgets/viewtoggle";
-import { AlbumCard, AlbumCardSkeleton, useGallery } from "@entities/gallery";
+import { NewAlbumForm } from "@features/gallery/createNewAlbum";
+import { AlbumFormProvider } from "@entities/gallery";
+import { useUser } from "@entities/user";
 import { type BreadcrumbItemType } from "@shared/lib/views";
+import { ElevatedTextButton } from "@shared/ui/Buttons";
 
 export function GalleryMainPage() {
+  const { isOpen, open, close } = useSimpleModal();
+  const { user } = useUser();
+
   const breadcrumbItems: BreadcrumbItemType[] = [
     {
       label: "앨범 목록",
@@ -17,46 +22,27 @@ export function GalleryMainPage() {
   ];
 
   return (
-    <Container>
-      <Header>
-        <ViewToggle />
-        <NewAlbum />
-      </Header>
-      <Breadcrumb items={breadcrumbItems} />
-      <ListComponents />
-    </Container>
-  );
-}
-
-function ListComponents() {
-  const { albums, isLoading, isError, refresh } = useGallery();
-
-  if (isLoading) {
-    return (
-      <List>
-        <AlbumCardSkeleton />
-        <AlbumCardSkeleton />
-        <AlbumCardSkeleton />
-      </List>
-    );
-  }
-
-  if (isError || !albums) {
-    return (
-      <ErrorWidget message="앨범을 불러오는 데 실패했습니다">
-        <button onClick={refresh}>다시 시도</button>
-      </ErrorWidget>
-    );
-  }
-
-  return (
-    <List>
-      {albums.map((album) => (
-        <Link to={`/gallery/${album.id}`} key={album.id}>
-          <AlbumCard key={album.id} album={album} />
-        </Link>
-      ))}
-    </List>
+    <>
+      <Container>
+        <Header>
+          <ViewToggle />
+          <div>
+            {user && user.role !== "MEMBER" && (
+              <ElevatedTextButton onClick={open}>
+                새 앨범 추가
+              </ElevatedTextButton>
+            )}
+          </div>
+        </Header>
+        <Breadcrumb items={breadcrumbItems} />
+        <Albums />
+      </Container>
+      <SimpleModal isOpen={isOpen} onClose={close}>
+        <AlbumFormProvider>
+          <NewAlbumForm closeModal={close} />
+        </AlbumFormProvider>
+      </SimpleModal>
+    </>
   );
 }
 
@@ -72,12 +58,4 @@ const Header = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0 4px;
-`;
-
-const List = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  padding: 16px 24px;
-  gap: 32px;
 `;

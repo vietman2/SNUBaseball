@@ -43,7 +43,7 @@ vi.mock("@shared/ui/Dividers", () => ({
   VerticalDivider: () => <div>VerticalDivider</div>,
 }));
 vi.mock("@shared/ui/Icons", () => ({
-  AppIcon: () => null,
+  AppIcon: ({icon}: {icon: string}) => <div>{icon}-icon</div>,
   Logo: ({ type }: { type: "SILVER" | "BLUE" }) => <div>{type} Logo</div>,
 }));
 vi.mock("@shared/ui/Images", () => ({

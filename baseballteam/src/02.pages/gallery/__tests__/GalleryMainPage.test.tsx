@@ -25,13 +25,23 @@ describe("GalleryMainPage", () => {
     });
   });
 
-  it("should render correctly with albums", async () => {
-    const { getByText, queryByText } = render();
+  it("should render correctly with albums (grid view)", async () => {
+    vi.unmock("@shared/lib/views");
+
+    const { getByTestId, getByText, queryByText } = render();
 
     await waitFor(() => {
       expect(getByText("앨범 목록")).toBeInTheDocument();
       // 기본적으로 useUser는 일반 멤버를 반환하기 때문에, 생성 버튼이 보이지 않음
       expect(queryByText("새 앨범 추가")).not.toBeInTheDocument();
+    });
+
+    // switch to list view
+    fireEvent.click(getByTestId("list-view-button"));
+
+    await waitFor(() => {
+      expect(getByText("image-icon")).toBeInTheDocument();
+      expect(getByText("video-icon")).toBeInTheDocument();
     });
   });
 
