@@ -8,6 +8,7 @@ import {
   SelectedArea,
 } from "./styles";
 import { useMenu } from "./useMenu";
+import { useColors } from "@shared/lib/styles";
 import { AppIcon } from "@shared/ui/Icons";
 
 interface Props<T> {
@@ -24,6 +25,7 @@ export function MultiSelectMenu<T>({
   getLabel,
 }: Readonly<Props<T>>) {
   const { rootRef, menuOpen, openMenu } = useMenu();
+  const { colors } = useColors();
 
   return (
     <Container ref={rootRef} data-testid="select-container">
@@ -57,7 +59,7 @@ export function MultiSelectMenu<T>({
                 >
                   <Item>
                     {getLabel(v)}
-                    <AppIcon icon="close" size={16} />
+                    <AppIcon icon="close" size={16} color={colors.primary} />
                   </Item>
                 </button>
               ))}

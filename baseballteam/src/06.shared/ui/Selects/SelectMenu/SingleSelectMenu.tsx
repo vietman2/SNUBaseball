@@ -8,6 +8,7 @@ import {
   SelectedArea,
 } from "./styles";
 import { useMenu } from "./useMenu";
+import { useColors } from "@shared/lib/styles";
 import { AppIcon } from "@shared/ui/Icons";
 
 interface Props<T> {
@@ -24,6 +25,7 @@ export function SingleSelectMenu<T>({
   getLabel,
 }: Readonly<Props<T>>) {
   const { rootRef, menuOpen, openMenu, closeMenu } = useMenu();
+  const { colors } = useColors();
 
   const removeSelected = () => {
     onSelect(null);
@@ -56,7 +58,7 @@ export function SingleSelectMenu<T>({
             <button onClick={removeSelected} data-testid="remove-selected">
               <Item>
                 {getLabel(value)}
-                <AppIcon icon="close" size={16} />
+                <AppIcon icon="close" size={16} color={colors.primary} />
               </Item>
             </button>
           )}

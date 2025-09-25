@@ -57,7 +57,7 @@ export const Item = styled.span`
   }
 `;
 
-export const Placeholder = styled.button`
+export const Placeholder = styled.span`
   display: flex;
   padding: 4px 8px;
   font-weight: 400;
