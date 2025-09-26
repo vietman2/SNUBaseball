@@ -71,7 +71,7 @@ describe("AlbumDetails", () => {
     fireEvent.click(getByText("앨범 목록으로 돌아가기"));
   });
 
-  it("handles empty album and upload files", async () => {
+  it("handles empty album and upload file modal open", async () => {
     vi.spyOn(AxiosAPI.axiosInstanceWithAuth, "get").mockResolvedValueOnce({
       data: { ...sampleAlbumDetails, media: [] },
     });
