@@ -46,6 +46,25 @@ describe("ViewsContext", () => {
     expect(activeView.textContent).toBe("GRID");
   });
 
+  it("restores view from localStorage", () => {
+    // Set initial value in localStorage
+    localStorage.setItem("preferred-view", "LIST");
+
+    const { getByTestId } = renderWithProviders(
+      <ViewsProvider>
+        <TestComponent />
+      </ViewsProvider>
+    );
+
+    const activeView = getByTestId("active-view");
+
+    // The view should be restored to LIST from localStorage
+    expect(activeView.textContent).toBe("LIST");
+
+    // Clean up
+    localStorage.removeItem("preferred-view");
+  });
+
   it("throws error when used outside of ViewsProvider", () => {
     expect(() => renderWithProviders(<TestComponent />)).toThrow(
       "useViews must be used within a ViewsProvider"
