@@ -1,3 +1,4 @@
+import posixpath
 from drf_spectacular.utils import extend_schema
 from rest_framework import status
 from rest_framework.decorators import action
@@ -96,19 +97,22 @@ class MembersViewSet(ModelViewSet):
             ) from e
 
         prefix = f"profiles/{member.id}/"
+        filename_clean = (
+            serializer.validated_data["filename"].strip().replace(" ", "_")[:100]
+        )
+        key = posixpath.join(prefix, filename_clean)
 
         data = serializer.validated_data
 
         out = presign_upload(
-            prefix=prefix,
-            filename=data["filename"],
+            key=key,
             content_type=data.get("content_type"),  ## optional
             size=data["size"],
         )
 
         return Response(data=out, status=status.HTTP_200_OK)
 
-    @extend_schema(summary="프로필 s 사진 업데이트 완료", tags=["부원"])
+    @extend_schema(summary="프로필 사진 업데이트 완료", tags=["부원"])
     @action(detail=True, methods=["PATCH"], url_path="avatar/complete")
     def avatar_complete(self, request, pk=None):
         member = self.get_object()
