@@ -1,4 +1,5 @@
 import Album from "./files/album.svg?react";
+import Check from "./files/check.svg?react";
 import ChevronDown from "./files/chevron-down.svg?react";
 import ChevronLeft from "./files/chevron-left.svg?react";
 import ChevronRight from "./files/chevron-right.svg?react";
@@ -44,6 +45,7 @@ const iconMap: Record<
   React.FunctionComponent<React.SVGProps<SVGSVGElement>>
 > = {
   album: Album,
+  check: Check,
   "chevron-down": ChevronDown,
   "chevron-left": ChevronLeft,
   "chevron-right": ChevronRight,
