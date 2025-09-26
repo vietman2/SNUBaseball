@@ -43,6 +43,13 @@ describe("GalleryMainPage", () => {
       expect(getByText("image-icon")).toBeInTheDocument();
       expect(getByText("video-icon")).toBeInTheDocument();
     });
+
+    // switch back to grid view
+    fireEvent.click(getByTestId("grid-view-button"));
+
+    await waitFor(() => {
+      expect(getByText("ImagePlaceholder")).toBeInTheDocument();
+    });
   });
 
   it("should handle fetch albums error", async () => {
