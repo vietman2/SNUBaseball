@@ -11,7 +11,11 @@ async function updateProfileImage(
   id: number,
   file: File
 ): Promise<APIResponseType<AvatarUploadResultType> | APIErrorType> {
-  const pre = await getPresignedUrl(id, file);
+  const pre = await getPresignedUrl(id, {
+    filename: file.name,
+    content_type: file.type,
+    size: file.size,
+  });
 
   if (!pre) {
     return {
