@@ -6,12 +6,12 @@ import type { MediaTagType } from "../models/tags";
 
 interface Props {
   children: ReactNode;
-  initialAlbum?: AlbumType | null;
+  initialAlbum: AlbumType | null;
 }
 
 export function MediaSelectsProvider({
   children,
-  initialAlbum = null,
+  initialAlbum,
 }: Readonly<Props>) {
   const [selectedAlbum, setSelectedAlbum] = useState<AlbumType | null>(
     initialAlbum

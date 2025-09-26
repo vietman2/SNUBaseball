@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
-import { useGallery, useMediaSelects } from "@entities/gallery";
+import { useGallery } from "../contexts/useGallery";
+import { useMediaSelects } from "../contexts/useMediaSelects";
 import { useColors } from "@shared/lib/styles";
 import { AppIcon } from "@shared/ui/Icons";
 import { MultiSelectMenu, SingleSelectMenu } from "@shared/ui/Selects";

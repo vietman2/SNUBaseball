@@ -19,8 +19,8 @@ export function AlbumFormProvider({
   // 변경사항이 있는지 + 제목이 최소 1글자 이상인지
   const isUpdated = useMemo(() => {
     return (
-      title.length > 0 &&
-      (title !== initialTitle || membersOnly !== initialMembersOnly)
+      (title !== initialTitle || membersOnly !== initialMembersOnly) &&
+      title.trim().length > 0
     );
   }, [title, membersOnly, initialTitle, initialMembersOnly]);
 
