@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 import type { AlbumType } from "../models/album";
+import { useColors } from "@shared/lib/styles";
+import { AppIcon } from "@shared/ui/Icons";
 import { ImagePlaceholder } from "@shared/ui/Images";
 import { Skeleton } from "@shared/ui/Loading";
 
@@ -9,6 +11,8 @@ interface Props {
 }
 
 export function AlbumCard({ album }: Readonly<Props>) {
+  const { colors } = useColors();
+
   return (
     <Container>
       {album.cover_images.length > 0 ? (
@@ -21,7 +25,12 @@ export function AlbumCard({ album }: Readonly<Props>) {
           label="빈 앨범"
         />
       )}
-      <span>{album.title}</span>
+      <span>
+        {album.title}
+        {album.members_only && (
+          <AppIcon icon="lock" size={16} color={colors.textSecondary} />
+        )}
+      </span>
     </Container>
   );
 }
@@ -42,9 +51,13 @@ const Container = styled.div`
   gap: 12px;
 
   > span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
     font-size: 1rem;
     font-weight: 600;
-    color: ${({ theme }) => theme.colors.textSecondary};
+    color: ${({ theme }) => theme.colors.textPrimary};
     text-align: center;
     word-break: break-all;
   }

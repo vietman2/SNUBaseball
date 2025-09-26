@@ -8,7 +8,7 @@ interface Props {
 }
 
 export function GalleryProvider({ children }: Readonly<Props>) {
-  const { data, isLoading, isError } = useGalleryData();
+  const { data, isLoading, isError, refetch } = useGalleryData();
 
   const value = useMemo(() => {
     return {
@@ -16,8 +16,9 @@ export function GalleryProvider({ children }: Readonly<Props>) {
       tags: data ? data.tags : [],
       isLoading,
       isError,
+      refresh: refetch,
     };
-  }, [data, isLoading, isError]);
+  }, [data, isLoading, isError, refetch]);
 
   return (
     <GalleryContext.Provider value={value}>{children}</GalleryContext.Provider>

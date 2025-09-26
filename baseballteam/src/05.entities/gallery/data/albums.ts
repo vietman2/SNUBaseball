@@ -1,4 +1,4 @@
-import type { AlbumType } from "../models/album";
+import type { AlbumType, AlbumDetailsResponseType } from "../models/album";
 
 export const sampleAlbums: AlbumType[] = [
   // 첫번째는 기본 앨범
@@ -49,3 +49,20 @@ export const sampleAlbums: AlbumType[] = [
     num_videos: 5,
   },
 ];
+
+export const sampleAlbumDetails: AlbumDetailsResponseType = {
+  album: sampleAlbums[0],
+  media: Array.from({ length: 12 }, (_, index) => ({
+    id: index + 1,
+    url: `https://via.placeholder.com/600/${Math.floor(
+      Math.random() * 16777215
+    ).toString(16)}`,
+    uploaded_at: `2025-01-${(index % 30) + 1}`.padStart(10, "0"),
+    uploaded_by: `user${(index % 5) + 1}`,
+  })),
+  current_page: 1,
+  next_page_url: null,
+  prev_page_url: null,
+  num_pages: 1,
+  total_media: 12,
+};

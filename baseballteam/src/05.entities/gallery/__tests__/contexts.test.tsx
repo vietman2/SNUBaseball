@@ -10,13 +10,9 @@ const TestFormComponent = () => {
 };
 
 const TestComponent = () => {
-  const { selectedAlbumId } = useGallery();
+  const { albums } = useGallery();
 
-  return (
-    <div>
-      {selectedAlbumId !== null ? "Has Selected Album" : "No Selected Album"}
-    </div>
-  );
+  return <div>{albums.length > 0 ? "Has Albums" : "No Albums"}</div>;
 };
 
 describe("useAlbumForm", () => {
