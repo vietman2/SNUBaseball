@@ -1,34 +1,27 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 
-import type { PresignItemType, S3UploadResult, S3UploadErr, S3UploadOk } from "../models/response.types";
+type SingleS3UploadItemType = {
+  url: string;
+  fields: Record<string, string>;
+  file: File;
+  onProgress?: (percent: number) => void;
+};
 
-type ProgressCb = (info: {
-  index: number;
-  filename: string;
-  percent: number;
-}) => void;
-
-export async function uploadToS3(
-  url: string,
-  fields: Record<string, string>,
-  file: File,
-  onProgress?: (percent: number) => void
-): Promise<void> {
+export async function uploadToS3(data: SingleS3UploadItemType): Promise<void> {
   const form = new FormData();
-  Object.entries(fields).forEach(([k, v]) => {
+  Object.entries(data.fields).forEach(([k, v]) => {
     form.append(k, v);
   });
-  form.append("file", file);
+  form.append("file", data.file);
 
-
-  await axios.post(url, form, {
+  await axios.post(data.url, form, {
     withCredentials: false,
     headers: {
       "Content-Type": "multipart/form-data",
     },
     onUploadProgress: (e) => {
-      if (!onProgress || !e.total) return;
-      onProgress(Math.round((e.loaded / e.total) * 100));
+      if (!data.onProgress || !e.total) return;
+      data.onProgress(Math.round((e.loaded / e.total) * 100));
     },
   });
 }

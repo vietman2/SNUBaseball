@@ -28,14 +28,19 @@ describe("uploadToS3", () => {
   });
 
   it("should upload file to S3", async () => {
-    await uploadToS3(url, fields, mockFile);
+    await uploadToS3({ url, fields, file: mockFile });
 
     expect(axios.post).toHaveBeenCalledTimes(1);
   });
 
   it("should report progress", async () => {
     const progressCallback = vi.fn();
-    await uploadToS3(url, fields, mockFile, progressCallback);
+    await uploadToS3({
+      url,
+      fields,
+      file: mockFile,
+      onProgress: progressCallback,
+    });
 
     expect(progressCallback).toHaveBeenCalledWith(50);
     expect(progressCallback).toHaveBeenCalledWith(100);

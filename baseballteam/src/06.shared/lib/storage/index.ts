@@ -1,3 +1,5 @@
-export { uploadToS3, uploadManyToS3 } from "./api/uploadToS3";
+export { uploadToS3 } from "./api/uploadToS3";
 
-export type { PresignResponseType } from "./models/response.types";
+export type { PresignItemType, PresignRequestType } from "./models/presign";
+
+export { toPresignRequestFile } from "./utils/convertFile";
