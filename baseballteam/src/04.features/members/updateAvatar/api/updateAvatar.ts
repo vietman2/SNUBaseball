@@ -1,5 +1,4 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
 
 import type { UserProfileType } from "@entities/user";
 import {
@@ -7,6 +6,7 @@ import {
   type APIErrorType,
   type APIResponseType,
 } from "@shared/lib/axios";
+import { uploadToS3 } from "@shared/lib/storage";
 
 type PresignResponseType = {
   url: string;
@@ -34,24 +34,6 @@ async function getPresignedUrl(
   } catch {
     return null;
   }
-}
-
-async function uploadToS3(
-  presignedRes: PresignResponseType,
-  file: File
-): Promise<void> {
-  const form = new FormData();
-  Object.entries(presignedRes.fields).forEach(([k, v]) => {
-    form.append(k, v);
-  });
-  form.append("file", file);
-  form.append("Content-Type", file.type);
-
-  await axios.post(presignedRes.url, form, {
-    headers: {
-      withCredentials: false,
-    },
-  });
 }
 
 type UploadResponseType = {
@@ -91,7 +73,7 @@ async function updateProfileImage(
   }
 
   try {
-    await uploadToS3(pre.data, file);
+    await uploadToS3(pre.data.url, pre.data.fields, file);
   } catch {
     return {
       status: "ERROR",
