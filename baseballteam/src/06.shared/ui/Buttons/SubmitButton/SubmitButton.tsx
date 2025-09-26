@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 export const SubmitButton = styled.button`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 8px 16px;
   border: none;
   border-radius: 8px;
