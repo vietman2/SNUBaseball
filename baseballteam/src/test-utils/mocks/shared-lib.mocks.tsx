@@ -84,7 +84,7 @@ vi.mock("@shared/lib/router", async () => {
   };
 });
 vi.mock("@shared/lib/storage", () => ({
-  uploadToS3: vi.fn().mockResolvedValue({ status: 204 }),
+  uploadToS3: vi.fn().mockResolvedValue({}),
   uploadManyToS3: vi.fn(),
   toPresignRequestFile: vi.fn().mockReturnValue({
     filename: "example.png",

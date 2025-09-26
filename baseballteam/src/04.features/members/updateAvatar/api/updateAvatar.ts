@@ -5,17 +5,13 @@ import { getPresignedUrl } from "./presign";
 import type { AvatarUploadResultType } from "../models/response";
 import type { UserProfileType } from "@entities/user";
 import { type APIErrorType, type APIResponseType } from "@shared/lib/axios";
-import { uploadToS3 } from "@shared/lib/storage";
+import { toPresignRequestFile, uploadToS3 } from "@shared/lib/storage";
 
 async function updateProfileImage(
   id: number,
   file: File
 ): Promise<APIResponseType<AvatarUploadResultType> | APIErrorType> {
-  const pre = await getPresignedUrl(id, {
-    filename: file.name,
-    content_type: file.type,
-    size: file.size,
-  });
+  const pre = await getPresignedUrl(id, toPresignRequestFile(file));
 
   if (!pre) {
     return {
@@ -25,7 +21,7 @@ async function updateProfileImage(
   }
 
   try {
-    await uploadToS3(pre.data.url, pre.data.fields, file);
+    await uploadToS3({ url: pre.data.url, fields: pre.data.fields, file });
   } catch {
     return {
       status: "ERROR",
@@ -38,7 +34,7 @@ async function updateProfileImage(
   if (!done) {
     return {
       status: "ERROR",
-      message: "업로드 완료 요청에 실패했습니다.",
+      message: "업로드 완료 처리에 실패했습니다.",
     };
   }
 
