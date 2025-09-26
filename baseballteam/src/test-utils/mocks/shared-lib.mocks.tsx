@@ -85,6 +85,12 @@ vi.mock("@shared/lib/router", async () => {
 });
 vi.mock("@shared/lib/storage", () => ({
   uploadToS3: vi.fn().mockResolvedValue({ status: 204 }),
+  uploadManyToS3: vi.fn(),
+  toPresignRequestFile: vi.fn().mockReturnValue({
+    filename: "example.png",
+    content_type: "image/png",
+    size: 12345,
+  }),
 }));
 vi.mock("@shared/lib/styles", async () => {
   const { ColorContext, ThemeColorType, light } = await vi.importActual(
