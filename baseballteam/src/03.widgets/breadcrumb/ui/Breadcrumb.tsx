@@ -63,7 +63,7 @@ const BreadcrumbItemContainer = styled.div<{ $isLastItem?: boolean }>`
   font-size: 1rem;
   font-weight: ${({ $isLastItem }) => ($isLastItem ? 600 : 500)};
   color: ${({ $isLastItem, theme }) =>
-    $isLastItem ? theme.colors.primary : theme.colors.gray900};
+    $isLastItem ? theme.colors.primary : theme.colors.textSecondary};
 
   > a {
     cursor: ${({ $isLastItem }) => ($isLastItem ? "default" : "pointer")};
