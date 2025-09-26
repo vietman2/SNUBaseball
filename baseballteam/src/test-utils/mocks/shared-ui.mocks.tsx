@@ -33,9 +33,7 @@ vi.mock("@shared/ui/Buttons", () => ({
     </a>
   ),
   SubmitButton: (props: unknown) => (
-    <button
-      {...(props as React.ButtonHTMLAttributes<HTMLButtonElement>)}
-    />
+    <button {...(props as React.ButtonHTMLAttributes<HTMLButtonElement>)} />
   ),
 }));
 vi.mock("@shared/ui/Dividers", () => ({
@@ -43,7 +41,7 @@ vi.mock("@shared/ui/Dividers", () => ({
   VerticalDivider: () => <div>VerticalDivider</div>,
 }));
 vi.mock("@shared/ui/Icons", () => ({
-  AppIcon: ({icon}: {icon: string}) => <div>{icon}-icon</div>,
+  AppIcon: ({ icon }: { icon: string }) => <div>{icon}-icon</div>,
   Logo: ({ type }: { type: "SILVER" | "BLUE" }) => <div>{type} Logo</div>,
 }));
 vi.mock("@shared/ui/Images", () => ({
@@ -78,7 +76,8 @@ vi.mock("@shared/ui/Loading", () => ({
   Spinner: () => <div>Loading Spinner</div>,
 }));
 vi.mock("@shared/ui/Selects", () => ({
-  SelectMenu: () => <div>SelectMenu</div>,
+  SingleSelectMenu: () => <div>SelectMenu</div>,
+  MultiSelectMenu: () => <div>MultiSelectMenu</div>,
   SimpleSelect: (props: unknown) => (
     <select
       data-testid="simple-select"
