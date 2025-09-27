@@ -4,10 +4,12 @@ __all__ = (
     "StoredFile",
     "verify_head",
     "presign_post",
+    "PresignItemSerializer",
 )
 
 if TYPE_CHECKING:
     from .models import StoredFile
+    from .serializers import PresignItemSerializer
     from .services import verify_head, presign_post
 
 
@@ -16,6 +18,10 @@ def __getattr__(name: str):
         from .models import StoredFile
 
         return StoredFile
+    if name == "PresignItemSerializer":
+        from .serializers import PresignItemSerializer
+
+        return PresignItemSerializer
     if name == "verify_head":
         from .services import verify_head
 
