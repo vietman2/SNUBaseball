@@ -6,16 +6,18 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
-from apps.media.assets.api import SNUBaseballImage, presign_upload, complete_upload
+from apps.media.assets.api import (
+    SNUBaseballImage,
+    UploadCompleteSerializer,
+    presign_upload,
+    complete_upload,
+)
+from apps.media.storage.api import PresignItemSerializer
 from core.auth.permissions import IsAuthenticated, IsOps
 from core.error_handling import SNUBaseballException
 from ..models import Member
 from ..permissions import IsOpsOrSelf
-from ..serializers import (
-    MemberDetailsSerializer,
-    AvatarPresignSerializer,
-    AvatarCompleteSerializer,
-)
+from ..serializers import MemberDetailsSerializer
 
 
 class MembersViewSet(ModelViewSet):
@@ -87,7 +89,7 @@ class MembersViewSet(ModelViewSet):
     @action(detail=True, methods=["POST"], url_path="avatar/presign")
     def avatar_presign(self, request, pk=None):
         member = self.get_object()
-        serializer = AvatarPresignSerializer(data=request.data)
+        serializer = PresignItemSerializer(data=request.data)
 
         try:
             serializer.is_valid(raise_exception=True)
@@ -116,7 +118,7 @@ class MembersViewSet(ModelViewSet):
     @action(detail=True, methods=["PATCH"], url_path="avatar/complete")
     def avatar_complete(self, request, pk=None):
         member = self.get_object()
-        serializer = AvatarCompleteSerializer(data=request.data)
+        serializer = UploadCompleteSerializer(data=request.data)
 
         try:
             serializer.is_valid(raise_exception=True)
@@ -128,11 +130,10 @@ class MembersViewSet(ModelViewSet):
         data = serializer.validated_data
 
         expected_prefix = f"profiles/{member.id}/"
-        if not data["key"].startswith(expected_prefix):
-            raise SNUBaseballException(code="INVALID", detail="유효하지 않은 키입니다.")
 
         asset = complete_upload(
             key=data["key"],
+            expected_prefix=expected_prefix,
             original_filename=data.get("original_filename"),
             uploaded_by=request.user,
         )
