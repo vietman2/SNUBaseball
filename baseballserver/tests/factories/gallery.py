@@ -1,7 +1,7 @@
-import factory
 from factory.django import DjangoModelFactory
 
 from apps.media.gallery.models import Album, MediaTag, GalleryImage, GalleryVideo
+from tests.factories.assets import SNUBaseballImageFactory, SNUBaseballVideoFactory
 
 
 class GalleryFactory(DjangoModelFactory):
@@ -24,19 +24,30 @@ class GalleryFactory(DjangoModelFactory):
         ## 앨범에 이미지 4개, 동영상 1개 추가
         tags = cls.create_tags()
         for i in range(4):
-            img = GalleryImage.objects.create(
-                album=album,
-                key=f"media/gallery/images/sample_image_{i+1}.jpg",
+            img = SNUBaseballImageFactory(
+                file__key=f"media/gallery/images/sample_image_{i+1}.jpg",
+                file__mime="image/jpeg",
+                width=1280,
+                height=720,
             )
-            img.tags.set([tags[i % len(tags)]])
-            img.save()
+            gi = GalleryImage.objects.create(
+                album=album,
+                image=img,
+            )
+            gi.tags.set([tags[i % len(tags)]])
+            gi.save()
 
-        video = GalleryVideo.objects.create(
-            album=album,
-            key="media/gallery/videos/sample_video_1.mp4",
+        vid = SNUBaseballVideoFactory(
+            file__key="media/gallery/videos/sample_video_1.mp4",
+            file__mime="video/mp4",
+            duration=10,
         )
-        video.tags.set(tags)
-        video.save()
+        gv = GalleryVideo.objects.create(
+            album=album,
+            video=vid,
+        )
+        gv.tags.set(tags)
+        gv.save()
 
         return album
 

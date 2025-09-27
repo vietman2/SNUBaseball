@@ -13,8 +13,6 @@ from tests.factories import UserFactory
 
 pytestmark = pytest.mark.django_db
 
-STORAGE_MODULE_PATH = "apps.media.assets.storage"
-
 
 @pytest.fixture(autouse=True, name="s3_client")
 def _s3_client(mocker):
@@ -24,21 +22,23 @@ def _s3_client(mocker):
         "ContentType": "image/png",
         "ETag": '"etag-1234"',
     }
-    mocker.patch(f"{STORAGE_MODULE_PATH}.boto3.client", return_value=client)
+    mocker.patch(
+        "apps.media.storage.services.verify_head.get_client", return_value=client
+    )
     return client
 
 
 def test_complete_upload_image():
     uploader = UserFactory()
     obj = complete_upload(
-        "tests/p.png", original_filename="p.png", uploaded_by=uploader
+        "tests/p.png", "tests/", original_filename="p.png", uploaded_by=uploader
     )
 
     assert isinstance(obj, SNUBaseballImage)
-    assert obj.key == "tests/p.png"
-    assert obj.mime == "image/png"
-    assert obj.size == 1234
-    assert obj.original_filename == "p.png"
+    assert obj.file.key == "tests/p.png"
+    assert obj.file.mime == "image/png"
+    assert obj.file.size == 1234
+    assert obj.file.original_filename == "p.png"
     assert obj.uploaded_by_id == uploader.pk
 
 
@@ -50,13 +50,13 @@ def test_complete_upload_video(s3_client):
     }
     uploader = UserFactory()
     obj = complete_upload(
-        "tests/v.mp4", original_filename="v.mp4", uploaded_by=uploader
+        "tests/v.mp4", "tests/", original_filename="v.mp4", uploaded_by=uploader
     )
 
     assert isinstance(obj, SNUBaseballVideo)
-    assert obj.key == "tests/v.mp4"
-    assert obj.mime == "video/mp4"
-    assert obj.size == 77
+    assert obj.file.key == "tests/v.mp4"
+    assert obj.file.mime == "video/mp4"
+    assert obj.file.size == 77
 
 
 def test_complete_upload_pdf_with_fallback_guess(s3_client):
@@ -68,13 +68,13 @@ def test_complete_upload_pdf_with_fallback_guess(s3_client):
     }
     uploader = UserFactory()
     obj = complete_upload(
-        "tests/doc.pdf", original_filename="doc.pdf", uploaded_by=uploader
+        "tests/doc.pdf", "tests/", original_filename="doc.pdf", uploaded_by=uploader
     )
 
     assert isinstance(obj, SNUBaseballAsset)
-    assert obj.key == "tests/doc.pdf"
-    assert obj.mime == "application/pdf"
-    assert obj.size == 10
+    assert obj.file.key == "tests/doc.pdf"
+    assert obj.file.mime == "application/pdf"
+    assert obj.file.size == 10
 
 
 def test_complete_upload_rejects_disallowed_mime(s3_client):
@@ -86,7 +86,7 @@ def test_complete_upload_rejects_disallowed_mime(s3_client):
     uploader = UserFactory()
 
     with pytest.raises(SNUBaseballException) as e:
-        complete_upload("tests/a.exe", original_filename="a.exe", uploaded_by=uploader)
+        complete_upload("tests/a.exe", "tests/", original_filename="a.exe", uploaded_by=uploader)
     assert "MIME" in str(e.value)
 
 
@@ -95,9 +95,9 @@ def test_complete_upload_updates_existing_record(s3_client):
     key = "tests/existing.png"
 
     # 최초 업로드(작은 사이즈)
-    obj1 = complete_upload(key, original_filename="old.png", uploaded_by=uploader)
+    obj1 = complete_upload(key, "tests/", original_filename="old.png", uploaded_by=uploader)
     assert isinstance(obj1, SNUBaseballImage)
-    assert obj1.size == 1234
+    assert obj1.file.size == 1234
 
     # 두 번째 업로드: HEAD 응답 사이즈 변경 -> update_or_create로 갱신되는지 확인
     s3_client.head_object.return_value = {
@@ -105,12 +105,12 @@ def test_complete_upload_updates_existing_record(s3_client):
         "ContentType": "image/png",
         "ETag": '"etag-new"',
     }
-    obj2 = complete_upload(key, original_filename="new.png", uploaded_by=uploader)
+    obj2 = complete_upload(key, "tests/", original_filename="new.png", uploaded_by=uploader)
 
     assert obj2.pk == obj1.pk  # 같은 레코드 갱신
     obj2.refresh_from_db()
-    assert obj2.size == 9999
-    assert obj2.original_filename == "new.png"
+    assert obj2.file.size == 9999
+    assert obj2.file.original_filename == "new.png"
 
 
 def test_complete_upload_missing_key_raises(s3_client):
@@ -122,7 +122,7 @@ def test_complete_upload_missing_key_raises(s3_client):
 
     with pytest.raises(SNUBaseballException) as e:
         complete_upload(
-            "tests/missing.png", original_filename="x.png", uploaded_by=uploader
+            "tests/missing.png", "tests/", original_filename="x.png", uploaded_by=uploader
         )
     assert "업로드된 파일을 찾을 수 없습니다." in str(e.value)
 
@@ -135,6 +135,6 @@ def test_complete_upload_head_other_error_raises_generic(s3_client):
 
     with pytest.raises(SNUBaseballException) as e:
         complete_upload(
-            "tests/forbidden.png", original_filename="x.png", uploaded_by=uploader
+            "tests/forbidden.png", "tests/", original_filename="x.png", uploaded_by=uploader
         )
-    assert "파일 정보를 가져오는 데 실패했습니다." in str(e.value)
+    assert "파일에 접근할 권한이 없습니다." in str(e.value)
