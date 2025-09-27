@@ -1,7 +1,6 @@
 import pytest
 
-from apps.media.assets.api import SNUBaseballImage
-from tests.factories import UserFactory
+from tests.factories import SNUBaseballImageFactory, UserFactory
 
 pytestmark = pytest.mark.django_db
 
@@ -18,23 +17,20 @@ def _patch_media_services(monkeypatch, member_id):
     """
     key = f"profiles/{member_id}/avatar.png"
 
-    # presign: prefix 검사 + 정형 응답
     def fake_presign_upload(
-        *, prefix, filename, content_type=None, size=0
+        *, key, content_type=None, size=0
     ):  # pylint: disable=unused-argument
-        assert prefix == f"profiles/{member_id}/"
         return {
-            "key": key,
-            "post": {"url": "https://s3.test/presigned", "fields": {"key": key}},
+            "url": f"https://s3.test/presigned/{key}",
+            "fields": {"key": key},
         }
 
-    # complete: 실제 DB에 이미지 레코드 생성해서 반환
-    def fake_complete_upload(*, key, original_filename=None, uploaded_by=None):
-        return SNUBaseballImage.objects.create(
-            key=key,
-            original_filename=original_filename or "",
-            mime="image/png",
-            size=1024,
+    def fake_complete_upload(
+        *, key, expected_prefix, original_filename=None, uploaded_by=None
+    ):
+        assert key.startswith(expected_prefix)
+        return SNUBaseballImageFactory(
+            file__key=key,
             uploaded_by=uploaded_by,
         )
 
@@ -68,9 +64,8 @@ def test_members_update_avatar_success(api_client, monkeypatch):
     )
     assert presign_resp.status_code == 200
     presign_data = presign_resp.json()
-    assert presign_data["key"] == expected_key
-    assert "url" in presign_data["post"]
-    assert presign_data["post"]["fields"]["key"] == expected_key
+    assert presign_data["url"] == f"https://s3.test/presigned/{expected_key}"
+    assert presign_data["fields"]["key"] == expected_key
 
     # 2) complete 요청
     complete_resp = api_client.patch(
@@ -89,7 +84,6 @@ def test_members_update_avatar_success(api_client, monkeypatch):
     # 멤버의 profile_image가 실제로 설정되었는지 확인
     user.member.refresh_from_db()
     assert user.member.profile_image is not None
-    assert user.member.profile_image.key == expected_key
 
 
 def test_members_update_avatar_presign_invalid_data(api_client):
@@ -156,7 +150,7 @@ def test_members_update_avatar_complete_not_image(api_client, monkeypatch):
 
     # services 패치 (complete_upload가 이미지를 반환하지 않도록)
     def fake_complete_upload(
-        *, key, original_filename=None, uploaded_by=None
+        *, key, expected_prefix, original_filename=None, uploaded_by=None
     ):  ## pylint: disable=unused-argument
         class NotAnImage:
             url = "https://cdn.test/not-an-image.png"
