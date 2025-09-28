@@ -5,7 +5,10 @@ from .albums import Album
 from .tags import MediaTag
 
 
-class GalleryImage(SNUBaseballImage):
+class GalleryImage(models.Model):
+    image = models.OneToOneField(
+        SNUBaseballImage, on_delete=models.CASCADE, related_name="gallery_images"
+    )
     tags = models.ManyToManyField(MediaTag, blank=True, related_name="images")
     album = models.ForeignKey(
         Album, on_delete=models.SET_NULL, null=True, related_name="images"
@@ -19,14 +22,17 @@ class GalleryImage(SNUBaseballImage):
         verbose_name_plural = "갤러리 이미지"
 
     def __str__(self):
-        return self.original_filename if self.original_filename else self.key
+        return self.image.url
 
     @property
     def type(self):
         return "IMAGE"
 
 
-class GalleryVideo(SNUBaseballVideo):
+class GalleryVideo(models.Model):
+    video = models.OneToOneField(
+        SNUBaseballVideo, on_delete=models.CASCADE, related_name="gallery_videos"
+    )
     tags = models.ManyToManyField(MediaTag, blank=True, related_name="videos")
     album = models.ForeignKey(
         Album, on_delete=models.SET_NULL, null=True, related_name="videos"
@@ -40,7 +46,7 @@ class GalleryVideo(SNUBaseballVideo):
         verbose_name_plural = "갤러리 비디오"
 
     def __str__(self):
-        return self.original_filename if self.original_filename else self.key
+        return self.video.url
 
     @property
     def type(self):
