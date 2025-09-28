@@ -26,6 +26,13 @@ class SNUBaseballAsset(models.Model):
             models.Index(fields=["uploaded_by"]),
         ]
 
+    def __str__(self):
+        return self.file.key
+
     @property
     def type(self):
         return "ASSET"
+
+    @property
+    def url(self):
+        return self.file.url

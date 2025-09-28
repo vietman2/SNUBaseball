@@ -28,6 +28,13 @@ class SNUBaseballImage(models.Model):
             models.Index(fields=["uploaded_by"]),
         ]
 
+    def __str__(self):
+        return self.file.key
+
     @property
     def type(self):
         return "IMAGE"
+
+    @property
+    def url(self):
+        return self.file.url

@@ -78,7 +78,9 @@ class BaseFileManager(models.Manager):
                     obj = qs.get(file=file)
                 except qs.model.DoesNotExist:
                     try:
-                        obj = qs.create(file=file, uploaded_by=kwargs.get("uploaded_by"))
+                        obj = qs.create(
+                            file=file, uploaded_by=kwargs.get("uploaded_by")
+                        )
                     except IntegrityError:
                         obj = qs.get(file=file)
                     return obj, True
@@ -106,40 +108,42 @@ class BaseFileManager(models.Manager):
         )
 
 
-class AssetsManager(BaseFileManager):
+MIME_TYPE_ERROR_MESSAGE = "허용되지 않는 MIME 타입입니다: {}"
 
+
+class AssetsManager(BaseFileManager):
     def update_or_create_by_key(self, *, key=None, **kwargs):
         if not key:
             raise ValidationError(KEY_MISSING_ERROR)
 
         mime = kwargs.get("mime") or getattr(kwargs.get("file"), "mime", None)
         if mime and mime.startswith("image/"):
-            raise ValidationError("Image MIME type not allowed")
+            raise ValidationError(MIME_TYPE_ERROR_MESSAGE.format(mime))
         if mime and mime.startswith("video/"):
-            raise ValidationError("Video MIME type not allowed")
+            raise ValidationError(MIME_TYPE_ERROR_MESSAGE.format(mime))
 
         return super().update_or_create_by_key(key=key, **kwargs)
 
-class ImagesManager(BaseFileManager):
 
+class ImagesManager(BaseFileManager):
     def update_or_create_by_key(self, *, key=None, **kwargs):
         if not key:
             raise ValidationError(KEY_MISSING_ERROR)
 
         mime = kwargs.get("mime") or getattr(kwargs.get("file"), "mime", None)
         if mime and not mime.startswith("image/"):
-            raise ValidationError("Image MIME type expected")
+            raise ValidationError(MIME_TYPE_ERROR_MESSAGE.format(mime))
 
         return super().update_or_create_by_key(key=key, **kwargs)
 
-class VideosManager(BaseFileManager):
 
+class VideosManager(BaseFileManager):
     def update_or_create_by_key(self, *, key=None, **kwargs):
         if not key:
             raise ValidationError(KEY_MISSING_ERROR)
 
         mime = kwargs.get("mime") or getattr(kwargs.get("file"), "mime", None)
         if mime and not mime.startswith("video/"):
-            raise ValidationError("Video MIME type expected")
+            raise ValidationError(MIME_TYPE_ERROR_MESSAGE.format(mime))
 
         return super().update_or_create_by_key(key=key, **kwargs)
