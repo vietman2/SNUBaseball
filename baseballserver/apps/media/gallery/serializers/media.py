@@ -4,8 +4,12 @@ from ..models import GalleryImage, GalleryVideo
 
 
 class GalleryImageSerializer(serializers.ModelSerializer):
+    url = serializers.CharField(source="image.url", read_only=True)
+    created_at = serializers.DateTimeField(
+        source="image.file.created_at", read_only=True, format="%Y-%m-%d %H:%M"
+    )
     uploaded_by = serializers.CharField(
-        source="uploaded_by.member.name", read_only=True
+        source="image.uploaded_by.member.name", read_only=True
     )
 
     class Meta:
@@ -14,8 +18,12 @@ class GalleryImageSerializer(serializers.ModelSerializer):
 
 
 class GalleryVideoSerializer(serializers.ModelSerializer):
+    url = serializers.CharField(source="video.url", read_only=True)
+    created_at = serializers.DateTimeField(
+        source="video.file.created_at", read_only=True, format="%Y-%m-%d %H:%M"
+    )
     uploaded_by = serializers.CharField(
-        source="uploaded_by.member.name", read_only=True
+        source="video.uploaded_by.member.name", read_only=True
     )
 
     class Meta:
