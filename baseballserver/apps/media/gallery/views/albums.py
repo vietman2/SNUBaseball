@@ -14,7 +14,11 @@ from ..paginators import MediaPageNumberPagination
 from ..permissions import CanViewAlbum
 from ..selectors import album_media_union_queryset, fetch_media_page_objects
 from ..serializers import AlbumSerializer, GalleryUploadCompleteSerializer
-from ..services import serialize_gallery_media, presign_for_album_item
+from ..services import (
+    serialize_gallery_media,
+    presign_for_album_item,
+    complete_album_uploads,
+)
 
 
 class AlbumViewSet(ModelViewSet):
