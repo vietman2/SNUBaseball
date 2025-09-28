@@ -1,9 +1,15 @@
 from typing import TYPE_CHECKING
 
-__all__ = ("AlbumViewSet", "GalleryDataAPIView")
+__all__ = (
+    "AlbumViewSet",
+    "GalleryDataAPIView",
+)
 
 if TYPE_CHECKING:
-    from .views import AlbumViewSet, GalleryDataAPIView
+    from .views import (
+        AlbumViewSet,
+        GalleryDataAPIView,
+    )
 
 
 def __getattr__(name: str):
