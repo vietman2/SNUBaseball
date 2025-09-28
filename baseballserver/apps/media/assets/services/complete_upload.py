@@ -5,7 +5,7 @@ from ..utils import get_file_type, get_existing_file_type
 
 
 def complete_upload(
-    key: str, original_filename: str | None, uploaded_by
+    key: str, expected_prefix: str, original_filename: str | None, uploaded_by
 ) -> SNUBaseballAsset | SNUBaseballImage | SNUBaseballVideo:
     """
     S3에 업로드가 완료된 파일을, Asset으로 확정.
@@ -13,7 +13,10 @@ def complete_upload(
       - 이미 존재하는 키라면, 업데이트 (단, 타입이 다르면 에러)
       - 그렇지 않으면 생성
     """
-    ## 1. S3에 업로드된 파일이 실제로 존재하는지, 그리고 메타정보를 HEAD로 확인
+    if not key.startswith(expected_prefix):
+        raise SNUBaseballException("유효하지 않은 키입니다.")
+
+    ## S3에 업로드된 파일이 실제로 존재하는지, 그리고 메타정보를 HEAD로 확인
     head = verify_head(key)
 
     file_type = get_file_type(head.get("content_type"))
