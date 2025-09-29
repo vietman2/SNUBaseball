@@ -6,14 +6,13 @@ from .models import GalleryImage, GalleryVideo
 from .serializers import GalleryImageSerializer, GalleryVideoSerializer
 
 
-def build_album_key(album, filename: str):
-    filename_clean = (filename.strip().replace(" ", "_"))[:100]
-    prefix = f"gallery/{album.title}/"  # 필요 시 album.slug로 교체 권장
-    return posixpath.join(prefix, filename_clean)
-
-
 def presign_for_album_item(album, *, filename: str, content_type: str, size: int):
-    key = build_album_key(album, filename)
+    ## 1. Build key
+    filename_clean = (filename.strip().replace(" ", "_"))[:100]
+    prefix = f"gallery/{album.title}/"
+    key = posixpath.join(prefix, filename_clean)
+
+    ## 2. Presign
     return presign_upload(key=key, content_type=content_type or "", size=size)
 
 

@@ -56,11 +56,11 @@ def fetch_media_page_objects(page_rows):
 
     page_objs = []
     for row in page_rows:
-        obj = (
-            image_map.get(row["media_id"])
-            if row["media_type"] == "image"
-            else video_map.get(row["media_id"])
-        )
-        if obj:
+        if row["media_type"] == "image":
+            obj = image_map.get(row["media_id"])
             page_objs.append(obj)
+        else:
+            obj = video_map.get(row["media_id"])
+            page_objs.append(obj)
+
     return page_objs
