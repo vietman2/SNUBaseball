@@ -17,6 +17,7 @@ class SNUBaseballVideo(models.Model):
         on_delete=models.SET_NULL,
         related_name="uploaded_videos",
     )
+    thumbnail_key = models.CharField(max_length=255, blank=True, default="")
 
     objects = VideosManager()
 
@@ -37,3 +38,9 @@ class SNUBaseballVideo(models.Model):
     @property
     def url(self):
         return self.file.url
+
+    @property
+    def thumbnail_url(self):
+        if not self.thumbnail_key:
+            return ""
+        return f"{settings.MEDIA_CDN_BASE_URL}/{self.thumbnail_key}"
