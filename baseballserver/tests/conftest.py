@@ -30,10 +30,14 @@ def s3_client(mocker):
         "url": "https://s3.test/presigned",
         "fields": {"key": "k"},
     }
+    client.put_object.return_value = {"ResponseMetadata": {"HTTPStatusCode": 200}}
     mocker.patch(
         "apps.media.storage.services.verify_head.get_client", return_value=client
     )
     mocker.patch(
         "apps.media.storage.services.presign_post.get_client", return_value=client
+    )
+    mocker.patch(
+        "apps.media.storage.services.upload_file.get_client", return_value=client
     )
     return client

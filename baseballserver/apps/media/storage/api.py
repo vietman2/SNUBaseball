@@ -3,6 +3,7 @@ from typing import TYPE_CHECKING
 __all__ = (
     "StoredFile",
     "verify_head",
+    "upload_file",
     "presign_post",
     "PresignItemSerializer",
 )
@@ -10,7 +11,7 @@ __all__ = (
 if TYPE_CHECKING:
     from .models import StoredFile
     from .serializers import PresignItemSerializer
-    from .services import verify_head, presign_post
+    from .services import verify_head, presign_post, upload_file
 
 
 def __getattr__(name: str):
@@ -30,4 +31,8 @@ def __getattr__(name: str):
         from .services import presign_post
 
         return presign_post
+    if name == "upload_file":
+        from .services import upload_file
+
+        return upload_file
     raise AttributeError(f"storage.api has no attribute {name!r}")

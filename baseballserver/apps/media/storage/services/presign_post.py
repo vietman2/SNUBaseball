@@ -1,5 +1,4 @@
 from __future__ import annotations
-
 from django.conf import settings
 
 from .client import get_client
