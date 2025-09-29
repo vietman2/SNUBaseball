@@ -51,3 +51,7 @@ class GalleryVideo(models.Model):
     @property
     def type(self):
         return "VIDEO"
+
+    @property
+    def thumbnail_url(self):
+        return self.video.thumbnail_url
