@@ -112,8 +112,6 @@ jobs:
         run: |
           pipenv run pytest .
           pipenv run coverage lcov
-          pipenv run coverage xml
-          sed -i "s|<source></source>|<source>baseballserver</source>|g" coverage.xml
 
       - name: Upload coverage artifact (lcov)
         uses: actions/upload-artifact@v4
@@ -121,14 +119,8 @@ jobs:
           name: coverage-report-django
           path: baseballserver/coverage.lcov
 
-      - name: Upload coverage artifact (xml)
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-report-django-xml
-          path: baseballserver/coverage.xml
-
       - name: Run linters
-        run: pipenv run sh -c 'DJANGO_SETTINGS_MODULE=config.settings.tests pylint --load-plugins pylint_django --rcfile=.pylintrc .'
+        run: pipenv run sh -c 'DJANGO_SETTINGS_MODULE=config.settings.tests pylint --rcfile=.pylintrc .'
 
   nextjs-tests-and-lint:
     runs-on: ubuntu-latest
