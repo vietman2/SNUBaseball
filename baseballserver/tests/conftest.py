@@ -16,3 +16,24 @@ def refdata(request, django_db_blocker):
 @pytest.fixture(autouse=True)
 def api_client():
     return APIClient()
+
+
+@pytest.fixture(autouse=True)
+def s3_client(mocker):
+    client = mocker.Mock()
+    client.head_object.return_value = {
+        "ContentLength": 1234,
+        "ContentType": "image/png",
+        "ETag": '"etag-1234"',
+    }
+    client.generate_presigned_post.return_value = {
+        "url": "https://s3.test/presigned",
+        "fields": {"key": "k"},
+    }
+    mocker.patch(
+        "apps.media.storage.services.verify_head.get_client", return_value=client
+    )
+    mocker.patch(
+        "apps.media.storage.services.presign_post.get_client", return_value=client
+    )
+    return client
