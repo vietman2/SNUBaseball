@@ -1,6 +1,9 @@
+from django.db import transaction
+
 from apps.media.storage.api import verify_head
 from core.error_handling import SNUBaseballException
 from ..models import SNUBaseballAsset, SNUBaseballImage, SNUBaseballVideo
+from ..tasks import generate_video_thumbnail
 from ..utils import get_file_type, get_existing_file_type
 
 
@@ -38,7 +41,14 @@ def complete_upload(
     if file_type == "IMAGE":
         obj, _ = SNUBaseballImage.objects.update_or_create_by_key(key=key, **data)
     elif file_type == "VIDEO":
-        obj, _ = SNUBaseballVideo.objects.update_or_create_by_key(key=key, **data)
+        obj, created = SNUBaseballVideo.objects.update_or_create_by_key(key=key, **data)
+
+        ## 썸네일 생성 task 큐에 추가
+        def _enqueue():
+            if created or not getattr(obj, "thumbnail_key", None):
+                generate_video_thumbnail.delay(key=key, video_url=obj.file.url)
+
+        transaction.on_commit(_enqueue)
     else:  # file_type == "ASSET"
         obj, _ = SNUBaseballAsset.objects.update_or_create_by_key(key=key, **data)
 

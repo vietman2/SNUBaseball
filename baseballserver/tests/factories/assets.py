@@ -1,7 +1,6 @@
 from factory import SubFactory, Trait
 from factory.django import DjangoModelFactory
 
-# 실제 경로에 맞게 수정
 from apps.media.assets.models import (
     SNUBaseballAsset,
     SNUBaseballImage,
@@ -46,7 +45,7 @@ class _BaseFileBackedFactory(DjangoModelFactory):
         )
 
         changed = False
-        for name in ("width", "height", "duration"):
+        for name in cls._update_fields:
             if name in kwargs and hasattr(obj, name):
                 setattr(obj, name, kwargs[name])
                 changed = True
@@ -60,6 +59,7 @@ class SNUBaseballAssetFactory(_BaseFileBackedFactory):
     class Meta:
         model = SNUBaseballAsset
 
+    _update_fields = ()
     # Asset은 image/video MIME 금지 → 기본적으로 비-미디어 MIME을 사용
     file = SubFactory(StoredFileFactory, mime="application/pdf")
 
@@ -73,6 +73,7 @@ class SNUBaseballImageFactory(_BaseFileBackedFactory):
     class Meta:
         model = SNUBaseballImage
 
+    _update_fields = ("width", "height")
     # 이미지 MIME 필요
     file = SubFactory(StoredFileFactory, mime="image/png")
     width = 640
@@ -87,6 +88,11 @@ class SNUBaseballVideoFactory(_BaseFileBackedFactory):
     class Meta:
         model = SNUBaseballVideo
 
+    _update_fields = ("duration", "thumbnail_key")
     # 비디오 MIME 필요
     file = SubFactory(StoredFileFactory, mime="video/mp4")
     duration = 10
+    thumbnail_key = ""
+
+    class Params:
+        with_thumbnail = Trait(thumbnail_key="some_thumbnail_key")

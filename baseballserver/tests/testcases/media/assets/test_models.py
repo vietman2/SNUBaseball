@@ -1,4 +1,5 @@
 import pytest
+from django.conf import settings
 
 from tests.factories import (
     SNUBaseballAssetFactory,
@@ -31,3 +32,8 @@ def test_video_str():
     assert video.type == "VIDEO"
     expected_url = f"{video.url}"
     assert video.url == expected_url
+    assert video.thumbnail_url == ""
+
+def test_video_with_thumbnail_str():
+    video = SNUBaseballVideoFactory(file__key="test_video_key", thumbnail_key="thumb_key")
+    assert video.thumbnail_url == f"{settings.MEDIA_CDN_BASE_URL}/thumb_key"

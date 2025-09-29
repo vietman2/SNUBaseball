@@ -3,10 +3,10 @@ import pytest
 
 from apps.media.assets.services import complete_upload
 from core.error_handling import SNUBaseballException
-from tests.factories import UserFactory
+from tests.factories import UserFactory, StoredFileFactory
 
 
-pytestmark = pytest.mark.django_db
+pytestmark = pytest.mark.django_db()
 
 MODULE_PATH = complete_upload.__module__
 
@@ -29,12 +29,7 @@ def _prepare_mocks(mocker):
     ast_model = mocker.patch(f"{MODULE_PATH}.SNUBaseballAsset")
 
     def make_obj(key, kwargs):
-        file = types.SimpleNamespace(
-            key=key,
-            original_filename=kwargs.get("original_filename"),
-            mime=kwargs.get("mime"),
-            size=kwargs.get("size"),
-        )
+        file = StoredFileFactory(key=key, mime=kwargs.get("mime"), size=kwargs.get("size"))
         return types.SimpleNamespace(
             file=file,
             uploaded_by_id=getattr(kwargs.get("uploaded_by"), "pk", None),
@@ -101,21 +96,7 @@ def test_complete_upload_image(file_type, existing_file_type):
     assert obj.file.key == "tests/p.png"
     assert obj.file.mime == "image/png"
     assert obj.file.size == 1234
-    assert obj.file.original_filename == "p.png"
     assert obj.uploaded_by_id == uploader.pk
-
-
-def test_complete_upload_video(file_type, existing_file_type):
-    file_type.return_value = "VIDEO"
-    existing_file_type.return_value = None  # 새 키
-    uploader = UserFactory()
-    obj = complete_upload(
-        "tests/v.mp4", "tests/", original_filename="v.mp4", uploaded_by=uploader
-    )
-
-    assert obj.file.key == "tests/v.mp4"
-    assert obj.file.mime == "video/mp4"
-    assert obj.file.size == 77
 
 
 def test_complete_upload_asset(file_type, existing_file_type):
@@ -129,3 +110,55 @@ def test_complete_upload_asset(file_type, existing_file_type):
     assert obj.file.key == "tests/doc.pdf"
     assert obj.file.mime == "application/pdf"
     assert obj.file.size == 10
+
+
+def test_complete_upload_video_with_task_enqueue(
+    django_capture_on_commit_callbacks, mocker, file_type, existing_file_type
+):
+    file_type.return_value = "VIDEO"
+    existing_file_type.return_value = None  # 새 키
+    mock_delay = mocker.patch(f"{MODULE_PATH}.generate_video_thumbnail.delay")
+    uploader = UserFactory()
+
+    with django_capture_on_commit_callbacks(execute=True):
+        obj = complete_upload(
+            "tests/v.mp4", "tests/", original_filename="v.mp4", uploaded_by=uploader
+        )
+
+    assert obj.file.key == "tests/v.mp4"
+    assert obj.file.mime == "video/mp4"
+    assert obj.file.size == 77
+
+    mock_delay.assert_called_once_with(key="tests/v.mp4", video_url=obj.file.url)
+
+
+def test_complete_upload_video_without_task_enqueue(
+    django_capture_on_commit_callbacks, mocker, file_type, existing_file_type
+):
+    ### create가 아니라, update인 경우, 썸네일 생성 task를 enqueue하지 않음
+    ## side effect에서 created=False로 반환하도록 수정
+    def side(effect):
+        def _fn(*, key=None, **kwargs):
+            file = StoredFileFactory(key=key, mime=kwargs.get("mime"), size=kwargs.get("size"))
+            return types.SimpleNamespace(
+                file=file,
+                uploaded_by_id=getattr(kwargs.get("uploaded_by"), "pk", None),
+                thumbnail_key="existing_thumbnail.jpg",
+            ), False
+
+        return _fn
+    mocker.patch(f"{MODULE_PATH}.SNUBaseballVideo.objects.update_or_create_by_key", side_effect=side("VIDEO"))
+
+    file_type.return_value = "VIDEO"
+    existing_file_type.return_value = "VIDEO"  # 기존에 존재하는 키
+    mock_delay = mocker.patch(f"{MODULE_PATH}.generate_video_thumbnail.delay")
+    uploader = UserFactory()
+    with django_capture_on_commit_callbacks(execute=True):
+        obj = complete_upload(
+            "tests/existing_key",
+            "tests/",
+            original_filename="v.mp4",
+            uploaded_by=uploader,
+        )
+    assert obj.file.key == "tests/existing_key"
+    mock_delay.assert_not_called()
