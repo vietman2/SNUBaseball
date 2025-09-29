@@ -4,8 +4,6 @@ from django.utils import timezone
 
 from apps.media.storage.api import StoredFile
 
-KEY_MISSING_ERROR = "Key는 필수입니다."
-
 
 class BaseFileManager(models.Manager):
     def _update_fields(self, **kwargs):
@@ -28,13 +26,13 @@ class BaseFileManager(models.Manager):
         return None
 
     def _create_fields(self, **kwargs):
-        fields = {}
-        if "original_filename" in kwargs:
-            fields["original_filename"] = kwargs.pop("original_filename")
-        if "mime" in kwargs:
-            fields["mime"] = kwargs.pop("mime")
-        if "size" in kwargs:
-            fields["size"] = kwargs.pop("size")
+        fields = {
+            "original_filename": kwargs.pop("original_filename", ""),
+            "mime": kwargs.pop("mime", None),
+            "size": kwargs.pop("size", 0),
+            "created_at": timezone.now(),
+            "updated_at": timezone.now(),
+        }
 
         return fields
 
@@ -64,6 +62,9 @@ class BaseFileManager(models.Manager):
                 return file, False
 
     def update_or_create_by_key(self, *, key=None, **kwargs):
+        if not key:
+            raise ValidationError("Key는 필수입니다.")
+
         with transaction.atomic():
             file, created = self._update_or_create_stored_file(key=key, **kwargs)
             qs = super().get_queryset()
@@ -113,9 +114,6 @@ MIME_TYPE_ERROR_MESSAGE = "허용되지 않는 MIME 타입입니다: {}"
 
 class AssetsManager(BaseFileManager):
     def update_or_create_by_key(self, *, key=None, **kwargs):
-        if not key:
-            raise ValidationError(KEY_MISSING_ERROR)
-
         mime = kwargs.get("mime") or getattr(kwargs.get("file"), "mime", None)
         if mime and mime.startswith("image/"):
             raise ValidationError(MIME_TYPE_ERROR_MESSAGE.format(mime))
@@ -127,9 +125,6 @@ class AssetsManager(BaseFileManager):
 
 class ImagesManager(BaseFileManager):
     def update_or_create_by_key(self, *, key=None, **kwargs):
-        if not key:
-            raise ValidationError(KEY_MISSING_ERROR)
-
         mime = kwargs.get("mime") or getattr(kwargs.get("file"), "mime", None)
         if mime and not mime.startswith("image/"):
             raise ValidationError(MIME_TYPE_ERROR_MESSAGE.format(mime))
@@ -139,9 +134,6 @@ class ImagesManager(BaseFileManager):
 
 class VideosManager(BaseFileManager):
     def update_or_create_by_key(self, *, key=None, **kwargs):
-        if not key:
-            raise ValidationError(KEY_MISSING_ERROR)
-
         mime = kwargs.get("mime") or getattr(kwargs.get("file"), "mime", None)
         if mime and not mime.startswith("video/"):
             raise ValidationError(MIME_TYPE_ERROR_MESSAGE.format(mime))
