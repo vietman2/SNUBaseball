@@ -30,7 +30,7 @@ def test_get_albums_list(api_client):
 
 
 def test_get_album_detail_public(api_client):
-    resp = api_client.get("/api/v1/gallery/albums/1/")
+    resp = api_client.get("/api/v1/gallery/albums/public album/")
 
     assert resp.status_code == 200
     assert resp.data["album"]["title"] == "public album"
@@ -39,7 +39,7 @@ def test_get_album_detail_public(api_client):
 
 
 def test_get_album_detail_private_unauthenticated(api_client):
-    resp = api_client.get("/api/v1/gallery/albums/2/")
+    resp = api_client.get("/api/v1/gallery/albums/private album/")
 
     assert resp.status_code == 403
     assert resp.data["message"] == "자격 인증 데이터가 제공되지 않았습니다."
@@ -50,7 +50,8 @@ def test_get_album_detail_private_authenticated_forbidden_client(api_client, use
     api_client.force_authenticate(user=normal_user)
 
     resp = api_client.get(
-        "/api/v1/gallery/albums/2/", headers={"X-SNUBASEBALL-CLIENT": "unknown"}
+        "/api/v1/gallery/albums/private album/",
+        headers={"X-SNUBASEBALL-CLIENT": "unknown"},
     )
 
     assert resp.status_code == 403
@@ -62,7 +63,7 @@ def test_get_album_detail_private_success(api_client, users):
     api_client.force_authenticate(user=normal_user)
 
     resp = api_client.get(
-        "/api/v1/gallery/albums/2/",
+        "/api/v1/gallery/albums/private album/",
         headers={"X-SNUBASEBALL-CLIENT": "snu-baseball-team-portal"},
     )
 
