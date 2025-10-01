@@ -1,6 +1,16 @@
 import { vi } from "vitest";
 
+vi.mock("@shared/ui/Badges", () => ({
+  SimpleBadge: ({ label }: { label: string }) => <div>{label}</div>,
+}));
 vi.mock("@shared/ui/Buttons", () => ({
+  DeleteButton: ({
+    onClick,
+    label = "변경하기",
+  }: {
+    onClick: () => void;
+    label: string;
+  }) => <button onClick={onClick}>{label}</button>,
   EditButton: ({
     onClick,
     label = "변경하기",
@@ -32,6 +42,11 @@ vi.mock("@shared/ui/Buttons", () => ({
       {children}
     </a>
   ),
+  TextLink: ({ to, children }: { to: string; children: React.ReactNode }) => (
+    <a href={to} onClick={(e) => e.preventDefault()}>
+      {children}
+    </a>
+  ),
   SubmitButton: (props: unknown) => (
     <button {...(props as React.ButtonHTMLAttributes<HTMLButtonElement>)} />
   ),
@@ -46,6 +61,7 @@ vi.mock("@shared/ui/Icons", () => ({
 }));
 vi.mock("@shared/ui/Images", () => ({
   ImagePlaceholder: () => <div>ImagePlaceholder</div>,
+  ProgressiveImage: () => <div>ProgressiveImage</div>,
 }));
 vi.mock("@shared/ui/Inputs", async () => {
   const { DateInput } = await vi.importActual("@shared/ui/Inputs");
@@ -74,6 +90,9 @@ vi.mock("@shared/ui/Inputs", async () => {
 vi.mock("@shared/ui/Loading", () => ({
   Skeleton: () => <div>Loading Skeleton</div>,
   Spinner: () => <div>Loading Spinner</div>,
+}));
+vi.mock("@shared/ui/Pagination", () => ({
+  Pagination: () => <div>Pagination</div>,
 }));
 vi.mock("@shared/ui/Selects", () => ({
   SingleSelectMenu: () => <div>SelectMenu</div>,
