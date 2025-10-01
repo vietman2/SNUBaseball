@@ -6,6 +6,7 @@ __all__ = (
     "delete_refresh_cookie",
     "PasswordValidator",
     "IsAuthenticated",
+    "AllowAny",
     "IsOps",
 )
 
@@ -13,7 +14,7 @@ if TYPE_CHECKING:
     from .backend import AuthBackend
     from .cookies import set_refresh_cookie, delete_refresh_cookie
     from .password import PasswordValidator
-    from .permissions import IsAuthenticated, IsOps
+    from .permissions import IsAuthenticated, IsOps, AllowAny
 
 
 def __getattr__(name):
@@ -37,6 +38,10 @@ def __getattr__(name):
         from .permissions import IsAuthenticated
 
         return IsAuthenticated
+    if name == "AllowAny":
+        from .permissions import AllowAny
+
+        return AllowAny
     if name == "IsOps":
         from .permissions import IsOps
 

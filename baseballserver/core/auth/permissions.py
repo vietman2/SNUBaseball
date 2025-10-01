@@ -5,14 +5,36 @@ _HEADER_NAME = "X-SNUBASEBALL-CLIENT"
 _ALLOWED_CLIENT = "snu-baseball-team-portal"
 
 
+def _is_authenticated(request):
+    client = request.headers.get(_HEADER_NAME, "")
+
+    if client != _ALLOWED_CLIENT:
+        return False
+
+    return request.user and request.user.is_authenticated and request.user.is_active
+
+
 class IsAuthenticated(BasePermission):
+    """
+    인증된 사용자
+      - 반드시, 포털에서 접근해야 함
+    """
     def has_permission(self, request, view):
-        client = request.headers.get(_HEADER_NAME, "")
+        return _is_authenticated(request)
 
-        if client != _ALLOWED_CLIENT:
-            return False
 
-        return request.user and request.user.is_authenticated and request.user.is_active
+class AllowAny(BasePermission):
+    """
+    누구나
+    """
+    def has_permission(self, request, view):
+        ## 누구나 접근 가능
+        ## - 단, 로그인했는지 확인할 수 있는 함수를 포함
+        is_authenticated = _is_authenticated(request)
+
+        setattr(request, "is_authenticated", is_authenticated)
+
+        return True
 
 
 class IsOps(IsAuthenticated):
@@ -26,13 +48,13 @@ class IsOps(IsAuthenticated):
         if not super().has_permission(request, view):
             return False
 
-        client = request.headers.get(_HEADER_NAME, "")
+        if getattr(request.user, "is_superuser", False):
+            return True
 
-        if client != _ALLOWED_CLIENT:
-            return False
+        member = getattr(request.user, "member", None)
+        role = getattr(member, "role", None)
 
-        return (
-            request.user.member.role.is_leadership
-            or request.user.member.role.is_manager
-            or request.user.is_superuser
+        return bool(
+            getattr(role, "is_leadership", False) or getattr(role, "is_manager", False)
         )
+
