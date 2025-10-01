@@ -1,9 +1,11 @@
 from .albums import AlbumViewSet
-from .gallery import GalleryDataAPIView
+from .media import GalleryMediaAPIView
+from .tags import MediaTagViewSet
 from .uploads import AlbumUploadView
 
 __all__ = (
     "AlbumViewSet",
-    "GalleryDataAPIView",
+    "GalleryMediaAPIView",
+    "MediaTagViewSet",
     "AlbumUploadView",
 )
