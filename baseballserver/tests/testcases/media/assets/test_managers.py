@@ -303,3 +303,6 @@ def test_update_or_create_asset_race_2(monkeypatch):
 
     assert obj.file.key
     assert created is True
+
+
+## VideoManager의 update_thumbnail 메서드는 test_tasks.py 에서 테스트한다.

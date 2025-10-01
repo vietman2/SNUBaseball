@@ -1,4 +1,4 @@
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django.db import models, transaction, IntegrityError
 from django.utils import timezone
 
@@ -139,3 +139,19 @@ class VideosManager(BaseFileManager):
             raise ValidationError(MIME_TYPE_ERROR_MESSAGE.format(mime))
 
         return super().update_or_create_by_key(key=key, **kwargs)
+
+    def update_thumbnail(self, *, key=None, thumbnail_key):
+        if not key:
+            raise ValidationError("Key는 필수입니다.")
+
+        with transaction.atomic():
+            try:
+                file = StoredFile.objects.get(key=key)
+                obj = super().get_queryset().get(file=file)
+            except ObjectDoesNotExist:
+                raise ValidationError("존재하지 않는 비디오입니다.")
+
+            obj.thumbnail_key = thumbnail_key
+            obj.save()
+
+            return obj
