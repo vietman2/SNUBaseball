@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { Link } from "react-router";
 
+import type { BreadcrumbItemType } from "@widgets/breadcrumb";
 import { useColors } from "@shared/lib/styles";
-import type { BreadcrumbItemType } from "@shared/lib/views";
 import { AppIcon } from "@shared/ui/Icons";
 
 interface Props {
