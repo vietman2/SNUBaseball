@@ -27,10 +27,12 @@ import Person from "./files/person.svg?react";
 import Player from "./files/player.svg?react";
 import Plus from "./files/plus.svg?react";
 import Record from "./files/record.svg?react";
+import Settings from "./files/settings.svg?react";
 import SidebarClose from "./files/sidebar-close.svg?react";
 import SidebarOpen from "./files/sidebar-open.svg?react";
 import Sun from "./files/sun.svg?react";
 import Tag from "./files/tag.svg?react";
+import Trash from "./files/trash.svg?react";
 import Upload from "./files/upload.svg?react";
 import Video from "./files/video.svg?react";
 
@@ -73,10 +75,12 @@ const iconMap: Record<
   player: Player,
   plus: Plus,
   record: Record,
+  settings: Settings,
   "sidebar-close": SidebarClose,
   "sidebar-open": SidebarOpen,
   sun: Sun,
   tag: Tag,
+  trash: Trash,
   upload: Upload,
   video: Video,
 };
