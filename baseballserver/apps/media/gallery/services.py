@@ -3,7 +3,6 @@ import posixpath
 from apps.media.assets.api import SNUBaseballImage, presign_upload, complete_upload
 from core.error_handling import SNUBaseballException
 from .models import GalleryImage, GalleryVideo
-from .serializers import GalleryImageSerializer, GalleryVideoSerializer
 
 
 def presign_for_album_item(album, *, filename: str, content_type: str, size: int):
@@ -43,15 +42,3 @@ def complete_album_uploads(*, album, items, tag_ids, user):
         except SNUBaseballException as e:
             errors.append({"key": item["key"], "error": str(e)})
     return errors
-
-
-def serialize_gallery_media(objs):
-    result = []
-    for obj in objs:
-        if isinstance(obj, GalleryImage):
-            result.append(GalleryImageSerializer(obj).data)
-        elif isinstance(obj, GalleryVideo):
-            result.append(GalleryVideoSerializer(obj).data)
-        else:
-            raise SNUBaseballException("알 수 없는 미디어 객체입니다.")
-    return result
