@@ -9,7 +9,7 @@ class GalleryImageSerializer(serializers.ModelSerializer):
     filename = serializers.CharField(
         source="image.file.original_filename", read_only=True
     )
-    album = serializers.CharField(source="album.name", read_only=True)
+    album = serializers.CharField(source="album.title", read_only=True)
     tags = serializers.SlugRelatedField(many=True, read_only=True, slug_field="name")
     created_at = serializers.DateTimeField(
         source="image.file.created_at", read_only=True, format="%Y-%m-%d"
@@ -38,7 +38,7 @@ class GalleryVideoSerializer(serializers.ModelSerializer):
     filename = serializers.CharField(
         source="video.file.original_filename", read_only=True
     )
-    album = serializers.CharField(source="album.name", read_only=True)
+    album = serializers.CharField(source="album.title", read_only=True)
     tags = serializers.SlugRelatedField(many=True, read_only=True, slug_field="name")
     created_at = serializers.DateTimeField(
         source="video.file.created_at", read_only=True, format="%Y-%m-%d"
