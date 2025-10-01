@@ -1,25 +1,11 @@
 import styled from "styled-components";
 
 interface Props {
-  width: string;
-  height: string;
-  borderRadius: string;
   label?: string;
 }
 
-export function ImagePlaceholder({
-  width,
-  height,
-  borderRadius,
-  label,
-}: Readonly<Props>) {
-  return (
-    <div style={{ width, height }}>
-      <MockImage style={{ borderRadius }}>
-        {label ? <span>{label}</span> : null}
-      </MockImage>
-    </div>
-  );
+export function ImagePlaceholder({ label }: Readonly<Props>) {
+  return <MockImage>{label ? <span>{label}</span> : null}</MockImage>;
 }
 
 const MockImage = styled.div`
@@ -27,7 +13,11 @@ const MockImage = styled.div`
   flex: 1;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  min-width: 120px;
+  max-width: 160px;
+  aspect-ratio: 1 / 1;
+
+  border-radius: 16px;
   background-color: ${({ theme }) => theme.colors.gray200};
 
   > span {

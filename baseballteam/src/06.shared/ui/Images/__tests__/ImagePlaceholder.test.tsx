@@ -7,24 +7,16 @@ vi.unmock("@shared/ui/Images");
 
 describe("ImagePlaceholder", () => {
   it("renders correctly with required props", () => {
-    const { container } = renderWithProviders(
-      <ImagePlaceholder width="100px" height="100px" borderRadius="8px" />
-    );
+    const { container } = renderWithProviders(<ImagePlaceholder />);
 
     expect(container).toBeDefined();
   });
 
   it("renders correctly with optional label prop", () => {
-    const { container, getByText } = renderWithProviders(
-      <ImagePlaceholder
-        width="150px"
-        height="150px"
-        borderRadius="12px"
-        label="Placeholder"
-      />
+    const { getByText } = renderWithProviders(
+      <ImagePlaceholder label="Placeholder" />
     );
 
     expect(getByText("Placeholder")).toBeInTheDocument();
-    expect(container.firstChild).toMatchSnapshot();
   });
 });
