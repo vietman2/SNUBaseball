@@ -109,7 +109,7 @@ const SidebarLink = styled(Link)`
 const Right = styled.div`
   flex: 3;
   padding: 16px;
-  background-color: ${({ theme }) => theme.colors.surfaceElevated};
+  background-color: ${({ theme }) => theme.colors.backgroundDefault};
   border-radius: 12px;
   // shadow to left
   box-shadow: -4px 0 8px rgba(0, 0, 0, 0.1);
