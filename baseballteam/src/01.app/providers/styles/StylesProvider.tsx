@@ -1,7 +1,13 @@
 import { useCallback, useMemo, useState, type ReactNode } from "react";
 import { ThemeProvider } from "styled-components";
 
-import { ColorContext, dark, GlobalStyles, light } from "@shared/lib/styles";
+import {
+  ColorContext,
+  GlobalStyles,
+  dark,
+  light,
+  breakpoints,
+} from "@shared/lib/styles";
 
 interface Props {
   children: ReactNode;
@@ -24,7 +30,7 @@ export function StylesProvider({ children }: Readonly<Props>) {
   );
 
   return (
-    <ThemeProvider theme={{ colors }}>
+    <ThemeProvider theme={{ colors, breakpoints }}>
       <ColorContext.Provider value={value}>
         <GlobalStyles />
         {children}
