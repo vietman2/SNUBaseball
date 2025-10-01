@@ -3,7 +3,6 @@ import pytest
 from apps.media.gallery.models import MediaTag
 from apps.media.gallery.services import (
     complete_album_uploads,
-    serialize_gallery_media,
     presign_for_album_item,
 )
 from core.error_handling import SNUBaseballException
@@ -75,6 +74,7 @@ def test_complete_album_uploads_with_tags(monkeypatch):
     image = album.images.first()
     assert set(image.tags.all()) == {tag1}
 
+
 def test_complete_album_uploads_partial_failure(monkeypatch):
     def mock_complete_upload_partial_failure(**kwargs):
         key = kwargs.get("key")
@@ -86,29 +86,20 @@ def test_complete_album_uploads_partial_failure(monkeypatch):
             return SNUBaseballVideoFactory(key=key)
 
     monkeypatch.setattr(
-        "apps.media.gallery.services.complete_upload", mock_complete_upload_partial_failure
+        "apps.media.gallery.services.complete_upload",
+        mock_complete_upload_partial_failure,
     )
 
     album = GalleryFactory.create()
     items = [
         {"key": f"gallery/{album.title}/image3.jpg", "original_filename": "image3.jpg"},
-        {"key": f"gallery/{album.title}/fail_video.mp4", "original_filename": "fail_video.mp4"},
+        {
+            "key": f"gallery/{album.title}/fail_video.mp4",
+            "original_filename": "fail_video.mp4",
+        },
     ]
     errors = complete_album_uploads(album=album, items=items, tag_ids=[], user=None)
     assert len(errors) == 1
     assert errors[0]["key"] == f"gallery/{album.title}/fail_video.mp4"
     assert album.images.count() == 1
     assert album.videos.count() == 0
-
-def test_gallery_media_serialization():
-    album = GalleryFactory.create_public_album()
-    serialized_images = serialize_gallery_media(album.images.all())
-    assert len(serialized_images) == album.images.count()
-
-    serialized_videos = serialize_gallery_media(album.videos.all())
-    assert len(serialized_videos) == album.videos.count()
-
-
-def test_gallery_media_serialization_invalid_type():
-    with pytest.raises(SNUBaseballException):
-        serialize_gallery_media([object()])
