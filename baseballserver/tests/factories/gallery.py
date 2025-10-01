@@ -24,6 +24,7 @@ class GalleryFactory(DjangoModelFactory):
         ## 앨범에 이미지 4개, 동영상 1개 추가
         tags = cls.create_tags()
         for i in range(4):
+            ## 태그는 tag1 3개, tag2 1개, tag3 0개 연결한다
             img = SNUBaseballImageFactory(
                 file__key=f"media/gallery/images/sample_image_{i+1}.jpg",
                 file__mime="image/jpeg",
@@ -34,7 +35,10 @@ class GalleryFactory(DjangoModelFactory):
                 album=album,
                 image=img,
             )
-            gi.tags.set([tags[i % len(tags)]])
+            if i < 3:
+                gi.tags.set([tags[0]])
+            else:
+                gi.tags.set([tags[1]])
             gi.save()
 
         vid = SNUBaseballVideoFactory(
@@ -46,7 +50,8 @@ class GalleryFactory(DjangoModelFactory):
             album=album,
             video=vid,
         )
-        gv.tags.set(tags)
+        ## 태그는 tag1만 연결한다
+        gv.tags.set([tags[0]])
         gv.save()
 
         return album
@@ -54,4 +59,21 @@ class GalleryFactory(DjangoModelFactory):
     @classmethod
     def create_private_album(cls, **kwargs) -> Album:
         album = cls.create(members_only=True, **kwargs)
+        ## 앨범에 이미지 1개 추가
+        img = SNUBaseballImageFactory(
+            file__key="media/gallery/images/private_image_1.jpg",
+            file__mime="image/jpeg",
+            width=1280,
+            height=720,
+        )
+        gi = GalleryImage.objects.create(
+            album=album,
+            image=img,
+        )
+        gi.save()
+        return album
+
+    @classmethod
+    def create_empty_album(cls, **kwargs) -> Album:
+        album = cls.create(members_only=False, **kwargs)
         return album
