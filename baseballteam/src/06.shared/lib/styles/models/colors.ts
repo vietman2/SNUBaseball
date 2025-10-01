@@ -31,7 +31,7 @@ export const light: ThemeColorType = {
 
   backgroundDefault: "#FFFFFF",
   backgroundPaper: "#E8E6F2",
-  surfaceElevated: "#FDFDFB",
+  surfaceElevated: "#E5E7EB",
   overlay: "#000000",
 
   textPrimary: "#0F0F70",

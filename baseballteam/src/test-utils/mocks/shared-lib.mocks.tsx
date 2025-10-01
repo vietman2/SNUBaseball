@@ -102,9 +102,8 @@ vi.mock("@shared/lib/storage", () => ({
   }),
 }));
 vi.mock("@shared/lib/styles", async () => {
-  const { ColorContext, ThemeColorType, light } = await vi.importActual(
-    "@shared/lib/styles"
-  );
+  const { breakpoints, ColorContext, light } =
+    await vi.importActual("@shared/lib/styles");
 
   return {
     ColorContext: ColorContext,
@@ -113,10 +112,10 @@ vi.mock("@shared/lib/styles", async () => {
       isDarkMode: false,
       toggleTheme: vi.fn(),
     })),
-    ThemeColorType: ThemeColorType,
     light: light,
     dark: light,
     GlobalStyles: () => null,
+    breakpoints: breakpoints,
   };
 });
 vi.mock("@shared/lib/views", () => ({
