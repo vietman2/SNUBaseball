@@ -6,7 +6,6 @@ from core.auth import AllowAny
 from core.error_handling import SNUBaseballException
 from ..models import GalleryImage, GalleryVideo
 from ..paginators import MediaPageNumberPagination
-from ..selectors import fetch_media_page_objects
 from ..serializers import GalleryImageSerializer, GalleryVideoSerializer
 
 
@@ -83,6 +82,34 @@ class GalleryMediaAPIView(APIView):
 
         return videos_queryset
 
+    def _get_page_objects(self, page_rows):
+        image_ids = [r["media_id"] for r in page_rows if r["media_type"] == "image"]
+        video_ids = [r["media_id"] for r in page_rows if r["media_type"] == "video"]
+
+        image_map = {
+            obj.id: obj
+            for obj in GalleryImage.objects.filter(id__in=image_ids)
+            .select_related("image")
+            .prefetch_related("tags")
+        }
+        video_map = {
+            obj.id: obj
+            for obj in GalleryVideo.objects.filter(id__in=video_ids)
+            .select_related("video")
+            .prefetch_related("tags")
+        }
+
+        page_objs = []
+        for row in page_rows:
+            if row["media_type"] == "image":
+                obj = image_map.get(row["media_id"])
+                page_objs.append(obj)
+            else:
+                obj = video_map.get(row["media_id"])
+                page_objs.append(obj)
+
+        return page_objs
+
     @extend_schema(summary="갤러리 미디어 목록 조회", tags=["갤러리"])
     def get(self, request, *args, **kwargs):
         ## 1. Query Param 파싱
@@ -105,7 +132,7 @@ class GalleryMediaAPIView(APIView):
         paginator = MediaPageNumberPagination()
         page_rows = paginator.paginate_queryset(union_qs, request, view=self)
 
-        page_objs = fetch_media_page_objects(page_rows)
+        page_objs = self._get_page_objects(page_rows)
         media_data = self._serialize_batch(page_objs)
 
         return paginator.get_paginated_response(media_data)
