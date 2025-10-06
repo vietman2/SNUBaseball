@@ -1,91 +1,64 @@
-import { Link } from "react-router";
+import { useSearchParams } from "react-router";
 import styled from "styled-components";
 
-import { ErrorWidget } from "@widgets/error";
 import {
   AlbumCard,
   AlbumCardSkeleton,
-  AlbumListHeaderItem,
-  AlbumListItem,
-  AlbumListItemSkeleton,
-  useGallery,
-} from "@entities/gallery";
-import { useViews } from "@shared/lib/views";
+  useAlbums,
+} from "@entities/gallery/album";
 
 export function Albums() {
-  const { albums, isLoading, isError, refresh } = useGallery();
-  const { activeView } = useViews();
+  const [, setSearchParams] = useSearchParams();
+  const { albums, selectedAlbum, isLoading } = useAlbums();
+
+  const onAlbumClick = (albumTitle: string) => {
+    setSearchParams((prev) => {
+      const next = new URLSearchParams(prev);
+
+      if (next.get("album") === albumTitle) {
+        next.delete("album");
+      } else {
+        next.set("album", albumTitle);
+      }
+
+      return next;
+    });
+  };
 
   if (isLoading) {
-    if (activeView === "LIST") {
-      return (
-        <List>
-          <AlbumListHeaderItem />
-          <AlbumListItemSkeleton />
-          <AlbumListItemSkeleton />
-          <AlbumListItemSkeleton />
-        </List>
-      );
-    }
-
     return (
-      <Grid>
+      <Container>
         <AlbumCardSkeleton />
         <AlbumCardSkeleton />
         <AlbumCardSkeleton />
-      </Grid>
-    );
-  }
-
-  if (isError || !albums) {
-    return (
-      <ErrorWidget message="앨범을 불러오는 데 실패했습니다">
-        <button onClick={refresh}>다시 시도</button>
-      </ErrorWidget>
-    );
-  }
-
-  if (activeView === "GRID") {
-    return (
-      <Grid>
-        {albums.map((album) => (
-          <Link to={`/gallery/${album.id}`} key={album.id}>
-            <AlbumCard key={album.id} album={album} />
-          </Link>
-        ))}
-      </Grid>
+      </Container>
     );
   }
 
   return (
-    <List>
-      <AlbumListHeaderItem />
+    <Container>
       {albums.map((album) => (
-        <Link to={`/gallery/${album.id}`} key={album.id}>
-          <AlbumListItem album={album} />
-        </Link>
+        <button
+          key={album.id}
+          onClick={() => onAlbumClick(album.title)}
+          data-testid={`album-${album.title}-card`}
+        >
+          <AlbumCard
+            key={album.id}
+            album={album}
+            isActive={selectedAlbum?.id === album.id}
+          />
+        </button>
       ))}
-    </List>
+    </Container>
   );
 }
 
-const List = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  > a:not(:first-child) {
-    border-top: 1px solid ${({theme}) => theme.colors.divider};
-  }
-
-  > a:nth-child(even) {
-    background-color: ${({theme}) => theme.colors.backgroundPaper};
-  }
-`;
-
-const Grid = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
-  padding: 16px 24px;
-  gap: 32px;
+  max-width: 100%;
+  gap: 16px;
+
+  overflow-x: auto;
 `;
