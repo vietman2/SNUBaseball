@@ -55,7 +55,6 @@ export function ProgressiveImage({
 
 const Frame = styled.div`
   min-width: 120px;
-  max-width: 160px;
   aspect-ratio: 1 / 1;
   position: relative;
   overflow: hidden;
