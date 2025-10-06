@@ -21,7 +21,7 @@ export function EditButton({
   return (
     <Button onClick={onClick}>
       <AppIcon icon="pencil" size={16} color={displayColor} />
-      <span style={{ color: displayColor }}>{label}</span>
+      {label && <span style={{ color: displayColor }}>{label}</span>}
     </Button>
   );
 }

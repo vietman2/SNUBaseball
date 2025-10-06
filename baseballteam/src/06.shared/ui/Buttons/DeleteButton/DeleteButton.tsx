@@ -21,7 +21,7 @@ export function DeleteButton({
   return (
     <Button onClick={onClick}>
       <AppIcon icon="trash" size={16} color={displayColor} />
-      <span style={{ color: displayColor }}>{label}</span>
+      {label && <span style={{ color: displayColor }}>{label}</span>}
     </Button>
   );
 }
@@ -29,6 +29,7 @@ export function DeleteButton({
 const Button = styled.button`
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 4px;
 
   font-weight: 500;
