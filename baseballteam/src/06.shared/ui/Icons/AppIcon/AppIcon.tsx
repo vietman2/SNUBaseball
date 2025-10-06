@@ -1,4 +1,5 @@
 import Album from "./files/album.svg?react";
+import Bat from "./files/bat.svg?react";
 import Check from "./files/check.svg?react";
 import ChevronDown from "./files/chevron-down.svg?react";
 import ChevronLeft from "./files/chevron-left.svg?react";
@@ -12,11 +13,13 @@ import File from "./files/file.svg?react";
 import Forum from "./files/forum.svg?react";
 import Gallery from "./files/gallery.svg?react";
 import Grid from "./files/grid.svg?react";
+import Hashtag from "./files/hashtag.svg?react";
 import Home from "./files/home.svg?react";
 import Image from "./files/image.svg?react";
 import InfoCircle from "./files/info-circle.svg?react";
 import List from "./files/list.svg?react";
 import Lock from "./files/lock.svg?react";
+import LockOpen from "./files/lock-open.svg?react";
 import Logout from "./files/logout.svg?react";
 import Management from "./files/management.svg?react";
 import Money from "./files/money.svg?react";
@@ -47,6 +50,7 @@ const iconMap: Record<
   React.FunctionComponent<React.SVGProps<SVGSVGElement>>
 > = {
   album: Album,
+  bat: Bat,
   check: Check,
   "chevron-down": ChevronDown,
   "chevron-left": ChevronLeft,
@@ -60,11 +64,13 @@ const iconMap: Record<
   forum: Forum,
   gallery: Gallery,
   grid: Grid,
+  hashtag: Hashtag,
   home: Home,
   image: Image,
   "info-circle": InfoCircle,
   list: List,
   lock: Lock,
+  "lock-open": LockOpen,
   logout: Logout,
   management: Management,
   money: Money,
