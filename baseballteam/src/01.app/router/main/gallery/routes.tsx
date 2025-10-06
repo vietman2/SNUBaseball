@@ -1,12 +1,14 @@
 import { Route } from "react-router";
 
 import { GalleryLayout } from "./layout";
-import { AlbumDetails } from "@pages/gallery/album-details";
-import { GalleryMainPage } from "@pages/gallery/main";
+import { GalleryAdminRoutes } from "./admin/routes";
+import { MediaDisplay } from "@pages/gallery/media-display";
+import { UploadMedia } from "@pages/gallery/upload";
 
 export const GalleryRoutes = (
   <Route path="gallery" element={<GalleryLayout />}>
-    <Route index element={<GalleryMainPage />} />
-    <Route path=":id" element={<AlbumDetails />} />
+    {GalleryAdminRoutes}
+    <Route path="upload" element={<UploadMedia />} />
+    <Route path="*" element={<MediaDisplay />} />
   </Route>
 );
