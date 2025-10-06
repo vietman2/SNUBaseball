@@ -40,3 +40,8 @@ vi.mock("react-router", async () => {
     useLocation: vi.fn().mockReturnValue({ pathname: "/home" }),
   };
 });
+vi.mock("react-colorful", () => ({
+  HexColorPicker: ({ onChange }: { onChange: (color: string) => void }) => (
+    <button onClick={() => onChange("#000000")}>ColorPicker</button>
+  ),
+}));

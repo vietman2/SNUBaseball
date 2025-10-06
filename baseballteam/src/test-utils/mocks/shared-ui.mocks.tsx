@@ -85,6 +85,7 @@ vi.mock("@shared/ui/Inputs", async () => {
     }) => (
       <button data-testid="file-input" onClick={() => onChange(mockFile)} />
     ),
+    InlineTextInput: () => <input data-testid="inline-text-input" />,
   };
 });
 vi.mock("@shared/ui/Loading", () => ({
@@ -93,6 +94,10 @@ vi.mock("@shared/ui/Loading", () => ({
 }));
 vi.mock("@shared/ui/Pagination", () => ({
   Pagination: () => <div>Pagination</div>,
+}));
+vi.mock("@shared/ui/Pickers", () => ({
+  ColorPicker: () => <div>ColorPicker</div>,
+  IconPicker: () => <div>IconPicker</div>,
 }));
 vi.mock("@shared/ui/Selects", () => ({
   SingleSelectMenu: () => <div>SelectMenu</div>,
@@ -119,4 +124,5 @@ vi.mock("@shared/ui/Tooltips", () => ({
   SimpleTooltip: (props: unknown) => (
     <div>{(props as { text: string }).text}</div>
   ),
+  TooltipWrapper: ({children}: {children: React.ReactNode}) => <div>{children}</div>,
 }));
