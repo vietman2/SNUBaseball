@@ -91,6 +91,10 @@ jobs:
       AWS_S3_BUCKET_NAME: "test"
       AWS_ACCESS_KEY_ID: "test"
       AWS_SECRET_ACCESS_KEY: "test"
+      CELERY_BROKER_URL: "test"
+      CELERY_RESULT_BACKEND: "test"
+      CELERY_WORKER_CONCURRENCY: "2"
+      CELERY_WORKER_PREFETCH_MULTIPLIER: "1"
 
     steps:
       - name: Checkout code
