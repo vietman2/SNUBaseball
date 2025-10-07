@@ -1,3 +1,3 @@
-from .base import TimeStampedModel, Chip
+from .base import TimeStampedModel, SoftDeleteModel, Chip
 
-__all__ = ["TimeStampedModel", "Chip"]
+__all__ = ["TimeStampedModel", "SoftDeleteModel", "Chip"]

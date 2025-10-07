@@ -1,11 +1,12 @@
 from django.db import models
 
 from apps.media.assets.api import SNUBaseballImage, SNUBaseballVideo
+from core.models import SoftDeleteModel
 from .albums import Album
 from .tags import MediaTag
 
 
-class GalleryImage(models.Model):
+class GalleryImage(SoftDeleteModel):
     image = models.OneToOneField(
         SNUBaseballImage, on_delete=models.CASCADE, related_name="gallery_images"
     )
@@ -29,7 +30,7 @@ class GalleryImage(models.Model):
         return "IMAGE"
 
 
-class GalleryVideo(models.Model):
+class GalleryVideo(SoftDeleteModel):
     video = models.OneToOneField(
         SNUBaseballVideo, on_delete=models.CASCADE, related_name="gallery_videos"
     )
