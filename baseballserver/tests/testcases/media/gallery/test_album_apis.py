@@ -9,6 +9,7 @@ pytestmark = pytest.mark.django_db
 def setup():
     GalleryFactory.create_public_album(title="public album")
     GalleryFactory.create_private_album(title="private album")
+    GalleryFactory.create_empty_album(title="empty album")
 
 
 @pytest.fixture(name="users")
@@ -41,9 +42,9 @@ def test_get_albums_list_full_access(api_client, users):
 
     assert resp.status_code == 200
     assert isinstance(resp.data, list)
-    assert len(resp.data) == 2
+    assert len(resp.data) == 3
     titles = {album["title"] for album in resp.data}
-    assert titles == {"public album", "private album"}
+    assert titles == {"public album", "private album", "empty album"}
 
 
 @pytest.mark.no_portal_header
@@ -55,9 +56,10 @@ def test_get_albums_list_limited_access(api_client, users):
 
     assert resp.status_code == 200
     assert isinstance(resp.data, list)
-    assert len(resp.data) == 1
+    assert len(resp.data) == 2
     titles = {album["title"] for album in resp.data}
-    assert titles == {"public album"}
+    assert titles == {"public album", "empty album"}
+
 
 @pytest.mark.no_portal_header
 def test_create_update_delete_unauthenticated(api_client, users):
@@ -73,9 +75,7 @@ def test_create_update_delete_unauthenticated(api_client, users):
     )
     assert resp.status_code == 403
 
-    resp = api_client.put(
-        f"{ALBUMS_API_URL}public album/", data=payload, format="json"
-    )
+    resp = api_client.put(f"{ALBUMS_API_URL}public album/", data=payload, format="json")
     assert resp.status_code == 403
 
     resp = api_client.delete(f"{ALBUMS_API_URL}public album/")
@@ -91,9 +91,7 @@ def test_create_update_delete_unauthenticated(api_client, users):
     )
     assert resp.status_code == 403
 
-    resp = api_client.put(
-        f"{ALBUMS_API_URL}public album/", data=payload, format="json"
-    )
+    resp = api_client.put(f"{ALBUMS_API_URL}public album/", data=payload, format="json")
     assert resp.status_code == 403
 
     resp = api_client.delete(f"{ALBUMS_API_URL}public album/")
@@ -109,13 +107,30 @@ def test_create_update_delete_unauthenticated(api_client, users):
     )
     assert resp.status_code == 403
 
-    resp = api_client.put(
-        f"{ALBUMS_API_URL}public album/", data=payload, format="json"
-    )
+    resp = api_client.put(f"{ALBUMS_API_URL}public album/", data=payload, format="json")
     assert resp.status_code == 403
 
     resp = api_client.delete(f"{ALBUMS_API_URL}public album/")
     assert resp.status_code == 403
+
+
+def test_delete_album_success(api_client, users):
+    _, admin_user = users
+    api_client.force_authenticate(user=admin_user)
+
+    resp = api_client.delete(f"{ALBUMS_API_URL}empty album/")
+
+    assert resp.status_code == 204
+
+
+def test_delete_album_with_media_fail(api_client, users):
+    ## TODO: 추후에는 앨범 내 미디어가 있어도 삭제 가능하도록 변경
+    _, admin_user = users
+    api_client.force_authenticate(user=admin_user)
+
+    resp = api_client.delete(f"{ALBUMS_API_URL}public album/")
+
+    assert resp.status_code == 400
 
 
 def test_create_album_success(api_client, users):
@@ -158,11 +173,3 @@ def test_update_album_success(api_client, users):
     assert resp.status_code == 200
     assert resp.data["title"] == "Updated Album"
     assert resp.data["members_only"] is True
-
-def test_delete_album_not_implemented(api_client, users):
-    _, admin_user = users
-    api_client.force_authenticate(user=admin_user)
-
-    resp = api_client.delete(f"{ALBUMS_API_URL}public album/")
-
-    assert resp.status_code == 501
