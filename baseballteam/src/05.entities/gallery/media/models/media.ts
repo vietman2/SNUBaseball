@@ -29,7 +29,7 @@ export type MediaType = GalleryImageType | GalleryVideoType;
 
 export const sampleGalleryImage: GalleryImageType = {
   type: "IMAGE",
-  key: "sample-image-key",
+  key: "gallery/sample-image-key",
   url: "https://via.placeholder.com/600",
   filename: "sample-image.jpg",
   album: sampleAlbumSimple,
@@ -40,7 +40,7 @@ export const sampleGalleryImage: GalleryImageType = {
 
 export const sampleGalleryVideo: GalleryVideoType = {
   type: "VIDEO",
-  key: "sample-video-key",
+  key: "gallery/sample-video-key",
   url: "https://via.placeholder.com/600",
   thumbnail_url: "https://via.placeholder.com/150",
   filename: "sample-video.mp4",
