@@ -7,6 +7,7 @@ interface Props {
   isOpen: boolean;
   onClose: () => void;
   children: ReactNode;
+  minWidth?: number;
 }
 
 /**
@@ -14,7 +15,12 @@ interface Props {
  * useSimpleModal 훅과 함께 사용.
  */
 
-export function SimpleModal({ isOpen, onClose, children }: Readonly<Props>) {
+export function SimpleModal({
+  isOpen,
+  onClose,
+  children,
+  minWidth = 400,
+}: Readonly<Props>) {
   const ANIMATION_MS = 200;
   const [mounted, setMounted] = useState(isOpen);
   const [exiting, setExiting] = useState(false);
@@ -62,6 +68,7 @@ export function SimpleModal({ isOpen, onClose, children }: Readonly<Props>) {
         $exiting={exiting}
         $animationLength={200}
         onMouseDown={(e) => e.stopPropagation()}
+        style={{ minWidth }}
         data-testid="modal-dialog"
       >
         {children}
@@ -77,7 +84,6 @@ const ModalWrapper = styled(ModalOverlay)`
 
 const ModalContentWrapper = styled(ModalDialog)`
   padding: 24px;
-  min-width: 400px;
   max-width: 90vw;
 
   background-color: ${({ theme }) => theme.colors.backgroundDefault};
