@@ -1,4 +1,3 @@
-export { SingleSelectMenu } from "./SelectMenu/SingleSelectMenu";
-export { MultiSelectMenu } from "./SelectMenu/MultiSelectMenu";
+export { SelectMenu } from "./SelectMenu/styles";
 
 export { SimpleSelect } from "./SimpleSelect/SimpleSelect";
