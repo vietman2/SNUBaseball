@@ -47,15 +47,24 @@ vi.mock("@shared/lib/axios", async () => ({
     message: "Sample Error Message",
   }),
 }));
-vi.mock("@shared/lib/files", () => {
-  const uploadReducer = vi.fn(
-    (state: unknown[], action: { type: string; items?: unknown[] }) => {
-      if (action?.type === "ADD") return [...state, ...(action.items ?? [])];
-      return state;
-    }
-  );
-  return { uploadReducer };
-});
+vi.mock("@shared/lib/files", () => ({
+  useFileSelect: vi.fn().mockReturnValue({
+    fileObjs: [],
+    addFiles: vi.fn(),
+    removeFile: vi.fn(),
+    setError: vi.fn(),
+    setDone: vi.fn(),
+    setProgress: vi.fn(),
+    overallProgress: 0,
+    clear: vi.fn(),
+  }),
+  FileSelectProvider: ({ children }: { children: React.ReactNode }) => (
+    <>{children}</>
+  ),
+  FileDropArea: () => <div>FileDropArea</div>,
+  SelectedFiles: () => <div>SelectedFiles</div>,
+  SingleFileDropArea: () => <div>SingleFileDropArea</div>,
+}));
 vi.mock("@shared/lib/formatters", async () => ({
   formatPhoneKR: (phone: string) => phone,
 }));
