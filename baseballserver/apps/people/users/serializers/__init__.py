@@ -1,4 +1,4 @@
 from .register import RegisterSerializer
-from .user_profile import UserProfileSerializer
+from .user_profile import UserProfileSerializer, UserRelatedSerializer
 
-__all__ = ["RegisterSerializer", "UserProfileSerializer"]
+__all__ = ["RegisterSerializer", "UserProfileSerializer", "UserRelatedSerializer"]

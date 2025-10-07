@@ -26,3 +26,11 @@ class UserProfileSerializer(serializers.ModelSerializer):
             return "STAFF"
 
         return "MEMBER"
+
+
+class UserRelatedSerializer(serializers.ModelSerializer):
+    name = serializers.CharField(source="member.name", read_only=True)
+
+    class Meta:
+        model = User
+        fields = ["uuid", "name"]
