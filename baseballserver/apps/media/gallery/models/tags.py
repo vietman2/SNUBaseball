@@ -3,6 +3,8 @@ from django.db import models
 
 class MediaTag(models.Model):
     name = models.CharField(max_length=20, unique=True)
+    color = models.CharField(max_length=7, default="#FFFFFF")
+    icon = models.CharField(max_length=30, default="hashtag")
 
     objects = models.Manager()
 
