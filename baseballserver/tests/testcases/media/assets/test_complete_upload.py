@@ -29,13 +29,15 @@ def _prepare_mocks(mocker):
     ast_model = mocker.patch(f"{MODULE_PATH}.SNUBaseballAsset")
 
     def make_obj(key, kwargs):
-        file = StoredFileFactory(key=key, mime=kwargs.get("mime"), size=kwargs.get("size"))
+        file = StoredFileFactory(
+            key=key, mime=kwargs.get("mime"), size=kwargs.get("size")
+        )
         return types.SimpleNamespace(
             file=file,
             uploaded_by_id=getattr(kwargs.get("uploaded_by"), "pk", None),
         )
 
-    def side(kind):
+    def side(kind): ## pylint: disable=unused-argument
         def _fn(*, key=None, **kwargs):
             return make_obj(key, kwargs), True
 
@@ -137,17 +139,26 @@ def test_complete_upload_video_without_task_enqueue(
 ):
     ### create가 아니라, update인 경우, 썸네일 생성 task를 enqueue하지 않음
     ## side effect에서 created=False로 반환하도록 수정
-    def side(effect):
+    def side(effect): ## pylint: disable=unused-argument
         def _fn(*, key=None, **kwargs):
-            file = StoredFileFactory(key=key, mime=kwargs.get("mime"), size=kwargs.get("size"))
-            return types.SimpleNamespace(
-                file=file,
-                uploaded_by_id=getattr(kwargs.get("uploaded_by"), "pk", None),
-                thumbnail_key="existing_thumbnail.jpg",
-            ), False
+            file = StoredFileFactory(
+                key=key, mime=kwargs.get("mime"), size=kwargs.get("size")
+            )
+            return (
+                types.SimpleNamespace(
+                    file=file,
+                    uploaded_by_id=getattr(kwargs.get("uploaded_by"), "pk", None),
+                    thumbnail_key="existing_thumbnail.jpg",
+                ),
+                False,
+            )
 
         return _fn
-    mocker.patch(f"{MODULE_PATH}.SNUBaseballVideo.objects.update_or_create_by_key", side_effect=side("VIDEO"))
+
+    mocker.patch(
+        f"{MODULE_PATH}.SNUBaseballVideo.objects.update_or_create_by_key",
+        side_effect=side("VIDEO"),
+    )
 
     file_type.return_value = "VIDEO"
     existing_file_type.return_value = "VIDEO"  # 기존에 존재하는 키

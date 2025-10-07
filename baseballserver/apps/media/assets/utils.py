@@ -17,10 +17,9 @@ def get_file_type(ct: str | None) -> Kind:
 
     if ct.startswith("image/"):
         return "IMAGE"
-    elif ct.startswith("video/"):
+    if ct.startswith("video/"):
         return "VIDEO"
-    else:
-        return "ASSET"
+    return "ASSET"
 
 
 def get_existing_file_type(key: str) -> Kind | None:

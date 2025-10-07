@@ -27,7 +27,7 @@ def _patch_media_services(monkeypatch, member_id):
 
     def fake_complete_upload(
         *, key, expected_prefix, original_filename=None, uploaded_by=None
-    ):
+    ): ## pylint: disable=unused-argument
         assert key.startswith(expected_prefix)
         return SNUBaseballImageFactory(
             file__key=key,

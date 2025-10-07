@@ -21,7 +21,7 @@ def _thumb_key(src_key: str) -> str:
 
 
 @shared_task(bind=True, autoretry_for=(Exception,), retry_backoff=True, max_retries=3)
-def generate_video_thumbnail(self, key: str, video_url: str) -> str:
+def generate_video_thumbnail(self, key: str, video_url: str) -> str: ## pylint: disable=unused-argument
     """
     비디오 썸네일 생성 및 업로드
     - `key`: 비디오 파일의 스토리지 키

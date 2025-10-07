@@ -3,8 +3,8 @@ import pytest
 from apps.media.storage.services.client import get_client
 
 
-@pytest.fixture
-def s3_client(mocker):
+@pytest.fixture(name="s3_client")
+def _s3_client(mocker):
     mock = mocker.patch("boto3.client")
     instance = mock.return_value
     instance.generate_presigned_post.return_value = {

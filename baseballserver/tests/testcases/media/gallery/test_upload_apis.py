@@ -109,8 +109,8 @@ def test_album_media_upload_complete_partial_failure(api_client, users, monkeypa
     def mock_complete_upload(**kwargs):
         if kwargs["key"] == key_valid:
             return SNUBaseballImageFactory(file__key=kwargs["key"])
-        else:
-            raise SNUBaseballException("NOT_FOUND", "파일을 찾을 수 없습니다.")
+
+        raise SNUBaseballException("NOT_FOUND", "파일을 찾을 수 없습니다.")
 
     monkeypatch.setattr(
         "apps.media.gallery.services.complete_upload",

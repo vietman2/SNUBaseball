@@ -17,7 +17,7 @@ if TYPE_CHECKING:
     from .permissions import IsAuthenticated, IsOps, AllowAny
 
 
-def __getattr__(name):
+def __getattr__(name): ## pylint: disable=too-many-return-statements
     if name == "AuthBackend":
         from .backend import AuthBackend
 

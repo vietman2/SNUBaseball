@@ -19,6 +19,7 @@ class IsAuthenticated(BasePermission):
     인증된 사용자
       - 반드시, 포털에서 접근해야 함
     """
+
     def has_permission(self, request, view):
         return _is_authenticated(request)
 
@@ -27,6 +28,7 @@ class AllowAny(BasePermission):
     """
     누구나
     """
+
     def has_permission(self, request, view):
         ## 누구나 접근 가능
         ## - 단, 로그인했는지 확인할 수 있는 함수를 포함
@@ -57,4 +59,3 @@ class IsOps(IsAuthenticated):
         return bool(
             getattr(role, "is_leadership", False) or getattr(role, "is_manager", False)
         )
-

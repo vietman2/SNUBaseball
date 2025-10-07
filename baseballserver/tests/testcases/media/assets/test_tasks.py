@@ -4,7 +4,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from apps.media.assets.tasks import generate_video_thumbnail
 from core.error_handling import SNUBaseballException
-from tests.factories import StoredFileFactory, SNUBaseballVideoFactory
+from tests.factories import SNUBaseballVideoFactory
 
 _MODULE_PATH = "apps.media.assets.tasks.video_thumbnail"
 

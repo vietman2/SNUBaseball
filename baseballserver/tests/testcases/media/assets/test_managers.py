@@ -37,7 +37,7 @@ def _mock_storedfile_integrity_error(monkeypatch):
             # (키 인자를 무시하지 않고 체크해도 됨. 필요 시 아래처럼 안전장치)
             if "key" in kwargs and kwargs["key"] != sf.key:
                 # 원래 동작과 최대한 비슷하게: 다른 키면 실제 쿼리로 위임
-                return StoredFile._default_manager.get(*args, **kwargs)
+                return StoredFile.objects.get(*args, **kwargs)
             return sf
 
         def mocked_create(*args, **kwargs):

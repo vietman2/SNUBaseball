@@ -14,7 +14,7 @@ class IsOpsOrUploader(IsAuthenticated):
         ### 운영진이 아닐 경우 업로더 여부 확인
         if hasattr(obj, "image"):
             return obj.image.uploaded_by == request.user
-        elif hasattr(obj, "video"):
+        if hasattr(obj, "video"):
             return obj.video.uploaded_by == request.user
 
         return False

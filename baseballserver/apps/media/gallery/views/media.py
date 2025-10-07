@@ -118,8 +118,10 @@ class GalleryMediaAPIView(APIView):
 
         try:
             tag_ids = [int(x) for x in tags if x.strip()]
-        except ValueError:
-            raise SNUBaseballException("잘못된 태그 쿼리입니다.", status_code=400)
+        except ValueError as e:
+            raise SNUBaseballException(
+                "잘못된 태그 쿼리입니다.", status_code=400
+            ) from e
 
         ## 2. 필터링된 이미지/동영상 쿼리셋 생성
         images_qs = self._get_images_queryset(request, album_title, tag_ids)

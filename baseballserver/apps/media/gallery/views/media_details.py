@@ -1,4 +1,5 @@
 from django.utils import timezone
+from drf_spectacular.utils import extend_schema
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
@@ -20,6 +21,7 @@ class GalleryImageDetailsAPIView(ModelViewSet):
     permission_classes = [IsOpsOrUploader]
     http_method_names = ["patch", "delete", "head", "options"]
 
+    @extend_schema(summary="갤러리 이미지 삭제", tags=["갤러리"])
     def destroy(self, request, *args, **kwargs):
         """
         갤러리 이미지 삭제
@@ -31,6 +33,7 @@ class GalleryImageDetailsAPIView(ModelViewSet):
 
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+    @extend_schema(summary="갤러리 이미지 수정", tags=["갤러리"])
     def partial_update(self, request, *args, **kwargs):
         return super().partial_update(request, *args, **kwargs)
 
@@ -47,6 +50,7 @@ class GalleryVideoDetailsAPIView(ModelViewSet):
     permission_classes = [IsOpsOrUploader]
     http_method_names = ["patch", "delete", "head", "options"]
 
+    @extend_schema(summary="갤러리 비디오 삭제", tags=["갤러리"])
     def destroy(self, request, *args, **kwargs):
         """
         갤러리 비디오 삭제
@@ -58,5 +62,6 @@ class GalleryVideoDetailsAPIView(ModelViewSet):
 
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+    @extend_schema(summary="갤러리 비디오 수정", tags=["갤러리"])
     def partial_update(self, request, *args, **kwargs):
         return super().partial_update(request, *args, **kwargs)

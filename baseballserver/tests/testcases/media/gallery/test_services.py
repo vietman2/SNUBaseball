@@ -35,8 +35,8 @@ def _mock_complete_upload(**kwargs):
 
     if key.endswith(".jpg"):
         return SNUBaseballImageFactory(key=key)
-    else:
-        return SNUBaseballVideoFactory(key=key)
+
+    return SNUBaseballVideoFactory(key=key)
 
 
 def test_complete_album_uploads_success(monkeypatch):
@@ -50,7 +50,7 @@ def test_complete_album_uploads_success(monkeypatch):
         {"key": f"gallery/{album.title}/video1.mp4", "original_filename": "video1.mp4"},
     ]
     errors = complete_album_uploads(album=album, items=items, tag_ids=[], user=None)
-    assert errors == []
+    assert not errors
     assert album.images.count() == 1
     assert album.videos.count() == 1
 
@@ -69,7 +69,7 @@ def test_complete_album_uploads_with_tags(monkeypatch):
     errors = complete_album_uploads(
         album=album, items=items, tag_ids=[tag1.id], user=None
     )
-    assert errors == []
+    assert not errors
     assert album.images.count() == 5
     image = album.images.first()
     assert set(image.tags.all()) == {tag1}
@@ -82,8 +82,8 @@ def test_complete_album_uploads_partial_failure(monkeypatch):
             raise SNUBaseballException("Simulated failure")
         if key.endswith(".jpg"):
             return SNUBaseballImageFactory(key=key)
-        else:
-            return SNUBaseballVideoFactory(key=key)
+
+        return SNUBaseballVideoFactory(key=key)
 
     monkeypatch.setattr(
         "apps.media.gallery.services.complete_upload",

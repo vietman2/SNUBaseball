@@ -22,8 +22,8 @@ def refdata(request, django_db_blocker):
         call_command("loaddata", "status.json")
 
 
-@pytest.fixture
-def client():
+@pytest.fixture(name="client")
+def _client():
     return APIClient()
 
 

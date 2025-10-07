@@ -73,19 +73,18 @@ class BaseFileManager(models.Manager):
                     obj = qs.create(file=file, uploaded_by=kwargs.get("uploaded_by"))
                 except IntegrityError:
                     obj = qs.get(file=file)
+
                 return obj, True
-            else:
+
+            try:
+                obj = qs.get(file=file)
+            except qs.model.DoesNotExist:
                 try:
+                    obj = qs.create(file=file, uploaded_by=kwargs.get("uploaded_by"))
+                except IntegrityError:
                     obj = qs.get(file=file)
-                except qs.model.DoesNotExist:
-                    try:
-                        obj = qs.create(
-                            file=file, uploaded_by=kwargs.get("uploaded_by")
-                        )
-                    except IntegrityError:
-                        obj = qs.get(file=file)
-                    return obj, True
-                return obj, False
+                return obj, True
+            return obj, False
 
     ## 일반 update, create, get_or_create, update_or_create를 전부 막는다
     def update(self, *args, **kwargs):
@@ -148,8 +147,8 @@ class VideosManager(BaseFileManager):
             try:
                 file = StoredFile.objects.get(key=key)
                 obj = super().get_queryset().get(file=file)
-            except ObjectDoesNotExist:
-                raise ValidationError("존재하지 않는 비디오입니다.")
+            except ObjectDoesNotExist as e:
+                raise ValidationError("존재하지 않는 비디오입니다.") from e
 
             obj.thumbnail_key = thumbnail_key
             obj.save()

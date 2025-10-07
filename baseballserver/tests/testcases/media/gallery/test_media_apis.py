@@ -75,13 +75,13 @@ def test_media_invalid_tag_query(api_client):
     assert "잘못된 태그 쿼리입니다." in resp.data["message"]
 
 
-def test_media_invalid_object(api_client):
+def test_media_invalid_object():
     ## COVERAGE PURPOSE ONLY
     ## 실제로는 발생하면 안됨.
     view = GalleryMediaAPIView()
     view.request = APIRequestFactory().get("/dummy")
     mock_obj = types.SimpleNamespace()
     with pytest.raises(SNUBaseballException) as e:
-        view._serialize_batch(objs=[mock_obj])
+        view._serialize_batch(objs=[mock_obj]) ## pylint: disable=protected-access
 
     assert str(e.value) == "알 수 없는 미디어 객체입니다."
