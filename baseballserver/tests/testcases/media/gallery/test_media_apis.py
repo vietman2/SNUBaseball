@@ -31,7 +31,7 @@ def test_media_list_default(api_client):
     assert resp.status_code == 200
     assert "results" in resp.data
     assert isinstance(resp.data["results"], list)
-    assert len(resp.data["results"]) == 5
+    assert len(resp.data["results"]) == 6
 
 
 def test_media_list_with_album_filter(api_client):
@@ -39,7 +39,7 @@ def test_media_list_with_album_filter(api_client):
     assert resp.status_code == 200
     assert "results" in resp.data
     assert isinstance(resp.data["results"], list)
-    assert len(resp.data["results"]) == 5
+    assert len(resp.data["results"]) == 6
 
 
 def test_media_list_with_tag_filter(api_client):
@@ -66,7 +66,7 @@ def test_media_list_full_access(api_client, users):
     assert resp.status_code == 200
     assert "results" in resp.data
     assert isinstance(resp.data["results"], list)
-    assert len(resp.data["results"]) == 6
+    assert len(resp.data["results"]) == 7
 
 
 def test_media_invalid_tag_query(api_client):

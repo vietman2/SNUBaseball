@@ -2,6 +2,7 @@ from factory.django import DjangoModelFactory
 
 from apps.media.gallery.models import Album, MediaTag, GalleryImage, GalleryVideo
 from tests.factories.assets import SNUBaseballImageFactory, SNUBaseballVideoFactory
+from tests.factories.users import UserFactory
 
 
 class GalleryFactory(DjangoModelFactory):
@@ -20,8 +21,9 @@ class GalleryFactory(DjangoModelFactory):
     @classmethod
     def create_public_album(cls, **kwargs) -> Album:
         album = cls.create(members_only=False, **kwargs)
+        user = UserFactory.create_admin()
 
-        ## 앨범에 이미지 4개, 동영상 1개 추가
+        ## 앨범에 이미지 4개, 동영상 2개 추가
         tags = cls.create_tags()
         for i in range(4):
             ## 태그는 tag1 3개, tag2 1개, tag3 0개 연결한다
@@ -39,12 +41,15 @@ class GalleryFactory(DjangoModelFactory):
                 gi.tags.set([tags[0]])
             else:
                 gi.tags.set([tags[1]])
+                img.uploaded_by = user
+                img.save()
             gi.save()
 
         vid = SNUBaseballVideoFactory(
             file__key="media/gallery/videos/sample_video_1.mp4",
             file__mime="video/mp4",
             duration=10,
+            uploaded_by=user,
         )
         gv = GalleryVideo.objects.create(
             album=album,
@@ -53,6 +58,16 @@ class GalleryFactory(DjangoModelFactory):
         ## 태그는 tag1만 연결한다
         gv.tags.set([tags[0]])
         gv.save()
+
+        vid2 = SNUBaseballVideoFactory(
+            file__key="media/gallery/videos/sample_video_2.mp4",
+            file__mime="video/mp4",
+            duration=20,
+        )
+        GalleryVideo.objects.create(
+            album=album,
+            video=vid2,
+        )
 
         return album
 
