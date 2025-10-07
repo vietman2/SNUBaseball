@@ -188,16 +188,10 @@ jobs:
           name: coverage-report-vite
           path: ./baseballteam
 
-      - name: Download coverage artifact (Django-lcov)
+      - name: Download coverage artifact (Django)
         uses: actions/download-artifact@v4
         with:
           name: coverage-report-django
-          path: ./baseballserver
-
-      - name: Download coverage artifact (Django-xml)
-        uses: actions/download-artifact@v4
-        with:
-          name: coverage-report-django-xml
           path: ./baseballserver
 
       - name: Download coverage artifact (Next.js)
