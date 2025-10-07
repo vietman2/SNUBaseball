@@ -39,7 +39,7 @@ export const sampleTags: MediaTagType[] = [
     name: "개인사진",
     color: "#FF33C1",
     icon: "person",
-    num_images: 3,
-    num_videos: 4,
+    num_images: 0,
+    num_videos: 0,
   },
 ];
