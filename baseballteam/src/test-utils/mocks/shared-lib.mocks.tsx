@@ -47,24 +47,45 @@ vi.mock("@shared/lib/axios", async () => ({
     message: "Sample Error Message",
   }),
 }));
-vi.mock("@shared/lib/files", () => ({
-  useFileSelect: vi.fn().mockReturnValue({
-    fileObjs: [],
-    addFiles: vi.fn(),
-    removeFile: vi.fn(),
-    setError: vi.fn(),
-    setDone: vi.fn(),
-    setProgress: vi.fn(),
-    overallProgress: 0,
-    clear: vi.fn(),
-  }),
-  FileSelectProvider: ({ children }: { children: React.ReactNode }) => (
-    <>{children}</>
-  ),
-  FileDropArea: () => <div>FileDropArea</div>,
-  SelectedFiles: () => <div>SelectedFiles</div>,
-  SingleFileDropArea: () => <div>SingleFileDropArea</div>,
-}));
+vi.mock("@shared/lib/files", async () => {
+  const mockFile = new File(["(⌐□_□)"], "chucknorris.png", {
+    type: "image/png",
+  });
+  const actual = await vi.importActual("@shared/lib/files");
+
+  return {
+    sampleUploadItem: actual.sampleUploadItem,
+    useFileSelect: vi.fn().mockReturnValue({
+      fileObjs: [],
+      addFiles: vi.fn(),
+      removeFile: vi.fn(),
+      setError: vi.fn(),
+      setDone: vi.fn(),
+      setProgress: vi.fn(),
+      overallProgress: 0,
+      clear: vi.fn(),
+    }),
+    FileSelectProvider: ({ children }: { children: React.ReactNode }) => (
+      <>{children}</>
+    ),
+    FileDropArea: () => <div>FileDropArea</div>,
+    SelectedFiles: () => <div>SelectedFiles</div>,
+    SingleFileDropArea: ({
+      onChange,
+    }: {
+      onChange: (f: File | null) => void;
+    }) => (
+      <button
+        data-testid="file-input"
+        onClick={() => {
+          onChange(mockFile);
+        }}
+      >
+        Select File
+      </button>
+    ),
+  };
+});
 vi.mock("@shared/lib/formatters", async () => ({
   formatPhoneKR: (phone: string) => phone,
 }));
@@ -111,8 +132,9 @@ vi.mock("@shared/lib/storage", () => ({
   }),
 }));
 vi.mock("@shared/lib/styles", async () => {
-  const { breakpoints, ColorContext, light } =
-    await vi.importActual("@shared/lib/styles");
+  const { breakpoints, ColorContext, light } = await vi.importActual(
+    "@shared/lib/styles"
+  );
 
   return {
     ColorContext: ColorContext,

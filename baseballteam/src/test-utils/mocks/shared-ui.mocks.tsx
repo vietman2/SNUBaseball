@@ -114,23 +114,26 @@ vi.mock("@shared/ui/Pickers", () => ({
   IconPicker: () => <div>IconPicker</div>,
 }));
 vi.mock("@shared/ui/ProgressBars", () => ({
-  ProgressBar: () => <div>ProgressBar</div>,
+  ProgressBar: ({ $progress }: { $progress: number }) => (
+    <div>ProgressBar: {$progress}%</div>
+  ),
 }));
 vi.mock("@shared/ui/Selects", () => {
   const ComponentWithChildren = ({
     children,
+    ...props
   }: {
     children: React.ReactNode;
-  }) => <div>{children}</div>;
+  }) => <div {...props}>{children}</div>;
 
   return {
-    SelectMenu: () => ({
+    SelectMenu: {
       Container: ComponentWithChildren,
       ItemsContainer: ComponentWithChildren,
       Placeholder: ComponentWithChildren,
       SelectedArea: ComponentWithChildren,
       Options: ComponentWithChildren,
-    }),
+    },
     SimpleSelect: (props: unknown) => (
       <select
         data-testid="simple-select"

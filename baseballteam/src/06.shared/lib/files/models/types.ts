@@ -8,6 +8,14 @@ export type UploadItem = {
   errorMsg: string | null;
 };
 
+export const sampleUploadItem: UploadItem = {
+  id: "1",
+  file: new File(["dummy content"], "example.png", { type: "image/png" }),
+  status: "PENDING",
+  progress: 0,
+  errorMsg: null,
+};
+
 export type Action =
   | { type: "ADD"; items: UploadItem[] }
   | { type: "PROGRESS"; id: string; percent: number }

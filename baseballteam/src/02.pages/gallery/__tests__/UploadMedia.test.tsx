@@ -21,14 +21,6 @@ vi.mock("react-router", async () => {
 });
 
 describe("UploadMedia", () => {
-  const sampleUploadItem: FilesAPI.UploadItem = {
-    id: "1",
-    file: new File(["dummy content"], "example.png", { type: "image/png" }),
-    status: "PENDING",
-    progress: 0,
-    errorMsg: null,
-  };
-
   beforeEach(() => {
     vi.spyOn(AlbumEntity, "useAlbums").mockReturnValue({
       albums: AlbumEntity.sampleAlbums,
@@ -45,7 +37,7 @@ describe("UploadMedia", () => {
       isError: false,
     });
     vi.spyOn(FilesAPI, "useFileSelect").mockReturnValue({
-      fileObjs: [sampleUploadItem],
+      fileObjs: [FilesAPI.sampleUploadItem],
       addFiles: vi.fn(),
       removeFile: vi.fn(),
       setError: vi.fn(),
@@ -91,7 +83,7 @@ describe("UploadMedia", () => {
     vi.spyOn(FilesAPI, "useFileSelect").mockReturnValue({
       fileObjs: [
         {
-          ...sampleUploadItem,
+          ...FilesAPI.sampleUploadItem,
           status: "UPLOADING",
           progress: 30,
         },

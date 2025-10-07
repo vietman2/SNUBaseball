@@ -1,4 +1,4 @@
-export type { UploadItem } from "./models/types";
+export { type UploadItem, sampleUploadItem } from "./models/types";
 
 export { useFileSelect } from "./contexts/useFileSelect";
 export { FileSelectProvider } from "./contexts/FileSelectProvider";
