@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import { useAvatarForm } from "../hooks/useAvatarForm";
-import { SingleFileInput } from "@shared/ui/Inputs";
+import { SingleFileDropArea } from "@shared/lib/files";
 import { Spinner } from "@shared/ui/Loading";
 import { ErrorText } from "@shared/ui/Texts";
 import { SubmitButton } from "@shared/ui/Buttons";
@@ -40,11 +40,11 @@ export function UpdateAvatarForm({
         </Panel>
         <Panel>
           <PanelTitle>새 이미지</PanelTitle>
-          <SingleFileInput
+          <SingleFileDropArea
             value={file}
             onChange={setFile}
             onError={setErrorMsg}
-            defaultPreviewUrl={null} // 새 이미지는 업로드 영역에서만 표시
+            accept="image/*"
             disabled={submitting}
           />
         </Panel>
