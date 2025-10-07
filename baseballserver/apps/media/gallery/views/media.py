@@ -35,7 +35,7 @@ class GalleryMediaAPIView(APIView):
         return result
 
     def _get_images_queryset(self, request, album_title, tag_ids):
-        image_q = Q()
+        image_q = Q(is_deleted=False)
         if not getattr(request, "is_authenticated", False):
             image_q &= Q(album__members_only=False)
         if album_title:
@@ -59,7 +59,7 @@ class GalleryMediaAPIView(APIView):
         return images_queryset
 
     def _get_videos_queryset(self, request, album_title, tag_ids):
-        video_q = Q()
+        video_q = Q(is_deleted=False)
         if not getattr(request, "is_authenticated", False):
             video_q &= Q(album__members_only=False)
         if album_title:
