@@ -7,17 +7,21 @@ vi.mock("@shared/ui/Buttons", () => ({
   DeleteButton: ({
     onClick,
     label = "변경하기",
+    testID = "delete-button",
   }: {
     onClick: () => void;
     label: string;
-  }) => <button onClick={onClick}>{label}</button>,
+    testID?: string;
+  }) => <button onClick={onClick} data-testid={testID}>{label}</button>,
   EditButton: ({
     onClick,
     label = "변경하기",
+    testID = "edit-button",
   }: {
     onClick: () => void;
     label: string;
-  }) => <button onClick={onClick}>{label}</button>,
+    testID?: string;
+  }) => <button onClick={onClick} data-testid={testID}>{label}</button>,
   ElevatedTextButton: ({
     $backgroundColor,
     $color,
@@ -85,7 +89,9 @@ vi.mock("@shared/ui/Inputs", async () => {
     }) => (
       <button data-testid="file-input" onClick={() => onChange(mockFile)} />
     ),
-    InlineTextInput: () => <input data-testid="inline-text-input" />,
+    InlineTextInput: (props: unknown) => (
+      <input {...(props as React.InputHTMLAttributes<HTMLInputElement>)} />
+    ),
   };
 });
 vi.mock("@shared/ui/Loading", () => ({

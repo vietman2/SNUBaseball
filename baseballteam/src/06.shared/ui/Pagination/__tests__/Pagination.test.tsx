@@ -4,6 +4,7 @@ import { fireEvent } from "@testing-library/react";
 import { Pagination } from "@shared/ui/Pagination";
 import { renderWithProviders } from "@test-utils/renderer";
 
+vi.unmock("react-router");
 vi.unmock("@shared/ui/Pagination"); 
 
 describe("Pagination", () => {
