@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 import { DeleteTagButton } from "@features/gallery/tags/delete";
 import { TagBadge, type MediaTagType } from "@entities/gallery/tags";
 import { EditButton } from "@shared/ui/Buttons";
+import { useMenu } from "@shared/ui/Menus";
 
 interface Props {
   tag: MediaTagType;
@@ -11,42 +11,14 @@ interface Props {
 }
 
 export function TagMenu({ tag, openEditModal }: Readonly<Props>) {
-  const [menuOpen, setMenuOpen] = useState<boolean>(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  const openMenu = () => setMenuOpen(true);
-
-  useEffect(() => {
-    if (!menuOpen) return;
-
-    // 메뉴가 열려있을 때, 바깥을 클릭하면 메뉴 닫기
-    const handlePointerDown = (e: PointerEvent) => {
-      const root = ref.current;
-      if (!root) return;
-
-      const path = e.composedPath?.() ?? []; // EventTarget[];
-      const isInside = path.includes(root);
-
-      if (!isInside) {
-        setMenuOpen(false);
-      }
-    };
-
-    document.addEventListener("pointerdown", handlePointerDown, {
-      passive: true,
-    });
-
-    return () => {
-      document.removeEventListener("pointerdown", handlePointerDown);
-    };
-  }, [menuOpen]);
+  const { ref, isOpen, open } = useMenu();
 
   return (
     <Container ref={ref}>
-      <button onClick={openMenu} data-testid={`tag-badge-${tag.id}`}>
+      <button onClick={open} data-testid={`tag-badge-${tag.id}`}>
         <TagBadge tag={tag} isActive />
       </button>
-      {menuOpen && (
+      {isOpen && (
         <Buttons>
           <EditButton
             onClick={openEditModal}
