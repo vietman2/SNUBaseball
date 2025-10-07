@@ -3,6 +3,8 @@ from typing import TYPE_CHECKING
 __all__ = (
     "AlbumViewSet",
     "GalleryMediaAPIView",
+    "GalleryImageDetailsAPIView",
+    "GalleryVideoDetailsAPIView",
     "AlbumUploadView",
     "MediaTagViewSet",
 )
@@ -11,6 +13,8 @@ if TYPE_CHECKING:
     from .views import (
         AlbumViewSet,
         GalleryMediaAPIView,
+        GalleryImageDetailsAPIView,
+        GalleryVideoDetailsAPIView,
         AlbumUploadView,
         MediaTagViewSet,
     )
@@ -25,6 +29,14 @@ def __getattr__(name: str):
         from .views import GalleryMediaAPIView
 
         return GalleryMediaAPIView
+    if name == "GalleryImageDetailsAPIView":
+        from .views import GalleryImageDetailsAPIView
+
+        return GalleryImageDetailsAPIView
+    if name == "GalleryVideoDetailsAPIView":
+        from .views import GalleryVideoDetailsAPIView
+
+        return GalleryVideoDetailsAPIView
     if name == "AlbumUploadView":
         from .views import AlbumUploadView
 
