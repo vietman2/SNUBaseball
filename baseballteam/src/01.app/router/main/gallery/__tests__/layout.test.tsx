@@ -190,5 +190,7 @@ describe("GalleryLayout", () => {
     await waitFor(() => {
       expect(getByText("아직 업로드된 파일이 없습니다.")).toBeInTheDocument();
     });
+
+    fireEvent.click(getByText("업로드하기"));
   });
 });

@@ -15,7 +15,8 @@ import { Pagination } from "@shared/ui/Pagination";
 
 export function Media() {
   const [searchParams] = useSearchParams();
-  const { media, num_pages, current_page, isLoading, isError, refresh } = useMedia();
+  const { media, num_pages, current_page, isLoading, isError, refresh } =
+    useMedia();
   const { activeView } = useViews();
 
   if (isLoading) {
@@ -59,9 +60,7 @@ export function Media() {
       <EmptyStateContainer>
         <span>아직 업로드된 파일이 없습니다.</span>
         <span>첫번째 파일을 업로드 해보세요!</span>
-        <div>
-          <button>업로드하기</button>
-        </div>
+        <Link to="/gallery/upload">업로드하기</Link>
       </EmptyStateContainer>
     );
   }
@@ -149,5 +148,14 @@ const EmptyStateContainer = styled.div`
   > span {
     font-size: 1.125rem;
     color: ${({ theme }) => theme.colors.textSecondary};
+  }
+
+  a {
+    margin-top: 4px;
+    padding: 6px 12px;
+    color: ${({ theme }) => theme.colors.onPrimary};
+    font-weight: 600;
+    background-color: ${({ theme }) => theme.colors.primary};
+    border-radius: 8px;
   }
 `;
