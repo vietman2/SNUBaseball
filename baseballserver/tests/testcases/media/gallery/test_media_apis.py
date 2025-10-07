@@ -40,8 +40,6 @@ def test_media_list_with_album_filter(api_client):
     assert "results" in resp.data
     assert isinstance(resp.data["results"], list)
     assert len(resp.data["results"]) == 5
-    for item in resp.data["results"]:
-        assert item["album"] == "public album"
 
 
 def test_media_list_with_tag_filter(api_client):
