@@ -45,7 +45,7 @@ export const sampleGalleryVideo: GalleryVideoType = {
   thumbnail_url: "https://via.placeholder.com/150",
   filename: "sample-video.mp4",
   album: sampleAlbumSimple,
-  tags: [sampleTags[0]],
+  tags: [],
   created_at: "2025-01-02",
   uploaded_by: "user1",
 };

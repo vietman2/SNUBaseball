@@ -38,7 +38,7 @@ export function MediaRow({ index, media }: Readonly<Props>) {
         />
         {media.filename}
       </NameColumn>
-      <AlbumColumn>{media.album?.title ?? "-"}</AlbumColumn>
+      <AlbumColumn>{media.album.title}</AlbumColumn>
       <TagsColumn>
         {media.tags.length > 0
           ? media.tags.map((tag) => (

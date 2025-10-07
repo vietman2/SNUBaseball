@@ -5,10 +5,10 @@ import { Skeleton } from "@shared/ui/Loading";
 
 interface Props {
   tag: MediaTagType;
-  isActive?: boolean;
+  isActive: boolean;
 }
 
-export function TagBadge({ tag, isActive = false }: Readonly<Props>) {
+export function TagBadge({ tag, isActive }: Readonly<Props>) {
   const { colors } = useColors();
 
   return (

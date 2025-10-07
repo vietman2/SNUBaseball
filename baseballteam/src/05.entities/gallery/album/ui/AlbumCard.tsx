@@ -8,10 +8,10 @@ import { Skeleton } from "@shared/ui/Loading";
 
 interface Props {
   album: AlbumType;
-  isActive?: boolean; // 선택된 앨범인지 여부 (선택된 앨범은 강조 표시)
+  isActive: boolean; // 선택된 앨범인지 여부 (선택된 앨범은 강조 표시)
 }
 
-export function AlbumCard({ album, isActive = false }: Readonly<Props>) {
+export function AlbumCard({ album, isActive }: Readonly<Props>) {
   const { colors } = useColors();
 
   return (
