@@ -56,7 +56,7 @@ export function TagForm({
           data-testid="submit-tag"
           disabled={isButtonDisabled}
         >
-          수정
+          {mode === "CREATE" ? "추가" : "수정"}
         </Button>
       </Buttons>
     </Container>
