@@ -62,7 +62,7 @@ def test_get_albums_list_limited_access(api_client, users):
 
 
 @pytest.mark.no_portal_header
-def test_create_update_delete_unauthenticated(api_client, users):
+def test_mutations_unauthenticated(api_client, users):
     ## 1. not authenticated
     payload = {
         "title": "New Album",
@@ -139,8 +139,8 @@ def test_create_album_success(api_client, users):
 
     payload = {
         "title": "New Album",
-        "description": "This is a new album.",
         "members_only": False,
+        "color": "#FFFFFF",
     }
 
     resp = api_client.post(
@@ -152,6 +152,26 @@ def test_create_album_success(api_client, users):
     assert resp.status_code == 201
     assert resp.data["title"] == "New Album"
     assert resp.data["members_only"] is False
+
+
+def test_create_album_duplicate_title_fail(api_client, users):
+    _, admin_user = users
+    api_client.force_authenticate(user=admin_user)
+
+    payload = {
+        "title": "public album",
+        "members_only": False,
+        "color": "#FFFFFF",
+    }
+
+    resp = api_client.post(
+        ALBUMS_API_URL,
+        data=payload,
+        format="json",
+    )
+
+    assert resp.status_code == 400
+    assert resp.data["message"] == "이미 존재하는 앨범 제목입니다."
 
 
 def test_update_album_success(api_client, users):
@@ -173,3 +193,22 @@ def test_update_album_success(api_client, users):
     assert resp.status_code == 200
     assert resp.data["title"] == "Updated Album"
     assert resp.data["members_only"] is True
+
+
+def test_update_album_duplicate_title_fail(api_client, users):
+    _, admin_user = users
+    api_client.force_authenticate(user=admin_user)
+
+    payload = {
+        "title": "private album",
+        "members_only": False,
+    }
+
+    resp = api_client.put(
+        f"{ALBUMS_API_URL}public album/",
+        data=payload,
+        format="json",
+    )
+
+    assert resp.status_code == 400
+    assert resp.data["message"] == "이미 존재하는 앨범 제목입니다."
