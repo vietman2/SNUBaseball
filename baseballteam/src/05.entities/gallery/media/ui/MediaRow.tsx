@@ -47,7 +47,7 @@ export function MediaRow({ index, media }: Readonly<Props>) {
           : "-"}
       </TagsColumn>
       <Cell>{media.created_at}</Cell>
-      <Cell>{media.uploaded_by}</Cell>
+      <Cell>{media.uploaded_by.name}</Cell>
     </Container>
   );
 }

@@ -6,3 +6,8 @@ export type UserProfileType = {
   role: "ADMIN" | "LEADER" | "STAFF" | "MEMBER";
   member: MemberDetailsType;
 };
+
+export type UserRelatedType = {
+  uuid: string;
+  name: string;
+};
