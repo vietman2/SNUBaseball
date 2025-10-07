@@ -7,19 +7,21 @@ interface Props {
   onClick: () => void;
   label?: string;
   color?: string;
+  testID?: string; // for testing purpose only
 }
 
 export function EditButton({
   onClick,
   label = "변경하기",
   color,
+  testID = "edit-button",
 }: Readonly<Props>) {
   const { colors } = useColors();
 
   const displayColor = color || colors.primaryDark;
 
   return (
-    <Button onClick={onClick}>
+    <Button onClick={onClick} data-testid={testID} type="button">
       <AppIcon icon="pencil" size={16} color={displayColor} />
       {label && <span style={{ color: displayColor }}>{label}</span>}
     </Button>
