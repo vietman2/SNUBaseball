@@ -3,7 +3,7 @@ import { describe, it, expect, vi } from "vitest";
 import type { UploadItem, Action } from "../models/types";
 import { uploadReducer } from "../reducers/uploadReducer";
 
-vi.unmock("@shared/lib.files");
+vi.unmock("@shared/lib/files");
 
 const mkItem = (overrides?: Partial<UploadItem>): UploadItem => ({
   id: (overrides?.id as string) ?? "1",
