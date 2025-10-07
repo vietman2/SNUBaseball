@@ -207,4 +207,98 @@ describe("ManageTags", () => {
       });
     });
   });
+
+  describe("Delete", () => {
+    it("handles delete tag correctly", async () => {
+      const { getByTestId, getByText } = renderWithProviders(<ManageTags />);
+      expect(getByText("태그 관리")).toBeInTheDocument();
+
+      fireEvent.click(getByTestId("tag-badge-1"));
+      fireEvent.click(getByTestId("delete-tag-1"));
+
+      // 삭제 요청
+      vi.spyOn(AxiosAPI.axiosInstanceWithAuth, "delete").mockResolvedValue({
+        data: {},
+      });
+
+      await waitFor(() => {
+        expect(window.alert).toHaveBeenCalledWith(
+          "태그가 성공적으로 삭제되었습니다."
+        );
+      });
+    });
+
+    it("handles delete fail, then success with existing query", async () => {
+      const queryClient = createTestQueryClient();
+      queryClient.setQueryData<TagEntity.MediaTagType[]>(
+        ["tags"],
+        TagEntity.sampleTags
+      );
+
+      const { getByTestId } = renderWithProviders(<ManageTags />, {
+        client: queryClient,
+      });
+
+      // 삭제 요청 취소
+      vi.spyOn(window, "confirm").mockImplementationOnce(() => false);
+
+      fireEvent.click(getByTestId("tag-badge-2"));
+      fireEvent.click(getByTestId("delete-tag-2"));
+
+      await waitFor(() => {
+        expect(AxiosAPI.axiosInstanceWithAuth.delete).not.toHaveBeenCalledWith(
+          "/api/v1/gallery/tags/2/"
+        );
+      });
+
+      // 삭제 요청 (실패)
+      vi.spyOn(AxiosAPI.axiosInstanceWithAuth, "delete").mockRejectedValueOnce({
+        response: {
+          data: {
+            message: "태그 삭제 실패",
+          },
+        },
+      });
+
+      fireEvent.click(getByTestId("tag-badge-2"));
+      fireEvent.click(getByTestId("delete-tag-2"));
+
+      await waitFor(() => {
+        expect(window.alert).toHaveBeenCalledWith("Sample Error Message");
+      });
+
+      // 재시도 (성공)
+      vi.spyOn(AxiosAPI.axiosInstanceWithAuth, "delete").mockResolvedValue({
+        data: {},
+      });
+
+      fireEvent.click(getByTestId("tag-badge-2"));
+      fireEvent.click(getByTestId("delete-tag-2"));
+
+      await waitFor(() => {
+        expect(window.alert).toHaveBeenCalledWith(
+          "태그가 성공적으로 삭제되었습니다."
+        );
+      });
+    });
+
+    it("handles delete tag with no linked media", async () => {
+      const { getByTestId } = renderWithProviders(<ManageTags />);
+
+      fireEvent.click(getByTestId("tag-badge-4"));
+      fireEvent.click(getByTestId("delete-tag-4"));
+
+      // 삭제 요청
+      vi.spyOn(AxiosAPI.axiosInstanceWithAuth, "delete").mockResolvedValue({
+        data: {},
+      });
+
+      await waitFor(() => {
+        expect(window.confirm).not.toHaveBeenCalled();
+        expect(window.alert).toHaveBeenCalledWith(
+          "태그가 성공적으로 삭제되었습니다."
+        );
+      });
+    });
+  });
 });
