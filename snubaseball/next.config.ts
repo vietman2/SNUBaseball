@@ -28,6 +28,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       new URL("https://cdn.snubaseball.co.kr/images/**"),
       new URL("https://cdn.snubaseball.co.kr/profiles/**"),
+      new URL("https://cdn.snubaseball.co.kr/gallery/**"),
     ],
   },
   webpack(config) {
