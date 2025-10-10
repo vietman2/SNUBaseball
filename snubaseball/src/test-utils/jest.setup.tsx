@@ -9,6 +9,12 @@ jest.mock("next/navigation", () => ({
     return cb();
   },
   usePathname: () => "/test-path",
+  useSearchParams: jest.fn(),
+  useRouter: jest.fn().mockReturnValue({ push: jest.fn() }),
+}));
+
+jest.mock("@shared/configs/backend", () => ({
+  BACKEND_API_URL: "http://test-backend-api.com",
 }));
 
 jest.mock("@shared/lib/styles", () => ({
