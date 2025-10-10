@@ -4,6 +4,7 @@ import ChevronLeft from "./files/chevron-left.svg";
 import ChevronRight from "./files/chevron-right.svg";
 import Close from "./files/close.svg";
 import Menu from "./files/menu.svg";
+import Play from "./files/play.svg";
 
 interface Props {
   icon: string;
@@ -16,6 +17,7 @@ const iconMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
   "chevron-right": ChevronRight,
   close: Close,
   menu: Menu,
+  play: Play,
 };
 
 export function AppIcon({
