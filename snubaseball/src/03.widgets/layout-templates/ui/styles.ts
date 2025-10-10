@@ -43,4 +43,12 @@ export const PageContainer = styled.div`
   flex-direction: column;
   padding: 12px 0px;
   gap: 32px;
+
+  h1 {
+    /* Loading 페이지에서 사용할 h1 스타일 */
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: ${({ theme }) => theme.colors.primary};
+  }
 `;
