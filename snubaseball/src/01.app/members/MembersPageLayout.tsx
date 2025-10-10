@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import Image from "next/image";
 
-import { MemberLayoutContainer, TeamImageContainer } from "./ui/styles";
+import { LayoutContainer, ImageHeader } from "@widgets/layout-templates";
 
 interface Props {
   children: ReactNode;
@@ -12,8 +12,8 @@ export function MembersPageLayout({ children }: Readonly<Props>) {
   const semester = new Date().getMonth() < 8 ? "1학기" : "2학기";
 
   return (
-    <MemberLayoutContainer>
-      <TeamImageContainer>
+    <LayoutContainer>
+      <ImageHeader>
         <Image
           src="https://cdn.snubaseball.co.kr/images/Main1.jpg"
           alt="team"
@@ -22,8 +22,8 @@ export function MembersPageLayout({ children }: Readonly<Props>) {
         <div className="overlay-text">{`${currentYear}-${
           semester === "1학기" ? "1" : "2"
         } 서울대 야구부`}</div>
-      </TeamImageContainer>
+      </ImageHeader>
       {children}
-    </MemberLayoutContainer>
+    </LayoutContainer>
   );
 }
