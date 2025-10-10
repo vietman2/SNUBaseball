@@ -36,12 +36,17 @@ const BreadcrumbItemContainer = styled.div<{ $isLastItem?: boolean }>`
   align-items: center;
   gap: 8px;
 
-  font-size: 0.925rem;
+  font-size: 1.25rem;
   font-weight: ${({ $isLastItem }) => ($isLastItem ? 600 : 500)};
   color: ${({ $isLastItem, theme }) =>
     $isLastItem ? theme.colors.primary : theme.colors.gray900};
+  white-space: nowrap;
 
   > a {
     cursor: ${({ $isLastItem }) => ($isLastItem ? "default" : "pointer")};
+  }
+
+  > svg {
+    margin-top: 2px;
   }
 `;
