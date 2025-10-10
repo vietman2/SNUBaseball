@@ -11,10 +11,7 @@ interface Props {
 }
 
 export function MediaGrid({ totalPages, media }: Readonly<Props>) {
-  const { page, setPage } = usePagination({
-    initialPage: 1,
-    paramKey: "page",
-  });
+  const { page, setPage } = usePagination();
 
   const openMedia = (media: MediaType) => {
     window.open(media.url, "_blank");
