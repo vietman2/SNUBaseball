@@ -44,3 +44,14 @@ export const ModalDialog = styled.div<Props>`
       cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
   `}
 `;
+
+export const ModalPageContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 65vw;
+  min-width: 760px;
+  min-height: 75vh;
+  max-height: 75vh;
+  background-color: ${({ theme }) => theme.colors.gray200};
+  border-radius: 12px;
+`;

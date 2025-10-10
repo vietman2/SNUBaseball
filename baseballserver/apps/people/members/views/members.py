@@ -1,3 +1,4 @@
+import posixpath
 from drf_spectacular.utils import extend_schema
 from rest_framework import status
 from rest_framework.decorators import action
@@ -5,16 +6,18 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
-from apps.media.assets.api import SNUBaseballImage, presign_upload, complete_upload
+from apps.media.assets.api import (
+    SNUBaseballImage,
+    UploadCompleteSerializer,
+    presign_upload,
+    complete_upload,
+)
+from apps.media.storage.api import PresignItemSerializer
 from core.auth.permissions import IsAuthenticated, IsOps
 from core.error_handling import SNUBaseballException
 from ..models import Member
 from ..permissions import IsOpsOrSelf
-from ..serializers import (
-    MemberDetailsSerializer,
-    AvatarPresignSerializer,
-    AvatarCompleteSerializer,
-)
+from ..serializers import MemberDetailsSerializer
 
 
 class MembersViewSet(ModelViewSet):
@@ -86,7 +89,7 @@ class MembersViewSet(ModelViewSet):
     @action(detail=True, methods=["POST"], url_path="avatar/presign")
     def avatar_presign(self, request, pk=None):
         member = self.get_object()
-        serializer = AvatarPresignSerializer(data=request.data)
+        serializer = PresignItemSerializer(data=request.data)
 
         try:
             serializer.is_valid(raise_exception=True)
@@ -96,23 +99,26 @@ class MembersViewSet(ModelViewSet):
             ) from e
 
         prefix = f"profiles/{member.id}/"
+        filename_clean = (
+            serializer.validated_data["filename"].strip().replace(" ", "_")[:100]
+        )
+        key = posixpath.join(prefix, filename_clean)
 
         data = serializer.validated_data
 
         out = presign_upload(
-            prefix=prefix,
-            filename=data["filename"],
+            key=key,
             content_type=data.get("content_type"),  ## optional
             size=data["size"],
         )
 
         return Response(data=out, status=status.HTTP_200_OK)
 
-    @extend_schema(summary="프로필 s 사진 업데이트 완료", tags=["부원"])
+    @extend_schema(summary="프로필 사진 업데이트 완료", tags=["부원"])
     @action(detail=True, methods=["PATCH"], url_path="avatar/complete")
     def avatar_complete(self, request, pk=None):
         member = self.get_object()
-        serializer = AvatarCompleteSerializer(data=request.data)
+        serializer = UploadCompleteSerializer(data=request.data)
 
         try:
             serializer.is_valid(raise_exception=True)
@@ -124,11 +130,10 @@ class MembersViewSet(ModelViewSet):
         data = serializer.validated_data
 
         expected_prefix = f"profiles/{member.id}/"
-        if not data["key"].startswith(expected_prefix):
-            raise SNUBaseballException(code="INVALID", detail="유효하지 않은 키입니다.")
 
         asset = complete_upload(
             key=data["key"],
+            expected_prefix=expected_prefix,
             original_filename=data.get("original_filename"),
             uploaded_by=request.user,
         )

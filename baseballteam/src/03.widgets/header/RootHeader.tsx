@@ -34,8 +34,8 @@ export function RootHeader({ user }: Readonly<Props>) {
 
 const Container = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   min-height: 60px;
   max-height: 60px;
   padding: 8px 24px;

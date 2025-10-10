@@ -30,15 +30,13 @@ export function AvatarSection({ user }: Readonly<Props>) {
           <SimpleTooltip text="이름, 학번 변경은 주장단에 문의해주세요." />
         </TooltipWrapper>
       </Section>
-      {isOpen && (
-        <SimpleModal isOpen={isOpen} onClose={close}>
-          <UpdateAvatarForm
-            memberId={user.member.id}
-            originalImageUrl={user.member.profile_image ?? null}
-            postUpload={close}
-          />
-        </SimpleModal>
-      )}
+      <SimpleModal isOpen={isOpen} onClose={close}>
+        <UpdateAvatarForm
+          memberId={user.member.id}
+          originalImageUrl={user.member.profile_image ?? null}
+          postUpload={close}
+        />
+      </SimpleModal>
     </>
   );
 }

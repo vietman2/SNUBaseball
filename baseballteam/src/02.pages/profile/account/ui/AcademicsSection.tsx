@@ -23,13 +23,11 @@ export function AcademicsSection({ major, memberId }: Readonly<Props>) {
           <EditButton onClick={open} />
         </EditButtonWrapper>
       </Section>
-      {isOpen && (
-        <SimpleModal isOpen={isOpen} onClose={close}>
-          <MajorSelectsProvider originalMajor={major}>
-            <UpdateMajorForm memberId={memberId} closeModal={close} />
-          </MajorSelectsProvider>
-        </SimpleModal>
-      )}
+      <SimpleModal isOpen={isOpen} onClose={close}>
+        <MajorSelectsProvider originalMajor={major}>
+          <UpdateMajorForm memberId={memberId} closeModal={close} />
+        </MajorSelectsProvider>
+      </SimpleModal>
     </>
   );
 }

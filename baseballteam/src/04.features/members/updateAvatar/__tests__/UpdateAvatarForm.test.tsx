@@ -1,10 +1,10 @@
 import { beforeEach, describe, it, expect, vi } from "vitest";
 import { fireEvent, waitFor } from "@testing-library/react";
-import BareAxios from "axios";
 
 import { UpdateAvatarForm } from "@features/members/updateAvatar";
 import * as UserEntity from "@entities/user";
 import * as AxiosAPI from "@shared/lib/axios";
+import * as StorageAPI from "@shared/lib/storage";
 import {
   createTestQueryClient,
   renderWithProviders,
@@ -23,9 +23,7 @@ describe("UpdateAvatarForm", () => {
       },
     });
     // 그 다음 uploadToS3가 성공한다
-    vi.spyOn(BareAxios, "post").mockResolvedValue({
-      status: 204,
-    });
+    vi.spyOn(StorageAPI, "uploadToS3").mockResolvedValue();
     // 마지막으로 postUpload가 성공한다
     vi.spyOn(AxiosAPI.axiosInstanceWithAuth, "patch").mockResolvedValue({
       data: {
@@ -78,7 +76,7 @@ describe("UpdateAvatarForm", () => {
     });
 
     // 두번째 시도때는 S3 업로드에 실패
-    vi.spyOn(BareAxios, "post").mockRejectedValueOnce(
+    vi.spyOn(StorageAPI, "uploadToS3").mockRejectedValueOnce(
       new Error("S3 Upload Error")
     );
     fireEvent.click(getByText("업로드"));

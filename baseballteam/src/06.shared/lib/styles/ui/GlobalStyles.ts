@@ -119,6 +119,8 @@ export const GlobalStyles = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
+    user-select: none;
+
     ::-webkit-scrollbar {
       width: 0;
       height: 0;

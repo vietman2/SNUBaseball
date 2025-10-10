@@ -4,7 +4,9 @@ vi.mock("@entities/user", async () => {
   const actual = await vi.importActual("@entities/user");
   return {
     ...actual,
-    useUser: vi.fn().mockReturnValue({ user: null, isAuthenticated: false }),
+    useUser: vi
+      .fn()
+      .mockReturnValue({ user: actual.sampleUser, isAuthenticated: true }),
   };
 });
 
@@ -45,6 +47,45 @@ vi.mock("@shared/lib/axios", async () => ({
     message: "Sample Error Message",
   }),
 }));
+vi.mock("@shared/lib/files", async () => {
+  const mockFile = new File(["(⌐□_□)"], "chucknorris.png", {
+    type: "image/png",
+  });
+  const actual = await vi.importActual("@shared/lib/files");
+
+  return {
+    sampleUploadItem: actual.sampleUploadItem,
+    useFileSelect: vi.fn().mockReturnValue({
+      fileObjs: [],
+      addFiles: vi.fn(),
+      removeFile: vi.fn(),
+      setError: vi.fn(),
+      setDone: vi.fn(),
+      setProgress: vi.fn(),
+      overallProgress: 0,
+      clear: vi.fn(),
+    }),
+    FileSelectProvider: ({ children }: { children: React.ReactNode }) => (
+      <>{children}</>
+    ),
+    FileDropArea: () => <div>FileDropArea</div>,
+    SelectedFiles: () => <div>SelectedFiles</div>,
+    SingleFileDropArea: ({
+      onChange,
+    }: {
+      onChange: (f: File | null) => void;
+    }) => (
+      <button
+        data-testid="file-input"
+        onClick={() => {
+          onChange(mockFile);
+        }}
+      >
+        Select File
+      </button>
+    ),
+  };
+});
 vi.mock("@shared/lib/formatters", async () => ({
   formatPhoneKR: (phone: string) => phone,
 }));
@@ -81,8 +122,17 @@ vi.mock("@shared/lib/router", async () => {
     }),
   };
 });
+vi.mock("@shared/lib/storage", () => ({
+  uploadToS3: vi.fn().mockResolvedValue({}),
+  uploadManyToS3: vi.fn(),
+  toPresignRequestFile: vi.fn().mockReturnValue({
+    filename: "example.png",
+    content_type: "image/png",
+    size: 12345,
+  }),
+}));
 vi.mock("@shared/lib/styles", async () => {
-  const { ColorContext, ThemeColorType, light } = await vi.importActual(
+  const { breakpoints, ColorContext, light } = await vi.importActual(
     "@shared/lib/styles"
   );
 
@@ -93,9 +143,19 @@ vi.mock("@shared/lib/styles", async () => {
       isDarkMode: false,
       toggleTheme: vi.fn(),
     })),
-    ThemeColorType: ThemeColorType,
     light: light,
     dark: light,
     GlobalStyles: () => null,
+    breakpoints: breakpoints,
   };
 });
+vi.mock("@shared/lib/views", () => ({
+  useViews: vi.fn().mockReturnValue({
+    activeView: "GRID",
+    switchToGrid: vi.fn(),
+    switchToList: vi.fn(),
+  }),
+  ViewsProvider: ({ children }: { children: React.ReactNode }) => (
+    <>{children}</>
+  ),
+}));

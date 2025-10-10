@@ -44,17 +44,15 @@ export function ContactsSection({
           <EditButton onClick={open} />
         </EditButtonWrapper>
       </Section>
-      {isOpen && (
-        <SimpleModal isOpen={isOpen} onClose={close}>
-          <ContactInputsProvider
-            originalPhone={phone}
-            originalEmail={email}
-            originalAddress={address}
-          >
-            <UpdateContactForm memberId={memberId} closeModal={close} />
-          </ContactInputsProvider>
-        </SimpleModal>
-      )}
+      <SimpleModal isOpen={isOpen} onClose={close}>
+        <ContactInputsProvider
+          originalPhone={phone}
+          originalEmail={email}
+          originalAddress={address}
+        >
+          <UpdateContactForm memberId={memberId} closeModal={close} />
+        </ContactInputsProvider>
+      </SimpleModal>
     </>
   );
 }

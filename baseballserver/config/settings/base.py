@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     "drf_spectacular",
     ## Custom Apps
     "apps.media.assets.apps.AssetsConfig",
+    "apps.media.gallery.apps.GalleryConfig",
+    "apps.media.storage.apps.StorageConfig",
     "apps.people.members.apps.MembersConfig",
     "apps.people.users.apps.UsersConfig",
     "apps.teams.teams.apps.TeamsConfig",
@@ -154,3 +156,65 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# CORS Common Settings
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "authorization",
+    "content-type",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+    "x-snubaseball-client",
+]
+
+## Media Settings
+MEDIA_CDN_BASE_URL = config("MEDIA_CDN_BASE_URL")
+MEDIA_KEY_PREFIX_WHITELIST = [
+    "profiles/",
+    "gallery/",
+]
+MEDIA_ALLOWED_MIME_PREFIXES = [
+    "image/",
+    "video/",
+]
+MEDIA_ALLOWED_MIME_TYPES = [
+    "application/pdf",
+    "application/msword",  # .doc
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",  # .docx
+    "application/vnd.ms-excel",  # .xls
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",  # .xlsx
+    "application/vnd.ms-powerpoint",  # .ppt
+    "application/vnd.openxmlformats-officedocument.presentationml.presentation",  # .pptx
+    "application/x-hwp",  # .hwp (old)
+    "application/vnd.hancom.hwp",  # .hwp
+    "application/vnd.hancom.hwpx",  # .hwpx
+    "application/x-hwpml",  # .hwpml (old)
+    "application/vnd.hancom.hwpml",  # .hwpml (new)
+    "application/zip",
+    "application/x-7z-compressed",
+    "application/x-rar-compressed",
+    "application/gzip",
+]
+
+## AWS S3 Settings
+AWS_REGION = "ap-northeast-2"
+AWS_S3_BUCKET_NAME = config("AWS_S3_BUCKET_NAME")
+AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY")
+
+# Celery Settings
+CELERY_BROKER_URL = config("CELERY_BROKER_URL")
+CELERY_RESULT_BACKEND = config("CELERY_RESULT_BACKEND")
+CELERY_TASK_ALWAYS_EAGER = False
+CELERY_TASK_TIME_LIMIT = 5 * 60  # 5 minutes
+CELERY_TASK_SOFT_TIME_LIMIT = 60  # 1 minute
+CELERY_TASK_SERIALIZER = "json"
+CELERY_ACCEPT_CONTENT = ["json"]
+
+## 태스크 라우팅
+CELERY_TASK_ROUTES = {
+    "apps.media.assets.tasks.*": {"queue": "media"},
+}

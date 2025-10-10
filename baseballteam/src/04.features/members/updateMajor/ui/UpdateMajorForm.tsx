@@ -6,8 +6,7 @@ import {
   DepartmentSelect,
   useMajorSelects,
 } from "@entities/majors";
-import { useColors } from "@shared/lib/styles";
-import { ElevatedTextButton } from "@shared/ui/Buttons";
+import { SubmitButton } from "@shared/ui/Buttons";
 import { Spinner } from "@shared/ui/Loading";
 import { ErrorText } from "@shared/ui/Texts";
 
@@ -22,7 +21,6 @@ export function UpdateMajorForm({ memberId, closeModal }: Readonly<Props>) {
     memberId,
     postUpdate: closeModal,
   });
-  const { colors } = useColors();
 
   if (loading) {
     return (
@@ -48,15 +46,13 @@ export function UpdateMajorForm({ memberId, closeModal }: Readonly<Props>) {
         <DepartmentSelect />
       </InputsWrapper>
       {errorMsg && <ErrorText>{errorMsg}</ErrorText>}
-      <Button
+      <SubmitButton
         type="submit"
         disabled={isButtonDisabled}
-        $backgroundColor={colors.primary}
-        $color={colors.onPrimary}
         data-testid="submit-major-form-button"
       >
         변경하기
-      </Button>
+      </SubmitButton>
     </Container>
   );
 }
@@ -91,13 +87,5 @@ const InputsWrapper = styled.div`
       border-color: ${({ theme }) => theme.colors.primary};
       box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
     }
-  }
-`;
-
-const Button = styled(ElevatedTextButton)`
-  &:disabled {
-    background-color: ${({ theme }) => theme.colors.gray100};
-    color: ${({ theme }) => theme.colors.gray500};
-    cursor: not-allowed;
   }
 `;

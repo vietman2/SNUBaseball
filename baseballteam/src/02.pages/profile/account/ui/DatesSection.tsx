@@ -12,7 +12,11 @@ interface Props {
   joinDate: string | null; // YYYY-MM-DD
 }
 
-export function DatesSection({ memberId, birthDate, joinDate }: Readonly<Props>) {
+export function DatesSection({
+  memberId,
+  birthDate,
+  joinDate,
+}: Readonly<Props>) {
   const { isOpen, open, close } = useSimpleModal();
 
   return (
@@ -27,16 +31,14 @@ export function DatesSection({ memberId, birthDate, joinDate }: Readonly<Props>)
           <EditButton onClick={open} />
         </EditButtonWrapper>
       </Section>
-      {isOpen && (
-        <SimpleModal isOpen={isOpen} onClose={close}>
-          <DateInputsProvider
-            originalBirthDate={birthDate}
-            originalJoinDate={joinDate}
-          >
-            <UpdateDatesForm memberId={memberId} closeModal={close} />
-          </DateInputsProvider>
-        </SimpleModal>
-      )}
+      <SimpleModal isOpen={isOpen} onClose={close}>
+        <DateInputsProvider
+          originalBirthDate={birthDate}
+          originalJoinDate={joinDate}
+        >
+          <UpdateDatesForm memberId={memberId} closeModal={close} />
+        </DateInputsProvider>
+      </SimpleModal>
     </>
   );
 }

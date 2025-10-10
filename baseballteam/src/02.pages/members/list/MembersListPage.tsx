@@ -32,26 +32,24 @@ export function MembersListPage() {
         <MemberTableHeaderRow />
         <List openForm={open} />
       </Container>
-      {isOpen && (
-        <SimpleModal isOpen={isOpen} onClose={close}>
-          <MajorSelectsProvider originalMajor={null}>
-            <ContactInputsProvider
-              originalPhone=""
-              originalEmail=""
-              originalAddress=""
+      <SimpleModal isOpen={isOpen} onClose={close}>
+        <MajorSelectsProvider originalMajor={null}>
+          <ContactInputsProvider
+            originalPhone=""
+            originalEmail=""
+            originalAddress=""
+          >
+            <DateInputsProvider
+              originalBirthDate={null}
+              originalJoinDate={null}
             >
-              <DateInputsProvider
-                originalBirthDate={null}
-                originalJoinDate={null}
-              >
-                <NameIDInputProvider>
-                  <NewMemberForm closeForm={close} />
-                </NameIDInputProvider>
-              </DateInputsProvider>
-            </ContactInputsProvider>
-          </MajorSelectsProvider>
-        </SimpleModal>
-      )}
+              <NameIDInputProvider>
+                <NewMemberForm closeForm={close} />
+              </NameIDInputProvider>
+            </DateInputsProvider>
+          </ContactInputsProvider>
+        </MajorSelectsProvider>
+      </SimpleModal>
     </>
   );
 }

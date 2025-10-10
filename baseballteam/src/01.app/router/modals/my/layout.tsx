@@ -1,6 +1,7 @@
 import { Link, Outlet } from "react-router";
 import styled from "styled-components";
 
+import { ModalPageContainer } from "@widgets/modal";
 import { LogoutButton } from "@features/auth/logout";
 import { MyModalTabs, useRouter } from "@shared/lib/router";
 import { useColors } from "@shared/lib/styles";
@@ -16,7 +17,7 @@ export function MyLayout() {
   };
 
   return (
-    <Container>
+    <ModalPageContainer>
       <Left>
         <h2 className="profile-modal-title">내 프로필</h2>
         <div className="profile-modal-sidebar">
@@ -46,20 +47,9 @@ export function MyLayout() {
       <Right>
         <Outlet />
       </Right>
-    </Container>
+    </ModalPageContainer>
   );
 }
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 65vw;
-  min-width: 760px;
-  min-height: 75vh;
-  max-height: 75vh;
-  background-color: ${({ theme }) => theme.colors.gray200};
-  border-radius: 12px;
-`;
 
 const Left = styled.div`
   display: flex;
@@ -109,7 +99,7 @@ const SidebarLink = styled(Link)`
 const Right = styled.div`
   flex: 3;
   padding: 16px;
-  background-color: ${({ theme }) => theme.colors.surfaceElevated};
+  background-color: ${({ theme }) => theme.colors.backgroundDefault};
   border-radius: 12px;
   // shadow to left
   box-shadow: -4px 0 8px rgba(0, 0, 0, 0.1);

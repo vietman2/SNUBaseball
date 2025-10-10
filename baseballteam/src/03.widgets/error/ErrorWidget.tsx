@@ -21,11 +21,17 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 50vh;
   gap: 16px;
 
+  h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: ${({ theme }) => theme.colors.error};
+  }
+
   button {
-    padding: 8px 16px;
+    padding: 6px 12px;
     color: ${({ theme }) => theme.colors.onPrimary};
     font-weight: 600;
     background-color: ${({ theme }) => theme.colors.primary};

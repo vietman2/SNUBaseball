@@ -5,7 +5,7 @@ export type MemberDetailsType = {
   name: string;
   student_id: string;
   admission_year: number;
-  major: DepartmentType;
+  major: DepartmentType | null;
   profile_image: string | null;
   phone: string | null;
   email: string | null;

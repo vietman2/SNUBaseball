@@ -1,8 +1,8 @@
 from drf_spectacular.utils import extend_schema
 from rest_framework.generics import GenericAPIView
 from rest_framework.mixins import ListModelMixin
-from rest_framework.permissions import AllowAny
 
+from core.auth import AllowAny
 from ..models import College
 from ..serializers import CollegeSerializer
 

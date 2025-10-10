@@ -38,5 +38,14 @@ vi.mock("react-router", async () => {
     Outlet: () => <div>Mocked Outlet</div>,
     useNavigate: vi.fn().mockReturnValue(vi.fn()),
     useLocation: vi.fn().mockReturnValue({ pathname: "/home" }),
+    useSearchParams: vi.fn().mockReturnValue([
+      new URLSearchParams(),
+      vi.fn(),
+    ]),
   };
 });
+vi.mock("react-colorful", () => ({
+  HexColorPicker: ({ onChange }: { onChange: (color: string) => void }) => (
+    <button onClick={() => onChange("#000000")}>ColorPicker</button>
+  ),
+}));

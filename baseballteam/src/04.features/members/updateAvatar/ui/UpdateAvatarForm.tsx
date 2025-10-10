@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
 import { useAvatarForm } from "../hooks/useAvatarForm";
-import { SingleFileInput } from "@shared/ui/Inputs";
+import { SingleFileDropArea } from "@shared/lib/files";
 import { Spinner } from "@shared/ui/Loading";
 import { ErrorText } from "@shared/ui/Texts";
+import { SubmitButton } from "@shared/ui/Buttons";
 
 interface Props {
   memberId: number;
@@ -39,11 +40,11 @@ export function UpdateAvatarForm({
         </Panel>
         <Panel>
           <PanelTitle>새 이미지</PanelTitle>
-          <SingleFileInput
+          <SingleFileDropArea
             value={file}
             onChange={setFile}
             onError={setErrorMsg}
-            defaultPreviewUrl={null} // 새 이미지는 업로드 영역에서만 표시
+            accept="image/*"
             disabled={submitting}
           />
         </Panel>
@@ -105,22 +106,5 @@ const CurrentImageBox = styled.div`
     width: 100%;
     max-height: 180px;
     object-fit: cover;
-  }
-`;
-
-const SubmitButton = styled.button`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px;
-  border-radius: 8px;
-  background-color: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.onPrimary};
-  font-weight: 600;
-  border: none;
-
-  &:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
   }
 `;

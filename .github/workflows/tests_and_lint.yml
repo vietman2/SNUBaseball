@@ -91,6 +91,10 @@ jobs:
       AWS_S3_BUCKET_NAME: "test"
       AWS_ACCESS_KEY_ID: "test"
       AWS_SECRET_ACCESS_KEY: "test"
+      CELERY_BROKER_URL: "test"
+      CELERY_RESULT_BACKEND: "test"
+      CELERY_WORKER_CONCURRENCY: "2"
+      CELERY_WORKER_PREFETCH_MULTIPLIER: "1"
 
     steps:
       - name: Checkout code
@@ -112,8 +116,6 @@ jobs:
         run: |
           pipenv run pytest .
           pipenv run coverage lcov
-          pipenv run coverage xml
-          sed -i "s|<source></source>|<source>baseballserver</source>|g" coverage.xml
 
       - name: Upload coverage artifact (lcov)
         uses: actions/upload-artifact@v4
@@ -121,14 +123,8 @@ jobs:
           name: coverage-report-django
           path: baseballserver/coverage.lcov
 
-      - name: Upload coverage artifact (xml)
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-report-django-xml
-          path: baseballserver/coverage.xml
-
       - name: Run linters
-        run: pipenv run sh -c 'DJANGO_SETTINGS_MODULE=config.settings.tests pylint --load-plugins pylint_django --rcfile=.pylintrc .'
+        run: pipenv run sh -c 'DJANGO_SETTINGS_MODULE=config.settings.tests pylint --rcfile=.pylintrc .'
 
   nextjs-tests-and-lint:
     runs-on: ubuntu-latest
@@ -192,16 +188,10 @@ jobs:
           name: coverage-report-vite
           path: ./baseballteam
 
-      - name: Download coverage artifact (Django-lcov)
+      - name: Download coverage artifact (Django)
         uses: actions/download-artifact@v4
         with:
           name: coverage-report-django
-          path: ./baseballserver
-
-      - name: Download coverage artifact (Django-xml)
-        uses: actions/download-artifact@v4
-        with:
-          name: coverage-report-django-xml
           path: ./baseballserver
 
       - name: Download coverage artifact (Next.js)

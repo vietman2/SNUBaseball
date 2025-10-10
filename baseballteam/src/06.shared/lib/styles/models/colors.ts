@@ -31,7 +31,7 @@ export const light: ThemeColorType = {
 
   backgroundDefault: "#FFFFFF",
   backgroundPaper: "#E8E6F2",
-  surfaceElevated: "#FDFDFB",
+  surfaceElevated: "#E5E7EB",
   overlay: "#000000",
 
   textPrimary: "#0F0F70",
@@ -74,7 +74,7 @@ export const dark: ThemeColorType = {
   backgroundDefault: "#0A0A0A",
   backgroundPaper: "#1F2937",
   surfaceElevated: "#161B22",
-  overlay: "#000000",
+  overlay: "#FFFFFF",
 
   textPrimary: "#E5E7EB", // 기본 텍스트는 흰색
   textSecondary: "#B5B6B6", // 실버 톤 (보조 텍스트)

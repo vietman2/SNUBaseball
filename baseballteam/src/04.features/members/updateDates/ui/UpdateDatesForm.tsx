@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 import { useDatesForm } from "../form/useDatesForm";
 import { useDateInputs } from "@entities/members";
+import { SubmitButton } from "@shared/ui/Buttons";
 import { DateInput } from "@shared/ui/Inputs";
 import { ErrorText } from "@shared/ui/Texts";
 
@@ -44,13 +45,13 @@ export function UpdateDatesForm({ memberId, closeModal }: Readonly<Props>) {
         </div>
       </InputWrapper>
       {errorMsg && <ErrorText>{errorMsg}</ErrorText>}
-      <Button
+      <SubmitButton
         type="submit"
         disabled={buttonDisabled}
         data-testid="submit-contacts-update-button"
       >
         변경하기
-      </Button>
+      </SubmitButton>
     </Container>
   );
 }
@@ -90,20 +91,5 @@ const InputWrapper = styled.div`
       font-family: inherit;
       color: ${({ theme }) => theme.colors.gray900};
     }
-  }
-`;
-
-const Button = styled.button`
-  padding: 8px 16px;
-  border: none;
-  border-radius: 8px;
-  background-color: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.onPrimary};
-  font-weight: 600;
-  font-size: 0.875rem;
-
-  &:disabled {
-    background-color: ${({ theme }) => theme.colors.gray100};
-    color: ${({ theme }) => theme.colors.gray500};
   }
 `;

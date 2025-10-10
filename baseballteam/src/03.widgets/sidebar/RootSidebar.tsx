@@ -15,23 +15,19 @@ import {
 } from "@shared/lib/router";
 import { Divider } from "@shared/ui/Dividers";
 
-const SIDEBAR_WIDTH = 240;
-const SIDEBAR_COLLAPSED_WIDTH = 72;
+interface Props {
+  isOpen: boolean;
+  toggle: () => void;
+}
 
-export function RootSidebar() {
+export function RootSidebar({ isOpen, toggle }: Readonly<Props>) {
   const [activeTab, setActiveTab] = useState<TabType | null>(null);
   const [activeSubtab, setActiveSubtab] = useState<SubTabType | null>(null);
-
-  const [sidebarOpen, setSidebarOpen] = useState<boolean>(true);
 
   const { backgroundLocation } = useRouter();
   const { user } = useUser();
 
   const tabGroups: TabGroupType[] = getAllTabs(user?.role !== "MEMBER");
-
-  const toggleSidebar = () => {
-    setSidebarOpen((prev) => !prev);
-  };
 
   useEffect(() => {
     const currentPath = backgroundLocation.pathname;
@@ -45,18 +41,16 @@ export function RootSidebar() {
   }, [backgroundLocation, user]);
 
   return (
-    <SidebarContainer
-      style={{ width: sidebarOpen ? SIDEBAR_WIDTH : SIDEBAR_COLLAPSED_WIDTH }}
-    >
+    <SidebarContainer $isOpen={isOpen} data-testid="root-sidebar">
       <Tabs>
         {tabGroups.map((group) => (
           <TabGroup key={group.title}>
-            {sidebarOpen && <h4>{group.title}</h4>}
+            {isOpen && <h4>{group.title}</h4>}
             {group.tabs.map((tab) => (
               <TabItem
                 key={tab.title}
                 tab={tab}
-                isSidebarOpen={sidebarOpen}
+                isSidebarOpen={isOpen}
                 isActive={activeTab?.href === tab.href}
                 activeSubTab={activeSubtab}
               />
@@ -66,19 +60,25 @@ export function RootSidebar() {
       </Tabs>
       <Divider />
       <SidebarFooter>
-        <ToggleThemeButton isSidebarOpen={sidebarOpen} />
-        <ToggleSidebarButton isOpen={sidebarOpen} toggle={toggleSidebar} />
+        <ToggleThemeButton isSidebarOpen={isOpen} />
+        <ToggleSidebarButton isOpen={isOpen} toggle={toggle} />
       </SidebarFooter>
     </SidebarContainer>
   );
 }
 
-const SidebarContainer = styled.div`
+const SidebarContainer = styled.div<{ $isOpen: boolean }>`
   display: flex;
+  flex: 0 0 auto;
   flex-direction: column;
   justify-content: space-between;
-  min-height: calc(100vh - 60px);
-  max-height: calc(100vh - 60px);
+  height: calc(100vh - var(--header-height));
+  width: ${({ $isOpen }) =>
+    $isOpen ? "var(--sidebar-width)" : "var(--sidebar-collapsed-width)"};
+
+  position: sticky;
+  top: var(--header-height);
+  left: 0;
 
   background-color: ${({ theme }) => theme.colors.backgroundDefault};
   border-right: 0.25px solid ${({ theme }) => theme.colors.divider};

@@ -1,6 +1,7 @@
-import { Event, MilestoneContainer, Year } from "./styles";
+import Image from "next/image";
+
+import { Event, MilestoneContainer, MilestoneImage, Year } from "./styles";
 import { MilestoneType } from "../models/history";
-import { ImagePlaceholder } from "@shared/ui/Images";
 
 interface Props {
   milestone: MilestoneType;
@@ -17,7 +18,14 @@ export function MilestoneItem({ milestone }: Readonly<Props>) {
         </Event>
       ))}
       {milestone.imageUrl && (
-          <ImagePlaceholder />
+        <MilestoneImage>
+          <Image
+            src={milestone.imageUrl}
+            alt={milestone.year}
+            width={280}
+            height={280}
+          />
+        </MilestoneImage>
       )}
     </MilestoneContainer>
   );
