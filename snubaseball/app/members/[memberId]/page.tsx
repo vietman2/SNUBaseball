@@ -1,7 +1,4 @@
-import {
-  MemberDetailsPage,
-  generateMetadata,
-} from "@pages/member-details";
+import { MemberDetailsPage, generateMetadata } from "@pages/member-details";
 
 export { generateMetadata };
 
